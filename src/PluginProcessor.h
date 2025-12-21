@@ -2,7 +2,33 @@
 // =============================================================================
 // FIELD — PluginProcessor.h
 // =============================================================================
-// 3-control Z-Plane engine: FIELD, TENSION, MOTION
+// JUCE AudioProcessor implementation for FIELD Z-Plane filter plugin.
+//
+// UI Parameters (3-control system):
+//   - FIELD (0-1): Position in filter universe, selects vowel pairs
+//     - [0.0-0.33): Ah/Ee morph
+//     - [0.33-0.66): Oo/Eh morph
+//     - [0.66-1.0]: Uh/Ee morph
+//   - TENSION (0-1): Maps to drive (0.5-3.0) and postGain (2.0-8.0)
+//   - MOTION (0-1): Morph depth between Frame A and Frame B
+//   - Test Noise (dev toggle): White noise generator for DSP testing
+//
+// Architecture:
+//   - Dual mono processing (independent L/R ZPlaneCore instances)
+//   - Frame selection in updateFramesFromField (cpp:72-100)
+//   - Parameter processing in processBlock (cpp:120-175)
+//   - Test noise generator using std::mt19937 (cpp:162-163)
+//
+// Integration:
+//   - Uses ZPlaneCore for DSP processing
+//   - Uses ZPlaneDesigner for frame generation
+//   - APVTS for parameter management
+//
+// See also:
+//   - PluginProcessor.cpp:72-100: FIELD parameter frame mapping
+//   - PluginProcessor.cpp:140-148: TENSION parameter mapping
+//   - src/dsp/ZPlaneCore.h: DSP engine
+//   - src/dsp/ZPlaneDesigner.h: Frame factory
 // =============================================================================
 
 #include <juce_audio_processors/juce_audio_processors.h>

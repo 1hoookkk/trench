@@ -2,8 +2,39 @@
 // =============================================================================
 // ZPlaneDesigner.h — Pole and Frame Factory
 // =============================================================================
-// Creates Pole objects and FilterFrames from frequency/bandwidth specs.
-// Works with the pole-parameter morph domain in ZPlaneCore.
+// Factory functions for creating Pole objects and FilterFrames from
+// frequency/bandwidth specifications.
+//
+// Key responsibilities:
+//   - Convert semantic parameters (freq, bandwidth, weight) to Pole objects
+//   - Provide bandwidth/radius/Q conversion utilities
+//   - Define vowel formant presets (Peterson & Barney 1952 reference)
+//   - Build complete FilterFrames for different filter types
+//
+// Frame builders:
+//   - buildVowelFrame (84-106): PARALLEL RESONATOR for formant synthesis
+//   - buildPhaserFrame (109-130): CASCADE ALLPASS for phase effects
+//   - buildAcidFrame (133-157): CASCADE LOWPASS for resonant filters
+//   - buildCustomFrame (160-179): Generic builder from pole array
+//
+// Conversions:
+//   - bandwidthToRadius (40-43): BW (Hz) -> radius via R = exp(-PI*BW/sr)
+//   - radiusToBandwidth (45-48): Inverse conversion
+//   - qToBandwidth / bandwidthToQ (54-60): Q-factor conversions
+//
+// Vowel formants:
+//   - Peterson & Barney 1952 formant frequencies
+//   - Tight bandwidth (15-20 Hz) for E-mu "ring" character
+//   - Per-formant weights for vowel character
+//
+// Integration:
+//   - Creates FilterFrames consumed by ZPlaneCore
+//   - Used by PluginProcessor.cpp:78-92 for FIELD parameter mapping
+//   - Works in pole-parameter domain (not coefficients)
+//
+// See also:
+//   - ZPlaneCore.h: Filter engine that consumes these frames
+//   - docs/dsp-spec.md:63-118: Coefficient formulas and filter types
 // =============================================================================
 
 #include "ZPlaneCore.h"

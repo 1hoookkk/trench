@@ -30,11 +30,21 @@ include(FetchContent)
 FetchContent_Declare(
     JUCE
     GIT_REPOSITORY https://github.com/juce-framework/JUCE.git
-    GIT_TAG 8.0.3
+    GIT_TAG 8.0.10
     GIT_SHALLOW TRUE
     GIT_PROGRESS TRUE
 )
 FetchContent_MakeAvailable(JUCE)
+
+# Build options
+option(FIELD_COPY_PLUGIN_AFTER_BUILD "Copy plugin to system folder after build" ON)
+
+# Platform-specific formats
+if(APPLE)
+    set(FIELD_FORMATS VST3 AU Standalone)
+else()
+    set(FIELD_FORMATS VST3 Standalone)
+endif()
 
 # ==============================================================================
 # Plugin Target
@@ -49,10 +59,10 @@ juce_add_plugin(${PLUGIN_NAME}
     NEEDS_MIDI_OUTPUT FALSE
     IS_MIDI_EFFECT FALSE
     EDITOR_WANTS_KEYBOARD_FOCUS FALSE
-    COPY_PLUGIN_AFTER_BUILD TRUE
+    COPY_PLUGIN_AFTER_BUILD ${FIELD_COPY_PLUGIN_AFTER_BUILD}
     PLUGIN_MANUFACTURER_CODE ${MANUFACTURER_CODE}
     PLUGIN_CODE ${PLUGIN_CODE}
-    FORMATS VST3 AU Standalone
+    FORMATS ${FIELD_FORMATS}
     PRODUCT_NAME "${PLUGIN_NAME}"
 )
 

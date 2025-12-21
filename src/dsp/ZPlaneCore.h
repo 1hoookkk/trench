@@ -2,10 +2,44 @@
 // =============================================================================
 // ZPlaneCore.h — 14-Pole Z-Plane Filter Engine with Pole Morphing
 // =============================================================================
-// Primary morph domain: pole parameters (freq + radius)
-// Coefficients rebuilt at control rate from interpolated poles
-// Dual-core architecture for true A/B crossfade when topology/type differs
-// Per-stage bandwidth loudness compensation
+// Core DSP engine for FIELD Z-Plane morphing filter.
+//
+// Key responsibilities:
+//   - 7 biquad stages (14 poles total) in parallel or cascade topology
+//   - Pole-parameter interpolation as primary morph domain
+//   - Dual-path crossfade when topology/type differs between frames
+//   - Per-stage bandwidth loudness compensation folded into gain
+//   - Brute-force 7! pole assignment to minimize perceptual distance
+//   - Saturation in feedback path (Dattorro soft clipper)
+//   - Control-rate coefficient rebuild (every 16 samples)
+//
+// Architecture patterns:
+//   - Audio thread safe: no allocations, no locks, no logging
+//   - Double precision for coefficients/state, float for audio buffers
+//   - Birth/death handling for pole activation transitions
+//   - Inactive parallel stages output 0 (not bypass)
+//
+// Integration:
+//   - Used by PluginProcessor for L/R channel processing
+//   - Frames created by ZPlaneDesigner factory functions
+//   - See docs/dsp-spec.md for complete mathematical reference
+//
+// Key sections:
+//   - Pole struct (32-47): Semantic pole parameters (the morph domain)
+//   - Biquad struct (53-66): Runtime coefficients with effectiveGain
+//   - FilterFrame struct (79-89): Snapshot of pole positions + topology
+//   - ZPlaneCore class (95-472): Main DSP engine
+//     - Configuration (101-109): Sample rate and gain staging
+//     - Frame setup (115-128): Set A/B frames, trigger assignment
+//     - Morph control (133-137): Set interpolation position
+//     - Processing (143-178): Sample/block processing with dual-path logic
+//     - Pole interpolation (204-238): Birth/death/normal morph cases
+//     - BW compensation (244-250): Per-stage loudness compensation
+//     - Coefficient rebuild (256-288): Control-rate updates
+//     - Pole assignment (351-374): Brute-force 7! permutation search
+//     - Signal path (396-439): Biquad processing, parallel/cascade topology
+//
+// Usage example in PluginProcessor.cpp:62-70, 94-97, 155-156
 // =============================================================================
 
 #include <array>
