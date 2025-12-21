@@ -1,0 +1,29 @@
+# builds
+build/
+**/cmake-build-*/
+CMakeFiles/
+CMakeCache.txt
+cmake_install.cmake
+*.ninja
+*.ninja_deps
+*.ninja_log
+
+# Visual Studio
+.vs/
+*.suo
+*.user
+*.VC.db
+*.VC.VC.opendb
+
+# JUCE / plugin artifacts
+*.vst3/
+*.clap/
+*.component/
+*.dll
+*.pdb
+*.exp
+*.lib
+
+# OS
+.DS_Store
+Thumbs.db
