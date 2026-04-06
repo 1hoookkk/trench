@@ -40,18 +40,51 @@ feature cannot be expressed as authored body behavior, it does not ship.
 | **ALIGN** | Mono collapse (bypass QSound) | 20ms crossfade |
 | **Slew Limiter** | Max morph delta = 0.15 per block | Per-block clamp |
 
-### Heritage (E-mu Morpheus / UltraProteus)
+### Heritage (E-mu Morpheus / UltraProteus / Emulator X)
 
-From RE vault and DillusionMan documentation:
+From RE vault, DillusionMan documentation, and Emulator X cord architecture:
 
-- **2 Function Generators**: Multi-segment envelopes (attack/hold/decay with shape control)
-- **Patchcord Routing**: Source -> Destination with amount. e.g., `MidiA -> FilFreq +100%`
-- **Mod Sources**: Velocity, aftertouch, MIDI CC, LFO, function generators
-- **Mod Destinations**: FilFreq (morph position), FilRes (resonance), Shelf, Peak
-- **Morph Control**: CC-driven sweep between Frame A (CC=0) and Frame B (CC=127)
-- **Real-time**: All patchcords evaluated per MIDI event or per control block
+**Cord System Architecture:**
+- Source -> Destination -> Amount (-128 to +127, negative = inverted)
+- Multiple sources to one destination, one source to multiple destinations
+- Completely flexible routing — no fixed signal path
 
-TRENCH v1 deliberately does NOT ship a patchcord system. Modulation is pre-authored per body.
+**Note-On Sources** (measured once at key strike):
+- Key Velocity, Key Number (keyboard tracking)
+- Initial controller positions
+
+**Realtime Sources** (continuously evaluated while note sustains):
+- LFOs (free-running periodic)
+- Auxiliary Envelopes (multi-segment)
+- Function Generators (2 per voice, complex multi-segment)
+- Pitch wheel, mono pressure, poly pressure
+- MIDI CCs (mapped to MIDI A-D)
+
+**Destinations:**
+- Primary/secondary pitch, volume, pan
+- LFO rates, envelope segment times
+- Z-Plane filter: **Morph** (Transform 1), **Frequency Tracking**, **Transform 2**
+
+**Transform 2 is significant.** In the Morpheus lineage, Transform 1 = morph axis,
+Transform 2 = an orthogonal morphing axis. This is the heritage precedent for the
+diagonal gesture concept — E-mu already had a second axis available as a cord
+destination. TRENCH's Q parameter occupies this position but is not yet modulated
+by anything except the user's knob.
+
+**Heritage mapping to TRENCH v1:**
+
+| E-mu Cord System | TRENCH Equivalent | Status |
+|-----------------|-------------------|--------|
+| Velocity -> Morph | velocity_scale on TRIG | v1.x |
+| LFO -> Morph | ENV (follower, not periodic) | v1 ship |
+| Pressure -> FilRes | Aftertouch -> Q | v1.x |
+| FuncGen -> Morph | TRIG gesture engine | v1 ship |
+| CC -> Transform 2 | Q knob (manual only) | Live |
+| Negative cord amount | REV (morph inversion) | v1 ship |
+| Key Number -> Morph | Not planned | — |
+
+TRENCH v1 deliberately does NOT ship a patchcord system. Modulation is pre-authored
+per body. The E-mu cord flexibility is collapsed into body-specific authored behaviors.
 
 ### Python Reference Implementations
 
@@ -138,14 +171,41 @@ Aftertouch    --       --      --        --
 
 ## Heritage Modulation We Could Adapt
 
+### Note-On vs Realtime Distinction
+E-mu split modulation into sources evaluated once (note-on) and sources evaluated
+continuously (realtime). TRENCH already mirrors this: TRIG is note-on (fires once,
+plays gesture), ENV is realtime (continuous follower). The value of making this
+distinction explicit in body authoring: note-on sources can scale gesture parameters
+(velocity -> travel distance), while realtime sources drive continuous offsets
+(envelope -> morph position). Mixing the two categories in the same authored slot
+would be incoherent.
+
 ### Function Generator Shape Library
-E-mu function generators supported segment shapes: linear, exponential, logarithmic, and "circle" curves. The TRIG gesture spec already includes `segment_curves` — but we could expand this with heritage-derived shapes that create the characteristic Morpheus envelope feel.
+E-mu function generators supported segment shapes: linear, exponential, logarithmic,
+and "circle" curves. The TRIG gesture spec already includes `segment_curves`. Heritage
+shapes that create the characteristic Morpheus envelope feel are directly portable.
 
-### Velocity-to-Morph Scaling
-Morpheus patchcords allowed velocity to scale morph depth. A simple `velocity_scale` parameter per body would let MIDI velocity control how far TRIG gestures travel. Hard hits = full morph excursion; soft hits = subtle movement.
+### Velocity-to-Morph Scaling (Note-On Source)
+Heritage cord: Velocity -> FilFreq with amount scaling. TRENCH equivalent: a
+`velocity_scale` float per body that scales TRIG gesture travel distance. Hard hits =
+full morph excursion; soft hits = subtle movement. This is the single cheapest
+heritage feature to add — one float, one multiply at note-on.
 
-### Aftertouch-to-Q
-The most expressive Morpheus patches used aftertouch -> FilRes. Mapping aftertouch to Q in TRENCH would give keyboard players continuous pressure control over resonance aggression during sustained notes.
+### Aftertouch-to-Q (Realtime Source)
+Heritage cord: Pressure -> FilRes. The most expressive Morpheus patches used this.
+TRENCH equivalent: map poly/mono aftertouch to Q offset. Gives keyboard players
+continuous pressure control over resonance aggression during sustained notes.
+Combined with per-slot pressure behaviors (Hold, Tighten, Yield, Cross, Collapse),
+aftertouch becomes a performance axis — not just volume control.
+
+### Negative Cord Amounts
+E-mu cords scaled -128 to +127. Negative amounts inverted the modulation. TRENCH's
+REV toggle is the static equivalent (morph inversion). The heritage system allowed
+per-cord inversion: one cord could drive morph forward while another drove it
+backward simultaneously. In TRENCH terms, this would mean ENV could push morph in
+the opposite direction from TRIG gesture travel — the body breathes one way and
+snaps the other. This is naturally supported if ENV offset and TRIG offset are
+summed independently (already specified in v1 architecture).
 
 ---
 
