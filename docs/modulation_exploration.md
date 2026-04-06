@@ -3,6 +3,17 @@
 Status: research / branch setup
 Date: 2026-04-07
 
+## Modulation Grammar
+
+> **Bodies expose pressure, inversion, and gesture — not arbitrary modulation.**
+
+All modulation in TRENCH is pre-authored per body. There is no patchcord system,
+no user-facing routing matrix, no open modulation bus. A body defines what it
+reacts to and how. The user's job is to play the body, not to wire it.
+
+This rule exists to prevent TRENCH from becoming a DSP sandbox. If a modulation
+feature cannot be expressed as authored body behavior, it does not ship.
+
 ## What We Have
 
 ### DSP Infrastructure (Implemented, Shipping)
@@ -140,20 +151,54 @@ The most expressive Morpheus patches used aftertouch -> FilRes. Mapping aftertou
 
 ## Priority Assessment
 
-**Ship in v1 (already specified):**
-- ENV (envelope follower -> morph)
-- REV (morph axis flip)
-- TRIG (one-shot gesture)
-- Slew limiter
+### Ship path (v1)
 
-**Low-cost extensions (v1.x):**
-- ENV -> Q split routing (one extra authored parameter per body)
-- Velocity-to-morph scaling (one float per body)
-- REV as continuous parameter (change toggle to knob)
+- ENV -> morph (envelope follower, one-pole, per-body timing profiles)
+- REV (morph axis flip, toggle)
+- TRIG (one-shot authored gesture from anchor)
+- Slew limiter (max morph delta = 0.15 per block)
 
-**Research required (v2):**
-- Per-slot morph staggering (needs cascade architecture review)
-- Diagonal gestures on morph/Q surface (needs gesture engine rethink)
-- TRIG cycling (needs gesture state machine)
-- Spatial punch (independent azimuth modulation)
-- CVSD-adaptive envelope (full codec-style step adaptation)
+### v1.x extensions
+
+- ENV split routing: morph + Q (one extra authored float per body)
+- Velocity-to-morph scaling (one float per body, scales TRIG travel)
+- Aftertouch-to-Q (continuous pressure control for keyboard players)
+- Continuous REV — only if 2-3 bodies prove it musically; not automatic promotion
+
+### Research path (ordered by expected yield)
+
+1. **Diagonal gestures on morph/Q surface** — best core research bet.
+   The cross-term `Dmq` is real math, not cosmetic. Diagonal motion accesses
+   spectral behavior that serial morph-then-Q sweeps cannot reproduce.
+   This is an instrument-level expansion, not a modulation add-on.
+
+2. **TRIG cycling** — authored gesture sequences (bark/shimmer/choke) from
+   a single MIDI note stream. Fits the grammar: bodies define the cycle,
+   user just plays.
+
+3. **Per-slot morph staggering** — research-only until null-tested and
+   listen-tested. Risk: transient impossible-states may read as vague blur
+   rather than musical micro-detuning. Do not promote without audio proof.
+
+4. **Codec-derived adaptive envelope** — only after the simpler one-pole
+   follower proves it earns its keep in shipped bodies.
+
+### Explicitly deferred
+
+- QSound as independent modulation destination (spatial punch) — secondary
+  until the core spectral modulation language is undeniable.
+- Waveshaper drive modulation — implicit behavior may be sufficient.
+- Open patchcord routing — violates the modulation grammar. Domain 3 only.
+
+---
+
+## Risk Assessment
+
+| Idea | Risk | Gate |
+|------|------|------|
+| Diagonal gestures | Low — exploits existing math | Prototype on one body, measure Dmq magnitude |
+| ENV -> Q split | Low — one float, cheap | Prove "fights back" is audible, not just conceptual |
+| Per-slot stagger | Medium — architecture churn for potentially inaudible effect | Null test + listen test before any cascade changes |
+| Continuous REV | Medium — midpoint collapse can be gimmick | 2-3 bodies must prove musical midpoint behavior |
+| TRIG cycling | Low — state machine, contained scope | Rhythmic test with real MIDI input |
+| Codec adaptive ENV | Low technical risk, high diminishing-returns risk | Ship simple follower first, compare |
