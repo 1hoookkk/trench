@@ -1,0 +1,16 @@
+/target/
+/target-*/
+__pycache__/
+*.py[cod]
+/.pytest_cache/
+/.venv/
+/datasets
+terrain_*.log
+trench_live.json
+/*.png
+/*.zip
+/*.lnk
+/.codex/
+/.claude/
+/.vscode/
+/_ui_overlay_iter/
