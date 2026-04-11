@@ -1,0 +1,6294 @@
+{
+  "protocol": {
+    "manifest": "C:\\Users\\hooki\\Trench\\vault\\_shipping_finalists\\manifest.json",
+    "design_corpus": "C:\\Users\\hooki\\Trench\\datasets\\wav_corpus\\design_split_emotion_strat",
+    "holdout_corpus": "C:\\Users\\hooki\\Trench\\datasets\\wav_corpus\\holdout_split_emotion_strat",
+    "design_probe_mode": "corpus",
+    "holdout_probe_mode": "corpus",
+    "design_label_counts": {
+      "bass": 56,
+      "vocal": 56,
+      "drum": 56,
+      "mix": 56
+    },
+    "holdout_label_counts": {
+      "bass": 14,
+      "vocal": 14,
+      "drum": 14,
+      "mix": 14
+    },
+    "design_missing_labels": [],
+    "holdout_missing_labels": [],
+    "allow_fallback": false,
+    "max_abs_metric_contribution": 1.5,
+    "balanced_sampling": true,
+    "balance_seed": 42,
+    "max_clips_per_class": null,
+    "design_balance_input_counts": {
+      "bass": 56,
+      "vocal": 56,
+      "drum": 56,
+      "mix": 56
+    },
+    "design_balance_output_counts": {
+      "bass": 56,
+      "vocal": 56,
+      "drum": 56,
+      "mix": 56
+    },
+    "design_balance_target_count": 56,
+    "holdout_balance_input_counts": {
+      "bass": 14,
+      "vocal": 14,
+      "drum": 14,
+      "mix": 14
+    },
+    "holdout_balance_output_counts": {
+      "bass": 14,
+      "vocal": 14,
+      "drum": 14,
+      "mix": 14
+    },
+    "holdout_balance_target_count": 14,
+    "selection_rule": "Pick top candidate on design only; promote from holdout only."
+  },
+  "summary": [
+    {
+      "body": "Speaker Knockerz",
+      "design_candidate": "Speaker Knockerz C4",
+      "design_gate_ok": true,
+      "design_composite_improvement": 2.8793719536772686,
+      "holdout_promoted": true,
+      "holdout_gate_ok": true,
+      "holdout_wins": 3,
+      "holdout_composite_improvement": 2.8098044914428835,
+      "holdout_oracle_candidate": "Speaker Knockerz C4",
+      "holdout_oracle_promoted": true
+    },
+    {
+      "body": "Aluminum Siding",
+      "design_candidate": "Aluminum Siding C2",
+      "design_gate_ok": true,
+      "design_composite_improvement": 3.0,
+      "holdout_promoted": true,
+      "holdout_gate_ok": true,
+      "holdout_wins": 3,
+      "holdout_composite_improvement": 3.0,
+      "holdout_oracle_candidate": "Aluminum Siding C2",
+      "holdout_oracle_promoted": true
+    },
+    {
+      "body": "Small Talk Ah-Ee",
+      "design_candidate": "Small Talk Ah-Ee C2",
+      "design_gate_ok": true,
+      "design_composite_improvement": 3.562955266948896,
+      "holdout_promoted": true,
+      "holdout_gate_ok": true,
+      "holdout_wins": 4,
+      "holdout_composite_improvement": 3.9964664360207265,
+      "holdout_oracle_candidate": "Small Talk Ah-Ee C2",
+      "holdout_oracle_promoted": true
+    },
+    {
+      "body": "Cul-De-Sac",
+      "design_candidate": "Cul-De-Sac C3",
+      "design_gate_ok": false,
+      "design_composite_improvement": 3.9361385420535138,
+      "holdout_promoted": false,
+      "holdout_gate_ok": false,
+      "holdout_wins": 3,
+      "holdout_composite_improvement": 3.2306982061339826,
+      "holdout_oracle_candidate": "Cul-De-Sac C3",
+      "holdout_oracle_promoted": false
+    }
+  ],
+  "results": {
+    "speaker_knockerz": {
+      "public_name": "Speaker Knockerz",
+      "baseline_path": "C:\\Users\\hooki\\Trench\\cartridges\\translation\\speaker_knockerz.compiled.json",
+      "design_ranked": [
+        {
+          "body": "Speaker Knockerz",
+          "candidate_name": "Speaker Knockerz C4",
+          "shipping_gate_passed": true,
+          "midpoint_passed": true,
+          "gate_ok": true,
+          "promoted": true,
+          "wins": 3,
+          "composite_improvement": 2.8793719536772686,
+          "baseline": {
+            "name": "Speaker Knockerz",
+            "gate": {
+              "passed": true,
+              "body": "Speaker Knockerz",
+              "canonical_body": "speaker_knockerz",
+              "failures": [],
+              "measurements": {
+                "canonical_name": "speaker_knockerz",
+                "test_grid_morphs": [
+                  0.0,
+                  0.25,
+                  0.5,
+                  0.75,
+                  1.0
+                ],
+                "test_grid_qs": [
+                  0.0,
+                  0.5,
+                  1.0
+                ],
+                "ref_sub_peak_db": -0.1,
+                "worst_sub_drop_db": 3.0,
+                "worst_sub_point": [
+                  0.25,
+                  0.5
+                ],
+                "danger_bite_gain_db": 24.5
+              }
+            },
+            "midpoint": {
+              "passed": true,
+              "worst_peak_db": 30.1,
+              "worst_point": {
+                "morph": 0.75,
+                "q": 1.0
+              },
+              "peak_limit_db": 40.0,
+              "points": [
+                {
+                  "morph": 0.0,
+                  "q": 0.0,
+                  "peak_db": -0.1
+                },
+                {
+                  "morph": 0.0,
+                  "q": 1.0,
+                  "peak_db": 18.1
+                },
+                {
+                  "morph": 0.25,
+                  "q": 0.0,
+                  "peak_db": 1.2
+                },
+                {
+                  "morph": 0.25,
+                  "q": 1.0,
+                  "peak_db": 28.5
+                },
+                {
+                  "morph": 0.5,
+                  "q": 0.0,
+                  "peak_db": 4.7
+                },
+                {
+                  "morph": 0.5,
+                  "q": 1.0,
+                  "peak_db": 29.9
+                },
+                {
+                  "morph": 0.75,
+                  "q": 0.0,
+                  "peak_db": 8.3
+                },
+                {
+                  "morph": 0.75,
+                  "q": 1.0,
+                  "peak_db": 30.1
+                },
+                {
+                  "morph": 1.0,
+                  "q": 0.0,
+                  "peak_db": 12.0
+                },
+                {
+                  "morph": 1.0,
+                  "q": 1.0,
+                  "peak_db": 29.3
+                }
+              ]
+            },
+            "task": {
+              "sub_anchor_shift_db": 0.8793389511987548,
+              "translation_bite_db": 22.43880467901554,
+              "danger_contrast_db": 7.579127311826893
+            }
+          },
+          "candidate": {
+            "gate": {
+              "passed": true,
+              "body": "Speaker Knockerz",
+              "canonical_body": "speaker_knockerz",
+              "failures": [],
+              "measurements": {
+                "canonical_name": "speaker_knockerz",
+                "test_grid_morphs": [
+                  0.0,
+                  0.25,
+                  0.5,
+                  0.75,
+                  1.0
+                ],
+                "test_grid_qs": [
+                  0.0,
+                  0.5,
+                  1.0
+                ],
+                "ref_sub_peak_db": -91.0,
+                "worst_sub_drop_db": 0.0,
+                "worst_sub_point": [
+                  0.0,
+                  0.0
+                ],
+                "danger_bite_gain_db": 19.65
+              }
+            },
+            "midpoint": {
+              "passed": true,
+              "worst_peak_db": -0.6,
+              "worst_point": {
+                "morph": 1.0,
+                "q": 1.0
+              },
+              "peak_limit_db": 40.0,
+              "points": [
+                {
+                  "morph": 0.0,
+                  "q": 0.0,
+                  "peak_db": -50.9
+                },
+                {
+                  "morph": 0.0,
+                  "q": 1.0,
+                  "peak_db": -43.0
+                },
+                {
+                  "morph": 0.25,
+                  "q": 0.0,
+                  "peak_db": -18.3
+                },
+                {
+                  "morph": 0.25,
+                  "q": 1.0,
+                  "peak_db": -6.6
+                },
+                {
+                  "morph": 0.5,
+                  "q": 0.0,
+                  "peak_db": -15.2
+                },
+                {
+                  "morph": 0.5,
+                  "q": 1.0,
+                  "peak_db": -2.9
+                },
+                {
+                  "morph": 0.75,
+                  "q": 0.0,
+                  "peak_db": -14.2
+                },
+                {
+                  "morph": 0.75,
+                  "q": 1.0,
+                  "peak_db": -1.4
+                },
+                {
+                  "morph": 1.0,
+                  "q": 0.0,
+                  "peak_db": -14.1
+                },
+                {
+                  "morph": 1.0,
+                  "q": 1.0,
+                  "peak_db": -0.6
+                }
+              ]
+            },
+            "task": {
+              "sub_anchor_shift_db": 27.89737904905019,
+              "translation_bite_db": 30.71503640107915,
+              "danger_contrast_db": 34.24747682819089
+            }
+          },
+          "improvements": {
+            "sub_anchor_shift_db": -1.5,
+            "translation_bite_db": 1.3793719536772684,
+            "danger_contrast_db": 1.5,
+            "midpoint_worst_peak_db": 1.5
+          },
+          "raw_improvements": {
+            "sub_anchor_shift_db": -4.503006682975239,
+            "translation_bite_db": 1.3793719536772684,
+            "danger_contrast_db": 4.444724919393999,
+            "midpoint_worst_peak_db": 5.116666666666667
+          },
+          "max_abs_metric_contribution": 1.5
+        },
+        {
+          "body": "Speaker Knockerz",
+          "candidate_name": "Speaker Knockerz C1",
+          "shipping_gate_passed": true,
+          "midpoint_passed": true,
+          "gate_ok": true,
+          "promoted": true,
+          "wins": 3,
+          "composite_improvement": 1.6166666666666671,
+          "baseline": {
+            "name": "Speaker Knockerz",
+            "gate": {
+              "passed": true,
+              "body": "Speaker Knockerz",
+              "canonical_body": "speaker_knockerz",
+              "failures": [],
+              "measurements": {
+                "canonical_name": "speaker_knockerz",
+                "test_grid_morphs": [
+                  0.0,
+                  0.25,
+                  0.5,
+                  0.75,
+                  1.0
+                ],
+                "test_grid_qs": [
+                  0.0,
+                  0.5,
+                  1.0
+                ],
+                "ref_sub_peak_db": -0.1,
+                "worst_sub_drop_db": 3.0,
+                "worst_sub_point": [
+                  0.25,
+                  0.5
+                ],
+                "danger_bite_gain_db": 24.5
+              }
+            },
+            "midpoint": {
+              "passed": true,
+              "worst_peak_db": 30.1,
+              "worst_point": {
+                "morph": 0.75,
+                "q": 1.0
+              },
+              "peak_limit_db": 40.0,
+              "points": [
+                {
+                  "morph": 0.0,
+                  "q": 0.0,
+                  "peak_db": -0.1
+                },
+                {
+                  "morph": 0.0,
+                  "q": 1.0,
+                  "peak_db": 18.1
+                },
+                {
+                  "morph": 0.25,
+                  "q": 0.0,
+                  "peak_db": 1.2
+                },
+                {
+                  "morph": 0.25,
+                  "q": 1.0,
+                  "peak_db": 28.5
+                },
+                {
+                  "morph": 0.5,
+                  "q": 0.0,
+                  "peak_db": 4.7
+                },
+                {
+                  "morph": 0.5,
+                  "q": 1.0,
+                  "peak_db": 29.9
+                },
+                {
+                  "morph": 0.75,
+                  "q": 0.0,
+                  "peak_db": 8.3
+                },
+                {
+                  "morph": 0.75,
+                  "q": 1.0,
+                  "peak_db": 30.1
+                },
+                {
+                  "morph": 1.0,
+                  "q": 0.0,
+                  "peak_db": 12.0
+                },
+                {
+                  "morph": 1.0,
+                  "q": 1.0,
+                  "peak_db": 29.3
+                }
+              ]
+            },
+            "task": {
+              "sub_anchor_shift_db": 0.8793389511987548,
+              "translation_bite_db": 22.43880467901554,
+              "danger_contrast_db": 7.579127311826893
+            }
+          },
+          "candidate": {
+            "gate": {
+              "passed": true,
+              "body": "Speaker Knockerz",
+              "canonical_body": "speaker_knockerz",
+              "failures": [],
+              "measurements": {
+                "canonical_name": "speaker_knockerz",
+                "test_grid_morphs": [
+                  0.0,
+                  0.25,
+                  0.5,
+                  0.75,
+                  1.0
+                ],
+                "test_grid_qs": [
+                  0.0,
+                  0.5,
+                  1.0
+                ],
+                "ref_sub_peak_db": -105.5,
+                "worst_sub_drop_db": 2.7,
+                "worst_sub_point": [
+                  0.0,
+                  0.5
+                ],
+                "danger_bite_gain_db": 39.36
+              }
+            },
+            "midpoint": {
+              "passed": true,
+              "worst_peak_db": 29.4,
+              "worst_point": {
+                "morph": 0.5,
+                "q": 1.0
+              },
+              "peak_limit_db": 40.0,
+              "points": [
+                {
+                  "morph": 0.0,
+                  "q": 0.0,
+                  "peak_db": -34.1
+                },
+                {
+                  "morph": 0.0,
+                  "q": 1.0,
+                  "peak_db": -22.8
+                },
+                {
+                  "morph": 0.25,
+                  "q": 0.0,
+                  "peak_db": 13.1
+                },
+                {
+                  "morph": 0.25,
+                  "q": 1.0,
+                  "peak_db": 27.6
+                },
+                {
+                  "morph": 0.5,
+                  "q": 0.0,
+                  "peak_db": 12.4
+                },
+                {
+                  "morph": 0.5,
+                  "q": 1.0,
+                  "peak_db": 29.4
+                },
+                {
+                  "morph": 0.75,
+                  "q": 0.0,
+                  "peak_db": 7.8
+                },
+                {
+                  "morph": 0.75,
+                  "q": 1.0,
+                  "peak_db": 26.7
+                },
+                {
+                  "morph": 1.0,
+                  "q": 0.0,
+                  "peak_db": -3.3
+                },
+                {
+                  "morph": 1.0,
+                  "q": 1.0,
+                  "peak_db": 6.8
+                }
+              ]
+            },
+            "task": {
+              "sub_anchor_shift_db": 60.124498393659906,
+              "translation_bite_db": 42.21861636006166,
+              "danger_contrast_db": 43.86435243213886
+            }
+          },
+          "improvements": {
+            "sub_anchor_shift_db": -1.5,
+            "translation_bite_db": 1.5,
+            "danger_contrast_db": 1.5,
+            "midpoint_worst_peak_db": 0.11666666666666714
+          },
+          "raw_improvements": {
+            "sub_anchor_shift_db": -9.874193240410191,
+            "translation_bite_db": 3.2966352801743533,
+            "danger_contrast_db": 6.047537520051994,
+            "midpoint_worst_peak_db": 0.11666666666666714
+          },
+          "max_abs_metric_contribution": 1.5
+        },
+        {
+          "body": "Speaker Knockerz",
+          "candidate_name": "Speaker Knockerz C3",
+          "shipping_gate_passed": true,
+          "midpoint_passed": true,
+          "gate_ok": true,
+          "promoted": true,
+          "wins": 2,
+          "composite_improvement": 1.0833333333333333,
+          "baseline": {
+            "name": "Speaker Knockerz",
+            "gate": {
+              "passed": true,
+              "body": "Speaker Knockerz",
+              "canonical_body": "speaker_knockerz",
+              "failures": [],
+              "measurements": {
+                "canonical_name": "speaker_knockerz",
+                "test_grid_morphs": [
+                  0.0,
+                  0.25,
+                  0.5,
+                  0.75,
+                  1.0
+                ],
+                "test_grid_qs": [
+                  0.0,
+                  0.5,
+                  1.0
+                ],
+                "ref_sub_peak_db": -0.1,
+                "worst_sub_drop_db": 3.0,
+                "worst_sub_point": [
+                  0.25,
+                  0.5
+                ],
+                "danger_bite_gain_db": 24.5
+              }
+            },
+            "midpoint": {
+              "passed": true,
+              "worst_peak_db": 30.1,
+              "worst_point": {
+                "morph": 0.75,
+                "q": 1.0
+              },
+              "peak_limit_db": 40.0,
+              "points": [
+                {
+                  "morph": 0.0,
+                  "q": 0.0,
+                  "peak_db": -0.1
+                },
+                {
+                  "morph": 0.0,
+                  "q": 1.0,
+                  "peak_db": 18.1
+                },
+                {
+                  "morph": 0.25,
+                  "q": 0.0,
+                  "peak_db": 1.2
+                },
+                {
+                  "morph": 0.25,
+                  "q": 1.0,
+                  "peak_db": 28.5
+                },
+                {
+                  "morph": 0.5,
+                  "q": 0.0,
+                  "peak_db": 4.7
+                },
+                {
+                  "morph": 0.5,
+                  "q": 1.0,
+                  "peak_db": 29.9
+                },
+                {
+                  "morph": 0.75,
+                  "q": 0.0,
+                  "peak_db": 8.3
+                },
+                {
+                  "morph": 0.75,
+                  "q": 1.0,
+                  "peak_db": 30.1
+                },
+                {
+                  "morph": 1.0,
+                  "q": 0.0,
+                  "peak_db": 12.0
+                },
+                {
+                  "morph": 1.0,
+                  "q": 1.0,
+                  "peak_db": 29.3
+                }
+              ]
+            },
+            "task": {
+              "sub_anchor_shift_db": 0.8793389511987548,
+              "translation_bite_db": 22.43880467901554,
+              "danger_contrast_db": 7.579127311826893
+            }
+          },
+          "candidate": {
+            "gate": {
+              "passed": true,
+              "body": "Speaker Knockerz",
+              "canonical_body": "speaker_knockerz",
+              "failures": [],
+              "measurements": {
+                "canonical_name": "speaker_knockerz",
+                "test_grid_morphs": [
+                  0.0,
+                  0.25,
+                  0.5,
+                  0.75,
+                  1.0
+                ],
+                "test_grid_qs": [
+                  0.0,
+                  0.5,
+                  1.0
+                ],
+                "ref_sub_peak_db": -116.7,
+                "worst_sub_drop_db": 1.7,
+                "worst_sub_point": [
+                  0.0,
+                  0.5
+                ],
+                "danger_bite_gain_db": 50.48
+              }
+            },
+            "midpoint": {
+              "passed": true,
+              "worst_peak_db": 32.6,
+              "worst_point": {
+                "morph": 0.5,
+                "q": 1.0
+              },
+              "peak_limit_db": 40.0,
+              "points": [
+                {
+                  "morph": 0.0,
+                  "q": 0.0,
+                  "peak_db": -39.6
+                },
+                {
+                  "morph": 0.0,
+                  "q": 1.0,
+                  "peak_db": -22.5
+                },
+                {
+                  "morph": 0.25,
+                  "q": 0.0,
+                  "peak_db": 9.3
+                },
+                {
+                  "morph": 0.25,
+                  "q": 1.0,
+                  "peak_db": 27.7
+                },
+                {
+                  "morph": 0.5,
+                  "q": 0.0,
+                  "peak_db": 9.6
+                },
+                {
+                  "morph": 0.5,
+                  "q": 1.0,
+                  "peak_db": 32.6
+                },
+                {
+                  "morph": 0.75,
+                  "q": 0.0,
+                  "peak_db": 4.8
+                },
+                {
+                  "morph": 0.75,
+                  "q": 1.0,
+                  "peak_db": 31.5
+                },
+                {
+                  "morph": 1.0,
+                  "q": 0.0,
+                  "peak_db": 1.0
+                },
+                {
+                  "morph": 1.0,
+                  "q": 1.0,
+                  "peak_db": 15.6
+                }
+              ]
+            },
+            "task": {
+              "sub_anchor_shift_db": 108.35949125182886,
+              "translation_bite_db": 45.8959073531136,
+              "danger_contrast_db": 51.8669100854634
+            }
+          },
+          "improvements": {
+            "sub_anchor_shift_db": -1.5,
+            "translation_bite_db": 1.5,
+            "danger_contrast_db": 1.5,
+            "midpoint_worst_peak_db": -0.4166666666666667
+          },
+          "raw_improvements": {
+            "sub_anchor_shift_db": -17.913358716771683,
+            "translation_bite_db": 3.909517112349677,
+            "danger_contrast_db": 7.381297128939418,
+            "midpoint_worst_peak_db": -0.4166666666666667
+          },
+          "max_abs_metric_contribution": 1.5
+        },
+        {
+          "body": "Speaker Knockerz",
+          "candidate_name": "Speaker Knockerz C2",
+          "shipping_gate_passed": true,
+          "midpoint_passed": true,
+          "gate_ok": true,
+          "promoted": true,
+          "wins": 2,
+          "composite_improvement": 0.3328533918558953,
+          "baseline": {
+            "name": "Speaker Knockerz",
+            "gate": {
+              "passed": true,
+              "body": "Speaker Knockerz",
+              "canonical_body": "speaker_knockerz",
+              "failures": [],
+              "measurements": {
+                "canonical_name": "speaker_knockerz",
+                "test_grid_morphs": [
+                  0.0,
+                  0.25,
+                  0.5,
+                  0.75,
+                  1.0
+                ],
+                "test_grid_qs": [
+                  0.0,
+                  0.5,
+                  1.0
+                ],
+                "ref_sub_peak_db": -0.1,
+                "worst_sub_drop_db": 3.0,
+                "worst_sub_point": [
+                  0.25,
+                  0.5
+                ],
+                "danger_bite_gain_db": 24.5
+              }
+            },
+            "midpoint": {
+              "passed": true,
+              "worst_peak_db": 30.1,
+              "worst_point": {
+                "morph": 0.75,
+                "q": 1.0
+              },
+              "peak_limit_db": 40.0,
+              "points": [
+                {
+                  "morph": 0.0,
+                  "q": 0.0,
+                  "peak_db": -0.1
+                },
+                {
+                  "morph": 0.0,
+                  "q": 1.0,
+                  "peak_db": 18.1
+                },
+                {
+                  "morph": 0.25,
+                  "q": 0.0,
+                  "peak_db": 1.2
+                },
+                {
+                  "morph": 0.25,
+                  "q": 1.0,
+                  "peak_db": 28.5
+                },
+                {
+                  "morph": 0.5,
+                  "q": 0.0,
+                  "peak_db": 4.7
+                },
+                {
+                  "morph": 0.5,
+                  "q": 1.0,
+                  "peak_db": 29.9
+                },
+                {
+                  "morph": 0.75,
+                  "q": 0.0,
+                  "peak_db": 8.3
+                },
+                {
+                  "morph": 0.75,
+                  "q": 1.0,
+                  "peak_db": 30.1
+                },
+                {
+                  "morph": 1.0,
+                  "q": 0.0,
+                  "peak_db": 12.0
+                },
+                {
+                  "morph": 1.0,
+                  "q": 1.0,
+                  "peak_db": 29.3
+                }
+              ]
+            },
+            "task": {
+              "sub_anchor_shift_db": 0.8793389511987548,
+              "translation_bite_db": 22.43880467901554,
+              "danger_contrast_db": 7.579127311826893
+            }
+          },
+          "candidate": {
+            "gate": {
+              "passed": true,
+              "body": "Speaker Knockerz",
+              "canonical_body": "speaker_knockerz",
+              "failures": [],
+              "measurements": {
+                "canonical_name": "speaker_knockerz",
+                "test_grid_morphs": [
+                  0.0,
+                  0.25,
+                  0.5,
+                  0.75,
+                  1.0
+                ],
+                "test_grid_qs": [
+                  0.0,
+                  0.5,
+                  1.0
+                ],
+                "ref_sub_peak_db": -73.3,
+                "worst_sub_drop_db": 0.0,
+                "worst_sub_point": [
+                  0.0,
+                  0.0
+                ],
+                "danger_bite_gain_db": 23.54
+              }
+            },
+            "midpoint": {
+              "passed": true,
+              "worst_peak_db": 27.8,
+              "worst_point": {
+                "morph": 0.5,
+                "q": 1.0
+              },
+              "peak_limit_db": 40.0,
+              "points": [
+                {
+                  "morph": 0.0,
+                  "q": 0.0,
+                  "peak_db": -24.4
+                },
+                {
+                  "morph": 0.0,
+                  "q": 1.0,
+                  "peak_db": -10.4
+                },
+                {
+                  "morph": 0.25,
+                  "q": 0.0,
+                  "peak_db": 4.5
+                },
+                {
+                  "morph": 0.25,
+                  "q": 1.0,
+                  "peak_db": 23.8
+                },
+                {
+                  "morph": 0.5,
+                  "q": 0.0,
+                  "peak_db": 6.4
+                },
+                {
+                  "morph": 0.5,
+                  "q": 1.0,
+                  "peak_db": 27.8
+                },
+                {
+                  "morph": 0.75,
+                  "q": 0.0,
+                  "peak_db": -1.5
+                },
+                {
+                  "morph": 0.75,
+                  "q": 1.0,
+                  "peak_db": 26.1
+                },
+                {
+                  "morph": 1.0,
+                  "q": 0.0,
+                  "peak_db": 9.3
+                },
+                {
+                  "morph": 1.0,
+                  "q": 1.0,
+                  "peak_db": 21.6
+                }
+              ]
+            },
+            "task": {
+              "sub_anchor_shift_db": 66.2003275460442,
+              "translation_bite_db": 22.13592503015091,
+              "danger_contrast_db": 26.020247842626823
+            }
+          },
+          "improvements": {
+            "sub_anchor_shift_db": -1.5,
+            "translation_bite_db": -0.050479941477438096,
+            "danger_contrast_db": 1.5,
+            "midpoint_worst_peak_db": 0.38333333333333347
+          },
+          "raw_improvements": {
+            "sub_anchor_shift_db": -10.88683143247424,
+            "translation_bite_db": -0.050479941477438096,
+            "danger_contrast_db": 3.0735200884666547,
+            "midpoint_worst_peak_db": 0.38333333333333347
+          },
+          "max_abs_metric_contribution": 1.5
+        }
+      ],
+      "chosen_from_design": {
+        "body": "Speaker Knockerz",
+        "candidate_name": "Speaker Knockerz C4",
+        "shipping_gate_passed": true,
+        "midpoint_passed": true,
+        "gate_ok": true,
+        "promoted": true,
+        "wins": 3,
+        "composite_improvement": 2.8793719536772686,
+        "baseline": {
+          "name": "Speaker Knockerz",
+          "gate": {
+            "passed": true,
+            "body": "Speaker Knockerz",
+            "canonical_body": "speaker_knockerz",
+            "failures": [],
+            "measurements": {
+              "canonical_name": "speaker_knockerz",
+              "test_grid_morphs": [
+                0.0,
+                0.25,
+                0.5,
+                0.75,
+                1.0
+              ],
+              "test_grid_qs": [
+                0.0,
+                0.5,
+                1.0
+              ],
+              "ref_sub_peak_db": -0.1,
+              "worst_sub_drop_db": 3.0,
+              "worst_sub_point": [
+                0.25,
+                0.5
+              ],
+              "danger_bite_gain_db": 24.5
+            }
+          },
+          "midpoint": {
+            "passed": true,
+            "worst_peak_db": 30.1,
+            "worst_point": {
+              "morph": 0.75,
+              "q": 1.0
+            },
+            "peak_limit_db": 40.0,
+            "points": [
+              {
+                "morph": 0.0,
+                "q": 0.0,
+                "peak_db": -0.1
+              },
+              {
+                "morph": 0.0,
+                "q": 1.0,
+                "peak_db": 18.1
+              },
+              {
+                "morph": 0.25,
+                "q": 0.0,
+                "peak_db": 1.2
+              },
+              {
+                "morph": 0.25,
+                "q": 1.0,
+                "peak_db": 28.5
+              },
+              {
+                "morph": 0.5,
+                "q": 0.0,
+                "peak_db": 4.7
+              },
+              {
+                "morph": 0.5,
+                "q": 1.0,
+                "peak_db": 29.9
+              },
+              {
+                "morph": 0.75,
+                "q": 0.0,
+                "peak_db": 8.3
+              },
+              {
+                "morph": 0.75,
+                "q": 1.0,
+                "peak_db": 30.1
+              },
+              {
+                "morph": 1.0,
+                "q": 0.0,
+                "peak_db": 12.0
+              },
+              {
+                "morph": 1.0,
+                "q": 1.0,
+                "peak_db": 29.3
+              }
+            ]
+          },
+          "task": {
+            "sub_anchor_shift_db": 0.8793389511987548,
+            "translation_bite_db": 22.43880467901554,
+            "danger_contrast_db": 7.579127311826893
+          }
+        },
+        "candidate": {
+          "gate": {
+            "passed": true,
+            "body": "Speaker Knockerz",
+            "canonical_body": "speaker_knockerz",
+            "failures": [],
+            "measurements": {
+              "canonical_name": "speaker_knockerz",
+              "test_grid_morphs": [
+                0.0,
+                0.25,
+                0.5,
+                0.75,
+                1.0
+              ],
+              "test_grid_qs": [
+                0.0,
+                0.5,
+                1.0
+              ],
+              "ref_sub_peak_db": -91.0,
+              "worst_sub_drop_db": 0.0,
+              "worst_sub_point": [
+                0.0,
+                0.0
+              ],
+              "danger_bite_gain_db": 19.65
+            }
+          },
+          "midpoint": {
+            "passed": true,
+            "worst_peak_db": -0.6,
+            "worst_point": {
+              "morph": 1.0,
+              "q": 1.0
+            },
+            "peak_limit_db": 40.0,
+            "points": [
+              {
+                "morph": 0.0,
+                "q": 0.0,
+                "peak_db": -50.9
+              },
+              {
+                "morph": 0.0,
+                "q": 1.0,
+                "peak_db": -43.0
+              },
+              {
+                "morph": 0.25,
+                "q": 0.0,
+                "peak_db": -18.3
+              },
+              {
+                "morph": 0.25,
+                "q": 1.0,
+                "peak_db": -6.6
+              },
+              {
+                "morph": 0.5,
+                "q": 0.0,
+                "peak_db": -15.2
+              },
+              {
+                "morph": 0.5,
+                "q": 1.0,
+                "peak_db": -2.9
+              },
+              {
+                "morph": 0.75,
+                "q": 0.0,
+                "peak_db": -14.2
+              },
+              {
+                "morph": 0.75,
+                "q": 1.0,
+                "peak_db": -1.4
+              },
+              {
+                "morph": 1.0,
+                "q": 0.0,
+                "peak_db": -14.1
+              },
+              {
+                "morph": 1.0,
+                "q": 1.0,
+                "peak_db": -0.6
+              }
+            ]
+          },
+          "task": {
+            "sub_anchor_shift_db": 27.89737904905019,
+            "translation_bite_db": 30.71503640107915,
+            "danger_contrast_db": 34.24747682819089
+          }
+        },
+        "improvements": {
+          "sub_anchor_shift_db": -1.5,
+          "translation_bite_db": 1.3793719536772684,
+          "danger_contrast_db": 1.5,
+          "midpoint_worst_peak_db": 1.5
+        },
+        "raw_improvements": {
+          "sub_anchor_shift_db": -4.503006682975239,
+          "translation_bite_db": 1.3793719536772684,
+          "danger_contrast_db": 4.444724919393999,
+          "midpoint_worst_peak_db": 5.116666666666667
+        },
+        "max_abs_metric_contribution": 1.5
+      },
+      "holdout_eval": {
+        "body": "Speaker Knockerz",
+        "candidate_name": "Speaker Knockerz C4",
+        "shipping_gate_passed": true,
+        "midpoint_passed": true,
+        "gate_ok": true,
+        "promoted": true,
+        "wins": 3,
+        "composite_improvement": 2.8098044914428835,
+        "baseline": {
+          "name": "Speaker Knockerz",
+          "gate": {
+            "passed": true,
+            "body": "Speaker Knockerz",
+            "canonical_body": "speaker_knockerz",
+            "failures": [],
+            "measurements": {
+              "canonical_name": "speaker_knockerz",
+              "test_grid_morphs": [
+                0.0,
+                0.25,
+                0.5,
+                0.75,
+                1.0
+              ],
+              "test_grid_qs": [
+                0.0,
+                0.5,
+                1.0
+              ],
+              "ref_sub_peak_db": -0.1,
+              "worst_sub_drop_db": 3.0,
+              "worst_sub_point": [
+                0.25,
+                0.5
+              ],
+              "danger_bite_gain_db": 24.5
+            }
+          },
+          "midpoint": {
+            "passed": true,
+            "worst_peak_db": 30.1,
+            "worst_point": {
+              "morph": 0.75,
+              "q": 1.0
+            },
+            "peak_limit_db": 40.0,
+            "points": [
+              {
+                "morph": 0.0,
+                "q": 0.0,
+                "peak_db": -0.1
+              },
+              {
+                "morph": 0.0,
+                "q": 1.0,
+                "peak_db": 18.1
+              },
+              {
+                "morph": 0.25,
+                "q": 0.0,
+                "peak_db": 1.2
+              },
+              {
+                "morph": 0.25,
+                "q": 1.0,
+                "peak_db": 28.5
+              },
+              {
+                "morph": 0.5,
+                "q": 0.0,
+                "peak_db": 4.7
+              },
+              {
+                "morph": 0.5,
+                "q": 1.0,
+                "peak_db": 29.9
+              },
+              {
+                "morph": 0.75,
+                "q": 0.0,
+                "peak_db": 8.3
+              },
+              {
+                "morph": 0.75,
+                "q": 1.0,
+                "peak_db": 30.1
+              },
+              {
+                "morph": 1.0,
+                "q": 0.0,
+                "peak_db": 12.0
+              },
+              {
+                "morph": 1.0,
+                "q": 1.0,
+                "peak_db": 29.3
+              }
+            ]
+          },
+          "task": {
+            "sub_anchor_shift_db": 0.7713685084903829,
+            "translation_bite_db": 23.45633198554546,
+            "danger_contrast_db": 8.191216425537544
+          }
+        },
+        "candidate": {
+          "gate": {
+            "passed": true,
+            "body": "Speaker Knockerz",
+            "canonical_body": "speaker_knockerz",
+            "failures": [],
+            "measurements": {
+              "canonical_name": "speaker_knockerz",
+              "test_grid_morphs": [
+                0.0,
+                0.25,
+                0.5,
+                0.75,
+                1.0
+              ],
+              "test_grid_qs": [
+                0.0,
+                0.5,
+                1.0
+              ],
+              "ref_sub_peak_db": -91.0,
+              "worst_sub_drop_db": 0.0,
+              "worst_sub_point": [
+                0.0,
+                0.0
+              ],
+              "danger_bite_gain_db": 19.65
+            }
+          },
+          "midpoint": {
+            "passed": true,
+            "worst_peak_db": -0.6,
+            "worst_point": {
+              "morph": 1.0,
+              "q": 1.0
+            },
+            "peak_limit_db": 40.0,
+            "points": [
+              {
+                "morph": 0.0,
+                "q": 0.0,
+                "peak_db": -50.9
+              },
+              {
+                "morph": 0.0,
+                "q": 1.0,
+                "peak_db": -43.0
+              },
+              {
+                "morph": 0.25,
+                "q": 0.0,
+                "peak_db": -18.3
+              },
+              {
+                "morph": 0.25,
+                "q": 1.0,
+                "peak_db": -6.6
+              },
+              {
+                "morph": 0.5,
+                "q": 0.0,
+                "peak_db": -15.2
+              },
+              {
+                "morph": 0.5,
+                "q": 1.0,
+                "peak_db": -2.9
+              },
+              {
+                "morph": 0.75,
+                "q": 0.0,
+                "peak_db": -14.2
+              },
+              {
+                "morph": 0.75,
+                "q": 1.0,
+                "peak_db": -1.4
+              },
+              {
+                "morph": 1.0,
+                "q": 0.0,
+                "peak_db": -14.1
+              },
+              {
+                "morph": 1.0,
+                "q": 1.0,
+                "peak_db": -0.6
+              }
+            ]
+          },
+          "task": {
+            "sub_anchor_shift_db": 27.881740625876652,
+            "translation_bite_db": 31.315158934202763,
+            "danger_contrast_db": 33.536368078179
+          }
+        },
+        "improvements": {
+          "sub_anchor_shift_db": -1.5,
+          "translation_bite_db": 1.3098044914428837,
+          "danger_contrast_db": 1.5,
+          "midpoint_worst_peak_db": 1.5
+        },
+        "raw_improvements": {
+          "sub_anchor_shift_db": -4.518395352897712,
+          "translation_bite_db": 1.3098044914428837,
+          "danger_contrast_db": 4.22419194210691,
+          "midpoint_worst_peak_db": 5.116666666666667
+        },
+        "max_abs_metric_contribution": 1.5
+      },
+      "holdout_oracle_top": {
+        "body": "Speaker Knockerz",
+        "candidate_name": "Speaker Knockerz C4",
+        "shipping_gate_passed": true,
+        "midpoint_passed": true,
+        "gate_ok": true,
+        "promoted": true,
+        "wins": 3,
+        "composite_improvement": 2.8098044914428835,
+        "baseline": {
+          "name": "Speaker Knockerz",
+          "gate": {
+            "passed": true,
+            "body": "Speaker Knockerz",
+            "canonical_body": "speaker_knockerz",
+            "failures": [],
+            "measurements": {
+              "canonical_name": "speaker_knockerz",
+              "test_grid_morphs": [
+                0.0,
+                0.25,
+                0.5,
+                0.75,
+                1.0
+              ],
+              "test_grid_qs": [
+                0.0,
+                0.5,
+                1.0
+              ],
+              "ref_sub_peak_db": -0.1,
+              "worst_sub_drop_db": 3.0,
+              "worst_sub_point": [
+                0.25,
+                0.5
+              ],
+              "danger_bite_gain_db": 24.5
+            }
+          },
+          "midpoint": {
+            "passed": true,
+            "worst_peak_db": 30.1,
+            "worst_point": {
+              "morph": 0.75,
+              "q": 1.0
+            },
+            "peak_limit_db": 40.0,
+            "points": [
+              {
+                "morph": 0.0,
+                "q": 0.0,
+                "peak_db": -0.1
+              },
+              {
+                "morph": 0.0,
+                "q": 1.0,
+                "peak_db": 18.1
+              },
+              {
+                "morph": 0.25,
+                "q": 0.0,
+                "peak_db": 1.2
+              },
+              {
+                "morph": 0.25,
+                "q": 1.0,
+                "peak_db": 28.5
+              },
+              {
+                "morph": 0.5,
+                "q": 0.0,
+                "peak_db": 4.7
+              },
+              {
+                "morph": 0.5,
+                "q": 1.0,
+                "peak_db": 29.9
+              },
+              {
+                "morph": 0.75,
+                "q": 0.0,
+                "peak_db": 8.3
+              },
+              {
+                "morph": 0.75,
+                "q": 1.0,
+                "peak_db": 30.1
+              },
+              {
+                "morph": 1.0,
+                "q": 0.0,
+                "peak_db": 12.0
+              },
+              {
+                "morph": 1.0,
+                "q": 1.0,
+                "peak_db": 29.3
+              }
+            ]
+          },
+          "task": {
+            "sub_anchor_shift_db": 0.7713685084903829,
+            "translation_bite_db": 23.45633198554546,
+            "danger_contrast_db": 8.191216425537544
+          }
+        },
+        "candidate": {
+          "gate": {
+            "passed": true,
+            "body": "Speaker Knockerz",
+            "canonical_body": "speaker_knockerz",
+            "failures": [],
+            "measurements": {
+              "canonical_name": "speaker_knockerz",
+              "test_grid_morphs": [
+                0.0,
+                0.25,
+                0.5,
+                0.75,
+                1.0
+              ],
+              "test_grid_qs": [
+                0.0,
+                0.5,
+                1.0
+              ],
+              "ref_sub_peak_db": -91.0,
+              "worst_sub_drop_db": 0.0,
+              "worst_sub_point": [
+                0.0,
+                0.0
+              ],
+              "danger_bite_gain_db": 19.65
+            }
+          },
+          "midpoint": {
+            "passed": true,
+            "worst_peak_db": -0.6,
+            "worst_point": {
+              "morph": 1.0,
+              "q": 1.0
+            },
+            "peak_limit_db": 40.0,
+            "points": [
+              {
+                "morph": 0.0,
+                "q": 0.0,
+                "peak_db": -50.9
+              },
+              {
+                "morph": 0.0,
+                "q": 1.0,
+                "peak_db": -43.0
+              },
+              {
+                "morph": 0.25,
+                "q": 0.0,
+                "peak_db": -18.3
+              },
+              {
+                "morph": 0.25,
+                "q": 1.0,
+                "peak_db": -6.6
+              },
+              {
+                "morph": 0.5,
+                "q": 0.0,
+                "peak_db": -15.2
+              },
+              {
+                "morph": 0.5,
+                "q": 1.0,
+                "peak_db": -2.9
+              },
+              {
+                "morph": 0.75,
+                "q": 0.0,
+                "peak_db": -14.2
+              },
+              {
+                "morph": 0.75,
+                "q": 1.0,
+                "peak_db": -1.4
+              },
+              {
+                "morph": 1.0,
+                "q": 0.0,
+                "peak_db": -14.1
+              },
+              {
+                "morph": 1.0,
+                "q": 1.0,
+                "peak_db": -0.6
+              }
+            ]
+          },
+          "task": {
+            "sub_anchor_shift_db": 27.881740625876652,
+            "translation_bite_db": 31.315158934202763,
+            "danger_contrast_db": 33.536368078179
+          }
+        },
+        "improvements": {
+          "sub_anchor_shift_db": -1.5,
+          "translation_bite_db": 1.3098044914428837,
+          "danger_contrast_db": 1.5,
+          "midpoint_worst_peak_db": 1.5
+        },
+        "raw_improvements": {
+          "sub_anchor_shift_db": -4.518395352897712,
+          "translation_bite_db": 1.3098044914428837,
+          "danger_contrast_db": 4.22419194210691,
+          "midpoint_worst_peak_db": 5.116666666666667
+        },
+        "max_abs_metric_contribution": 1.5
+      }
+    },
+    "aluminum_siding": {
+      "public_name": "Aluminum Siding",
+      "baseline_path": "C:\\Users\\hooki\\Trench\\cartridges\\translation\\aluminum_siding.compiled.json",
+      "design_ranked": [
+        {
+          "body": "Aluminum Siding",
+          "candidate_name": "Aluminum Siding C2",
+          "shipping_gate_passed": true,
+          "midpoint_passed": true,
+          "gate_ok": true,
+          "promoted": true,
+          "wins": 3,
+          "composite_improvement": 3.0,
+          "baseline": {
+            "name": "Aluminum Siding",
+            "gate": {
+              "passed": false,
+              "body": "Aluminum Siding",
+              "canonical_body": "aluminum_siding",
+              "failures": [
+                "1kHz void failed: only -26.8 dB scoop at morph=0.0, Q=1.0 (limit: 10 dB)",
+                "Open-air gain failed: -161.13 dB (limit: 1.0 dB)"
+              ],
+              "measurements": {
+                "canonical_name": "aluminum_siding",
+                "test_grid_morphs": [
+                  0.0,
+                  0.25,
+                  0.5,
+                  0.75,
+                  1.0
+                ],
+                "test_grid_qs": [
+                  0.0,
+                  0.5,
+                  1.0
+                ],
+                "worst_void_scoop_db": -26.8,
+                "worst_void_point": [
+                  0.0,
+                  1.0
+                ],
+                "open_air_gain_db": -161.13
+              }
+            },
+            "midpoint": {
+              "passed": true,
+              "worst_peak_db": 34.6,
+              "worst_point": {
+                "morph": 0.75,
+                "q": 0.0
+              },
+              "peak_limit_db": 40.0,
+              "points": [
+                {
+                  "morph": 0.0,
+                  "q": 0.0,
+                  "peak_db": 24.1
+                },
+                {
+                  "morph": 0.0,
+                  "q": 1.0,
+                  "peak_db": 22.0
+                },
+                {
+                  "morph": 0.25,
+                  "q": 0.0,
+                  "peak_db": 17.1
+                },
+                {
+                  "morph": 0.25,
+                  "q": 1.0,
+                  "peak_db": 18.5
+                },
+                {
+                  "morph": 0.5,
+                  "q": 0.0,
+                  "peak_db": 28.9
+                },
+                {
+                  "morph": 0.5,
+                  "q": 1.0,
+                  "peak_db": 15.2
+                },
+                {
+                  "morph": 0.75,
+                  "q": 0.0,
+                  "peak_db": 34.6
+                },
+                {
+                  "morph": 0.75,
+                  "q": 1.0,
+                  "peak_db": 12.2
+                },
+                {
+                  "morph": 1.0,
+                  "q": 0.0,
+                  "peak_db": 28.0
+                },
+                {
+                  "morph": 1.0,
+                  "q": 1.0,
+                  "peak_db": 9.9
+                }
+              ]
+            },
+            "task": {
+              "void_depth_db": -33.12079043770153,
+              "air_band_gain_db": -61.65816674754255,
+              "mid_fill_db": -5.752346848420416
+            }
+          },
+          "candidate": {
+            "gate": {
+              "passed": true,
+              "body": "Aluminum Siding",
+              "canonical_body": "aluminum_siding",
+              "failures": [],
+              "measurements": {
+                "canonical_name": "aluminum_siding",
+                "test_grid_morphs": [
+                  0.0,
+                  0.25,
+                  0.5,
+                  0.75,
+                  1.0
+                ],
+                "test_grid_qs": [
+                  0.0,
+                  0.5,
+                  1.0
+                ],
+                "worst_void_scoop_db": 35.2,
+                "worst_void_point": [
+                  0.75,
+                  1.0
+                ],
+                "open_air_gain_db": 7.67
+              }
+            },
+            "midpoint": {
+              "passed": true,
+              "worst_peak_db": 17.4,
+              "worst_point": {
+                "morph": 1.0,
+                "q": 0.0
+              },
+              "peak_limit_db": 40.0,
+              "points": [
+                {
+                  "morph": 0.0,
+                  "q": 0.0,
+                  "peak_db": 13.8
+                },
+                {
+                  "morph": 0.0,
+                  "q": 1.0,
+                  "peak_db": -4.8
+                },
+                {
+                  "morph": 0.25,
+                  "q": 0.0,
+                  "peak_db": 2.7
+                },
+                {
+                  "morph": 0.25,
+                  "q": 1.0,
+                  "peak_db": 2.9
+                },
+                {
+                  "morph": 0.5,
+                  "q": 0.0,
+                  "peak_db": 11.9
+                },
+                {
+                  "morph": 0.5,
+                  "q": 1.0,
+                  "peak_db": 9.3
+                },
+                {
+                  "morph": 0.75,
+                  "q": 0.0,
+                  "peak_db": 13.0
+                },
+                {
+                  "morph": 0.75,
+                  "q": 1.0,
+                  "peak_db": 11.2
+                },
+                {
+                  "morph": 1.0,
+                  "q": 0.0,
+                  "peak_db": 17.4
+                },
+                {
+                  "morph": 1.0,
+                  "q": 1.0,
+                  "peak_db": 15.3
+                }
+              ]
+            },
+            "task": {
+              "void_depth_db": 20.634507784589875,
+              "air_band_gain_db": 22.861644446249297,
+              "mid_fill_db": 43.9310930782576
+            }
+          },
+          "improvements": {
+            "void_depth_db": 1.5,
+            "air_band_gain_db": 1.5,
+            "mid_fill_db": -1.5,
+            "midpoint_worst_peak_db": 1.5
+          },
+          "raw_improvements": {
+            "void_depth_db": 8.9592163703819,
+            "air_band_gain_db": 14.08663519896531,
+            "mid_fill_db": -12.420859981669503,
+            "midpoint_worst_peak_db": 2.866666666666667
+          },
+          "max_abs_metric_contribution": 1.5
+        },
+        {
+          "body": "Aluminum Siding",
+          "candidate_name": "Aluminum Siding C3",
+          "shipping_gate_passed": false,
+          "midpoint_passed": true,
+          "gate_ok": false,
+          "promoted": false,
+          "wins": 4,
+          "composite_improvement": 4.955672253716166,
+          "baseline": {
+            "name": "Aluminum Siding",
+            "gate": {
+              "passed": false,
+              "body": "Aluminum Siding",
+              "canonical_body": "aluminum_siding",
+              "failures": [
+                "1kHz void failed: only -26.8 dB scoop at morph=0.0, Q=1.0 (limit: 10 dB)",
+                "Open-air gain failed: -161.13 dB (limit: 1.0 dB)"
+              ],
+              "measurements": {
+                "canonical_name": "aluminum_siding",
+                "test_grid_morphs": [
+                  0.0,
+                  0.25,
+                  0.5,
+                  0.75,
+                  1.0
+                ],
+                "test_grid_qs": [
+                  0.0,
+                  0.5,
+                  1.0
+                ],
+                "worst_void_scoop_db": -26.8,
+                "worst_void_point": [
+                  0.0,
+                  1.0
+                ],
+                "open_air_gain_db": -161.13
+              }
+            },
+            "midpoint": {
+              "passed": true,
+              "worst_peak_db": 34.6,
+              "worst_point": {
+                "morph": 0.75,
+                "q": 0.0
+              },
+              "peak_limit_db": 40.0,
+              "points": [
+                {
+                  "morph": 0.0,
+                  "q": 0.0,
+                  "peak_db": 24.1
+                },
+                {
+                  "morph": 0.0,
+                  "q": 1.0,
+                  "peak_db": 22.0
+                },
+                {
+                  "morph": 0.25,
+                  "q": 0.0,
+                  "peak_db": 17.1
+                },
+                {
+                  "morph": 0.25,
+                  "q": 1.0,
+                  "peak_db": 18.5
+                },
+                {
+                  "morph": 0.5,
+                  "q": 0.0,
+                  "peak_db": 28.9
+                },
+                {
+                  "morph": 0.5,
+                  "q": 1.0,
+                  "peak_db": 15.2
+                },
+                {
+                  "morph": 0.75,
+                  "q": 0.0,
+                  "peak_db": 34.6
+                },
+                {
+                  "morph": 0.75,
+                  "q": 1.0,
+                  "peak_db": 12.2
+                },
+                {
+                  "morph": 1.0,
+                  "q": 0.0,
+                  "peak_db": 28.0
+                },
+                {
+                  "morph": 1.0,
+                  "q": 1.0,
+                  "peak_db": 9.9
+                }
+              ]
+            },
+            "task": {
+              "void_depth_db": -33.12079043770153,
+              "air_band_gain_db": -61.65816674754255,
+              "mid_fill_db": -5.752346848420416
+            }
+          },
+          "candidate": {
+            "gate": {
+              "passed": false,
+              "body": "Aluminum Siding",
+              "canonical_body": "aluminum_siding",
+              "failures": [
+                "Open-air gain failed: -11.54 dB (limit: 1.0 dB)"
+              ],
+              "measurements": {
+                "canonical_name": "aluminum_siding",
+                "test_grid_morphs": [
+                  0.0,
+                  0.25,
+                  0.5,
+                  0.75,
+                  1.0
+                ],
+                "test_grid_qs": [
+                  0.0,
+                  0.5,
+                  1.0
+                ],
+                "worst_void_scoop_db": 10.8,
+                "worst_void_point": [
+                  0.0,
+                  0.0
+                ],
+                "open_air_gain_db": -11.54
+              }
+            },
+            "midpoint": {
+              "passed": true,
+              "worst_peak_db": -53.0,
+              "worst_point": {
+                "morph": 1.0,
+                "q": 0.0
+              },
+              "peak_limit_db": 40.0,
+              "points": [
+                {
+                  "morph": 0.0,
+                  "q": 0.0,
+                  "peak_db": -68.1
+                },
+                {
+                  "morph": 0.0,
+                  "q": 1.0,
+                  "peak_db": -68.2
+                },
+                {
+                  "morph": 0.25,
+                  "q": 0.0,
+                  "peak_db": -70.4
+                },
+                {
+                  "morph": 0.25,
+                  "q": 1.0,
+                  "peak_db": -67.2
+                },
+                {
+                  "morph": 0.5,
+                  "q": 0.0,
+                  "peak_db": -71.3
+                },
+                {
+                  "morph": 0.5,
+                  "q": 1.0,
+                  "peak_db": -67.1
+                },
+                {
+                  "morph": 0.75,
+                  "q": 0.0,
+                  "peak_db": -65.5
+                },
+                {
+                  "morph": 0.75,
+                  "q": 1.0,
+                  "peak_db": -67.4
+                },
+                {
+                  "morph": 1.0,
+                  "q": 0.0,
+                  "peak_db": -53.0
+                },
+                {
+                  "morph": 1.0,
+                  "q": 1.0,
+                  "peak_db": -64.9
+                }
+              ]
+            },
+            "task": {
+              "void_depth_db": -25.145421725324347,
+              "air_band_gain_db": -9.34285316365215,
+              "mid_fill_db": -8.25812338836696
+            }
+          },
+          "improvements": {
+            "void_depth_db": 1.3292281187295305,
+            "air_band_gain_db": 1.5,
+            "mid_fill_db": 0.6264441349866359,
+            "midpoint_worst_peak_db": 1.5
+          },
+          "raw_improvements": {
+            "void_depth_db": 1.3292281187295305,
+            "air_band_gain_db": 8.7192189306484,
+            "mid_fill_db": 0.6264441349866359,
+            "midpoint_worst_peak_db": 14.6
+          },
+          "max_abs_metric_contribution": 1.5
+        },
+        {
+          "body": "Aluminum Siding",
+          "candidate_name": "Aluminum Siding C4",
+          "shipping_gate_passed": false,
+          "midpoint_passed": true,
+          "gate_ok": false,
+          "promoted": false,
+          "wins": 4,
+          "composite_improvement": 4.816081504202257,
+          "baseline": {
+            "name": "Aluminum Siding",
+            "gate": {
+              "passed": false,
+              "body": "Aluminum Siding",
+              "canonical_body": "aluminum_siding",
+              "failures": [
+                "1kHz void failed: only -26.8 dB scoop at morph=0.0, Q=1.0 (limit: 10 dB)",
+                "Open-air gain failed: -161.13 dB (limit: 1.0 dB)"
+              ],
+              "measurements": {
+                "canonical_name": "aluminum_siding",
+                "test_grid_morphs": [
+                  0.0,
+                  0.25,
+                  0.5,
+                  0.75,
+                  1.0
+                ],
+                "test_grid_qs": [
+                  0.0,
+                  0.5,
+                  1.0
+                ],
+                "worst_void_scoop_db": -26.8,
+                "worst_void_point": [
+                  0.0,
+                  1.0
+                ],
+                "open_air_gain_db": -161.13
+              }
+            },
+            "midpoint": {
+              "passed": true,
+              "worst_peak_db": 34.6,
+              "worst_point": {
+                "morph": 0.75,
+                "q": 0.0
+              },
+              "peak_limit_db": 40.0,
+              "points": [
+                {
+                  "morph": 0.0,
+                  "q": 0.0,
+                  "peak_db": 24.1
+                },
+                {
+                  "morph": 0.0,
+                  "q": 1.0,
+                  "peak_db": 22.0
+                },
+                {
+                  "morph": 0.25,
+                  "q": 0.0,
+                  "peak_db": 17.1
+                },
+                {
+                  "morph": 0.25,
+                  "q": 1.0,
+                  "peak_db": 18.5
+                },
+                {
+                  "morph": 0.5,
+                  "q": 0.0,
+                  "peak_db": 28.9
+                },
+                {
+                  "morph": 0.5,
+                  "q": 1.0,
+                  "peak_db": 15.2
+                },
+                {
+                  "morph": 0.75,
+                  "q": 0.0,
+                  "peak_db": 34.6
+                },
+                {
+                  "morph": 0.75,
+                  "q": 1.0,
+                  "peak_db": 12.2
+                },
+                {
+                  "morph": 1.0,
+                  "q": 0.0,
+                  "peak_db": 28.0
+                },
+                {
+                  "morph": 1.0,
+                  "q": 1.0,
+                  "peak_db": 9.9
+                }
+              ]
+            },
+            "task": {
+              "void_depth_db": -33.12079043770153,
+              "air_band_gain_db": -61.65816674754255,
+              "mid_fill_db": -5.752346848420416
+            }
+          },
+          "candidate": {
+            "gate": {
+              "passed": false,
+              "body": "Aluminum Siding",
+              "canonical_body": "aluminum_siding",
+              "failures": [
+                "1kHz void failed: only 6.9 dB scoop at morph=0.0, Q=0.0 (limit: 10 dB)",
+                "Open-air gain failed: -1.73 dB (limit: 1.0 dB)"
+              ],
+              "measurements": {
+                "canonical_name": "aluminum_siding",
+                "test_grid_morphs": [
+                  0.0,
+                  0.25,
+                  0.5,
+                  0.75,
+                  1.0
+                ],
+                "test_grid_qs": [
+                  0.0,
+                  0.5,
+                  1.0
+                ],
+                "worst_void_scoop_db": 6.9,
+                "worst_void_point": [
+                  0.0,
+                  0.0
+                ],
+                "open_air_gain_db": -1.73
+              }
+            },
+            "midpoint": {
+              "passed": true,
+              "worst_peak_db": -37.5,
+              "worst_point": {
+                "morph": 1.0,
+                "q": 0.0
+              },
+              "peak_limit_db": 40.0,
+              "points": [
+                {
+                  "morph": 0.0,
+                  "q": 0.0,
+                  "peak_db": -73.3
+                },
+                {
+                  "morph": 0.0,
+                  "q": 1.0,
+                  "peak_db": -74.8
+                },
+                {
+                  "morph": 0.25,
+                  "q": 0.0,
+                  "peak_db": -75.4
+                },
+                {
+                  "morph": 0.25,
+                  "q": 1.0,
+                  "peak_db": -75.9
+                },
+                {
+                  "morph": 0.5,
+                  "q": 0.0,
+                  "peak_db": -77.4
+                },
+                {
+                  "morph": 0.5,
+                  "q": 1.0,
+                  "peak_db": -75.3
+                },
+                {
+                  "morph": 0.75,
+                  "q": 0.0,
+                  "peak_db": -70.8
+                },
+                {
+                  "morph": 0.75,
+                  "q": 1.0,
+                  "peak_db": -72.9
+                },
+                {
+                  "morph": 1.0,
+                  "q": 0.0,
+                  "peak_db": -37.5
+                },
+                {
+                  "morph": 1.0,
+                  "q": 1.0,
+                  "peak_db": -68.7
+                }
+              ]
+            },
+            "task": {
+              "void_depth_db": -25.27322831430027,
+              "air_band_gain_db": -7.128744636986978,
+              "mid_fill_db": -7.7849647829619375
+            }
+          },
+          "improvements": {
+            "void_depth_db": 1.3079270205668767,
+            "air_band_gain_db": 1.5,
+            "mid_fill_db": 0.5081544836353804,
+            "midpoint_worst_peak_db": 1.5
+          },
+          "raw_improvements": {
+            "void_depth_db": 1.3079270205668767,
+            "air_band_gain_db": 9.088237018425929,
+            "mid_fill_db": 0.5081544836353804,
+            "midpoint_worst_peak_db": 12.016666666666666
+          },
+          "max_abs_metric_contribution": 1.5
+        },
+        {
+          "body": "Aluminum Siding",
+          "candidate_name": "Aluminum Siding C1",
+          "shipping_gate_passed": false,
+          "midpoint_passed": true,
+          "gate_ok": false,
+          "promoted": false,
+          "wins": 3,
+          "composite_improvement": 3.9744417512828747,
+          "baseline": {
+            "name": "Aluminum Siding",
+            "gate": {
+              "passed": false,
+              "body": "Aluminum Siding",
+              "canonical_body": "aluminum_siding",
+              "failures": [
+                "1kHz void failed: only -26.8 dB scoop at morph=0.0, Q=1.0 (limit: 10 dB)",
+                "Open-air gain failed: -161.13 dB (limit: 1.0 dB)"
+              ],
+              "measurements": {
+                "canonical_name": "aluminum_siding",
+                "test_grid_morphs": [
+                  0.0,
+                  0.25,
+                  0.5,
+                  0.75,
+                  1.0
+                ],
+                "test_grid_qs": [
+                  0.0,
+                  0.5,
+                  1.0
+                ],
+                "worst_void_scoop_db": -26.8,
+                "worst_void_point": [
+                  0.0,
+                  1.0
+                ],
+                "open_air_gain_db": -161.13
+              }
+            },
+            "midpoint": {
+              "passed": true,
+              "worst_peak_db": 34.6,
+              "worst_point": {
+                "morph": 0.75,
+                "q": 0.0
+              },
+              "peak_limit_db": 40.0,
+              "points": [
+                {
+                  "morph": 0.0,
+                  "q": 0.0,
+                  "peak_db": 24.1
+                },
+                {
+                  "morph": 0.0,
+                  "q": 1.0,
+                  "peak_db": 22.0
+                },
+                {
+                  "morph": 0.25,
+                  "q": 0.0,
+                  "peak_db": 17.1
+                },
+                {
+                  "morph": 0.25,
+                  "q": 1.0,
+                  "peak_db": 18.5
+                },
+                {
+                  "morph": 0.5,
+                  "q": 0.0,
+                  "peak_db": 28.9
+                },
+                {
+                  "morph": 0.5,
+                  "q": 1.0,
+                  "peak_db": 15.2
+                },
+                {
+                  "morph": 0.75,
+                  "q": 0.0,
+                  "peak_db": 34.6
+                },
+                {
+                  "morph": 0.75,
+                  "q": 1.0,
+                  "peak_db": 12.2
+                },
+                {
+                  "morph": 1.0,
+                  "q": 0.0,
+                  "peak_db": 28.0
+                },
+                {
+                  "morph": 1.0,
+                  "q": 1.0,
+                  "peak_db": 9.9
+                }
+              ]
+            },
+            "task": {
+              "void_depth_db": -33.12079043770153,
+              "air_band_gain_db": -61.65816674754255,
+              "mid_fill_db": -5.752346848420416
+            }
+          },
+          "candidate": {
+            "gate": {
+              "passed": false,
+              "body": "Aluminum Siding",
+              "canonical_body": "aluminum_siding",
+              "failures": [
+                "1kHz void failed: only 6.8 dB scoop at morph=1.0, Q=0.0 (limit: 10 dB)"
+              ],
+              "measurements": {
+                "canonical_name": "aluminum_siding",
+                "test_grid_morphs": [
+                  0.0,
+                  0.25,
+                  0.5,
+                  0.75,
+                  1.0
+                ],
+                "test_grid_qs": [
+                  0.0,
+                  0.5,
+                  1.0
+                ],
+                "worst_void_scoop_db": 6.8,
+                "worst_void_point": [
+                  1.0,
+                  0.0
+                ],
+                "open_air_gain_db": 1.32
+              }
+            },
+            "midpoint": {
+              "passed": true,
+              "worst_peak_db": -68.4,
+              "worst_point": {
+                "morph": 0.0,
+                "q": 1.0
+              },
+              "peak_limit_db": 40.0,
+              "points": [
+                {
+                  "morph": 0.0,
+                  "q": 0.0,
+                  "peak_db": -72.4
+                },
+                {
+                  "morph": 0.0,
+                  "q": 1.0,
+                  "peak_db": -68.4
+                },
+                {
+                  "morph": 0.25,
+                  "q": 0.0,
+                  "peak_db": -78.3
+                },
+                {
+                  "morph": 0.25,
+                  "q": 1.0,
+                  "peak_db": -69.8
+                },
+                {
+                  "morph": 0.5,
+                  "q": 0.0,
+                  "peak_db": -79.4
+                },
+                {
+                  "morph": 0.5,
+                  "q": 1.0,
+                  "peak_db": -72.9
+                },
+                {
+                  "morph": 0.75,
+                  "q": 0.0,
+                  "peak_db": -76.8
+                },
+                {
+                  "morph": 0.75,
+                  "q": 1.0,
+                  "peak_db": -73.1
+                },
+                {
+                  "morph": 1.0,
+                  "q": 0.0,
+                  "peak_db": -75.7
+                },
+                {
+                  "morph": 1.0,
+                  "q": 1.0,
+                  "peak_db": -80.8
+                }
+              ]
+            },
+            "task": {
+              "void_depth_db": -23.302128014677585,
+              "air_band_gain_db": -10.064160132984307,
+              "mid_fill_db": -3.6501138535519146
+            }
+          },
+          "improvements": {
+            "void_depth_db": 1.5,
+            "air_band_gain_db": 1.5,
+            "mid_fill_db": -0.5255582487171253,
+            "midpoint_worst_peak_db": 1.5
+          },
+          "raw_improvements": {
+            "void_depth_db": 1.6364437371706575,
+            "air_band_gain_db": 8.599001102426374,
+            "mid_fill_db": -0.5255582487171253,
+            "midpoint_worst_peak_db": 17.166666666666668
+          },
+          "max_abs_metric_contribution": 1.5
+        }
+      ],
+      "chosen_from_design": {
+        "body": "Aluminum Siding",
+        "candidate_name": "Aluminum Siding C2",
+        "shipping_gate_passed": true,
+        "midpoint_passed": true,
+        "gate_ok": true,
+        "promoted": true,
+        "wins": 3,
+        "composite_improvement": 3.0,
+        "baseline": {
+          "name": "Aluminum Siding",
+          "gate": {
+            "passed": false,
+            "body": "Aluminum Siding",
+            "canonical_body": "aluminum_siding",
+            "failures": [
+              "1kHz void failed: only -26.8 dB scoop at morph=0.0, Q=1.0 (limit: 10 dB)",
+              "Open-air gain failed: -161.13 dB (limit: 1.0 dB)"
+            ],
+            "measurements": {
+              "canonical_name": "aluminum_siding",
+              "test_grid_morphs": [
+                0.0,
+                0.25,
+                0.5,
+                0.75,
+                1.0
+              ],
+              "test_grid_qs": [
+                0.0,
+                0.5,
+                1.0
+              ],
+              "worst_void_scoop_db": -26.8,
+              "worst_void_point": [
+                0.0,
+                1.0
+              ],
+              "open_air_gain_db": -161.13
+            }
+          },
+          "midpoint": {
+            "passed": true,
+            "worst_peak_db": 34.6,
+            "worst_point": {
+              "morph": 0.75,
+              "q": 0.0
+            },
+            "peak_limit_db": 40.0,
+            "points": [
+              {
+                "morph": 0.0,
+                "q": 0.0,
+                "peak_db": 24.1
+              },
+              {
+                "morph": 0.0,
+                "q": 1.0,
+                "peak_db": 22.0
+              },
+              {
+                "morph": 0.25,
+                "q": 0.0,
+                "peak_db": 17.1
+              },
+              {
+                "morph": 0.25,
+                "q": 1.0,
+                "peak_db": 18.5
+              },
+              {
+                "morph": 0.5,
+                "q": 0.0,
+                "peak_db": 28.9
+              },
+              {
+                "morph": 0.5,
+                "q": 1.0,
+                "peak_db": 15.2
+              },
+              {
+                "morph": 0.75,
+                "q": 0.0,
+                "peak_db": 34.6
+              },
+              {
+                "morph": 0.75,
+                "q": 1.0,
+                "peak_db": 12.2
+              },
+              {
+                "morph": 1.0,
+                "q": 0.0,
+                "peak_db": 28.0
+              },
+              {
+                "morph": 1.0,
+                "q": 1.0,
+                "peak_db": 9.9
+              }
+            ]
+          },
+          "task": {
+            "void_depth_db": -33.12079043770153,
+            "air_band_gain_db": -61.65816674754255,
+            "mid_fill_db": -5.752346848420416
+          }
+        },
+        "candidate": {
+          "gate": {
+            "passed": true,
+            "body": "Aluminum Siding",
+            "canonical_body": "aluminum_siding",
+            "failures": [],
+            "measurements": {
+              "canonical_name": "aluminum_siding",
+              "test_grid_morphs": [
+                0.0,
+                0.25,
+                0.5,
+                0.75,
+                1.0
+              ],
+              "test_grid_qs": [
+                0.0,
+                0.5,
+                1.0
+              ],
+              "worst_void_scoop_db": 35.2,
+              "worst_void_point": [
+                0.75,
+                1.0
+              ],
+              "open_air_gain_db": 7.67
+            }
+          },
+          "midpoint": {
+            "passed": true,
+            "worst_peak_db": 17.4,
+            "worst_point": {
+              "morph": 1.0,
+              "q": 0.0
+            },
+            "peak_limit_db": 40.0,
+            "points": [
+              {
+                "morph": 0.0,
+                "q": 0.0,
+                "peak_db": 13.8
+              },
+              {
+                "morph": 0.0,
+                "q": 1.0,
+                "peak_db": -4.8
+              },
+              {
+                "morph": 0.25,
+                "q": 0.0,
+                "peak_db": 2.7
+              },
+              {
+                "morph": 0.25,
+                "q": 1.0,
+                "peak_db": 2.9
+              },
+              {
+                "morph": 0.5,
+                "q": 0.0,
+                "peak_db": 11.9
+              },
+              {
+                "morph": 0.5,
+                "q": 1.0,
+                "peak_db": 9.3
+              },
+              {
+                "morph": 0.75,
+                "q": 0.0,
+                "peak_db": 13.0
+              },
+              {
+                "morph": 0.75,
+                "q": 1.0,
+                "peak_db": 11.2
+              },
+              {
+                "morph": 1.0,
+                "q": 0.0,
+                "peak_db": 17.4
+              },
+              {
+                "morph": 1.0,
+                "q": 1.0,
+                "peak_db": 15.3
+              }
+            ]
+          },
+          "task": {
+            "void_depth_db": 20.634507784589875,
+            "air_band_gain_db": 22.861644446249297,
+            "mid_fill_db": 43.9310930782576
+          }
+        },
+        "improvements": {
+          "void_depth_db": 1.5,
+          "air_band_gain_db": 1.5,
+          "mid_fill_db": -1.5,
+          "midpoint_worst_peak_db": 1.5
+        },
+        "raw_improvements": {
+          "void_depth_db": 8.9592163703819,
+          "air_band_gain_db": 14.08663519896531,
+          "mid_fill_db": -12.420859981669503,
+          "midpoint_worst_peak_db": 2.866666666666667
+        },
+        "max_abs_metric_contribution": 1.5
+      },
+      "holdout_eval": {
+        "body": "Aluminum Siding",
+        "candidate_name": "Aluminum Siding C2",
+        "shipping_gate_passed": true,
+        "midpoint_passed": true,
+        "gate_ok": true,
+        "promoted": true,
+        "wins": 3,
+        "composite_improvement": 3.0,
+        "baseline": {
+          "name": "Aluminum Siding",
+          "gate": {
+            "passed": false,
+            "body": "Aluminum Siding",
+            "canonical_body": "aluminum_siding",
+            "failures": [
+              "1kHz void failed: only -26.8 dB scoop at morph=0.0, Q=1.0 (limit: 10 dB)",
+              "Open-air gain failed: -161.13 dB (limit: 1.0 dB)"
+            ],
+            "measurements": {
+              "canonical_name": "aluminum_siding",
+              "test_grid_morphs": [
+                0.0,
+                0.25,
+                0.5,
+                0.75,
+                1.0
+              ],
+              "test_grid_qs": [
+                0.0,
+                0.5,
+                1.0
+              ],
+              "worst_void_scoop_db": -26.8,
+              "worst_void_point": [
+                0.0,
+                1.0
+              ],
+              "open_air_gain_db": -161.13
+            }
+          },
+          "midpoint": {
+            "passed": true,
+            "worst_peak_db": 34.6,
+            "worst_point": {
+              "morph": 0.75,
+              "q": 0.0
+            },
+            "peak_limit_db": 40.0,
+            "points": [
+              {
+                "morph": 0.0,
+                "q": 0.0,
+                "peak_db": 24.1
+              },
+              {
+                "morph": 0.0,
+                "q": 1.0,
+                "peak_db": 22.0
+              },
+              {
+                "morph": 0.25,
+                "q": 0.0,
+                "peak_db": 17.1
+              },
+              {
+                "morph": 0.25,
+                "q": 1.0,
+                "peak_db": 18.5
+              },
+              {
+                "morph": 0.5,
+                "q": 0.0,
+                "peak_db": 28.9
+              },
+              {
+                "morph": 0.5,
+                "q": 1.0,
+                "peak_db": 15.2
+              },
+              {
+                "morph": 0.75,
+                "q": 0.0,
+                "peak_db": 34.6
+              },
+              {
+                "morph": 0.75,
+                "q": 1.0,
+                "peak_db": 12.2
+              },
+              {
+                "morph": 1.0,
+                "q": 0.0,
+                "peak_db": 28.0
+              },
+              {
+                "morph": 1.0,
+                "q": 1.0,
+                "peak_db": 9.9
+              }
+            ]
+          },
+          "task": {
+            "void_depth_db": -33.1245519485169,
+            "air_band_gain_db": -51.57688962349,
+            "mid_fill_db": -5.487575329270911
+          }
+        },
+        "candidate": {
+          "gate": {
+            "passed": true,
+            "body": "Aluminum Siding",
+            "canonical_body": "aluminum_siding",
+            "failures": [],
+            "measurements": {
+              "canonical_name": "aluminum_siding",
+              "test_grid_morphs": [
+                0.0,
+                0.25,
+                0.5,
+                0.75,
+                1.0
+              ],
+              "test_grid_qs": [
+                0.0,
+                0.5,
+                1.0
+              ],
+              "worst_void_scoop_db": 35.2,
+              "worst_void_point": [
+                0.75,
+                1.0
+              ],
+              "open_air_gain_db": 7.67
+            }
+          },
+          "midpoint": {
+            "passed": true,
+            "worst_peak_db": 17.4,
+            "worst_point": {
+              "morph": 1.0,
+              "q": 0.0
+            },
+            "peak_limit_db": 40.0,
+            "points": [
+              {
+                "morph": 0.0,
+                "q": 0.0,
+                "peak_db": 13.8
+              },
+              {
+                "morph": 0.0,
+                "q": 1.0,
+                "peak_db": -4.8
+              },
+              {
+                "morph": 0.25,
+                "q": 0.0,
+                "peak_db": 2.7
+              },
+              {
+                "morph": 0.25,
+                "q": 1.0,
+                "peak_db": 2.9
+              },
+              {
+                "morph": 0.5,
+                "q": 0.0,
+                "peak_db": 11.9
+              },
+              {
+                "morph": 0.5,
+                "q": 1.0,
+                "peak_db": 9.3
+              },
+              {
+                "morph": 0.75,
+                "q": 0.0,
+                "peak_db": 13.0
+              },
+              {
+                "morph": 0.75,
+                "q": 1.0,
+                "peak_db": 11.2
+              },
+              {
+                "morph": 1.0,
+                "q": 0.0,
+                "peak_db": 17.4
+              },
+              {
+                "morph": 1.0,
+                "q": 1.0,
+                "peak_db": 15.3
+              }
+            ]
+          },
+          "task": {
+            "void_depth_db": 17.413196433549498,
+            "air_band_gain_db": 21.98267697673335,
+            "mid_fill_db": 43.305663193883085
+          }
+        },
+        "improvements": {
+          "void_depth_db": 1.5,
+          "air_band_gain_db": 1.5,
+          "mid_fill_db": -1.5,
+          "midpoint_worst_peak_db": 1.5
+        },
+        "raw_improvements": {
+          "void_depth_db": 8.422958063677733,
+          "air_band_gain_db": 12.25992776670389,
+          "mid_fill_db": -12.198309630788499,
+          "midpoint_worst_peak_db": 2.866666666666667
+        },
+        "max_abs_metric_contribution": 1.5
+      },
+      "holdout_oracle_top": {
+        "body": "Aluminum Siding",
+        "candidate_name": "Aluminum Siding C2",
+        "shipping_gate_passed": true,
+        "midpoint_passed": true,
+        "gate_ok": true,
+        "promoted": true,
+        "wins": 3,
+        "composite_improvement": 3.0,
+        "baseline": {
+          "name": "Aluminum Siding",
+          "gate": {
+            "passed": false,
+            "body": "Aluminum Siding",
+            "canonical_body": "aluminum_siding",
+            "failures": [
+              "1kHz void failed: only -26.8 dB scoop at morph=0.0, Q=1.0 (limit: 10 dB)",
+              "Open-air gain failed: -161.13 dB (limit: 1.0 dB)"
+            ],
+            "measurements": {
+              "canonical_name": "aluminum_siding",
+              "test_grid_morphs": [
+                0.0,
+                0.25,
+                0.5,
+                0.75,
+                1.0
+              ],
+              "test_grid_qs": [
+                0.0,
+                0.5,
+                1.0
+              ],
+              "worst_void_scoop_db": -26.8,
+              "worst_void_point": [
+                0.0,
+                1.0
+              ],
+              "open_air_gain_db": -161.13
+            }
+          },
+          "midpoint": {
+            "passed": true,
+            "worst_peak_db": 34.6,
+            "worst_point": {
+              "morph": 0.75,
+              "q": 0.0
+            },
+            "peak_limit_db": 40.0,
+            "points": [
+              {
+                "morph": 0.0,
+                "q": 0.0,
+                "peak_db": 24.1
+              },
+              {
+                "morph": 0.0,
+                "q": 1.0,
+                "peak_db": 22.0
+              },
+              {
+                "morph": 0.25,
+                "q": 0.0,
+                "peak_db": 17.1
+              },
+              {
+                "morph": 0.25,
+                "q": 1.0,
+                "peak_db": 18.5
+              },
+              {
+                "morph": 0.5,
+                "q": 0.0,
+                "peak_db": 28.9
+              },
+              {
+                "morph": 0.5,
+                "q": 1.0,
+                "peak_db": 15.2
+              },
+              {
+                "morph": 0.75,
+                "q": 0.0,
+                "peak_db": 34.6
+              },
+              {
+                "morph": 0.75,
+                "q": 1.0,
+                "peak_db": 12.2
+              },
+              {
+                "morph": 1.0,
+                "q": 0.0,
+                "peak_db": 28.0
+              },
+              {
+                "morph": 1.0,
+                "q": 1.0,
+                "peak_db": 9.9
+              }
+            ]
+          },
+          "task": {
+            "void_depth_db": -33.1245519485169,
+            "air_band_gain_db": -51.57688962349,
+            "mid_fill_db": -5.487575329270911
+          }
+        },
+        "candidate": {
+          "gate": {
+            "passed": true,
+            "body": "Aluminum Siding",
+            "canonical_body": "aluminum_siding",
+            "failures": [],
+            "measurements": {
+              "canonical_name": "aluminum_siding",
+              "test_grid_morphs": [
+                0.0,
+                0.25,
+                0.5,
+                0.75,
+                1.0
+              ],
+              "test_grid_qs": [
+                0.0,
+                0.5,
+                1.0
+              ],
+              "worst_void_scoop_db": 35.2,
+              "worst_void_point": [
+                0.75,
+                1.0
+              ],
+              "open_air_gain_db": 7.67
+            }
+          },
+          "midpoint": {
+            "passed": true,
+            "worst_peak_db": 17.4,
+            "worst_point": {
+              "morph": 1.0,
+              "q": 0.0
+            },
+            "peak_limit_db": 40.0,
+            "points": [
+              {
+                "morph": 0.0,
+                "q": 0.0,
+                "peak_db": 13.8
+              },
+              {
+                "morph": 0.0,
+                "q": 1.0,
+                "peak_db": -4.8
+              },
+              {
+                "morph": 0.25,
+                "q": 0.0,
+                "peak_db": 2.7
+              },
+              {
+                "morph": 0.25,
+                "q": 1.0,
+                "peak_db": 2.9
+              },
+              {
+                "morph": 0.5,
+                "q": 0.0,
+                "peak_db": 11.9
+              },
+              {
+                "morph": 0.5,
+                "q": 1.0,
+                "peak_db": 9.3
+              },
+              {
+                "morph": 0.75,
+                "q": 0.0,
+                "peak_db": 13.0
+              },
+              {
+                "morph": 0.75,
+                "q": 1.0,
+                "peak_db": 11.2
+              },
+              {
+                "morph": 1.0,
+                "q": 0.0,
+                "peak_db": 17.4
+              },
+              {
+                "morph": 1.0,
+                "q": 1.0,
+                "peak_db": 15.3
+              }
+            ]
+          },
+          "task": {
+            "void_depth_db": 17.413196433549498,
+            "air_band_gain_db": 21.98267697673335,
+            "mid_fill_db": 43.305663193883085
+          }
+        },
+        "improvements": {
+          "void_depth_db": 1.5,
+          "air_band_gain_db": 1.5,
+          "mid_fill_db": -1.5,
+          "midpoint_worst_peak_db": 1.5
+        },
+        "raw_improvements": {
+          "void_depth_db": 8.422958063677733,
+          "air_band_gain_db": 12.25992776670389,
+          "mid_fill_db": -12.198309630788499,
+          "midpoint_worst_peak_db": 2.866666666666667
+        },
+        "max_abs_metric_contribution": 1.5
+      }
+    },
+    "small_talk": {
+      "public_name": "Small Talk Ah-Ee",
+      "baseline_path": "C:\\Users\\hooki\\Trench\\cartridges\\translation\\small_talk_ah_ee.compiled.json",
+      "design_ranked": [
+        {
+          "body": "Small Talk Ah-Ee",
+          "candidate_name": "Small Talk Ah-Ee C2",
+          "shipping_gate_passed": true,
+          "midpoint_passed": true,
+          "gate_ok": true,
+          "promoted": true,
+          "wins": 3,
+          "composite_improvement": 3.562955266948896,
+          "baseline": {
+            "name": "Small Talk Ah-Ee",
+            "gate": {
+              "passed": false,
+              "body": "Small Talk Ah-Ee",
+              "canonical_body": "small_talk_ah_ee",
+              "failures": [
+                "Formant floor failed: only 1 dominant peaks at morph=0.0, Q=0.0 (need >= 2)",
+                "Formant separation failed: 247.9 Hz (limit: 250 Hz)"
+              ],
+              "measurements": {
+                "canonical_name": "small_talk_ah_ee",
+                "test_grid_morphs": [
+                  0.0,
+                  0.25,
+                  0.5,
+                  0.75,
+                  1.0
+                ],
+                "test_grid_qs": [
+                  0.0,
+                  0.5,
+                  1.0
+                ],
+                "min_formant_peaks": 1,
+                "max_formant_peaks": 4,
+                "min_peaks_point": [
+                  0.0,
+                  0.0
+                ],
+                "min_formant_separation_hz": 247.9
+              }
+            },
+            "midpoint": {
+              "passed": true,
+              "worst_peak_db": 26.8,
+              "worst_point": {
+                "morph": 1.0,
+                "q": 1.0
+              },
+              "peak_limit_db": 40.0,
+              "points": [
+                {
+                  "morph": 0.0,
+                  "q": 0.0,
+                  "peak_db": 6.3
+                },
+                {
+                  "morph": 0.0,
+                  "q": 1.0,
+                  "peak_db": 6.4
+                },
+                {
+                  "morph": 0.25,
+                  "q": 0.0,
+                  "peak_db": 7.8
+                },
+                {
+                  "morph": 0.25,
+                  "q": 1.0,
+                  "peak_db": 8.3
+                },
+                {
+                  "morph": 0.5,
+                  "q": 0.0,
+                  "peak_db": 10.1
+                },
+                {
+                  "morph": 0.5,
+                  "q": 1.0,
+                  "peak_db": 11.2
+                },
+                {
+                  "morph": 0.75,
+                  "q": 0.0,
+                  "peak_db": 14.2
+                },
+                {
+                  "morph": 0.75,
+                  "q": 1.0,
+                  "peak_db": 15.8
+                },
+                {
+                  "morph": 1.0,
+                  "q": 0.0,
+                  "peak_db": 24.1
+                },
+                {
+                  "morph": 1.0,
+                  "q": 1.0,
+                  "peak_db": 26.8
+                }
+              ]
+            },
+            "task": {
+              "formant_peak_count": 5194.553571428572,
+              "formant_separation_hz": 182.03941888607952,
+              "speech_band_gain_db": 8.982378499083241
+            }
+          },
+          "candidate": {
+            "gate": {
+              "passed": true,
+              "body": "Small Talk Ah-Ee",
+              "canonical_body": "small_talk_ah_ee",
+              "failures": [],
+              "measurements": {
+                "canonical_name": "small_talk_ah_ee",
+                "test_grid_morphs": [
+                  0.0,
+                  0.25,
+                  0.5,
+                  0.75,
+                  1.0
+                ],
+                "test_grid_qs": [
+                  0.0,
+                  0.5,
+                  1.0
+                ],
+                "min_formant_peaks": 2,
+                "max_formant_peaks": 2,
+                "min_peaks_point": [
+                  0.0,
+                  0.0
+                ],
+                "min_formant_separation_hz": 611.9
+              }
+            },
+            "midpoint": {
+              "passed": true,
+              "worst_peak_db": 23.2,
+              "worst_point": {
+                "morph": 1.0,
+                "q": 1.0
+              },
+              "peak_limit_db": 40.0,
+              "points": [
+                {
+                  "morph": 0.0,
+                  "q": 0.0,
+                  "peak_db": -1.0
+                },
+                {
+                  "morph": 0.0,
+                  "q": 1.0,
+                  "peak_db": 7.8
+                },
+                {
+                  "morph": 0.25,
+                  "q": 0.0,
+                  "peak_db": 12.5
+                },
+                {
+                  "morph": 0.25,
+                  "q": 1.0,
+                  "peak_db": 20.4
+                },
+                {
+                  "morph": 0.5,
+                  "q": 0.0,
+                  "peak_db": 10.7
+                },
+                {
+                  "morph": 0.5,
+                  "q": 1.0,
+                  "peak_db": 22.3
+                },
+                {
+                  "morph": 0.75,
+                  "q": 0.0,
+                  "peak_db": 11.0
+                },
+                {
+                  "morph": 0.75,
+                  "q": 1.0,
+                  "peak_db": 23.2
+                },
+                {
+                  "morph": 1.0,
+                  "q": 0.0,
+                  "peak_db": 10.5
+                },
+                {
+                  "morph": 1.0,
+                  "q": 1.0,
+                  "peak_db": 23.2
+                }
+              ]
+            },
+            "task": {
+              "formant_peak_count": 6725.160714285715,
+              "formant_separation_hz": 167.22152566563796,
+              "speech_band_gain_db": 18.86769722544949
+            }
+          },
+          "improvements": {
+            "formant_peak_count": 1.5,
+            "formant_separation_hz": -0.0370447330511039,
+            "speech_band_gain_db": 1.5,
+            "midpoint_worst_peak_db": 0.6000000000000002
+          },
+          "raw_improvements": {
+            "formant_peak_count": 1530.6071428571431,
+            "formant_separation_hz": -0.0370447330511039,
+            "speech_band_gain_db": 2.471329681591562,
+            "midpoint_worst_peak_db": 0.6000000000000002
+          },
+          "max_abs_metric_contribution": 1.5
+        },
+        {
+          "body": "Small Talk Ah-Ee",
+          "candidate_name": "Small Talk Ah-Ee C1",
+          "shipping_gate_passed": false,
+          "midpoint_passed": true,
+          "gate_ok": false,
+          "promoted": false,
+          "wins": 2,
+          "composite_improvement": 1.5017574938530436,
+          "baseline": {
+            "name": "Small Talk Ah-Ee",
+            "gate": {
+              "passed": false,
+              "body": "Small Talk Ah-Ee",
+              "canonical_body": "small_talk_ah_ee",
+              "failures": [
+                "Formant floor failed: only 1 dominant peaks at morph=0.0, Q=0.0 (need >= 2)",
+                "Formant separation failed: 247.9 Hz (limit: 250 Hz)"
+              ],
+              "measurements": {
+                "canonical_name": "small_talk_ah_ee",
+                "test_grid_morphs": [
+                  0.0,
+                  0.25,
+                  0.5,
+                  0.75,
+                  1.0
+                ],
+                "test_grid_qs": [
+                  0.0,
+                  0.5,
+                  1.0
+                ],
+                "min_formant_peaks": 1,
+                "max_formant_peaks": 4,
+                "min_peaks_point": [
+                  0.0,
+                  0.0
+                ],
+                "min_formant_separation_hz": 247.9
+              }
+            },
+            "midpoint": {
+              "passed": true,
+              "worst_peak_db": 26.8,
+              "worst_point": {
+                "morph": 1.0,
+                "q": 1.0
+              },
+              "peak_limit_db": 40.0,
+              "points": [
+                {
+                  "morph": 0.0,
+                  "q": 0.0,
+                  "peak_db": 6.3
+                },
+                {
+                  "morph": 0.0,
+                  "q": 1.0,
+                  "peak_db": 6.4
+                },
+                {
+                  "morph": 0.25,
+                  "q": 0.0,
+                  "peak_db": 7.8
+                },
+                {
+                  "morph": 0.25,
+                  "q": 1.0,
+                  "peak_db": 8.3
+                },
+                {
+                  "morph": 0.5,
+                  "q": 0.0,
+                  "peak_db": 10.1
+                },
+                {
+                  "morph": 0.5,
+                  "q": 1.0,
+                  "peak_db": 11.2
+                },
+                {
+                  "morph": 0.75,
+                  "q": 0.0,
+                  "peak_db": 14.2
+                },
+                {
+                  "morph": 0.75,
+                  "q": 1.0,
+                  "peak_db": 15.8
+                },
+                {
+                  "morph": 1.0,
+                  "q": 0.0,
+                  "peak_db": 24.1
+                },
+                {
+                  "morph": 1.0,
+                  "q": 1.0,
+                  "peak_db": 26.8
+                }
+              ]
+            },
+            "task": {
+              "formant_peak_count": 5194.553571428572,
+              "formant_separation_hz": 182.03941888607952,
+              "speech_band_gain_db": 8.982378499083241
+            }
+          },
+          "candidate": {
+            "gate": {
+              "passed": false,
+              "body": "Small Talk Ah-Ee",
+              "canonical_body": "small_talk_ah_ee",
+              "failures": [
+                "Formant floor failed: only 1 dominant peaks at morph=1.0, Q=0.5 (need >= 2)",
+                "Formant separation failed: 223.9 Hz (limit: 250 Hz)"
+              ],
+              "measurements": {
+                "canonical_name": "small_talk_ah_ee",
+                "test_grid_morphs": [
+                  0.0,
+                  0.25,
+                  0.5,
+                  0.75,
+                  1.0
+                ],
+                "test_grid_qs": [
+                  0.0,
+                  0.5,
+                  1.0
+                ],
+                "min_formant_peaks": 1,
+                "max_formant_peaks": 2,
+                "min_peaks_point": [
+                  1.0,
+                  0.5
+                ],
+                "min_formant_separation_hz": 223.9
+              }
+            },
+            "midpoint": {
+              "passed": true,
+              "worst_peak_db": 5.9,
+              "worst_point": {
+                "morph": 0.0,
+                "q": 1.0
+              },
+              "peak_limit_db": 40.0,
+              "points": [
+                {
+                  "morph": 0.0,
+                  "q": 0.0,
+                  "peak_db": -2.9
+                },
+                {
+                  "morph": 0.0,
+                  "q": 1.0,
+                  "peak_db": 5.9
+                },
+                {
+                  "morph": 0.25,
+                  "q": 0.0,
+                  "peak_db": -7.8
+                },
+                {
+                  "morph": 0.25,
+                  "q": 1.0,
+                  "peak_db": 1.5
+                },
+                {
+                  "morph": 0.5,
+                  "q": 0.0,
+                  "peak_db": -11.3
+                },
+                {
+                  "morph": 0.5,
+                  "q": 1.0,
+                  "peak_db": -0.6
+                },
+                {
+                  "morph": 0.75,
+                  "q": 0.0,
+                  "peak_db": -12.0
+                },
+                {
+                  "morph": 0.75,
+                  "q": 1.0,
+                  "peak_db": -0.9
+                },
+                {
+                  "morph": 1.0,
+                  "q": 0.0,
+                  "peak_db": -11.7
+                },
+                {
+                  "morph": 1.0,
+                  "q": 1.0,
+                  "peak_db": -0.4
+                }
+              ]
+            },
+            "task": {
+              "formant_peak_count": 6993.232142857143,
+              "formant_separation_hz": 182.74241642729697,
+              "speech_band_gain_db": -0.6259802925243907
+            }
+          },
+          "improvements": {
+            "formant_peak_count": 1.5,
+            "formant_separation_hz": 0.0017574938530436413,
+            "speech_band_gain_db": -1.5,
+            "midpoint_worst_peak_db": 1.5
+          },
+          "raw_improvements": {
+            "formant_peak_count": 1798.6785714285716,
+            "formant_separation_hz": 0.0017574938530436413,
+            "speech_band_gain_db": -2.402089697901908,
+            "midpoint_worst_peak_db": 3.483333333333333
+          },
+          "max_abs_metric_contribution": 1.5
+        },
+        {
+          "body": "Small Talk Ah-Ee",
+          "candidate_name": "Small Talk Ah-Ee C4",
+          "shipping_gate_passed": false,
+          "midpoint_passed": true,
+          "gate_ok": false,
+          "promoted": false,
+          "wins": 2,
+          "composite_improvement": 1.230928978688716,
+          "baseline": {
+            "name": "Small Talk Ah-Ee",
+            "gate": {
+              "passed": false,
+              "body": "Small Talk Ah-Ee",
+              "canonical_body": "small_talk_ah_ee",
+              "failures": [
+                "Formant floor failed: only 1 dominant peaks at morph=0.0, Q=0.0 (need >= 2)",
+                "Formant separation failed: 247.9 Hz (limit: 250 Hz)"
+              ],
+              "measurements": {
+                "canonical_name": "small_talk_ah_ee",
+                "test_grid_morphs": [
+                  0.0,
+                  0.25,
+                  0.5,
+                  0.75,
+                  1.0
+                ],
+                "test_grid_qs": [
+                  0.0,
+                  0.5,
+                  1.0
+                ],
+                "min_formant_peaks": 1,
+                "max_formant_peaks": 4,
+                "min_peaks_point": [
+                  0.0,
+                  0.0
+                ],
+                "min_formant_separation_hz": 247.9
+              }
+            },
+            "midpoint": {
+              "passed": true,
+              "worst_peak_db": 26.8,
+              "worst_point": {
+                "morph": 1.0,
+                "q": 1.0
+              },
+              "peak_limit_db": 40.0,
+              "points": [
+                {
+                  "morph": 0.0,
+                  "q": 0.0,
+                  "peak_db": 6.3
+                },
+                {
+                  "morph": 0.0,
+                  "q": 1.0,
+                  "peak_db": 6.4
+                },
+                {
+                  "morph": 0.25,
+                  "q": 0.0,
+                  "peak_db": 7.8
+                },
+                {
+                  "morph": 0.25,
+                  "q": 1.0,
+                  "peak_db": 8.3
+                },
+                {
+                  "morph": 0.5,
+                  "q": 0.0,
+                  "peak_db": 10.1
+                },
+                {
+                  "morph": 0.5,
+                  "q": 1.0,
+                  "peak_db": 11.2
+                },
+                {
+                  "morph": 0.75,
+                  "q": 0.0,
+                  "peak_db": 14.2
+                },
+                {
+                  "morph": 0.75,
+                  "q": 1.0,
+                  "peak_db": 15.8
+                },
+                {
+                  "morph": 1.0,
+                  "q": 0.0,
+                  "peak_db": 24.1
+                },
+                {
+                  "morph": 1.0,
+                  "q": 1.0,
+                  "peak_db": 26.8
+                }
+              ]
+            },
+            "task": {
+              "formant_peak_count": 5194.553571428572,
+              "formant_separation_hz": 182.03941888607952,
+              "speech_band_gain_db": 8.982378499083241
+            }
+          },
+          "candidate": {
+            "gate": {
+              "passed": false,
+              "body": "Small Talk Ah-Ee",
+              "canonical_body": "small_talk_ah_ee",
+              "failures": [
+                "Formant floor failed: only 1 dominant peaks at morph=0.0, Q=0.0 (need >= 2)"
+              ],
+              "measurements": {
+                "canonical_name": "small_talk_ah_ee",
+                "test_grid_morphs": [
+                  0.0,
+                  0.25,
+                  0.5,
+                  0.75,
+                  1.0
+                ],
+                "test_grid_qs": [
+                  0.0,
+                  0.5,
+                  1.0
+                ],
+                "min_formant_peaks": 1,
+                "max_formant_peaks": 1,
+                "min_peaks_point": [
+                  0.0,
+                  0.0
+                ],
+                "min_formant_separation_hz": 0.0
+              }
+            },
+            "midpoint": {
+              "passed": true,
+              "worst_peak_db": 12.2,
+              "worst_point": {
+                "morph": 0.75,
+                "q": 1.0
+              },
+              "peak_limit_db": 40.0,
+              "points": [
+                {
+                  "morph": 0.0,
+                  "q": 0.0,
+                  "peak_db": 5.0
+                },
+                {
+                  "morph": 0.0,
+                  "q": 1.0,
+                  "peak_db": 7.9
+                },
+                {
+                  "morph": 0.25,
+                  "q": 0.0,
+                  "peak_db": 4.5
+                },
+                {
+                  "morph": 0.25,
+                  "q": 1.0,
+                  "peak_db": 7.7
+                },
+                {
+                  "morph": 0.5,
+                  "q": 0.0,
+                  "peak_db": 8.2
+                },
+                {
+                  "morph": 0.5,
+                  "q": 1.0,
+                  "peak_db": 11.3
+                },
+                {
+                  "morph": 0.75,
+                  "q": 0.0,
+                  "peak_db": 9.1
+                },
+                {
+                  "morph": 0.75,
+                  "q": 1.0,
+                  "peak_db": 12.2
+                },
+                {
+                  "morph": 1.0,
+                  "q": 0.0,
+                  "peak_db": -1.2
+                },
+                {
+                  "morph": 1.0,
+                  "q": 1.0,
+                  "peak_db": 2.5
+                }
+              ]
+            },
+            "task": {
+              "formant_peak_count": 7172.375,
+              "formant_separation_hz": 74.41101036156594,
+              "speech_band_gain_db": -9.1995105183906
+            }
+          },
+          "improvements": {
+            "formant_peak_count": 1.5,
+            "formant_separation_hz": -0.2690710213112839,
+            "speech_band_gain_db": -1.5,
+            "midpoint_worst_peak_db": 1.5
+          },
+          "raw_improvements": {
+            "formant_peak_count": 1977.8214285714284,
+            "formant_separation_hz": -0.2690710213112839,
+            "speech_band_gain_db": -4.545472254368461,
+            "midpoint_worst_peak_db": 2.4333333333333336
+          },
+          "max_abs_metric_contribution": 1.5
+        },
+        {
+          "body": "Small Talk Ah-Ee",
+          "candidate_name": "Small Talk Ah-Ee C3",
+          "shipping_gate_passed": false,
+          "midpoint_passed": true,
+          "gate_ok": false,
+          "promoted": false,
+          "wins": 2,
+          "composite_improvement": -1.25314479165865,
+          "baseline": {
+            "name": "Small Talk Ah-Ee",
+            "gate": {
+              "passed": false,
+              "body": "Small Talk Ah-Ee",
+              "canonical_body": "small_talk_ah_ee",
+              "failures": [
+                "Formant floor failed: only 1 dominant peaks at morph=0.0, Q=0.0 (need >= 2)",
+                "Formant separation failed: 247.9 Hz (limit: 250 Hz)"
+              ],
+              "measurements": {
+                "canonical_name": "small_talk_ah_ee",
+                "test_grid_morphs": [
+                  0.0,
+                  0.25,
+                  0.5,
+                  0.75,
+                  1.0
+                ],
+                "test_grid_qs": [
+                  0.0,
+                  0.5,
+                  1.0
+                ],
+                "min_formant_peaks": 1,
+                "max_formant_peaks": 4,
+                "min_peaks_point": [
+                  0.0,
+                  0.0
+                ],
+                "min_formant_separation_hz": 247.9
+              }
+            },
+            "midpoint": {
+              "passed": true,
+              "worst_peak_db": 26.8,
+              "worst_point": {
+                "morph": 1.0,
+                "q": 1.0
+              },
+              "peak_limit_db": 40.0,
+              "points": [
+                {
+                  "morph": 0.0,
+                  "q": 0.0,
+                  "peak_db": 6.3
+                },
+                {
+                  "morph": 0.0,
+                  "q": 1.0,
+                  "peak_db": 6.4
+                },
+                {
+                  "morph": 0.25,
+                  "q": 0.0,
+                  "peak_db": 7.8
+                },
+                {
+                  "morph": 0.25,
+                  "q": 1.0,
+                  "peak_db": 8.3
+                },
+                {
+                  "morph": 0.5,
+                  "q": 0.0,
+                  "peak_db": 10.1
+                },
+                {
+                  "morph": 0.5,
+                  "q": 1.0,
+                  "peak_db": 11.2
+                },
+                {
+                  "morph": 0.75,
+                  "q": 0.0,
+                  "peak_db": 14.2
+                },
+                {
+                  "morph": 0.75,
+                  "q": 1.0,
+                  "peak_db": 15.8
+                },
+                {
+                  "morph": 1.0,
+                  "q": 0.0,
+                  "peak_db": 24.1
+                },
+                {
+                  "morph": 1.0,
+                  "q": 1.0,
+                  "peak_db": 26.8
+                }
+              ]
+            },
+            "task": {
+              "formant_peak_count": 5194.553571428572,
+              "formant_separation_hz": 182.03941888607952,
+              "speech_band_gain_db": 8.982378499083241
+            }
+          },
+          "candidate": {
+            "gate": {
+              "passed": false,
+              "body": "Small Talk Ah-Ee",
+              "canonical_body": "small_talk_ah_ee",
+              "failures": [
+                "Formant floor failed: only 1 dominant peaks at morph=0.0, Q=0.0 (need >= 2)"
+              ],
+              "measurements": {
+                "canonical_name": "small_talk_ah_ee",
+                "test_grid_morphs": [
+                  0.0,
+                  0.25,
+                  0.5,
+                  0.75,
+                  1.0
+                ],
+                "test_grid_qs": [
+                  0.0,
+                  0.5,
+                  1.0
+                ],
+                "min_formant_peaks": 1,
+                "max_formant_peaks": 1,
+                "min_peaks_point": [
+                  0.0,
+                  0.0
+                ],
+                "min_formant_separation_hz": 0.0
+              }
+            },
+            "midpoint": {
+              "passed": true,
+              "worst_peak_db": 39.4,
+              "worst_point": {
+                "morph": 0.0,
+                "q": 1.0
+              },
+              "peak_limit_db": 40.0,
+              "points": [
+                {
+                  "morph": 0.0,
+                  "q": 0.0,
+                  "peak_db": 37.1
+                },
+                {
+                  "morph": 0.0,
+                  "q": 1.0,
+                  "peak_db": 39.4
+                },
+                {
+                  "morph": 0.25,
+                  "q": 0.0,
+                  "peak_db": 23.8
+                },
+                {
+                  "morph": 0.25,
+                  "q": 1.0,
+                  "peak_db": 28.1
+                },
+                {
+                  "morph": 0.5,
+                  "q": 0.0,
+                  "peak_db": 17.3
+                },
+                {
+                  "morph": 0.5,
+                  "q": 1.0,
+                  "peak_db": 22.2
+                },
+                {
+                  "morph": 0.75,
+                  "q": 0.0,
+                  "peak_db": 12.1
+                },
+                {
+                  "morph": 0.75,
+                  "q": 1.0,
+                  "peak_db": 17.5
+                },
+                {
+                  "morph": 1.0,
+                  "q": 0.0,
+                  "peak_db": 7.8
+                },
+                {
+                  "morph": 1.0,
+                  "q": 1.0,
+                  "peak_db": 13.6
+                }
+              ]
+            },
+            "task": {
+              "formant_peak_count": 7296.214285714285,
+              "formant_separation_hz": 280.7815022226195,
+              "speech_band_gain_db": -21.558678571076435
+            }
+          },
+          "improvements": {
+            "formant_peak_count": 1.5,
+            "formant_separation_hz": 0.24685520834134997,
+            "speech_band_gain_db": -1.5,
+            "midpoint_worst_peak_db": -1.5
+          },
+          "raw_improvements": {
+            "formant_peak_count": 2101.6607142857138,
+            "formant_separation_hz": 0.24685520834134997,
+            "speech_band_gain_db": -7.6352642675399185,
+            "midpoint_worst_peak_db": -2.0999999999999996
+          },
+          "max_abs_metric_contribution": 1.5
+        }
+      ],
+      "chosen_from_design": {
+        "body": "Small Talk Ah-Ee",
+        "candidate_name": "Small Talk Ah-Ee C2",
+        "shipping_gate_passed": true,
+        "midpoint_passed": true,
+        "gate_ok": true,
+        "promoted": true,
+        "wins": 3,
+        "composite_improvement": 3.562955266948896,
+        "baseline": {
+          "name": "Small Talk Ah-Ee",
+          "gate": {
+            "passed": false,
+            "body": "Small Talk Ah-Ee",
+            "canonical_body": "small_talk_ah_ee",
+            "failures": [
+              "Formant floor failed: only 1 dominant peaks at morph=0.0, Q=0.0 (need >= 2)",
+              "Formant separation failed: 247.9 Hz (limit: 250 Hz)"
+            ],
+            "measurements": {
+              "canonical_name": "small_talk_ah_ee",
+              "test_grid_morphs": [
+                0.0,
+                0.25,
+                0.5,
+                0.75,
+                1.0
+              ],
+              "test_grid_qs": [
+                0.0,
+                0.5,
+                1.0
+              ],
+              "min_formant_peaks": 1,
+              "max_formant_peaks": 4,
+              "min_peaks_point": [
+                0.0,
+                0.0
+              ],
+              "min_formant_separation_hz": 247.9
+            }
+          },
+          "midpoint": {
+            "passed": true,
+            "worst_peak_db": 26.8,
+            "worst_point": {
+              "morph": 1.0,
+              "q": 1.0
+            },
+            "peak_limit_db": 40.0,
+            "points": [
+              {
+                "morph": 0.0,
+                "q": 0.0,
+                "peak_db": 6.3
+              },
+              {
+                "morph": 0.0,
+                "q": 1.0,
+                "peak_db": 6.4
+              },
+              {
+                "morph": 0.25,
+                "q": 0.0,
+                "peak_db": 7.8
+              },
+              {
+                "morph": 0.25,
+                "q": 1.0,
+                "peak_db": 8.3
+              },
+              {
+                "morph": 0.5,
+                "q": 0.0,
+                "peak_db": 10.1
+              },
+              {
+                "morph": 0.5,
+                "q": 1.0,
+                "peak_db": 11.2
+              },
+              {
+                "morph": 0.75,
+                "q": 0.0,
+                "peak_db": 14.2
+              },
+              {
+                "morph": 0.75,
+                "q": 1.0,
+                "peak_db": 15.8
+              },
+              {
+                "morph": 1.0,
+                "q": 0.0,
+                "peak_db": 24.1
+              },
+              {
+                "morph": 1.0,
+                "q": 1.0,
+                "peak_db": 26.8
+              }
+            ]
+          },
+          "task": {
+            "formant_peak_count": 5194.553571428572,
+            "formant_separation_hz": 182.03941888607952,
+            "speech_band_gain_db": 8.982378499083241
+          }
+        },
+        "candidate": {
+          "gate": {
+            "passed": true,
+            "body": "Small Talk Ah-Ee",
+            "canonical_body": "small_talk_ah_ee",
+            "failures": [],
+            "measurements": {
+              "canonical_name": "small_talk_ah_ee",
+              "test_grid_morphs": [
+                0.0,
+                0.25,
+                0.5,
+                0.75,
+                1.0
+              ],
+              "test_grid_qs": [
+                0.0,
+                0.5,
+                1.0
+              ],
+              "min_formant_peaks": 2,
+              "max_formant_peaks": 2,
+              "min_peaks_point": [
+                0.0,
+                0.0
+              ],
+              "min_formant_separation_hz": 611.9
+            }
+          },
+          "midpoint": {
+            "passed": true,
+            "worst_peak_db": 23.2,
+            "worst_point": {
+              "morph": 1.0,
+              "q": 1.0
+            },
+            "peak_limit_db": 40.0,
+            "points": [
+              {
+                "morph": 0.0,
+                "q": 0.0,
+                "peak_db": -1.0
+              },
+              {
+                "morph": 0.0,
+                "q": 1.0,
+                "peak_db": 7.8
+              },
+              {
+                "morph": 0.25,
+                "q": 0.0,
+                "peak_db": 12.5
+              },
+              {
+                "morph": 0.25,
+                "q": 1.0,
+                "peak_db": 20.4
+              },
+              {
+                "morph": 0.5,
+                "q": 0.0,
+                "peak_db": 10.7
+              },
+              {
+                "morph": 0.5,
+                "q": 1.0,
+                "peak_db": 22.3
+              },
+              {
+                "morph": 0.75,
+                "q": 0.0,
+                "peak_db": 11.0
+              },
+              {
+                "morph": 0.75,
+                "q": 1.0,
+                "peak_db": 23.2
+              },
+              {
+                "morph": 1.0,
+                "q": 0.0,
+                "peak_db": 10.5
+              },
+              {
+                "morph": 1.0,
+                "q": 1.0,
+                "peak_db": 23.2
+              }
+            ]
+          },
+          "task": {
+            "formant_peak_count": 6725.160714285715,
+            "formant_separation_hz": 167.22152566563796,
+            "speech_band_gain_db": 18.86769722544949
+          }
+        },
+        "improvements": {
+          "formant_peak_count": 1.5,
+          "formant_separation_hz": -0.0370447330511039,
+          "speech_band_gain_db": 1.5,
+          "midpoint_worst_peak_db": 0.6000000000000002
+        },
+        "raw_improvements": {
+          "formant_peak_count": 1530.6071428571431,
+          "formant_separation_hz": -0.0370447330511039,
+          "speech_band_gain_db": 2.471329681591562,
+          "midpoint_worst_peak_db": 0.6000000000000002
+        },
+        "max_abs_metric_contribution": 1.5
+      },
+      "holdout_eval": {
+        "body": "Small Talk Ah-Ee",
+        "candidate_name": "Small Talk Ah-Ee C2",
+        "shipping_gate_passed": true,
+        "midpoint_passed": true,
+        "gate_ok": true,
+        "promoted": true,
+        "wins": 4,
+        "composite_improvement": 3.9964664360207265,
+        "baseline": {
+          "name": "Small Talk Ah-Ee",
+          "gate": {
+            "passed": false,
+            "body": "Small Talk Ah-Ee",
+            "canonical_body": "small_talk_ah_ee",
+            "failures": [
+              "Formant floor failed: only 1 dominant peaks at morph=0.0, Q=0.0 (need >= 2)",
+              "Formant separation failed: 247.9 Hz (limit: 250 Hz)"
+            ],
+            "measurements": {
+              "canonical_name": "small_talk_ah_ee",
+              "test_grid_morphs": [
+                0.0,
+                0.25,
+                0.5,
+                0.75,
+                1.0
+              ],
+              "test_grid_qs": [
+                0.0,
+                0.5,
+                1.0
+              ],
+              "min_formant_peaks": 1,
+              "max_formant_peaks": 4,
+              "min_peaks_point": [
+                0.0,
+                0.0
+              ],
+              "min_formant_separation_hz": 247.9
+            }
+          },
+          "midpoint": {
+            "passed": true,
+            "worst_peak_db": 26.8,
+            "worst_point": {
+              "morph": 1.0,
+              "q": 1.0
+            },
+            "peak_limit_db": 40.0,
+            "points": [
+              {
+                "morph": 0.0,
+                "q": 0.0,
+                "peak_db": 6.3
+              },
+              {
+                "morph": 0.0,
+                "q": 1.0,
+                "peak_db": 6.4
+              },
+              {
+                "morph": 0.25,
+                "q": 0.0,
+                "peak_db": 7.8
+              },
+              {
+                "morph": 0.25,
+                "q": 1.0,
+                "peak_db": 8.3
+              },
+              {
+                "morph": 0.5,
+                "q": 0.0,
+                "peak_db": 10.1
+              },
+              {
+                "morph": 0.5,
+                "q": 1.0,
+                "peak_db": 11.2
+              },
+              {
+                "morph": 0.75,
+                "q": 0.0,
+                "peak_db": 14.2
+              },
+              {
+                "morph": 0.75,
+                "q": 1.0,
+                "peak_db": 15.8
+              },
+              {
+                "morph": 1.0,
+                "q": 0.0,
+                "peak_db": 24.1
+              },
+              {
+                "morph": 1.0,
+                "q": 1.0,
+                "peak_db": 26.8
+              }
+            ]
+          },
+          "task": {
+            "formant_peak_count": 4781.928571428572,
+            "formant_separation_hz": 1.3313963513340172,
+            "speech_band_gain_db": 8.247892746673346
+          }
+        },
+        "candidate": {
+          "gate": {
+            "passed": true,
+            "body": "Small Talk Ah-Ee",
+            "canonical_body": "small_talk_ah_ee",
+            "failures": [],
+            "measurements": {
+              "canonical_name": "small_talk_ah_ee",
+              "test_grid_morphs": [
+                0.0,
+                0.25,
+                0.5,
+                0.75,
+                1.0
+              ],
+              "test_grid_qs": [
+                0.0,
+                0.5,
+                1.0
+              ],
+              "min_formant_peaks": 2,
+              "max_formant_peaks": 2,
+              "min_peaks_point": [
+                0.0,
+                0.0
+              ],
+              "min_formant_separation_hz": 611.9
+            }
+          },
+          "midpoint": {
+            "passed": true,
+            "worst_peak_db": 23.2,
+            "worst_point": {
+              "morph": 1.0,
+              "q": 1.0
+            },
+            "peak_limit_db": 40.0,
+            "points": [
+              {
+                "morph": 0.0,
+                "q": 0.0,
+                "peak_db": -1.0
+              },
+              {
+                "morph": 0.0,
+                "q": 1.0,
+                "peak_db": 7.8
+              },
+              {
+                "morph": 0.25,
+                "q": 0.0,
+                "peak_db": 12.5
+              },
+              {
+                "morph": 0.25,
+                "q": 1.0,
+                "peak_db": 20.4
+              },
+              {
+                "morph": 0.5,
+                "q": 0.0,
+                "peak_db": 10.7
+              },
+              {
+                "morph": 0.5,
+                "q": 1.0,
+                "peak_db": 22.3
+              },
+              {
+                "morph": 0.75,
+                "q": 0.0,
+                "peak_db": 11.0
+              },
+              {
+                "morph": 0.75,
+                "q": 1.0,
+                "peak_db": 23.2
+              },
+              {
+                "morph": 1.0,
+                "q": 0.0,
+                "peak_db": 10.5
+              },
+              {
+                "morph": 1.0,
+                "q": 1.0,
+                "peak_db": 23.2
+              }
+            ]
+          },
+          "task": {
+            "formant_peak_count": 5865.0,
+            "formant_separation_hz": 159.91797075962452,
+            "speech_band_gain_db": 19.305455899485654
+          }
+        },
+        "improvements": {
+          "formant_peak_count": 1.5,
+          "formant_separation_hz": 0.3964664360207263,
+          "speech_band_gain_db": 1.5,
+          "midpoint_worst_peak_db": 0.6000000000000002
+        },
+        "raw_improvements": {
+          "formant_peak_count": 1083.0714285714284,
+          "formant_separation_hz": 0.3964664360207263,
+          "speech_band_gain_db": 2.764390788203077,
+          "midpoint_worst_peak_db": 0.6000000000000002
+        },
+        "max_abs_metric_contribution": 1.5
+      },
+      "holdout_oracle_top": {
+        "body": "Small Talk Ah-Ee",
+        "candidate_name": "Small Talk Ah-Ee C2",
+        "shipping_gate_passed": true,
+        "midpoint_passed": true,
+        "gate_ok": true,
+        "promoted": true,
+        "wins": 4,
+        "composite_improvement": 3.9964664360207265,
+        "baseline": {
+          "name": "Small Talk Ah-Ee",
+          "gate": {
+            "passed": false,
+            "body": "Small Talk Ah-Ee",
+            "canonical_body": "small_talk_ah_ee",
+            "failures": [
+              "Formant floor failed: only 1 dominant peaks at morph=0.0, Q=0.0 (need >= 2)",
+              "Formant separation failed: 247.9 Hz (limit: 250 Hz)"
+            ],
+            "measurements": {
+              "canonical_name": "small_talk_ah_ee",
+              "test_grid_morphs": [
+                0.0,
+                0.25,
+                0.5,
+                0.75,
+                1.0
+              ],
+              "test_grid_qs": [
+                0.0,
+                0.5,
+                1.0
+              ],
+              "min_formant_peaks": 1,
+              "max_formant_peaks": 4,
+              "min_peaks_point": [
+                0.0,
+                0.0
+              ],
+              "min_formant_separation_hz": 247.9
+            }
+          },
+          "midpoint": {
+            "passed": true,
+            "worst_peak_db": 26.8,
+            "worst_point": {
+              "morph": 1.0,
+              "q": 1.0
+            },
+            "peak_limit_db": 40.0,
+            "points": [
+              {
+                "morph": 0.0,
+                "q": 0.0,
+                "peak_db": 6.3
+              },
+              {
+                "morph": 0.0,
+                "q": 1.0,
+                "peak_db": 6.4
+              },
+              {
+                "morph": 0.25,
+                "q": 0.0,
+                "peak_db": 7.8
+              },
+              {
+                "morph": 0.25,
+                "q": 1.0,
+                "peak_db": 8.3
+              },
+              {
+                "morph": 0.5,
+                "q": 0.0,
+                "peak_db": 10.1
+              },
+              {
+                "morph": 0.5,
+                "q": 1.0,
+                "peak_db": 11.2
+              },
+              {
+                "morph": 0.75,
+                "q": 0.0,
+                "peak_db": 14.2
+              },
+              {
+                "morph": 0.75,
+                "q": 1.0,
+                "peak_db": 15.8
+              },
+              {
+                "morph": 1.0,
+                "q": 0.0,
+                "peak_db": 24.1
+              },
+              {
+                "morph": 1.0,
+                "q": 1.0,
+                "peak_db": 26.8
+              }
+            ]
+          },
+          "task": {
+            "formant_peak_count": 4781.928571428572,
+            "formant_separation_hz": 1.3313963513340172,
+            "speech_band_gain_db": 8.247892746673346
+          }
+        },
+        "candidate": {
+          "gate": {
+            "passed": true,
+            "body": "Small Talk Ah-Ee",
+            "canonical_body": "small_talk_ah_ee",
+            "failures": [],
+            "measurements": {
+              "canonical_name": "small_talk_ah_ee",
+              "test_grid_morphs": [
+                0.0,
+                0.25,
+                0.5,
+                0.75,
+                1.0
+              ],
+              "test_grid_qs": [
+                0.0,
+                0.5,
+                1.0
+              ],
+              "min_formant_peaks": 2,
+              "max_formant_peaks": 2,
+              "min_peaks_point": [
+                0.0,
+                0.0
+              ],
+              "min_formant_separation_hz": 611.9
+            }
+          },
+          "midpoint": {
+            "passed": true,
+            "worst_peak_db": 23.2,
+            "worst_point": {
+              "morph": 1.0,
+              "q": 1.0
+            },
+            "peak_limit_db": 40.0,
+            "points": [
+              {
+                "morph": 0.0,
+                "q": 0.0,
+                "peak_db": -1.0
+              },
+              {
+                "morph": 0.0,
+                "q": 1.0,
+                "peak_db": 7.8
+              },
+              {
+                "morph": 0.25,
+                "q": 0.0,
+                "peak_db": 12.5
+              },
+              {
+                "morph": 0.25,
+                "q": 1.0,
+                "peak_db": 20.4
+              },
+              {
+                "morph": 0.5,
+                "q": 0.0,
+                "peak_db": 10.7
+              },
+              {
+                "morph": 0.5,
+                "q": 1.0,
+                "peak_db": 22.3
+              },
+              {
+                "morph": 0.75,
+                "q": 0.0,
+                "peak_db": 11.0
+              },
+              {
+                "morph": 0.75,
+                "q": 1.0,
+                "peak_db": 23.2
+              },
+              {
+                "morph": 1.0,
+                "q": 0.0,
+                "peak_db": 10.5
+              },
+              {
+                "morph": 1.0,
+                "q": 1.0,
+                "peak_db": 23.2
+              }
+            ]
+          },
+          "task": {
+            "formant_peak_count": 5865.0,
+            "formant_separation_hz": 159.91797075962452,
+            "speech_band_gain_db": 19.305455899485654
+          }
+        },
+        "improvements": {
+          "formant_peak_count": 1.5,
+          "formant_separation_hz": 0.3964664360207263,
+          "speech_band_gain_db": 1.5,
+          "midpoint_worst_peak_db": 0.6000000000000002
+        },
+        "raw_improvements": {
+          "formant_peak_count": 1083.0714285714284,
+          "formant_separation_hz": 0.3964664360207263,
+          "speech_band_gain_db": 2.764390788203077,
+          "midpoint_worst_peak_db": 0.6000000000000002
+        },
+        "max_abs_metric_contribution": 1.5
+      }
+    },
+    "cul_de_sac": {
+      "public_name": "Cul-De-Sac",
+      "baseline_path": "C:\\Users\\hooki\\Trench\\cartridges\\translation\\cul_de_sac.compiled.json",
+      "design_ranked": [
+        {
+          "body": "Cul-De-Sac",
+          "candidate_name": "Cul-De-Sac C3",
+          "shipping_gate_passed": false,
+          "midpoint_passed": true,
+          "gate_ok": false,
+          "promoted": false,
+          "wins": 3,
+          "composite_improvement": 3.9361385420535138,
+          "baseline": {
+            "name": "Cul-De-Sac",
+            "gate": {
+              "passed": false,
+              "body": "Cul-De-Sac",
+              "canonical_body": "cul_de_sac",
+              "failures": [
+                "Null event failed: depth vs calm=-0.97 dB, vs fracture=1.00 dB (limit: 3 dB both)",
+                "Comb structure failed: only 4 peaks at fracture state (limit: 6)"
+              ],
+              "measurements": {
+                "canonical_name": "cul_de_sac",
+                "test_grid_morphs": [
+                  0.0,
+                  0.25,
+                  0.5,
+                  0.75,
+                  1.0
+                ],
+                "test_grid_qs": [
+                  0.0,
+                  0.5,
+                  1.0
+                ],
+                "ref_root_peak_db": 1.1,
+                "worst_root_drop_db": 5.1,
+                "worst_root_point": [
+                  1.0,
+                  0.5
+                ],
+                "null_depth_vs_calm_db": -0.97,
+                "null_depth_vs_fracture_db": 1.0,
+                "fracture_comb_peak_count": 4
+              }
+            },
+            "midpoint": {
+              "passed": true,
+              "worst_peak_db": 25.5,
+              "worst_point": {
+                "morph": 1.0,
+                "q": 0.0
+              },
+              "peak_limit_db": 40.0,
+              "points": [
+                {
+                  "morph": 0.0,
+                  "q": 0.0,
+                  "peak_db": 13.9
+                },
+                {
+                  "morph": 0.0,
+                  "q": 1.0,
+                  "peak_db": 8.4
+                },
+                {
+                  "morph": 0.25,
+                  "q": 0.0,
+                  "peak_db": 15.8
+                },
+                {
+                  "morph": 0.25,
+                  "q": 1.0,
+                  "peak_db": 10.5
+                },
+                {
+                  "morph": 0.5,
+                  "q": 0.0,
+                  "peak_db": 18.4
+                },
+                {
+                  "morph": 0.5,
+                  "q": 1.0,
+                  "peak_db": 13.2
+                },
+                {
+                  "morph": 0.75,
+                  "q": 0.0,
+                  "peak_db": 21.6
+                },
+                {
+                  "morph": 0.75,
+                  "q": 1.0,
+                  "peak_db": 17.2
+                },
+                {
+                  "morph": 1.0,
+                  "q": 0.0,
+                  "peak_db": 25.5
+                },
+                {
+                  "morph": 1.0,
+                  "q": 1.0,
+                  "peak_db": 24.3
+                }
+              ]
+            },
+            "task": {
+              "root_tether_shift_db": 0.423350799816301,
+              "null_depth_db": -1.0019162159932047,
+              "fracture_distance_db": 11.514267403763709
+            }
+          },
+          "candidate": {
+            "gate": {
+              "passed": false,
+              "body": "Cul-De-Sac",
+              "canonical_body": "cul_de_sac",
+              "failures": [
+                "Null event failed: depth vs calm=12.10 dB, vs fracture=-0.41 dB (limit: 3 dB both)",
+                "Comb structure failed: only 1 peaks at fracture state (limit: 6)"
+              ],
+              "measurements": {
+                "canonical_name": "cul_de_sac",
+                "test_grid_morphs": [
+                  0.0,
+                  0.25,
+                  0.5,
+                  0.75,
+                  1.0
+                ],
+                "test_grid_qs": [
+                  0.0,
+                  0.5,
+                  1.0
+                ],
+                "ref_root_peak_db": -30.3,
+                "worst_root_drop_db": 0.0,
+                "worst_root_point": [
+                  0.0,
+                  0.0
+                ],
+                "null_depth_vs_calm_db": 12.1,
+                "null_depth_vs_fracture_db": -0.41,
+                "fracture_comb_peak_count": 1
+              }
+            },
+            "midpoint": {
+              "passed": true,
+              "worst_peak_db": 10.0,
+              "worst_point": {
+                "morph": 0.0,
+                "q": 1.0
+              },
+              "peak_limit_db": 40.0,
+              "points": [
+                {
+                  "morph": 0.0,
+                  "q": 0.0,
+                  "peak_db": 9.7
+                },
+                {
+                  "morph": 0.0,
+                  "q": 1.0,
+                  "peak_db": 10.0
+                },
+                {
+                  "morph": 0.25,
+                  "q": 0.0,
+                  "peak_db": -11.8
+                },
+                {
+                  "morph": 0.25,
+                  "q": 1.0,
+                  "peak_db": -11.8
+                },
+                {
+                  "morph": 0.5,
+                  "q": 0.0,
+                  "peak_db": -5.5
+                },
+                {
+                  "morph": 0.5,
+                  "q": 1.0,
+                  "peak_db": -5.3
+                },
+                {
+                  "morph": 0.75,
+                  "q": 0.0,
+                  "peak_db": -4.2
+                },
+                {
+                  "morph": 0.75,
+                  "q": 1.0,
+                  "peak_db": -3.9
+                },
+                {
+                  "morph": 1.0,
+                  "q": 0.0,
+                  "peak_db": -3.8
+                },
+                {
+                  "morph": 1.0,
+                  "q": 1.0,
+                  "peak_db": -3.5
+                }
+              ]
+            },
+            "task": {
+              "root_tether_shift_db": 1.131886049380282,
+              "null_depth_db": 12.2480470649431,
+              "fracture_distance_db": 17.83963390564877
+            }
+          },
+          "improvements": {
+            "root_tether_shift_db": -0.11808920826066349,
+            "null_depth_db": 1.5,
+            "fracture_distance_db": 1.054227750314177,
+            "midpoint_worst_peak_db": 1.5
+          },
+          "raw_improvements": {
+            "root_tether_shift_db": -0.11808920826066349,
+            "null_depth_db": 1.656245410117038,
+            "fracture_distance_db": 1.054227750314177,
+            "midpoint_worst_peak_db": 2.5833333333333335
+          },
+          "max_abs_metric_contribution": 1.5
+        },
+        {
+          "body": "Cul-De-Sac",
+          "candidate_name": "Cul-De-Sac C1",
+          "shipping_gate_passed": false,
+          "midpoint_passed": false,
+          "gate_ok": false,
+          "promoted": false,
+          "wins": 2,
+          "composite_improvement": 0.0,
+          "baseline": {
+            "name": "Cul-De-Sac",
+            "gate": {
+              "passed": false,
+              "body": "Cul-De-Sac",
+              "canonical_body": "cul_de_sac",
+              "failures": [
+                "Null event failed: depth vs calm=-0.97 dB, vs fracture=1.00 dB (limit: 3 dB both)",
+                "Comb structure failed: only 4 peaks at fracture state (limit: 6)"
+              ],
+              "measurements": {
+                "canonical_name": "cul_de_sac",
+                "test_grid_morphs": [
+                  0.0,
+                  0.25,
+                  0.5,
+                  0.75,
+                  1.0
+                ],
+                "test_grid_qs": [
+                  0.0,
+                  0.5,
+                  1.0
+                ],
+                "ref_root_peak_db": 1.1,
+                "worst_root_drop_db": 5.1,
+                "worst_root_point": [
+                  1.0,
+                  0.5
+                ],
+                "null_depth_vs_calm_db": -0.97,
+                "null_depth_vs_fracture_db": 1.0,
+                "fracture_comb_peak_count": 4
+              }
+            },
+            "midpoint": {
+              "passed": true,
+              "worst_peak_db": 25.5,
+              "worst_point": {
+                "morph": 1.0,
+                "q": 0.0
+              },
+              "peak_limit_db": 40.0,
+              "points": [
+                {
+                  "morph": 0.0,
+                  "q": 0.0,
+                  "peak_db": 13.9
+                },
+                {
+                  "morph": 0.0,
+                  "q": 1.0,
+                  "peak_db": 8.4
+                },
+                {
+                  "morph": 0.25,
+                  "q": 0.0,
+                  "peak_db": 15.8
+                },
+                {
+                  "morph": 0.25,
+                  "q": 1.0,
+                  "peak_db": 10.5
+                },
+                {
+                  "morph": 0.5,
+                  "q": 0.0,
+                  "peak_db": 18.4
+                },
+                {
+                  "morph": 0.5,
+                  "q": 1.0,
+                  "peak_db": 13.2
+                },
+                {
+                  "morph": 0.75,
+                  "q": 0.0,
+                  "peak_db": 21.6
+                },
+                {
+                  "morph": 0.75,
+                  "q": 1.0,
+                  "peak_db": 17.2
+                },
+                {
+                  "morph": 1.0,
+                  "q": 0.0,
+                  "peak_db": 25.5
+                },
+                {
+                  "morph": 1.0,
+                  "q": 1.0,
+                  "peak_db": 24.3
+                }
+              ]
+            },
+            "task": {
+              "root_tether_shift_db": 0.423350799816301,
+              "null_depth_db": -1.0019162159932047,
+              "fracture_distance_db": 11.514267403763709
+            }
+          },
+          "candidate": {
+            "gate": {
+              "passed": false,
+              "body": "Cul-De-Sac",
+              "canonical_body": "cul_de_sac",
+              "failures": [
+                "Root tether failed: 174.5 dB drop at morph=1.0, Q=1.0 (limit: 6 dB)",
+                "Null event failed: depth vs calm=80.19 dB, vs fracture=-18.07 dB (limit: 3 dB both)",
+                "Comb structure failed: only 2 peaks at fracture state (limit: 6)"
+              ],
+              "measurements": {
+                "canonical_name": "cul_de_sac",
+                "test_grid_morphs": [
+                  0.0,
+                  0.25,
+                  0.5,
+                  0.75,
+                  1.0
+                ],
+                "test_grid_qs": [
+                  0.0,
+                  0.5,
+                  1.0
+                ],
+                "ref_root_peak_db": 148.8,
+                "worst_root_drop_db": 174.5,
+                "worst_root_point": [
+                  1.0,
+                  1.0
+                ],
+                "null_depth_vs_calm_db": 80.19,
+                "null_depth_vs_fracture_db": -18.07,
+                "fracture_comb_peak_count": 2
+              }
+            },
+            "midpoint": {
+              "passed": false,
+              "worst_peak_db": 148.8,
+              "worst_point": {
+                "morph": 0.0,
+                "q": 0.0
+              },
+              "peak_limit_db": 40.0,
+              "points": [
+                {
+                  "morph": 0.0,
+                  "q": 0.0,
+                  "peak_db": 148.8
+                },
+                {
+                  "morph": 0.0,
+                  "q": 1.0,
+                  "peak_db": 79.8
+                },
+                {
+                  "morph": 0.25,
+                  "q": 0.0,
+                  "peak_db": 38.1
+                },
+                {
+                  "morph": 0.25,
+                  "q": 1.0,
+                  "peak_db": 29.0
+                },
+                {
+                  "morph": 0.5,
+                  "q": 0.0,
+                  "peak_db": 5.3
+                },
+                {
+                  "morph": 0.5,
+                  "q": 1.0,
+                  "peak_db": -3.3
+                },
+                {
+                  "morph": 0.75,
+                  "q": 0.0,
+                  "peak_db": -4.9
+                },
+                {
+                  "morph": 0.75,
+                  "q": 1.0,
+                  "peak_db": -21.0
+                },
+                {
+                  "morph": 1.0,
+                  "q": 0.0,
+                  "peak_db": -17.5
+                },
+                {
+                  "morph": 1.0,
+                  "q": 1.0,
+                  "peak_db": -25.7
+                }
+              ]
+            },
+            "task": {
+              "root_tether_shift_db": -38.905880205879,
+              "null_depth_db": 15.259548054146592,
+              "fracture_distance_db": 59.184082977359985
+            }
+          },
+          "improvements": {
+            "root_tether_shift_db": -1.5,
+            "null_depth_db": 1.5,
+            "fracture_distance_db": 1.5,
+            "midpoint_worst_peak_db": -1.5
+          },
+          "raw_improvements": {
+            "root_tether_shift_db": -6.41375490101045,
+            "null_depth_db": 2.0326830337674746,
+            "fracture_distance_db": 7.944969262266046,
+            "midpoint_worst_peak_db": -20.55
+          },
+          "max_abs_metric_contribution": 1.5
+        },
+        {
+          "body": "Cul-De-Sac",
+          "candidate_name": "Cul-De-Sac C2",
+          "shipping_gate_passed": false,
+          "midpoint_passed": false,
+          "gate_ok": false,
+          "promoted": false,
+          "wins": 2,
+          "composite_improvement": 0.0,
+          "baseline": {
+            "name": "Cul-De-Sac",
+            "gate": {
+              "passed": false,
+              "body": "Cul-De-Sac",
+              "canonical_body": "cul_de_sac",
+              "failures": [
+                "Null event failed: depth vs calm=-0.97 dB, vs fracture=1.00 dB (limit: 3 dB both)",
+                "Comb structure failed: only 4 peaks at fracture state (limit: 6)"
+              ],
+              "measurements": {
+                "canonical_name": "cul_de_sac",
+                "test_grid_morphs": [
+                  0.0,
+                  0.25,
+                  0.5,
+                  0.75,
+                  1.0
+                ],
+                "test_grid_qs": [
+                  0.0,
+                  0.5,
+                  1.0
+                ],
+                "ref_root_peak_db": 1.1,
+                "worst_root_drop_db": 5.1,
+                "worst_root_point": [
+                  1.0,
+                  0.5
+                ],
+                "null_depth_vs_calm_db": -0.97,
+                "null_depth_vs_fracture_db": 1.0,
+                "fracture_comb_peak_count": 4
+              }
+            },
+            "midpoint": {
+              "passed": true,
+              "worst_peak_db": 25.5,
+              "worst_point": {
+                "morph": 1.0,
+                "q": 0.0
+              },
+              "peak_limit_db": 40.0,
+              "points": [
+                {
+                  "morph": 0.0,
+                  "q": 0.0,
+                  "peak_db": 13.9
+                },
+                {
+                  "morph": 0.0,
+                  "q": 1.0,
+                  "peak_db": 8.4
+                },
+                {
+                  "morph": 0.25,
+                  "q": 0.0,
+                  "peak_db": 15.8
+                },
+                {
+                  "morph": 0.25,
+                  "q": 1.0,
+                  "peak_db": 10.5
+                },
+                {
+                  "morph": 0.5,
+                  "q": 0.0,
+                  "peak_db": 18.4
+                },
+                {
+                  "morph": 0.5,
+                  "q": 1.0,
+                  "peak_db": 13.2
+                },
+                {
+                  "morph": 0.75,
+                  "q": 0.0,
+                  "peak_db": 21.6
+                },
+                {
+                  "morph": 0.75,
+                  "q": 1.0,
+                  "peak_db": 17.2
+                },
+                {
+                  "morph": 1.0,
+                  "q": 0.0,
+                  "peak_db": 25.5
+                },
+                {
+                  "morph": 1.0,
+                  "q": 1.0,
+                  "peak_db": 24.3
+                }
+              ]
+            },
+            "task": {
+              "root_tether_shift_db": 0.423350799816301,
+              "null_depth_db": -1.0019162159932047,
+              "fracture_distance_db": 11.514267403763709
+            }
+          },
+          "candidate": {
+            "gate": {
+              "passed": false,
+              "body": "Cul-De-Sac",
+              "canonical_body": "cul_de_sac",
+              "failures": [
+                "Root tether failed: 195.5 dB drop at morph=1.0, Q=0.0 (limit: 6 dB)",
+                "Null event failed: depth vs calm=88.89 dB, vs fracture=-34.32 dB (limit: 3 dB both)",
+                "Comb structure failed: only 3 peaks at fracture state (limit: 6)"
+              ],
+              "measurements": {
+                "canonical_name": "cul_de_sac",
+                "test_grid_morphs": [
+                  0.0,
+                  0.25,
+                  0.5,
+                  0.75,
+                  1.0
+                ],
+                "test_grid_qs": [
+                  0.0,
+                  0.5,
+                  1.0
+                ],
+                "ref_root_peak_db": 112.3,
+                "worst_root_drop_db": 195.5,
+                "worst_root_point": [
+                  1.0,
+                  0.0
+                ],
+                "null_depth_vs_calm_db": 88.89,
+                "null_depth_vs_fracture_db": -34.32,
+                "fracture_comb_peak_count": 3
+              }
+            },
+            "midpoint": {
+              "passed": false,
+              "worst_peak_db": 112.3,
+              "worst_point": {
+                "morph": 0.0,
+                "q": 0.0
+              },
+              "peak_limit_db": 40.0,
+              "points": [
+                {
+                  "morph": 0.0,
+                  "q": 0.0,
+                  "peak_db": 112.3
+                },
+                {
+                  "morph": 0.0,
+                  "q": 1.0,
+                  "peak_db": 49.0
+                },
+                {
+                  "morph": 0.25,
+                  "q": 0.0,
+                  "peak_db": -18.1
+                },
+                {
+                  "morph": 0.25,
+                  "q": 1.0,
+                  "peak_db": 1.5
+                },
+                {
+                  "morph": 0.5,
+                  "q": 0.0,
+                  "peak_db": -47.9
+                },
+                {
+                  "morph": 0.5,
+                  "q": 1.0,
+                  "peak_db": -21.3
+                },
+                {
+                  "morph": 0.75,
+                  "q": 0.0,
+                  "peak_db": -67.4
+                },
+                {
+                  "morph": 0.75,
+                  "q": 1.0,
+                  "peak_db": -39.3
+                },
+                {
+                  "morph": 1.0,
+                  "q": 0.0,
+                  "peak_db": -83.2
+                },
+                {
+                  "morph": 1.0,
+                  "q": 1.0,
+                  "peak_db": -56.1
+                }
+              ]
+            },
+            "task": {
+              "root_tether_shift_db": -104.81051245737213,
+              "null_depth_db": 68.72900285811946,
+              "fracture_distance_db": 31.260235710742496
+            }
+          },
+          "improvements": {
+            "root_tether_shift_db": -1.5,
+            "null_depth_db": 1.5,
+            "fracture_distance_db": 1.5,
+            "midpoint_worst_peak_db": -1.5
+          },
+          "raw_improvements": {
+            "root_tether_shift_db": -17.397860276259305,
+            "null_depth_db": 8.716364884264083,
+            "fracture_distance_db": 3.2909947178297982,
+            "midpoint_worst_peak_db": -14.466666666666667
+          },
+          "max_abs_metric_contribution": 1.5
+        },
+        {
+          "body": "Cul-De-Sac",
+          "candidate_name": "Cul-De-Sac C4",
+          "shipping_gate_passed": false,
+          "midpoint_passed": false,
+          "gate_ok": false,
+          "promoted": false,
+          "wins": 2,
+          "composite_improvement": 0.0,
+          "baseline": {
+            "name": "Cul-De-Sac",
+            "gate": {
+              "passed": false,
+              "body": "Cul-De-Sac",
+              "canonical_body": "cul_de_sac",
+              "failures": [
+                "Null event failed: depth vs calm=-0.97 dB, vs fracture=1.00 dB (limit: 3 dB both)",
+                "Comb structure failed: only 4 peaks at fracture state (limit: 6)"
+              ],
+              "measurements": {
+                "canonical_name": "cul_de_sac",
+                "test_grid_morphs": [
+                  0.0,
+                  0.25,
+                  0.5,
+                  0.75,
+                  1.0
+                ],
+                "test_grid_qs": [
+                  0.0,
+                  0.5,
+                  1.0
+                ],
+                "ref_root_peak_db": 1.1,
+                "worst_root_drop_db": 5.1,
+                "worst_root_point": [
+                  1.0,
+                  0.5
+                ],
+                "null_depth_vs_calm_db": -0.97,
+                "null_depth_vs_fracture_db": 1.0,
+                "fracture_comb_peak_count": 4
+              }
+            },
+            "midpoint": {
+              "passed": true,
+              "worst_peak_db": 25.5,
+              "worst_point": {
+                "morph": 1.0,
+                "q": 0.0
+              },
+              "peak_limit_db": 40.0,
+              "points": [
+                {
+                  "morph": 0.0,
+                  "q": 0.0,
+                  "peak_db": 13.9
+                },
+                {
+                  "morph": 0.0,
+                  "q": 1.0,
+                  "peak_db": 8.4
+                },
+                {
+                  "morph": 0.25,
+                  "q": 0.0,
+                  "peak_db": 15.8
+                },
+                {
+                  "morph": 0.25,
+                  "q": 1.0,
+                  "peak_db": 10.5
+                },
+                {
+                  "morph": 0.5,
+                  "q": 0.0,
+                  "peak_db": 18.4
+                },
+                {
+                  "morph": 0.5,
+                  "q": 1.0,
+                  "peak_db": 13.2
+                },
+                {
+                  "morph": 0.75,
+                  "q": 0.0,
+                  "peak_db": 21.6
+                },
+                {
+                  "morph": 0.75,
+                  "q": 1.0,
+                  "peak_db": 17.2
+                },
+                {
+                  "morph": 1.0,
+                  "q": 0.0,
+                  "peak_db": 25.5
+                },
+                {
+                  "morph": 1.0,
+                  "q": 1.0,
+                  "peak_db": 24.3
+                }
+              ]
+            },
+            "task": {
+              "root_tether_shift_db": 0.423350799816301,
+              "null_depth_db": -1.0019162159932047,
+              "fracture_distance_db": 11.514267403763709
+            }
+          },
+          "candidate": {
+            "gate": {
+              "passed": false,
+              "body": "Cul-De-Sac",
+              "canonical_body": "cul_de_sac",
+              "failures": [
+                "Root tether failed: 168.7 dB drop at morph=1.0, Q=0.0 (limit: 6 dB)",
+                "Null event failed: depth vs calm=65.86 dB, vs fracture=-32.13 dB (limit: 3 dB both)",
+                "Comb structure failed: only 2 peaks at fracture state (limit: 6)"
+              ],
+              "measurements": {
+                "canonical_name": "cul_de_sac",
+                "test_grid_morphs": [
+                  0.0,
+                  0.25,
+                  0.5,
+                  0.75,
+                  1.0
+                ],
+                "test_grid_qs": [
+                  0.0,
+                  0.5,
+                  1.0
+                ],
+                "ref_root_peak_db": 114.5,
+                "worst_root_drop_db": 168.7,
+                "worst_root_point": [
+                  1.0,
+                  0.0
+                ],
+                "null_depth_vs_calm_db": 65.86,
+                "null_depth_vs_fracture_db": -32.13,
+                "fracture_comb_peak_count": 2
+              }
+            },
+            "midpoint": {
+              "passed": false,
+              "worst_peak_db": 114.5,
+              "worst_point": {
+                "morph": 0.0,
+                "q": 0.0
+              },
+              "peak_limit_db": 40.0,
+              "points": [
+                {
+                  "morph": 0.0,
+                  "q": 0.0,
+                  "peak_db": 114.5
+                },
+                {
+                  "morph": 0.0,
+                  "q": 1.0,
+                  "peak_db": 50.3
+                },
+                {
+                  "morph": 0.25,
+                  "q": 0.0,
+                  "peak_db": 9.2
+                },
+                {
+                  "morph": 0.25,
+                  "q": 1.0,
+                  "peak_db": 8.5
+                },
+                {
+                  "morph": 0.5,
+                  "q": 0.0,
+                  "peak_db": -18.4
+                },
+                {
+                  "morph": 0.5,
+                  "q": 1.0,
+                  "peak_db": -10.3
+                },
+                {
+                  "morph": 0.75,
+                  "q": 0.0,
+                  "peak_db": -37.7
+                },
+                {
+                  "morph": 0.75,
+                  "q": 1.0,
+                  "peak_db": -26.6
+                },
+                {
+                  "morph": 1.0,
+                  "q": 0.0,
+                  "peak_db": -54.2
+                },
+                {
+                  "morph": 1.0,
+                  "q": 1.0,
+                  "peak_db": -42.7
+                }
+              ]
+            },
+            "task": {
+              "root_tether_shift_db": -75.5119988470885,
+              "null_depth_db": 39.08987735805822,
+              "fracture_distance_db": 29.001433437335205
+            }
+          },
+          "improvements": {
+            "root_tether_shift_db": -1.5,
+            "null_depth_db": 1.5,
+            "fracture_distance_db": 1.5,
+            "midpoint_worst_peak_db": -1.5
+          },
+          "raw_improvements": {
+            "root_tether_shift_db": -12.514774674545366,
+            "null_depth_db": 5.011474196756428,
+            "fracture_distance_db": 2.9145276722619164,
+            "midpoint_worst_peak_db": -14.833333333333334
+          },
+          "max_abs_metric_contribution": 1.5
+        }
+      ],
+      "chosen_from_design": {
+        "body": "Cul-De-Sac",
+        "candidate_name": "Cul-De-Sac C3",
+        "shipping_gate_passed": false,
+        "midpoint_passed": true,
+        "gate_ok": false,
+        "promoted": false,
+        "wins": 3,
+        "composite_improvement": 3.9361385420535138,
+        "baseline": {
+          "name": "Cul-De-Sac",
+          "gate": {
+            "passed": false,
+            "body": "Cul-De-Sac",
+            "canonical_body": "cul_de_sac",
+            "failures": [
+              "Null event failed: depth vs calm=-0.97 dB, vs fracture=1.00 dB (limit: 3 dB both)",
+              "Comb structure failed: only 4 peaks at fracture state (limit: 6)"
+            ],
+            "measurements": {
+              "canonical_name": "cul_de_sac",
+              "test_grid_morphs": [
+                0.0,
+                0.25,
+                0.5,
+                0.75,
+                1.0
+              ],
+              "test_grid_qs": [
+                0.0,
+                0.5,
+                1.0
+              ],
+              "ref_root_peak_db": 1.1,
+              "worst_root_drop_db": 5.1,
+              "worst_root_point": [
+                1.0,
+                0.5
+              ],
+              "null_depth_vs_calm_db": -0.97,
+              "null_depth_vs_fracture_db": 1.0,
+              "fracture_comb_peak_count": 4
+            }
+          },
+          "midpoint": {
+            "passed": true,
+            "worst_peak_db": 25.5,
+            "worst_point": {
+              "morph": 1.0,
+              "q": 0.0
+            },
+            "peak_limit_db": 40.0,
+            "points": [
+              {
+                "morph": 0.0,
+                "q": 0.0,
+                "peak_db": 13.9
+              },
+              {
+                "morph": 0.0,
+                "q": 1.0,
+                "peak_db": 8.4
+              },
+              {
+                "morph": 0.25,
+                "q": 0.0,
+                "peak_db": 15.8
+              },
+              {
+                "morph": 0.25,
+                "q": 1.0,
+                "peak_db": 10.5
+              },
+              {
+                "morph": 0.5,
+                "q": 0.0,
+                "peak_db": 18.4
+              },
+              {
+                "morph": 0.5,
+                "q": 1.0,
+                "peak_db": 13.2
+              },
+              {
+                "morph": 0.75,
+                "q": 0.0,
+                "peak_db": 21.6
+              },
+              {
+                "morph": 0.75,
+                "q": 1.0,
+                "peak_db": 17.2
+              },
+              {
+                "morph": 1.0,
+                "q": 0.0,
+                "peak_db": 25.5
+              },
+              {
+                "morph": 1.0,
+                "q": 1.0,
+                "peak_db": 24.3
+              }
+            ]
+          },
+          "task": {
+            "root_tether_shift_db": 0.423350799816301,
+            "null_depth_db": -1.0019162159932047,
+            "fracture_distance_db": 11.514267403763709
+          }
+        },
+        "candidate": {
+          "gate": {
+            "passed": false,
+            "body": "Cul-De-Sac",
+            "canonical_body": "cul_de_sac",
+            "failures": [
+              "Null event failed: depth vs calm=12.10 dB, vs fracture=-0.41 dB (limit: 3 dB both)",
+              "Comb structure failed: only 1 peaks at fracture state (limit: 6)"
+            ],
+            "measurements": {
+              "canonical_name": "cul_de_sac",
+              "test_grid_morphs": [
+                0.0,
+                0.25,
+                0.5,
+                0.75,
+                1.0
+              ],
+              "test_grid_qs": [
+                0.0,
+                0.5,
+                1.0
+              ],
+              "ref_root_peak_db": -30.3,
+              "worst_root_drop_db": 0.0,
+              "worst_root_point": [
+                0.0,
+                0.0
+              ],
+              "null_depth_vs_calm_db": 12.1,
+              "null_depth_vs_fracture_db": -0.41,
+              "fracture_comb_peak_count": 1
+            }
+          },
+          "midpoint": {
+            "passed": true,
+            "worst_peak_db": 10.0,
+            "worst_point": {
+              "morph": 0.0,
+              "q": 1.0
+            },
+            "peak_limit_db": 40.0,
+            "points": [
+              {
+                "morph": 0.0,
+                "q": 0.0,
+                "peak_db": 9.7
+              },
+              {
+                "morph": 0.0,
+                "q": 1.0,
+                "peak_db": 10.0
+              },
+              {
+                "morph": 0.25,
+                "q": 0.0,
+                "peak_db": -11.8
+              },
+              {
+                "morph": 0.25,
+                "q": 1.0,
+                "peak_db": -11.8
+              },
+              {
+                "morph": 0.5,
+                "q": 0.0,
+                "peak_db": -5.5
+              },
+              {
+                "morph": 0.5,
+                "q": 1.0,
+                "peak_db": -5.3
+              },
+              {
+                "morph": 0.75,
+                "q": 0.0,
+                "peak_db": -4.2
+              },
+              {
+                "morph": 0.75,
+                "q": 1.0,
+                "peak_db": -3.9
+              },
+              {
+                "morph": 1.0,
+                "q": 0.0,
+                "peak_db": -3.8
+              },
+              {
+                "morph": 1.0,
+                "q": 1.0,
+                "peak_db": -3.5
+              }
+            ]
+          },
+          "task": {
+            "root_tether_shift_db": 1.131886049380282,
+            "null_depth_db": 12.2480470649431,
+            "fracture_distance_db": 17.83963390564877
+          }
+        },
+        "improvements": {
+          "root_tether_shift_db": -0.11808920826066349,
+          "null_depth_db": 1.5,
+          "fracture_distance_db": 1.054227750314177,
+          "midpoint_worst_peak_db": 1.5
+        },
+        "raw_improvements": {
+          "root_tether_shift_db": -0.11808920826066349,
+          "null_depth_db": 1.656245410117038,
+          "fracture_distance_db": 1.054227750314177,
+          "midpoint_worst_peak_db": 2.5833333333333335
+        },
+        "max_abs_metric_contribution": 1.5
+      },
+      "holdout_eval": {
+        "body": "Cul-De-Sac",
+        "candidate_name": "Cul-De-Sac C3",
+        "shipping_gate_passed": false,
+        "midpoint_passed": true,
+        "gate_ok": false,
+        "promoted": false,
+        "wins": 3,
+        "composite_improvement": 3.2306982061339826,
+        "baseline": {
+          "name": "Cul-De-Sac",
+          "gate": {
+            "passed": false,
+            "body": "Cul-De-Sac",
+            "canonical_body": "cul_de_sac",
+            "failures": [
+              "Null event failed: depth vs calm=-0.97 dB, vs fracture=1.00 dB (limit: 3 dB both)",
+              "Comb structure failed: only 4 peaks at fracture state (limit: 6)"
+            ],
+            "measurements": {
+              "canonical_name": "cul_de_sac",
+              "test_grid_morphs": [
+                0.0,
+                0.25,
+                0.5,
+                0.75,
+                1.0
+              ],
+              "test_grid_qs": [
+                0.0,
+                0.5,
+                1.0
+              ],
+              "ref_root_peak_db": 1.1,
+              "worst_root_drop_db": 5.1,
+              "worst_root_point": [
+                1.0,
+                0.5
+              ],
+              "null_depth_vs_calm_db": -0.97,
+              "null_depth_vs_fracture_db": 1.0,
+              "fracture_comb_peak_count": 4
+            }
+          },
+          "midpoint": {
+            "passed": true,
+            "worst_peak_db": 25.5,
+            "worst_point": {
+              "morph": 1.0,
+              "q": 0.0
+            },
+            "peak_limit_db": 40.0,
+            "points": [
+              {
+                "morph": 0.0,
+                "q": 0.0,
+                "peak_db": 13.9
+              },
+              {
+                "morph": 0.0,
+                "q": 1.0,
+                "peak_db": 8.4
+              },
+              {
+                "morph": 0.25,
+                "q": 0.0,
+                "peak_db": 15.8
+              },
+              {
+                "morph": 0.25,
+                "q": 1.0,
+                "peak_db": 10.5
+              },
+              {
+                "morph": 0.5,
+                "q": 0.0,
+                "peak_db": 18.4
+              },
+              {
+                "morph": 0.5,
+                "q": 1.0,
+                "peak_db": 13.2
+              },
+              {
+                "morph": 0.75,
+                "q": 0.0,
+                "peak_db": 21.6
+              },
+              {
+                "morph": 0.75,
+                "q": 1.0,
+                "peak_db": 17.2
+              },
+              {
+                "morph": 1.0,
+                "q": 0.0,
+                "peak_db": 25.5
+              },
+              {
+                "morph": 1.0,
+                "q": 1.0,
+                "peak_db": 24.3
+              }
+            ]
+          },
+          "task": {
+            "root_tether_shift_db": 1.0407578979038732,
+            "null_depth_db": -0.5713946456825327,
+            "fracture_distance_db": 10.864419398777155
+          }
+        },
+        "candidate": {
+          "gate": {
+            "passed": false,
+            "body": "Cul-De-Sac",
+            "canonical_body": "cul_de_sac",
+            "failures": [
+              "Null event failed: depth vs calm=12.10 dB, vs fracture=-0.41 dB (limit: 3 dB both)",
+              "Comb structure failed: only 1 peaks at fracture state (limit: 6)"
+            ],
+            "measurements": {
+              "canonical_name": "cul_de_sac",
+              "test_grid_morphs": [
+                0.0,
+                0.25,
+                0.5,
+                0.75,
+                1.0
+              ],
+              "test_grid_qs": [
+                0.0,
+                0.5,
+                1.0
+              ],
+              "ref_root_peak_db": -30.3,
+              "worst_root_drop_db": 0.0,
+              "worst_root_point": [
+                0.0,
+                0.0
+              ],
+              "null_depth_vs_calm_db": 12.1,
+              "null_depth_vs_fracture_db": -0.41,
+              "fracture_comb_peak_count": 1
+            }
+          },
+          "midpoint": {
+            "passed": true,
+            "worst_peak_db": 10.0,
+            "worst_point": {
+              "morph": 0.0,
+              "q": 1.0
+            },
+            "peak_limit_db": 40.0,
+            "points": [
+              {
+                "morph": 0.0,
+                "q": 0.0,
+                "peak_db": 9.7
+              },
+              {
+                "morph": 0.0,
+                "q": 1.0,
+                "peak_db": 10.0
+              },
+              {
+                "morph": 0.25,
+                "q": 0.0,
+                "peak_db": -11.8
+              },
+              {
+                "morph": 0.25,
+                "q": 1.0,
+                "peak_db": -11.8
+              },
+              {
+                "morph": 0.5,
+                "q": 0.0,
+                "peak_db": -5.5
+              },
+              {
+                "morph": 0.5,
+                "q": 1.0,
+                "peak_db": -5.3
+              },
+              {
+                "morph": 0.75,
+                "q": 0.0,
+                "peak_db": -4.2
+              },
+              {
+                "morph": 0.75,
+                "q": 1.0,
+                "peak_db": -3.9
+              },
+              {
+                "morph": 1.0,
+                "q": 0.0,
+                "peak_db": -3.8
+              },
+              {
+                "morph": 1.0,
+                "q": 1.0,
+                "peak_db": -3.5
+              }
+            ]
+          },
+          "task": {
+            "root_tether_shift_db": 4.77288819111881,
+            "null_depth_db": 10.316509811738554,
+            "fracture_distance_db": 16.81481058573017
+          }
+        },
+        "improvements": {
+          "root_tether_shift_db": -0.6220217155358228,
+          "null_depth_db": 1.3609880571776358,
+          "fracture_distance_db": 0.9917318644921694,
+          "midpoint_worst_peak_db": 1.5
+        },
+        "raw_improvements": {
+          "root_tether_shift_db": -0.6220217155358228,
+          "null_depth_db": 1.3609880571776358,
+          "fracture_distance_db": 0.9917318644921694,
+          "midpoint_worst_peak_db": 2.5833333333333335
+        },
+        "max_abs_metric_contribution": 1.5
+      },
+      "holdout_oracle_top": {
+        "body": "Cul-De-Sac",
+        "candidate_name": "Cul-De-Sac C3",
+        "shipping_gate_passed": false,
+        "midpoint_passed": true,
+        "gate_ok": false,
+        "promoted": false,
+        "wins": 3,
+        "composite_improvement": 3.2306982061339826,
+        "baseline": {
+          "name": "Cul-De-Sac",
+          "gate": {
+            "passed": false,
+            "body": "Cul-De-Sac",
+            "canonical_body": "cul_de_sac",
+            "failures": [
+              "Null event failed: depth vs calm=-0.97 dB, vs fracture=1.00 dB (limit: 3 dB both)",
+              "Comb structure failed: only 4 peaks at fracture state (limit: 6)"
+            ],
+            "measurements": {
+              "canonical_name": "cul_de_sac",
+              "test_grid_morphs": [
+                0.0,
+                0.25,
+                0.5,
+                0.75,
+                1.0
+              ],
+              "test_grid_qs": [
+                0.0,
+                0.5,
+                1.0
+              ],
+              "ref_root_peak_db": 1.1,
+              "worst_root_drop_db": 5.1,
+              "worst_root_point": [
+                1.0,
+                0.5
+              ],
+              "null_depth_vs_calm_db": -0.97,
+              "null_depth_vs_fracture_db": 1.0,
+              "fracture_comb_peak_count": 4
+            }
+          },
+          "midpoint": {
+            "passed": true,
+            "worst_peak_db": 25.5,
+            "worst_point": {
+              "morph": 1.0,
+              "q": 0.0
+            },
+            "peak_limit_db": 40.0,
+            "points": [
+              {
+                "morph": 0.0,
+                "q": 0.0,
+                "peak_db": 13.9
+              },
+              {
+                "morph": 0.0,
+                "q": 1.0,
+                "peak_db": 8.4
+              },
+              {
+                "morph": 0.25,
+                "q": 0.0,
+                "peak_db": 15.8
+              },
+              {
+                "morph": 0.25,
+                "q": 1.0,
+                "peak_db": 10.5
+              },
+              {
+                "morph": 0.5,
+                "q": 0.0,
+                "peak_db": 18.4
+              },
+              {
+                "morph": 0.5,
+                "q": 1.0,
+                "peak_db": 13.2
+              },
+              {
+                "morph": 0.75,
+                "q": 0.0,
+                "peak_db": 21.6
+              },
+              {
+                "morph": 0.75,
+                "q": 1.0,
+                "peak_db": 17.2
+              },
+              {
+                "morph": 1.0,
+                "q": 0.0,
+                "peak_db": 25.5
+              },
+              {
+                "morph": 1.0,
+                "q": 1.0,
+                "peak_db": 24.3
+              }
+            ]
+          },
+          "task": {
+            "root_tether_shift_db": 1.0407578979038732,
+            "null_depth_db": -0.5713946456825327,
+            "fracture_distance_db": 10.864419398777155
+          }
+        },
+        "candidate": {
+          "gate": {
+            "passed": false,
+            "body": "Cul-De-Sac",
+            "canonical_body": "cul_de_sac",
+            "failures": [
+              "Null event failed: depth vs calm=12.10 dB, vs fracture=-0.41 dB (limit: 3 dB both)",
+              "Comb structure failed: only 1 peaks at fracture state (limit: 6)"
+            ],
+            "measurements": {
+              "canonical_name": "cul_de_sac",
+              "test_grid_morphs": [
+                0.0,
+                0.25,
+                0.5,
+                0.75,
+                1.0
+              ],
+              "test_grid_qs": [
+                0.0,
+                0.5,
+                1.0
+              ],
+              "ref_root_peak_db": -30.3,
+              "worst_root_drop_db": 0.0,
+              "worst_root_point": [
+                0.0,
+                0.0
+              ],
+              "null_depth_vs_calm_db": 12.1,
+              "null_depth_vs_fracture_db": -0.41,
+              "fracture_comb_peak_count": 1
+            }
+          },
+          "midpoint": {
+            "passed": true,
+            "worst_peak_db": 10.0,
+            "worst_point": {
+              "morph": 0.0,
+              "q": 1.0
+            },
+            "peak_limit_db": 40.0,
+            "points": [
+              {
+                "morph": 0.0,
+                "q": 0.0,
+                "peak_db": 9.7
+              },
+              {
+                "morph": 0.0,
+                "q": 1.0,
+                "peak_db": 10.0
+              },
+              {
+                "morph": 0.25,
+                "q": 0.0,
+                "peak_db": -11.8
+              },
+              {
+                "morph": 0.25,
+                "q": 1.0,
+                "peak_db": -11.8
+              },
+              {
+                "morph": 0.5,
+                "q": 0.0,
+                "peak_db": -5.5
+              },
+              {
+                "morph": 0.5,
+                "q": 1.0,
+                "peak_db": -5.3
+              },
+              {
+                "morph": 0.75,
+                "q": 0.0,
+                "peak_db": -4.2
+              },
+              {
+                "morph": 0.75,
+                "q": 1.0,
+                "peak_db": -3.9
+              },
+              {
+                "morph": 1.0,
+                "q": 0.0,
+                "peak_db": -3.8
+              },
+              {
+                "morph": 1.0,
+                "q": 1.0,
+                "peak_db": -3.5
+              }
+            ]
+          },
+          "task": {
+            "root_tether_shift_db": 4.77288819111881,
+            "null_depth_db": 10.316509811738554,
+            "fracture_distance_db": 16.81481058573017
+          }
+        },
+        "improvements": {
+          "root_tether_shift_db": -0.6220217155358228,
+          "null_depth_db": 1.3609880571776358,
+          "fracture_distance_db": 0.9917318644921694,
+          "midpoint_worst_peak_db": 1.5
+        },
+        "raw_improvements": {
+          "root_tether_shift_db": -0.6220217155358228,
+          "null_depth_db": 1.3609880571776358,
+          "fracture_distance_db": 0.9917318644921694,
+          "midpoint_worst_peak_db": 2.5833333333333335
+        },
+        "max_abs_metric_contribution": 1.5
+      }
+    }
+  }
+}

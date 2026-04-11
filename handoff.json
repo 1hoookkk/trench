@@ -1,0 +1,303 @@
+{
+  "project": "TRENCH",
+  "date": "2026-04-06",
+  "session_summary": "Body authoring session for TRENCH v1 shipping bodies",
+
+  "architecture_decisions": {
+    "12_stage_runtime": "Confirmed. The Rust cascade already processes 12 biquads. Stages 7-12 were passthrough (wasted CPU). Now used for character layer. No DSP change needed.",
+    "NUM_BODY_STAGES": "Changed from 6 to 12 in pyruntime/constants.py so Python analysis matches the Rust runtime.",
+    "heritage_plus_character": "6 heritage stages (0-5) from P2K scaffold are NEVER touched. 6 character stages (6-11) are added. Heritage provides stability. Character provides identity. They don't interact destructively.",
+    "optimizer_authoring": "Bismuth Shrapnel uses random search over zero parameters with a fitness function. This finds non-obvious zero placements that hand-authoring missed. The method scales to all 4 bodies."
+  },
+
+  "bodies": {
+    "speaker_knockerz": {
+      "status": "v6 — passes all gates, needs ear verification",
+      "scaffold": "cartridges/p2k/P2k_006.json",
+      "candidate": "cartridges/candidates/Speaker_Knockerz_v6.keyframe.json",
+      "compiled": "cartridges/candidates/Speaker_Knockerz_v6.compiled.json",
+      "method": "Heritage foundation + character layer at shipping landmarks (190, 354, 800, 1200, 2700, 4900 Hz). Passthrough at M0, active at M100. Unity val1 on character stages.",
+      "measurements": {
+        "midpoint_audit": "PASS (34.5 dB, limit 35)",
+        "morph_distance_mean": 32.0,
+        "crossings": [0, 1, 1, 2],
+        "spectral_tilt_db": -28.8,
+        "peak_m0_q0": "20 Hz / -0.1 dB",
+        "peak_m1_q0": "1201 Hz / 28.8 dB",
+        "peak_m1_q1": "362 Hz / 34.7 dB"
+      },
+      "known_issues": [
+        "Character layer r=0.40 at M100_Q0, r=0.15 at M100_Q100 — conservative. Push higher after ear test.",
+        "Crossings dropped from 3 to 1 at M100_Q0 — character layer smoothed some heritage detail.",
+        "6-stage sparse editing PROVEN impossible — load-bearing zeros on frequency-swap backbones. Do not retry."
+      ],
+      "next_steps": [
+        "Load in DAW, listen through the morph sweep at Q=0 and Q=1",
+        "If character is too subtle, increase M100_Q0 character r from 0.40 toward 0.60",
+        "If M1_Q1 clips, lower M100_Q100 character r below 0.15"
+      ]
+    },
+
+    "bismuth_shrapnel": {
+      "status": "v1 — optimizer-authored, passes gates, open state too quiet",
+      "scaffold": "cartridges/p2k/P2k_026.json",
+      "candidate": "cartridges/candidates/Bismuth_Shrapnel_v1.keyframe.json",
+      "compiled": "cartridges/candidates/Bismuth_Shrapnel_v1.compiled.json",
+      "method": "Optimizer-driven. Random search (2000 candidates) over character stage zero parameters. Fitness rewards: HF comb teeth, 1kHz void, spectral tilt, open state energy, morph distance.",
+      "optimizer_found_zeros": {
+        "S6_pole_2700": "zero=892Hz r=0.569",
+        "S7_pole_4900": "zero=1654Hz r=0.600",
+        "S8_pole_7300": "zero=1160Hz r=0.455",
+        "S9_pole_9400": "zero=635Hz r=0.456",
+        "S10_pole_11400": "zero=2921Hz r=0.131",
+        "S11_pole_13500": "zero=15457Hz r=0.504"
+      },
+      "measurements": {
+        "midpoint_audit": "PASS (17.3 dB — 18 dB headroom)",
+        "morph_distance_mean": 47.6,
+        "crossings": [12, 0, 0, 2],
+        "spectral_tilt_db": -3.6,
+        "peak_m0_q0": "8472 Hz / 14.5 dB (HF centered)",
+        "peak_m1_q0": "414 Hz / -10.6 dB (too quiet)",
+        "peak_m1_q1": "367 Hz / 3.3 dB"
+      },
+      "known_issues": [
+        "M100_Q0 open state at -10.6 dB peak — too quiet. Heritage frequency-swap pulls poles to bass at M100.",
+        "Character r at M100_Q0 is 0.45 — push to 0.60+ or add open-state energy to fitness function.",
+        "Q=1 states are very quiet (heritage + character both attenuate). May need separate Q fitness term."
+      ],
+      "next_steps": [
+        "Increase M100_Q0 character r from 0.45 to 0.65",
+        "Add open-state minimum peak constraint to fitness: peak > 5 dB at M1_Q0",
+        "Run pymoo NSGA-II (forge_optimize.py has the infrastructure) for Pareto-optimal search over comb_teeth vs void_depth vs open_energy",
+        "Consider 5000+ candidates or evolutionary search for better convergence"
+      ]
+    },
+
+    "glottal_snare": {
+      "status": "not started",
+      "scaffold": "cartridges/p2k/P2k_013.json",
+      "notes": "Talking Hedz lineage. Vocal formant morpher. Use MorphLP zero dissolution pattern from trench_re_vault. Optimizer approach from Bismuth applies — define vocal fitness (formant separation, talkingness, nasal anti-resonances)."
+    },
+
+    "phase_molt": {
+      "status": "not started",
+      "scaffold": "cartridges/p2k/P2k_010.json",
+      "notes": "Highest fragmentation skin. Meta body. The optimizer approach is ideal here — define fitness for low coherence + structural transformation."
+    }
+  },
+
+  "key_lessons": {
+    "load_bearing_zeros": "On 6-stage frequency-swap backbones, every heritage zero suppresses adjacent poles. Moving a zero from 5kHz to 200Hz removes HF suppression and causes 20-50 dB gain spikes. Proven across 5 failed candidates (v1-v5).",
+    "heritage_val1_kills_character": "Using heritage val1 (-0.55 to -0.93) on character stages creates b0^6 attenuation (-42 to -120 dB). Character stages MUST use val1=0.0 (unity gain).",
+    "passthrough_at_m0": "Character stages at M0 corners must be StageParams.passthrough(), not dormant (r=0.12, val1=-0.90). Dormant stages still attenuate.",
+    "optimizer_beats_manual": "Random search over zero parameters with a fitness function finds non-obvious solutions. Bismuth v1 optimizer placed zeros at 635-1654 Hz (mid scoop) — creates HF dominance by absence, not by manual HF boost."
+  },
+
+  "files_created": {
+    "tools/author_speaker_knockerz.py": "Speaker Knockerz authoring script (heritage + character layer)",
+    "tools/author_bismuth_shrapnel.py": "Bismuth Shrapnel authoring script (optimizer-driven)",
+    "tools/measure_body.py": "Body measurement against shipping gates (peak/trough, profile, pole skeleton)",
+    "tools/plot_body_comparison.py": "Matplotlib comparison plots (7 morph positions)",
+    "cartridges/candidates/": "All candidate JSONs (keyframe + compiled)",
+    "pyruntime/constants.py": "NUM_BODY_STAGES changed from 6 to 12"
+  },
+
+  "infrastructure_state": {
+    "pyruntime_analysis": "body_profile, midpoint_audit, morph_trajectory_distance all work at 12 stages",
+    "trench_mcp": "analyze_state, compare_states, find_corridors, scan_stability all available",
+    "forge_optimize": "pymoo NSGA-II infrastructure ready in pyruntime/forge_optimize.py — can be adapted for body-level optimization",
+    "z_plane_visualizer": "HTML tool at tools/zero_author.html for offline snapshot authoring"
+  },
+
+  "claude": {
+    "session_date": "2026-04-10",
+    "session_title": "Archive-to-shipping audit, coordination port, musical authoring skill",
+    "written_by": "Claude Opus 4.6 (1M context) for the next Claude session — the user does not read this file to review code, the user owns sound/taste/product, the user has written zero lines of code in six months; tests and reports are the only verification surface",
+
+    "operational_rules_the_user_lives_by": {
+      "user_role": "Owns sound, taste, UX, product identity, final musical judgment. Directs, never writes code. Not a DSP nerd. Cannot review your math. Cannot read Rust. The ear is the only independent verification channel.",
+      "no_option_menus": "Pick one path and execute. Never offer A/B/C. Never ask the user to pick between implementation strategies.",
+      "no_dramatic_vocabulary": "Technical language only. No 'revolutionary', 'groundbreaking', 'powerful', 'elegant'. State what is.",
+      "do_not_summarize_before_acting": "When the instruction is to do something, do it — do not describe what you are about to do.",
+      "one_task_at_a_time": "Finish, verify, report, then next. Do not batch. Do not chain speculative next steps.",
+      "we_are_the_training_data": "The user's repo contains everything. Do not import training priors. Do not reach for RBJ cookbook, standard DSP textbook vocabulary, or parametric-EQ framing. Every domain term has a project-specific meaning that lives only in this codebase.",
+      "dont_invent": "Before proposing any metric, file, schema, or gate, grep the repo for it. If it exists, read it and reuse it. If it does not, ask whether inventing is warranted before doing so.",
+      "read_before_claiming": "Every claim about the codebase must cite file:line. If you cannot cite, say 'unverified, need to read' — never guess from training.",
+      "tests_are_the_contract": "The user cannot review code. Test names must read as product claims, not developer labels. Failure messages must read as project sentences. The test is the only audit surface."
+    },
+
+    "frozen_doctrine_cited_from_repo": {
+      "claude_md_section_4": "12-stage serial DF2T cascade (6 active + 6 passthrough), kernel-form [c0..c4] interpolation only, 4-corner bilinear, Q first then morph, 32-sample control blocks, per-sample coefficient ramping, authoring rate 39062.5 Hz, runtime 44100 Hz. DF2T form: y = c0*x + w1, w1 = c1*x - c3*y + w2, w2 = c2*x - c4*y.",
+      "claude_md_section_5_hard_bans": "No RBJ cookbook for character filters. No compensation layers. No saturation rescue. No parallel paths. No gain baked into c4. No pole sanitization unless a failing test proves instability. No new deps without asking. No shipping verbatim heritage extractions as presets.",
+      "claude_md_section_8": "Stop and ask if DSP or audible path changes materially, if a shortcut creates architectural debt, or if behavior is unclear as bug vs deliberate betrayal."
+    },
+
+    "the_four_shipping_slots": {
+      "speaker_knockerz": {
+        "world": "bass_pressure",
+        "heritage_reference": ["cartridges/heritage/BassBox_303.json", "cartridges/heritage/Millennium.json"],
+        "user_direction_2026_04_10": "Mix between BassBox 303 and Millennium. Sub weapon anchored (BassBox lineage) crossed with brittle upper-mid bite (Millennium lineage). Acid bass foundation + Millennium top-end articulation.",
+        "current_shipping_candidate": "Speaker Knockerz C4 (cand_04_fracture_hiss)",
+        "current_structural_state": "role pattern A:1 L:3 C:1 Ai:1, 1 interference pair, Δq across morph 7.9→13.5 dB, sub anchor holds per scorecard (worst_sub_drop_db=3.0, limit 6.0)",
+        "verdict": "Ships as-is OR re-forge against BassBox_303 + Millennium mix per user direction. User has explicitly requested the mix — treat as re-forge target."
+      },
+      "aluminum_siding": {
+        "world": "brittle_air",
+        "heritage_reference": ["cartridges/heritage/Millennium.json", "cartridges/heritage/Ear_Bender.json"],
+        "current_shipping_candidate": "Aluminum Siding C2 (cand_02_glass_whistle)",
+        "current_structural_state": "role pattern A:0 L:0 C:0 Ai:6 (all six stages >3 kHz), 2 interference pairs",
+        "verdict": "Re-rank within family. C1, C3, C4 all have 3 interference pairs vs C2's 2. The gate picked the thinnest of four rich candidates. Do NOT re-forge — promote the richest existing candidate."
+      },
+      "small_talk_ah_ee": {
+        "world": "dual_formant",
+        "heritage_reference": "No single file. User description: 'heavily voweled with obvious A and B'.",
+        "current_shipping_candidate": "Small Talk Ah-Ee C2 (cand_02_yawn_to_bite)",
+        "current_structural_state": "role pattern A:0 L:1 C:3 Ai:2, 3 interference pairs, Δq 7.9→12.7 dB",
+        "verdict": "Probably ships. Needs formant-pair-count verification the current gate does not run. The dual_formant Q contract at docs/world_q_behavior_gate_spec.md:197-201 has the tightest stage_domination_ratio_qmax in the spec (0.65)."
+      },
+      "cul_de_sac": {
+        "world": "null_fracture",
+        "heritage_reference": "NONE. Original TRENCH territory. User 2026-04-10: 'cul-de-sac is our TRENCH filter that is the most complex and unknown of the lot. produces genuine new sounds'. This is THE signature body. No heritage target to copy.",
+        "current_shipping_candidate": "Cul-De-Sac C3 (cand_03_comb_dust)",
+        "current_structural_state": "role pattern A:2 L:0 C:1 Ai:3, ZERO interference pairs, ZERO LowMid stages, max |Δq| across entire (m,q) grid = 0.3 dB — the Q axis is effectively dead. Running as a 2-corner Morpheus cube on a 4-corner runtime.",
+        "verdict": "FULL FAMILY RESET. Not just C3 — all four Cul-De-Sac candidates have zero LowMid stages, incapable of producing 'Iron Pipe → The Rust → The Bulge' opening per SHIPPING.md:64-80. The forge generation for Cul-De-Sac has to be redone with explicit LowMid constraints and null_fracture contract as the target.",
+        "evidence_locations": [
+          "vault/_diagnostics/role_distribution.json (role counts + interference pairs for all 16 candidates)",
+          "vault/_scorecards/better_than_emu_holdout_scorecard.json (midpoint.points Q-axis grid per candidate)",
+          "vault/_plots/shipping_vs_emu_stages/cul_de_sac/cul_de_sac__vs_p2k_000_stages.png (visual confirmation — stages 1, 2, 3 flat shelves)"
+        ]
+      }
+    },
+
+    "the_four_worlds_from_world_q_behavior_gate_spec_md": {
+      "bass_pressure": "Speaker Knockerz. Hard gates: dominant_peak_count_qmax >= 2, occupied_bands_qmax >= 2, stage_domination_ratio_qmax <= 0.70, hf_takeover_flag_qmax = false, sub_anchor_qmax = pass",
+      "brittle_air": "Aluminum Siding. Hard gates: dominant_peak_count_qmax >= 1, occupied_bands_qmax >= 2, stage_domination_ratio_qmax <= 0.80, mid_scoop_qcurve = pass",
+      "dual_formant": "Small Talk Ah-Ee. Hard gates: dominant_peak_count_qmax >= 2, dual_formant_spacing_qmax = pass, stage_domination_ratio_qmax <= 0.65 (strictest), landmark_persistence_ratio >= 0.60",
+      "null_fracture": "Cul-De-Sac. Hard gates: boundary_collapse = pass, occupied_bands_qmax >= 1, void_signature_qmax = pass, stage_domination_ratio_qmax <= 0.85",
+      "status_of_the_spec": "docs/world_q_behavior_gate_spec.md is marked 'proposed' — NOT implemented in tools/run_shipping_release_gate.py. The gate measures composite audio outcomes, not these per-world Q contracts. This is the load-bearing gap between 'green gate' and 'structurally correct body'."
+    },
+
+    "what_got_ported_into_trench_core_this_session": {
+      "motor": "trench-core/src/motor.rs — MotorId, ForceCurve (Linear/Exponential/Logarithmic/SCurve/Impulse/Breathing), Motor struct with home_morph, home_q, vector_morph, vector_q, rise_ms, fall_ms, curve, lfo_rate_hz, lfo_depth. Motor::position_at(t) returns (morph, q) clamped to [0,1]. Ported from archive/trench-atlas/src/motor.rs. #[serde(transparent)] on MotorId for clean JSON.",
+      "role": "trench-core/src/role.rs — Role enum (Anchor < 200 Hz, LowMid 200-900 Hz, Character 900-3000 Hz, Air > 3000 Hz) + Role::classify(freq_hz). Ported from archive/pre-runtime/trench-forge/src/coordination.rs:38-59. Band boundaries are P2K-corpus-locked — do not adjust without re-running the corpus analysis that derived them.",
+      "cluster": "trench-core/src/cluster.rs — StageFunction enum (Anchor/Relief/Interference/Bypass), ClusterStage, Cluster (band + stages), InterferenceLink (a, b, sign, strength — relationship-valued cross-stage coupling), ClusterPlan with active_count/subordinate_count/total_stages. Ported from archive/pre-runtime/trench-forge/src/cluster.rs:10-95 — data types only, no solver code yet.",
+      "excluded_from_port": "CompiledTopology, ClusterPlan::compile(), FourCornerTopology, build_four_corners, inherit_q, check_pair, default_cluster_layout. These depend on SkeletonPlan/RelativeZero/StageTarget from coordination.rs which is not yet ported."
+    },
+
+    "tests_added_this_session": {
+      "trench-core/src/motor.rs": "2 unit tests — motor_serde_roundtrip, diagonal_motor_has_nonzero_q_vector",
+      "trench-core/src/role.rs": "4 unit tests — boundaries_match_p2k_corpus_bands, role_serde_roundtrip, sub_bass_is_anchor, vocal_formant_band_is_character",
+      "trench-core/src/cluster.rs": "6 unit tests — active_count_excludes_bypass, subordinate_count_matches_relief_plus_bypass, total_stages_sums_all_cluster_stages, interference_link_carries_sign_and_strength, cluster_plan_serde_roundtrip, stage_function_equality_and_matching",
+      "trench-core/tests/motor_diagonal_trajectory.rs": "4 integration tests — snap_rip_motor_loads_with_diagonal_vector, snap_rip_position_at_traces_anti_diagonal, diagonal_trajectory_reaches_unreachable_coefficients, diagonal_trajectory_visits_distinct_coefficient_sets. Bridges the 12-stage forge keyframe format to trench-core's 6-active-stage Cartridge via load_cartridge_active_only() helper (slices stages 0..6).",
+      "trench-core/tests/role_distribution_diagnostic.rs": "1 integration test — shipping_candidates_role_distribution. Extracts pole freq from DF2T c3/c4 for all 16 shipping candidates across the 4 identities, classifies by Role, counts interference pair candidates (high-Q pole pairs within 25% frequency spacing), writes vault/_diagnostics/role_distribution.json.",
+      "total_new_tests": "17 passing",
+      "lib_suite_status": "25 passing, 0 failing after ports",
+      "pre_existing_failure_not_mine": "trench-core/tests/forge_audio.rs has 3 tests that fail on missing cartridges/Acid_Squelch_77.json — unrelated to this session's work"
+    },
+
+    "authoring_artifacts_created": {
+      "cartridges/motors/snap_rip.json": "First diagonal motor. home=(0, 1), vector=(+1, -1), curve=Impulse, rise_ms=18, fall_ms=420. Traces anti-diagonal from (m=0,q=1) through (0.5,0.5) to (1,0). The first populated use of the vector_q field in the live tree.",
+      "vault/_diagnostics/role_distribution.json": "Per-candidate analysis of all 16 shipping candidates — role counts + interference pair count + per-stage pole freq/radius. Generated by trench-core/tests/role_distribution_diagnostic.rs. This is the load-bearing product evidence that exposed Cul-De-Sac's structural failure.",
+      ".claude/skills/destroy-math/SKILL.md": "Custom skill for musical-language authoring. Takes sound/feel input from the user, hides all math (Hz, Q numerical values, kernel coefficients, stage indices, JSON, code, plots) in output, drives the existing forge via role_vocab quality mode, translates gate measurements back into musical sentences. Explicitly bans random-peak authoring — requires going through Role/InterferenceLink/ClusterPlan vocabulary and the per-world Q contract. Skill is loaded and listed in the active skill set."
+    },
+
+    "docs_read_this_session_that_must_be_read_by_future_sessions": {
+      "docs/world_q_behavior_gate_spec.md": "Per-world Q contracts. Hard gates per world. Plain-language failure labels. Status: proposed, not implemented. This is where the 'gate must fail-close on dead-Q-axis bodies' requirement is already written.",
+      "docs/world_body_candidate_schema.md": "Full TypeScript WorldSpec/BodySpec/CandidateSpec schemas. Complete example for Speaker Knockerz bass_pressure at :512-633 with seven checkpoints (vault, chest, choke, rip, rattle, cry, fracture). Status: proposed, not implemented.",
+      "docs/body_authoring_seed.md": "The 4-step authoring method: Identity → Invariant → Danger Zone → Motion Law. Explicit reject conditions at :129-139 including 'sounds complex without sounding intentional' — the random-peak failure mode is already doctrine-banned. Critical rule at :156-165: 'The user is shipping a bass choke weapon, a brittle air destroyer, a talking throat, a structural fracture body. Author toward those ends directly.'",
+      "docs/p2k_role_vocabulary_workflow.md": "Forge invocation path: python tools/forge_pymoo.py <body> --quality-mode role_vocab --pop 80 --gen 60. Quality modes: role_vocab (default), legacy, hybrid. Status of tool existence in live tree: unverified this session; vault/_scorecards/role_vocab_scorecard.json exists so it has run at least once.",
+      "docs/modulation_exploration.md": "Modulation grammar RULE: 'Bodies expose pressure, inversion, and gesture — not arbitrary modulation.' No patchcord system. v1 ships ENV + REV + TRIG + slew. Δmq diagonal gestures identified at :229-232 as highest-yield research bet. Heritage cord mapping at :74-85."
+    },
+
+    "archive_status_do_not_reinvent": {
+      "location": "C:/Users/hooki/trenchwork_clean/archive/",
+      "size": "~11,000 lines Rust",
+      "inventory": "tools/inventory_archive_symbols.py + docs/archive_symbol_inventory_2026-04-09.json — 1134 total symbols, 50 alive_in_shipping, 98 dead_heritage, 863 portable_to_current, 146 needs_adaptation",
+      "still_portable_priority_symbols": [
+        "owned_gaps (archive/pre-runtime/trench-forge/src/coordination.rs:399)",
+        "seed_relative_zero (coordination.rs:481)",
+        "pressure_law (archive/pre-runtime/trench-forge/src/redistribution.rs:145)",
+        "prominence (redistribution.rs:161)",
+        "topology_anchor_theft (coordination.rs:1548)",
+        "topology_interference_drift (coordination.rs:1587)",
+        "topology_cluster_leakage (coordination.rs:1626)",
+        "topology_bypass_wake (coordination.rs:1666)"
+      ],
+      "needs_adaptation_priority_symbols": [
+        "Material (archive/trench-atlas/src/material.rs:140)",
+        "Volatility (material.rs:75) — enum Safe/Exposed/Unstable/Contraband",
+        "Curation (material.rs:63) — body_law/behavior_law/breakage_law/tagline",
+        "House (material.rs:43) — Uncurated/Core/Character/Extreme"
+      ],
+      "dead_in_heritage_do_not_port_for_shipping": [
+        "p2k_val2, p2k_val3, p2k_law_corner, p2k_law_body, solve_p2k_vocal_body",
+        "compile_historical_corners, HistoricalPayload, Type 1/2/3 code policy",
+        "All per memory entry 'Heritage dead for flagships — Forge path only; proven 2026-04-06'"
+      ]
+    },
+
+    "the_single_load_bearing_finding_from_this_session": "The gate is currently green on bodies that contradict their own product spec. Cul-De-Sac C3 ships with a dead Q axis (0.3 dB max Δq) and zero LowMid stages against a SHIPPING.md spec that demands 'Iron Pipe → The Rust → The Bulge' — a body physically incapable of producing the opening three movements of its own identity. This happened because the shipping gate measures composite audio metrics (ruggedness, trajectory, continuity, morph_distance) instead of the per-world Q contracts already written in docs/world_q_behavior_gate_spec.md. The architecture is not overbuilt — three of four shipping winners earn their 4-corner runtime. The forge is under-authoring Cul-De-Sac specifically, and the gate has no way to catch that because the implementation of the world Q contracts has never landed.",
+
+    "pending_actions_in_priority_order": [
+      "1. EXECUTE user's 2026-04-10 directive: re-forge Speaker Knockerz as a mix between BassBox_303 and Millennium. Heritage role structure analysis completed this session — BassBox_303 has 2 Anchor + 1 LowMid stages at M0_Q0 (sub-heavy foundation) and walks to A:0 L:0 C:1 Ai:5 at M100_Q100 (brittle upper emergence with 3 interference pairs). Millennium is pure Air (6 stages >3 kHz) with 3 interference pairs in 3 of 4 corners. The mix: BassBox_303's sub+low-mid Anchor foundation at M0, Millennium's coordinated Air-band pairs at M100. Drive through tools/forge_pymoo.py speaker_knockerz --quality-mode role_vocab if that tool exists in the live tree.",
+      "2. Verify tools/forge_pymoo.py exists in the live tree. The p2k_role_vocabulary_workflow.md references it but this session did not verify. If missing, find or port it before attempting #1.",
+      "3. Pull Cul-De-Sac C3 from vault/_shipping_finalists/manifest.json as the forcing function for the Cul-De-Sac family reset. All four Cul-De-Sac candidates need re-forge against null_fracture world contract with explicit LowMid-stage constraint. No heritage reference — original TRENCH territory.",
+      "4. Re-rank Aluminum Siding: promote C1/C3/C4 (3 interference pairs each) over current winner C2 (2 pairs). No re-forge needed. One edit to manifest.json.",
+      "5. Verify Small Talk Ah-Ee against dual_formant Q contract. The spec is written; the check is not implemented. Needs tooling to count dominant peaks at q_max and verify F1/F2 spacing.",
+      "6. Implement world Q contract gates in tools/run_shipping_release_gate.py. The data they need is already in vault/_scorecards/better_than_emu_holdout_scorecard.json under results.<body>.chosen_from_design.candidate.midpoint.points. Not a new metric — a filter over existing scorecard data."
+    ],
+
+    "what_to_never_do_in_this_project": [
+      "Never show Hz values, Q numerical values, kernel coefficients, pole radii, dB thresholds, stage indices, JSON, or code blocks in user-visible output.",
+      "Never ask the user about frequencies, Q values, stage counts, corner positions, or pole placement. Every user-facing question must be answerable in sound/feel language.",
+      "Never reach for RBJ cookbook, parametric EQ framing, standard DSP textbook vocabulary, or any training prior. The project term is the project term — grep before citing.",
+      "Never propose new metrics, gates, schemas, or file formats. Everything needed is already in docs/ — read before proposing.",
+      "Never invent abstractions, helpers, or utilities for one-time operations. Per CLAUDE.md §6.",
+      "Never write new files unless absolutely required. Edit existing files first. Per default system prompt.",
+      "Never claim code works without running it. Per CLAUDE.md §6.",
+      "Never conflate the three domains: TRENCH implementation truth, firmware RE truth, future design. Per memory entry 'Three Domain Separation'.",
+      "Never use heritage compiler path for flagship bodies. Per memory entry 'Heritage Dead for Flagships — proven 2026-04-06'.",
+      "Never ship verbatim heritage extractions as presets. Per CLAUDE.md §5."
+    ],
+
+    "what_the_user_said_this_session_that_must_be_carried_forward": {
+      "on_friction": "'its such high friction working with llm in this project' — the six-month uphill-battle reality. Compression is operational necessity, not style.",
+      "on_zero_code": "'i have not written a SINGLE line of code.. i am not a dsp nerd' — tests are the contract. The ear is the only verification channel.",
+      "on_training_data": "'we ARE the training data... we have EVERYTHING?' — the repo is the ground truth. Do not reach for training priors. Every project term has a repo-local definition.",
+      "on_invention": "'dont invent anything' — if you are about to propose a new metric, file, or schema, grep the repo first.",
+      "on_math": "'we need to author everything musical... create a custom skill where an ai destroys the math' — the destroy-math skill was written in response to this directive.",
+      "on_architecture": "'are we forced in this architecture?' → Answer: frozen at the DSP math layer per CLAUDE.md §4, open at every layer above (authoring, forge, scorer, bodies, modulation, product identity).",
+      "on_randomness": "'it cant be just random peaks tho you know that' — the destroy-math skill explicitly bans random peak authoring and requires going through the coordination vocabulary (Role, InterferenceLink, ClusterPlan, per-world Q contracts).",
+      "on_cul_de_sac_identity": "'cul-de-sac is our TRENCH filter that is the most complex and unknown of the lot. produces genuine new sounds' — this is THE signature body. No heritage reference allowed. Original TRENCH territory, authored purely from null_fracture world grammar and the archive topology primitives."
+    },
+
+    "memory_entries_that_are_still_true_after_this_session": [
+      "project_zeros_architecture.md — foreign-pole alignment rule",
+      "feedback_no_fences.md — never label things 'unsolved' or 'off-limits'",
+      "feedback_three_domains.md — never conflate impl truth, RE truth, future design",
+      "feedback_webview_broken.md — nih-plug-webview does not execute JS on this system",
+      "project_v1_architecture.md — full signal chain, 6 body layers, QSound, REV/ENV",
+      "feedback_production_discipline.md — stop expanding before existing bodies pass invariants",
+      "project_faceplate_identity.md — verdigris copper + pink display + cyan rollers",
+      "feedback_optimizer_governance.md — freeze spec before optimization",
+      "feedback_solver_quarantine.md — forge_trajectory.py is research-only",
+      "feedback_get_a_grip.md — analyze P2K corpus bodies before authoring",
+      "project_dot4_cubes.md — heritage .4 filters are 2D morph-only cubes",
+      "reference_dillusionman_guide.md — heritage Peak/Shelf Morph authoring vocabulary",
+      "user_role.md — new to coding; owns sound/taste/marketing",
+      "feedback_pick_apples.md — generate candidates for selection; never expose parameter grids",
+      "feedback_heritage_dead_for_flagships.md — proven 2026-04-06",
+      "reference_juce_project.md — active plugin at C:/Users/hooki/trench-juce/plugin/",
+      "reference_heritage_vs_vault.md — cartridges/p2k = real E-mu; vault = forge output",
+      "reference_calibration_data.md — 11 proven P2K skins",
+      "reference_all_datasets.md — 72 XMLs, 11 calibrated, 35 p2k_skins, 33 cartridges",
+      "reference_re_analysis.md — Ghidra decompile",
+      "feedback_constellation_first.md — per-stage randomization fails; splice/crack work"
+    ],
+
+    "memory_entry_that_needs_updating": {
+      "project_v1_presets.md": "Current memory says '4 shipping bodies (names TBD); trap/drumkit scene; superseded by architecture spec'. This is stale. As of 2026-04-10 the names ARE locked per SHIPPING.md: Speaker Knockerz, Aluminum Siding, Small Talk Ah-Ee, Cul-De-Sac. The shipping winners are Speaker Knockerz C4, Aluminum Siding C2, Small Talk Ah-Ee C2, Cul-De-Sac C3 — but C3 is failing and the Aluminum Siding pick is a re-rank target. The memory should be updated to reflect the locked names and the verdicts from this session's diagnostic."
+    }
+  }
+}

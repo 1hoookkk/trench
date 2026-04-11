@@ -1,0 +1,929 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TRENCH Vault Station</title>
+<style>
+:root {
+    --face: #c0c0c0;
+    --light: #ffffff;
+    --mid: #808080;
+    --dark: #404040;
+    --black: #000000;
+    --title-a: #0a246a;
+    --title-b: #3a6ea5;
+    --void: #0a0e0a;
+    --trace: #33ff33;
+    --trace-ref: #ffb000;
+    --accent: #0f6b2f;
+    --err: #8f0e0e;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+    background: var(--face);
+    color: #000;
+    font: 11px Tahoma, "MS Sans Serif", sans-serif;
+    height: 100vh;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+.title-bar {
+    background: linear-gradient(to right, var(--title-a), var(--title-b));
+    color: #fff;
+    font-weight: bold;
+    padding: 3px 6px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+.title-bar .spacer { flex: 1; }
+.pill {
+    background: rgba(0, 0, 0, 0.35);
+    padding: 1px 6px;
+    font: 10px Consolas, monospace;
+}
+.main {
+    flex: 1;
+    min-height: 0;
+    display: grid;
+    grid-template-columns: 340px 1fr 320px;
+    gap: 8px;
+    padding: 8px;
+}
+.panel {
+    border: 2px solid;
+    border-color: var(--light) var(--dark) var(--dark) var(--light);
+    background: var(--face);
+    display: flex;
+    flex-direction: column;
+    min-height: 0;
+}
+.panel-title {
+    background: #d4d0c8;
+    border-bottom: 1px solid #8a8a8a;
+    padding: 4px 6px;
+    font: bold 10px Consolas, monospace;
+    letter-spacing: 1px;
+}
+.panel-body {
+    padding: 8px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    min-height: 0;
+    overflow: auto;
+}
+.group {
+    border: 2px solid;
+    border-color: var(--dark) var(--light) var(--light) var(--dark);
+    background: #d4d0c8;
+    padding: 6px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+.group-title {
+    font: bold 10px Consolas, monospace;
+    color: #333;
+}
+.field {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+.field label {
+    font: 10px Consolas, monospace;
+    color: #444;
+}
+input[type="text"], input[type="number"], textarea, select {
+    width: 100%;
+    font: 11px Tahoma, "MS Sans Serif", sans-serif;
+    background: #fff;
+    border: 2px solid;
+    border-color: var(--dark) var(--light) var(--light) var(--dark);
+    padding: 2px 4px;
+}
+textarea {
+    resize: vertical;
+    min-height: 50px;
+}
+button {
+    font: 11px Tahoma, "MS Sans Serif", sans-serif;
+    background: var(--face);
+    padding: 4px 10px;
+    border: 2px solid;
+    border-color: var(--light) var(--dark) var(--dark) var(--light);
+    cursor: pointer;
+}
+button:active {
+    border-color: var(--dark) var(--light) var(--light) var(--dark);
+}
+button.accent {
+    background: var(--accent);
+    color: #fff;
+    border-color: #68a97d #0d3f1b #0d3f1b #68a97d;
+    font-weight: bold;
+}
+button.err {
+    background: var(--err);
+    color: #fff;
+    border-color: #d07070 #5c0808 #5c0808 #d07070;
+}
+button.mini {
+    padding: 1px 6px;
+    font: 10px Consolas, monospace;
+}
+.button-row {
+    display: flex;
+    gap: 4px;
+    flex-wrap: wrap;
+}
+.status {
+    padding: 4px 6px;
+    font: 10px Consolas, monospace;
+    border: 2px solid;
+    border-color: var(--dark) var(--light) var(--light) var(--dark);
+    background: #fff;
+}
+.status.err { color: #900; }
+.scope-wrap {
+    flex: 1;
+    min-height: 240px;
+    position: relative;
+    background: var(--void);
+    border: 2px solid;
+    border-color: var(--dark) var(--light) var(--light) var(--dark);
+}
+canvas {
+    width: 100%;
+    height: 100%;
+    display: block;
+}
+.scope-overlay {
+    position: absolute;
+    top: 6px;
+    left: 8px;
+    right: 8px;
+    display: flex;
+    justify-content: space-between;
+    pointer-events: none;
+    font: 10px Consolas, monospace;
+    color: #6cb56c;
+}
+.scope-tag {
+    background: rgba(0, 0, 0, 0.55);
+    padding: 2px 6px;
+}
+.slider-row {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+.slider-row label {
+    min-width: 36px;
+    font: 10px Consolas, monospace;
+}
+.slider-row input[type="range"] {
+    flex: 1;
+}
+.readout {
+    min-width: 42px;
+    text-align: right;
+    font: 10px Consolas, monospace;
+    background: #fff;
+    padding: 1px 4px;
+    border: 2px solid;
+    border-color: var(--dark) var(--light) var(--light) var(--dark);
+}
+.checkpoint-row {
+    display: grid;
+    grid-template-columns: 110px 52px 1fr 1fr 1fr 1fr 110px 28px;
+    gap: 4px;
+    align-items: center;
+    padding: 4px;
+    border: 2px solid;
+    border-color: var(--dark) var(--light) var(--light) var(--dark);
+    background: #dcd8d0;
+}
+.checkpoint-row input[type="range"] { width: 100%; }
+.checkpoint-row .metric {
+    display: flex;
+    flex-direction: column;
+    gap: 1px;
+}
+.checkpoint-row .metric span {
+    font: 9px Consolas, monospace;
+    color: #555;
+}
+.checkpoint-list {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+.tree {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    font: 10px Consolas, monospace;
+}
+.tree-node {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+.tree-row {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+.tree-children {
+    margin-left: 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+.tree-btn {
+    text-align: left;
+    width: 100%;
+    padding: 2px 4px;
+}
+.tree-btn.active {
+    background: #1b4d8a;
+    color: #fff;
+}
+.summary-box, .json-box {
+    background: #fff;
+    border: 2px solid;
+    border-color: var(--dark) var(--light) var(--light) var(--dark);
+    padding: 4px;
+    font: 10px Consolas, monospace;
+    white-space: pre-wrap;
+    word-break: break-word;
+    max-height: 220px;
+    overflow: auto;
+}
+.gate-grid {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 4px 8px;
+    font: 10px Consolas, monospace;
+}
+.gate-pass { color: #0a6c0a; font-weight: bold; }
+.gate-fail { color: #8f0e0e; font-weight: bold; }
+.take-list {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    font: 10px Consolas, monospace;
+}
+</style>
+</head>
+<body>
+<div class="title-bar">
+    VAULT STATION
+    <span class="pill">PYTHON AUTHORING</span>
+    <span class="spacer"></span>
+    <span class="pill" id="title-session">no session</span>
+</div>
+
+<div class="main">
+    <div class="panel">
+        <div class="panel-title">SESSION CONTROL</div>
+        <div class="panel-body">
+            <div class="group">
+                <div class="group-title">NEW / LOAD</div>
+                <div class="field">
+                    <label>Template</label>
+                    <select id="template-select"></select>
+                </div>
+                <div class="field">
+                    <label>Session Name</label>
+                    <input id="session-name" type="text" value="speaker_knockerz_session">
+                </div>
+                <div class="field">
+                    <label>World</label>
+                    <input id="session-world" type="text" value="bass_pressure">
+                </div>
+                <div class="field">
+                    <label>Brief</label>
+                    <textarea id="session-brief">Sub anchor first. Body-led sweep. No HF takeover.</textarea>
+                </div>
+                <div class="button-row">
+                    <button class="accent" onclick="createSession()">NEW SESSION</button>
+                    <button onclick="generateFromBrief()">GENERATE</button>
+                    <button onclick="reloadSessionList()">REFRESH</button>
+                </div>
+                <div class="field">
+                    <label>Saved Sessions</label>
+                    <select id="session-list"></select>
+                </div>
+                <div class="button-row">
+                    <button onclick="loadSelectedSession()">LOAD</button>
+                    <button onclick="replaceSession()">APPLY EDITS</button>
+                </div>
+            </div>
+
+            <div class="group">
+                <div class="group-title">ACTIONS</div>
+                <div class="button-row">
+                    <button onclick="analyzeSession()">ANALYZE</button>
+                    <button onclick="pushSessionLive()">PUSH LIVE</button>
+                    <button class="accent" onclick="saveTake()">SAVE TAKE</button>
+                </div>
+                <div class="button-row">
+                    <button onclick="addCheckpoint()">ADD CHECKPOINT</button>
+                    <button onclick="loadTemplateIntoEditor()">RESET TO TEMPLATE</button>
+                </div>
+            </div>
+
+            <div class="group">
+                <div class="group-title">VAULT</div>
+                <div class="button-row">
+                    <button onclick="reloadVault()">REFRESH VAULT</button>
+                    <button onclick="pushSelectedVaultFile()">PUSH FILE LIVE</button>
+                </div>
+                <div class="tree" id="vault-tree"></div>
+            </div>
+
+            <div class="status" id="status-box">ready</div>
+        </div>
+    </div>
+
+    <div class="panel">
+        <div class="panel-title">AUTHOR</div>
+        <div class="panel-body">
+            <div class="scope-wrap">
+                <canvas id="scope" width="960" height="420"></canvas>
+                <div class="scope-overlay">
+                    <span class="scope-tag" id="scope-tag-left">session</span>
+                    <span class="scope-tag" id="scope-tag-right">m=0.00 q=0.00</span>
+                </div>
+            </div>
+            <div class="group">
+                <div class="group-title">AUDITION</div>
+                <div class="slider-row">
+                    <label>MORPH</label>
+                    <input id="morph-slider" type="range" min="0" max="100" value="0" oninput="updateResponse()">
+                    <span class="readout" id="morph-readout">0%</span>
+                </div>
+                <div class="slider-row">
+                    <label>Q</label>
+                    <input id="q-slider" type="range" min="0" max="100" value="0" oninput="updateResponse()">
+                    <span class="readout" id="q-readout">0%</span>
+                </div>
+            </div>
+            <div class="group">
+                <div class="group-title">CHECKPOINTS</div>
+                <div class="checkpoint-list" id="checkpoint-list"></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="panel">
+        <div class="panel-title">INSPECT</div>
+        <div class="panel-body">
+            <div class="group">
+                <div class="group-title">CURRENT ANALYSIS</div>
+                <div class="gate-grid" id="analysis-grid"></div>
+            </div>
+            <div class="group">
+                <div class="group-title">TAKES</div>
+                <div class="take-list" id="take-list"></div>
+            </div>
+            <div class="group">
+                <div class="group-title">SELECTED VAULT ITEM</div>
+                <div class="summary-box" id="vault-selected-summary">none</div>
+            </div>
+            <div class="group">
+                <div class="group-title">JSON PREVIEW</div>
+                <div class="json-box" id="vault-json-preview">none</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+const TEMPLATES = {
+  blank: {
+    world: "bass_pressure",
+    brief: "Blank session",
+    checkpoints: [
+      { name: "Start", morph: 0.0, brightness: 0.0, intensity: 0.0, width: 0.0, violence: 0.0, anchors: [80, 150, 300, 600, 1200, 2400] },
+      { name: "End", morph: 1.0, brightness: 0.0, intensity: 0.0, width: 0.0, violence: 0.0, anchors: [80, 150, 300, 600, 1200, 2400] }
+    ]
+  },
+  speaker_knockerz: {
+    world: "bass_pressure",
+    brief: "Sub anchor first. Body-led sweep. No HF takeover.",
+    checkpoints: [
+      { name: "Vault", morph: 0.0, brightness: -0.70, intensity: 0.70, width: 0.20, violence: -0.20, anchors: [45, 90, 150, 250, 500, 1000] },
+      { name: "Chest", morph: 0.2, brightness: -0.40, intensity: 0.55, width: 0.35, violence: 0.00, anchors: [45, 150, 220, 380, 700, 1200] },
+      { name: "Choke", morph: 0.4, brightness: -0.20, intensity: 0.65, width: -0.25, violence: 0.25, anchors: [45, 200, 320, 450, 800, 1400] },
+      { name: "Rip", morph: 0.6, brightness: 0.05, intensity: 0.72, width: -0.35, violence: 0.60, anchors: [45, 180, 400, 650, 1000, 1800] },
+      { name: "Rattle", morph: 0.75, brightness: 0.10, intensity: 0.76, width: -0.20, violence: 0.72, anchors: [45, 170, 330, 800, 1200, 2200] },
+      { name: "Cry", morph: 0.9, brightness: 0.35, intensity: 0.80, width: -0.55, violence: 0.82, anchors: [45, 160, 280, 700, 1200, 2600] },
+      { name: "Fracture", morph: 1.0, brightness: 0.55, intensity: 0.85, width: -0.60, violence: 0.92, anchors: [45, 140, 260, 520, 1200, 3200] }
+    ]
+  },
+  cul_de_sac: {
+    world: "null_fracture",
+    brief: "Tube into fracture. Play the boundary.",
+    checkpoints: [
+      { name: "Iron Pipe", morph: 0.0, brightness: -0.45, intensity: 0.50, width: 0.10, violence: -0.10, anchors: [90, 240, 420, 700, 1200, 2200] },
+      { name: "Bulge", morph: 0.35, brightness: 0.10, intensity: 0.65, width: 0.20, violence: 0.30, anchors: [100, 260, 500, 900, 1600, 3000] },
+      { name: "State Boundary", morph: 0.5, brightness: 0.00, intensity: 0.20, width: -0.50, violence: 0.80, anchors: [110, 280, 520, 1000, 2200, 3600] },
+      { name: "Fracture", morph: 0.7, brightness: 0.30, intensity: 0.72, width: -0.30, violence: 0.85, anchors: [120, 320, 640, 1400, 2800, 5200] },
+      { name: "Crystal Dust", morph: 1.0, brightness: 0.70, intensity: 0.40, width: -0.60, violence: 0.65, anchors: [130, 360, 720, 1800, 4200, 8000] }
+    ]
+  }
+};
+
+let currentSession = null;
+let currentSessionData = null;
+let currentVaultSelection = null;
+let currentVaultBody = null;
+let currentAnalysis = null;
+
+function setStatus(msg, isErr = false) {
+  const box = document.getElementById("status-box");
+  box.textContent = msg;
+  box.classList.toggle("err", !!isErr);
+}
+
+function templateOptions() {
+  const select = document.getElementById("template-select");
+  select.innerHTML = "";
+  Object.keys(TEMPLATES).forEach((key) => {
+    const opt = document.createElement("option");
+    opt.value = key;
+    opt.textContent = key;
+    select.appendChild(opt);
+  });
+}
+
+function readEditorCheckpoint(index) {
+  const row = document.querySelector(`.checkpoint-row[data-index="${index}"]`);
+  return {
+    name: row.querySelector(".cp-name").value,
+    morph: parseFloat(row.querySelector(".cp-morph").value),
+    brightness: parseFloat(row.querySelector(".cp-brightness").value),
+    intensity: parseFloat(row.querySelector(".cp-intensity").value),
+    width: parseFloat(row.querySelector(".cp-width").value),
+    violence: parseFloat(row.querySelector(".cp-violence").value),
+    anchors: row.querySelector(".cp-anchors").value.split(",").map((v) => parseFloat(v.trim())).filter((v) => Number.isFinite(v))
+  };
+}
+
+function collectCheckpoints() {
+  return Array.from(document.querySelectorAll(".checkpoint-row")).map((row, idx) => readEditorCheckpoint(idx));
+}
+
+function renderCheckpointRows(checkpoints) {
+  const host = document.getElementById("checkpoint-list");
+  host.innerHTML = "";
+  checkpoints
+    .slice()
+    .sort((a, b) => a.morph - b.morph)
+    .forEach((cp, index) => {
+      const row = document.createElement("div");
+      row.className = "checkpoint-row";
+      row.dataset.index = index;
+      row.innerHTML = `
+        <input class="cp-name" type="text" value="${cp.name}">
+        <input class="cp-morph" type="number" min="0" max="1" step="0.01" value="${cp.morph}">
+        <div class="metric"><span>BRIGHT</span><input class="cp-brightness" type="range" min="-1" max="1" step="0.01" value="${cp.brightness}"></div>
+        <div class="metric"><span>INTENSITY</span><input class="cp-intensity" type="range" min="-1" max="1" step="0.01" value="${cp.intensity}"></div>
+        <div class="metric"><span>WIDTH</span><input class="cp-width" type="range" min="-1" max="1" step="0.01" value="${cp.width}"></div>
+        <div class="metric"><span>VIOLENCE</span><input class="cp-violence" type="range" min="-1" max="1" step="0.01" value="${cp.violence}"></div>
+        <input class="cp-anchors" type="text" value="${(cp.anchors || []).join(", ")}">
+        <button class="mini err" onclick="removeCheckpoint(${index})">X</button>
+      `;
+      host.appendChild(row);
+    });
+}
+
+function removeCheckpoint(index) {
+  const cps = collectCheckpoints();
+  cps.splice(index, 1);
+  renderCheckpointRows(cps);
+}
+
+function addCheckpoint() {
+  const cps = collectCheckpoints();
+  cps.push({ name: "New", morph: 0.5, brightness: 0, intensity: 0, width: 0, violence: 0, anchors: [100, 250, 500, 1000, 2000, 4000] });
+  renderCheckpointRows(cps);
+}
+
+function loadTemplateIntoEditor() {
+  const key = document.getElementById("template-select").value;
+  const tpl = TEMPLATES[key];
+  document.getElementById("session-world").value = tpl.world;
+  document.getElementById("session-brief").value = tpl.brief;
+  renderCheckpointRows(JSON.parse(JSON.stringify(tpl.checkpoints)));
+  setStatus(`template loaded: ${key}`);
+}
+
+async function jsonFetch(url, options = {}) {
+  const response = await fetch(url, options);
+  if (!response.ok) {
+    throw new Error(await response.text());
+  }
+  return response.json();
+}
+
+async function reloadSessionList() {
+  const data = await jsonFetch("/session/list");
+  const select = document.getElementById("session-list");
+  select.innerHTML = "";
+  (data.sessions || []).forEach((name) => {
+    const opt = document.createElement("option");
+    opt.value = name;
+    opt.textContent = name;
+    select.appendChild(opt);
+  });
+}
+
+async function createSession() {
+  const name = document.getElementById("session-name").value.trim();
+  if (!name) {
+    setStatus("session name required", true);
+    return;
+  }
+  const payload = {
+    name,
+    world: document.getElementById("session-world").value.trim(),
+    brief: document.getElementById("session-brief").value.trim(),
+    checkpoints: collectCheckpoints()
+  };
+  try {
+    await jsonFetch("/session/new", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(payload)
+    });
+    currentSession = name;
+    document.getElementById("title-session").textContent = name;
+    await reloadSessionList();
+    await loadSession(name);
+    setStatus(`created session ${name}`);
+  } catch (err) {
+    setStatus(err.message, true);
+  }
+}
+
+async function replaceSession() {
+  if (!currentSession) {
+    setStatus("load or create a session first", true);
+    return;
+  }
+  const payload = {
+    session_name: currentSession,
+    world: document.getElementById("session-world").value.trim(),
+    brief: document.getElementById("session-brief").value.trim(),
+    checkpoints: collectCheckpoints()
+  };
+  try {
+    await jsonFetch("/session/replace", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(payload)
+    });
+    await loadSession(currentSession);
+    setStatus(`updated ${currentSession}`);
+  } catch (err) {
+    setStatus(err.message, true);
+  }
+}
+
+async function loadSession(name) {
+  const data = await jsonFetch(`/session/load/${encodeURIComponent(name)}`);
+  currentSession = data.name;
+  currentSessionData = data;
+  document.getElementById("session-name").value = data.name;
+  document.getElementById("session-world").value = data.world || "";
+  document.getElementById("session-brief").value = data.brief || "";
+  document.getElementById("title-session").textContent = data.name;
+  renderCheckpointRows(data.current_checkpoints || []);
+  renderTakes(data.takes || []);
+  await analyzeSession();
+}
+
+async function loadSelectedSession() {
+  const name = document.getElementById("session-list").value;
+  if (!name) {
+    setStatus("no session selected", true);
+    return;
+  }
+  try {
+    await loadSession(name);
+    setStatus(`loaded ${name}`);
+  } catch (err) {
+    setStatus(err.message, true);
+  }
+}
+
+async function analyzeSession() {
+  if (!currentSession) {
+    setStatus("no session loaded", true);
+    return;
+  }
+  try {
+    await replaceSession();
+    const morph = parseInt(document.getElementById("morph-slider").value, 10) / 100;
+    const q = parseInt(document.getElementById("q-slider").value, 10) / 100;
+    currentAnalysis = await jsonFetch("/session/analyze", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ session_name: currentSession, morph, q })
+    });
+    renderAnalysis(currentAnalysis);
+    await updateResponse();
+  } catch (err) {
+    setStatus(err.message, true);
+  }
+}
+
+async function saveTake() {
+  if (!currentSession) {
+    setStatus("no session loaded", true);
+    return;
+  }
+  try {
+    await replaceSession();
+    const morph = parseInt(document.getElementById("morph-slider").value, 10) / 100;
+    const q = parseInt(document.getElementById("q-slider").value, 10) / 100;
+    const result = await jsonFetch("/session/save_take", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ session_name: currentSession, morph, q })
+    });
+    await loadSession(currentSession);
+    setStatus(`saved take v${result.version}`);
+  } catch (err) {
+    setStatus(err.message, true);
+  }
+}
+
+async function pushSessionLive() {
+  if (!currentSession) {
+    setStatus("no session loaded", true);
+    return;
+  }
+  try {
+    await replaceSession();
+    await jsonFetch("/session/push_live", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ session_name: currentSession, morph: 0, q: 0 })
+    });
+    setStatus(`pushed session ${currentSession} live`);
+  } catch (err) {
+    setStatus(err.message, true);
+  }
+}
+
+function renderTakes(takes) {
+  const host = document.getElementById("take-list");
+  host.innerHTML = "";
+  if (!takes.length) {
+    host.textContent = "no takes";
+    return;
+  }
+  takes.slice().reverse().forEach((take) => {
+    const line = document.createElement("div");
+    const when = new Date(take.timestamp * 1000).toLocaleString();
+    line.textContent = `v${take.version} ${when} ${take.body_path || ""}`;
+    host.appendChild(line);
+  });
+}
+
+function renderAnalysis(data) {
+  const host = document.getElementById("analysis-grid");
+  host.innerHTML = "";
+  if (!data) {
+    host.textContent = "no analysis";
+    return;
+  }
+  const profile = data.profile || {};
+  const morph = profile.morph_distance || {};
+  const gates = data.gates || {};
+  const rows = [
+    ["motion mean", morph.mean_rms_db ?? "--"],
+    ["motion q0", morph.q0_rms_db ?? "--"],
+    ["motion q1", morph.q1_rms_db ?? "--"],
+    ["spectral tilt", profile.spectral_tilt_db ?? "--"],
+    ["active stages", profile.active_stages ?? "--"],
+    ["midpoint", gateLabel(gates.midpoint)],
+    ["dense", gateLabel(gates.dense)],
+    ["shipping", gateLabel(gates.shipping)]
+  ];
+  rows.forEach(([label, value]) => {
+    const k = document.createElement("div");
+    k.textContent = label;
+    const v = document.createElement("div");
+    v.innerHTML = value;
+    host.appendChild(k);
+    host.appendChild(v);
+  });
+}
+
+function gateLabel(gate) {
+  if (!gate) return "--";
+  const passed = gate.passed !== false;
+  return `<span class="${passed ? "gate-pass" : "gate-fail"}">${passed ? "PASS" : "FAIL"}</span>`;
+}
+
+async function reloadVault() {
+  try {
+    const catalog = await jsonFetch("/vault/catalog");
+    renderVaultTree(catalog.children || []);
+  } catch (err) {
+    setStatus(err.message, true);
+  }
+}
+
+function renderVaultTree(nodes) {
+  const host = document.getElementById("vault-tree");
+  host.innerHTML = "";
+  nodes.forEach((node) => host.appendChild(renderVaultNode(node)));
+}
+
+function renderVaultNode(node) {
+  const wrap = document.createElement("div");
+  wrap.className = "tree-node";
+  if (node.type === "dir") {
+    const details = document.createElement("details");
+    details.open = false;
+    const summary = document.createElement("summary");
+    summary.textContent = node.name;
+    summary.className = "tree-row";
+    details.appendChild(summary);
+    const children = document.createElement("div");
+    children.className = "tree-children";
+    (node.children || []).forEach((child) => children.appendChild(renderVaultNode(child)));
+    details.appendChild(children);
+    wrap.appendChild(details);
+  } else {
+    const btn = document.createElement("button");
+    btn.className = "tree-btn";
+    btn.textContent = node.name;
+    btn.onclick = () => selectVaultFile(node.relative_path, btn);
+    wrap.appendChild(btn);
+  }
+  return wrap;
+}
+
+async function selectVaultFile(relativePath, btn) {
+  document.querySelectorAll(".tree-btn").forEach((el) => el.classList.remove("active"));
+  if (btn) btn.classList.add("active");
+  currentVaultSelection = relativePath;
+  try {
+    const file = await jsonFetch(`/vault/file?relative_path=${encodeURIComponent(relativePath)}`);
+    document.getElementById("vault-selected-summary").textContent = JSON.stringify(file.preview || file, null, 2);
+    document.getElementById("vault-json-preview").textContent = JSON.stringify(file.data || file, null, 2);
+    currentVaultBody = file.data || null;
+    await updateResponse();
+    setStatus(`selected ${relativePath}`);
+  } catch (err) {
+    setStatus(err.message, true);
+  }
+}
+
+async function pushSelectedVaultFile() {
+  if (!currentVaultSelection) {
+    setStatus("no vault file selected", true);
+    return;
+  }
+  try {
+    const data = await jsonFetch("/vault/push-live", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ relative_path: currentVaultSelection })
+    });
+    setStatus(`pushed ${data.name} live`);
+  } catch (err) {
+    setStatus(err.message, true);
+  }
+}
+
+async function updateResponse() {
+  const morph = parseInt(document.getElementById("morph-slider").value, 10) / 100;
+  const q = parseInt(document.getElementById("q-slider").value, 10) / 100;
+  document.getElementById("morph-readout").textContent = `${Math.round(morph * 100)}%`;
+  document.getElementById("q-readout").textContent = `${Math.round(q * 100)}%`;
+  document.getElementById("scope-tag-right").textContent = `m=${morph.toFixed(2)} q=${q.toFixed(2)}`;
+
+  let sessionResp = null;
+  let refResp = null;
+  try {
+    if (currentSession) {
+      sessionResp = await jsonFetch("/session/response", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ session_name: currentSession, morph, q })
+      });
+    }
+    if (currentVaultBody) {
+      refResp = await jsonFetch("/response", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ body: currentVaultBody, morph, q })
+      });
+    }
+    drawScope(sessionResp, refResp);
+  } catch (err) {
+    setStatus(err.message, true);
+  }
+}
+
+function drawScope(sessionResp, refResp) {
+  const canvas = document.getElementById("scope");
+  const ctx = canvas.getContext("2d");
+  const W = canvas.width;
+  const H = canvas.height;
+  ctx.fillStyle = "#0a0e0a";
+  ctx.fillRect(0, 0, W, H);
+
+  const fLo = Math.log10(20);
+  const fHi = Math.log10(19500);
+  const dLo = -90;
+  const dHi = 50;
+  const xF = (f) => ((Math.log10(f) - fLo) / (fHi - fLo)) * W;
+  const yD = (d) => H - ((d - dLo) / (dHi - dLo)) * H;
+
+  [100, 1000, 10000].forEach((f) => {
+    ctx.strokeStyle = "#1b251b";
+    ctx.lineWidth = 1;
+    ctx.beginPath();
+    ctx.moveTo(xF(f), 0);
+    ctx.lineTo(xF(f), H);
+    ctx.stroke();
+  });
+  [-60, -30, 0, 30].forEach((d) => {
+    ctx.strokeStyle = d === 0 ? "#264326" : "#1b251b";
+    ctx.beginPath();
+    ctx.moveTo(0, yD(d));
+    ctx.lineTo(W, yD(d));
+    ctx.stroke();
+  });
+
+  ctx.font = "10px Consolas";
+  ctx.fillStyle = "#4d7f4d";
+  [100, 1000, 10000].forEach((f) => {
+    ctx.fillText(f >= 1000 ? `${f / 1000}k` : `${f}`, xF(f) - 8, H - 6);
+  });
+
+  const drawCurve = (resp, color, width) => {
+    if (!resp || !resp.freqs || !resp.db) return;
+    ctx.strokeStyle = color;
+    ctx.lineWidth = width;
+    ctx.beginPath();
+    resp.freqs.forEach((f, i) => {
+      const px = xF(f);
+      const py = yD(Math.max(dLo, Math.min(dHi, resp.db[i])));
+      if (i === 0) ctx.moveTo(px, py);
+      else ctx.lineTo(px, py);
+    });
+    ctx.stroke();
+  };
+
+  drawCurve(refResp, "#ffb000", 1.25);
+  drawCurve(sessionResp, "#33ff33", 2);
+  document.getElementById("scope-tag-left").textContent =
+    currentVaultSelection ? `session + ref ${currentVaultSelection}` : "session";
+}
+
+async function generateFromBrief() {
+  const brief = document.getElementById("session-brief").value.trim();
+  const world = document.getElementById("session-world").value.trim();
+  if (!brief) {
+    setStatus("write a brief first", true);
+    return;
+  }
+  try {
+    const result = await jsonFetch("/session/generate", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ brief, world })
+    });
+    renderCheckpointRows(result.checkpoints);
+    setStatus(`generated ${result.checkpoints.length} checkpoints (matched: ${result.matched})`);
+  } catch (err) {
+    setStatus(err.message, true);
+  }
+}
+
+async function bootstrap() {
+  templateOptions();
+  loadTemplateIntoEditor();
+  await reloadSessionList();
+  await reloadVault();
+  await updateResponse();
+}
+
+bootstrap();
+</script>
+</body>
+</html>

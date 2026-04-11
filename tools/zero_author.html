@@ -1,0 +1,565 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TRENCH Scaffold-Locked Zero Tool</title>
+    <style>
+        :root {
+            --bg: #808080;
+            --window: #c0c0c0;
+            --panel: #d4d0c8;
+            --field: #ffffff;
+            --light: #ffffff;
+            --dark: #404040;
+            --text: #111111;
+            --muted: #555555;
+            --raw: #6f6f6f;
+            --cand: #8b1e00;
+            --bad: #7e0000;
+            --ok: #004b00;
+        }
+        * { box-sizing: border-box; }
+        body {
+            margin: 0;
+            padding: 12px;
+            background: var(--bg);
+            color: var(--text);
+            font: 12px/1.3 "MS Sans Serif", "Segoe UI", sans-serif;
+        }
+        .window {
+            max-width: 1460px;
+            margin: 0 auto;
+            background: var(--window);
+            border: 2px solid;
+            border-color: var(--light) var(--dark) var(--dark) var(--light);
+            box-shadow: inset 1px 1px 0 #dfdfdf, inset -1px -1px 0 #808080;
+        }
+        .titlebar {
+            display: flex;
+            justify-content: space-between;
+            gap: 12px;
+            padding: 4px 8px;
+            color: #ffffff;
+            background: linear-gradient(90deg, #0a2e82 0%, #2957a4 100%);
+            font-weight: 700;
+        }
+        .content {
+            display: grid;
+            grid-template-columns: 360px minmax(0, 1fr);
+            gap: 8px;
+            padding: 8px;
+        }
+        .stack { display: grid; gap: 8px; }
+        .panel {
+            padding: 8px;
+            background: var(--panel);
+            border: 2px solid;
+            border-color: var(--light) var(--dark) var(--dark) var(--light);
+            box-shadow: inset 1px 1px 0 #ece9d8, inset -1px -1px 0 #8a8a8a;
+        }
+        .panel h2 {
+            margin: 0 0 8px;
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.3px;
+        }
+        .row {
+            display: grid;
+            grid-template-columns: 100px minmax(0, 1fr);
+            gap: 6px;
+            align-items: center;
+            margin-bottom: 6px;
+        }
+        .field, select, input, textarea, button {
+            font: inherit;
+        }
+        .field, select, input, textarea {
+            width: 100%;
+            padding: 3px 5px;
+            background: var(--field);
+            border: 2px solid;
+            border-color: var(--dark) var(--light) var(--light) var(--dark);
+            color: var(--text);
+        }
+        button {
+            min-height: 24px;
+            padding: 0 10px;
+            background: var(--window);
+            border: 2px solid;
+            border-color: var(--light) var(--dark) var(--dark) var(--light);
+            cursor: pointer;
+        }
+        button:active {
+            border-color: var(--dark) var(--light) var(--light) var(--dark);
+        }
+        .toolbar {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 4px;
+        }
+        .metrics {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 6px;
+        }
+        .metric {
+            padding: 6px;
+            background: var(--field);
+            border: 2px solid;
+            border-color: var(--dark) var(--light) var(--light) var(--dark);
+        }
+        .metric strong {
+            display: block;
+            color: var(--muted);
+            font-size: 11px;
+            text-transform: uppercase;
+        }
+        .metric span {
+            display: block;
+            margin-top: 3px;
+            font-size: 15px;
+            font-weight: 700;
+        }
+        .ok { color: var(--ok); }
+        .bad { color: var(--bad); }
+        .muted { color: var(--muted); }
+        .mono { font-family: "Courier New", monospace; }
+        .plot {
+            padding: 6px;
+            background: #f5f5f5;
+            border: 2px solid;
+            border-color: var(--dark) var(--light) var(--light) var(--dark);
+        }
+        canvas {
+            display: block;
+            width: 100%;
+            height: 640px;
+            background: #ffffff;
+        }
+        .legend {
+            display: flex;
+            gap: 10px;
+            margin-top: 6px;
+        }
+        .legend span {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+        }
+        .swatch {
+            width: 10px;
+            height: 10px;
+            border: 1px solid #111111;
+            display: inline-block;
+        }
+        textarea {
+            min-height: 220px;
+            resize: vertical;
+            font-family: "Courier New", monospace;
+        }
+        @media (max-width: 1120px) {
+            .content { grid-template-columns: 1fr; }
+            canvas { height: 480px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="window">
+        <div class="titlebar">
+            <div>TRENCH Scaffold-Locked Zero Tool</div>
+            <div class="mono">P2k_006 / current runtime / one verified numerator move</div>
+        </div>
+        <div class="content">
+            <div class="stack">
+                <div class="panel">
+                    <h2>Edit</h2>
+                    <div class="row">
+                        <label>Move</label>
+                        <div class="field mono">Open-State Body Anchor / M100_Q0 / S0</div>
+                    </div>
+                    <div class="row">
+                        <label for="zeroHz">Zero Hz</label>
+                        <input id="zeroHz" class="field" type="range" min="80" max="1200" step="1">
+                    </div>
+                    <div class="row">
+                        <label for="zeroHzNumber">Hz Value</label>
+                        <input id="zeroHzNumber" class="field" type="number" min="80" max="1200" step="1">
+                    </div>
+                    <div class="row">
+                        <label for="zeroRadius">Zero r</label>
+                        <input id="zeroRadius" class="field" type="range" min="0" max="0.6" step="0.0005">
+                    </div>
+                    <div class="row">
+                        <label for="zeroRadiusNumber">r Value</label>
+                        <input id="zeroRadiusNumber" class="field" type="number" min="0" max="0.6" step="0.0005">
+                    </div>
+                    <div class="row">
+                        <label for="viewSelect">Plot State</label>
+                        <select id="viewSelect" class="field">
+                            <option value="0,0">M0_Q0</option>
+                            <option value="0,1">M0_Q100</option>
+                            <option value="0.5,0.5">M50_Q50</option>
+                            <option value="0.75,0">M75_Q0</option>
+                            <option value="1,0" selected>M100_Q0</option>
+                            <option value="1,1">M100_Q100</option>
+                        </select>
+                    </div>
+                    <div class="toolbar">
+                        <button id="btnInherited">Reset To Inherited</button>
+                        <button id="btnV3">Load Verified Move</button>
+                    </div>
+                    <div class="muted" style="margin-top:6px;">Hard lock: one proven edit surface only. No corner hopping, no stage hopping, no pole edits, no gain edits.</div>
+                </div>
+
+                <div class="panel">
+                    <h2>Inherited Stage</h2>
+                    <div id="stageInfo" class="mono"></div>
+                </div>
+
+                <div class="panel">
+                    <h2>Gates</h2>
+                    <div class="metrics">
+                        <div class="metric"><strong>Midpoint Audit</strong><span id="metricAudit">PASS</span></div>
+                        <div class="metric"><strong>Worst Peak</strong><span id="metricWorst">0.0 dB</span></div>
+                        <div class="metric"><strong>M100_Q0 Peak</strong><span id="metricOpenQ0">0 Hz</span></div>
+                        <div class="metric"><strong>M100_Q100 Peak</strong><span id="metricOpenQ1">0 Hz</span></div>
+                        <div class="metric"><strong>M50_Q50 Sub ≤60</strong><span id="metricSubMid">0.0 dB</span></div>
+                        <div class="metric"><strong>M100_Q0 Sub ≤60</strong><span id="metricSubOpen">0.0 dB</span></div>
+                    </div>
+                </div>
+
+                <div class="panel">
+                    <h2>Export</h2>
+                    <textarea id="exportOut" readonly></textarea>
+                </div>
+            </div>
+
+            <div class="stack">
+                <div class="plot">
+                    <canvas id="plot" width="1020" height="640"></canvas>
+                    <div class="legend">
+                        <span><i class="swatch" style="background:var(--raw)"></i> Raw `P2k_006`</span>
+                        <span><i class="swatch" style="background:var(--cand)"></i> Candidate</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const SR = 39062.5;
+        const FMIN = 20.0;
+        const FMAX = 19000.0;
+        const DBMIN = -90.0;
+        const DBMAX = 42.0;
+        const PLOT_POINTS = 720;
+        const cornerOrder = ["M0_Q0", "M0_Q100", "M100_Q0", "M100_Q100"];
+        const passthrough = { a1: 0, r: 0, val1: 0, val2: 0, val3: 0, flag: 1 };
+        const scaffold = {
+            M0_Q0: [
+                { a1: -0.750336, r: 0.015625, val1: -0.536194, val2: -0.147848, val3: -0.437302, flag: 1 },
+                { a1: -1.924241, r: 0.962199, val1: -0.536194, val2: 1.134236, val3: 0.538072, flag: 1 },
+                { a1: -1.946803, r: 0.976293, val1: -0.536194, val2: 2.39562, val3: 0.590757, flag: 1 },
+                { a1: 0.983353, r: 0.943754, val1: -0.536194, val2: -0.41138, val3: 0.59346, flag: 1 },
+                { a1: 1.498978, r: 0.935439, val1: -0.536194, val2: -0.698683, val3: 0.48729, flag: 1 },
+                { a1: 1.815384, r: 0.96625, val1: -0.536194, val2: -2.576399, val3: 0.469835, flag: 1 },
+            ],
+            M0_Q100: [
+                { a1: -1.35965, r: 0.728995, val1: -0.585449, val2: 0.570505, val3: 0.154108, flag: 1 },
+                { a1: -1.993412, r: 0.997557, val1: -0.585449, val2: 1.233914, val3: 0.62913, flag: 1 },
+                { a1: -1.89653, r: 0.971279, val1: -0.585449, val2: 1.345803, val3: 0.645348, flag: 1 },
+                { a1: -1.328491, r: 0.847899, val1: -0.585449, val2: 0.962331, val3: 0.404743, flag: 1 },
+                { a1: -0.891083, r: 0.875052, val1: -0.585449, val2: 1.480041, val3: 0.525978, flag: 1 },
+                { a1: -0.500755, r: 0.968258, val1: -0.585449, val2: 1.277635, val3: 0.522974, flag: 1 },
+            ],
+            M100_Q0: [
+                { a1: -1.947294, r: 0.99216, val1: -0.550293, val2: 1.508012, val3: 0.984271, flag: 1 },
+                { a1: -1.977765, r: 0.989205, val1: -0.550293, val2: 1.107762, val3: 0.554281, flag: 1 },
+                { a1: -1.871162, r: 0.951996, val1: -0.550293, val2: 1.013009, val3: 0.480293, flag: 1 },
+                { a1: -1.714958, r: 0.879505, val1: -0.550293, val2: 0.88051, val3: 0.343135, flag: 1 },
+                { a1: -1.820404, r: 0.962199, val1: -0.550293, val2: 1.814784, val3: 0.527043, flag: 1 },
+                { a1: 0.048073, r: 0.975292, val1: -0.550293, val2: -0.511996, val3: 0.501489, flag: 1 },
+            ],
+            M100_Q100: [
+                { a1: -0.364059, r: 0.962199, val1: 0.01709, val2: -1.07045, val3: 0.496494, flag: 1 },
+                { a1: -1.990727, r: 0.997067, val1: 0.01709, val2: 1.735523, val3: 0.421844, flag: 1 },
+                { a1: 0.297829, r: 0.975292, val1: 0.01709, val2: 0.114324, val3: 0.029411, flag: 1 },
+                { a1: 0.543922, r: 0.977293, val1: 0.01709, val2: -0.004587, val3: 0.478092, flag: 1 },
+                { a1: 0.877884, r: 0.96625, val1: 0.01709, val2: -0.108207, val3: 0.051539, flag: 1 },
+                { a1: 0.936279, r: 0.661622, val1: 0.01709, val2: -1.985522, val3: -0.579342, flag: 1 },
+            ],
+        };
+
+        const plot = document.getElementById("plot");
+        const ctx = plot.getContext("2d");
+        const freqs = buildFreqs(PLOT_POINTS);
+        const state = {
+            zeroHz: 400,
+            zeroR: 0.30,
+            view: [1, 0],
+        };
+        const FIXED_CORNER = "M100_Q0";
+        const FIXED_STAGE = 0;
+        const ZERO_HZ_MIN = 80;
+        const ZERO_HZ_MAX = 1200;
+        const ZERO_R_MIN = 0.0;
+        const ZERO_R_MAX = 0.6;
+
+        function cloneStage(stage) { return { ...stage }; }
+        function clamp(v, lo, hi) { return Math.min(hi, Math.max(lo, v)); }
+        function log10(x) { return Math.log(x) / Math.LN10; }
+        function xForFreq(freq) { return (log10(freq) - log10(FMIN)) / (log10(FMAX) - log10(FMIN)) * plot.width; }
+        function yForDb(db) { return plot.height - (clamp(db, DBMIN, DBMAX) - DBMIN) / (DBMAX - DBMIN) * plot.height; }
+        function buildFreqs(count) {
+            const out = [];
+            for (let i = 0; i < count; i += 1) {
+                const t = i / (count - 1);
+                out.push(Math.pow(10, log10(FMIN) + t * (log10(FMAX) - log10(FMIN))));
+            }
+            return out;
+        }
+        function poleFreq(stage) {
+            if (stage.r < 1e-6) return 0;
+            const arg = clamp(-stage.a1 / (2 * stage.r), -1, 1);
+            return Math.acos(arg) * SR / (2 * Math.PI);
+        }
+        function zeroInfo(stage) {
+            const b1 = stage.a1 + stage.val2;
+            const b2 = stage.r * stage.r - stage.val3;
+            if (b2 <= 0) return { freqHz: 0, radius: 0 };
+            const zr = Math.sqrt(b2);
+            if (zr < 1e-9) return { freqHz: 0, radius: 0 };
+            const arg = clamp(-b1 / (2 * zr), -1, 1);
+            return { freqHz: Math.acos(arg) * SR / (2 * Math.PI), radius: zr };
+        }
+        function encode(stage) {
+            const a1 = Math.fround(stage.a1);
+            const r = Math.fround(stage.r);
+            const val1 = Math.fround(stage.val1);
+            const val2 = Math.fround(stage.val2);
+            const val3 = Math.fround(stage.val3);
+            return {
+                c0: 1 + val1,
+                c1: a1 + val2,
+                c2: r * r - val3,
+                c3: a1,
+                c4: r * r,
+            };
+        }
+        function lerp(a, b, t) { return a + (b - a) * t; }
+        function interpEnc(a, b, t) {
+            return {
+                c0: lerp(a.c0, b.c0, t),
+                c1: lerp(a.c1, b.c1, t),
+                c2: lerp(a.c2, b.c2, t),
+                c3: lerp(a.c3, b.c3, t),
+                c4: lerp(a.c4, b.c4, t),
+            };
+        }
+        function candidateBody() {
+            const body = {};
+            for (const key of cornerOrder) body[key] = scaffold[key].map(cloneStage);
+            const stage = body[FIXED_CORNER][FIXED_STAGE];
+            const theta = 2 * Math.PI * clamp(state.zeroHz, ZERO_HZ_MIN, ZERO_HZ_MAX) / SR;
+            const b1Target = -2 * state.zeroR * Math.cos(theta);
+            const b2Target = state.zeroR * state.zeroR;
+            stage.val2 = b1Target - stage.a1;
+            stage.val3 = stage.r * stage.r - b2Target;
+            return body;
+        }
+        function interpolate(body, morph, q) {
+            const a = body.M0_Q0.map(encode);
+            const b = body.M0_Q100.map(encode);
+            const c = body.M100_Q0.map(encode);
+            const d = body.M100_Q100.map(encode);
+            const out = [];
+            for (let i = 0; i < 6; i += 1) {
+                const q0 = interpEnc(a[i], b[i], q);
+                const q1 = interpEnc(c[i], d[i], q);
+                out.push(interpEnc(q0, q1, morph));
+            }
+            return out;
+        }
+        function cascadeDb(stages, freq) {
+            const omega = 2 * Math.PI * freq / 44100.0;
+            const z1r = Math.cos(omega), z1i = -Math.sin(omega);
+            const z2r = Math.cos(2 * omega), z2i = -Math.sin(2 * omega);
+            let hr = 1, hi = 0;
+            for (const s of stages) {
+                const nr = s.c0 + s.c1 * z1r + s.c2 * z2r;
+                const ni = s.c1 * z1i + s.c2 * z2i;
+                const dr = 1 + s.c3 * z1r + s.c4 * z2r;
+                const di = s.c3 * z1i + s.c4 * z2i;
+                const denom = dr * dr + di * di || 1e-20;
+                const sr = (nr * dr + ni * di) / denom;
+                const si = (ni * dr - nr * di) / denom;
+                const tr = hr * sr - hi * si;
+                const ti = hr * si + hi * sr;
+                hr = tr; hi = ti;
+            }
+            return 20 * Math.log10(Math.max(Math.hypot(hr, hi), 1e-20));
+        }
+        function curveFor(body, morph, q) {
+            const stages = interpolate(body, morph, q);
+            return freqs.map((f) => cascadeDb(stages, f));
+        }
+        function peakInfo(body, morph, q) {
+            const curve = curveFor(body, morph, q);
+            let peakDb = -1e9, peakHz = freqs[0];
+            let troughDb = 1e9, troughHz = freqs[0];
+            let subDb = -1e9;
+            for (let i = 0; i < curve.length; i += 1) {
+                const db = curve[i];
+                const hz = freqs[i];
+                if (db > peakDb) { peakDb = db; peakHz = hz; }
+                if (db < troughDb) { troughDb = db; troughHz = hz; }
+                if (hz <= 60 && db > subDb) subDb = db;
+            }
+            return { peakHz, peakDb, troughHz, troughDb, subDb, curve };
+        }
+        function midpointAudit(body) {
+            const morphs = [0, 0.25, 0.5, 0.75, 1];
+            const qs = [0, 1];
+            let worst = -1e9;
+            for (const morph of morphs) {
+                for (const q of qs) {
+                    const info = peakInfo(body, morph, q);
+                    if (info.peakDb > worst) worst = info.peakDb;
+                }
+            }
+            return worst;
+        }
+        function keyframeJson(body) {
+            const keyframes = cornerOrder.map((key, i) => ({
+                label: key,
+                morph: i < 2 ? 0 : 1,
+                q: i % 2,
+                boost: 4.0,
+                stages: [
+                    ...body[key].map((stage) => ({ ...stage })),
+                    ...Array.from({ length: 6 }, () => ({ ...passthrough })),
+                ],
+            }));
+            return JSON.stringify({ name: "P2k_006_one_edit", sampleRate: SR, stages: 12, keyframes }, null, 2);
+        }
+        function updateStageFields() {
+            const inherited = scaffold[FIXED_CORNER][FIXED_STAGE];
+            const zero = zeroInfo(inherited);
+            document.getElementById("stageInfo").textContent =
+                `pole=${poleFreq(inherited).toFixed(1)} Hz r=${inherited.r.toFixed(6)}\n` +
+                `zero=${zero.freqHz.toFixed(1)} Hz r=${zero.radius.toFixed(6)}\n` +
+                `candidate=${state.zeroHz.toFixed(1)} Hz r=${state.zeroR.toFixed(4)}\n` +
+                `gain=${(1 + inherited.val1).toFixed(6)}\n` +
+                `a1=${inherited.a1.toFixed(6)} val1=${inherited.val1.toFixed(6)}\n` +
+                `val2=${inherited.val2.toFixed(6)} val3=${inherited.val3.toFixed(6)}`;
+        }
+        function updateMetrics(body) {
+            const audit = midpointAudit(body);
+            const m50 = peakInfo(body, 0.5, 0.5);
+            const m10 = peakInfo(body, 1, 0);
+            const m11 = peakInfo(body, 1, 1);
+            const auditEl = document.getElementById("metricAudit");
+            auditEl.textContent = audit <= 35 ? "PASS" : "FAIL";
+            auditEl.className = audit <= 35 ? "ok" : "bad";
+            document.getElementById("metricWorst").textContent = `${audit.toFixed(1)} dB`;
+            document.getElementById("metricWorst").className = audit <= 35 ? "ok" : "bad";
+            document.getElementById("metricOpenQ0").textContent = `${m10.peakHz.toFixed(1)} Hz`;
+            document.getElementById("metricOpenQ1").textContent = `${m11.peakHz.toFixed(1)} Hz`;
+            document.getElementById("metricSubMid").textContent = `${m50.subDb.toFixed(1)} dB`;
+            document.getElementById("metricSubOpen").textContent = `${m10.subDb.toFixed(1)} dB`;
+        }
+        function drawPlot(rawCurve, candCurve) {
+            ctx.clearRect(0, 0, plot.width, plot.height);
+            ctx.fillStyle = "#ffffff";
+            ctx.fillRect(0, 0, plot.width, plot.height);
+            ctx.lineWidth = 1;
+            for (let db = DBMIN; db <= DBMAX; db += 12) {
+                const y = yForDb(db);
+                ctx.strokeStyle = db === 0 ? "#909090" : "#dddddd";
+                ctx.beginPath(); ctx.moveTo(0, y); ctx.lineTo(plot.width, y); ctx.stroke();
+                ctx.fillStyle = "#666666";
+                ctx.font = "11px MS Sans Serif";
+                ctx.fillText(`${db > 0 ? "+" : ""}${db} dB`, 6, y - 3);
+            }
+            for (let decade = 1; decade <= 4; decade += 1) {
+                for (let i = 1; i <= 9; i += 1) {
+                    const f = i * Math.pow(10, decade);
+                    if (f < FMIN || f > FMAX) continue;
+                    const x = xForFreq(f);
+                    ctx.strokeStyle = i === 1 ? "#bbbbbb" : "#e7e7e7";
+                    ctx.beginPath(); ctx.moveTo(x, 0); ctx.lineTo(x, plot.height); ctx.stroke();
+                }
+            }
+            const drawCurve = (curve, color) => {
+                ctx.beginPath();
+                ctx.strokeStyle = color;
+                ctx.lineWidth = 2;
+                for (let i = 0; i < curve.length; i += 1) {
+                    const x = i / (curve.length - 1) * plot.width;
+                    const y = yForDb(curve[i]);
+                    if (i === 0) ctx.moveTo(x, y); else ctx.lineTo(x, y);
+                }
+                ctx.stroke();
+            };
+            drawCurve(rawCurve, getComputedStyle(document.documentElement).getPropertyValue("--raw").trim());
+            drawCurve(candCurve, getComputedStyle(document.documentElement).getPropertyValue("--cand").trim());
+        }
+        function render() {
+            updateStageFields();
+            const rawBody = scaffold;
+            const candBody = candidateBody();
+            const [morph, q] = state.view;
+            const raw = peakInfo(rawBody, morph, q).curve;
+            const cand = peakInfo(candBody, morph, q).curve;
+            drawPlot(raw, cand);
+            updateMetrics(candBody);
+            document.getElementById("exportOut").value = keyframeJson(candBody);
+        }
+        function syncInputs() {
+            document.getElementById("zeroHz").value = state.zeroHz.toFixed(0);
+            document.getElementById("zeroHzNumber").value = state.zeroHz.toFixed(1);
+            document.getElementById("zeroRadius").value = state.zeroR.toFixed(4);
+            document.getElementById("zeroRadiusNumber").value = state.zeroR.toFixed(4);
+            document.getElementById("viewSelect").value = `${state.view[0]},${state.view[1]}`;
+        }
+        function resetToInherited() {
+            const info = zeroInfo(scaffold[FIXED_CORNER][FIXED_STAGE]);
+            state.zeroHz = clamp(info.freqHz, ZERO_HZ_MIN, ZERO_HZ_MAX);
+            state.zeroR = clamp(info.radius, ZERO_R_MIN, ZERO_R_MAX);
+            syncInputs();
+            render();
+        }
+
+        function setZeroHz(value) {
+            state.zeroHz = clamp(Number(value) || ZERO_HZ_MIN, ZERO_HZ_MIN, ZERO_HZ_MAX);
+            syncInputs();
+            render();
+        }
+        function setZeroR(value) {
+            state.zeroR = clamp(Number(value) || ZERO_R_MIN, ZERO_R_MIN, ZERO_R_MAX);
+            syncInputs();
+            render();
+        }
+
+        document.getElementById("zeroHz").addEventListener("input", (e) => setZeroHz(e.target.value));
+        document.getElementById("zeroHzNumber").addEventListener("input", (e) => setZeroHz(e.target.value));
+        document.getElementById("zeroRadius").addEventListener("input", (e) => setZeroR(e.target.value));
+        document.getElementById("zeroRadiusNumber").addEventListener("input", (e) => setZeroR(e.target.value));
+        document.getElementById("viewSelect").addEventListener("change", (e) => {
+            state.view = e.target.value.split(",").map(Number);
+            render();
+        });
+        document.getElementById("btnInherited").addEventListener("click", resetToInherited);
+        document.getElementById("btnV3").addEventListener("click", () => {
+            state.zeroHz = 400;
+            state.zeroR = 0.30;
+            state.view = [1, 0];
+            syncInputs();
+            render();
+        });
+
+        resetToInherited();
+    </script>
+</body>
+</html>

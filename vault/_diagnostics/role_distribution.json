@@ -1,0 +1,963 @@
+{
+  "candidates": [
+    {
+      "active_stages": 6,
+      "interference_candidates": 1,
+      "interference_pairs": [
+        {
+          "a": 1,
+          "b": 2,
+          "spacing_ratio": 0.16378341725947662
+        }
+      ],
+      "name": "speaker_knockerz__cand_01_vault_choke",
+      "role_counts": {
+        "Air": 1,
+        "Anchor": 1,
+        "Character": 0,
+        "LowMid": 4
+      },
+      "source": "../vault/_shipping_finalists\\speaker_knockerz\\speaker_knockerz__cand_01_vault_choke.json",
+      "stages": [
+        {
+          "freq_hz": 50.75981690718145,
+          "pole_r": 0.9549999833106996,
+          "role": "Anchor",
+          "stage": 0
+        },
+        {
+          "freq_hz": 314.30628712786444,
+          "pole_r": 0.9570000171661377,
+          "role": "LowMid",
+          "stage": 1
+        },
+        {
+          "freq_hz": 365.7844448998043,
+          "pole_r": 0.9570000171661377,
+          "role": "LowMid",
+          "stage": 2
+        },
+        {
+          "freq_hz": 463.33027946911955,
+          "pole_r": 0.9570000171661377,
+          "role": "LowMid",
+          "stage": 3
+        },
+        {
+          "freq_hz": 896.846546978677,
+          "pole_r": 0.9570000171661377,
+          "role": "LowMid",
+          "stage": 4
+        },
+        {
+          "freq_hz": 4039.870522598665,
+          "pole_r": 0.9470000267028809,
+          "role": "Air",
+          "stage": 5
+        }
+      ]
+    },
+    {
+      "active_stages": 6,
+      "interference_candidates": 0,
+      "interference_pairs": [],
+      "name": "speaker_knockerz__cand_02_cardboard_rip",
+      "role_counts": {
+        "Air": 1,
+        "Anchor": 1,
+        "Character": 1,
+        "LowMid": 3
+      },
+      "source": "../vault/_shipping_finalists\\speaker_knockerz\\speaker_knockerz__cand_02_cardboard_rip.json",
+      "stages": [
+        {
+          "freq_hz": 50.75981690718145,
+          "pole_r": 0.9549999833106996,
+          "role": "Anchor",
+          "stage": 0
+        },
+        {
+          "freq_hz": 311.59946541316407,
+          "pole_r": 0.9570000171661377,
+          "role": "LowMid",
+          "stage": 1
+        },
+        {
+          "freq_hz": 393.7832334320099,
+          "pole_r": 0.9570000171661377,
+          "role": "LowMid",
+          "stage": 2
+        },
+        {
+          "freq_hz": 663.8315221378444,
+          "pole_r": 0.9570000171661377,
+          "role": "LowMid",
+          "stage": 3
+        },
+        {
+          "freq_hz": 1673.5706552556019,
+          "pole_r": 0.9470000267028809,
+          "role": "Character",
+          "stage": 4
+        },
+        {
+          "freq_hz": 4315.336661346089,
+          "pole_r": 0.9459999799728394,
+          "role": "Air",
+          "stage": 5
+        }
+      ]
+    },
+    {
+      "active_stages": 6,
+      "interference_candidates": 0,
+      "interference_pairs": [],
+      "name": "speaker_knockerz__cand_03_rattle_howl",
+      "role_counts": {
+        "Air": 1,
+        "Anchor": 1,
+        "Character": 1,
+        "LowMid": 3
+      },
+      "source": "../vault/_shipping_finalists\\speaker_knockerz\\speaker_knockerz__cand_03_rattle_howl.json",
+      "stages": [
+        {
+          "freq_hz": 50.75981690718145,
+          "pole_r": 0.9549999833106996,
+          "role": "Anchor",
+          "stage": 0
+        },
+        {
+          "freq_hz": 365.331004970306,
+          "pole_r": 0.9570000171661377,
+          "role": "LowMid",
+          "stage": 1
+        },
+        {
+          "freq_hz": 499.45253474522707,
+          "pole_r": 0.9570000171661377,
+          "role": "LowMid",
+          "stage": 2
+        },
+        {
+          "freq_hz": 762.7275483251068,
+          "pole_r": 0.9570000171661377,
+          "role": "LowMid",
+          "stage": 3
+        },
+        {
+          "freq_hz": 1184.9586010232856,
+          "pole_r": 0.9470000267028809,
+          "role": "Character",
+          "stage": 4
+        },
+        {
+          "freq_hz": 4761.501177538808,
+          "pole_r": 0.9459999799728394,
+          "role": "Air",
+          "stage": 5
+        }
+      ]
+    },
+    {
+      "active_stages": 6,
+      "interference_candidates": 1,
+      "interference_pairs": [
+        {
+          "a": 1,
+          "b": 2,
+          "spacing_ratio": 0.24653264917605486
+        }
+      ],
+      "name": "speaker_knockerz__cand_04_fracture_hiss",
+      "role_counts": {
+        "Air": 1,
+        "Anchor": 1,
+        "Character": 1,
+        "LowMid": 3
+      },
+      "source": "../vault/_shipping_finalists\\speaker_knockerz\\speaker_knockerz__cand_04_fracture_hiss.json",
+      "stages": [
+        {
+          "freq_hz": 50.75981690718145,
+          "pole_r": 0.9549999833106996,
+          "role": "Anchor",
+          "stage": 0
+        },
+        {
+          "freq_hz": 284.3886493628397,
+          "pole_r": 0.9570000171661377,
+          "role": "LowMid",
+          "stage": 1
+        },
+        {
+          "freq_hz": 354.49973648586075,
+          "pole_r": 0.9570000171661377,
+          "role": "LowMid",
+          "stage": 2
+        },
+        {
+          "freq_hz": 551.8366018162557,
+          "pole_r": 0.9570000171661377,
+          "role": "LowMid",
+          "stage": 3
+        },
+        {
+          "freq_hz": 1465.8436098093914,
+          "pole_r": 0.9470000267028809,
+          "role": "Character",
+          "stage": 4
+        },
+        {
+          "freq_hz": 6451.329082780523,
+          "pole_r": 0.9470000267028809,
+          "role": "Air",
+          "stage": 5
+        }
+      ]
+    },
+    {
+      "active_stages": 6,
+      "interference_candidates": 3,
+      "interference_pairs": [
+        {
+          "a": 1,
+          "b": 2,
+          "spacing_ratio": 0.21548182298734067
+        },
+        {
+          "a": 3,
+          "b": 4,
+          "spacing_ratio": 0.24676618263688263
+        },
+        {
+          "a": 4,
+          "b": 5,
+          "spacing_ratio": 0.12370311269760675
+        }
+      ],
+      "name": "aluminum_siding__cand_01_sheen_fold",
+      "role_counts": {
+        "Air": 6,
+        "Anchor": 0,
+        "Character": 0,
+        "LowMid": 0
+      },
+      "source": "../vault/_shipping_finalists\\aluminum_siding\\aluminum_siding__cand_01_sheen_fold.json",
+      "stages": [
+        {
+          "freq_hz": 3856.5273173238593,
+          "pole_r": 0.9639999866485596,
+          "role": "Air",
+          "stage": 0
+        },
+        {
+          "freq_hz": 7146.316887928255,
+          "pole_r": 0.9779999852180482,
+          "role": "Air",
+          "stage": 1
+        },
+        {
+          "freq_hz": 8686.218278584254,
+          "pole_r": 0.9810000061988831,
+          "role": "Air",
+          "stage": 2
+        },
+        {
+          "freq_hz": 11346.048016295379,
+          "pole_r": 0.9779999852180482,
+          "role": "Air",
+          "stage": 3
+        },
+        {
+          "freq_hz": 14145.868973291364,
+          "pole_r": 0.9739999771118163,
+          "role": "Air",
+          "stage": 4
+        },
+        {
+          "freq_hz": 15895.756997100005,
+          "pole_r": 0.9580000042915344,
+          "role": "Air",
+          "stage": 5
+        }
+      ]
+    },
+    {
+      "active_stages": 6,
+      "interference_candidates": 2,
+      "interference_pairs": [
+        {
+          "a": 0,
+          "b": 1,
+          "spacing_ratio": 0.14589425841315515
+        },
+        {
+          "a": 2,
+          "b": 3,
+          "spacing_ratio": 0.05704408525971558
+        }
+      ],
+      "name": "aluminum_siding__cand_02_glass_whistle",
+      "role_counts": {
+        "Air": 6,
+        "Anchor": 0,
+        "Character": 0,
+        "LowMid": 0
+      },
+      "source": "../vault/_shipping_finalists\\aluminum_siding\\aluminum_siding__cand_02_glass_whistle.json",
+      "stages": [
+        {
+          "freq_hz": 3632.03177825626,
+          "pole_r": 0.9471229314804077,
+          "role": "Air",
+          "stage": 0
+        },
+        {
+          "freq_hz": 4161.92436107797,
+          "pole_r": 0.927122950553894,
+          "role": "Air",
+          "stage": 1
+        },
+        {
+          "freq_hz": 9292.8356512556,
+          "pole_r": 0.9751229286193848,
+          "role": "Air",
+          "stage": 2
+        },
+        {
+          "freq_hz": 8791.341610858502,
+          "pole_r": 0.9601229429244994,
+          "role": "Air",
+          "stage": 3
+        },
+        {
+          "freq_hz": 12917.653462360533,
+          "pole_r": 0.8821229338645935,
+          "role": "Air",
+          "stage": 4
+        },
+        {
+          "freq_hz": 17244.74729905244,
+          "pole_r": 0.9291229248046875,
+          "role": "Air",
+          "stage": 5
+        }
+      ]
+    },
+    {
+      "active_stages": 6,
+      "interference_candidates": 3,
+      "interference_pairs": [
+        {
+          "a": 1,
+          "b": 2,
+          "spacing_ratio": 0.24315576529590244
+        },
+        {
+          "a": 3,
+          "b": 4,
+          "spacing_ratio": 0.24173721219395797
+        },
+        {
+          "a": 4,
+          "b": 5,
+          "spacing_ratio": 0.0648922232113796
+        }
+      ],
+      "name": "aluminum_siding__cand_03_sibilant_swallow",
+      "role_counts": {
+        "Air": 6,
+        "Anchor": 0,
+        "Character": 0,
+        "LowMid": 0
+      },
+      "source": "../vault/_shipping_finalists\\aluminum_siding\\aluminum_siding__cand_03_sibilant_swallow.json",
+      "stages": [
+        {
+          "freq_hz": 4273.11348251447,
+          "pole_r": 0.9639999866485596,
+          "role": "Air",
+          "stage": 0
+        },
+        {
+          "freq_hz": 7670.154042049618,
+          "pole_r": 0.9789999723434447,
+          "role": "Air",
+          "stage": 1
+        },
+        {
+          "freq_hz": 9535.196218081652,
+          "pole_r": 0.9810000061988831,
+          "role": "Air",
+          "stage": 2
+        },
+        {
+          "freq_hz": 12399.367709158234,
+          "pole_r": 0.9779999852180482,
+          "role": "Air",
+          "stage": 3
+        },
+        {
+          "freq_hz": 15396.756292137929,
+          "pole_r": 0.975000023841858,
+          "role": "Air",
+          "stage": 4
+        },
+        {
+          "freq_hz": 16395.886038178556,
+          "pole_r": 0.9559999704360962,
+          "role": "Air",
+          "stage": 5
+        }
+      ]
+    },
+    {
+      "active_stages": 6,
+      "interference_candidates": 3,
+      "interference_pairs": [
+        {
+          "a": 3,
+          "b": 4,
+          "spacing_ratio": 0.18937874989439799
+        },
+        {
+          "a": 3,
+          "b": 5,
+          "spacing_ratio": 0.24348696974740452
+        },
+        {
+          "a": 4,
+          "b": 5,
+          "spacing_ratio": 0.045492842257195756
+        }
+      ],
+      "name": "aluminum_siding__cand_04_foil_shatter",
+      "role_counts": {
+        "Air": 6,
+        "Anchor": 0,
+        "Character": 0,
+        "LowMid": 0
+      },
+      "source": "../vault/_shipping_finalists\\aluminum_siding\\aluminum_siding__cand_04_foil_shatter.json",
+      "stages": [
+        {
+          "freq_hz": 5168.378885806106,
+          "pole_r": 0.9649999737739563,
+          "role": "Air",
+          "stage": 0
+        },
+        {
+          "freq_hz": 7850.787797996531,
+          "pole_r": 0.9789999723434447,
+          "role": "Air",
+          "stage": 1
+        },
+        {
+          "freq_hz": 10472.23293120667,
+          "pole_r": 0.9819999933242799,
+          "role": "Air",
+          "stage": 2
+        },
+        {
+          "freq_hz": 13520.425069138266,
+          "pole_r": 0.9789999723434447,
+          "role": "Air",
+          "stage": 3
+        },
+        {
+          "freq_hz": 16080.90626677255,
+          "pole_r": 0.9769999980926514,
+          "role": "Air",
+          "stage": 4
+        },
+        {
+          "freq_hz": 16812.472398919585,
+          "pole_r": 0.9570000171661377,
+          "role": "Air",
+          "stage": 5
+        }
+      ]
+    },
+    {
+      "active_stages": 6,
+      "interference_candidates": 2,
+      "interference_pairs": [
+        {
+          "a": 1,
+          "b": 2,
+          "spacing_ratio": 0.17973301955097779
+        },
+        {
+          "a": 2,
+          "b": 4,
+          "spacing_ratio": 0.191235053282543
+        }
+      ],
+      "name": "small_talk__cand_01_open_bite",
+      "role_counts": {
+        "Air": 2,
+        "Anchor": 0,
+        "Character": 3,
+        "LowMid": 1
+      },
+      "source": "../vault/_shipping_finalists\\small_talk\\small_talk__cand_01_open_bite.json",
+      "stages": [
+        {
+          "freq_hz": 613.6994378909467,
+          "pole_r": 0.9729999899864197,
+          "role": "LowMid",
+          "stage": 0
+        },
+        {
+          "freq_hz": 2401.975665567823,
+          "pole_r": 0.972000002861023,
+          "role": "Character",
+          "stage": 1
+        },
+        {
+          "freq_hz": 2833.6900048282973,
+          "pole_r": 0.9580000042915344,
+          "role": "Character",
+          "stage": 2
+        },
+        {
+          "freq_hz": 1388.6200880241895,
+          "pole_r": 0.9499999880790712,
+          "role": "Character",
+          "stage": 3
+        },
+        {
+          "freq_hz": 3375.5908638878464,
+          "pole_r": 0.9440000057220459,
+          "role": "Air",
+          "stage": 4
+        },
+        {
+          "freq_hz": 5001.292791278369,
+          "pole_r": 0.9359999895095825,
+          "role": "Air",
+          "stage": 5
+        }
+      ]
+    },
+    {
+      "active_stages": 6,
+      "interference_candidates": 3,
+      "interference_pairs": [
+        {
+          "a": 1,
+          "b": 3,
+          "spacing_ratio": 0.06801705438822499
+        },
+        {
+          "a": 2,
+          "b": 3,
+          "spacing_ratio": 0.17889080911769165
+        },
+        {
+          "a": 2,
+          "b": 4,
+          "spacing_ratio": 0.12139604779994428
+        }
+      ],
+      "name": "small_talk__cand_02_yawn_to_bite",
+      "role_counts": {
+        "Air": 2,
+        "Anchor": 0,
+        "Character": 3,
+        "LowMid": 1
+      },
+      "source": "../vault/_shipping_finalists\\small_talk\\small_talk__cand_02_yawn_to_bite.json",
+      "stages": [
+        {
+          "freq_hz": 575.3191684279926,
+          "pole_r": 0.9729999899864197,
+          "role": "LowMid",
+          "stage": 0
+        },
+        {
+          "freq_hz": 2363.5904746513042,
+          "pole_r": 0.972000002861023,
+          "role": "Character",
+          "stage": 1
+        },
+        {
+          "freq_hz": 2975.938833610945,
+          "pole_r": 0.9580000042915344,
+          "role": "Character",
+          "stage": 2
+        },
+        {
+          "freq_hz": 2524.3549365171525,
+          "pole_r": 0.9499999880790712,
+          "role": "Character",
+          "stage": 3
+        },
+        {
+          "freq_hz": 3337.2060465056898,
+          "pole_r": 0.9440000057220459,
+          "role": "Air",
+          "stage": 4
+        },
+        {
+          "freq_hz": 4962.907872951419,
+          "pole_r": 0.9359999895095825,
+          "role": "Air",
+          "stage": 5
+        }
+      ]
+    },
+    {
+      "active_stages": 6,
+      "interference_candidates": 3,
+      "interference_pairs": [
+        {
+          "a": 1,
+          "b": 2,
+          "spacing_ratio": 0.07141541787772873
+        },
+        {
+          "a": 2,
+          "b": 3,
+          "spacing_ratio": 0.18723396161627084
+        },
+        {
+          "a": 3,
+          "b": 5,
+          "spacing_ratio": 0.12616499896949676
+        }
+      ],
+      "name": "small_talk__cand_03_hum_gag",
+      "role_counts": {
+        "Air": 2,
+        "Anchor": 0,
+        "Character": 3,
+        "LowMid": 1
+      },
+      "source": "../vault/_shipping_finalists\\small_talk\\small_talk__cand_03_hum_gag.json",
+      "stages": [
+        {
+          "freq_hz": 586.6081191880818,
+          "pole_r": 0.9679999947547914,
+          "role": "LowMid",
+          "stage": 0
+        },
+        {
+          "freq_hz": 2476.2159756175733,
+          "pole_r": 0.9679999947547914,
+          "role": "Character",
+          "stage": 1
+        },
+        {
+          "freq_hz": 2653.05597427181,
+          "pole_r": 0.9520000219345092,
+          "role": "Character",
+          "stage": 2
+        },
+        {
+          "freq_hz": 3149.7981547244362,
+          "pole_r": 0.9480000138282776,
+          "role": "Air",
+          "stage": 3
+        },
+        {
+          "freq_hz": 1361.5258625976057,
+          "pole_r": 0.9440000057220459,
+          "role": "Character",
+          "stage": 4
+        },
+        {
+          "freq_hz": 3547.1924356693676,
+          "pole_r": 0.9359999895095825,
+          "role": "Air",
+          "stage": 5
+        }
+      ]
+    },
+    {
+      "active_stages": 6,
+      "interference_candidates": 3,
+      "interference_pairs": [
+        {
+          "a": 1,
+          "b": 2,
+          "spacing_ratio": 0.07178092841796681
+        },
+        {
+          "a": 1,
+          "b": 4,
+          "spacing_ratio": 0.07178093717158865
+        },
+        {
+          "a": 2,
+          "b": 4,
+          "spacing_ratio": 8.167361079764198e-9
+        }
+      ],
+      "name": "small_talk__cand_04_trumpet_tube",
+      "role_counts": {
+        "Air": 1,
+        "Anchor": 0,
+        "Character": 4,
+        "LowMid": 1
+      },
+      "source": "../vault/_shipping_finalists\\small_talk\\small_talk__cand_04_trumpet_tube.json",
+      "stages": [
+        {
+          "freq_hz": 507.80187784104595,
+          "pole_r": 0.968999981880188,
+          "role": "LowMid",
+          "stage": 0
+        },
+        {
+          "freq_hz": 2519.612333448097,
+          "pole_r": 0.968999981880188,
+          "role": "Character",
+          "stage": 1
+        },
+        {
+          "freq_hz": 2700.4724459963613,
+          "pole_r": 0.9530000090599059,
+          "role": "Character",
+          "stage": 2
+        },
+        {
+          "freq_hz": 1582.801902403748,
+          "pole_r": 0.9490000009536743,
+          "role": "Character",
+          "stage": 3
+        },
+        {
+          "freq_hz": 2700.472468052095,
+          "pole_r": 0.9440000057220459,
+          "role": "Character",
+          "stage": 4
+        },
+        {
+          "freq_hz": 3614.929823418991,
+          "pole_r": 0.9359999895095825,
+          "role": "Air",
+          "stage": 5
+        }
+      ]
+    },
+    {
+      "active_stages": 6,
+      "interference_candidates": 1,
+      "interference_pairs": [
+        {
+          "a": 2,
+          "b": 3,
+          "spacing_ratio": 0.24288433818102056
+        }
+      ],
+      "name": "cul_de_sac__cand_01_pipe_to_shards",
+      "role_counts": {
+        "Air": 2,
+        "Anchor": 1,
+        "Character": 3,
+        "LowMid": 0
+      },
+      "source": "../vault/_shipping_finalists\\cul_de_sac\\cul_de_sac__cand_01_pipe_to_shards.json",
+      "stages": [
+        {
+          "freq_hz": 112.89480849431428,
+          "pole_r": 0.975000023841858,
+          "role": "Anchor",
+          "stage": 0
+        },
+        {
+          "freq_hz": 1720.5340435957298,
+          "pole_r": 0.9869999885559081,
+          "role": "Character",
+          "stage": 1
+        },
+        {
+          "freq_hz": 2957.8754999996977,
+          "pole_r": 0.9860000014305115,
+          "role": "Character",
+          "stage": 2
+        },
+        {
+          "freq_hz": 2379.8477534350395,
+          "pole_r": 0.984000027179718,
+          "role": "Character",
+          "stage": 3
+        },
+        {
+          "freq_hz": 4583.577452451323,
+          "pole_r": 0.9819999933242799,
+          "role": "Air",
+          "stage": 4
+        },
+        {
+          "freq_hz": 6841.497594882116,
+          "pole_r": 0.9800000190734863,
+          "role": "Air",
+          "stage": 5
+        }
+      ]
+    },
+    {
+      "active_stages": 6,
+      "interference_candidates": 0,
+      "interference_pairs": [],
+      "name": "cul_de_sac__cand_02_null_bridge",
+      "role_counts": {
+        "Air": 3,
+        "Anchor": 1,
+        "Character": 2,
+        "LowMid": 0
+      },
+      "source": "../vault/_shipping_finalists\\cul_de_sac\\cul_de_sac__cand_02_null_bridge.json",
+      "stages": [
+        {
+          "freq_hz": 112.89480849431428,
+          "pole_r": 0.975000023841858,
+          "role": "Anchor",
+          "stage": 0
+        },
+        {
+          "freq_hz": 1906.814169529832,
+          "pole_r": 0.9890000224113464,
+          "role": "Character",
+          "stage": 1
+        },
+        {
+          "freq_hz": 2700.4719267904316,
+          "pole_r": 0.987999975681305,
+          "role": "Character",
+          "stage": 2
+        },
+        {
+          "freq_hz": 3870.0745961753933,
+          "pole_r": 0.9860000014305115,
+          "role": "Air",
+          "stage": 3
+        },
+        {
+          "freq_hz": 5540.93592877136,
+          "pole_r": 0.9850000143051149,
+          "role": "Air",
+          "stage": 4
+        },
+        {
+          "freq_hz": 7337.111021177743,
+          "pole_r": 0.9829999804496765,
+          "role": "Air",
+          "stage": 5
+        }
+      ]
+    },
+    {
+      "active_stages": 6,
+      "interference_candidates": 0,
+      "interference_pairs": [],
+      "name": "cul_de_sac__cand_03_comb_dust",
+      "role_counts": {
+        "Air": 3,
+        "Anchor": 2,
+        "Character": 1,
+        "LowMid": 0
+      },
+      "source": "../vault/_shipping_finalists\\cul_de_sac\\cul_de_sac__cand_03_comb_dust.json",
+      "stages": [
+        {
+          "freq_hz": 82.52966198911012,
+          "pole_r": 0.8510000109672546,
+          "role": "Anchor",
+          "stage": 0
+        },
+        {
+          "freq_hz": 195.0846250157073,
+          "pole_r": 0.8600000143051147,
+          "role": "Anchor",
+          "stage": 1
+        },
+        {
+          "freq_hz": 2051.961175629863,
+          "pole_r": 0.9400994777679443,
+          "role": "Character",
+          "stage": 2
+        },
+        {
+          "freq_hz": 3694.1808258591873,
+          "pole_r": 0.928099513053894,
+          "role": "Air",
+          "stage": 3
+        },
+        {
+          "freq_hz": 11249.325610454032,
+          "pole_r": 0.916099488735199,
+          "role": "Air",
+          "stage": 4
+        },
+        {
+          "freq_hz": 16078.248666644675,
+          "pole_r": 0.9510995149612428,
+          "role": "Air",
+          "stage": 5
+        }
+      ]
+    },
+    {
+      "active_stages": 6,
+      "interference_candidates": 0,
+      "interference_pairs": [],
+      "name": "cul_de_sac__cand_04_bulge_collapse",
+      "role_counts": {
+        "Air": 3,
+        "Anchor": 1,
+        "Character": 2,
+        "LowMid": 0
+      },
+      "source": "../vault/_shipping_finalists\\cul_de_sac\\cul_de_sac__cand_04_bulge_collapse.json",
+      "stages": [
+        {
+          "freq_hz": 112.89480849431428,
+          "pole_r": 0.975000023841858,
+          "role": "Anchor",
+          "stage": 0
+        },
+        {
+          "freq_hz": 2129.2186076280705,
+          "pole_r": 0.9890000224113464,
+          "role": "Character",
+          "stage": 1
+        },
+        {
+          "freq_hz": 2944.3268084223923,
+          "pole_r": 0.987999975681305,
+          "role": "Character",
+          "stage": 2
+        },
+        {
+          "freq_hz": 3973.9394471991654,
+          "pole_r": 0.9860000014305115,
+          "role": "Air",
+          "stage": 3
+        },
+        {
+          "freq_hz": 6118.963337156041,
+          "pole_r": 0.9850000143051149,
+          "role": "Air",
+          "stage": 4
+        },
+        {
+          "freq_hz": 7834.982222945147,
+          "pole_r": 0.9829999804496765,
+          "role": "Air",
+          "stage": 5
+        }
+      ]
+    }
+  ],
+  "corner_probed": "M100_Q100",
+  "generated_by": "trench-core/tests/role_distribution_diagnostic.rs",
+  "interference_criteria": {
+    "max_spacing_ratio": 0.25,
+    "min_pole_r": 0.9
+  },
+  "sr_hz": 44100.0
+}

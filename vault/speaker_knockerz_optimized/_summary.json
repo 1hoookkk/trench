@@ -1,0 +1,544 @@
+{
+  "body": "speaker_knockerz",
+  "pop_size": 8,
+  "n_gen": 1,
+  "pareto_size": 5,
+  "heroes": [],
+  "edge_cases": [
+    {
+      "name": "speaker_knockerz_opt_004",
+      "raw_morph_db": 65.8,
+      "norm_morph_db": 8.0,
+      "dense_peak_db": -85.6,
+      "quality": -100.3,
+      "types": "111113",
+      "sections": [
+        [
+          1,
+          11,
+          65,
+          53,
+          58
+        ],
+        [
+          1,
+          11,
+          67,
+          69,
+          65
+        ],
+        [
+          1,
+          23,
+          73,
+          57,
+          59
+        ],
+        [
+          1,
+          26,
+          60,
+          81,
+          61
+        ],
+        [
+          1,
+          98,
+          57,
+          104,
+          63
+        ],
+        [
+          3,
+          109,
+          59,
+          104,
+          61
+        ]
+      ],
+      "path": "C:\\Users\\hooki\\Trench\\vault\\speaker_knockerz_optimized\\speaker_knockerz_opt_004.json"
+    },
+    {
+      "name": "speaker_knockerz_opt_000",
+      "raw_morph_db": 61.8,
+      "norm_morph_db": 7.3,
+      "dense_peak_db": -41.4,
+      "quality": -99.1,
+      "types": "112132",
+      "sections": [
+        [
+          1,
+          4,
+          72,
+          65,
+          55
+        ],
+        [
+          1,
+          14,
+          71,
+          56,
+          63
+        ],
+        [
+          2,
+          20,
+          62,
+          74,
+          64
+        ],
+        [
+          1,
+          22,
+          66,
+          85,
+          67
+        ],
+        [
+          3,
+          88,
+          61,
+          98,
+          68
+        ],
+        [
+          2,
+          96,
+          47,
+          111,
+          56
+        ]
+      ],
+      "path": "C:\\Users\\hooki\\Trench\\vault\\speaker_knockerz_optimized\\speaker_knockerz_opt_000.json"
+    },
+    {
+      "name": "speaker_knockerz_opt_002",
+      "raw_morph_db": 45.0,
+      "norm_morph_db": 5.5,
+      "dense_peak_db": -48.0,
+      "quality": -98.2,
+      "types": "112123",
+      "sections": [
+        [
+          1,
+          14,
+          71,
+          66,
+          55
+        ],
+        [
+          1,
+          6,
+          74,
+          54,
+          64
+        ],
+        [
+          2,
+          21,
+          60,
+          69,
+          64
+        ],
+        [
+          1,
+          21,
+          63,
+          59,
+          63
+        ],
+        [
+          2,
+          82,
+          57,
+          95,
+          59
+        ],
+        [
+          3,
+          108,
+          63,
+          107,
+          68
+        ]
+      ],
+      "path": "C:\\Users\\hooki\\Trench\\vault\\speaker_knockerz_optimized\\speaker_knockerz_opt_002.json"
+    },
+    {
+      "name": "speaker_knockerz_opt_003",
+      "raw_morph_db": 25.7,
+      "norm_morph_db": 3.8,
+      "dense_peak_db": -4.5,
+      "quality": -96.4,
+      "types": "112222",
+      "sections": [
+        [
+          1,
+          11,
+          72,
+          57,
+          68
+        ],
+        [
+          1,
+          9,
+          79,
+          44,
+          61
+        ],
+        [
+          2,
+          21,
+          73,
+          63,
+          56
+        ],
+        [
+          2,
+          11,
+          72,
+          79,
+          55
+        ],
+        [
+          2,
+          100,
+          65,
+          91,
+          63
+        ],
+        [
+          2,
+          110,
+          48,
+          106,
+          67
+        ]
+      ],
+      "path": "C:\\Users\\hooki\\Trench\\vault\\speaker_knockerz_optimized\\speaker_knockerz_opt_003.json"
+    }
+  ],
+  "near_miss_legends": [
+    {
+      "name": "speaker_knockerz_opt_001",
+      "raw_morph_db": 11.7,
+      "norm_morph_db": 2.7,
+      "dense_peak_db": 17.8,
+      "quality": -90.9,
+      "types": "221223",
+      "sections": [
+        [
+          2,
+          3,
+          64,
+          60,
+          63
+        ],
+        [
+          2,
+          15,
+          63,
+          53,
+          58
+        ],
+        [
+          1,
+          21,
+          70,
+          73,
+          62
+        ],
+        [
+          2,
+          23,
+          56,
+          81,
+          58
+        ],
+        [
+          2,
+          80,
+          51,
+          97,
+          64
+        ],
+        [
+          3,
+          110,
+          47,
+          100,
+          68
+        ]
+      ],
+      "path": "C:\\Users\\hooki\\Trench\\vault\\speaker_knockerz_optimized\\speaker_knockerz_opt_001.json"
+    }
+  ],
+  "worst_dense_peak_db": 17.8,
+  "all_results": [
+    {
+      "name": "speaker_knockerz_opt_000",
+      "raw_morph_db": 61.8,
+      "norm_morph_db": 7.3,
+      "dense_peak_db": -41.4,
+      "quality": -99.1,
+      "types": "112132",
+      "sections": [
+        [
+          1,
+          4,
+          72,
+          65,
+          55
+        ],
+        [
+          1,
+          14,
+          71,
+          56,
+          63
+        ],
+        [
+          2,
+          20,
+          62,
+          74,
+          64
+        ],
+        [
+          1,
+          22,
+          66,
+          85,
+          67
+        ],
+        [
+          3,
+          88,
+          61,
+          98,
+          68
+        ],
+        [
+          2,
+          96,
+          47,
+          111,
+          56
+        ]
+      ],
+      "path": "C:\\Users\\hooki\\Trench\\vault\\speaker_knockerz_optimized\\speaker_knockerz_opt_000.json"
+    },
+    {
+      "name": "speaker_knockerz_opt_001",
+      "raw_morph_db": 11.7,
+      "norm_morph_db": 2.7,
+      "dense_peak_db": 17.8,
+      "quality": -90.9,
+      "types": "221223",
+      "sections": [
+        [
+          2,
+          3,
+          64,
+          60,
+          63
+        ],
+        [
+          2,
+          15,
+          63,
+          53,
+          58
+        ],
+        [
+          1,
+          21,
+          70,
+          73,
+          62
+        ],
+        [
+          2,
+          23,
+          56,
+          81,
+          58
+        ],
+        [
+          2,
+          80,
+          51,
+          97,
+          64
+        ],
+        [
+          3,
+          110,
+          47,
+          100,
+          68
+        ]
+      ],
+      "path": "C:\\Users\\hooki\\Trench\\vault\\speaker_knockerz_optimized\\speaker_knockerz_opt_001.json"
+    },
+    {
+      "name": "speaker_knockerz_opt_002",
+      "raw_morph_db": 45.0,
+      "norm_morph_db": 5.5,
+      "dense_peak_db": -48.0,
+      "quality": -98.2,
+      "types": "112123",
+      "sections": [
+        [
+          1,
+          14,
+          71,
+          66,
+          55
+        ],
+        [
+          1,
+          6,
+          74,
+          54,
+          64
+        ],
+        [
+          2,
+          21,
+          60,
+          69,
+          64
+        ],
+        [
+          1,
+          21,
+          63,
+          59,
+          63
+        ],
+        [
+          2,
+          82,
+          57,
+          95,
+          59
+        ],
+        [
+          3,
+          108,
+          63,
+          107,
+          68
+        ]
+      ],
+      "path": "C:\\Users\\hooki\\Trench\\vault\\speaker_knockerz_optimized\\speaker_knockerz_opt_002.json"
+    },
+    {
+      "name": "speaker_knockerz_opt_003",
+      "raw_morph_db": 25.7,
+      "norm_morph_db": 3.8,
+      "dense_peak_db": -4.5,
+      "quality": -96.4,
+      "types": "112222",
+      "sections": [
+        [
+          1,
+          11,
+          72,
+          57,
+          68
+        ],
+        [
+          1,
+          9,
+          79,
+          44,
+          61
+        ],
+        [
+          2,
+          21,
+          73,
+          63,
+          56
+        ],
+        [
+          2,
+          11,
+          72,
+          79,
+          55
+        ],
+        [
+          2,
+          100,
+          65,
+          91,
+          63
+        ],
+        [
+          2,
+          110,
+          48,
+          106,
+          67
+        ]
+      ],
+      "path": "C:\\Users\\hooki\\Trench\\vault\\speaker_knockerz_optimized\\speaker_knockerz_opt_003.json"
+    },
+    {
+      "name": "speaker_knockerz_opt_004",
+      "raw_morph_db": 65.8,
+      "norm_morph_db": 8.0,
+      "dense_peak_db": -85.6,
+      "quality": -100.3,
+      "types": "111113",
+      "sections": [
+        [
+          1,
+          11,
+          65,
+          53,
+          58
+        ],
+        [
+          1,
+          11,
+          67,
+          69,
+          65
+        ],
+        [
+          1,
+          23,
+          73,
+          57,
+          59
+        ],
+        [
+          1,
+          26,
+          60,
+          81,
+          61
+        ],
+        [
+          1,
+          98,
+          57,
+          104,
+          63
+        ],
+        [
+          3,
+          109,
+          59,
+          104,
+          61
+        ]
+      ],
+      "path": "C:\\Users\\hooki\\Trench\\vault\\speaker_knockerz_optimized\\speaker_knockerz_opt_004.json"
+    }
+  ]
+}

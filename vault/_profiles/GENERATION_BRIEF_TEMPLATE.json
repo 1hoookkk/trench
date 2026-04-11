@@ -1,0 +1,59 @@
+{
+  "_comment": "Template for o3 to fill. Each brief becomes a Forge generation target.",
+  "name": "Bone Telephone",
+  "concept": "sub→mouth: bass floor opening directly into speech. Gap body — this motion never appears in P2K corpus.",
+  "slots": [
+    {
+      "actor": "FOUNDATION",
+      "place_a": 0.1, "place_b": 0.4,
+      "focus_a": 0.3, "focus_b": 0.7,
+      "weight_a": 0.8, "weight_b": 0.6,
+      "pressure": "CROSS",
+      "note": "Sub anchor that crosses up into throat territory on morph"
+    },
+    {
+      "actor": "MASS",
+      "place_a": 0.3, "place_b": 0.8,
+      "focus_a": 0.5, "focus_b": 0.9,
+      "weight_a": 0.7, "weight_b": 0.5,
+      "pressure": "TIGHTEN",
+      "note": "Chest cavity that tightens into upper mouth on Q"
+    },
+    {
+      "actor": "THROAT",
+      "place_a": 0.2, "place_b": 0.6,
+      "focus_a": 0.4, "focus_b": 0.8,
+      "weight_a": 0.9, "weight_b": 0.7,
+      "pressure": "YIELD",
+      "note": "Primary formant carrier — yields to let the mouth open"
+    },
+    {
+      "actor": "BITE",
+      "place_a": 0.5, "place_b": 0.3,
+      "focus_a": 0.7, "focus_b": 0.5,
+      "weight_a": 0.4, "weight_b": 0.8,
+      "pressure": "COLLAPSE",
+      "note": "Presence peak that collapses into the mouth zone"
+    },
+    {
+      "actor": "AIR",
+      "place_a": 0.6, "place_b": 0.2,
+      "focus_a": 0.3, "focus_b": 0.6,
+      "weight_a": 0.3, "weight_b": 0.5,
+      "pressure": "HOLD",
+      "note": "Breath shelf — stays as ceiling reference"
+    },
+    {
+      "actor": "SCAR",
+      "place_a": 0.05, "place_b": 0.5,
+      "focus_a": 0.2, "focus_b": 0.9,
+      "weight_a": 0.5, "weight_b": 0.3,
+      "pressure": "CROSS",
+      "note": "Wild card — sub-range scar that crosses into mid for fracture"
+    }
+  ],
+  "boost": 4.0,
+  "gap_filled": "sub→mouth",
+  "expected_character": "[biological] [pressure] [morphing] [vocal]",
+  "motion_law": "Bass floor splits open into a speaking mouth. Q tightens the cavity. Morph is jaw opening."
+}

@@ -1,0 +1,1044 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TRENCH Guided Editor</title>
+<style>
+    :root {
+        --bg: #0b0d0e;
+        --panel: #13181b;
+        --panel-2: #171d21;
+        --line: #26302d;
+        --text: #d7cfba;
+        --muted: #7a827d;
+        --accent: #95b857;
+        --accent-2: #ce7240;
+        --danger: #c95b43;
+        --pole: #d7cfba;
+        --zero: #d77a64;
+    }
+    * { box-sizing: border-box; }
+    html, body {
+        margin: 0;
+        min-height: 100%;
+        background:
+            linear-gradient(180deg, rgba(255,255,255,0.02), transparent 26%),
+            linear-gradient(180deg, #121618, #090a0b 72%, #050607);
+        color: var(--text);
+        font: 12px/1.4 "Cascadia Mono", Consolas, monospace;
+    }
+    body { padding: 12px; }
+    .shell {
+        min-height: calc(100vh - 24px);
+        border: 1px solid var(--line);
+        background:
+            linear-gradient(180deg, rgba(255,255,255,0.02), transparent 14%),
+            linear-gradient(180deg, #151a1d, #0d1113 68%, #090b0c);
+        display: grid;
+        grid-template-rows: auto auto 1fr auto;
+    }
+    .mast, .footer {
+        padding: 10px 12px;
+        border-bottom: 1px solid var(--line);
+        display: flex;
+        gap: 12px;
+        align-items: center;
+        justify-content: space-between;
+    }
+    .footer {
+        border-top: 1px solid var(--line);
+        border-bottom: none;
+        color: var(--muted);
+        flex-wrap: wrap;
+    }
+    .brand { text-transform: uppercase; letter-spacing: 0.14em; }
+    .brand strong { color: var(--text); }
+    .sub { color: var(--muted); }
+    .toolbar, .guidebar {
+        padding: 10px 12px;
+        border-bottom: 1px solid var(--line);
+        display: flex;
+        gap: 10px;
+        flex-wrap: wrap;
+        align-items: center;
+        background: rgba(0, 0, 0, 0.12);
+    }
+    .main {
+        min-height: 0;
+        display: grid;
+        grid-template-columns: minmax(0, 1.3fr) minmax(320px, 0.9fr);
+    }
+    .scope-panel {
+        min-width: 0;
+        padding: 12px;
+        border-right: 1px solid var(--line);
+        display: grid;
+        grid-template-rows: auto 1fr auto;
+        gap: 10px;
+    }
+    .stage-panel {
+        min-width: 0;
+        padding: 12px;
+        display: grid;
+        grid-template-rows: auto 1fr;
+        gap: 10px;
+    }
+    .section-title {
+        text-transform: uppercase;
+        letter-spacing: 0.12em;
+        color: var(--muted);
+        font-size: 10px;
+    }
+    .scope-shell, .stage-grid, .stage-card, .chip, .status-pill, .field, .legend, .mobile-stage-panel, .mobile-stage-strip, .mobile-inspector, .mobile-note {
+        border: 1px solid var(--line);
+        background:
+            linear-gradient(180deg, rgba(255,255,255,0.02), transparent 30%),
+            var(--panel);
+    }
+    .scope-shell {
+        position: relative;
+        min-height: 420px;
+        padding: 10px;
+    }
+    #scope {
+        width: 100%;
+        height: 100%;
+        display: block;
+        background: #060808;
+        touch-action: none;
+    }
+    .scope-note {
+        color: var(--muted);
+        font-size: 11px;
+        display: flex;
+        justify-content: space-between;
+        gap: 10px;
+        flex-wrap: wrap;
+    }
+    .stage-grid {
+        min-height: 0;
+        overflow: auto;
+        padding: 8px;
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 8px;
+        align-content: start;
+    }
+    .stage-card {
+        padding: 10px;
+        display: grid;
+        gap: 8px;
+    }
+    .stage-card.active-stage { border-color: var(--accent); }
+    .stage-head {
+        display: flex;
+        justify-content: space-between;
+        gap: 8px;
+        align-items: baseline;
+    }
+    .stage-id { color: var(--accent); font-weight: 700; font-size: 13px; }
+    .stage-copy { color: var(--muted); font-size: 10px; }
+    .field {
+        padding: 8px;
+        display: grid;
+        gap: 6px;
+    }
+    .field label {
+        color: var(--muted);
+        font-size: 10px;
+        text-transform: uppercase;
+        letter-spacing: 0.12em;
+    }
+    .row {
+        display: flex;
+        gap: 8px;
+        align-items: center;
+        flex-wrap: wrap;
+    }
+    .row > * { flex: 1 1 auto; }
+    input[type="text"], input[type="number"], select {
+        width: 100%;
+        border: 1px solid #34413d;
+        background: #0c1012;
+        color: var(--text);
+        font: inherit;
+        padding: 8px;
+    }
+    input[type="range"] { width: 100%; accent-color: var(--accent); }
+    button {
+        border: 1px solid #3e4a46;
+        background:
+            linear-gradient(180deg, rgba(255,255,255,0.03), transparent 40%),
+            var(--panel-2);
+        color: var(--text);
+        font: inherit;
+        padding: 10px 12px;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        cursor: pointer;
+        min-height: 42px;
+    }
+    button.active { border-color: var(--accent); color: #e4eccf; }
+    button.warn { border-color: #604239; color: #f0c0aa; }
+    .frame-toggle, .actions, .guide-toggles {
+        display: flex;
+        gap: 8px;
+        flex-wrap: wrap;
+        align-items: center;
+    }
+    .chip, .status-pill {
+        padding: 7px 9px;
+        color: var(--muted);
+    }
+    .status-pill strong { color: var(--text); }
+    .mobile-stage-panel {
+        display: none;
+        gap: 10px;
+        padding: 10px;
+    }
+    .mobile-stage-strip {
+        display: flex;
+        gap: 8px;
+        overflow-x: auto;
+        padding: 8px;
+    }
+    .stage-chip {
+        min-width: 94px;
+        display: grid;
+        gap: 2px;
+        text-align: left;
+    }
+    .stage-chip strong {
+        font-size: 15px;
+        color: var(--text);
+    }
+    .stage-chip span {
+        color: var(--muted);
+        font-size: 10px;
+    }
+    .mobile-inspector {
+        padding: 10px;
+        display: grid;
+        gap: 10px;
+    }
+    .mobile-note {
+        padding: 8px 10px;
+        color: var(--muted);
+        font-size: 11px;
+    }
+    .mobile-head {
+        display: flex;
+        justify-content: space-between;
+        gap: 8px;
+        align-items: baseline;
+        flex-wrap: wrap;
+    }
+    .mobile-head strong {
+        color: var(--accent);
+        font-size: 16px;
+    }
+    .mobile-meter {
+        padding: 8px 10px;
+        border: 1px solid #34413d;
+        background: #0c1012;
+        color: var(--muted);
+    }
+    .mobile-row {
+        display: flex;
+        gap: 8px;
+        align-items: center;
+        flex-wrap: wrap;
+    }
+    .mobile-row > * { flex: 1 1 auto; }
+    .toggle-label {
+        display: flex;
+        gap: 8px;
+        align-items: center;
+        color: var(--text);
+        font-size: 12px;
+        text-transform: none;
+        letter-spacing: 0;
+    }
+    .legend {
+        padding: 8px 10px;
+        display: flex;
+        gap: 14px;
+        flex-wrap: wrap;
+        color: var(--muted);
+    }
+    .legend span::before {
+        content: "";
+        display: inline-block;
+        width: 10px;
+        height: 10px;
+        margin-right: 6px;
+        vertical-align: -1px;
+    }
+    .legend .pole::before { background: var(--pole); border-radius: 50%; }
+    .legend .zero::before { background: var(--zero); clip-path: polygon(50% 0, 100% 100%, 0 100%); }
+    .legend .guide::before { background: var(--accent); width: 2px; }
+    @media (max-width: 980px) {
+        .main { grid-template-columns: 1fr; }
+        .scope-panel { border-right: none; border-bottom: 1px solid var(--line); }
+    }
+    @media (max-width: 720px) {
+        body { padding: 0; }
+        .shell { min-height: 100vh; border: none; }
+        .mast, .toolbar, .guidebar, .scope-panel, .stage-panel, .footer { padding: 10px; }
+        .toolbar { gap: 8px; }
+        .toolbar > .field,
+        .toolbar > .frame-toggle,
+        .toolbar > .actions { flex: 1 1 100%; }
+        .actions { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); width: 100%; }
+        .guidebar {
+            position: sticky;
+            top: 0;
+            z-index: 4;
+            background:
+                linear-gradient(180deg, rgba(255,255,255,0.02), transparent 40%),
+                rgba(12, 16, 18, 0.96);
+            backdrop-filter: blur(6px);
+        }
+        .scope-shell { min-height: 46vh; }
+        #scope { min-height: 44vh; }
+        .mobile-stage-panel {
+            display: grid;
+            position: sticky;
+            bottom: 0;
+            z-index: 3;
+            background:
+                linear-gradient(180deg, rgba(10,12,13,0.65), rgba(10,12,13,0.96)),
+                #0a0c0d;
+            border-top: 1px solid var(--line);
+        }
+        .stage-grid { display: none; }
+        .footer { display: none; }
+    }
+</style>
+</head>
+<body>
+<div class="shell">
+    <div class="mast">
+        <div class="brand"><strong>TRENCH</strong> guided pole / zero editor</div>
+        <div class="sub">same six stages, easier surface</div>
+    </div>
+
+    <div class="toolbar">
+        <div class="field" style="min-width: 180px; flex: 1 1 180px;">
+            <label>Name</label>
+            <input id="nameInput" type="text" value="guided_editor">
+        </div>
+        <div class="field" style="min-width: 170px; flex: 1 1 170px;">
+            <label>Template</label>
+            <select id="templateSelect"></select>
+        </div>
+        <div class="field" style="min-width: 220px; flex: 1 1 220px;">
+            <label>Morph Preview</label>
+            <div class="row">
+                <input id="morphSlider" type="range" min="0" max="100" value="0">
+                <div class="chip" id="morphReadout">0%</div>
+            </div>
+        </div>
+        <div class="frame-toggle">
+            <button id="frameAButton" class="active">Edit A</button>
+            <button id="frameBButton">Edit B</button>
+        </div>
+        <div class="actions">
+            <button id="previewButton">Preview</button>
+            <button id="playButton">Play</button>
+            <button id="liveButton">Push Live</button>
+            <button id="exportButton">Export</button>
+        </div>
+    </div>
+
+    <div class="guidebar">
+        <div class="section-title">Sonic Guides</div>
+        <div class="guide-toggles" id="guideToggles"></div>
+        <div class="status-pill"><strong id="status">idle</strong></div>
+    </div>
+
+    <div class="main">
+        <div class="scope-panel">
+            <div class="section-title">Frequency Spectrum</div>
+            <div class="scope-shell">
+                <canvas id="scope" width="1000" height="520"></canvas>
+            </div>
+            <div class="legend">
+                <span class="pole">drag pole handles to set frequency and radius</span>
+                <span class="zero">drag zero handles when enabled</span>
+                <span class="guide">sonic table guide lines</span>
+            </div>
+            <div class="scope-note">
+                <span>Top half edits pole radius. Bottom half edits zero radius.</span>
+                <span id="hoverText">tap or drag a handle</span>
+            </div>
+        </div>
+
+        <div class="stage-panel">
+            <div class="section-title">Stage Controls</div>
+            <div class="mobile-stage-panel">
+                <div class="mobile-note">phone mode: pick one stage, move it fast, stay on the spectrum.</div>
+                <div class="mobile-stage-strip" id="mobileStageStrip"></div>
+                <div class="mobile-inspector" id="mobileInspector"></div>
+            </div>
+            <div class="stage-grid" id="stageGrid"></div>
+        </div>
+    </div>
+
+    <div class="footer">
+        <div>Direct path: `/direct/response`, `/direct/live`, `/direct/export`, `/direct/render`</div>
+        <div id="footerText">authoring rate 39062.5 Hz</div>
+    </div>
+</div>
+
+<script>
+const N = 6;
+const COMPACT_MEDIA = window.matchMedia("(max-width: 720px)");
+const GUIDE_COLORS = {
+    vowels: "rgba(149,184,87,0.18)",
+    nasals: "rgba(212,207,186,0.14)",
+    landmarks: "rgba(206,114,64,0.18)",
+    instruments: "rgba(120,158,205,0.16)",
+    consonants: "rgba(212,120,102,0.16)",
+    singer: "rgba(220,196,113,0.18)",
+    moog: "rgba(173,198,90,0.18)",
+};
+
+const TEMPLATES = {
+    blank: { name: "guided_editor", a: [], b: [] },
+    ah_ee: {
+        name: "ah_to_ee",
+        a: [{pole_hz:700,radius:0.91,gain:-0.25},{pole_hz:1220,radius:0.9,gain:-0.25},{pole_hz:2600,radius:0.88,gain:-0.35},{pole_hz:3400,radius:0.82,gain:-0.45},{pole_hz:5200,radius:0.7,gain:-0.65},{pole_hz:140,radius:0.4,gain:-0.9}],
+        b: [{pole_hz:342,radius:0.91,gain:-0.25},{pole_hz:2322,radius:0.9,gain:-0.25},{pole_hz:3000,radius:0.88,gain:-0.35},{pole_hz:3657,radius:0.82,gain:-0.45},{pole_hz:6400,radius:0.7,gain:-0.65},{pole_hz:140,radius:0.4,gain:-0.9}],
+    },
+    trumpet: {
+        name: "trumpet_body",
+        a: [{pole_hz:700,radius:0.83,gain:-0.45},{pole_hz:1300,radius:0.92,gain:-0.2},{pole_hz:2500,radius:0.9,gain:-0.24,zero_hz:1600,zero_radius:0.55},{pole_hz:4100,radius:0.8,gain:-0.45},{pole_hz:6200,radius:0.72,gain:-0.62},{pole_hz:120,radius:0.35,gain:-0.95}],
+        b: [{pole_hz:840,radius:0.84,gain:-0.4},{pole_hz:1480,radius:0.93,gain:-0.16},{pole_hz:2800,radius:0.91,gain:-0.18,zero_hz:1900,zero_radius:0.52},{pole_hz:4800,radius:0.82,gain:-0.38},{pole_hz:7600,radius:0.74,gain:-0.54},{pole_hz:120,radius:0.35,gain:-0.95}],
+    },
+    vocal_notch: {
+        name: "vocal_notch",
+        a: [{pole_hz:420,radius:0.92,gain:-0.28},{pole_hz:1460,radius:0.92,gain:-0.28,zero_hz:820,zero_radius:0.64},{pole_hz:2500,radius:0.88,gain:-0.35},{pole_hz:3400,radius:0.82,gain:-0.45},{pole_hz:6800,radius:0.74,gain:-0.58},{pole_hz:120,radius:0.34,gain:-0.96}],
+        b: [{pole_hz:300,radius:0.93,gain:-0.26},{pole_hz:2200,radius:0.92,gain:-0.24,zero_hz:1200,zero_radius:0.68},{pole_hz:3100,radius:0.88,gain:-0.32},{pole_hz:3900,radius:0.82,gain:-0.42},{pole_hz:7600,radius:0.74,gain:-0.55},{pole_hz:120,radius:0.34,gain:-0.96}],
+    },
+};
+
+const state = {
+    editFrame: "A",
+    selectedStage: 0,
+    frameA: Array.from({length: N}, (_, i) => defaultStage(i)),
+    frameB: Array.from({length: N}, (_, i) => defaultStage(i)),
+    response: null,
+    guides: [],
+    visibleGuideCategories: new Set(COMPACT_MEDIA.matches ? ["vowels", "instruments"] : ["vowels", "landmarks", "instruments"]),
+    drag: null,
+    audioContext: null,
+    debounce: null,
+};
+
+function defaultStage(index) {
+    return {
+        pole_hz: Math.round(180 + index * 420),
+        radius: 0.82,
+        gain: -0.45,
+        zero_hz: null,
+        zero_radius: 0.6,
+    };
+}
+
+function currentFrame() { return state.editFrame === "A" ? state.frameA : state.frameB; }
+function otherFrame() { return state.editFrame === "A" ? state.frameB : state.frameA; }
+function selectedStage() { return currentFrame()[state.selectedStage]; }
+function selectedPeerStage() { return otherFrame()[state.selectedStage]; }
+
+function setStatus(text) {
+    document.getElementById("status").textContent = text;
+}
+
+function setFooter(text) {
+    document.getElementById("footerText").textContent = text;
+}
+
+function clamp(v, lo, hi) {
+    return Math.max(lo, Math.min(hi, v));
+}
+
+function formatHz(hz) {
+    return hz >= 1000 ? `${(hz / 1000).toFixed(2)}k` : `${Math.round(hz)}`;
+}
+
+function freqToX(freq, width) {
+    const lo = Math.log10(20);
+    const hi = Math.log10(19500);
+    return ((Math.log10(clamp(freq, 20, 19500)) - lo) / (hi - lo)) * width;
+}
+
+function xToFreq(x, width) {
+    const lo = Math.log10(20);
+    const hi = Math.log10(19500);
+    const t = clamp(x / width, 0, 1);
+    return Math.pow(10, lo + t * (hi - lo));
+}
+
+function freqToSliderValue(freq) {
+    const lo = Math.log10(20);
+    const hi = Math.log10(18000);
+    return clamp(((Math.log10(clamp(freq, 20, 18000)) - lo) / (hi - lo)) * 1000, 0, 1000);
+}
+
+function sliderValueToFreq(value) {
+    const lo = Math.log10(20);
+    const hi = Math.log10(18000);
+    const t = clamp(value / 1000, 0, 1);
+    return Math.pow(10, lo + t * (hi - lo));
+}
+
+function poleRadiusToY(radius, height) {
+    const top = 24;
+    const bottom = height * 0.42;
+    const t = (0.995 - clamp(radius, 0.3, 0.995)) / (0.995 - 0.3);
+    return top + t * (bottom - top);
+}
+
+function yToPoleRadius(y, height) {
+    const top = 24;
+    const bottom = height * 0.42;
+    const t = clamp((y - top) / (bottom - top), 0, 1);
+    return 0.995 - t * (0.995 - 0.3);
+}
+
+function zeroRadiusToY(radius, height) {
+    const top = height * 0.58;
+    const bottom = height - 24;
+    const t = (1.2 - clamp(radius, 0.0, 1.2)) / 1.2;
+    return top + t * (bottom - top);
+}
+
+function yToZeroRadius(y, height) {
+    const top = height * 0.58;
+    const bottom = height - 24;
+    const t = clamp((y - top) / (bottom - top), 0, 1);
+    return 1.2 - t * 1.2;
+}
+
+function buildTemplates() {
+    const select = document.getElementById("templateSelect");
+    select.innerHTML = Object.entries(TEMPLATES).map(([key, tpl]) => `<option value="${key}">${tpl.name}</option>`).join("");
+    select.value = "blank";
+    select.addEventListener("change", () => loadTemplate(select.value));
+}
+
+function loadTemplate(key) {
+    const tpl = TEMPLATES[key];
+    if (!tpl) { return; }
+    document.getElementById("nameInput").value = tpl.name;
+    state.frameA = Array.from({length: N}, (_, i) => ({ ...defaultStage(i), ...(tpl.a[i] || {}) }));
+    state.frameB = Array.from({length: N}, (_, i) => ({ ...defaultStage(i), ...(tpl.b[i] || {}) }));
+    state.selectedStage = 0;
+    renderStageGrid();
+    queueResponse();
+}
+
+function stageCard(stage, index) {
+    const peer = otherFrame()[index];
+    return `
+        <div class="stage-card ${index === state.selectedStage ? "active-stage" : ""}">
+            <div class="stage-head">
+                <div class="stage-id">Stage ${index + 1}</div>
+                <div class="stage-copy">${state.editFrame} edit / ${state.editFrame === "A" ? "B" : "A"} peer ${formatHz(peer.pole_hz)}</div>
+            </div>
+            <div class="field">
+                <label>Pole Hz</label>
+                <input type="number" min="20" max="18000" step="1" value="${Math.round(stage.pole_hz)}" data-field="pole_hz" data-stage="${index}">
+            </div>
+            <div class="field">
+                <label>Radius ${stage.radius.toFixed(3)}</label>
+                <input type="range" min="300" max="995" step="1" value="${Math.round(stage.radius * 1000)}" data-field="radius" data-stage="${index}">
+            </div>
+            <div class="field">
+                <label>Gain ${stage.gain.toFixed(2)}</label>
+                <input type="range" min="-100" max="0" step="1" value="${Math.round(stage.gain * 100)}" data-field="gain" data-stage="${index}">
+            </div>
+            <div class="field">
+                <label><input type="checkbox" ${stage.zero_hz !== null ? "checked" : ""} data-field="zero_toggle" data-stage="${index}"> zero enabled</label>
+                <input type="number" min="20" max="18000" step="1" value="${stage.zero_hz !== null ? Math.round(stage.zero_hz) : Math.round(stage.pole_hz)}" data-field="zero_hz" data-stage="${index}" ${stage.zero_hz === null ? "disabled" : ""}>
+                <label>Zero Radius ${stage.zero_radius.toFixed(3)}</label>
+                <input type="range" min="0" max="1200" step="1" value="${Math.round(stage.zero_radius * 1000)}" data-field="zero_radius" data-stage="${index}" ${stage.zero_hz === null ? "disabled" : ""}>
+            </div>
+            <div class="row">
+                <button data-copy="to-other" data-stage="${index}">Copy To ${state.editFrame === "A" ? "B" : "A"}</button>
+                <button class="warn" data-copy="reset" data-stage="${index}">Reset</button>
+            </div>
+        </div>`;
+}
+
+function mobileStageChip(stage, index) {
+    const zeroMode = stage.zero_hz !== null ? "pole + zero" : "pole";
+    return `
+        <button class="stage-chip ${index === state.selectedStage ? "active" : ""}" data-stage-select="${index}">
+            <strong>S${index + 1} ${formatHz(stage.pole_hz)}</strong>
+            <span>${stage.radius.toFixed(3)} / ${zeroMode}</span>
+        </button>`;
+}
+
+function mobileInspectorMarkup() {
+    const stage = selectedStage();
+    const peer = selectedPeerStage();
+    const zeroEnabled = stage.zero_hz !== null;
+    const zeroFreq = zeroEnabled ? stage.zero_hz : stage.pole_hz;
+    return `
+        <div class="mobile-head">
+            <strong>Stage ${state.selectedStage + 1}</strong>
+            <div class="mobile-meter">${state.editFrame} edit / peer ${formatHz(peer.pole_hz)}</div>
+        </div>
+        <div class="field">
+            <label>Pole Hz</label>
+            <div class="mobile-row">
+                <input type="number" min="20" max="18000" step="1" value="${Math.round(stage.pole_hz)}" data-mobile-field="pole_hz">
+                <div class="mobile-meter">${formatHz(stage.pole_hz)}</div>
+            </div>
+            <input type="range" min="0" max="1000" step="1" value="${Math.round(freqToSliderValue(stage.pole_hz))}" data-mobile-field="pole_hz_slider">
+        </div>
+        <div class="field">
+            <label>Radius ${stage.radius.toFixed(3)}</label>
+            <input type="range" min="300" max="995" step="1" value="${Math.round(stage.radius * 1000)}" data-mobile-field="radius">
+        </div>
+        <div class="field">
+            <label>Gain ${stage.gain.toFixed(2)}</label>
+            <input type="range" min="-100" max="0" step="1" value="${Math.round(stage.gain * 100)}" data-mobile-field="gain">
+        </div>
+        <div class="field">
+            <label class="toggle-label"><input type="checkbox" ${zeroEnabled ? "checked" : ""} data-mobile-field="zero_toggle"> zero enabled</label>
+            <div class="mobile-row">
+                <input type="number" min="20" max="18000" step="1" value="${Math.round(zeroFreq)}" data-mobile-field="zero_hz" ${zeroEnabled ? "" : "disabled"}>
+                <div class="mobile-meter">${zeroEnabled ? formatHz(zeroFreq) : "off"}</div>
+            </div>
+            <input type="range" min="0" max="1000" step="1" value="${Math.round(freqToSliderValue(zeroFreq))}" data-mobile-field="zero_hz_slider" ${zeroEnabled ? "" : "disabled"}>
+            <label>Zero Radius ${stage.zero_radius.toFixed(3)}</label>
+            <input type="range" min="0" max="1200" step="1" value="${Math.round(stage.zero_radius * 1000)}" data-mobile-field="zero_radius" ${zeroEnabled ? "" : "disabled"}>
+        </div>
+        <div class="mobile-row">
+            <button data-mobile-action="copy">Copy To ${state.editFrame === "A" ? "B" : "A"}</button>
+            <button class="warn" data-mobile-action="reset">Reset</button>
+        </div>`;
+}
+
+function onMobileInput(event) {
+    const stage = selectedStage();
+    const field = event.target.dataset.mobileField;
+    if (field === "pole_hz") stage.pole_hz = clamp(Number(event.target.value) || 20, 20, 18000);
+    if (field === "pole_hz_slider") stage.pole_hz = clamp(sliderValueToFreq(Number(event.target.value)), 20, 18000);
+    if (field === "radius") stage.radius = clamp(Number(event.target.value) / 1000, 0.3, 0.995);
+    if (field === "gain") stage.gain = clamp(Number(event.target.value) / 100, -1.0, 0.0);
+    if (field === "zero_toggle") stage.zero_hz = event.target.checked ? clamp(stage.pole_hz * 1.2, 20, 18000) : null;
+    if (field === "zero_hz" && stage.zero_hz !== null) stage.zero_hz = clamp(Number(event.target.value) || stage.pole_hz, 20, 18000);
+    if (field === "zero_hz_slider" && stage.zero_hz !== null) stage.zero_hz = clamp(sliderValueToFreq(Number(event.target.value)), 20, 18000);
+    if (field === "zero_radius") stage.zero_radius = clamp(Number(event.target.value) / 1000, 0.0, 1.2);
+    renderStageGrid();
+    queueResponse();
+}
+
+function onMobileAction(event) {
+    const mode = event.target.dataset.mobileAction;
+    if (mode === "copy") otherFrame()[state.selectedStage] = { ...selectedStage() };
+    else currentFrame()[state.selectedStage] = defaultStage(state.selectedStage);
+    renderStageGrid();
+    queueResponse();
+}
+
+function renderMobileControls() {
+    const strip = document.getElementById("mobileStageStrip");
+    const inspector = document.getElementById("mobileInspector");
+    if (!strip || !inspector) return;
+    strip.innerHTML = currentFrame().map((stage, index) => mobileStageChip(stage, index)).join("");
+    strip.querySelectorAll("[data-stage-select]").forEach((button) => {
+        button.addEventListener("click", () => {
+            state.selectedStage = Number(button.dataset.stageSelect);
+            renderStageGrid();
+        });
+    });
+    inspector.innerHTML = mobileInspectorMarkup();
+    inspector.querySelectorAll("[data-mobile-field]").forEach((input) => {
+        input.addEventListener("input", onMobileInput);
+        input.addEventListener("change", onMobileInput);
+    });
+    inspector.querySelectorAll("[data-mobile-action]").forEach((button) => {
+        button.addEventListener("click", onMobileAction);
+    });
+}
+
+function renderStageGrid() {
+    const grid = document.getElementById("stageGrid");
+    grid.innerHTML = currentFrame().map((stage, index) => stageCard(stage, index)).join("");
+    grid.querySelectorAll("input").forEach((input) => {
+        input.addEventListener("input", onStageInput);
+        input.addEventListener("change", onStageInput);
+    });
+    grid.querySelectorAll("button[data-copy]").forEach((button) => {
+        button.addEventListener("click", onStageCopy);
+    });
+    renderMobileControls();
+    drawScope();
+}
+
+function onStageInput(event) {
+    const stageIndex = Number(event.target.dataset.stage);
+    const field = event.target.dataset.field;
+    const stage = currentFrame()[stageIndex];
+    state.selectedStage = stageIndex;
+    if (field === "pole_hz") stage.pole_hz = clamp(Number(event.target.value) || 20, 20, 18000);
+    if (field === "radius") stage.radius = clamp(Number(event.target.value) / 1000, 0.3, 0.995);
+    if (field === "gain") stage.gain = clamp(Number(event.target.value) / 100, -1.0, 0.0);
+    if (field === "zero_hz") stage.zero_hz = clamp(Number(event.target.value) || stage.pole_hz, 20, 18000);
+    if (field === "zero_radius") stage.zero_radius = clamp(Number(event.target.value) / 1000, 0.0, 1.2);
+    if (field === "zero_toggle") stage.zero_hz = event.target.checked ? Math.round(stage.pole_hz * 1.4) : null;
+    renderStageGrid();
+    queueResponse();
+}
+
+function onStageCopy(event) {
+    const stageIndex = Number(event.target.dataset.stage);
+    const mode = event.target.dataset.copy;
+    state.selectedStage = stageIndex;
+    if (mode === "to-other") {
+        otherFrame()[stageIndex] = { ...currentFrame()[stageIndex] };
+    } else {
+        currentFrame()[stageIndex] = defaultStage(stageIndex);
+    }
+    renderStageGrid();
+    queueResponse();
+}
+
+function buildGuideToggles() {
+    const categories = ["vowels", "landmarks", "instruments", "nasals", "consonants", "singer", "moog"];
+    const shell = document.getElementById("guideToggles");
+    shell.innerHTML = categories.map((cat) => `<button data-guide="${cat}" class="${state.visibleGuideCategories.has(cat) ? "active" : ""}">${cat}</button>`).join("");
+    shell.querySelectorAll("button[data-guide]").forEach((button) => {
+        button.addEventListener("click", () => {
+            const cat = button.dataset.guide;
+            if (state.visibleGuideCategories.has(cat)) state.visibleGuideCategories.delete(cat);
+            else state.visibleGuideCategories.add(cat);
+            buildGuideToggles();
+            drawScope();
+        });
+    });
+}
+
+function payload(morph) {
+    return {
+        name: document.getElementById("nameInput").value.trim() || "guided_editor",
+        frame_a: state.frameA.map((s) => ({ ...s, zero_hz: s.zero_hz, zero_radius: s.zero_hz !== null ? s.zero_radius : null })),
+        frame_b: state.frameB.map((s) => ({ ...s, zero_hz: s.zero_hz, zero_radius: s.zero_hz !== null ? s.zero_radius : null })),
+        morph,
+        q: 0,
+    };
+}
+
+async function fetchResponse() {
+    const morph = Number(document.getElementById("morphSlider").value) / 100;
+    document.getElementById("morphReadout").textContent = `${Math.round(morph * 100)}%`;
+    try {
+        const response = await fetch("/direct/response", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(payload(morph)),
+        });
+        if (!response.ok) throw new Error(await response.text());
+        state.response = await response.json();
+        setStatus("preview");
+        drawScope();
+    } catch (error) {
+        setStatus(`error: ${error.message}`);
+    }
+}
+
+function queueResponse() {
+    clearTimeout(state.debounce);
+    state.debounce = setTimeout(fetchResponse, 60);
+}
+
+function handlePole(stage, index, width, height) {
+    return { kind: "pole", stageIndex: index, x: freqToX(stage.pole_hz, width), y: poleRadiusToY(stage.radius, height) };
+}
+
+function handleZero(stage, index, width, height) {
+    if (stage.zero_hz === null) return null;
+    return { kind: "zero", stageIndex: index, x: freqToX(stage.zero_hz, width), y: zeroRadiusToY(stage.zero_radius, height) };
+}
+
+function prepareCanvas() {
+    const canvas = document.getElementById("scope");
+    const rect = canvas.getBoundingClientRect();
+    const width = Math.max(1, Math.round(rect.width));
+    const height = Math.max(1, Math.round(rect.height));
+    const dpr = window.devicePixelRatio || 1;
+    const wantedWidth = Math.round(width * dpr);
+    const wantedHeight = Math.round(height * dpr);
+    if (canvas.width !== wantedWidth || canvas.height !== wantedHeight) {
+        canvas.width = wantedWidth;
+        canvas.height = wantedHeight;
+    }
+    const ctx = canvas.getContext("2d");
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    return { canvas, ctx, width, height };
+}
+
+function drawScope() {
+    const { ctx, width, height } = prepareCanvas();
+    ctx.clearRect(0, 0, width, height);
+    ctx.fillStyle = "#060808";
+    ctx.fillRect(0, 0, width, height);
+
+    ctx.strokeStyle = "#17201d";
+    ctx.lineWidth = 1;
+    for (const db of [-40, -20, 0, 20]) {
+        const y = height - ((db + 60) / 100) * height;
+        ctx.beginPath();
+        ctx.moveTo(0, y);
+        ctx.lineTo(width, y);
+        ctx.stroke();
+    }
+    for (const freq of [50, 100, 200, 500, 1000, 2000, 5000, 10000]) {
+        const x = freqToX(freq, width);
+        ctx.beginPath();
+        ctx.moveTo(x, 0);
+        ctx.lineTo(x, height);
+        ctx.stroke();
+    }
+
+    const labelGap = COMPACT_MEDIA.matches ? 78 : 34;
+    let lastLabelX = -1000;
+    for (const guide of state.guides) {
+        if (!state.visibleGuideCategories.has(guide.category)) continue;
+        const x = freqToX(guide.freq_hz, width);
+        ctx.strokeStyle = GUIDE_COLORS[guide.category] || "rgba(149,184,87,0.12)";
+        ctx.beginPath();
+        ctx.moveTo(x, 0);
+        ctx.lineTo(x, height);
+        ctx.stroke();
+        if (x - lastLabelX > labelGap) {
+            ctx.fillStyle = "#66716d";
+            ctx.font = COMPACT_MEDIA.matches ? "10px Cascadia Mono" : "9px Cascadia Mono";
+            ctx.fillText(guide.label, x + 3, 12);
+            lastLabelX = x;
+        }
+    }
+
+    if (state.response?.freqs?.length) {
+        ctx.strokeStyle = "#d7cfba";
+        ctx.lineWidth = 2;
+        ctx.beginPath();
+        state.response.freqs.forEach((freq, i) => {
+            const x = freqToX(freq, width);
+            const db = clamp(state.response.db[i], -60, 40);
+            const y = height - ((db + 60) / 100) * height;
+            if (i === 0) ctx.moveTo(x, y);
+            else ctx.lineTo(x, y);
+        });
+        ctx.stroke();
+    }
+
+    currentFrame().forEach((stage, index) => {
+        const selected = index === state.selectedStage;
+        const pole = handlePole(stage, index, width, height);
+        const zero = handleZero(stage, index, width, height);
+
+        ctx.fillStyle = selected ? "rgba(149,184,87,0.08)" : "rgba(149,184,87,0.02)";
+        ctx.fillRect(Math.max(0, pole.x - 10), 0, selected ? 20 : 12, height);
+
+        ctx.strokeStyle = selected ? "rgba(149,184,87,0.64)" : "rgba(149,184,87,0.18)";
+        ctx.lineWidth = selected ? 2 : 1;
+        ctx.beginPath();
+        ctx.moveTo(pole.x, pole.y);
+        ctx.lineTo(pole.x, height * 0.5);
+        ctx.stroke();
+        ctx.fillStyle = selected ? "#eef3de" : "#d7cfba";
+        ctx.beginPath();
+        ctx.arc(pole.x, pole.y, selected ? 11 : 7, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.fillStyle = "#0b0d0e";
+        ctx.font = selected ? "12px Cascadia Mono" : "10px Cascadia Mono";
+        ctx.fillText(String(index + 1), pole.x - (selected ? 4 : 3), pole.y + 4);
+
+        if (zero) {
+            ctx.strokeStyle = selected ? "rgba(215,123,100,0.64)" : "rgba(201,91,67,0.22)";
+            ctx.lineWidth = selected ? 2 : 1;
+            ctx.beginPath();
+            ctx.moveTo(zero.x, zero.y);
+            ctx.lineTo(zero.x, height * 0.5);
+            ctx.stroke();
+            ctx.fillStyle = selected ? "#ec9b89" : "#d77a64";
+            ctx.beginPath();
+            const size = selected ? 10 : 7;
+            ctx.moveTo(zero.x, zero.y - size);
+            ctx.lineTo(zero.x + size, zero.y + size);
+            ctx.lineTo(zero.x - size, zero.y + size);
+            ctx.closePath();
+            ctx.fill();
+        }
+    });
+}
+
+function hitHandle(clientX, clientY) {
+    const canvas = document.getElementById("scope");
+    const rect = canvas.getBoundingClientRect();
+    const x = clientX - rect.left;
+    const y = clientY - rect.top;
+    for (let i = currentFrame().length - 1; i >= 0; i--) {
+        const stage = currentFrame()[i];
+        for (const handle of [handlePole(stage, i, rect.width, rect.height), handleZero(stage, i, rect.width, rect.height)]) {
+            if (!handle) continue;
+            const dx = x - handle.x;
+            const dy = y - handle.y;
+            if (Math.hypot(dx, dy) <= 18) {
+                return { ...handle, x, y };
+            }
+        }
+    }
+    return null;
+}
+
+function updateDrag(clientX, clientY) {
+    if (!state.drag) return;
+    const canvas = document.getElementById("scope");
+    const rect = canvas.getBoundingClientRect();
+    const x = clamp(clientX - rect.left, 0, rect.width);
+    const y = clamp(clientY - rect.top, 0, rect.height);
+    const stage = currentFrame()[state.drag.stageIndex];
+    if (state.drag.kind === "pole") {
+        stage.pole_hz = clamp(xToFreq(x, rect.width), 20, 18000);
+        stage.radius = yToPoleRadius(y, rect.height);
+    } else if (state.drag.kind === "zero" && stage.zero_hz !== null) {
+        stage.zero_hz = clamp(xToFreq(x, rect.width), 20, 18000);
+        stage.zero_radius = yToZeroRadius(y, rect.height);
+    }
+    renderStageGrid();
+    queueResponse();
+}
+
+async function loadGuides() {
+    const response = await fetch("/sonic-guides");
+    const data = await response.json();
+    state.guides = data.guides || [];
+    buildGuideToggles();
+    drawScope();
+}
+
+async function pushLive() {
+    try {
+        const response = await fetch("/direct/live", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(payload(0)),
+        });
+        if (!response.ok) throw new Error(await response.text());
+        setStatus("live pushed");
+        setFooter("written to trench_live.json");
+    } catch (error) {
+        setStatus(`live error: ${error.message}`);
+    }
+}
+
+async function exportBody() {
+    try {
+        const response = await fetch("/direct/export", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(payload(0)),
+        });
+        if (!response.ok) throw new Error(await response.text());
+        const data = await response.json();
+        setStatus("exported");
+        setFooter(data.path);
+    } catch (error) {
+        setStatus(`export error: ${error.message}`);
+    }
+}
+
+async function playRender() {
+    try {
+        const response = await fetch("/direct/render", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ ...payload(Number(document.getElementById("morphSlider").value) / 100), mackie_amount: 0.55, duration: 2.5 }),
+        });
+        if (!response.ok) throw new Error(await response.text());
+        const data = await response.json();
+        const raw = atob(data.audio_b64);
+        const bytes = new Uint8Array(raw.length);
+        for (let i = 0; i < raw.length; i++) bytes[i] = raw.charCodeAt(i);
+        if (!state.audioContext) state.audioContext = new (window.AudioContext || window.webkitAudioContext)();
+        const buffer = await state.audioContext.decodeAudioData(bytes.buffer);
+        const source = state.audioContext.createBufferSource();
+        source.buffer = buffer;
+        source.connect(state.audioContext.destination);
+        source.start();
+        setStatus(`play ${data.peak_db} dB`);
+    } catch (error) {
+        setStatus(`play error: ${error.message}`);
+    }
+}
+
+function bind() {
+    document.getElementById("frameAButton").addEventListener("click", () => {
+        state.editFrame = "A";
+        document.getElementById("frameAButton").classList.add("active");
+        document.getElementById("frameBButton").classList.remove("active");
+        renderStageGrid();
+    });
+    document.getElementById("frameBButton").addEventListener("click", () => {
+        state.editFrame = "B";
+        document.getElementById("frameBButton").classList.add("active");
+        document.getElementById("frameAButton").classList.remove("active");
+        renderStageGrid();
+    });
+    document.getElementById("morphSlider").addEventListener("input", queueResponse);
+    document.getElementById("previewButton").addEventListener("click", fetchResponse);
+    document.getElementById("playButton").addEventListener("click", playRender);
+    document.getElementById("liveButton").addEventListener("click", pushLive);
+    document.getElementById("exportButton").addEventListener("click", exportBody);
+    window.addEventListener("resize", drawScope);
+    COMPACT_MEDIA.addEventListener("change", drawScope);
+
+    const canvas = document.getElementById("scope");
+    canvas.addEventListener("pointerdown", (event) => {
+        const hit = hitHandle(event.clientX, event.clientY);
+        if (!hit) return;
+        state.selectedStage = hit.stageIndex;
+        state.drag = hit;
+        renderStageGrid();
+        canvas.setPointerCapture(event.pointerId);
+        document.getElementById("hoverText").textContent = `${hit.kind} stage ${hit.stageIndex + 1}`;
+    });
+    canvas.addEventListener("pointermove", (event) => {
+        if (state.drag) {
+            updateDrag(event.clientX, event.clientY);
+            return;
+        }
+        const hit = hitHandle(event.clientX, event.clientY);
+        document.getElementById("hoverText").textContent = hit ? `${hit.kind} stage ${hit.stageIndex + 1}` : `stage ${state.selectedStage + 1} active`;
+    });
+    canvas.addEventListener("pointerup", (event) => {
+        state.drag = null;
+        document.getElementById("hoverText").textContent = `stage ${state.selectedStage + 1} active`;
+        try { canvas.releasePointerCapture(event.pointerId); } catch (_) {}
+    });
+    canvas.addEventListener("pointercancel", () => {
+        state.drag = null;
+        document.getElementById("hoverText").textContent = `stage ${state.selectedStage + 1} active`;
+    });
+}
+
+async function init() {
+    buildTemplates();
+    bind();
+    renderStageGrid();
+    await loadGuides();
+    await fetchResponse();
+}
+
+init();
+</script>
+</body>
+</html>

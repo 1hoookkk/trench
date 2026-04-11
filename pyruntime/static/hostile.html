@@ -1,0 +1,1105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TRENCH — HOSTILE MODE</title>
+    <style>
+        :root {
+            --bg: #808080;
+            --window: #c0c0c0;
+            --panel: #d4d0c8;
+            --field: #ffffff;
+            --light: #ffffff;
+            --dark: #404040;
+            --text: #111111;
+            --muted: #555555;
+            --pass: #004b00;
+            --fail: #7e0000;
+            --warn: #6b5a00;
+            --active-room: #0a2e82;
+            --locked-room: #555555;
+        }
+        * { box-sizing: border-box; }
+        body {
+            margin: 0; padding: 12px;
+            background: var(--bg);
+            color: var(--text);
+            font: 12px/1.3 "MS Sans Serif", "Segoe UI", sans-serif;
+        }
+        .window {
+            max-width: 1100px; margin: 0 auto;
+            background: var(--window);
+            border: 2px solid;
+            border-color: var(--light) var(--dark) var(--dark) var(--light);
+            box-shadow: inset 1px 1px 0 #dfdfdf, inset -1px -1px 0 #808080;
+        }
+        .titlebar {
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 4px 8px; color: #ffffff;
+            background: linear-gradient(90deg, #0a2e82 0%, #2957a4 100%);
+            font-weight: 700; font-size: 13px;
+        }
+        .titlebar .timer { font-family: 'Courier New', monospace; font-size: 12px; color: #aaccff; }
+
+        /* Room tabs */
+        .room-tabs {
+            display: flex; gap: 0; padding: 4px 4px 0; background: var(--panel);
+            border-bottom: 2px solid var(--dark);
+        }
+        .room-tab {
+            padding: 4px 16px; font-weight: 700; font-size: 12px; cursor: pointer;
+            border: 2px solid; border-bottom: none;
+            border-color: var(--light) var(--dark) transparent var(--light);
+            background: var(--panel); color: var(--muted);
+            position: relative; top: 2px;
+        }
+        .room-tab.active {
+            background: var(--window); color: var(--text); top: 2px;
+            border-bottom: 2px solid var(--window);
+        }
+        .room-tab.locked { color: #999; cursor: not-allowed; }
+        .room-tab .status { margin-left: 6px; font-size: 10px; }
+        .room-tab .status.done { color: var(--pass); }
+        .room-tab .status.fail { color: var(--fail); }
+
+        /* Room content */
+        .room { display: none; padding: 12px; }
+        .room.visible { display: block; }
+
+        /* Panels */
+        .group {
+            border: 2px solid; padding: 8px; margin-bottom: 8px;
+            border-color: var(--dark) var(--light) var(--light) var(--dark);
+            background: var(--panel);
+        }
+        .group-title {
+            font-weight: 700; font-size: 11px; text-transform: uppercase;
+            color: var(--muted); margin-bottom: 6px; letter-spacing: 0.5px;
+        }
+
+        /* Form elements */
+        label { display: block; font-size: 11px; margin-bottom: 2px; font-weight: 600; }
+        select, input[type="text"], input[type="number"], textarea {
+            font: 12px "MS Sans Serif", "Segoe UI", sans-serif;
+            background: var(--field); color: var(--text);
+            border: 2px solid; padding: 2px 4px;
+            border-color: var(--dark) var(--light) var(--light) var(--dark);
+        }
+        select { padding: 1px 2px; }
+        textarea { width: 100%; resize: vertical; min-height: 40px; }
+
+        /* Buttons */
+        .btn {
+            font: bold 12px "MS Sans Serif", "Segoe UI", sans-serif;
+            padding: 4px 16px; cursor: pointer;
+            border: 2px solid;
+            border-color: var(--light) var(--dark) var(--dark) var(--light);
+            background: var(--panel); color: var(--text);
+        }
+        .btn:active {
+            border-color: var(--dark) var(--light) var(--light) var(--dark);
+        }
+        .btn:disabled { color: #999; cursor: not-allowed; }
+        .btn.primary { background: #0a2e82; color: #fff; }
+        .btn.danger { background: var(--fail); color: #fff; }
+        .btn.again { background: #4a3600; color: #ffcc00; font-weight: 900; }
+
+        /* Stage cards */
+        .stage-grid {
+            display: grid; grid-template-columns: repeat(6, 1fr); gap: 6px;
+        }
+        .stage-card {
+            border: 2px solid; padding: 6px;
+            border-color: var(--dark) var(--light) var(--light) var(--dark);
+            background: var(--field); font-size: 11px;
+        }
+        .stage-card .stage-num {
+            font-weight: 900; font-size: 13px; color: var(--active-room);
+            margin-bottom: 4px;
+        }
+        .stage-card select, .stage-card input {
+            width: 100%; margin-bottom: 3px; font-size: 11px;
+        }
+
+        /* Cluster builder */
+        .cluster-row {
+            display: flex; gap: 6px; align-items: center; margin-bottom: 4px;
+            padding: 4px; background: var(--field);
+            border: 1px solid var(--dark);
+        }
+        .cluster-row select, .cluster-row input { font-size: 11px; }
+        .cluster-stages { display: flex; gap: 2px; }
+        .cluster-stages label { display: inline; font-weight: normal; }
+
+        /* Gate results */
+        .gate-result {
+            padding: 8px; margin-bottom: 6px;
+            border: 2px solid;
+            font-size: 12px;
+        }
+        .gate-result.pass {
+            border-color: var(--pass);
+            background: #d4f0d4;
+        }
+        .gate-result.fail {
+            border-color: var(--fail);
+            background: #f0d4d4;
+        }
+        .gate-name { font-weight: 900; text-transform: uppercase; margin-bottom: 2px; }
+        .gate-detail { font-size: 11px; color: #333; }
+
+        /* Response plot */
+        #plot-canvas {
+            width: 100%; height: 200px;
+            background: #0a0a0a;
+            border: 2px solid;
+            border-color: var(--dark) var(--light) var(--light) var(--dark);
+        }
+
+        /* Seed bank */
+        .seed-bank {
+            display: flex; gap: 4px; flex-wrap: wrap; margin-top: 6px;
+        }
+        .seed-chip {
+            font: bold 10px "Courier New", monospace;
+            padding: 2px 6px; cursor: pointer;
+            border: 1px solid var(--dark);
+            background: var(--field);
+        }
+        .seed-chip:hover { background: #ffffcc; }
+        .seed-chip.active { background: #ccddff; border-color: var(--active-room); }
+
+        /* Debug drawer */
+        #debug-drawer {
+            display: none; position: fixed; right: 0; top: 0;
+            width: 400px; height: 100vh; overflow-y: auto;
+            background: #111; color: #33ff33;
+            font: 11px 'Courier New', monospace;
+            padding: 12px; z-index: 999;
+            border-left: 2px solid #33ff33;
+        }
+        #debug-drawer.open { display: block; }
+        #debug-drawer pre { white-space: pre-wrap; word-break: break-all; }
+
+        /* Layout helpers */
+        .row { display: flex; gap: 8px; align-items: center; }
+        .row > * { flex-shrink: 0; }
+        .flex-1 { flex: 1; }
+        .mt-8 { margin-top: 8px; }
+        .mb-4 { margin-bottom: 4px; }
+        .text-center { text-align: center; }
+
+        /* Overall verdict */
+        .verdict {
+            font-size: 24px; font-weight: 900; text-align: center;
+            padding: 12px; margin-bottom: 8px;
+            border: 3px solid;
+        }
+        .verdict.pass { color: var(--pass); border-color: var(--pass); background: #d4f0d4; }
+        .verdict.fail { color: var(--fail); border-color: var(--fail); background: #f0d4d4; }
+    </style>
+</head>
+<body>
+
+<div class="window">
+    <div class="titlebar">
+        <span>HOSTILE MODE — 3-Room Authoring Prototype</span>
+        <span class="timer" id="timer">00:00</span>
+    </div>
+
+    <div class="room-tabs">
+        <div class="room-tab active" data-room="1" id="tab-1">
+            1. HOLD THE PISTON <span class="status" id="status-1"></span>
+        </div>
+        <div class="room-tab locked" data-room="2" id="tab-2">
+            2. DRAG THE CRATE <span class="status" id="status-2"></span>
+        </div>
+        <div class="room-tab locked" data-room="3" id="tab-3">
+            3. JAM THE GATE <span class="status" id="status-3"></span>
+        </div>
+    </div>
+
+    <!-- ============================================================ -->
+    <!-- ROOM 1: HOLD THE PISTON — Declare intent                     -->
+    <!-- ============================================================ -->
+    <div class="room visible" id="room-1">
+        <div class="group">
+            <div class="group-title">Intent Declaration</div>
+            <p style="font-size:11px;color:#555;margin:0 0 8px">
+                Describe the body in one sentence. What does it do musically?
+                This locks your world before you touch a single stage.
+            </p>
+            <label>Body Name</label>
+            <input type="text" id="body-name" style="width:300px" placeholder="e.g. Magma_Rising" value="Magma_Rising">
+            <div style="height:6px"></div>
+            <label>One-Sentence Intent</label>
+            <textarea id="body-sentence" placeholder="e.g. Sub cluster erupts to bite range. Stages cross. Q compresses to mud.">Sub cluster erupts to bite range. Stages cross. Q compresses to mud.</textarea>
+        </div>
+
+        <div class="group">
+            <div class="group-title">World Selection</div>
+            <div class="row">
+                <div>
+                    <label>Primary Zone</label>
+                    <select id="world-zone">
+                        <option value="sub" selected>Sub (20-100 Hz)</option>
+                        <option value="mud">Mud (100-300 Hz)</option>
+                        <option value="boxy">Boxy (300-800 Hz)</option>
+                        <option value="bite">Bite (1-5 kHz)</option>
+                        <option value="air">Air (5-12 kHz)</option>
+                        <option value="ceiling">Ceiling (10-18 kHz)</option>
+                    </select>
+                </div>
+                <div>
+                    <label>Character</label>
+                    <select id="world-character">
+                        <option value="bass" selected>Bass — sub-focused, weight-first</option>
+                        <option value="vocal">Vocal — formant movement</option>
+                        <option value="glass">Glass — HF shimmer and shatter</option>
+                        <option value="meta">Meta — full-range destruction</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <div class="row mt-8">
+            <button class="btn primary" id="btn-lock-intent" onclick="lockIntent()">
+                LOCK INTENT &rarr;
+            </button>
+        </div>
+    </div>
+
+    <!-- ============================================================ -->
+    <!-- ROOM 2: DRAG THE CRATE — Configure stages + constraints      -->
+    <!-- ============================================================ -->
+    <div class="room" id="room-2">
+        <div class="group">
+            <div class="group-title">Intent: <span id="r2-intent" style="color:#0a2e82"></span></div>
+            <div id="r2-sentence" style="font-size:11px;color:#555"></div>
+        </div>
+
+        <div class="group">
+            <div class="group-title">6 Stages — Direct Pole / Zero Authoring</div>
+            <div class="stage-grid" id="stage-grid"></div>
+        </div>
+
+        <div class="group">
+            <div class="group-title">Q Law — Pressure Behavior</div>
+            <div class="row">
+                <div>
+                    <label>Compression</label>
+                    <select id="q-compression">
+                        <option value="none">None</option>
+                        <option value="moderate" selected>Moderate</option>
+                        <option value="extreme">Extreme</option>
+                    </select>
+                </div>
+                <div>
+                    <label>Center Hz</label>
+                    <input type="number" id="q-center" value="1000" min="20" max="18000" style="width:80px">
+                </div>
+            </div>
+            <div style="margin-top:6px;font-size:11px;color:#555">
+                Q corners are auto-derived from your direct stages by frequency squeeze around the center.
+            </div>
+        </div>
+
+        <div class="row mt-8">
+            <button class="btn" onclick="goRoom(1)">&larr; Back</button>
+            <button class="btn primary" id="btn-compile" onclick="compileAndGate()">
+                COMPILE &amp; GATE &rarr;
+            </button>
+            <span id="compile-status" style="font-size:11px;color:#555"></span>
+        </div>
+    </div>
+
+    <!-- ============================================================ -->
+    <!-- ROOM 3: JAM THE GATE — Results + AGAIN                       -->
+    <!-- ============================================================ -->
+    <div class="room" id="room-3">
+        <div id="verdict-box" class="verdict"></div>
+
+        <div class="group">
+            <div class="group-title">Gate Results</div>
+            <div id="gate-results"></div>
+        </div>
+
+        <div class="group">
+            <div class="group-title">Response Plot (morph sweep at Q=0)</div>
+            <canvas id="plot-canvas" width="1060" height="200"></canvas>
+            <div class="row mt-8" style="gap:4px">
+                <label style="margin:0">Q:</label>
+                <select id="plot-q" onchange="redrawPlot()" style="width:60px">
+                    <option value="0">0</option>
+                    <option value="0.5">0.5</option>
+                    <option value="1">1.0</option>
+                </select>
+                <label style="margin:0 0 0 10px">View:</label>
+                <select id="plot-view" onchange="redrawPlot()" style="width:90px">
+                    <option value="both">Candidate+Ref</option>
+                    <option value="candidate">Candidate</option>
+                    <option value="reference">Reference</option>
+                </select>
+            </div>
+            <div class="row mt-8" style="gap:4px">
+                <label style="margin:0">Reference:</label>
+                <select id="ref-select" style="min-width:240px"></select>
+                <button class="btn" onclick="loadReference()">LOAD REF</button>
+                <button class="btn" onclick="loadReferenceList()">REFRESH LIST</button>
+            </div>
+        </div>
+
+        <div class="group">
+            <div class="group-title">Design Signals</div>
+            <div style="font:11px 'Courier New', monospace; line-height:1.45">
+                <div>Midpoint peak: <b id="signal-midpoint">--</b></div>
+                <div>Sub-anchor delta: <b id="signal-subanchor">--</b></div>
+                <div>Q-diff RMS: <b id="signal-qdiff">--</b></div>
+                <div>Occupied bands: <b id="signal-occupied">--</b></div>
+            </div>
+        </div>
+
+        <div class="group">
+            <div class="group-title">Seed Bank</div>
+            <div class="row">
+                <span style="font-size:11px">Current seed: <b id="current-seed">0</b></span>
+            </div>
+            <div class="seed-bank" id="seed-bank"></div>
+        </div>
+
+        <div class="group">
+            <div class="group-title">Triage Metrics</div>
+            <div style="font:11px 'Courier New', monospace; line-height:1.45">
+                <div>Session: <b id="triage-session">not started</b></div>
+                <div>Total: <b id="triage-total">0</b> | Keep: <b id="triage-keep">0</b> | Reject: <b id="triage-reject">0</b> | Again: <b id="triage-again">0</b></div>
+                <div>Gate pass: <b id="triage-pass-rate">0.00%</b> | Keeps/20: <b id="triage-k20">0.00</b></div>
+                <div>First keep: <b id="triage-first-keep">--</b> | Decision median: <b id="triage-decision-med">--</b></div>
+                <div>Debug opens: <b id="triage-debug">0</b></div>
+            </div>
+        </div>
+
+        <div class="row mt-8">
+            <button class="btn" onclick="goRoom(2)">&larr; Edit Crate</button>
+            <button class="btn again" onclick="again()" id="btn-again">AGAIN</button>
+            <button class="btn danger" onclick="rejectCandidate()" id="btn-reject">REJECT</button>
+            <button class="btn primary" onclick="keepCandidate()" id="btn-keep">KEEP</button>
+            <span id="save-status" style="font-size:11px;color:#555"></span>
+        </div>
+    </div>
+</div>
+
+<!-- Hidden debug drawer (Ctrl+D) -->
+<div id="debug-drawer">
+    <div style="display:flex;justify-content:space-between;margin-bottom:8px">
+        <b>DEBUG</b>
+        <span style="cursor:pointer" onclick="toggleDebug()">[ X ]</span>
+    </div>
+    <pre id="debug-log"></pre>
+</div>
+
+<script>
+// ====================================================================
+// STATE
+// ====================================================================
+const API = '';
+let state = {
+    room: 1,
+    intent: { name: '', sentence: '', zone: '', character: '' },
+    stages: [],
+    qLaw: { compression: 'moderate', center_hz: 1000, dominance: [] },
+    compiled: null,       // last compile response
+    gateResult: null,     // last gate response
+    seed: 0,
+    seedBank: [],         // { seed, passed, name }
+    timerStart: Date.now(),
+    debugLog: [],
+    triage: {
+        sessionId: '',
+        summary: null,
+    },
+    currentCompileMs: 0,
+    currentCandidateReadyAtMs: 0,
+    debugOpenCount: 0,
+    reference: {
+        name: '',
+        body: null,
+        sweep: null,
+    },
+};
+
+// ====================================================================
+// TIMER
+// ====================================================================
+setInterval(() => {
+    const s = Math.floor((Date.now() - state.timerStart) / 1000);
+    const m = Math.floor(s / 60);
+    document.getElementById('timer').textContent =
+        String(m).padStart(2, '0') + ':' + String(s % 60).padStart(2, '0');
+}, 1000);
+
+// ====================================================================
+// ROOM NAVIGATION
+// ====================================================================
+function goRoom(n) {
+    if (n === 2 && !state.intent.name) return;
+    if (n === 3 && !state.compiled) return;
+    state.room = n;
+    document.querySelectorAll('.room').forEach(r => r.classList.remove('visible'));
+    document.getElementById('room-' + n).classList.add('visible');
+    document.querySelectorAll('.room-tab').forEach(t => {
+        t.classList.remove('active');
+        const rn = parseInt(t.dataset.room);
+        if (rn === n) t.classList.add('active');
+        if (rn <= n) t.classList.remove('locked');
+    });
+}
+
+// ====================================================================
+// ROOM 1: LOCK INTENT
+// ====================================================================
+async function lockIntent() {
+    const name = document.getElementById('body-name').value.trim();
+    const sentence = document.getElementById('body-sentence').value.trim();
+    if (!name) { alert('Name the body.'); return; }
+    if (!sentence) { alert('Write the intent sentence.'); return; }
+
+    state.intent = {
+        name: name.replace(/\s+/g, '_'),
+        sentence,
+        zone: document.getElementById('world-zone').value,
+        character: document.getElementById('world-character').value,
+    };
+
+    document.getElementById('status-1').textContent = '\u2713';
+    document.getElementById('status-1').className = 'status done';
+
+    // Pre-populate stages based on world selection
+    populateStages();
+
+    document.getElementById('r2-intent').textContent = state.intent.name;
+    document.getElementById('r2-sentence').textContent = state.intent.sentence;
+
+    await startTriageSession();
+    goRoom(2);
+    dbg('intent locked', state.intent);
+}
+
+async function startTriageSession() {
+    const status = document.getElementById('compile-status');
+    try {
+        const resp = await fetch(API + '/hostile/triage/start', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                session_name: state.intent.name || 'triage',
+                world_id: 'bass_pressure',
+                body_family: 'speaker_knockerz',
+                target_candidates: 20,
+            }),
+        });
+        if (!resp.ok) throw new Error(await resp.text());
+        const summary = await resp.json();
+        state.triage.sessionId = summary.session_id;
+        state.triage.summary = summary;
+        renderTriageSummary(summary);
+        status.textContent = `Triage session ${summary.session_id}`;
+        dbg('triage started', summary);
+    } catch (e) {
+        status.textContent = 'Triage start failed: ' + e.message;
+        dbg('triage start failed', e.message);
+    }
+}
+
+// ====================================================================
+// ROOM 2: STAGE GRID
+// ====================================================================
+const WORLD_PRESETS = {
+    bass: {
+        stages: [
+            { pole_hz: 45, pole_hz_b: 45, radius: 0.985, gain: -0.2, zero_hz: null, zero_hz_b: null, zero_radius: null },
+            { pole_hz: 70, pole_hz_b: 90, radius: 0.975, gain: -0.15, zero_hz: null, zero_hz_b: null, zero_radius: null },
+            { pole_hz: 140, pole_hz_b: 210, radius: 0.965, gain: -0.1, zero_hz: 320, zero_hz_b: 420, zero_radius: 0.65 },
+            { pole_hz: 260, pole_hz_b: 420, radius: 0.955, gain: -0.1, zero_hz: null, zero_hz_b: null, zero_radius: null },
+            { pole_hz: 700, pole_hz_b: 1200, radius: 0.94, gain: -0.1, zero_hz: 1700, zero_hz_b: 2200, zero_radius: 0.55 },
+            { pole_hz: 1600, pole_hz_b: 2800, radius: 0.93, gain: -0.15, zero_hz: null, zero_hz_b: null, zero_radius: null },
+        ],
+        qLaw: { compression: 'extreme', center_hz: 200, dominance: [] },
+    },
+    vocal: {
+        stages: [
+            { pole_hz: 180, pole_hz_b: 240, radius: 0.97, gain: -0.1, zero_hz: null, zero_hz_b: null, zero_radius: null },
+            { pole_hz: 380, pole_hz_b: 520, radius: 0.965, gain: -0.1, zero_hz: null, zero_hz_b: null, zero_radius: null },
+            { pole_hz: 900, pole_hz_b: 1400, radius: 0.955, gain: -0.05, zero_hz: 1600, zero_hz_b: 1900, zero_radius: 0.75 },
+            { pole_hz: 1800, pole_hz_b: 2500, radius: 0.95, gain: -0.05, zero_hz: null, zero_hz_b: null, zero_radius: null },
+            { pole_hz: 2800, pole_hz_b: 3600, radius: 0.94, gain: -0.1, zero_hz: null, zero_hz_b: null, zero_radius: null },
+            { pole_hz: 5200, pole_hz_b: 6800, radius: 0.92, gain: -0.15, zero_hz: null, zero_hz_b: null, zero_radius: null },
+        ],
+        qLaw: { compression: 'moderate', center_hz: 1000, dominance: [] },
+    },
+    glass: {
+        stages: [
+            { pole_hz: 500, pole_hz_b: 620, radius: 0.96, gain: -0.2, zero_hz: null, zero_hz_b: null, zero_radius: null },
+            { pole_hz: 1200, pole_hz_b: 1600, radius: 0.95, gain: -0.15, zero_hz: null, zero_hz_b: null, zero_radius: null },
+            { pole_hz: 2600, pole_hz_b: 3400, radius: 0.94, gain: -0.1, zero_hz: 4200, zero_hz_b: 5200, zero_radius: 0.65 },
+            { pole_hz: 4200, pole_hz_b: 6200, radius: 0.935, gain: -0.1, zero_hz: null, zero_hz_b: null, zero_radius: null },
+            { pole_hz: 7000, pole_hz_b: 9000, radius: 0.925, gain: -0.12, zero_hz: 10500, zero_hz_b: 12000, zero_radius: 0.5 },
+            { pole_hz: 9800, pole_hz_b: 12500, radius: 0.915, gain: -0.2, zero_hz: null, zero_hz_b: null, zero_radius: null },
+        ],
+        qLaw: { compression: 'moderate', center_hz: 8000, dominance: [] },
+    },
+    meta: {
+        stages: [
+            { pole_hz: 55, pole_hz_b: 80, radius: 0.985, gain: -0.1, zero_hz: null, zero_hz_b: null, zero_radius: null },
+            { pole_hz: 220, pole_hz_b: 320, radius: 0.97, gain: -0.1, zero_hz: 400, zero_hz_b: 550, zero_radius: 0.75 },
+            { pole_hz: 520, pole_hz_b: 880, radius: 0.96, gain: -0.1, zero_hz: null, zero_hz_b: null, zero_radius: null },
+            { pole_hz: 1300, pole_hz_b: 2200, radius: 0.95, gain: -0.05, zero_hz: 2600, zero_hz_b: 3200, zero_radius: 0.7 },
+            { pole_hz: 3200, pole_hz_b: 5800, radius: 0.94, gain: -0.08, zero_hz: null, zero_hz_b: null, zero_radius: null },
+            { pole_hz: 7600, pole_hz_b: 11500, radius: 0.925, gain: -0.12, zero_hz: null, zero_hz_b: null, zero_radius: null },
+        ],
+        qLaw: { compression: 'extreme', center_hz: 1000, dominance: [] },
+    },
+};
+
+function populateStages() {
+    const preset = WORLD_PRESETS[state.intent.character] || WORLD_PRESETS.vocal;
+    state.stages = preset.stages.map(s => ({ ...s }));
+    if (preset.qLaw) {
+        state.qLaw = {
+            compression: preset.qLaw.compression,
+            center_hz: preset.qLaw.center_hz,
+            dominance: [],
+        };
+        document.getElementById('q-compression').value = state.qLaw.compression;
+        document.getElementById('q-center').value = state.qLaw.center_hz;
+    }
+    renderStageGrid();
+}
+
+function renderStageGrid() {
+    const grid = document.getElementById('stage-grid');
+    grid.innerHTML = '';
+    state.stages.forEach((s, i) => {
+        const card = document.createElement('div');
+        card.className = 'stage-card';
+        card.innerHTML = `
+            <div class="stage-num">S${i}</div>
+            <label>Pole A Hz</label>
+            <input type="number" value="${s.pole_hz ?? ''}" min="20" max="18000" style="width:100%"
+                   onchange="stageChanged(${i},'pole_hz',this.value)">
+            <label>Pole B Hz</label>
+            <input type="number" value="${s.pole_hz_b ?? ''}" min="20" max="18000" style="width:100%"
+                   onchange="stageChanged(${i},'pole_hz_b',this.value)">
+            <label>Radius</label>
+            <input type="number" value="${s.radius ?? ''}" min="0" max="0.9995" step="0.0005" style="width:100%"
+                   onchange="stageChanged(${i},'radius',this.value)">
+            <label>Gain (val1)</label>
+            <input type="number" value="${s.gain ?? 0}" min="-1" max="1" step="0.01" style="width:100%"
+                   onchange="stageChanged(${i},'gain',this.value)">
+            <label>Zero A Hz (optional)</label>
+            <input type="number" value="${s.zero_hz ?? ''}" min="20" max="18000" style="width:100%"
+                   onchange="stageChanged(${i},'zero_hz',this.value)">
+            <label>Zero B Hz (optional)</label>
+            <input type="number" value="${s.zero_hz_b ?? ''}" min="20" max="18000" style="width:100%"
+                   onchange="stageChanged(${i},'zero_hz_b',this.value)">
+            <label>Zero Radius (optional)</label>
+            <input type="number" value="${s.zero_radius ?? ''}" min="0" max="1.2" step="0.01" style="width:100%"
+                   onchange="stageChanged(${i},'zero_radius',this.value)">
+        `;
+        grid.appendChild(card);
+    });
+}
+
+function stageChanged(idx, field, val) {
+    if (val === '' || val == null) {
+        state.stages[idx][field] = null;
+        return;
+    }
+    const n = Number(val);
+    state.stages[idx][field] = Number.isFinite(n) ? n : null;
+}
+
+// ====================================================================
+// COMPILE + GATE (worker round-trip)
+// ====================================================================
+async function compileAndGate() {
+    const btn = document.getElementById('btn-compile');
+    const status = document.getElementById('compile-status');
+    btn.disabled = true;
+    status.textContent = 'Compiling...';
+
+    // Read Q law from UI
+    state.qLaw.compression = document.getElementById('q-compression').value;
+    state.qLaw.center_hz = +document.getElementById('q-center').value;
+
+    const spec = {
+        name: state.intent.name,
+        sentence: state.intent.sentence,
+        stages: state.stages,
+        q_law: state.qLaw,
+        seed: state.seed,
+    };
+
+    dbg('compile request', spec);
+    const t0 = performance.now();
+
+    try {
+        // Step 1: Compile
+        const compResp = await fetch(API + '/hostile/compile', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(spec),
+        });
+        if (!compResp.ok) throw new Error(await compResp.text());
+        state.compiled = await compResp.json();
+
+        dbg('compile response', { name: state.compiled.body.name, sweepPts: state.compiled.sweep.length });
+
+        // Step 2: Gate
+        status.textContent = 'Running gates...';
+        const gateResp = await fetch(API + '/hostile/gate', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ body: state.compiled.body }),
+        });
+        if (!gateResp.ok) throw new Error(await gateResp.text());
+        state.gateResult = await gateResp.json();
+
+        const dt = Math.round(performance.now() - t0);
+        state.currentCompileMs = dt;
+        state.currentCandidateReadyAtMs = performance.now();
+        dbg('gate result', { passed: state.gateResult.passed, dt_ms: dt, gates: state.gateResult.gates.length });
+
+        // Record seed
+        state.seedBank.push({
+            seed: state.seed,
+            passed: state.gateResult.passed,
+            name: state.intent.name,
+        });
+
+        status.textContent = `Done in ${dt}ms`;
+        document.getElementById('status-2').textContent = '\u2713';
+        document.getElementById('status-2').className = 'status done';
+
+        renderGateResults();
+        renderSeedBank();
+        drawPlot();
+        updateDecisionButtons();
+        goRoom(3);
+
+    } catch (e) {
+        status.textContent = 'Error: ' + e.message;
+        dbg('compile error', e.message);
+    } finally {
+        btn.disabled = false;
+    }
+}
+
+// ====================================================================
+// ROOM 3: GATE RESULTS
+// ====================================================================
+function renderGateResults() {
+    const gr = state.gateResult;
+    const box = document.getElementById('verdict-box');
+    box.className = 'verdict ' + (gr.passed ? 'pass' : 'fail');
+    box.textContent = gr.passed ? 'ALL GATES PASSED' : 'FAILED';
+
+    document.getElementById('status-3').textContent = gr.passed ? '\u2713' : '\u2717';
+    document.getElementById('status-3').className = 'status ' + (gr.passed ? 'done' : 'fail');
+
+    const container = document.getElementById('gate-results');
+    container.innerHTML = '';
+    gr.gates.forEach(g => {
+        const div = document.createElement('div');
+        div.className = 'gate-result ' + (g.passed ? 'pass' : 'fail');
+        div.innerHTML = `
+            <div class="gate-name">${g.passed ? '\u2713' : '\u2717'} ${g.name}</div>
+            <div class="gate-detail">${g.detail}</div>
+        `;
+        container.appendChild(div);
+    });
+
+    document.getElementById('current-seed').textContent = state.seed;
+    renderDesignSignals(gr.metrics || null);
+    updateDecisionButtons();
+}
+
+function renderDesignSignals(metrics) {
+    if (!metrics) {
+        document.getElementById('signal-midpoint').textContent = '--';
+        document.getElementById('signal-subanchor').textContent = '--';
+        document.getElementById('signal-qdiff').textContent = '--';
+        document.getElementById('signal-occupied').textContent = '--';
+        return;
+    }
+    document.getElementById('signal-midpoint').textContent = `${Number(metrics.midpoint_peak_db).toFixed(1)} dB`;
+    document.getElementById('signal-subanchor').textContent = `${Number(metrics.sub_anchor_delta_db).toFixed(2)} dB`;
+    document.getElementById('signal-qdiff').textContent = `${Number(metrics.q_diff_rms_db).toFixed(2)} dB`;
+    document.getElementById('signal-occupied').textContent = `${metrics.occupied_band_count} bands / ${metrics.occupied_peak_count} peaks`;
+}
+
+// ====================================================================
+// PLOT — Frequency response (morph sweep at selected Q)
+// ====================================================================
+let plotData = null;
+let referencePlotData = null;
+
+function drawPlot() {
+    if (!state.compiled) return;
+    plotData = state.compiled;
+    redrawPlot();
+}
+
+function redrawPlot() {
+    if (!plotData) return;
+    const canvas = document.getElementById('plot-canvas');
+    const ctx = canvas.getContext('2d');
+    const W = canvas.width, H = canvas.height;
+    ctx.fillStyle = '#0a0a0a';
+    ctx.fillRect(0, 0, W, H);
+
+    const freqs = plotData.freqs;
+    const qVal = parseFloat(document.getElementById('plot-q').value);
+    const view = document.getElementById('plot-view').value;
+
+    // Filter sweep points for selected Q
+    const curves = plotData.sweep.filter(p => Math.abs(p.q - qVal) < 0.01);
+    if (!curves.length) return;
+    const refCurves = referencePlotData ? referencePlotData.sweep.filter(p => Math.abs(p.q - qVal) < 0.01) : [];
+
+    // Freq range: 20 to 20000 (log scale)
+    const fMin = Math.log10(20), fMax = Math.log10(20000);
+    // dB range: -40 to +40
+    const dbMin = -40, dbMax = 40;
+
+    function xOf(f) { return (Math.log10(f) - fMin) / (fMax - fMin) * W; }
+    function yOf(db) { return H - (db - dbMin) / (dbMax - dbMin) * H; }
+
+    // Grid
+    ctx.strokeStyle = '#1a2a1a';
+    ctx.lineWidth = 0.5;
+    [100, 1000, 10000].forEach(f => {
+        const x = xOf(f);
+        ctx.beginPath(); ctx.moveTo(x, 0); ctx.lineTo(x, H); ctx.stroke();
+    });
+    [-20, 0, 20].forEach(db => {
+        const y = yOf(db);
+        ctx.beginPath(); ctx.moveTo(0, y); ctx.lineTo(W, y); ctx.stroke();
+    });
+
+    // 0 dB line
+    ctx.strokeStyle = '#335533';
+    ctx.lineWidth = 1;
+    const y0 = yOf(0);
+    ctx.beginPath(); ctx.moveTo(0, y0); ctx.lineTo(W, y0); ctx.stroke();
+
+    // Morph curves: M0 = blue, M25 = cyan, M50 = green, M75 = yellow, M100 = red
+    const colors = ['#4466ff', '#44aacc', '#33ff33', '#cccc33', '#ff4444'];
+    if (view === 'reference' || view === 'both') {
+        refCurves.forEach((curve, ci) => {
+            ctx.save();
+            ctx.setLineDash([6, 4]);
+            ctx.strokeStyle = '#ffb000';
+            ctx.globalAlpha = 0.75 - (ci * 0.08);
+            ctx.lineWidth = 1.2;
+            ctx.beginPath();
+            for (let i = 0; i < freqs.length; i++) {
+                const x = xOf(freqs[i]);
+                const y = yOf(Math.max(dbMin, Math.min(dbMax, curve.db[i])));
+                if (i === 0) ctx.moveTo(x, y); else ctx.lineTo(x, y);
+            }
+            ctx.stroke();
+            ctx.restore();
+        });
+    }
+    if (view === 'candidate' || view === 'both') {
+        curves.forEach((curve, ci) => {
+            ctx.strokeStyle = colors[ci] || '#ffffff';
+            ctx.lineWidth = 1.5;
+            ctx.beginPath();
+            for (let i = 0; i < freqs.length; i++) {
+                const x = xOf(freqs[i]);
+                const y = yOf(Math.max(dbMin, Math.min(dbMax, curve.db[i])));
+                if (i === 0) ctx.moveTo(x, y); else ctx.lineTo(x, y);
+            }
+            ctx.stroke();
+        });
+    }
+
+    // Legend
+    ctx.font = '10px Courier New';
+    const labels = ['M0', 'M25', 'M50', 'M75', 'M100'];
+    labels.forEach((l, i) => {
+        if (i >= curves.length && i >= refCurves.length) return;
+        ctx.fillStyle = colors[i];
+        ctx.fillText(l, 10 + i * 60, 14);
+    });
+    if (referencePlotData) {
+        ctx.fillStyle = '#ffb000';
+        ctx.fillText('REF', 10 + labels.length * 60, 14);
+    }
+
+    // Axis labels
+    ctx.fillStyle = '#446644';
+    ctx.font = '9px Courier New';
+    ctx.fillText('20', xOf(20) - 4, H - 3);
+    ctx.fillText('100', xOf(100) - 6, H - 3);
+    ctx.fillText('1k', xOf(1000) - 4, H - 3);
+    ctx.fillText('10k', xOf(10000) - 8, H - 3);
+    ctx.fillText('+40', 2, yOf(40) + 3);
+    ctx.fillText('0', 2, yOf(0) + 3);
+    ctx.fillText('-40', 2, yOf(-40) + 3);
+}
+
+async function fetchBodySweep(body) {
+    const resp = await fetch(API + '/hostile/sweep', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ body }),
+    });
+    if (!resp.ok) throw new Error(await resp.text());
+    return await resp.json();
+}
+
+async function loadReferenceList() {
+    const select = document.getElementById('ref-select');
+    select.innerHTML = '<option value="">(none)</option>';
+    try {
+        const resp = await fetch(API + '/vault');
+        if (!resp.ok) throw new Error(await resp.text());
+        const names = await resp.json();
+        names.forEach(name => {
+            const opt = document.createElement('option');
+            opt.value = name;
+            opt.textContent = name;
+            select.appendChild(opt);
+        });
+    } catch (e) {
+        dbg('reference list error', e.message);
+    }
+}
+
+async function loadReference() {
+    const name = document.getElementById('ref-select').value;
+    if (!name) {
+        state.reference = { name: '', body: null, sweep: null };
+        referencePlotData = null;
+        redrawPlot();
+        return;
+    }
+    const status = document.getElementById('save-status');
+    try {
+        const rf = await fetch(API + `/vault/file?relative_path=${encodeURIComponent(name + '.json')}`);
+        if (!rf.ok) throw new Error(await rf.text());
+        const rj = await rf.json();
+        state.reference.name = name;
+        state.reference.body = rj.data;
+        state.reference.sweep = await fetchBodySweep(rj.data);
+        referencePlotData = state.reference.sweep;
+        status.textContent = `Loaded reference: ${name}`;
+        redrawPlot();
+    } catch (e) {
+        status.textContent = `Reference load error: ${e.message}`;
+    }
+}
+
+// ====================================================================
+// SEED BANK + AGAIN
+// ====================================================================
+function renderSeedBank() {
+    const container = document.getElementById('seed-bank');
+    container.innerHTML = '';
+    state.seedBank.forEach((s) => {
+        const chip = document.createElement('span');
+        chip.className = 'seed-chip' + (s.seed === state.seed ? ' active' : '');
+        chip.textContent = '#' + s.seed + (s.passed ? ' \u2713' : ' \u2717');
+        chip.style.color = s.passed ? 'var(--pass)' : 'var(--fail)';
+        chip.onclick = () => {
+            state.seed = s.seed;
+            compileAndGate();
+        };
+        container.appendChild(chip);
+    });
+}
+
+async function again() {
+    if (state.compiled && state.gateResult) {
+        await logTriageDecision('again', null);
+    }
+    reseedAndCompile();
+}
+
+function reseedAndCompile() {
+    state.seed = Math.floor(Math.random() * 100000);
+    // Apply small random perturbation to pole/zero frequencies
+    state.stages.forEach(s => {
+        const jitter = 1 + (Math.random() - 0.5) * 0.10; // +-5%
+        if (s.pole_hz != null) {
+            s.pole_hz = Math.round(Math.max(20, Math.min(18000, s.pole_hz * jitter)));
+        }
+        if (s.pole_hz_b != null) {
+            s.pole_hz_b = Math.round(Math.max(20, Math.min(18000, s.pole_hz_b * jitter)));
+        }
+        if (s.zero_hz != null) {
+            s.zero_hz = Math.round(Math.max(20, Math.min(18000, s.zero_hz * jitter)));
+        }
+        if (s.zero_hz_b != null) {
+            s.zero_hz_b = Math.round(Math.max(20, Math.min(18000, s.zero_hz_b * jitter)));
+        }
+    });
+    renderStageGrid();
+    compileAndGate();
+}
+
+// ====================================================================
+// KEEP / REJECT / TRIAGE
+// ====================================================================
+async function keepCandidate() {
+    if (!state.compiled) return;
+    if (!state.gateResult || !state.gateResult.passed) {
+        const failures = getGateFailures();
+        document.getElementById('save-status').textContent = `KEEP blocked: ${failures.join(', ') || 'gate failure'}`;
+        return;
+    }
+    const status = document.getElementById('save-status');
+    try {
+        const keepName = `${state.intent.name}_keep_${Date.now()}`;
+        const resp = await fetch(API + '/export', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ body: state.compiled.body, name: keepName }),
+        });
+        if (!resp.ok) throw new Error(await resp.text());
+        const data = await resp.json();
+        await logTriageDecision('keep', data.path);
+        status.textContent = 'KEEP saved: ' + data.path;
+    } catch (e) {
+        status.textContent = 'KEEP error: ' + e.message;
+    }
+}
+
+async function rejectCandidate() {
+    if (!state.compiled || !state.gateResult) return;
+    const status = document.getElementById('save-status');
+    try {
+        await logTriageDecision('reject', null);
+        status.textContent = 'REJECT logged. Resampling...';
+        reseedAndCompile();
+    } catch (e) {
+        status.textContent = 'REJECT error: ' + e.message;
+    }
+}
+
+function getGateFailures() {
+    if (!state.gateResult || !state.gateResult.gates) return [];
+    return state.gateResult.gates.filter(g => !g.passed).map(g => g.name);
+}
+
+async function logTriageDecision(decision, exportPath) {
+    if (!state.triage.sessionId || !state.gateResult) return;
+    const latencyMs = state.currentCandidateReadyAtMs
+        ? Math.max(0, Math.round(performance.now() - state.currentCandidateReadyAtMs))
+        : 0;
+    const payload = {
+        session_id: state.triage.sessionId,
+        decision,
+        candidate_name: (state.compiled && state.compiled.body && state.compiled.body.name) || state.intent.name,
+        gate_passed: !!state.gateResult.passed,
+        compile_ms: state.currentCompileMs || 0,
+        decision_latency_ms: latencyMs,
+        gate_failures: getGateFailures(),
+        debug_open_count: state.debugOpenCount,
+        export_path: exportPath,
+        notes: '',
+    };
+    const resp = await fetch(API + '/hostile/triage/decision', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
+    });
+    if (!resp.ok) throw new Error(await resp.text());
+    const summary = await resp.json();
+    state.triage.summary = summary;
+    state.currentCandidateReadyAtMs = 0;
+    renderTriageSummary(summary);
+    dbg('triage decision', payload);
+}
+
+function renderTriageSummary(summary) {
+    document.getElementById('triage-session').textContent = summary && summary.session_id ? summary.session_id : 'not started';
+    document.getElementById('triage-total').textContent = summary ? summary.total_decisions : 0;
+    document.getElementById('triage-keep').textContent = summary ? summary.keep_count : 0;
+    document.getElementById('triage-reject').textContent = summary ? summary.reject_count : 0;
+    document.getElementById('triage-again').textContent = summary ? summary.again_count : 0;
+    const passRate = summary ? (100.0 * (summary.gate_pass_rate || 0.0)).toFixed(2) : '0.00';
+    document.getElementById('triage-pass-rate').textContent = `${passRate}%`;
+    document.getElementById('triage-k20').textContent = summary ? Number(summary.keeps_per_20 || 0).toFixed(2) : '0.00';
+    document.getElementById('triage-first-keep').textContent = summary && summary.time_to_first_keep_s != null
+        ? `${Number(summary.time_to_first_keep_s).toFixed(2)}s`
+        : '--';
+    document.getElementById('triage-decision-med').textContent = summary && summary.median_decision_latency_ms != null
+        ? `${Number(summary.median_decision_latency_ms).toFixed(0)}ms`
+        : '--';
+    document.getElementById('triage-debug').textContent = summary ? summary.debug_open_count : state.debugOpenCount;
+}
+
+function updateDecisionButtons() {
+    const hasCandidate = !!state.compiled && !!state.gateResult;
+    const keepBtn = document.getElementById('btn-keep');
+    const rejectBtn = document.getElementById('btn-reject');
+    const againBtn = document.getElementById('btn-again');
+    keepBtn.disabled = !hasCandidate || !state.gateResult.passed;
+    rejectBtn.disabled = !hasCandidate;
+    againBtn.disabled = !hasCandidate;
+}
+
+async function refreshTriageSummary() {
+    if (!state.triage.sessionId) return;
+    const resp = await fetch(API + `/hostile/triage/${encodeURIComponent(state.triage.sessionId)}`);
+    if (!resp.ok) throw new Error(await resp.text());
+    const summary = await resp.json();
+    state.triage.summary = summary;
+    renderTriageSummary(summary);
+}
+
+// ====================================================================
+// DEBUG DRAWER (Ctrl+D)
+// ====================================================================
+function dbg(label, data) {
+    const ts = new Date().toISOString().slice(11, 23);
+    const entry = `[${ts}] ${label}: ${typeof data === 'string' ? data : JSON.stringify(data, null, 2)}`;
+    state.debugLog.push(entry);
+    const el = document.getElementById('debug-log');
+    if (el) el.textContent = state.debugLog.join('\n\n');
+}
+
+function toggleDebug() {
+    const drawer = document.getElementById('debug-drawer');
+    const opening = !drawer.classList.contains('open');
+    drawer.classList.toggle('open');
+    if (opening) {
+        state.debugOpenCount += 1;
+        if (state.triage.summary) {
+            state.triage.summary.debug_open_count = state.debugOpenCount;
+            renderTriageSummary(state.triage.summary);
+        }
+    }
+}
+
+document.addEventListener('keydown', e => {
+    if (e.ctrlKey && e.key === 'd') {
+        e.preventDefault();
+        toggleDebug();
+    }
+});
+
+// ====================================================================
+// INIT
+// ====================================================================
+dbg('hostile mode', 'initialized');
+updateDecisionButtons();
+renderDesignSignals(null);
+loadReferenceList();
+</script>
+</body>
+</html>

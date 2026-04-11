@@ -1,0 +1,251 @@
+{
+  "name": "P2k_029",
+  "source": "cartridges\\p2k\\P2k_029.json",
+  "sample_rate": 39062.5,
+  "boost": 4.0,
+  "corners": {
+    "M0_Q0": {
+      "stages": [
+        {
+          "pole_hz": 79.4,
+          "pole_r": 0.962199,
+          "zero_hz": 2315.6,
+          "zero_r": 0.914346,
+          "stage": 1
+        },
+        {
+          "pole_hz": 17683.3,
+          "pole_r": 0.990192,
+          "zero_hz": 2895.7,
+          "zero_r": 0.857063,
+          "stage": 2
+        },
+        {
+          "pole_hz": 478.6,
+          "pole_r": 0.976293,
+          "zero_hz": 13366.6,
+          "zero_r": 0.883935,
+          "stage": 3
+        },
+        {
+          "pole_hz": 13057.8,
+          "pole_r": 0.975292,
+          "zero_hz": 15232.0,
+          "zero_r": 0.800503,
+          "stage": 4
+        },
+        {
+          "pole_hz": 15675.4,
+          "pole_r": 0.964227,
+          "zero_hz": 17432.6,
+          "zero_r": 0.914348,
+          "stage": 5
+        },
+        {
+          "pole_hz": 0.0,
+          "pole_r": 0.125973,
+          "zero_hz": 6729.9,
+          "zero_r": 0.999998,
+          "stage": 6
+        }
+      ],
+      "response": {
+        "peak_db": -0.0,
+        "notch_db": -117.2,
+        "dynamic_range_db": 117.1,
+        "centroid_hz": 133.5,
+        "num_peaks": 3,
+        "num_notches": 3
+      }
+    },
+    "M0_Q100": {
+      "stages": [
+        {
+          "pole_hz": 9432.7,
+          "pole_r": 0.95609,
+          "zero_hz": 1395.0,
+          "zero_r": 0.939605,
+          "stage": 1
+        },
+        {
+          "pole_hz": 357.5,
+          "pole_r": 0.969266,
+          "zero_hz": 426.0,
+          "zero_r": 0.954045,
+          "stage": 2
+        },
+        {
+          "pole_hz": 3162.2,
+          "pole_r": 0.760466,
+          "zero_hz": 4169.6,
+          "zero_r": 0.847899,
+          "stage": 3
+        },
+        {
+          "pole_hz": 6628.7,
+          "pole_r": 0.857064,
+          "zero_hz": 6458.0,
+          "zero_r": 0.870577,
+          "stage": 4
+        },
+        {
+          "pole_hz": 4275.1,
+          "pole_r": 0.829267,
+          "zero_hz": 9469.0,
+          "zero_r": 0.949942,
+          "stage": 5
+        },
+        {
+          "pole_hz": 1036.1,
+          "pole_r": 0.888343,
+          "zero_hz": 6947.9,
+          "zero_r": 0.999997,
+          "stage": 6
+        }
+      ],
+      "response": {
+        "peak_db": 0.8,
+        "notch_db": -52.5,
+        "dynamic_range_db": 53.3,
+        "centroid_hz": 749.8,
+        "num_peaks": 1,
+        "num_notches": 2
+      }
+    },
+    "M100_Q0": {
+      "stages": [
+        {
+          "pole_hz": 5092.7,
+          "pole_r": 0.927074,
+          "zero_hz": 414.7,
+          "zero_r": 0.960167,
+          "stage": 1
+        },
+        {
+          "pole_hz": 1377.2,
+          "pole_r": 0.998596,
+          "zero_hz": 1231.2,
+          "zero_r": 0.9622,
+          "stage": 2
+        },
+        {
+          "pole_hz": 2282.3,
+          "pole_r": 0.995844,
+          "zero_hz": 2206.7,
+          "zero_r": 0.954045,
+          "stage": 3
+        },
+        {
+          "pole_hz": 4139.4,
+          "pole_r": 0.986734,
+          "zero_hz": 3189.4,
+          "zero_r": 0.96625,
+          "stage": 4
+        },
+        {
+          "pole_hz": 3249.5,
+          "pole_r": 0.993881,
+          "zero_hz": 4244.0,
+          "zero_r": 0.974291,
+          "stage": 5
+        },
+        {
+          "pole_hz": 257.1,
+          "pole_r": 0.998963,
+          "zero_hz": 17960.8,
+          "zero_r": 0.999998,
+          "stage": 6
+        }
+      ],
+      "response": {
+        "peak_db": 24.3,
+        "notch_db": -83.4,
+        "dynamic_range_db": 107.6,
+        "centroid_hz": 1050.5,
+        "num_peaks": 6,
+        "num_notches": 6
+      }
+    },
+    "M100_Q100": {
+      "stages": [
+        {
+          "pole_hz": 12781.3,
+          "pole_r": 0.958131,
+          "zero_hz": 12366.8,
+          "zero_r": 0.931279,
+          "stage": 1
+        },
+        {
+          "pole_hz": 1171.6,
+          "pole_r": 0.988712,
+          "zero_hz": 0.0,
+          "zero_r": 0.649708,
+          "stage": 2
+        },
+        {
+          "pole_hz": 10124.1,
+          "pole_r": 0.97429,
+          "zero_hz": 11099.0,
+          "zero_r": 0.951995,
+          "stage": 3
+        },
+        {
+          "pole_hz": 11369.5,
+          "pole_r": 0.970273,
+          "zero_hz": 12237.2,
+          "zero_r": 0.684832,
+          "stage": 4
+        },
+        {
+          "pole_hz": 8592.7,
+          "pole_r": 0.960167,
+          "zero_hz": 8720.9,
+          "zero_r": 0.750122,
+          "stage": 5
+        },
+        {
+          "pole_hz": 14876.5,
+          "pole_r": 0.649707,
+          "zero_hz": 8787.9,
+          "zero_r": 0.999998,
+          "stage": 6
+        }
+      ],
+      "response": {
+        "peak_db": 37.7,
+        "notch_db": -0.3,
+        "dynamic_range_db": 38.1,
+        "centroid_hz": 3284.7,
+        "num_peaks": 3,
+        "num_notches": 3
+      }
+    }
+  },
+  "motion": {
+    "morph_at_Q0": {
+      "peak_db": 24.3,
+      "dynamic_range_db": -9.5,
+      "centroid_hz": 917.0
+    },
+    "morph_at_Q100": {
+      "peak_db": 36.9,
+      "dynamic_range_db": -15.2,
+      "centroid_hz": 2534.9
+    },
+    "Q_at_M0": {
+      "peak_db": 0.8,
+      "dynamic_range_db": -63.8,
+      "centroid_hz": 616.3
+    },
+    "Q_at_M100": {
+      "peak_db": 13.4,
+      "dynamic_range_db": -69.5,
+      "centroid_hz": 2234.2
+    },
+    "diagonal": {
+      "peak_db": 37.7,
+      "dynamic_range_db": -79.0,
+      "centroid_hz": 3151.2
+    }
+  }
+}

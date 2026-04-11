@@ -14,3 +14,7 @@ trench_live.json
 /.claude/
 /.vscode/
 /_ui_overlay_iter/
+/.agents/
+/.cargo/
+/dev/tmp/
+/trench-juce/
