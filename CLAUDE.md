@@ -1,116 +1,78 @@
 # TRENCH
 
-TRENCH is a cartridge-based morph filter plugin. It is not a parametric EQ, not an RBJ filter playground, and not a generic morphing UI.
-
-## 1. ROLE
-
+## Role
 - I own sound, taste, UX, product identity, and final musical judgment.
-- You own code, math, implementation, debugging, and verification.
-- Do the work. No preamble. No planning doc. No vague summaries.
+- You own code, math, implementation, debugging, verification, and cleanup.
+- Do the work. No planning doc. No vague summary layer between you and the task.
 
-## 2. CORE MENTAL MODEL
+## Ground truth stack
+- Law (never drift): `SPEC.md`
+- Live repo index (machine-readable): `REPO_TRUTH.json`
+- Human jump table (readable): `REPO_TRUTH.md`
+- Shipping gate + checklist: `SHIPPING.md`
+- Local subtree rules (read before editing):
+  - `trench-core/CLAUDE.md`
+  - `pyruntime/CLAUDE.md`
 
-- A TRENCH filter is not one static curve. It is movement between authored spectral states.
-- Think in terms of `Frame A` and `Frame B`:
-  `Frame A` = closed / dark / low state
-  `Frame B` = open / bright / aggressive state
-- `MORPH` is travel between states.
-- `Q` is aggression / emphasis behavior across that travel.
-- `TYPE` selects the authored body.
-- Judge filters by motion, not by static plots alone.
+## What we are doing (modes)
+### Shape Bank mode (DEFAULT right now)
+- We are collecting **shapes**: static sonic locations + explicitly authored trajectories.
+- **Static targets are valid by definition.** Do not score, rank, prune, or “optimize them away”.
+- Your job is to produce correct artifacts and keep the index truthful, not to curate taste.
 
-## 3. AUTHORING RULES
+### Trajectory mode (only when explicitly requested)
+- When authoring a morph journey, judge the **trajectory**; a single static plot is insufficient.
+- Motion judgement applies **only** to trajectories, not to the whole project by default.
 
-- Author the gesture, not the screenshot.
-- `Shelf` is a tone-shape continuum, not a rigid textbook selector.
-- `Freq` is context-dependent and only makes sense after `Shelf` is chosen.
-- `Peak` is not just loudness. It controls bite, emphasis, and perceived energy through the sweep.
-- Good body:
-  `Frame A` works
-  `Frame B` works
-  the path between them is intentional
-- Bad body:
-  dead middle
-  accidental harsh jump
-  level collapse
-  fake excitement caused by bad gain staging
+### Operator mode (repo hygiene / reproducibility)
+- Refactors, plumbing, indexing, fixing broken paths, and making runs reproducible.
+- Prefer mechanical enforcement over “remembering”: stubs/mirrors, single canonical truth files, and regenerated inventories.
 
-Authoring order:
-- choose the musical role
-- define `Frame A`
-- define `Frame B`
-- set `Shelf`
-- set `Freq`
-- set `Peak`
-- sweep-test the motion
+### Shipping mode (when working on release bodies)
+- Follow `SPEC.md` + `SHIPPING.md`. Shipping bodies must satisfy the release gate and product law.
+- If Shape Bank rules conflict with Shipping rules, Shipping rules win for shipping bodies.
 
-Never:
-- tune `Freq` before `Shelf`
-- judge from plots alone
-- use `Peak` to hide bad spectral behavior
+## Core model (always true)
+- TRENCH is a cartridge-based morph filter instrument.
+- MORPH = travel between authored spectral states.
+- Q = aggression / emphasis behavior across that travel.
+- TYPE = selects the authored body.
 
-## 4. FROZEN DSP INVARIANTS
+## Working rules
+- Treat the current filesystem, build wiring, imports/includes, registrations, and runtime call sites as the highest authority.
+- If `SPEC.md`, `REPO_TRUTH.json`, `REPO_TRUTH.md`, `CLAUDE.md`, and `AGENTS.md` disagree with the repo, report the conflict explicitly and follow verified wiring.
+- Prefer build-wired and runtime-wired truth over orphaned files, old notes, or nearby filenames.
+- Treat legacy, prototype, graveyard, and research-only paths as non-canonical unless promoted in `REPO_TRUTH.md`.
+- Pick the shortest path to a verified result.
+- Do not claim something works unless you ran it.
 
-- Topology: 12-stage serial DF2T cascade. Exactly 6 active + 6 passthrough.
-- Math: kernel-form `[c0, c1, c2, c3, c4]` interpolation only.
-- Order: 4-corner bilinear interpolation. Evaluate Q first, then morph.
-- Runtime: 32-sample control blocks with per-sample coefficient ramping.
-- Rates: authoring = `39062.5 Hz`, plugin runtime = `44100 Hz`.
-
-Exact DF2T form:
-- `y = c0*x + w1`
-- `w1 = c1*x - c3*y + w2`
-- `w2 = c2*x - c4*y`
-
-## 4b. AUTHORING VOCABULARY
-
-The heritage authoring interface is 6 stages × 5 integers on a 0–127 grid:
-`(type, low_freq, low_gain, high_freq, high_gain)` per stage.
-
-- `low_*` = morph=0 endpoint. `high_*` = morph=100 endpoint.
-- `type` (0–3): selects the pole recipe (Type 1 resonator, Type 2 shelf, Type 3 formant anchor).
-- The compiler converts these integers to stable cascade coefficients.
-- This is the exact vocabulary E-mu engineers used to author the original 289 Morpheus cubes.
-- Morpheus cubes are 2-endpoint (morph only), poles only, Q degenerate.
-- P2K skins extended this to 4 independent corners (morph × Q) with zero placement.
-- The runtime basis is `x(m,q) = A + q·Δq + m·Δm + mq·Δmq`.
-- Δmq (the cross-term) is zero in Morpheus cubes, load-bearing in P2K skins.
-
-Use the forge for body generation. Score candidates with the trajectory/continuity fitness stack, not by ear alone.
-
-## 5. HARD BANS
-
+## Hard bans
 - No RBJ cookbook for character filters.
 - No compensation layers, fudge factors, or arbitrary saturation to rescue bad math.
-- No parallel paths. The engine is rigid serial cascade only.
-- No new abstractions unless they are directly justified by proven behavior or hard implementation need.
+- No parallel engine paths unless explicitly proven and approved.
 - No gain baked into `c4`.
-- No pole sanitization unless a failing test proves instability.
-- No new dependencies in `Cargo.toml` without asking.
-- No shipping verbatim heritage extractions as presets.
+- No unapproved dependency changes.
+- No shipping verbatim heritage extractions.
+- No pole sanitization without a written failing test proving instability.
 
-## 6. WORKFLOW
-
-- Pick the shortest path to a verified result.
-- If the request is to build, implement first.
+## Verification discipline
 - If the audible path changes, state exactly what changed and why.
-- Do not claim something works unless you ran it.
-- Measure -> characterize -> validate -> then promote to policy.
-- Read `trench-core/CLAUDE.md` before editing `trench-core/`.
+- If spectral math changes, state exactly what changed and why.
+- When multiple implementations exist, determine the active one from build/runtime evidence before editing.
+- When docs are stale, say so plainly and continue from verified repo truth.
 
-## 7. REPO MAP
+## Repo truth resolution
+Resolve these from the live repo before relying on them:
+- active shipping plugin path
+- active build/test commands
+- canonical runtime path
+- canonical authoring/forge path
+- quarantined or research-only paths
 
-- `trench-core/` = DSP spine, interpolation, cascade, ramping
-- `trench-codec/` = minifloat codec
-- `pyruntime/` = forge / authoring / solver / analysis tools
-- `cartridges/` = compiled body JSON (P2K extractions, heritage quarantine)
-- `vault/` = forge output, shipping finalists, scorecards, diagnostics
-- `tools/` = scripts and validation harnesses
-- JUCE plugin = separate repo at `../trench-juce/plugin/` (shipping path)
+Do not turn unresolved repo guesses into doctrine.
 
-## 8. STOP AND ASK
-
-Stop and ask if:
-- the DSP or audible path changes materially
-- a shortcut creates architectural debt
-- it is unclear whether behavior is a bug or a deliberate betrayal in the filter design
+## Stop and ask if
+- A change materially alters DSP/audible behavior (not just refactor).
+- A change modifies topology, interpolation order, or cartridge format.
+- A change adds/changes dependencies or introduces audio-thread allocation/locking.
+- There are competing implementations and build-wired truth is unclear.

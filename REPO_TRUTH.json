@@ -1,0 +1,133 @@
+{
+  "schema": "trench.repo_truth.v1",
+  "generated_at": "2026-04-12T18:55:21",
+  "repo_root_abs": "C:\\Users\\hooki\\Trench",
+  "canonical": {
+    "agents": "AGENTS.md",
+    "claude": "CLAUDE.md",
+    "spec": "SPEC.md",
+    "shipping": "SHIPPING.md",
+    "repo_truth_md": "REPO_TRUTH.md",
+    "codebase_map": "CODEBASE_MAP.md",
+    "dsp_rules": "trench-core/CLAUDE.md",
+    "pyruntime_rules": "pyruntime/CLAUDE.md",
+    "shapes_readme": "vault/_shapes/README.md",
+    "phonemes_readme": "vault/_phonemes/README.md"
+  },
+  "entrypoints": {
+    "rust_workspace": "Cargo.toml",
+    "python_api": "pyruntime/api.py",
+    "python_tools_dir": "tools/",
+    "juce_repo_dir": "trench-juce/",
+    "juce_plugin_repo_dir": "trench-juce/plugin/"
+  },
+  "verification": {
+    "rust": [
+      "cargo test --workspace",
+      "cargo clippy --workspace --all-targets -- -D warnings"
+    ],
+    "python": [
+      "python -m pytest tests/test_api.py -v"
+    ],
+    "shape_bank": [
+      "python tools/author_sonic_bank.py --pairs --out-root vault/_shapes"
+    ]
+  },
+  "data_products": {
+    "sonic_tables": {
+      "tables": "docs/sonic_tables/tables.json",
+      "tables_bark": "docs/sonic_tables/tables_bark.json",
+      "heritage_phonemes": "docs/sonic_tables/heritage_phonemes.json",
+      "unified_bark": "docs/sonic_tables/sonic_tables_unified_bark.json"
+    },
+    "shape_bank": {
+      "root": "vault/_shapes/",
+      "manifest": "vault/_shapes/manifest.json",
+      "manifest_unified": "vault/_shapes/manifest_unified.json",
+      "catalog": "vault/_shapes/shape_bank_catalog.json",
+      "catalog_unified": "vault/_shapes/shape_bank_catalog_unified.json",
+      "palette": "vault/_shapes/palette.jsonl",
+      "palette_unified": "vault/_shapes/palette_unified.jsonl",
+      "counts": {
+        "total_bodies": 370,
+        "static_bodies": 50,
+        "pair_bodies": 320,
+        "by_category": {
+          "consonants": 4,
+          "electronic": 2,
+          "heritage_phonemes": 7,
+          "instruments": 7,
+          "landmarks": 10,
+          "measured_bells": 4,
+          "moog": 3,
+          "nasals": 2,
+          "singer": 1,
+          "vowel_cons": 40,
+          "vowel_inst": 70,
+          "vowel_land": 100,
+          "vowel_nasal": 20,
+          "vowel_pairs": 90,
+          "vowels": 10
+        }
+      },
+      "counts_source": "vault/_shapes/manifest_unified.json"
+    },
+    "phonemes": {
+      "p2k_inventory_raw": "vault/_phonemes/p2k_phoneme_inventory.json",
+      "p2k_inventory_v2": "vault/_phonemes/p2k_phoneme_inventory_v2.json",
+      "p2k_aliases_v2": "vault/_phonemes/p2k_phoneme_aliases_v2.json",
+      "token_inventory_unified_v2": "vault/_phonemes/token_inventory_unified_v2.json",
+      "unified_sonic_inventory_v2": "vault/_phonemes/unified_sonic_inventory_v2.json",
+      "counts": {
+        "clusters": 32,
+        "unmapped": 0,
+        "heritage_fills": 7
+      }
+    }
+  },
+  "external_workspaces": [
+    {
+      "name": "trench_re_vault",
+      "path_abs": "C:\\Users\\hooki\\trench_re_vault",
+      "exists": true,
+      "git_repo": false,
+      "has_agents_md": true,
+      "has_claude_md": true,
+      "has_handoff_json": true,
+      "agents_first_line": "# DIRTY AIRLOCK — AGENTS.md (Tier A / Non-Shipping)",
+      "suggested_role": "DIRTY airlock (reverse-engineering / capture / extraction).",
+      "suggested_policy": "Read-only from CLEAN/shipping code. Promote only sanitized contracts into this repo."
+    },
+    {
+      "name": "trenchwork_clean",
+      "path_abs": "C:\\Users\\hooki\\trenchwork_clean",
+      "exists": true,
+      "git_repo": false,
+      "has_agents_md": true,
+      "has_claude_md": true,
+      "has_handoff_json": false,
+      "agents_first_line": "# TRENCHWORK AGENTS",
+      "suggested_role": "Separate CLEAN workspace snapshot (factory/tooling).",
+      "suggested_policy": "Treat as non-canonical here; copy-in only specific files with explicit intent + provenance."
+    }
+  ],
+  "non_canonical_dirs": [
+    "_GRAVEYARD/",
+    "dev/tmp/",
+    "target/",
+    "target-codex-vizia/"
+  ],
+  "existence_checks": {
+    "SPEC.md": true,
+    "SHIPPING.md": true,
+    "Cargo.toml": true,
+    "pyruntime/api.py": true,
+    "trench-juce/plugin": true,
+    "vault/_shapes/manifest.json": true,
+    "vault/_phonemes/p2k_phoneme_inventory_v2.json": true
+  },
+  "notes": [
+    "SPEC.md is the immutable law. REPO_TRUTH.json is the live index; update via tools/update_repo_truth.py after moving/renaming paths.",
+    "If docs disagree with build/runtime wiring, report the conflict explicitly and follow the build-wired truth."
+  ]
+}

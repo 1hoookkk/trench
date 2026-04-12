@@ -1,71 +1,61 @@
 # TRENCH
 
-Filter plugin by 1hook. MORPH / Q / TYPE. nih-plug VST3/CLAP.
+## Role
+- Human owns sound, taste, UX, product identity, and final musical judgment.
+- Agent owns code, math, implementation, debugging, verification, and cleanup.
+- Execute directly. No planning theater. No vague summaries.
 
-## 1. DIRECTIVES (Read Carefully)
+## Ground truth stack
+- Law (never drift): `SPEC.md`
+- Live repo index (machine-readable): `REPO_TRUTH.json`
+- Human jump table (readable): `REPO_TRUTH.md`
+- Shipping gate + checklist: `SHIPPING.md`
+- Local subtree rules (read before editing):
+  - `trench-core/CLAUDE.md`
+  - `pyruntime/CLAUDE.md`
 
-- **Direct Execution:** No preamble. No planning documents. Execute the requested change immediately.
-- **No Circling:** Focus on one specific deliverable at a time.
-- **No Truncation:** You must output fully qualified, copy-pasteable blocks. If you change a function, provide the ENTIRE function. No `// existing code` or `...rest` placeholders.
-- **Division of Labor:** I own sound, taste, UX, and product identity. You own code, math, implementation, and verification.
+## Modes
+### Shape Bank mode (DEFAULT right now)
+- Produce shapes (static sonic locations + explicit trajectories).
+- Static targets are valid by definition.
+- Do NOT score, rank, filter, prune, or “curate” outputs unless explicitly ordered.
 
-## 2. REPO STRUCTURE
+### Trajectory mode (only when explicitly requested)
+- When authoring a morph journey, judge by trajectory/motion; static plots alone are insufficient.
 
-```text
-trench-core/    [CRATE] DSP engine (read trench-core/AGENTS.md before editing)
-trench-codec/   [CRATE] Minifloat encode/decode
-trench-plugin/  [CRATE] nih-plug wrapper, GUI, runtime params
-pyruntime/      [PYTHON] Forge, c4 solver, offline authoring
-cartridges/     compiled-v1 JSON payloads
-tests/          Integration, null-tests against X3 reference audio
-tools/          Scripts, batch processors, validation harnesses
+### Operator mode (repo hygiene / reproducibility)
+- Refactors, plumbing, indexing, fixing broken paths, and making runs reproducible.
+- Prefer enforcement over memory: stubs/mirrors, a single canonical truth stack, regenerated inventories.
 
-3. VERIFICATION & BUILD
-Bash
+### Shipping mode
+- For release bodies, `SPEC.md` + `SHIPPING.md` win. Enforce gate/checklist.
 
-cargo test -p <crate>
-cargo clippy --workspace --all-targets -- -D warnings
+## Working posture
+- Treat the current filesystem, build wiring, imports/includes, registrations, and runtime call sites as the highest authority.
+- If docs and code disagree, report the conflict explicitly and follow build-wired/runtime-wired truth.
+- Treat orphaned files, experiments, graveyards, and legacy branches as non-canonical unless promoted in `REPO_TRUTH.md`.
+- Prefer the shortest path to a verified result.
+- Do not claim success unless you ran the relevant verification.
 
-    Null Targets: Static < -120 dB, Dynamic < -90 dB.
+## Output discipline
+- Return fully qualified, copy-pasteable code when changing functions or files.
+- Do not use placeholders like `...existing code...` unless explicitly asked for a sketch.
+- Focus on one concrete deliverable at a time unless the task clearly requires a sweep.
 
-    Prove It: Do not claim a change works unless you have run the code and verified the output. If the audible path or spectral math changes, state exactly what changed and why.
+## Hard bans
+- No RBJ cookbook for character filters.
+- No compensation layers, fudge factors, or arbitrary saturation to rescue bad math.
+- No parallel engine paths unless explicitly proven and approved.
+- No gain baked into `c4`.
+- No unapproved dependency changes.
+- No shipping verbatim heritage extractions.
+- No pole sanitization without a written failing test proving instability.
 
-4. THE INVARIANTS (Frozen, Do Not Deviate)
+## Verification
+- If the audible path or spectral math changes, state exactly what changed and why.
+- Verify with the repo’s actual active commands from `REPO_TRUTH.md`, not stale remembered commands.
+- When choosing between competing implementations, prefer the one wired into the current build or runtime.
 
-    Topology: 12-stage serial DF2T cascade. 6 active + 6 passthrough.
-
-    Math: Kernel-form [c0..c4] interpolation only.
-
-    Order: 4-corner bilinear interpolation. Evaluate Q-axis first, then morph-axis.
-
-    Runtime: 32-sample blocks, per-sample coefficient ramping.
-
-    Rates: Authoring = 39062.5 Hz. Plugin = 44100 Hz.
-
-5. STRICTLY BANNED
-
-    No Frameworks: Do not invent abstractions not directly derived from proven hardware data.
-
-    No Band-Aids: Do not add compensation layers, arbitrary saturation, or gain baked into c4 to "fix" plots. Fix the underlying math.
-
-    No Parallel Paths: The engine is a rigid serial cascade.
-
-    No RBJ Cookbook: Clean biquads are spectrally flat. Do not use them for character filters.
-
-    No Unapproved Deps: Do not modify Cargo.toml dependencies without asking.
-
-    No Shipping Heritage: P2K extractions are for dev/calibration only, not shipping presets. No E-mu branding.
-
-    No Pole Sanitization: Never sanitize poles without a written, failing test proving instability.
-
-6. SCOPE
-
-**Nothing is off-limits. Measure it. Build it. Ask me if it sounds right.**
-
-7. STOP AND ASK IF:
-
-    The DSP/audible path changes materially.
-
-    A proposed shortcut creates architectural debt.
-
-    You are unsure if a bug is an implementation error or a deliberate "betrayal" built into the engine's design.
+## Repo truth maintenance
+- Regenerate after moving/renaming entrypoints, paths, commands:
+  - `python tools/update_repo_truth.py`

@@ -84,6 +84,30 @@ def _stage_to_params(s: Stage) -> StageParams:
     return StageParams(a1=a1, r=r, val1=0.0, val2=val2, val3=val3)
 
 
+def _explicit_zero_vals(zero_hz: float, zero_r: float, pole_hz: float, pole_r: float) -> tuple[float, float]:
+    """Compute (val2, val3) so the stage's numerator places a zero pair at (zero_hz, zero_r).
+
+    Numerator: 1 - 2*rz*cos(θz)*z⁻¹ + rz²*z⁻²
+    Encoder:   b1 = a1 + val2,  b2 = r² - val3
+    Therefore: val2 = -2*rz*cos(θz) - a1
+               val3 = r² - rz²
+    """
+    theta_z = 2.0 * math.pi * max(20.0, min(SR / 2.0 - 1.0, zero_hz)) / SR
+    rz = max(0.0, min(1.0, zero_r))
+    theta_p = 2.0 * math.pi * max(20.0, min(SR / 2.0 - 1.0, pole_hz)) / SR
+    rp = max(0.0, min(0.999, pole_r))
+    a1 = -2.0 * rp * math.cos(theta_p)
+    val2 = -2.0 * rz * math.cos(theta_z) - a1
+    val3 = rp * rp - rz * rz
+    return val2, val3
+
+
+def _stage_with_zero(pole_hz: float, pole_r: float, zero_hz: float, zero_r: float) -> Stage:
+    """Build a Stage with explicit zero placement (Six-Zero Comb / interior zeros)."""
+    val2, val3 = _explicit_zero_vals(zero_hz, zero_r, pole_hz, pole_r)
+    return Stage(freq_hz=pole_hz, radius=pole_r, val2=val2, val3=val3)
+
+
 def _apply_stage(base: Stage, df: float, dr: float, jf: float, jr: float) -> Stage:
     """Apply morph/Q delta + jitter to a base stage."""
     return Stage(
@@ -403,6 +427,159 @@ _reg(Blueprint(
        (-6000.0, 0.005), (500.0, 0.005), (-4500.0, 0.005)],
 ))
 
+# ─────────────────────────────────────────────────────────────────────────
+# UNEXPLORED TERRITORY BLUEPRINTS — bypass vocal-safety bias
+# ─────────────────────────────────────────────────────────────────────────
+
+# ── SIX-ZERO COMB (Inharmonic Subtraction) ──────────────────────────────
+# Six unit-circle zeros at prime-fraction angles. Poles killed (r=0.05).
+# Pure FIR-like notch comb. Inharmonic distribution = struck-rod texture.
+def _build_six_zero_comb() -> Blueprint:
+    base_hz = 220.0
+    primes = [2, 3, 5, 7, 11, 13]
+    nyq = SR / 2.0 - 1.0
+    pole_r = 0.05  # killed but not zero (avoid denormals)
+    anchor: list[Stage] = []
+    for p in primes:
+        zero_hz = min(nyq, base_hz * (p / primes[0]))
+        # Pole co-located with zero (kept inactive by tiny radius)
+        anchor.append(_stage_with_zero(pole_hz=zero_hz, pole_r=pole_r,
+                                        zero_hz=zero_hz, zero_r=1.0))
+    # Q axis: tighten zero radii toward 0.95 (less violent comb, more ringing)
+    # Morph axis: shift base frequency upward for the whole comb
+    morph_deltas = [(zh := min(nyq, base_hz * (p / primes[0]) * 1.6) - base_hz * (p / primes[0]), 0.0) for p in primes]
+    q_deltas = [(0.0, 0.0)] * 6
+    return Blueprint(
+        name="Six Zero Comb",
+        sentence="SIX-ZERO COMB. Prime-fraction inharmonic notches. Poles killed. Struck-rod texture.",
+        anchor=anchor,
+        morph=morph_deltas,
+        q=q_deltas,
+        jitter_hz=2.0,
+        jitter_r=0.001,
+    )
+_reg(_build_six_zero_comb())
+
+# ── ASYMMETRIC TEAR (Spectral Divergence) ────────────────────────────────
+# Stages 1-3 dive toward DC, stages 4-6 climb toward Nyquist. Mid dies.
+def _build_asymmetric_tear() -> Blueprint:
+    # Anchor: 6 stages spread evenly across 200-8000 Hz, midband loaded
+    anchor = [
+        Stage(220.0, 0.985),
+        Stage(400.0, 0.988),
+        Stage(750.0, 0.990),   # lower group
+        Stage(1400.0, 0.990),  # upper group
+        Stage(2800.0, 0.988),
+        Stage(5200.0, 0.985),
+    ]
+    # Morph: lower group dives (-200, -380, -700), upper group climbs (+8000, +10000, +12000)
+    morph = [
+        (-200.0, 0.005),   # 220 → 20
+        (-380.0, 0.005),   # 400 → 20
+        (-720.0, 0.005),   # 750 → 30
+        (8000.0, 0.005),   # 1400 → 9400
+        (10000.0, 0.005),  # 2800 → 12800
+        (12000.0, 0.005),  # 5200 → 17200
+    ]
+    # Q axis: tighten everything (resonance pulse)
+    q = [
+        (0.0, 0.011),
+        (0.0, 0.010),
+        (0.0, 0.008),
+        (0.0, 0.008),
+        (0.0, 0.010),
+        (0.0, 0.011),
+    ]
+    return Blueprint(
+        name="Asymmetric Tear",
+        sentence="SPECTRAL TEAR. Lower group dives to DC, upper group climbs to Nyquist. Mid collapses.",
+        anchor=anchor,
+        morph=morph,
+        q=q,
+        jitter_hz=15.0,
+        jitter_r=0.002,
+    )
+_reg(_build_asymmetric_tear())
+
+# ── COMB CROWN (Six Distinct Peaks) ──────────────────────────────────────
+# Six poles, all at high radius (>0.987), spaced inharmonically.
+# Forces N=6 distinct resonant peaks. Millennium-style but more aggressive.
+def _build_comb_crown() -> Blueprint:
+    # Inharmonic prime-ratio frequencies in the 200-12k range
+    base = 280.0
+    primes = [2, 3, 5, 7, 11, 13]
+    nyq = SR / 2.0 - 1.0
+    freqs = [min(nyq, base * (p / primes[0]) * 1.4) for p in primes]
+    # All poles at high radius (forces audible peak per stage)
+    anchor = [Stage(f, 0.991) for f in freqs]
+    # Morph: each pole drifts +/- 30% from its anchor (NOT in unison)
+    drifts = [-0.25, 0.30, -0.20, 0.25, -0.15, 0.20]
+    morph = [(f * drift, 0.005) for f, drift in zip(freqs, drifts)]
+    # Q: tighten radii further (resonance escalation)
+    q = [(0.0, 0.007)] * 6
+    return Blueprint(
+        name="Comb Crown",
+        sentence="SIX PEAKS. All stages at r>0.99, inharmonic prime ratios. Forces full-spectrum resonance.",
+        anchor=anchor,
+        morph=morph,
+        q=q,
+        jitter_hz=10.0,
+        jitter_r=0.001,
+    )
+_reg(_build_comb_crown())
+
+# ── P2K-DERIVED BLUEPRINTS (exact measured topology seeds) ────────────────
+# Extracted from vault/_profiles/ pole/zero data.  anchor = M0_Q0 stages,
+# morph = M100_Q0 − M0_Q0, q = M0_Q100 − M0_Q0.  No hand-approximation.
+
+_reg(Blueprint(
+    name="P2k BassBox 303",
+    sentence="P2K-011 exact. Frequency swap, sub-focused. BassBox 303 topology.",
+    anchor=[Stage(79.4, 0.9622), Stage(17683.3, 0.9902), Stage(478.6, 0.9763), Stage(13057.8, 0.9753), Stage(15675.4, 0.9642), Stage(0.0, 0.1260)],
+    morph=[(9839.5, 0.0131), (-17238.1, -0.0199), (677.6, -0.0243), (-11663.5, -0.0958), (-13622.2, -0.0020), (0.0, 0.0000)],
+    q=[(9353.3, -0.0061), (-17325.8, -0.0209), (1857.1, -0.2581), (-8875.8, -0.1460), (-9308.8, -0.1072), (1344.2, 0.8219)],
+))
+
+_reg(Blueprint(
+    name="P2k Talking Hedz",
+    sentence="P2K-013 exact. Radius-only morph, vocal formant ladder. Talking Hedz topology.",
+    anchor=[Stage(9320.9, 0.9753), Stage(890.7, 0.9793), Stage(1569.6, 0.9773), Stage(2348.0, 0.9969), Stage(4606.9, 0.9479), Stage(199.4, 0.9912)],
+    morph=[(837.0, 0.0237), (62.2, 0.0198), (-60.7, 0.0219), (-137.8, 0.0022), (-255.2, 0.0484), (-42.1, 0.0080)],
+    q=[(-944.9, -0.0131), (-689.7, 0.0129), (793.5, 0.0050), (383.8, -0.0117), (175.2, -0.0124), (1589.8, 0.0054)],
+))
+
+_reg(Blueprint(
+    name="P2k Ear Bender",
+    sentence="P2K-003 exact. 6-pole lowpass, HF wall fold. Ear Bender topology.",
+    anchor=[Stage(58.7, 0.9988), Stage(10329.1, 0.9438), Stage(12893.0, 0.7605), Stage(13615.5, 0.9683), Stage(14669.7, 0.9683), Stage(16276.7, 0.9014)],
+    morph=[(14641.8, -0.0326), (50.0, 0.0225), (32.2, 0.2058), (-254.8, 0.0010), (-13269.0, -0.0625), (-10852.7, -0.6215)],
+    q=[(5075.3, -0.0306), (-2112.6, 0.0082), (-12022.0, 0.2253), (-10128.8, -0.0040), (-12305.7, 0.0130), (-15820.6, 0.0739)],
+))
+
+_reg(Blueprint(
+    name="P2k Meaty Gizmo",
+    sentence="P2K-004 exact. One-vs-five suppression. Meaty Gizmo topology.",
+    anchor=[Stage(58.7, 0.9988), Stage(10329.1, 0.9438), Stage(12893.0, 0.7605), Stage(13615.5, 0.9683), Stage(14669.7, 0.9683), Stage(16276.7, 0.9014)],
+    morph=[(13421.3, 0.0008), (-7951.8, -0.5899), (-2543.8, 0.2391), (3206.2, 0.0313), (-1188.1, 0.0313), (-13644.4, 0.0648)],
+    q=[(5075.3, -0.0306), (-2112.6, 0.0082), (-12022.0, 0.2253), (-10128.8, -0.0040), (-12305.7, 0.0130), (-15820.6, 0.0739)],
+))
+
+_reg(Blueprint(
+    name="P2k Millennium",
+    sentence="P2K-026 exact. Descending frequency ladder, uniform high radii. Millennium topology.",
+    anchor=[Stage(14662.9, 0.9872), Stage(12467.5, 0.9892), Stage(10410.2, 0.9907), Stage(8428.9, 0.9927), Stage(6301.6, 0.9944), Stage(3629.5, 0.9897)],
+    morph=[(-8259.3, 0.0107), (-7542.5, 0.0074), (-7266.3, 0.0077), (-6684.6, 0.0057), (-5889.3, 0.0042), (-2651.7, -0.0839)],
+    q=[(-5004.4, -0.0020), (-3639.2, 0.0032), (-2161.0, -0.0025), (-3759.4, -0.0064), (-4466.4, -0.0022), (-2826.6, 0.0039)],
+))
+
+_reg(Blueprint(
+    name="P2k Contrary BP",
+    sentence="P2K-008 exact. Contrary bandpass, biological cavity. Widest centroid travel.",
+    anchor=[Stage(14366.0, 0.8102), Stage(2415.4, 0.9951), Stage(0.0, 0.0156), Stage(15607.0, 0.9852), Stage(10406.8, 0.9912), Stage(11243.2, 0.9602)],
+    morph=[(-1849.9, 0.1741), (364.4, -0.0025), (10335.9, 0.8323), (-1145.9, -0.0030), (571.6, -0.1072), (-11076.9, 0.0061)],
+    q=[(-10744.0, 0.1837), (-1566.5, -0.0010), (541.1, 0.9647), (-11235.1, 0.0020), (-8252.8, -0.0079), (-8402.1, 0.0285)],
+))
+
 # ---------------------------------------------------------------------------
 # Shared-b0 c4 solver
 #
@@ -467,10 +644,20 @@ def _solve_b0_for_corner(
 
 
 def _apply_shared_b0(enc: EncodedCoeffs, target_b0: float) -> EncodedCoeffs:
-    """Set c0 to target b0. c1..c4 stay fixed — pole/zero positions don't move."""
+    """Apply shared gain without moving zeros.
+
+    For all-pole stages (c1=c2=0), setting c0 is identical to scaling.
+    For stages with explicit zeros (c1/c2 != 0), changing only c0 shifts
+    the numerator polynomial and moves the zeros. To preserve the authored
+    zero placement, scale the entire numerator (c0, c1, c2) by a common
+    factor while leaving the denominator (c3, c4) untouched.
+    """
     if _is_passthrough(enc):
         return enc
-    return EncodedCoeffs(c0=target_b0, c1=enc.c1, c2=enc.c2, c3=enc.c3, c4=enc.c4)
+    if abs(enc.c0) < 1e-12:
+        return EncodedCoeffs(c0=target_b0, c1=enc.c1, c2=enc.c2, c3=enc.c3, c4=enc.c4)
+    scale = target_b0 / enc.c0
+    return EncodedCoeffs(c0=target_b0, c1=enc.c1 * scale, c2=enc.c2 * scale, c3=enc.c3, c4=enc.c4)
 
 
 # ---------------------------------------------------------------------------

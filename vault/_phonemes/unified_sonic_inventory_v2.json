@@ -1,0 +1,6205 @@
+{
+  "generated_at": "2026-04-12T14:41:39",
+  "tables_path": "C:\\Users\\hooki\\Trench\\docs\\sonic_tables\\tables.json",
+  "tables_meta": {
+    "version": "1.0.0",
+    "description": "TRENCH sonic targeting tables \u2014 20 waypoints for Hyper-Terrain authoring",
+    "sample_rate": 39062.5,
+    "categories": [
+      "vowels",
+      "nasals",
+      "landmarks",
+      "measured_bells",
+      "electronic",
+      "consonants",
+      "instruments",
+      "moog",
+      "singer"
+    ],
+    "total_waypoints": 20,
+    "waypoint_keys": [
+      "ee",
+      "ih",
+      "eh",
+      "ae",
+      "ah",
+      "aw",
+      "uh",
+      "oo",
+      "er",
+      "schwa",
+      "nasal_m",
+      "nasal_n",
+      "s",
+      "sh",
+      "p",
+      "t",
+      "oboe",
+      "trumpet",
+      "moog_uncompensated",
+      "singers_formant"
+    ]
+  },
+  "shape_bank_root": "C:\\Users\\hooki\\Trench\\vault\\_shapes",
+  "shape_bank_manifest": "C:\\Users\\hooki\\Trench\\vault\\_shapes\\manifest.json",
+  "shape_bank_counts": {
+    "authored": 363,
+    "failed": 0,
+    "static_targets": 43,
+    "pair_targets": 320,
+    "distinct_pairs": 320,
+    "authored_total": 370,
+    "static_targets_total": 50,
+    "pair_targets_total": 320
+  },
+  "static_targets": [
+    {
+      "category": "vowels",
+      "key": "ee",
+      "label": "EE (/i/ heed)",
+      "tables_ref": "vowels.ee",
+      "shape_path": "C:\\Users\\hooki\\Trench\\vault\\_shapes\\vowels\\ee.json"
+    },
+    {
+      "category": "vowels",
+      "key": "ih",
+      "label": "IH (/\u026a/ hid)",
+      "tables_ref": "vowels.ih",
+      "shape_path": "C:\\Users\\hooki\\Trench\\vault\\_shapes\\vowels\\ih.json"
+    },
+    {
+      "category": "vowels",
+      "key": "eh",
+      "label": "EH (/\u025b/ head)",
+      "tables_ref": "vowels.eh",
+      "shape_path": "C:\\Users\\hooki\\Trench\\vault\\_shapes\\vowels\\eh.json"
+    },
+    {
+      "category": "vowels",
+      "key": "ae",
+      "label": "AE (/\u00e6/ had)",
+      "tables_ref": "vowels.ae",
+      "shape_path": "C:\\Users\\hooki\\Trench\\vault\\_shapes\\vowels\\ae.json"
+    },
+    {
+      "category": "vowels",
+      "key": "ah",
+      "label": "AH (/\u0251/ father)",
+      "tables_ref": "vowels.ah",
+      "shape_path": "C:\\Users\\hooki\\Trench\\vault\\_shapes\\vowels\\ah.json"
+    },
+    {
+      "category": "vowels",
+      "key": "aw",
+      "label": "AW (/\u0254/ saw)",
+      "tables_ref": "vowels.aw",
+      "shape_path": "C:\\Users\\hooki\\Trench\\vault\\_shapes\\vowels\\aw.json"
+    },
+    {
+      "category": "vowels",
+      "key": "uh",
+      "label": "UH (/\u028a/ hood)",
+      "tables_ref": "vowels.uh",
+      "shape_path": "C:\\Users\\hooki\\Trench\\vault\\_shapes\\vowels\\uh.json"
+    },
+    {
+      "category": "vowels",
+      "key": "oo",
+      "label": "OO (/u/ who)",
+      "tables_ref": "vowels.oo",
+      "shape_path": "C:\\Users\\hooki\\Trench\\vault\\_shapes\\vowels\\oo.json"
+    },
+    {
+      "category": "vowels",
+      "key": "er",
+      "label": "ER (/\u025d/ bird)",
+      "tables_ref": "vowels.er",
+      "shape_path": "C:\\Users\\hooki\\Trench\\vault\\_shapes\\vowels\\er.json"
+    },
+    {
+      "category": "vowels",
+      "key": "schwa",
+      "label": "SCHWA (/\u0259/ about)",
+      "tables_ref": "vowels.schwa",
+      "shape_path": "C:\\Users\\hooki\\Trench\\vault\\_shapes\\vowels\\schwa.json"
+    },
+    {
+      "category": "nasals",
+      "key": "nasal_m",
+      "label": "M murmur",
+      "tables_ref": "nasals.nasal_m",
+      "shape_path": "C:\\Users\\hooki\\Trench\\vault\\_shapes\\nasals\\nasal_m.json"
+    },
+    {
+      "category": "nasals",
+      "key": "nasal_n",
+      "label": "N murmur",
+      "tables_ref": "nasals.nasal_n",
+      "shape_path": "C:\\Users\\hooki\\Trench\\vault\\_shapes\\nasals\\nasal_n.json"
+    },
+    {
+      "category": "landmarks",
+      "key": "chest_resonance",
+      "label": "chest_resonance",
+      "tables_ref": "landmarks.chest_resonance",
+      "shape_path": "C:\\Users\\hooki\\Trench\\vault\\_shapes\\landmarks\\chest_resonance.json"
+    },
+    {
+      "category": "landmarks",
+      "key": "vocal_tract_f1_floor",
+      "label": "vocal_tract_f1_floor",
+      "tables_ref": "landmarks.vocal_tract_f1_floor",
+      "shape_path": "C:\\Users\\hooki\\Trench\\vault\\_shapes\\landmarks\\vocal_tract_f1_floor.json"
+    },
+    {
+      "category": "landmarks",
+      "key": "room_mode_small",
+      "label": "room_mode_small",
+      "tables_ref": "landmarks.room_mode_small",
+      "shape_path": "C:\\Users\\hooki\\Trench\\vault\\_shapes\\landmarks\\room_mode_small.json"
+    },
+    {
+      "category": "landmarks",
+      "key": "room_mode_medium",
+      "label": "room_mode_medium",
+      "tables_ref": "landmarks.room_mode_medium",
+      "shape_path": "C:\\Users\\hooki\\Trench\\vault\\_shapes\\landmarks\\room_mode_medium.json"
+    },
+    {
+      "category": "landmarks",
+      "key": "telephone_band_low",
+      "label": "telephone_band_low",
+      "tables_ref": "landmarks.telephone_band_low",
+      "shape_path": "C:\\Users\\hooki\\Trench\\vault\\_shapes\\landmarks\\telephone_band_low.json"
+    },
+    {
+      "category": "landmarks",
+      "key": "telephone_band_high",
+      "label": "telephone_band_high",
+      "tables_ref": "landmarks.telephone_band_high",
+      "shape_path": "C:\\Users\\hooki\\Trench\\vault\\_shapes\\landmarks\\telephone_band_high.json"
+    },
+    {
+      "category": "landmarks",
+      "key": "ear_canal_resonance",
+      "label": "ear_canal_resonance",
+      "tables_ref": "landmarks.ear_canal_resonance",
+      "shape_path": "C:\\Users\\hooki\\Trench\\vault\\_shapes\\landmarks\\ear_canal_resonance.json"
+    },
+    {
+      "category": "landmarks",
+      "key": "presence_peak",
+      "label": "presence_peak",
+      "tables_ref": "landmarks.presence_peak",
+      "shape_path": "C:\\Users\\hooki\\Trench\\vault\\_shapes\\landmarks\\presence_peak.json"
+    },
+    {
+      "category": "landmarks",
+      "key": "sibilance_band",
+      "label": "sibilance_band",
+      "tables_ref": "landmarks.sibilance_band",
+      "shape_path": "C:\\Users\\hooki\\Trench\\vault\\_shapes\\landmarks\\sibilance_band.json"
+    },
+    {
+      "category": "landmarks",
+      "key": "air_band",
+      "label": "air_band",
+      "tables_ref": "landmarks.air_band",
+      "shape_path": "C:\\Users\\hooki\\Trench\\vault\\_shapes\\landmarks\\air_band.json"
+    },
+    {
+      "category": "consonants",
+      "key": "s",
+      "label": "S fricative",
+      "tables_ref": "consonants.s",
+      "shape_path": "C:\\Users\\hooki\\Trench\\vault\\_shapes\\consonants\\s.json"
+    },
+    {
+      "category": "consonants",
+      "key": "sh",
+      "label": "SH fricative",
+      "tables_ref": "consonants.sh",
+      "shape_path": "C:\\Users\\hooki\\Trench\\vault\\_shapes\\consonants\\sh.json"
+    },
+    {
+      "category": "consonants",
+      "key": "p",
+      "label": "P plosive burst",
+      "tables_ref": "consonants.p",
+      "shape_path": "C:\\Users\\hooki\\Trench\\vault\\_shapes\\consonants\\p.json"
+    },
+    {
+      "category": "consonants",
+      "key": "t",
+      "label": "T plosive burst",
+      "tables_ref": "consonants.t",
+      "shape_path": "C:\\Users\\hooki\\Trench\\vault\\_shapes\\consonants\\t.json"
+    },
+    {
+      "category": "instruments",
+      "key": "oboe",
+      "label": "Oboe body",
+      "tables_ref": "instruments.oboe",
+      "shape_path": "C:\\Users\\hooki\\Trench\\vault\\_shapes\\instruments\\oboe.json"
+    },
+    {
+      "category": "instruments",
+      "key": "clarinet",
+      "label": "Clarinet body",
+      "tables_ref": "instruments.clarinet",
+      "shape_path": "C:\\Users\\hooki\\Trench\\vault\\_shapes\\instruments\\clarinet.json"
+    },
+    {
+      "category": "instruments",
+      "key": "bassoon",
+      "label": "Bassoon body",
+      "tables_ref": "instruments.bassoon",
+      "shape_path": "C:\\Users\\hooki\\Trench\\vault\\_shapes\\instruments\\bassoon.json"
+    },
+    {
+      "category": "instruments",
+      "key": "trumpet",
+      "label": "Trumpet body",
+      "tables_ref": "instruments.trumpet",
+      "shape_path": "C:\\Users\\hooki\\Trench\\vault\\_shapes\\instruments\\trumpet.json"
+    },
+    {
+      "category": "instruments",
+      "key": "french_horn",
+      "label": "French horn body",
+      "tables_ref": "instruments.french_horn",
+      "shape_path": "C:\\Users\\hooki\\Trench\\vault\\_shapes\\instruments\\french_horn.json"
+    },
+    {
+      "category": "instruments",
+      "key": "flute",
+      "label": "Flute body",
+      "tables_ref": "instruments.flute",
+      "shape_path": "C:\\Users\\hooki\\Trench\\vault\\_shapes\\instruments\\flute.json"
+    },
+    {
+      "category": "instruments",
+      "key": "tuba",
+      "label": "Tuba body",
+      "tables_ref": "instruments.tuba",
+      "shape_path": "C:\\Users\\hooki\\Trench\\vault\\_shapes\\instruments\\tuba.json"
+    },
+    {
+      "category": "moog",
+      "key": "moog_uncompensated",
+      "label": "Moog LPF (no bass comp)",
+      "tables_ref": "moog.moog_uncompensated",
+      "shape_path": "C:\\Users\\hooki\\Trench\\vault\\_shapes\\moog\\moog_uncompensated.json"
+    },
+    {
+      "category": "moog",
+      "key": "moog_bass_compensated",
+      "label": "Moog LPF (bass boost)",
+      "tables_ref": "moog.moog_bass_compensated",
+      "shape_path": "C:\\Users\\hooki\\Trench\\vault\\_shapes\\moog\\moog_bass_compensated.json"
+    },
+    {
+      "category": "moog",
+      "key": "moog_self_oscillating",
+      "label": "Moog self-oscillation",
+      "tables_ref": "moog.moog_self_oscillating",
+      "shape_path": "C:\\Users\\hooki\\Trench\\vault\\_shapes\\moog\\moog_self_oscillating.json"
+    },
+    {
+      "category": "singer",
+      "key": "singers_formant",
+      "label": "Singer's Formant (ring)",
+      "tables_ref": "singer.singers_formant",
+      "shape_path": "C:\\Users\\hooki\\Trench\\vault\\_shapes\\singer\\singers_formant.json"
+    },
+    {
+      "category": "electronic",
+      "key": "acid",
+      "label": "Acid Sweep",
+      "tables_ref": "electronic.acid",
+      "shape_path": "C:\\Users\\hooki\\Trench\\vault\\_shapes\\electronic\\acid.json"
+    },
+    {
+      "category": "electronic",
+      "key": "telephone",
+      "label": "Telephone Band",
+      "tables_ref": "electronic.telephone",
+      "shape_path": "C:\\Users\\hooki\\Trench\\vault\\_shapes\\electronic\\telephone.json"
+    },
+    {
+      "category": "measured_bells",
+      "key": "freiburg_hosanna",
+      "label": "freiburg_hosanna",
+      "tables_ref": "measured_bells.freiburg_hosanna",
+      "shape_path": "C:\\Users\\hooki\\Trench\\vault\\_shapes\\measured_bells\\freiburg_hosanna.json"
+    },
+    {
+      "category": "measured_bells",
+      "key": "st_mary_le_tower",
+      "label": "st_mary_le_tower",
+      "tables_ref": "measured_bells.st_mary_le_tower",
+      "shape_path": "C:\\Users\\hooki\\Trench\\vault\\_shapes\\measured_bells\\st_mary_le_tower.json"
+    },
+    {
+      "category": "measured_bells",
+      "key": "berlin_freedom",
+      "label": "berlin_freedom",
+      "tables_ref": "measured_bells.berlin_freedom",
+      "shape_path": "C:\\Users\\hooki\\Trench\\vault\\_shapes\\measured_bells\\berlin_freedom.json"
+    },
+    {
+      "category": "measured_bells",
+      "key": "stretched_treble",
+      "label": "stretched_treble",
+      "tables_ref": "measured_bells.stretched_treble",
+      "shape_path": "C:\\Users\\hooki\\Trench\\vault\\_shapes\\measured_bells\\stretched_treble.json"
+    },
+    {
+      "category": "heritage_phonemes",
+      "key": "ph_004",
+      "label": "PH_004 (Vocal Oo-Ah)",
+      "tables_ref": "heritage.ph_004",
+      "shape_path": "C:\\Users\\hooki\\Trench\\vault\\_shapes\\heritage_phonemes\\ph_004.json",
+      "source": {
+        "p2k_cluster": "PH_004"
+      }
+    },
+    {
+      "category": "heritage_phonemes",
+      "key": "ph_009",
+      "label": "PH_009 (Swept EQ 3/1 Octave, BassBox 303)",
+      "tables_ref": "heritage.ph_009",
+      "shape_path": "C:\\Users\\hooki\\Trench\\vault\\_shapes\\heritage_phonemes\\ph_009.json",
+      "source": {
+        "p2k_cluster": "PH_009"
+      }
+    },
+    {
+      "category": "heritage_phonemes",
+      "key": "ph_011",
+      "label": "PH_011 (Contrary Bandpass)",
+      "tables_ref": "heritage.ph_011",
+      "shape_path": "C:\\Users\\hooki\\Trench\\vault\\_shapes\\heritage_phonemes\\ph_011.json",
+      "source": {
+        "p2k_cluster": "PH_011"
+      }
+    },
+    {
+      "category": "heritage_phonemes",
+      "key": "ph_013",
+      "label": "PH_013 (Swept EQ 3/1 Octave, Bat Phaser)",
+      "tables_ref": "heritage.ph_013",
+      "shape_path": "C:\\Users\\hooki\\Trench\\vault\\_shapes\\heritage_phonemes\\ph_013.json",
+      "source": {
+        "p2k_cluster": "PH_013"
+      }
+    },
+    {
+      "category": "heritage_phonemes",
+      "key": "ph_021",
+      "label": "PH_021 (No Filter, 2 Pole Bandpass)",
+      "tables_ref": "heritage.ph_021",
+      "shape_path": "C:\\Users\\hooki\\Trench\\vault\\_shapes\\heritage_phonemes\\ph_021.json",
+      "source": {
+        "p2k_cluster": "PH_021"
+      }
+    },
+    {
+      "category": "heritage_phonemes",
+      "key": "ph_023",
+      "label": "PH_023 (No Filter, 6 Pole Lowpass)",
+      "tables_ref": "heritage.ph_023",
+      "shape_path": "C:\\Users\\hooki\\Trench\\vault\\_shapes\\heritage_phonemes\\ph_023.json",
+      "source": {
+        "p2k_cluster": "PH_023"
+      }
+    },
+    {
+      "category": "heritage_phonemes",
+      "key": "ph_028",
+      "label": "PH_028 (TB or Not TB, Millennium)",
+      "tables_ref": "heritage.ph_028",
+      "shape_path": "C:\\Users\\hooki\\Trench\\vault\\_shapes\\heritage_phonemes\\ph_028.json",
+      "source": {
+        "p2k_cluster": "PH_028"
+      }
+    }
+  ],
+  "pair_targets": [
+    {
+      "category": "vowel_pairs",
+      "from": {
+        "category": "vowels",
+        "key": "ae",
+        "tables_ref": "vowels.ae"
+      },
+      "to": {
+        "category": "vowels",
+        "key": "ah",
+        "tables_ref": "vowels.ah"
+      },
+      "shape_path": "C:\\Users\\hooki\\Trench\\vault\\_shapes\\vowel_pairs\\ae_to_ah.json"
+    },
+    {
+      "category": "vowel_pairs",
+      "from": {
+        "category": "vowels",
+        "key": "ae",
+        "tables_ref": "vowels.ae"
+      },
+      "to": {
+        "category": "vowels",
+        "key": "aw",
+        "tables_ref": "vowels.aw"
+      },
+      "shape_path": "C:\\Users\\hooki\\Trench\\vault\\_shapes\\vowel_pairs\\ae_to_aw.json"
+    },
+    {
+      "category": "vowel_pairs",
+      "from": {
+        "category": "vowels",
+        "key": "ae",
+        "tables_ref": "vowels.ae"
+      },
+      "to": {
+        "category": "vowels",
+        "key": "ee",
+        "tables_ref": "vowels.ee"
+      },
+      "shape_path": "C:\\Users\\hooki\\Trench\\vault\\_shapes\\vowel_pairs\\ae_to_ee.json"
+    },
+    {
+      "category": "vowel_pairs",
+      "from": {
+        "category": "vowels",
+        "key": "ae",
+        "tables_ref": "vowels.ae"
+      },
+      "to": {
+        "category": "vowels",
+        "key": "eh",
+        "tables_ref": "vowels.eh"
+      },
+      "shape_path": "C:\\Users\\hooki\\Trench\\vault\\_shapes\\vowel_pairs\\ae_to_eh.json"
+    },
+    {
+      "category": "vowel_pairs",
+      "from": {
+        "category": "vowels",
+        "key": "ae",
+        "tables_ref": "vowels.ae"
+      },
+      "to": {
+        "category": "vowels",
+        "key": "er",
+        "tables_ref": "vowels.er"
+      },
+      "shape_path": "C:\\Users\\hooki\\Trench\\vault\\_shapes\\vowel_pairs\\ae_to_er.json"
+    },
+    {
+      "category": "vowel_pairs",
+      "from": {
+        "category": "vowels",
+        "key": "ae",
+        "tables_ref": "vowels.ae"
+      },
+      "to": {
+        "category": "vowels",
+        "key": "ih",
+        "tables_ref": "vowels.ih"
+      },
+      "shape_path": "C:\\Users\\hooki\\Trench\\vault\\_shapes\\vowel_pairs\\ae_to_ih.json"
+    },
+    {
+      "category": "vowel_pairs",
+      "from": {
+        "category": "vowels",
+        "key": "ae",
+        "tables_ref": "vowels.ae"
+      },
+      "to": {
+        "category": "vowels",
+        "key": "oo",
+        "tables_ref": "vowels.oo"
+      },
+      "shape_path": "C:\\Users\\hooki\\Trench\\vault\\_shapes\\vowel_pairs\\ae_to_oo.json"
+    },
+    {
+      "category": "vowel_pairs",
+      "from": {
+        "category": "vowels",
+        "key": "ae",
+        "tables_ref": "vowels.ae"
+      },
+      "to": {
+        "category": "vowels",
+        "key": "schwa",
+        "tables_ref": "vowels.schwa"
+      },
+      "shape_path": "C:\\Users\\hooki\\Trench\\vault\\_shapes\\vowel_pairs\\ae_to_schwa.json"
+    },
+    {
+      "category": "vowel_pairs",
+      "from": {
+        "category": "vowels",
+        "key": "ae",
+        "tables_ref": "vowels.ae"
+      },
+      "to": {
+        "category": "vowels",
+        "key": "uh",
+        "tables_ref": "vowels.uh"
+      },
+      "shape_path": "C:\\Users\\hooki\\Trench\\vault\\_shapes\\vowel_pairs\\ae_to_uh.json"
+    },
+    {
+      "category": "vowel_pairs",
+      "from": {
+        "category": "vowels",
+        "key": "ah",
+        "tables_ref": "vowels.ah"
+      },
+      "to": {
+        "category": "vowels",
+        "key": "ae",
+        "tables_ref": "vowels.ae"
+      },
+      "shape_path": "C:\\Users\\hooki\\Trench\\vault\\_shapes\\vowel_pairs\\ah_to_ae.json"
+    },
+    {
+      "category": "vowel_pairs",
+      "from": {
+        "category": "vowels",
+        "key": "ah",
+        "tables_ref": "vowels.ah"
+      },
+      "to": {
+        "category": "vowels",
+        "key": "aw",
+        "tables_ref": "vowels.aw"
+      },
+      "shape_path": "C:\\Users\\hooki\\Trench\\vault\\_shapes\\vowel_pairs\\ah_to_aw.json"
+    },
+    {
+      "category": "vowel_pairs",
+      "from": {
+        "category": "vowels",
+        "key": "ah",
+        "tables_ref": "vowels.ah"
+      },
+      "to": {
+        "category": "vowels",
+        "key": "ee",
+        "tables_ref": "vowels.ee"
+      },
+      "shape_path": "C:\\Users\\hooki\\Trench\\vault\\_shapes\\vowel_pairs\\ah_to_ee.json"
+    },
+    {
+      "category": "vowel_pairs",
+      "from": {
+        "category": "vowels",
+        "key": "ah",
+        "tables_ref": "vowels.ah"
+      },
+      "to": {
+        "category": "vowels",
+        "key": "eh",
+        "tables_ref": "vowels.eh"
+      },
+      "shape_path": "C:\\Users\\hooki\\Trench\\vault\\_shapes\\vowel_pairs\\ah_to_eh.json"
+    },
+    {
+      "category": "vowel_pairs",
+      "from": {
+        "category": "vowels",
+        "key": "ah",
+        "tables_ref": "vowels.ah"
+      },
+      "to": {
+        "category": "vowels",
+        "key": "er",
+        "tables_ref": "vowels.er"
+      },
+      "shape_path": "C:\\Users\\hooki\\Trench\\vault\\_shapes\\vowel_pairs\\ah_to_er.json"
+    },
+    {
+      "category": "vowel_pairs",
+      "from": {
+        "category": "vowels",
+        "key": "ah",
+        "tables_ref": "vowels.ah"
+      },
+      "to": {
+        "category": "vowels",
+        "key": "ih",
+        "tables_ref": "vowels.ih"
+      },
+      "shape_path": "C:\\Users\\hooki\\Trench\\vault\\_shapes\\vowel_pairs\\ah_to_ih.json"
+    },
+    {
+      "category": "vowel_pairs",
+      "from": {
+        "category": "vowels",
+        "key": "ah",
+        "tables_ref": "vowels.ah"
+      },
+      "to": {
+        "category": "vowels",
+        "key": "oo",
+        "tables_ref": "vowels.oo"
+      },
+      "shape_path": "C:\\Users\\hooki\\Trench\\vault\\_shapes\\vowel_pairs\\ah_to_oo.json"
+    },
+    {
+      "category": "vowel_pairs",
+      "from": {
+        "category": "vowels",
+        "key": "ah",
+        "tables_ref": "vowels.ah"
+      },
+      "to": {
+        "category": "vowels",
+        "key": "schwa",
+        "tables_ref": "vowels.schwa"
+      },
+      "shape_path": "C:\\Users\\hooki\\Trench\\vault\\_shapes\\vowel_pairs\\ah_to_schwa.json"
+    },
+    {
+      "category": "vowel_pairs",
+      "from": {
+        "category": "vowels",
+        "key": "ah",
+        "tables_ref": "vowels.ah"
+      },
+      "to": {
+        "category": "vowels",
+        "key": "uh",
+        "tables_ref": "vowels.uh"
+      },
+      "shape_path": "C:\\Users\\hooki\\Trench\\vault\\_shapes\\vowel_pairs\\ah_to_uh.json"
+    },
+    {
+      "category": "vowel_pairs",
+      "from": {
+        "category": "vowels",
+        "key": "aw",
+        "tables_ref": "vowels.aw"
+      },
+      "to": {
+        "category": "vowels",
+        "key": "ae",
+        "tables_ref": "vowels.ae"
+      },
+      "shape_path": "C:\\Users\\hooki\\Trench\\vault\\_shapes\\vowel_pairs\\aw_to_ae.json"
+    },
+    {
+      "category": "vowel_pairs",
+      "from": {
+        "category": "vowels",
+        "key": "aw",
+        "tables_ref": "vowels.aw"
+      },
+      "to": {
+        "category": "vowels",
+        "key": "ah",
+        "tables_ref": "vowels.ah"
+      },
+      "shape_path": "C:\\Users\\hooki\\Trench\\vault\\_shapes\\vowel_pairs\\aw_to_ah.json"
+    },
+    {
+      "category": "vowel_pairs",
+      "from": {
+        "category": "vowels",
+        "key": "aw",
+        "tables_ref": "vowels.aw"
+      },
+      "to": {
+        "category": "vowels",
+        "key": "ee",
+        "tables_ref": "vowels.ee"
+      },
+      "shape_path": "C:\\Users\\hooki\\Trench\\vault\\_shapes\\vowel_pairs\\aw_to_ee.json"
+    },
+    {
+      "category": "vowel_pairs",
+      "from": {
+        "category": "vowels",
+        "key": "aw",
+        "tables_ref": "vowels.aw"
+      },
+      "to": {
+        "category": "vowels",
+        "key": "eh",
+        "tables_ref": "vowels.eh"
+      },
+      "shape_path": "C:\\Users\\hooki\\Trench\\vault\\_shapes\\vowel_pairs\\aw_to_eh.json"
+    },
+    {
+      "category": "vowel_pairs",
+      "from": {
+        "category": "vowels",
+        "key": "aw",
+        "tables_ref": "vowels.aw"
+      },
+      "to": {
+        "category": "vowels",
+        "key": "er",
+        "tables_ref": "vowels.er"
+      },
+      "shape_path": "C:\\Users\\hooki\\Trench\\vault\\_shapes\\vowel_pairs\\aw_to_er.json"
+    },
+    {
+      "category": "vowel_pairs",
+      "from": {
+        "category": "vowels",
+        "key": "aw",
+        "tables_ref": "vowels.aw"
+      },
+      "to": {
+        "category": "vowels",
+        "key": "ih",
+        "tables_ref": "vowels.ih"
+      },
+      "shape_path": "C:\\Users\\hooki\\Trench\\vault\\_shapes\\vowel_pairs\\aw_to_ih.json"
+    },
+    {
+      "category": "vowel_pairs",
+      "from": {
+        "category": "vowels",
+        "key": "aw",
+        "tables_ref": "vowels.aw"
+      },
+      "to": {
+        "category": "vowels",
+        "key": "oo",
+        "tables_ref": "vowels.oo"
+      },
+      "shape_path": "C:\\Users\\hooki\\Trench\\vault\\_shapes\\vowel_pairs\\aw_to_oo.json"
+    },
+    {
+      "category": "vowel_pairs",
+      "from": {
+        "category": "vowels",
+        "key": "aw",
+        "tables_ref": "vowels.aw"
+      },
+      "to": {
+        "category": "vowels",
+        "key": "schwa",
+        "tables_ref": "vowels.schwa"
+      },
+      "shape_path": "C:\\Users\\hooki\\Trench\\vault\\_shapes\\vowel_pairs\\aw_to_schwa.json"
+    },
+    {
+      "category": "vowel_pairs",
+      "from": {
+        "category": "vowels",
+        "key": "aw",
+        "tables_ref": "vowels.aw"
+      },
+      "to": {
+        "category": "vowels",
+        "key": "uh",
+        "tables_ref": "vowels.uh"
+      },
+      "shape_path": "C:\\Users\\hooki\\Trench\\vault\\_shapes\\vowel_pairs\\aw_to_uh.json"
+    },
+    {
+      "category": "vowel_pairs",
+      "from": {
+        "category": "vowels",
+        "key": "ee",
+        "tables_ref": "vowels.ee"
+      },
+      "to": {
+        "category": "vowels",
+        "key": "ae",
+        "tables_ref": "vowels.ae"
+      },
+      "shape_path": "C:\\Users\\hooki\\Trench\\vault\\_shapes\\vowel_pairs\\ee_to_ae.json"
+    },
+    {
+      "category": "vowel_pairs",
+      "from": {
+        "category": "vowels",
+        "key": "ee",
+        "tables_ref": "vowels.ee"
+      },
+      "to": {
+        "category": "vowels",
+        "key": "ah",
+        "tables_ref": "vowels.ah"
+      },
+      "shape_path": "C:\\Users\\hooki\\Trench\\vault\\_shapes\\vowel_pairs\\ee_to_ah.json"
+    },
+    {
+      "category": "vowel_pairs",
+      "from": {
+        "category": "vowels",
+        "key": "ee",
+        "tables_ref": "vowels.ee"
+      },
+      "to": {
+        "category": "vowels",
+        "key": "aw",
+        "tables_ref": "vowels.aw"
+      },
+      "shape_path": "C:\\Users\\hooki\\Trench\\vault\\_shapes\\vowel_pairs\\ee_to_aw.json"
+    },
+    {
+      "category": "vowel_pairs",
+      "from": {
+        "category": "vowels",
+        "key": "ee",
+        "tables_ref": "vowels.ee"
+      },
+      "to": {
+        "category": "vowels",
+        "key": "eh",
+        "tables_ref": "vowels.eh"
+      },
+      "shape_path": "C:\\Users\\hooki\\Trench\\vault\\_shapes\\vowel_pairs\\ee_to_eh.json"
+    },
+    {
+      "category": "vowel_pairs",
+      "from": {
+        "category": "vowels",
+        "key": "ee",
+        "tables_ref": "vowels.ee"
+      },
+      "to": {
+        "category": "vowels",
+        "key": "er",
+        "tables_ref": "vowels.er"
+      },
+      "shape_path": "C:\\Users\\hooki\\Trench\\vault\\_shapes\\vowel_pairs\\ee_to_er.json"
+    },
+    {
+      "category": "vowel_pairs",
+      "from": {
+        "category": "vowels",
+        "key": "ee",
+        "tables_ref": "vowels.ee"
+      },
+      "to": {
+        "category": "vowels",
+        "key": "ih",
+        "tables_ref": "vowels.ih"
+      },
+      "shape_path": "C:\\Users\\hooki\\Trench\\vault\\_shapes\\vowel_pairs\\ee_to_ih.json"
+    },
+    {
+      "category": "vowel_pairs",
+      "from": {
+        "category": "vowels",
+        "key": "ee",
+        "tables_ref": "vowels.ee"
+      },
+      "to": {
+        "category": "vowels",
+        "key": "oo",
+        "tables_ref": "vowels.oo"
+      },
+      "shape_path": "C:\\Users\\hooki\\Trench\\vault\\_shapes\\vowel_pairs\\ee_to_oo.json"
+    },
+    {
+      "category": "vowel_pairs",
+      "from": {
+        "category": "vowels",
+        "key": "ee",
+        "tables_ref": "vowels.ee"
+      },
+      "to": {
+        "category": "vowels",
+        "key": "schwa",
+        "tables_ref": "vowels.schwa"
+      },
+      "shape_path": "C:\\Users\\hooki\\Trench\\vault\\_shapes\\vowel_pairs\\ee_to_schwa.json"
+    },
+    {
+      "category": "vowel_pairs",
+      "from": {
+        "category": "vowels",
+        "key": "ee",
+        "tables_ref": "vowels.ee"
+      },
+      "to": {
+        "category": "vowels",
+        "key": "uh",
+        "tables_ref": "vowels.uh"
+      },
+      "shape_path": "C:\\Users\\hooki\\Trench\\vault\\_shapes\\vowel_pairs\\ee_to_uh.json"
+    },
+    {
+      "category": "vowel_pairs",
+      "from": {
+        "category": "vowels",
+        "key": "eh",
+        "tables_ref": "vowels.eh"
+      },
+      "to": {
+        "category": "vowels",
+        "key": "ae",
+        "tables_ref": "vowels.ae"
+      },
+      "shape_path": "C:\\Users\\hooki\\Trench\\vault\\_shapes\\vowel_pairs\\eh_to_ae.json"
+    },
+    {
+      "category": "vowel_pairs",
+      "from": {
+        "category": "vowels",
+        "key": "eh",
+        "tables_ref": "vowels.eh"
+      },
+      "to": {
+        "category": "vowels",
+        "key": "ah",
+        "tables_ref": "vowels.ah"
+      },
+      "shape_path": "C:\\Users\\hooki\\Trench\\vault\\_shapes\\vowel_pairs\\eh_to_ah.json"
+    },
+    {
+      "category": "vowel_pairs",
+      "from": {
+        "category": "vowels",
+        "key": "eh",
+        "tables_ref": "vowels.eh"
+      },
+      "to": {
+        "category": "vowels",
+        "key": "aw",
+        "tables_ref": "vowels.aw"
+      },
+      "shape_path": "C:\\Users\\hooki\\Trench\\vault\\_shapes\\vowel_pairs\\eh_to_aw.json"
+    },
+    {
+      "category": "vowel_pairs",
+      "from": {
+        "category": "vowels",
+        "key": "eh",
+        "tables_ref": "vowels.eh"
+      },
+      "to": {
+        "category": "vowels",
+        "key": "ee",
+        "tables_ref": "vowels.ee"
+      },
+      "shape_path": "C:\\Users\\hooki\\Trench\\vault\\_shapes\\vowel_pairs\\eh_to_ee.json"
+    },
+    {
+      "category": "vowel_pairs",
+      "from": {
+        "category": "vowels",
+        "key": "eh",
+        "tables_ref": "vowels.eh"
+      },
+      "to": {
+        "category": "vowels",
+        "key": "er",
+        "tables_ref": "vowels.er"
+      },
+      "shape_path": "C:\\Users\\hooki\\Trench\\vault\\_shapes\\vowel_pairs\\eh_to_er.json"
+    },
+    {
+      "category": "vowel_pairs",
+      "from": {
+        "category": "vowels",
+        "key": "eh",
+        "tables_ref": "vowels.eh"
+      },
+      "to": {
+        "category": "vowels",
+        "key": "ih",
+        "tables_ref": "vowels.ih"
+      },
+      "shape_path": "C:\\Users\\hooki\\Trench\\vault\\_shapes\\vowel_pairs\\eh_to_ih.json"
+    },
+    {
+      "category": "vowel_pairs",
+      "from": {
+        "category": "vowels",
+        "key": "eh",
+        "tables_ref": "vowels.eh"
+      },
+      "to": {
+        "category": "vowels",
+        "key": "oo",
+        "tables_ref": "vowels.oo"
+      },
+      "shape_path": "C:\\Users\\hooki\\Trench\\vault\\_shapes\\vowel_pairs\\eh_to_oo.json"
+    },
+    {
+      "category": "vowel_pairs",
+      "from": {
+        "category": "vowels",
+        "key": "eh",
+        "tables_ref": "vowels.eh"
+      },
+      "to": {
+        "category": "vowels",
+        "key": "schwa",
+        "tables_ref": "vowels.schwa"
+      },
+      "shape_path": "C:\\Users\\hooki\\Trench\\vault\\_shapes\\vowel_pairs\\eh_to_schwa.json"
+    },
+    {
+      "category": "vowel_pairs",
+      "from": {
+        "category": "vowels",
+        "key": "eh",
+        "tables_ref": "vowels.eh"
+      },
+      "to": {
+        "category": "vowels",
+        "key": "uh",
+        "tables_ref": "vowels.uh"
+      },
+      "shape_path": "C:\\Users\\hooki\\Trench\\vault\\_shapes\\vowel_pairs\\eh_to_uh.json"
+    },
+    {
+      "category": "vowel_pairs",
+      "from": {
+        "category": "vowels",
+        "key": "er",
+        "tables_ref": "vowels.er"
+      },
+      "to": {
+        "category": "vowels",
+        "key": "ae",
+        "tables_ref": "vowels.ae"
+      },
+      "shape_path": "C:\\Users\\hooki\\Trench\\vault\\_shapes\\vowel_pairs\\er_to_ae.json"
+    },
+    {
+      "category": "vowel_pairs",
+      "from": {
+        "category": "vowels",
+        "key": "er",
+        "tables_ref": "vowels.er"
+      },
+      "to": {
+        "category": "vowels",
+        "key": "ah",
+        "tables_ref": "vowels.ah"
+      },
+      "shape_path": "C:\\Users\\hooki\\Trench\\vault\\_shapes\\vowel_pairs\\er_to_ah.json"
+    },
+    {
+      "category": "vowel_pairs",
+      "from": {
+        "category": "vowels",
+        "key": "er",
+        "tables_ref": "vowels.er"
+      },
+      "to": {
+        "category": "vowels",
+        "key": "aw",
+        "tables_ref": "vowels.aw"
+      },
+      "shape_path": "C:\\Users\\hooki\\Trench\\vault\\_shapes\\vowel_pairs\\er_to_aw.json"
+    },
+    {
+      "category": "vowel_pairs",
+      "from": {
+        "category": "vowels",
+        "key": "er",
+        "tables_ref": "vowels.er"
+      },
+      "to": {
+        "category": "vowels",
+        "key": "ee",
+        "tables_ref": "vowels.ee"
+      },
+      "shape_path": "C:\\Users\\hooki\\Trench\\vault\\_shapes\\vowel_pairs\\er_to_ee.json"
+    },
+    {
+      "category": "vowel_pairs",
+      "from": {
+        "category": "vowels",
+        "key": "er",
+        "tables_ref": "vowels.er"
+      },
+      "to": {
+        "category": "vowels",
+        "key": "eh",
+        "tables_ref": "vowels.eh"
+      },
+      "shape_path": "C:\\Users\\hooki\\Trench\\vault\\_shapes\\vowel_pairs\\er_to_eh.json"
+    },
+    {
+      "category": "vowel_pairs",
+      "from": {
+        "category": "vowels",
+        "key": "er",
+        "tables_ref": "vowels.er"
+      },
+      "to": {
+        "category": "vowels",
+        "key": "ih",
+        "tables_ref": "vowels.ih"
+      },
+      "shape_path": "C:\\Users\\hooki\\Trench\\vault\\_shapes\\vowel_pairs\\er_to_ih.json"
+    },
+    {
+      "category": "vowel_pairs",
+      "from": {
+        "category": "vowels",
+        "key": "er",
+        "tables_ref": "vowels.er"
+      },
+      "to": {
+        "category": "vowels",
+        "key": "oo",
+        "tables_ref": "vowels.oo"
+      },
+      "shape_path": "C:\\Users\\hooki\\Trench\\vault\\_shapes\\vowel_pairs\\er_to_oo.json"
+    },
+    {
+      "category": "vowel_pairs",
+      "from": {
+        "category": "vowels",
+        "key": "er",
+        "tables_ref": "vowels.er"
+      },
+      "to": {
+        "category": "vowels",
+        "key": "schwa",
+        "tables_ref": "vowels.schwa"
+      },
+      "shape_path": "C:\\Users\\hooki\\Trench\\vault\\_shapes\\vowel_pairs\\er_to_schwa.json"
+    },
+    {
+      "category": "vowel_pairs",
+      "from": {
+        "category": "vowels",
+        "key": "er",
+        "tables_ref": "vowels.er"
+      },
+      "to": {
+        "category": "vowels",
+        "key": "uh",
+        "tables_ref": "vowels.uh"
+      },
+      "shape_path": "C:\\Users\\hooki\\Trench\\vault\\_shapes\\vowel_pairs\\er_to_uh.json"
+    },
+    {
+      "category": "vowel_pairs",
+      "from": {
+        "category": "vowels",
+        "key": "ih",
+        "tables_ref": "vowels.ih"
+      },
+      "to": {
+        "category": "vowels",
+        "key": "ae",
+        "tables_ref": "vowels.ae"
+      },
+      "shape_path": "C:\\Users\\hooki\\Trench\\vault\\_shapes\\vowel_pairs\\ih_to_ae.json"
+    },
+    {
+      "category": "vowel_pairs",
+      "from": {
+        "category": "vowels",
+        "key": "ih",
+        "tables_ref": "vowels.ih"
+      },
+      "to": {
+        "category": "vowels",
+        "key": "ah",
+        "tables_ref": "vowels.ah"
+      },
+      "shape_path": "C:\\Users\\hooki\\Trench\\vault\\_shapes\\vowel_pairs\\ih_to_ah.json"
+    },
+    {
+      "category": "vowel_pairs",
+      "from": {
+        "category": "vowels",
+        "key": "ih",
+        "tables_ref": "vowels.ih"
+      },
+      "to": {
+        "category": "vowels",
+        "key": "aw",
+        "tables_ref": "vowels.aw"
+      },
+      "shape_path": "C:\\Users\\hooki\\Trench\\vault\\_shapes\\vowel_pairs\\ih_to_aw.json"
+    },
+    {
+      "category": "vowel_pairs",
+      "from": {
+        "category": "vowels",
+        "key": "ih",
+        "tables_ref": "vowels.ih"
+      },
+      "to": {
+        "category": "vowels",
+        "key": "ee",
+        "tables_ref": "vowels.ee"
+      },
+      "shape_path": "C:\\Users\\hooki\\Trench\\vault\\_shapes\\vowel_pairs\\ih_to_ee.json"
+    },
+    {
+      "category": "vowel_pairs",
+      "from": {
+        "category": "vowels",
+        "key": "ih",
+        "tables_ref": "vowels.ih"
+      },
+      "to": {
+        "category": "vowels",
+        "key": "eh",
+        "tables_ref": "vowels.eh"
+      },
+      "shape_path": "C:\\Users\\hooki\\Trench\\vault\\_shapes\\vowel_pairs\\ih_to_eh.json"
+    },
+    {
+      "category": "vowel_pairs",
+      "from": {
+        "category": "vowels",
+        "key": "ih",
+        "tables_ref": "vowels.ih"
+      },
+      "to": {
+        "category": "vowels",
+        "key": "er",
+        "tables_ref": "vowels.er"
+      },
+      "shape_path": "C:\\Users\\hooki\\Trench\\vault\\_shapes\\vowel_pairs\\ih_to_er.json"
+    },
+    {
+      "category": "vowel_pairs",
+      "from": {
+        "category": "vowels",
+        "key": "ih",
+        "tables_ref": "vowels.ih"
+      },
+      "to": {
+        "category": "vowels",
+        "key": "oo",
+        "tables_ref": "vowels.oo"
+      },
+      "shape_path": "C:\\Users\\hooki\\Trench\\vault\\_shapes\\vowel_pairs\\ih_to_oo.json"
+    },
+    {
+      "category": "vowel_pairs",
+      "from": {
+        "category": "vowels",
+        "key": "ih",
+        "tables_ref": "vowels.ih"
+      },
+      "to": {
+        "category": "vowels",
+        "key": "schwa",
+        "tables_ref": "vowels.schwa"
+      },
+      "shape_path": "C:\\Users\\hooki\\Trench\\vault\\_shapes\\vowel_pairs\\ih_to_schwa.json"
+    },
+    {
+      "category": "vowel_pairs",
+      "from": {
+        "category": "vowels",
+        "key": "ih",
+        "tables_ref": "vowels.ih"
+      },
+      "to": {
+        "category": "vowels",
+        "key": "uh",
+        "tables_ref": "vowels.uh"
+      },
+      "shape_path": "C:\\Users\\hooki\\Trench\\vault\\_shapes\\vowel_pairs\\ih_to_uh.json"
+    },
+    {
+      "category": "vowel_pairs",
+      "from": {
+        "category": "vowels",
+        "key": "oo",
+        "tables_ref": "vowels.oo"
+      },
+      "to": {
+        "category": "vowels",
+        "key": "ae",
+        "tables_ref": "vowels.ae"
+      },
+      "shape_path": "C:\\Users\\hooki\\Trench\\vault\\_shapes\\vowel_pairs\\oo_to_ae.json"
+    },
+    {
+      "category": "vowel_pairs",
+      "from": {
+        "category": "vowels",
+        "key": "oo",
+        "tables_ref": "vowels.oo"
+      },
+      "to": {
+        "category": "vowels",
+        "key": "ah",
+        "tables_ref": "vowels.ah"
+      },
+      "shape_path": "C:\\Users\\hooki\\Trench\\vault\\_shapes\\vowel_pairs\\oo_to_ah.json"
+    },
+    {
+      "category": "vowel_pairs",
+      "from": {
+        "category": "vowels",
+        "key": "oo",
+        "tables_ref": "vowels.oo"
+      },
+      "to": {
+        "category": "vowels",
+        "key": "aw",
+        "tables_ref": "vowels.aw"
+      },
+      "shape_path": "C:\\Users\\hooki\\Trench\\vault\\_shapes\\vowel_pairs\\oo_to_aw.json"
+    },
+    {
+      "category": "vowel_pairs",
+      "from": {
+        "category": "vowels",
+        "key": "oo",
+        "tables_ref": "vowels.oo"
+      },
+      "to": {
+        "category": "vowels",
+        "key": "ee",
+        "tables_ref": "vowels.ee"
+      },
+      "shape_path": "C:\\Users\\hooki\\Trench\\vault\\_shapes\\vowel_pairs\\oo_to_ee.json"
+    },
+    {
+      "category": "vowel_pairs",
+      "from": {
+        "category": "vowels",
+        "key": "oo",
+        "tables_ref": "vowels.oo"
+      },
+      "to": {
+        "category": "vowels",
+        "key": "eh",
+        "tables_ref": "vowels.eh"
+      },
+      "shape_path": "C:\\Users\\hooki\\Trench\\vault\\_shapes\\vowel_pairs\\oo_to_eh.json"
+    },
+    {
+      "category": "vowel_pairs",
+      "from": {
+        "category": "vowels",
+        "key": "oo",
+        "tables_ref": "vowels.oo"
+      },
+      "to": {
+        "category": "vowels",
+        "key": "er",
+        "tables_ref": "vowels.er"
+      },
+      "shape_path": "C:\\Users\\hooki\\Trench\\vault\\_shapes\\vowel_pairs\\oo_to_er.json"
+    },
+    {
+      "category": "vowel_pairs",
+      "from": {
+        "category": "vowels",
+        "key": "oo",
+        "tables_ref": "vowels.oo"
+      },
+      "to": {
+        "category": "vowels",
+        "key": "ih",
+        "tables_ref": "vowels.ih"
+      },
+      "shape_path": "C:\\Users\\hooki\\Trench\\vault\\_shapes\\vowel_pairs\\oo_to_ih.json"
+    },
+    {
+      "category": "vowel_pairs",
+      "from": {
+        "category": "vowels",
+        "key": "oo",
+        "tables_ref": "vowels.oo"
+      },
+      "to": {
+        "category": "vowels",
+        "key": "schwa",
+        "tables_ref": "vowels.schwa"
+      },
+      "shape_path": "C:\\Users\\hooki\\Trench\\vault\\_shapes\\vowel_pairs\\oo_to_schwa.json"
+    },
+    {
+      "category": "vowel_pairs",
+      "from": {
+        "category": "vowels",
+        "key": "oo",
+        "tables_ref": "vowels.oo"
+      },
+      "to": {
+        "category": "vowels",
+        "key": "uh",
+        "tables_ref": "vowels.uh"
+      },
+      "shape_path": "C:\\Users\\hooki\\Trench\\vault\\_shapes\\vowel_pairs\\oo_to_uh.json"
+    },
+    {
+      "category": "vowel_pairs",
+      "from": {
+        "category": "vowels",
+        "key": "schwa",
+        "tables_ref": "vowels.schwa"
+      },
+      "to": {
+        "category": "vowels",
+        "key": "ae",
+        "tables_ref": "vowels.ae"
+      },
+      "shape_path": "C:\\Users\\hooki\\Trench\\vault\\_shapes\\vowel_pairs\\schwa_to_ae.json"
+    },
+    {
+      "category": "vowel_pairs",
+      "from": {
+        "category": "vowels",
+        "key": "schwa",
+        "tables_ref": "vowels.schwa"
+      },
+      "to": {
+        "category": "vowels",
+        "key": "ah",
+        "tables_ref": "vowels.ah"
+      },
+      "shape_path": "C:\\Users\\hooki\\Trench\\vault\\_shapes\\vowel_pairs\\schwa_to_ah.json"
+    },
+    {
+      "category": "vowel_pairs",
+      "from": {
+        "category": "vowels",
+        "key": "schwa",
+        "tables_ref": "vowels.schwa"
+      },
+      "to": {
+        "category": "vowels",
+        "key": "aw",
+        "tables_ref": "vowels.aw"
+      },
+      "shape_path": "C:\\Users\\hooki\\Trench\\vault\\_shapes\\vowel_pairs\\schwa_to_aw.json"
+    },
+    {
+      "category": "vowel_pairs",
+      "from": {
+        "category": "vowels",
+        "key": "schwa",
+        "tables_ref": "vowels.schwa"
+      },
+      "to": {
+        "category": "vowels",
+        "key": "ee",
+        "tables_ref": "vowels.ee"
+      },
+      "shape_path": "C:\\Users\\hooki\\Trench\\vault\\_shapes\\vowel_pairs\\schwa_to_ee.json"
+    },
+    {
+      "category": "vowel_pairs",
+      "from": {
+        "category": "vowels",
+        "key": "schwa",
+        "tables_ref": "vowels.schwa"
+      },
+      "to": {
+        "category": "vowels",
+        "key": "eh",
+        "tables_ref": "vowels.eh"
+      },
+      "shape_path": "C:\\Users\\hooki\\Trench\\vault\\_shapes\\vowel_pairs\\schwa_to_eh.json"
+    },
+    {
+      "category": "vowel_pairs",
+      "from": {
+        "category": "vowels",
+        "key": "schwa",
+        "tables_ref": "vowels.schwa"
+      },
+      "to": {
+        "category": "vowels",
+        "key": "er",
+        "tables_ref": "vowels.er"
+      },
+      "shape_path": "C:\\Users\\hooki\\Trench\\vault\\_shapes\\vowel_pairs\\schwa_to_er.json"
+    },
+    {
+      "category": "vowel_pairs",
+      "from": {
+        "category": "vowels",
+        "key": "schwa",
+        "tables_ref": "vowels.schwa"
+      },
+      "to": {
+        "category": "vowels",
+        "key": "ih",
+        "tables_ref": "vowels.ih"
+      },
+      "shape_path": "C:\\Users\\hooki\\Trench\\vault\\_shapes\\vowel_pairs\\schwa_to_ih.json"
+    },
+    {
+      "category": "vowel_pairs",
+      "from": {
+        "category": "vowels",
+        "key": "schwa",
+        "tables_ref": "vowels.schwa"
+      },
+      "to": {
+        "category": "vowels",
+        "key": "oo",
+        "tables_ref": "vowels.oo"
+      },
+      "shape_path": "C:\\Users\\hooki\\Trench\\vault\\_shapes\\vowel_pairs\\schwa_to_oo.json"
+    },
+    {
+      "category": "vowel_pairs",
+      "from": {
+        "category": "vowels",
+        "key": "schwa",
+        "tables_ref": "vowels.schwa"
+      },
+      "to": {
+        "category": "vowels",
+        "key": "uh",
+        "tables_ref": "vowels.uh"
+      },
+      "shape_path": "C:\\Users\\hooki\\Trench\\vault\\_shapes\\vowel_pairs\\schwa_to_uh.json"
+    },
+    {
+      "category": "vowel_pairs",
+      "from": {
+        "category": "vowels",
+        "key": "uh",
+        "tables_ref": "vowels.uh"
+      },
+      "to": {
+        "category": "vowels",
+        "key": "ae",
+        "tables_ref": "vowels.ae"
+      },
+      "shape_path": "C:\\Users\\hooki\\Trench\\vault\\_shapes\\vowel_pairs\\uh_to_ae.json"
+    },
+    {
+      "category": "vowel_pairs",
+      "from": {
+        "category": "vowels",
+        "key": "uh",
+        "tables_ref": "vowels.uh"
+      },
+      "to": {
+        "category": "vowels",
+        "key": "ah",
+        "tables_ref": "vowels.ah"
+      },
+      "shape_path": "C:\\Users\\hooki\\Trench\\vault\\_shapes\\vowel_pairs\\uh_to_ah.json"
+    },
+    {
+      "category": "vowel_pairs",
+      "from": {
+        "category": "vowels",
+        "key": "uh",
+        "tables_ref": "vowels.uh"
+      },
+      "to": {
+        "category": "vowels",
+        "key": "aw",
+        "tables_ref": "vowels.aw"
+      },
+      "shape_path": "C:\\Users\\hooki\\Trench\\vault\\_shapes\\vowel_pairs\\uh_to_aw.json"
+    },
+    {
+      "category": "vowel_pairs",
+      "from": {
+        "category": "vowels",
+        "key": "uh",
+        "tables_ref": "vowels.uh"
+      },
+      "to": {
+        "category": "vowels",
+        "key": "ee",
+        "tables_ref": "vowels.ee"
+      },
+      "shape_path": "C:\\Users\\hooki\\Trench\\vault\\_shapes\\vowel_pairs\\uh_to_ee.json"
+    },
+    {
+      "category": "vowel_pairs",
+      "from": {
+        "category": "vowels",
+        "key": "uh",
+        "tables_ref": "vowels.uh"
+      },
+      "to": {
+        "category": "vowels",
+        "key": "eh",
+        "tables_ref": "vowels.eh"
+      },
+      "shape_path": "C:\\Users\\hooki\\Trench\\vault\\_shapes\\vowel_pairs\\uh_to_eh.json"
+    },
+    {
+      "category": "vowel_pairs",
+      "from": {
+        "category": "vowels",
+        "key": "uh",
+        "tables_ref": "vowels.uh"
+      },
+      "to": {
+        "category": "vowels",
+        "key": "er",
+        "tables_ref": "vowels.er"
+      },
+      "shape_path": "C:\\Users\\hooki\\Trench\\vault\\_shapes\\vowel_pairs\\uh_to_er.json"
+    },
+    {
+      "category": "vowel_pairs",
+      "from": {
+        "category": "vowels",
+        "key": "uh",
+        "tables_ref": "vowels.uh"
+      },
+      "to": {
+        "category": "vowels",
+        "key": "ih",
+        "tables_ref": "vowels.ih"
+      },
+      "shape_path": "C:\\Users\\hooki\\Trench\\vault\\_shapes\\vowel_pairs\\uh_to_ih.json"
+    },
+    {
+      "category": "vowel_pairs",
+      "from": {
+        "category": "vowels",
+        "key": "uh",
+        "tables_ref": "vowels.uh"
+      },
+      "to": {
+        "category": "vowels",
+        "key": "oo",
+        "tables_ref": "vowels.oo"
+      },
+      "shape_path": "C:\\Users\\hooki\\Trench\\vault\\_shapes\\vowel_pairs\\uh_to_oo.json"
+    },
+    {
+      "category": "vowel_pairs",
+      "from": {
+        "category": "vowels",
+        "key": "uh",
+        "tables_ref": "vowels.uh"
+      },
+      "to": {
+        "category": "vowels",
+        "key": "schwa",
+        "tables_ref": "vowels.schwa"
+      },
+      "shape_path": "C:\\Users\\hooki\\Trench\\vault\\_shapes\\vowel_pairs\\uh_to_schwa.json"
+    },
+    {
+      "category": "vowel_nasal",
+      "from": {
+        "category": "vowels",
+        "key": "ae",
+        "tables_ref": "vowels.ae"
+      },
+      "to": {
+        "category": "nasals",
+        "key": "nasal_m",
+        "tables_ref": "nasals.nasal_m"
+      },
+      "shape_path": "C:\\Users\\hooki\\Trench\\vault\\_shapes\\vowel_nasal\\ae_to_nasal_m.json"
+    },
+    {
+      "category": "vowel_nasal",
+      "from": {
+        "category": "vowels",
+        "key": "ae",
+        "tables_ref": "vowels.ae"
+      },
+      "to": {
+        "category": "nasals",
+        "key": "nasal_n",
+        "tables_ref": "nasals.nasal_n"
+      },
+      "shape_path": "C:\\Users\\hooki\\Trench\\vault\\_shapes\\vowel_nasal\\ae_to_nasal_n.json"
+    },
+    {
+      "category": "vowel_nasal",
+      "from": {
+        "category": "vowels",
+        "key": "ah",
+        "tables_ref": "vowels.ah"
+      },
+      "to": {
+        "category": "nasals",
+        "key": "nasal_m",
+        "tables_ref": "nasals.nasal_m"
+      },
+      "shape_path": "C:\\Users\\hooki\\Trench\\vault\\_shapes\\vowel_nasal\\ah_to_nasal_m.json"
+    },
+    {
+      "category": "vowel_nasal",
+      "from": {
+        "category": "vowels",
+        "key": "ah",
+        "tables_ref": "vowels.ah"
+      },
+      "to": {
+        "category": "nasals",
+        "key": "nasal_n",
+        "tables_ref": "nasals.nasal_n"
+      },
+      "shape_path": "C:\\Users\\hooki\\Trench\\vault\\_shapes\\vowel_nasal\\ah_to_nasal_n.json"
+    },
+    {
+      "category": "vowel_nasal",
+      "from": {
+        "category": "vowels",
+        "key": "aw",
+        "tables_ref": "vowels.aw"
+      },
+      "to": {
+        "category": "nasals",
+        "key": "nasal_m",
+        "tables_ref": "nasals.nasal_m"
+      },
+      "shape_path": "C:\\Users\\hooki\\Trench\\vault\\_shapes\\vowel_nasal\\aw_to_nasal_m.json"
+    },
+    {
+      "category": "vowel_nasal",
+      "from": {
+        "category": "vowels",
+        "key": "aw",
+        "tables_ref": "vowels.aw"
+      },
+      "to": {
+        "category": "nasals",
+        "key": "nasal_n",
+        "tables_ref": "nasals.nasal_n"
+      },
+      "shape_path": "C:\\Users\\hooki\\Trench\\vault\\_shapes\\vowel_nasal\\aw_to_nasal_n.json"
+    },
+    {
+      "category": "vowel_nasal",
+      "from": {
+        "category": "vowels",
+        "key": "ee",
+        "tables_ref": "vowels.ee"
+      },
+      "to": {
+        "category": "nasals",
+        "key": "nasal_m",
+        "tables_ref": "nasals.nasal_m"
+      },
+      "shape_path": "C:\\Users\\hooki\\Trench\\vault\\_shapes\\vowel_nasal\\ee_to_nasal_m.json"
+    },
+    {
+      "category": "vowel_nasal",
+      "from": {
+        "category": "vowels",
+        "key": "ee",
+        "tables_ref": "vowels.ee"
+      },
+      "to": {
+        "category": "nasals",
+        "key": "nasal_n",
+        "tables_ref": "nasals.nasal_n"
+      },
+      "shape_path": "C:\\Users\\hooki\\Trench\\vault\\_shapes\\vowel_nasal\\ee_to_nasal_n.json"
+    },
+    {
+      "category": "vowel_nasal",
+      "from": {
+        "category": "vowels",
+        "key": "eh",
+        "tables_ref": "vowels.eh"
+      },
+      "to": {
+        "category": "nasals",
+        "key": "nasal_m",
+        "tables_ref": "nasals.nasal_m"
+      },
+      "shape_path": "C:\\Users\\hooki\\Trench\\vault\\_shapes\\vowel_nasal\\eh_to_nasal_m.json"
+    },
+    {
+      "category": "vowel_nasal",
+      "from": {
+        "category": "vowels",
+        "key": "eh",
+        "tables_ref": "vowels.eh"
+      },
+      "to": {
+        "category": "nasals",
+        "key": "nasal_n",
+        "tables_ref": "nasals.nasal_n"
+      },
+      "shape_path": "C:\\Users\\hooki\\Trench\\vault\\_shapes\\vowel_nasal\\eh_to_nasal_n.json"
+    },
+    {
+      "category": "vowel_nasal",
+      "from": {
+        "category": "vowels",
+        "key": "er",
+        "tables_ref": "vowels.er"
+      },
+      "to": {
+        "category": "nasals",
+        "key": "nasal_m",
+        "tables_ref": "nasals.nasal_m"
+      },
+      "shape_path": "C:\\Users\\hooki\\Trench\\vault\\_shapes\\vowel_nasal\\er_to_nasal_m.json"
+    },
+    {
+      "category": "vowel_nasal",
+      "from": {
+        "category": "vowels",
+        "key": "er",
+        "tables_ref": "vowels.er"
+      },
+      "to": {
+        "category": "nasals",
+        "key": "nasal_n",
+        "tables_ref": "nasals.nasal_n"
+      },
+      "shape_path": "C:\\Users\\hooki\\Trench\\vault\\_shapes\\vowel_nasal\\er_to_nasal_n.json"
+    },
+    {
+      "category": "vowel_nasal",
+      "from": {
+        "category": "vowels",
+        "key": "ih",
+        "tables_ref": "vowels.ih"
+      },
+      "to": {
+        "category": "nasals",
+        "key": "nasal_m",
+        "tables_ref": "nasals.nasal_m"
+      },
+      "shape_path": "C:\\Users\\hooki\\Trench\\vault\\_shapes\\vowel_nasal\\ih_to_nasal_m.json"
+    },
+    {
+      "category": "vowel_nasal",
+      "from": {
+        "category": "vowels",
+        "key": "ih",
+        "tables_ref": "vowels.ih"
+      },
+      "to": {
+        "category": "nasals",
+        "key": "nasal_n",
+        "tables_ref": "nasals.nasal_n"
+      },
+      "shape_path": "C:\\Users\\hooki\\Trench\\vault\\_shapes\\vowel_nasal\\ih_to_nasal_n.json"
+    },
+    {
+      "category": "vowel_nasal",
+      "from": {
+        "category": "vowels",
+        "key": "oo",
+        "tables_ref": "vowels.oo"
+      },
+      "to": {
+        "category": "nasals",
+        "key": "nasal_m",
+        "tables_ref": "nasals.nasal_m"
+      },
+      "shape_path": "C:\\Users\\hooki\\Trench\\vault\\_shapes\\vowel_nasal\\oo_to_nasal_m.json"
+    },
+    {
+      "category": "vowel_nasal",
+      "from": {
+        "category": "vowels",
+        "key": "oo",
+        "tables_ref": "vowels.oo"
+      },
+      "to": {
+        "category": "nasals",
+        "key": "nasal_n",
+        "tables_ref": "nasals.nasal_n"
+      },
+      "shape_path": "C:\\Users\\hooki\\Trench\\vault\\_shapes\\vowel_nasal\\oo_to_nasal_n.json"
+    },
+    {
+      "category": "vowel_nasal",
+      "from": {
+        "category": "vowels",
+        "key": "schwa",
+        "tables_ref": "vowels.schwa"
+      },
+      "to": {
+        "category": "nasals",
+        "key": "nasal_m",
+        "tables_ref": "nasals.nasal_m"
+      },
+      "shape_path": "C:\\Users\\hooki\\Trench\\vault\\_shapes\\vowel_nasal\\schwa_to_nasal_m.json"
+    },
+    {
+      "category": "vowel_nasal",
+      "from": {
+        "category": "vowels",
+        "key": "schwa",
+        "tables_ref": "vowels.schwa"
+      },
+      "to": {
+        "category": "nasals",
+        "key": "nasal_n",
+        "tables_ref": "nasals.nasal_n"
+      },
+      "shape_path": "C:\\Users\\hooki\\Trench\\vault\\_shapes\\vowel_nasal\\schwa_to_nasal_n.json"
+    },
+    {
+      "category": "vowel_nasal",
+      "from": {
+        "category": "vowels",
+        "key": "uh",
+        "tables_ref": "vowels.uh"
+      },
+      "to": {
+        "category": "nasals",
+        "key": "nasal_m",
+        "tables_ref": "nasals.nasal_m"
+      },
+      "shape_path": "C:\\Users\\hooki\\Trench\\vault\\_shapes\\vowel_nasal\\uh_to_nasal_m.json"
+    },
+    {
+      "category": "vowel_nasal",
+      "from": {
+        "category": "vowels",
+        "key": "uh",
+        "tables_ref": "vowels.uh"
+      },
+      "to": {
+        "category": "nasals",
+        "key": "nasal_n",
+        "tables_ref": "nasals.nasal_n"
+      },
+      "shape_path": "C:\\Users\\hooki\\Trench\\vault\\_shapes\\vowel_nasal\\uh_to_nasal_n.json"
+    },
+    {
+      "category": "vowel_cons",
+      "from": {
+        "category": "vowels",
+        "key": "ae",
+        "tables_ref": "vowels.ae"
+      },
+      "to": {
+        "category": "consonants",
+        "key": "p",
+        "tables_ref": "consonants.p"
+      },
+      "shape_path": "C:\\Users\\hooki\\Trench\\vault\\_shapes\\vowel_cons\\ae_to_p.json"
+    },
+    {
+      "category": "vowel_cons",
+      "from": {
+        "category": "vowels",
+        "key": "ae",
+        "tables_ref": "vowels.ae"
+      },
+      "to": {
+        "category": "consonants",
+        "key": "s",
+        "tables_ref": "consonants.s"
+      },
+      "shape_path": "C:\\Users\\hooki\\Trench\\vault\\_shapes\\vowel_cons\\ae_to_s.json"
+    },
+    {
+      "category": "vowel_cons",
+      "from": {
+        "category": "vowels",
+        "key": "ae",
+        "tables_ref": "vowels.ae"
+      },
+      "to": {
+        "category": "consonants",
+        "key": "sh",
+        "tables_ref": "consonants.sh"
+      },
+      "shape_path": "C:\\Users\\hooki\\Trench\\vault\\_shapes\\vowel_cons\\ae_to_sh.json"
+    },
+    {
+      "category": "vowel_cons",
+      "from": {
+        "category": "vowels",
+        "key": "ae",
+        "tables_ref": "vowels.ae"
+      },
+      "to": {
+        "category": "consonants",
+        "key": "t",
+        "tables_ref": "consonants.t"
+      },
+      "shape_path": "C:\\Users\\hooki\\Trench\\vault\\_shapes\\vowel_cons\\ae_to_t.json"
+    },
+    {
+      "category": "vowel_cons",
+      "from": {
+        "category": "vowels",
+        "key": "ah",
+        "tables_ref": "vowels.ah"
+      },
+      "to": {
+        "category": "consonants",
+        "key": "p",
+        "tables_ref": "consonants.p"
+      },
+      "shape_path": "C:\\Users\\hooki\\Trench\\vault\\_shapes\\vowel_cons\\ah_to_p.json"
+    },
+    {
+      "category": "vowel_cons",
+      "from": {
+        "category": "vowels",
+        "key": "ah",
+        "tables_ref": "vowels.ah"
+      },
+      "to": {
+        "category": "consonants",
+        "key": "s",
+        "tables_ref": "consonants.s"
+      },
+      "shape_path": "C:\\Users\\hooki\\Trench\\vault\\_shapes\\vowel_cons\\ah_to_s.json"
+    },
+    {
+      "category": "vowel_cons",
+      "from": {
+        "category": "vowels",
+        "key": "ah",
+        "tables_ref": "vowels.ah"
+      },
+      "to": {
+        "category": "consonants",
+        "key": "sh",
+        "tables_ref": "consonants.sh"
+      },
+      "shape_path": "C:\\Users\\hooki\\Trench\\vault\\_shapes\\vowel_cons\\ah_to_sh.json"
+    },
+    {
+      "category": "vowel_cons",
+      "from": {
+        "category": "vowels",
+        "key": "ah",
+        "tables_ref": "vowels.ah"
+      },
+      "to": {
+        "category": "consonants",
+        "key": "t",
+        "tables_ref": "consonants.t"
+      },
+      "shape_path": "C:\\Users\\hooki\\Trench\\vault\\_shapes\\vowel_cons\\ah_to_t.json"
+    },
+    {
+      "category": "vowel_cons",
+      "from": {
+        "category": "vowels",
+        "key": "aw",
+        "tables_ref": "vowels.aw"
+      },
+      "to": {
+        "category": "consonants",
+        "key": "p",
+        "tables_ref": "consonants.p"
+      },
+      "shape_path": "C:\\Users\\hooki\\Trench\\vault\\_shapes\\vowel_cons\\aw_to_p.json"
+    },
+    {
+      "category": "vowel_cons",
+      "from": {
+        "category": "vowels",
+        "key": "aw",
+        "tables_ref": "vowels.aw"
+      },
+      "to": {
+        "category": "consonants",
+        "key": "s",
+        "tables_ref": "consonants.s"
+      },
+      "shape_path": "C:\\Users\\hooki\\Trench\\vault\\_shapes\\vowel_cons\\aw_to_s.json"
+    },
+    {
+      "category": "vowel_cons",
+      "from": {
+        "category": "vowels",
+        "key": "aw",
+        "tables_ref": "vowels.aw"
+      },
+      "to": {
+        "category": "consonants",
+        "key": "sh",
+        "tables_ref": "consonants.sh"
+      },
+      "shape_path": "C:\\Users\\hooki\\Trench\\vault\\_shapes\\vowel_cons\\aw_to_sh.json"
+    },
+    {
+      "category": "vowel_cons",
+      "from": {
+        "category": "vowels",
+        "key": "aw",
+        "tables_ref": "vowels.aw"
+      },
+      "to": {
+        "category": "consonants",
+        "key": "t",
+        "tables_ref": "consonants.t"
+      },
+      "shape_path": "C:\\Users\\hooki\\Trench\\vault\\_shapes\\vowel_cons\\aw_to_t.json"
+    },
+    {
+      "category": "vowel_cons",
+      "from": {
+        "category": "vowels",
+        "key": "ee",
+        "tables_ref": "vowels.ee"
+      },
+      "to": {
+        "category": "consonants",
+        "key": "p",
+        "tables_ref": "consonants.p"
+      },
+      "shape_path": "C:\\Users\\hooki\\Trench\\vault\\_shapes\\vowel_cons\\ee_to_p.json"
+    },
+    {
+      "category": "vowel_cons",
+      "from": {
+        "category": "vowels",
+        "key": "ee",
+        "tables_ref": "vowels.ee"
+      },
+      "to": {
+        "category": "consonants",
+        "key": "s",
+        "tables_ref": "consonants.s"
+      },
+      "shape_path": "C:\\Users\\hooki\\Trench\\vault\\_shapes\\vowel_cons\\ee_to_s.json"
+    },
+    {
+      "category": "vowel_cons",
+      "from": {
+        "category": "vowels",
+        "key": "ee",
+        "tables_ref": "vowels.ee"
+      },
+      "to": {
+        "category": "consonants",
+        "key": "sh",
+        "tables_ref": "consonants.sh"
+      },
+      "shape_path": "C:\\Users\\hooki\\Trench\\vault\\_shapes\\vowel_cons\\ee_to_sh.json"
+    },
+    {
+      "category": "vowel_cons",
+      "from": {
+        "category": "vowels",
+        "key": "ee",
+        "tables_ref": "vowels.ee"
+      },
+      "to": {
+        "category": "consonants",
+        "key": "t",
+        "tables_ref": "consonants.t"
+      },
+      "shape_path": "C:\\Users\\hooki\\Trench\\vault\\_shapes\\vowel_cons\\ee_to_t.json"
+    },
+    {
+      "category": "vowel_cons",
+      "from": {
+        "category": "vowels",
+        "key": "eh",
+        "tables_ref": "vowels.eh"
+      },
+      "to": {
+        "category": "consonants",
+        "key": "p",
+        "tables_ref": "consonants.p"
+      },
+      "shape_path": "C:\\Users\\hooki\\Trench\\vault\\_shapes\\vowel_cons\\eh_to_p.json"
+    },
+    {
+      "category": "vowel_cons",
+      "from": {
+        "category": "vowels",
+        "key": "eh",
+        "tables_ref": "vowels.eh"
+      },
+      "to": {
+        "category": "consonants",
+        "key": "s",
+        "tables_ref": "consonants.s"
+      },
+      "shape_path": "C:\\Users\\hooki\\Trench\\vault\\_shapes\\vowel_cons\\eh_to_s.json"
+    },
+    {
+      "category": "vowel_cons",
+      "from": {
+        "category": "vowels",
+        "key": "eh",
+        "tables_ref": "vowels.eh"
+      },
+      "to": {
+        "category": "consonants",
+        "key": "sh",
+        "tables_ref": "consonants.sh"
+      },
+      "shape_path": "C:\\Users\\hooki\\Trench\\vault\\_shapes\\vowel_cons\\eh_to_sh.json"
+    },
+    {
+      "category": "vowel_cons",
+      "from": {
+        "category": "vowels",
+        "key": "eh",
+        "tables_ref": "vowels.eh"
+      },
+      "to": {
+        "category": "consonants",
+        "key": "t",
+        "tables_ref": "consonants.t"
+      },
+      "shape_path": "C:\\Users\\hooki\\Trench\\vault\\_shapes\\vowel_cons\\eh_to_t.json"
+    },
+    {
+      "category": "vowel_cons",
+      "from": {
+        "category": "vowels",
+        "key": "er",
+        "tables_ref": "vowels.er"
+      },
+      "to": {
+        "category": "consonants",
+        "key": "p",
+        "tables_ref": "consonants.p"
+      },
+      "shape_path": "C:\\Users\\hooki\\Trench\\vault\\_shapes\\vowel_cons\\er_to_p.json"
+    },
+    {
+      "category": "vowel_cons",
+      "from": {
+        "category": "vowels",
+        "key": "er",
+        "tables_ref": "vowels.er"
+      },
+      "to": {
+        "category": "consonants",
+        "key": "s",
+        "tables_ref": "consonants.s"
+      },
+      "shape_path": "C:\\Users\\hooki\\Trench\\vault\\_shapes\\vowel_cons\\er_to_s.json"
+    },
+    {
+      "category": "vowel_cons",
+      "from": {
+        "category": "vowels",
+        "key": "er",
+        "tables_ref": "vowels.er"
+      },
+      "to": {
+        "category": "consonants",
+        "key": "sh",
+        "tables_ref": "consonants.sh"
+      },
+      "shape_path": "C:\\Users\\hooki\\Trench\\vault\\_shapes\\vowel_cons\\er_to_sh.json"
+    },
+    {
+      "category": "vowel_cons",
+      "from": {
+        "category": "vowels",
+        "key": "er",
+        "tables_ref": "vowels.er"
+      },
+      "to": {
+        "category": "consonants",
+        "key": "t",
+        "tables_ref": "consonants.t"
+      },
+      "shape_path": "C:\\Users\\hooki\\Trench\\vault\\_shapes\\vowel_cons\\er_to_t.json"
+    },
+    {
+      "category": "vowel_cons",
+      "from": {
+        "category": "vowels",
+        "key": "ih",
+        "tables_ref": "vowels.ih"
+      },
+      "to": {
+        "category": "consonants",
+        "key": "p",
+        "tables_ref": "consonants.p"
+      },
+      "shape_path": "C:\\Users\\hooki\\Trench\\vault\\_shapes\\vowel_cons\\ih_to_p.json"
+    },
+    {
+      "category": "vowel_cons",
+      "from": {
+        "category": "vowels",
+        "key": "ih",
+        "tables_ref": "vowels.ih"
+      },
+      "to": {
+        "category": "consonants",
+        "key": "s",
+        "tables_ref": "consonants.s"
+      },
+      "shape_path": "C:\\Users\\hooki\\Trench\\vault\\_shapes\\vowel_cons\\ih_to_s.json"
+    },
+    {
+      "category": "vowel_cons",
+      "from": {
+        "category": "vowels",
+        "key": "ih",
+        "tables_ref": "vowels.ih"
+      },
+      "to": {
+        "category": "consonants",
+        "key": "sh",
+        "tables_ref": "consonants.sh"
+      },
+      "shape_path": "C:\\Users\\hooki\\Trench\\vault\\_shapes\\vowel_cons\\ih_to_sh.json"
+    },
+    {
+      "category": "vowel_cons",
+      "from": {
+        "category": "vowels",
+        "key": "ih",
+        "tables_ref": "vowels.ih"
+      },
+      "to": {
+        "category": "consonants",
+        "key": "t",
+        "tables_ref": "consonants.t"
+      },
+      "shape_path": "C:\\Users\\hooki\\Trench\\vault\\_shapes\\vowel_cons\\ih_to_t.json"
+    },
+    {
+      "category": "vowel_cons",
+      "from": {
+        "category": "vowels",
+        "key": "oo",
+        "tables_ref": "vowels.oo"
+      },
+      "to": {
+        "category": "consonants",
+        "key": "p",
+        "tables_ref": "consonants.p"
+      },
+      "shape_path": "C:\\Users\\hooki\\Trench\\vault\\_shapes\\vowel_cons\\oo_to_p.json"
+    },
+    {
+      "category": "vowel_cons",
+      "from": {
+        "category": "vowels",
+        "key": "oo",
+        "tables_ref": "vowels.oo"
+      },
+      "to": {
+        "category": "consonants",
+        "key": "s",
+        "tables_ref": "consonants.s"
+      },
+      "shape_path": "C:\\Users\\hooki\\Trench\\vault\\_shapes\\vowel_cons\\oo_to_s.json"
+    },
+    {
+      "category": "vowel_cons",
+      "from": {
+        "category": "vowels",
+        "key": "oo",
+        "tables_ref": "vowels.oo"
+      },
+      "to": {
+        "category": "consonants",
+        "key": "sh",
+        "tables_ref": "consonants.sh"
+      },
+      "shape_path": "C:\\Users\\hooki\\Trench\\vault\\_shapes\\vowel_cons\\oo_to_sh.json"
+    },
+    {
+      "category": "vowel_cons",
+      "from": {
+        "category": "vowels",
+        "key": "oo",
+        "tables_ref": "vowels.oo"
+      },
+      "to": {
+        "category": "consonants",
+        "key": "t",
+        "tables_ref": "consonants.t"
+      },
+      "shape_path": "C:\\Users\\hooki\\Trench\\vault\\_shapes\\vowel_cons\\oo_to_t.json"
+    },
+    {
+      "category": "vowel_cons",
+      "from": {
+        "category": "vowels",
+        "key": "schwa",
+        "tables_ref": "vowels.schwa"
+      },
+      "to": {
+        "category": "consonants",
+        "key": "p",
+        "tables_ref": "consonants.p"
+      },
+      "shape_path": "C:\\Users\\hooki\\Trench\\vault\\_shapes\\vowel_cons\\schwa_to_p.json"
+    },
+    {
+      "category": "vowel_cons",
+      "from": {
+        "category": "vowels",
+        "key": "schwa",
+        "tables_ref": "vowels.schwa"
+      },
+      "to": {
+        "category": "consonants",
+        "key": "s",
+        "tables_ref": "consonants.s"
+      },
+      "shape_path": "C:\\Users\\hooki\\Trench\\vault\\_shapes\\vowel_cons\\schwa_to_s.json"
+    },
+    {
+      "category": "vowel_cons",
+      "from": {
+        "category": "vowels",
+        "key": "schwa",
+        "tables_ref": "vowels.schwa"
+      },
+      "to": {
+        "category": "consonants",
+        "key": "sh",
+        "tables_ref": "consonants.sh"
+      },
+      "shape_path": "C:\\Users\\hooki\\Trench\\vault\\_shapes\\vowel_cons\\schwa_to_sh.json"
+    },
+    {
+      "category": "vowel_cons",
+      "from": {
+        "category": "vowels",
+        "key": "schwa",
+        "tables_ref": "vowels.schwa"
+      },
+      "to": {
+        "category": "consonants",
+        "key": "t",
+        "tables_ref": "consonants.t"
+      },
+      "shape_path": "C:\\Users\\hooki\\Trench\\vault\\_shapes\\vowel_cons\\schwa_to_t.json"
+    },
+    {
+      "category": "vowel_cons",
+      "from": {
+        "category": "vowels",
+        "key": "uh",
+        "tables_ref": "vowels.uh"
+      },
+      "to": {
+        "category": "consonants",
+        "key": "p",
+        "tables_ref": "consonants.p"
+      },
+      "shape_path": "C:\\Users\\hooki\\Trench\\vault\\_shapes\\vowel_cons\\uh_to_p.json"
+    },
+    {
+      "category": "vowel_cons",
+      "from": {
+        "category": "vowels",
+        "key": "uh",
+        "tables_ref": "vowels.uh"
+      },
+      "to": {
+        "category": "consonants",
+        "key": "s",
+        "tables_ref": "consonants.s"
+      },
+      "shape_path": "C:\\Users\\hooki\\Trench\\vault\\_shapes\\vowel_cons\\uh_to_s.json"
+    },
+    {
+      "category": "vowel_cons",
+      "from": {
+        "category": "vowels",
+        "key": "uh",
+        "tables_ref": "vowels.uh"
+      },
+      "to": {
+        "category": "consonants",
+        "key": "sh",
+        "tables_ref": "consonants.sh"
+      },
+      "shape_path": "C:\\Users\\hooki\\Trench\\vault\\_shapes\\vowel_cons\\uh_to_sh.json"
+    },
+    {
+      "category": "vowel_cons",
+      "from": {
+        "category": "vowels",
+        "key": "uh",
+        "tables_ref": "vowels.uh"
+      },
+      "to": {
+        "category": "consonants",
+        "key": "t",
+        "tables_ref": "consonants.t"
+      },
+      "shape_path": "C:\\Users\\hooki\\Trench\\vault\\_shapes\\vowel_cons\\uh_to_t.json"
+    },
+    {
+      "category": "vowel_inst",
+      "from": {
+        "category": "vowels",
+        "key": "ae",
+        "tables_ref": "vowels.ae"
+      },
+      "to": {
+        "category": "instruments",
+        "key": "bassoon",
+        "tables_ref": "instruments.bassoon"
+      },
+      "shape_path": "C:\\Users\\hooki\\Trench\\vault\\_shapes\\vowel_inst\\ae_to_bassoon.json"
+    },
+    {
+      "category": "vowel_inst",
+      "from": {
+        "category": "vowels",
+        "key": "ae",
+        "tables_ref": "vowels.ae"
+      },
+      "to": {
+        "category": "instruments",
+        "key": "clarinet",
+        "tables_ref": "instruments.clarinet"
+      },
+      "shape_path": "C:\\Users\\hooki\\Trench\\vault\\_shapes\\vowel_inst\\ae_to_clarinet.json"
+    },
+    {
+      "category": "vowel_inst",
+      "from": {
+        "category": "vowels",
+        "key": "ae",
+        "tables_ref": "vowels.ae"
+      },
+      "to": {
+        "category": "instruments",
+        "key": "flute",
+        "tables_ref": "instruments.flute"
+      },
+      "shape_path": "C:\\Users\\hooki\\Trench\\vault\\_shapes\\vowel_inst\\ae_to_flute.json"
+    },
+    {
+      "category": "vowel_inst",
+      "from": {
+        "category": "vowels",
+        "key": "ae",
+        "tables_ref": "vowels.ae"
+      },
+      "to": {
+        "category": "instruments",
+        "key": "french_horn",
+        "tables_ref": "instruments.french_horn"
+      },
+      "shape_path": "C:\\Users\\hooki\\Trench\\vault\\_shapes\\vowel_inst\\ae_to_french_horn.json"
+    },
+    {
+      "category": "vowel_inst",
+      "from": {
+        "category": "vowels",
+        "key": "ae",
+        "tables_ref": "vowels.ae"
+      },
+      "to": {
+        "category": "instruments",
+        "key": "oboe",
+        "tables_ref": "instruments.oboe"
+      },
+      "shape_path": "C:\\Users\\hooki\\Trench\\vault\\_shapes\\vowel_inst\\ae_to_oboe.json"
+    },
+    {
+      "category": "vowel_inst",
+      "from": {
+        "category": "vowels",
+        "key": "ae",
+        "tables_ref": "vowels.ae"
+      },
+      "to": {
+        "category": "instruments",
+        "key": "trumpet",
+        "tables_ref": "instruments.trumpet"
+      },
+      "shape_path": "C:\\Users\\hooki\\Trench\\vault\\_shapes\\vowel_inst\\ae_to_trumpet.json"
+    },
+    {
+      "category": "vowel_inst",
+      "from": {
+        "category": "vowels",
+        "key": "ae",
+        "tables_ref": "vowels.ae"
+      },
+      "to": {
+        "category": "instruments",
+        "key": "tuba",
+        "tables_ref": "instruments.tuba"
+      },
+      "shape_path": "C:\\Users\\hooki\\Trench\\vault\\_shapes\\vowel_inst\\ae_to_tuba.json"
+    },
+    {
+      "category": "vowel_inst",
+      "from": {
+        "category": "vowels",
+        "key": "ah",
+        "tables_ref": "vowels.ah"
+      },
+      "to": {
+        "category": "instruments",
+        "key": "bassoon",
+        "tables_ref": "instruments.bassoon"
+      },
+      "shape_path": "C:\\Users\\hooki\\Trench\\vault\\_shapes\\vowel_inst\\ah_to_bassoon.json"
+    },
+    {
+      "category": "vowel_inst",
+      "from": {
+        "category": "vowels",
+        "key": "ah",
+        "tables_ref": "vowels.ah"
+      },
+      "to": {
+        "category": "instruments",
+        "key": "clarinet",
+        "tables_ref": "instruments.clarinet"
+      },
+      "shape_path": "C:\\Users\\hooki\\Trench\\vault\\_shapes\\vowel_inst\\ah_to_clarinet.json"
+    },
+    {
+      "category": "vowel_inst",
+      "from": {
+        "category": "vowels",
+        "key": "ah",
+        "tables_ref": "vowels.ah"
+      },
+      "to": {
+        "category": "instruments",
+        "key": "flute",
+        "tables_ref": "instruments.flute"
+      },
+      "shape_path": "C:\\Users\\hooki\\Trench\\vault\\_shapes\\vowel_inst\\ah_to_flute.json"
+    },
+    {
+      "category": "vowel_inst",
+      "from": {
+        "category": "vowels",
+        "key": "ah",
+        "tables_ref": "vowels.ah"
+      },
+      "to": {
+        "category": "instruments",
+        "key": "french_horn",
+        "tables_ref": "instruments.french_horn"
+      },
+      "shape_path": "C:\\Users\\hooki\\Trench\\vault\\_shapes\\vowel_inst\\ah_to_french_horn.json"
+    },
+    {
+      "category": "vowel_inst",
+      "from": {
+        "category": "vowels",
+        "key": "ah",
+        "tables_ref": "vowels.ah"
+      },
+      "to": {
+        "category": "instruments",
+        "key": "oboe",
+        "tables_ref": "instruments.oboe"
+      },
+      "shape_path": "C:\\Users\\hooki\\Trench\\vault\\_shapes\\vowel_inst\\ah_to_oboe.json"
+    },
+    {
+      "category": "vowel_inst",
+      "from": {
+        "category": "vowels",
+        "key": "ah",
+        "tables_ref": "vowels.ah"
+      },
+      "to": {
+        "category": "instruments",
+        "key": "trumpet",
+        "tables_ref": "instruments.trumpet"
+      },
+      "shape_path": "C:\\Users\\hooki\\Trench\\vault\\_shapes\\vowel_inst\\ah_to_trumpet.json"
+    },
+    {
+      "category": "vowel_inst",
+      "from": {
+        "category": "vowels",
+        "key": "ah",
+        "tables_ref": "vowels.ah"
+      },
+      "to": {
+        "category": "instruments",
+        "key": "tuba",
+        "tables_ref": "instruments.tuba"
+      },
+      "shape_path": "C:\\Users\\hooki\\Trench\\vault\\_shapes\\vowel_inst\\ah_to_tuba.json"
+    },
+    {
+      "category": "vowel_inst",
+      "from": {
+        "category": "vowels",
+        "key": "aw",
+        "tables_ref": "vowels.aw"
+      },
+      "to": {
+        "category": "instruments",
+        "key": "bassoon",
+        "tables_ref": "instruments.bassoon"
+      },
+      "shape_path": "C:\\Users\\hooki\\Trench\\vault\\_shapes\\vowel_inst\\aw_to_bassoon.json"
+    },
+    {
+      "category": "vowel_inst",
+      "from": {
+        "category": "vowels",
+        "key": "aw",
+        "tables_ref": "vowels.aw"
+      },
+      "to": {
+        "category": "instruments",
+        "key": "clarinet",
+        "tables_ref": "instruments.clarinet"
+      },
+      "shape_path": "C:\\Users\\hooki\\Trench\\vault\\_shapes\\vowel_inst\\aw_to_clarinet.json"
+    },
+    {
+      "category": "vowel_inst",
+      "from": {
+        "category": "vowels",
+        "key": "aw",
+        "tables_ref": "vowels.aw"
+      },
+      "to": {
+        "category": "instruments",
+        "key": "flute",
+        "tables_ref": "instruments.flute"
+      },
+      "shape_path": "C:\\Users\\hooki\\Trench\\vault\\_shapes\\vowel_inst\\aw_to_flute.json"
+    },
+    {
+      "category": "vowel_inst",
+      "from": {
+        "category": "vowels",
+        "key": "aw",
+        "tables_ref": "vowels.aw"
+      },
+      "to": {
+        "category": "instruments",
+        "key": "french_horn",
+        "tables_ref": "instruments.french_horn"
+      },
+      "shape_path": "C:\\Users\\hooki\\Trench\\vault\\_shapes\\vowel_inst\\aw_to_french_horn.json"
+    },
+    {
+      "category": "vowel_inst",
+      "from": {
+        "category": "vowels",
+        "key": "aw",
+        "tables_ref": "vowels.aw"
+      },
+      "to": {
+        "category": "instruments",
+        "key": "oboe",
+        "tables_ref": "instruments.oboe"
+      },
+      "shape_path": "C:\\Users\\hooki\\Trench\\vault\\_shapes\\vowel_inst\\aw_to_oboe.json"
+    },
+    {
+      "category": "vowel_inst",
+      "from": {
+        "category": "vowels",
+        "key": "aw",
+        "tables_ref": "vowels.aw"
+      },
+      "to": {
+        "category": "instruments",
+        "key": "trumpet",
+        "tables_ref": "instruments.trumpet"
+      },
+      "shape_path": "C:\\Users\\hooki\\Trench\\vault\\_shapes\\vowel_inst\\aw_to_trumpet.json"
+    },
+    {
+      "category": "vowel_inst",
+      "from": {
+        "category": "vowels",
+        "key": "aw",
+        "tables_ref": "vowels.aw"
+      },
+      "to": {
+        "category": "instruments",
+        "key": "tuba",
+        "tables_ref": "instruments.tuba"
+      },
+      "shape_path": "C:\\Users\\hooki\\Trench\\vault\\_shapes\\vowel_inst\\aw_to_tuba.json"
+    },
+    {
+      "category": "vowel_inst",
+      "from": {
+        "category": "vowels",
+        "key": "ee",
+        "tables_ref": "vowels.ee"
+      },
+      "to": {
+        "category": "instruments",
+        "key": "bassoon",
+        "tables_ref": "instruments.bassoon"
+      },
+      "shape_path": "C:\\Users\\hooki\\Trench\\vault\\_shapes\\vowel_inst\\ee_to_bassoon.json"
+    },
+    {
+      "category": "vowel_inst",
+      "from": {
+        "category": "vowels",
+        "key": "ee",
+        "tables_ref": "vowels.ee"
+      },
+      "to": {
+        "category": "instruments",
+        "key": "clarinet",
+        "tables_ref": "instruments.clarinet"
+      },
+      "shape_path": "C:\\Users\\hooki\\Trench\\vault\\_shapes\\vowel_inst\\ee_to_clarinet.json"
+    },
+    {
+      "category": "vowel_inst",
+      "from": {
+        "category": "vowels",
+        "key": "ee",
+        "tables_ref": "vowels.ee"
+      },
+      "to": {
+        "category": "instruments",
+        "key": "flute",
+        "tables_ref": "instruments.flute"
+      },
+      "shape_path": "C:\\Users\\hooki\\Trench\\vault\\_shapes\\vowel_inst\\ee_to_flute.json"
+    },
+    {
+      "category": "vowel_inst",
+      "from": {
+        "category": "vowels",
+        "key": "ee",
+        "tables_ref": "vowels.ee"
+      },
+      "to": {
+        "category": "instruments",
+        "key": "french_horn",
+        "tables_ref": "instruments.french_horn"
+      },
+      "shape_path": "C:\\Users\\hooki\\Trench\\vault\\_shapes\\vowel_inst\\ee_to_french_horn.json"
+    },
+    {
+      "category": "vowel_inst",
+      "from": {
+        "category": "vowels",
+        "key": "ee",
+        "tables_ref": "vowels.ee"
+      },
+      "to": {
+        "category": "instruments",
+        "key": "oboe",
+        "tables_ref": "instruments.oboe"
+      },
+      "shape_path": "C:\\Users\\hooki\\Trench\\vault\\_shapes\\vowel_inst\\ee_to_oboe.json"
+    },
+    {
+      "category": "vowel_inst",
+      "from": {
+        "category": "vowels",
+        "key": "ee",
+        "tables_ref": "vowels.ee"
+      },
+      "to": {
+        "category": "instruments",
+        "key": "trumpet",
+        "tables_ref": "instruments.trumpet"
+      },
+      "shape_path": "C:\\Users\\hooki\\Trench\\vault\\_shapes\\vowel_inst\\ee_to_trumpet.json"
+    },
+    {
+      "category": "vowel_inst",
+      "from": {
+        "category": "vowels",
+        "key": "ee",
+        "tables_ref": "vowels.ee"
+      },
+      "to": {
+        "category": "instruments",
+        "key": "tuba",
+        "tables_ref": "instruments.tuba"
+      },
+      "shape_path": "C:\\Users\\hooki\\Trench\\vault\\_shapes\\vowel_inst\\ee_to_tuba.json"
+    },
+    {
+      "category": "vowel_inst",
+      "from": {
+        "category": "vowels",
+        "key": "eh",
+        "tables_ref": "vowels.eh"
+      },
+      "to": {
+        "category": "instruments",
+        "key": "bassoon",
+        "tables_ref": "instruments.bassoon"
+      },
+      "shape_path": "C:\\Users\\hooki\\Trench\\vault\\_shapes\\vowel_inst\\eh_to_bassoon.json"
+    },
+    {
+      "category": "vowel_inst",
+      "from": {
+        "category": "vowels",
+        "key": "eh",
+        "tables_ref": "vowels.eh"
+      },
+      "to": {
+        "category": "instruments",
+        "key": "clarinet",
+        "tables_ref": "instruments.clarinet"
+      },
+      "shape_path": "C:\\Users\\hooki\\Trench\\vault\\_shapes\\vowel_inst\\eh_to_clarinet.json"
+    },
+    {
+      "category": "vowel_inst",
+      "from": {
+        "category": "vowels",
+        "key": "eh",
+        "tables_ref": "vowels.eh"
+      },
+      "to": {
+        "category": "instruments",
+        "key": "flute",
+        "tables_ref": "instruments.flute"
+      },
+      "shape_path": "C:\\Users\\hooki\\Trench\\vault\\_shapes\\vowel_inst\\eh_to_flute.json"
+    },
+    {
+      "category": "vowel_inst",
+      "from": {
+        "category": "vowels",
+        "key": "eh",
+        "tables_ref": "vowels.eh"
+      },
+      "to": {
+        "category": "instruments",
+        "key": "french_horn",
+        "tables_ref": "instruments.french_horn"
+      },
+      "shape_path": "C:\\Users\\hooki\\Trench\\vault\\_shapes\\vowel_inst\\eh_to_french_horn.json"
+    },
+    {
+      "category": "vowel_inst",
+      "from": {
+        "category": "vowels",
+        "key": "eh",
+        "tables_ref": "vowels.eh"
+      },
+      "to": {
+        "category": "instruments",
+        "key": "oboe",
+        "tables_ref": "instruments.oboe"
+      },
+      "shape_path": "C:\\Users\\hooki\\Trench\\vault\\_shapes\\vowel_inst\\eh_to_oboe.json"
+    },
+    {
+      "category": "vowel_inst",
+      "from": {
+        "category": "vowels",
+        "key": "eh",
+        "tables_ref": "vowels.eh"
+      },
+      "to": {
+        "category": "instruments",
+        "key": "trumpet",
+        "tables_ref": "instruments.trumpet"
+      },
+      "shape_path": "C:\\Users\\hooki\\Trench\\vault\\_shapes\\vowel_inst\\eh_to_trumpet.json"
+    },
+    {
+      "category": "vowel_inst",
+      "from": {
+        "category": "vowels",
+        "key": "eh",
+        "tables_ref": "vowels.eh"
+      },
+      "to": {
+        "category": "instruments",
+        "key": "tuba",
+        "tables_ref": "instruments.tuba"
+      },
+      "shape_path": "C:\\Users\\hooki\\Trench\\vault\\_shapes\\vowel_inst\\eh_to_tuba.json"
+    },
+    {
+      "category": "vowel_inst",
+      "from": {
+        "category": "vowels",
+        "key": "er",
+        "tables_ref": "vowels.er"
+      },
+      "to": {
+        "category": "instruments",
+        "key": "bassoon",
+        "tables_ref": "instruments.bassoon"
+      },
+      "shape_path": "C:\\Users\\hooki\\Trench\\vault\\_shapes\\vowel_inst\\er_to_bassoon.json"
+    },
+    {
+      "category": "vowel_inst",
+      "from": {
+        "category": "vowels",
+        "key": "er",
+        "tables_ref": "vowels.er"
+      },
+      "to": {
+        "category": "instruments",
+        "key": "clarinet",
+        "tables_ref": "instruments.clarinet"
+      },
+      "shape_path": "C:\\Users\\hooki\\Trench\\vault\\_shapes\\vowel_inst\\er_to_clarinet.json"
+    },
+    {
+      "category": "vowel_inst",
+      "from": {
+        "category": "vowels",
+        "key": "er",
+        "tables_ref": "vowels.er"
+      },
+      "to": {
+        "category": "instruments",
+        "key": "flute",
+        "tables_ref": "instruments.flute"
+      },
+      "shape_path": "C:\\Users\\hooki\\Trench\\vault\\_shapes\\vowel_inst\\er_to_flute.json"
+    },
+    {
+      "category": "vowel_inst",
+      "from": {
+        "category": "vowels",
+        "key": "er",
+        "tables_ref": "vowels.er"
+      },
+      "to": {
+        "category": "instruments",
+        "key": "french_horn",
+        "tables_ref": "instruments.french_horn"
+      },
+      "shape_path": "C:\\Users\\hooki\\Trench\\vault\\_shapes\\vowel_inst\\er_to_french_horn.json"
+    },
+    {
+      "category": "vowel_inst",
+      "from": {
+        "category": "vowels",
+        "key": "er",
+        "tables_ref": "vowels.er"
+      },
+      "to": {
+        "category": "instruments",
+        "key": "oboe",
+        "tables_ref": "instruments.oboe"
+      },
+      "shape_path": "C:\\Users\\hooki\\Trench\\vault\\_shapes\\vowel_inst\\er_to_oboe.json"
+    },
+    {
+      "category": "vowel_inst",
+      "from": {
+        "category": "vowels",
+        "key": "er",
+        "tables_ref": "vowels.er"
+      },
+      "to": {
+        "category": "instruments",
+        "key": "trumpet",
+        "tables_ref": "instruments.trumpet"
+      },
+      "shape_path": "C:\\Users\\hooki\\Trench\\vault\\_shapes\\vowel_inst\\er_to_trumpet.json"
+    },
+    {
+      "category": "vowel_inst",
+      "from": {
+        "category": "vowels",
+        "key": "er",
+        "tables_ref": "vowels.er"
+      },
+      "to": {
+        "category": "instruments",
+        "key": "tuba",
+        "tables_ref": "instruments.tuba"
+      },
+      "shape_path": "C:\\Users\\hooki\\Trench\\vault\\_shapes\\vowel_inst\\er_to_tuba.json"
+    },
+    {
+      "category": "vowel_inst",
+      "from": {
+        "category": "vowels",
+        "key": "ih",
+        "tables_ref": "vowels.ih"
+      },
+      "to": {
+        "category": "instruments",
+        "key": "bassoon",
+        "tables_ref": "instruments.bassoon"
+      },
+      "shape_path": "C:\\Users\\hooki\\Trench\\vault\\_shapes\\vowel_inst\\ih_to_bassoon.json"
+    },
+    {
+      "category": "vowel_inst",
+      "from": {
+        "category": "vowels",
+        "key": "ih",
+        "tables_ref": "vowels.ih"
+      },
+      "to": {
+        "category": "instruments",
+        "key": "clarinet",
+        "tables_ref": "instruments.clarinet"
+      },
+      "shape_path": "C:\\Users\\hooki\\Trench\\vault\\_shapes\\vowel_inst\\ih_to_clarinet.json"
+    },
+    {
+      "category": "vowel_inst",
+      "from": {
+        "category": "vowels",
+        "key": "ih",
+        "tables_ref": "vowels.ih"
+      },
+      "to": {
+        "category": "instruments",
+        "key": "flute",
+        "tables_ref": "instruments.flute"
+      },
+      "shape_path": "C:\\Users\\hooki\\Trench\\vault\\_shapes\\vowel_inst\\ih_to_flute.json"
+    },
+    {
+      "category": "vowel_inst",
+      "from": {
+        "category": "vowels",
+        "key": "ih",
+        "tables_ref": "vowels.ih"
+      },
+      "to": {
+        "category": "instruments",
+        "key": "french_horn",
+        "tables_ref": "instruments.french_horn"
+      },
+      "shape_path": "C:\\Users\\hooki\\Trench\\vault\\_shapes\\vowel_inst\\ih_to_french_horn.json"
+    },
+    {
+      "category": "vowel_inst",
+      "from": {
+        "category": "vowels",
+        "key": "ih",
+        "tables_ref": "vowels.ih"
+      },
+      "to": {
+        "category": "instruments",
+        "key": "oboe",
+        "tables_ref": "instruments.oboe"
+      },
+      "shape_path": "C:\\Users\\hooki\\Trench\\vault\\_shapes\\vowel_inst\\ih_to_oboe.json"
+    },
+    {
+      "category": "vowel_inst",
+      "from": {
+        "category": "vowels",
+        "key": "ih",
+        "tables_ref": "vowels.ih"
+      },
+      "to": {
+        "category": "instruments",
+        "key": "trumpet",
+        "tables_ref": "instruments.trumpet"
+      },
+      "shape_path": "C:\\Users\\hooki\\Trench\\vault\\_shapes\\vowel_inst\\ih_to_trumpet.json"
+    },
+    {
+      "category": "vowel_inst",
+      "from": {
+        "category": "vowels",
+        "key": "ih",
+        "tables_ref": "vowels.ih"
+      },
+      "to": {
+        "category": "instruments",
+        "key": "tuba",
+        "tables_ref": "instruments.tuba"
+      },
+      "shape_path": "C:\\Users\\hooki\\Trench\\vault\\_shapes\\vowel_inst\\ih_to_tuba.json"
+    },
+    {
+      "category": "vowel_inst",
+      "from": {
+        "category": "vowels",
+        "key": "oo",
+        "tables_ref": "vowels.oo"
+      },
+      "to": {
+        "category": "instruments",
+        "key": "bassoon",
+        "tables_ref": "instruments.bassoon"
+      },
+      "shape_path": "C:\\Users\\hooki\\Trench\\vault\\_shapes\\vowel_inst\\oo_to_bassoon.json"
+    },
+    {
+      "category": "vowel_inst",
+      "from": {
+        "category": "vowels",
+        "key": "oo",
+        "tables_ref": "vowels.oo"
+      },
+      "to": {
+        "category": "instruments",
+        "key": "clarinet",
+        "tables_ref": "instruments.clarinet"
+      },
+      "shape_path": "C:\\Users\\hooki\\Trench\\vault\\_shapes\\vowel_inst\\oo_to_clarinet.json"
+    },
+    {
+      "category": "vowel_inst",
+      "from": {
+        "category": "vowels",
+        "key": "oo",
+        "tables_ref": "vowels.oo"
+      },
+      "to": {
+        "category": "instruments",
+        "key": "flute",
+        "tables_ref": "instruments.flute"
+      },
+      "shape_path": "C:\\Users\\hooki\\Trench\\vault\\_shapes\\vowel_inst\\oo_to_flute.json"
+    },
+    {
+      "category": "vowel_inst",
+      "from": {
+        "category": "vowels",
+        "key": "oo",
+        "tables_ref": "vowels.oo"
+      },
+      "to": {
+        "category": "instruments",
+        "key": "french_horn",
+        "tables_ref": "instruments.french_horn"
+      },
+      "shape_path": "C:\\Users\\hooki\\Trench\\vault\\_shapes\\vowel_inst\\oo_to_french_horn.json"
+    },
+    {
+      "category": "vowel_inst",
+      "from": {
+        "category": "vowels",
+        "key": "oo",
+        "tables_ref": "vowels.oo"
+      },
+      "to": {
+        "category": "instruments",
+        "key": "oboe",
+        "tables_ref": "instruments.oboe"
+      },
+      "shape_path": "C:\\Users\\hooki\\Trench\\vault\\_shapes\\vowel_inst\\oo_to_oboe.json"
+    },
+    {
+      "category": "vowel_inst",
+      "from": {
+        "category": "vowels",
+        "key": "oo",
+        "tables_ref": "vowels.oo"
+      },
+      "to": {
+        "category": "instruments",
+        "key": "trumpet",
+        "tables_ref": "instruments.trumpet"
+      },
+      "shape_path": "C:\\Users\\hooki\\Trench\\vault\\_shapes\\vowel_inst\\oo_to_trumpet.json"
+    },
+    {
+      "category": "vowel_inst",
+      "from": {
+        "category": "vowels",
+        "key": "oo",
+        "tables_ref": "vowels.oo"
+      },
+      "to": {
+        "category": "instruments",
+        "key": "tuba",
+        "tables_ref": "instruments.tuba"
+      },
+      "shape_path": "C:\\Users\\hooki\\Trench\\vault\\_shapes\\vowel_inst\\oo_to_tuba.json"
+    },
+    {
+      "category": "vowel_inst",
+      "from": {
+        "category": "vowels",
+        "key": "schwa",
+        "tables_ref": "vowels.schwa"
+      },
+      "to": {
+        "category": "instruments",
+        "key": "bassoon",
+        "tables_ref": "instruments.bassoon"
+      },
+      "shape_path": "C:\\Users\\hooki\\Trench\\vault\\_shapes\\vowel_inst\\schwa_to_bassoon.json"
+    },
+    {
+      "category": "vowel_inst",
+      "from": {
+        "category": "vowels",
+        "key": "schwa",
+        "tables_ref": "vowels.schwa"
+      },
+      "to": {
+        "category": "instruments",
+        "key": "clarinet",
+        "tables_ref": "instruments.clarinet"
+      },
+      "shape_path": "C:\\Users\\hooki\\Trench\\vault\\_shapes\\vowel_inst\\schwa_to_clarinet.json"
+    },
+    {
+      "category": "vowel_inst",
+      "from": {
+        "category": "vowels",
+        "key": "schwa",
+        "tables_ref": "vowels.schwa"
+      },
+      "to": {
+        "category": "instruments",
+        "key": "flute",
+        "tables_ref": "instruments.flute"
+      },
+      "shape_path": "C:\\Users\\hooki\\Trench\\vault\\_shapes\\vowel_inst\\schwa_to_flute.json"
+    },
+    {
+      "category": "vowel_inst",
+      "from": {
+        "category": "vowels",
+        "key": "schwa",
+        "tables_ref": "vowels.schwa"
+      },
+      "to": {
+        "category": "instruments",
+        "key": "french_horn",
+        "tables_ref": "instruments.french_horn"
+      },
+      "shape_path": "C:\\Users\\hooki\\Trench\\vault\\_shapes\\vowel_inst\\schwa_to_french_horn.json"
+    },
+    {
+      "category": "vowel_inst",
+      "from": {
+        "category": "vowels",
+        "key": "schwa",
+        "tables_ref": "vowels.schwa"
+      },
+      "to": {
+        "category": "instruments",
+        "key": "oboe",
+        "tables_ref": "instruments.oboe"
+      },
+      "shape_path": "C:\\Users\\hooki\\Trench\\vault\\_shapes\\vowel_inst\\schwa_to_oboe.json"
+    },
+    {
+      "category": "vowel_inst",
+      "from": {
+        "category": "vowels",
+        "key": "schwa",
+        "tables_ref": "vowels.schwa"
+      },
+      "to": {
+        "category": "instruments",
+        "key": "trumpet",
+        "tables_ref": "instruments.trumpet"
+      },
+      "shape_path": "C:\\Users\\hooki\\Trench\\vault\\_shapes\\vowel_inst\\schwa_to_trumpet.json"
+    },
+    {
+      "category": "vowel_inst",
+      "from": {
+        "category": "vowels",
+        "key": "schwa",
+        "tables_ref": "vowels.schwa"
+      },
+      "to": {
+        "category": "instruments",
+        "key": "tuba",
+        "tables_ref": "instruments.tuba"
+      },
+      "shape_path": "C:\\Users\\hooki\\Trench\\vault\\_shapes\\vowel_inst\\schwa_to_tuba.json"
+    },
+    {
+      "category": "vowel_inst",
+      "from": {
+        "category": "vowels",
+        "key": "uh",
+        "tables_ref": "vowels.uh"
+      },
+      "to": {
+        "category": "instruments",
+        "key": "bassoon",
+        "tables_ref": "instruments.bassoon"
+      },
+      "shape_path": "C:\\Users\\hooki\\Trench\\vault\\_shapes\\vowel_inst\\uh_to_bassoon.json"
+    },
+    {
+      "category": "vowel_inst",
+      "from": {
+        "category": "vowels",
+        "key": "uh",
+        "tables_ref": "vowels.uh"
+      },
+      "to": {
+        "category": "instruments",
+        "key": "clarinet",
+        "tables_ref": "instruments.clarinet"
+      },
+      "shape_path": "C:\\Users\\hooki\\Trench\\vault\\_shapes\\vowel_inst\\uh_to_clarinet.json"
+    },
+    {
+      "category": "vowel_inst",
+      "from": {
+        "category": "vowels",
+        "key": "uh",
+        "tables_ref": "vowels.uh"
+      },
+      "to": {
+        "category": "instruments",
+        "key": "flute",
+        "tables_ref": "instruments.flute"
+      },
+      "shape_path": "C:\\Users\\hooki\\Trench\\vault\\_shapes\\vowel_inst\\uh_to_flute.json"
+    },
+    {
+      "category": "vowel_inst",
+      "from": {
+        "category": "vowels",
+        "key": "uh",
+        "tables_ref": "vowels.uh"
+      },
+      "to": {
+        "category": "instruments",
+        "key": "french_horn",
+        "tables_ref": "instruments.french_horn"
+      },
+      "shape_path": "C:\\Users\\hooki\\Trench\\vault\\_shapes\\vowel_inst\\uh_to_french_horn.json"
+    },
+    {
+      "category": "vowel_inst",
+      "from": {
+        "category": "vowels",
+        "key": "uh",
+        "tables_ref": "vowels.uh"
+      },
+      "to": {
+        "category": "instruments",
+        "key": "oboe",
+        "tables_ref": "instruments.oboe"
+      },
+      "shape_path": "C:\\Users\\hooki\\Trench\\vault\\_shapes\\vowel_inst\\uh_to_oboe.json"
+    },
+    {
+      "category": "vowel_inst",
+      "from": {
+        "category": "vowels",
+        "key": "uh",
+        "tables_ref": "vowels.uh"
+      },
+      "to": {
+        "category": "instruments",
+        "key": "trumpet",
+        "tables_ref": "instruments.trumpet"
+      },
+      "shape_path": "C:\\Users\\hooki\\Trench\\vault\\_shapes\\vowel_inst\\uh_to_trumpet.json"
+    },
+    {
+      "category": "vowel_inst",
+      "from": {
+        "category": "vowels",
+        "key": "uh",
+        "tables_ref": "vowels.uh"
+      },
+      "to": {
+        "category": "instruments",
+        "key": "tuba",
+        "tables_ref": "instruments.tuba"
+      },
+      "shape_path": "C:\\Users\\hooki\\Trench\\vault\\_shapes\\vowel_inst\\uh_to_tuba.json"
+    },
+    {
+      "category": "vowel_land",
+      "from": {
+        "category": "vowels",
+        "key": "ae",
+        "tables_ref": "vowels.ae"
+      },
+      "to": {
+        "category": "landmarks",
+        "key": "air_band",
+        "tables_ref": "landmarks.air_band"
+      },
+      "shape_path": "C:\\Users\\hooki\\Trench\\vault\\_shapes\\vowel_land\\ae_to_air_band.json"
+    },
+    {
+      "category": "vowel_land",
+      "from": {
+        "category": "vowels",
+        "key": "ae",
+        "tables_ref": "vowels.ae"
+      },
+      "to": {
+        "category": "landmarks",
+        "key": "chest_resonance",
+        "tables_ref": "landmarks.chest_resonance"
+      },
+      "shape_path": "C:\\Users\\hooki\\Trench\\vault\\_shapes\\vowel_land\\ae_to_chest_resonance.json"
+    },
+    {
+      "category": "vowel_land",
+      "from": {
+        "category": "vowels",
+        "key": "ae",
+        "tables_ref": "vowels.ae"
+      },
+      "to": {
+        "category": "landmarks",
+        "key": "ear_canal_resonance",
+        "tables_ref": "landmarks.ear_canal_resonance"
+      },
+      "shape_path": "C:\\Users\\hooki\\Trench\\vault\\_shapes\\vowel_land\\ae_to_ear_canal_resonance.json"
+    },
+    {
+      "category": "vowel_land",
+      "from": {
+        "category": "vowels",
+        "key": "ae",
+        "tables_ref": "vowels.ae"
+      },
+      "to": {
+        "category": "landmarks",
+        "key": "presence_peak",
+        "tables_ref": "landmarks.presence_peak"
+      },
+      "shape_path": "C:\\Users\\hooki\\Trench\\vault\\_shapes\\vowel_land\\ae_to_presence_peak.json"
+    },
+    {
+      "category": "vowel_land",
+      "from": {
+        "category": "vowels",
+        "key": "ae",
+        "tables_ref": "vowels.ae"
+      },
+      "to": {
+        "category": "landmarks",
+        "key": "room_mode_medium",
+        "tables_ref": "landmarks.room_mode_medium"
+      },
+      "shape_path": "C:\\Users\\hooki\\Trench\\vault\\_shapes\\vowel_land\\ae_to_room_mode_medium.json"
+    },
+    {
+      "category": "vowel_land",
+      "from": {
+        "category": "vowels",
+        "key": "ae",
+        "tables_ref": "vowels.ae"
+      },
+      "to": {
+        "category": "landmarks",
+        "key": "room_mode_small",
+        "tables_ref": "landmarks.room_mode_small"
+      },
+      "shape_path": "C:\\Users\\hooki\\Trench\\vault\\_shapes\\vowel_land\\ae_to_room_mode_small.json"
+    },
+    {
+      "category": "vowel_land",
+      "from": {
+        "category": "vowels",
+        "key": "ae",
+        "tables_ref": "vowels.ae"
+      },
+      "to": {
+        "category": "landmarks",
+        "key": "sibilance_band",
+        "tables_ref": "landmarks.sibilance_band"
+      },
+      "shape_path": "C:\\Users\\hooki\\Trench\\vault\\_shapes\\vowel_land\\ae_to_sibilance_band.json"
+    },
+    {
+      "category": "vowel_land",
+      "from": {
+        "category": "vowels",
+        "key": "ae",
+        "tables_ref": "vowels.ae"
+      },
+      "to": {
+        "category": "landmarks",
+        "key": "telephone_band_high",
+        "tables_ref": "landmarks.telephone_band_high"
+      },
+      "shape_path": "C:\\Users\\hooki\\Trench\\vault\\_shapes\\vowel_land\\ae_to_telephone_band_high.json"
+    },
+    {
+      "category": "vowel_land",
+      "from": {
+        "category": "vowels",
+        "key": "ae",
+        "tables_ref": "vowels.ae"
+      },
+      "to": {
+        "category": "landmarks",
+        "key": "telephone_band_low",
+        "tables_ref": "landmarks.telephone_band_low"
+      },
+      "shape_path": "C:\\Users\\hooki\\Trench\\vault\\_shapes\\vowel_land\\ae_to_telephone_band_low.json"
+    },
+    {
+      "category": "vowel_land",
+      "from": {
+        "category": "vowels",
+        "key": "ae",
+        "tables_ref": "vowels.ae"
+      },
+      "to": {
+        "category": "landmarks",
+        "key": "vocal_tract_f1_floor",
+        "tables_ref": "landmarks.vocal_tract_f1_floor"
+      },
+      "shape_path": "C:\\Users\\hooki\\Trench\\vault\\_shapes\\vowel_land\\ae_to_vocal_tract_f1_floor.json"
+    },
+    {
+      "category": "vowel_land",
+      "from": {
+        "category": "vowels",
+        "key": "ah",
+        "tables_ref": "vowels.ah"
+      },
+      "to": {
+        "category": "landmarks",
+        "key": "air_band",
+        "tables_ref": "landmarks.air_band"
+      },
+      "shape_path": "C:\\Users\\hooki\\Trench\\vault\\_shapes\\vowel_land\\ah_to_air_band.json"
+    },
+    {
+      "category": "vowel_land",
+      "from": {
+        "category": "vowels",
+        "key": "ah",
+        "tables_ref": "vowels.ah"
+      },
+      "to": {
+        "category": "landmarks",
+        "key": "chest_resonance",
+        "tables_ref": "landmarks.chest_resonance"
+      },
+      "shape_path": "C:\\Users\\hooki\\Trench\\vault\\_shapes\\vowel_land\\ah_to_chest_resonance.json"
+    },
+    {
+      "category": "vowel_land",
+      "from": {
+        "category": "vowels",
+        "key": "ah",
+        "tables_ref": "vowels.ah"
+      },
+      "to": {
+        "category": "landmarks",
+        "key": "ear_canal_resonance",
+        "tables_ref": "landmarks.ear_canal_resonance"
+      },
+      "shape_path": "C:\\Users\\hooki\\Trench\\vault\\_shapes\\vowel_land\\ah_to_ear_canal_resonance.json"
+    },
+    {
+      "category": "vowel_land",
+      "from": {
+        "category": "vowels",
+        "key": "ah",
+        "tables_ref": "vowels.ah"
+      },
+      "to": {
+        "category": "landmarks",
+        "key": "presence_peak",
+        "tables_ref": "landmarks.presence_peak"
+      },
+      "shape_path": "C:\\Users\\hooki\\Trench\\vault\\_shapes\\vowel_land\\ah_to_presence_peak.json"
+    },
+    {
+      "category": "vowel_land",
+      "from": {
+        "category": "vowels",
+        "key": "ah",
+        "tables_ref": "vowels.ah"
+      },
+      "to": {
+        "category": "landmarks",
+        "key": "room_mode_medium",
+        "tables_ref": "landmarks.room_mode_medium"
+      },
+      "shape_path": "C:\\Users\\hooki\\Trench\\vault\\_shapes\\vowel_land\\ah_to_room_mode_medium.json"
+    },
+    {
+      "category": "vowel_land",
+      "from": {
+        "category": "vowels",
+        "key": "ah",
+        "tables_ref": "vowels.ah"
+      },
+      "to": {
+        "category": "landmarks",
+        "key": "room_mode_small",
+        "tables_ref": "landmarks.room_mode_small"
+      },
+      "shape_path": "C:\\Users\\hooki\\Trench\\vault\\_shapes\\vowel_land\\ah_to_room_mode_small.json"
+    },
+    {
+      "category": "vowel_land",
+      "from": {
+        "category": "vowels",
+        "key": "ah",
+        "tables_ref": "vowels.ah"
+      },
+      "to": {
+        "category": "landmarks",
+        "key": "sibilance_band",
+        "tables_ref": "landmarks.sibilance_band"
+      },
+      "shape_path": "C:\\Users\\hooki\\Trench\\vault\\_shapes\\vowel_land\\ah_to_sibilance_band.json"
+    },
+    {
+      "category": "vowel_land",
+      "from": {
+        "category": "vowels",
+        "key": "ah",
+        "tables_ref": "vowels.ah"
+      },
+      "to": {
+        "category": "landmarks",
+        "key": "telephone_band_high",
+        "tables_ref": "landmarks.telephone_band_high"
+      },
+      "shape_path": "C:\\Users\\hooki\\Trench\\vault\\_shapes\\vowel_land\\ah_to_telephone_band_high.json"
+    },
+    {
+      "category": "vowel_land",
+      "from": {
+        "category": "vowels",
+        "key": "ah",
+        "tables_ref": "vowels.ah"
+      },
+      "to": {
+        "category": "landmarks",
+        "key": "telephone_band_low",
+        "tables_ref": "landmarks.telephone_band_low"
+      },
+      "shape_path": "C:\\Users\\hooki\\Trench\\vault\\_shapes\\vowel_land\\ah_to_telephone_band_low.json"
+    },
+    {
+      "category": "vowel_land",
+      "from": {
+        "category": "vowels",
+        "key": "ah",
+        "tables_ref": "vowels.ah"
+      },
+      "to": {
+        "category": "landmarks",
+        "key": "vocal_tract_f1_floor",
+        "tables_ref": "landmarks.vocal_tract_f1_floor"
+      },
+      "shape_path": "C:\\Users\\hooki\\Trench\\vault\\_shapes\\vowel_land\\ah_to_vocal_tract_f1_floor.json"
+    },
+    {
+      "category": "vowel_land",
+      "from": {
+        "category": "vowels",
+        "key": "aw",
+        "tables_ref": "vowels.aw"
+      },
+      "to": {
+        "category": "landmarks",
+        "key": "air_band",
+        "tables_ref": "landmarks.air_band"
+      },
+      "shape_path": "C:\\Users\\hooki\\Trench\\vault\\_shapes\\vowel_land\\aw_to_air_band.json"
+    },
+    {
+      "category": "vowel_land",
+      "from": {
+        "category": "vowels",
+        "key": "aw",
+        "tables_ref": "vowels.aw"
+      },
+      "to": {
+        "category": "landmarks",
+        "key": "chest_resonance",
+        "tables_ref": "landmarks.chest_resonance"
+      },
+      "shape_path": "C:\\Users\\hooki\\Trench\\vault\\_shapes\\vowel_land\\aw_to_chest_resonance.json"
+    },
+    {
+      "category": "vowel_land",
+      "from": {
+        "category": "vowels",
+        "key": "aw",
+        "tables_ref": "vowels.aw"
+      },
+      "to": {
+        "category": "landmarks",
+        "key": "ear_canal_resonance",
+        "tables_ref": "landmarks.ear_canal_resonance"
+      },
+      "shape_path": "C:\\Users\\hooki\\Trench\\vault\\_shapes\\vowel_land\\aw_to_ear_canal_resonance.json"
+    },
+    {
+      "category": "vowel_land",
+      "from": {
+        "category": "vowels",
+        "key": "aw",
+        "tables_ref": "vowels.aw"
+      },
+      "to": {
+        "category": "landmarks",
+        "key": "presence_peak",
+        "tables_ref": "landmarks.presence_peak"
+      },
+      "shape_path": "C:\\Users\\hooki\\Trench\\vault\\_shapes\\vowel_land\\aw_to_presence_peak.json"
+    },
+    {
+      "category": "vowel_land",
+      "from": {
+        "category": "vowels",
+        "key": "aw",
+        "tables_ref": "vowels.aw"
+      },
+      "to": {
+        "category": "landmarks",
+        "key": "room_mode_medium",
+        "tables_ref": "landmarks.room_mode_medium"
+      },
+      "shape_path": "C:\\Users\\hooki\\Trench\\vault\\_shapes\\vowel_land\\aw_to_room_mode_medium.json"
+    },
+    {
+      "category": "vowel_land",
+      "from": {
+        "category": "vowels",
+        "key": "aw",
+        "tables_ref": "vowels.aw"
+      },
+      "to": {
+        "category": "landmarks",
+        "key": "room_mode_small",
+        "tables_ref": "landmarks.room_mode_small"
+      },
+      "shape_path": "C:\\Users\\hooki\\Trench\\vault\\_shapes\\vowel_land\\aw_to_room_mode_small.json"
+    },
+    {
+      "category": "vowel_land",
+      "from": {
+        "category": "vowels",
+        "key": "aw",
+        "tables_ref": "vowels.aw"
+      },
+      "to": {
+        "category": "landmarks",
+        "key": "sibilance_band",
+        "tables_ref": "landmarks.sibilance_band"
+      },
+      "shape_path": "C:\\Users\\hooki\\Trench\\vault\\_shapes\\vowel_land\\aw_to_sibilance_band.json"
+    },
+    {
+      "category": "vowel_land",
+      "from": {
+        "category": "vowels",
+        "key": "aw",
+        "tables_ref": "vowels.aw"
+      },
+      "to": {
+        "category": "landmarks",
+        "key": "telephone_band_high",
+        "tables_ref": "landmarks.telephone_band_high"
+      },
+      "shape_path": "C:\\Users\\hooki\\Trench\\vault\\_shapes\\vowel_land\\aw_to_telephone_band_high.json"
+    },
+    {
+      "category": "vowel_land",
+      "from": {
+        "category": "vowels",
+        "key": "aw",
+        "tables_ref": "vowels.aw"
+      },
+      "to": {
+        "category": "landmarks",
+        "key": "telephone_band_low",
+        "tables_ref": "landmarks.telephone_band_low"
+      },
+      "shape_path": "C:\\Users\\hooki\\Trench\\vault\\_shapes\\vowel_land\\aw_to_telephone_band_low.json"
+    },
+    {
+      "category": "vowel_land",
+      "from": {
+        "category": "vowels",
+        "key": "aw",
+        "tables_ref": "vowels.aw"
+      },
+      "to": {
+        "category": "landmarks",
+        "key": "vocal_tract_f1_floor",
+        "tables_ref": "landmarks.vocal_tract_f1_floor"
+      },
+      "shape_path": "C:\\Users\\hooki\\Trench\\vault\\_shapes\\vowel_land\\aw_to_vocal_tract_f1_floor.json"
+    },
+    {
+      "category": "vowel_land",
+      "from": {
+        "category": "vowels",
+        "key": "ee",
+        "tables_ref": "vowels.ee"
+      },
+      "to": {
+        "category": "landmarks",
+        "key": "air_band",
+        "tables_ref": "landmarks.air_band"
+      },
+      "shape_path": "C:\\Users\\hooki\\Trench\\vault\\_shapes\\vowel_land\\ee_to_air_band.json"
+    },
+    {
+      "category": "vowel_land",
+      "from": {
+        "category": "vowels",
+        "key": "ee",
+        "tables_ref": "vowels.ee"
+      },
+      "to": {
+        "category": "landmarks",
+        "key": "chest_resonance",
+        "tables_ref": "landmarks.chest_resonance"
+      },
+      "shape_path": "C:\\Users\\hooki\\Trench\\vault\\_shapes\\vowel_land\\ee_to_chest_resonance.json"
+    },
+    {
+      "category": "vowel_land",
+      "from": {
+        "category": "vowels",
+        "key": "ee",
+        "tables_ref": "vowels.ee"
+      },
+      "to": {
+        "category": "landmarks",
+        "key": "ear_canal_resonance",
+        "tables_ref": "landmarks.ear_canal_resonance"
+      },
+      "shape_path": "C:\\Users\\hooki\\Trench\\vault\\_shapes\\vowel_land\\ee_to_ear_canal_resonance.json"
+    },
+    {
+      "category": "vowel_land",
+      "from": {
+        "category": "vowels",
+        "key": "ee",
+        "tables_ref": "vowels.ee"
+      },
+      "to": {
+        "category": "landmarks",
+        "key": "presence_peak",
+        "tables_ref": "landmarks.presence_peak"
+      },
+      "shape_path": "C:\\Users\\hooki\\Trench\\vault\\_shapes\\vowel_land\\ee_to_presence_peak.json"
+    },
+    {
+      "category": "vowel_land",
+      "from": {
+        "category": "vowels",
+        "key": "ee",
+        "tables_ref": "vowels.ee"
+      },
+      "to": {
+        "category": "landmarks",
+        "key": "room_mode_medium",
+        "tables_ref": "landmarks.room_mode_medium"
+      },
+      "shape_path": "C:\\Users\\hooki\\Trench\\vault\\_shapes\\vowel_land\\ee_to_room_mode_medium.json"
+    },
+    {
+      "category": "vowel_land",
+      "from": {
+        "category": "vowels",
+        "key": "ee",
+        "tables_ref": "vowels.ee"
+      },
+      "to": {
+        "category": "landmarks",
+        "key": "room_mode_small",
+        "tables_ref": "landmarks.room_mode_small"
+      },
+      "shape_path": "C:\\Users\\hooki\\Trench\\vault\\_shapes\\vowel_land\\ee_to_room_mode_small.json"
+    },
+    {
+      "category": "vowel_land",
+      "from": {
+        "category": "vowels",
+        "key": "ee",
+        "tables_ref": "vowels.ee"
+      },
+      "to": {
+        "category": "landmarks",
+        "key": "sibilance_band",
+        "tables_ref": "landmarks.sibilance_band"
+      },
+      "shape_path": "C:\\Users\\hooki\\Trench\\vault\\_shapes\\vowel_land\\ee_to_sibilance_band.json"
+    },
+    {
+      "category": "vowel_land",
+      "from": {
+        "category": "vowels",
+        "key": "ee",
+        "tables_ref": "vowels.ee"
+      },
+      "to": {
+        "category": "landmarks",
+        "key": "telephone_band_high",
+        "tables_ref": "landmarks.telephone_band_high"
+      },
+      "shape_path": "C:\\Users\\hooki\\Trench\\vault\\_shapes\\vowel_land\\ee_to_telephone_band_high.json"
+    },
+    {
+      "category": "vowel_land",
+      "from": {
+        "category": "vowels",
+        "key": "ee",
+        "tables_ref": "vowels.ee"
+      },
+      "to": {
+        "category": "landmarks",
+        "key": "telephone_band_low",
+        "tables_ref": "landmarks.telephone_band_low"
+      },
+      "shape_path": "C:\\Users\\hooki\\Trench\\vault\\_shapes\\vowel_land\\ee_to_telephone_band_low.json"
+    },
+    {
+      "category": "vowel_land",
+      "from": {
+        "category": "vowels",
+        "key": "ee",
+        "tables_ref": "vowels.ee"
+      },
+      "to": {
+        "category": "landmarks",
+        "key": "vocal_tract_f1_floor",
+        "tables_ref": "landmarks.vocal_tract_f1_floor"
+      },
+      "shape_path": "C:\\Users\\hooki\\Trench\\vault\\_shapes\\vowel_land\\ee_to_vocal_tract_f1_floor.json"
+    },
+    {
+      "category": "vowel_land",
+      "from": {
+        "category": "vowels",
+        "key": "eh",
+        "tables_ref": "vowels.eh"
+      },
+      "to": {
+        "category": "landmarks",
+        "key": "air_band",
+        "tables_ref": "landmarks.air_band"
+      },
+      "shape_path": "C:\\Users\\hooki\\Trench\\vault\\_shapes\\vowel_land\\eh_to_air_band.json"
+    },
+    {
+      "category": "vowel_land",
+      "from": {
+        "category": "vowels",
+        "key": "eh",
+        "tables_ref": "vowels.eh"
+      },
+      "to": {
+        "category": "landmarks",
+        "key": "chest_resonance",
+        "tables_ref": "landmarks.chest_resonance"
+      },
+      "shape_path": "C:\\Users\\hooki\\Trench\\vault\\_shapes\\vowel_land\\eh_to_chest_resonance.json"
+    },
+    {
+      "category": "vowel_land",
+      "from": {
+        "category": "vowels",
+        "key": "eh",
+        "tables_ref": "vowels.eh"
+      },
+      "to": {
+        "category": "landmarks",
+        "key": "ear_canal_resonance",
+        "tables_ref": "landmarks.ear_canal_resonance"
+      },
+      "shape_path": "C:\\Users\\hooki\\Trench\\vault\\_shapes\\vowel_land\\eh_to_ear_canal_resonance.json"
+    },
+    {
+      "category": "vowel_land",
+      "from": {
+        "category": "vowels",
+        "key": "eh",
+        "tables_ref": "vowels.eh"
+      },
+      "to": {
+        "category": "landmarks",
+        "key": "presence_peak",
+        "tables_ref": "landmarks.presence_peak"
+      },
+      "shape_path": "C:\\Users\\hooki\\Trench\\vault\\_shapes\\vowel_land\\eh_to_presence_peak.json"
+    },
+    {
+      "category": "vowel_land",
+      "from": {
+        "category": "vowels",
+        "key": "eh",
+        "tables_ref": "vowels.eh"
+      },
+      "to": {
+        "category": "landmarks",
+        "key": "room_mode_medium",
+        "tables_ref": "landmarks.room_mode_medium"
+      },
+      "shape_path": "C:\\Users\\hooki\\Trench\\vault\\_shapes\\vowel_land\\eh_to_room_mode_medium.json"
+    },
+    {
+      "category": "vowel_land",
+      "from": {
+        "category": "vowels",
+        "key": "eh",
+        "tables_ref": "vowels.eh"
+      },
+      "to": {
+        "category": "landmarks",
+        "key": "room_mode_small",
+        "tables_ref": "landmarks.room_mode_small"
+      },
+      "shape_path": "C:\\Users\\hooki\\Trench\\vault\\_shapes\\vowel_land\\eh_to_room_mode_small.json"
+    },
+    {
+      "category": "vowel_land",
+      "from": {
+        "category": "vowels",
+        "key": "eh",
+        "tables_ref": "vowels.eh"
+      },
+      "to": {
+        "category": "landmarks",
+        "key": "sibilance_band",
+        "tables_ref": "landmarks.sibilance_band"
+      },
+      "shape_path": "C:\\Users\\hooki\\Trench\\vault\\_shapes\\vowel_land\\eh_to_sibilance_band.json"
+    },
+    {
+      "category": "vowel_land",
+      "from": {
+        "category": "vowels",
+        "key": "eh",
+        "tables_ref": "vowels.eh"
+      },
+      "to": {
+        "category": "landmarks",
+        "key": "telephone_band_high",
+        "tables_ref": "landmarks.telephone_band_high"
+      },
+      "shape_path": "C:\\Users\\hooki\\Trench\\vault\\_shapes\\vowel_land\\eh_to_telephone_band_high.json"
+    },
+    {
+      "category": "vowel_land",
+      "from": {
+        "category": "vowels",
+        "key": "eh",
+        "tables_ref": "vowels.eh"
+      },
+      "to": {
+        "category": "landmarks",
+        "key": "telephone_band_low",
+        "tables_ref": "landmarks.telephone_band_low"
+      },
+      "shape_path": "C:\\Users\\hooki\\Trench\\vault\\_shapes\\vowel_land\\eh_to_telephone_band_low.json"
+    },
+    {
+      "category": "vowel_land",
+      "from": {
+        "category": "vowels",
+        "key": "eh",
+        "tables_ref": "vowels.eh"
+      },
+      "to": {
+        "category": "landmarks",
+        "key": "vocal_tract_f1_floor",
+        "tables_ref": "landmarks.vocal_tract_f1_floor"
+      },
+      "shape_path": "C:\\Users\\hooki\\Trench\\vault\\_shapes\\vowel_land\\eh_to_vocal_tract_f1_floor.json"
+    },
+    {
+      "category": "vowel_land",
+      "from": {
+        "category": "vowels",
+        "key": "er",
+        "tables_ref": "vowels.er"
+      },
+      "to": {
+        "category": "landmarks",
+        "key": "air_band",
+        "tables_ref": "landmarks.air_band"
+      },
+      "shape_path": "C:\\Users\\hooki\\Trench\\vault\\_shapes\\vowel_land\\er_to_air_band.json"
+    },
+    {
+      "category": "vowel_land",
+      "from": {
+        "category": "vowels",
+        "key": "er",
+        "tables_ref": "vowels.er"
+      },
+      "to": {
+        "category": "landmarks",
+        "key": "chest_resonance",
+        "tables_ref": "landmarks.chest_resonance"
+      },
+      "shape_path": "C:\\Users\\hooki\\Trench\\vault\\_shapes\\vowel_land\\er_to_chest_resonance.json"
+    },
+    {
+      "category": "vowel_land",
+      "from": {
+        "category": "vowels",
+        "key": "er",
+        "tables_ref": "vowels.er"
+      },
+      "to": {
+        "category": "landmarks",
+        "key": "ear_canal_resonance",
+        "tables_ref": "landmarks.ear_canal_resonance"
+      },
+      "shape_path": "C:\\Users\\hooki\\Trench\\vault\\_shapes\\vowel_land\\er_to_ear_canal_resonance.json"
+    },
+    {
+      "category": "vowel_land",
+      "from": {
+        "category": "vowels",
+        "key": "er",
+        "tables_ref": "vowels.er"
+      },
+      "to": {
+        "category": "landmarks",
+        "key": "presence_peak",
+        "tables_ref": "landmarks.presence_peak"
+      },
+      "shape_path": "C:\\Users\\hooki\\Trench\\vault\\_shapes\\vowel_land\\er_to_presence_peak.json"
+    },
+    {
+      "category": "vowel_land",
+      "from": {
+        "category": "vowels",
+        "key": "er",
+        "tables_ref": "vowels.er"
+      },
+      "to": {
+        "category": "landmarks",
+        "key": "room_mode_medium",
+        "tables_ref": "landmarks.room_mode_medium"
+      },
+      "shape_path": "C:\\Users\\hooki\\Trench\\vault\\_shapes\\vowel_land\\er_to_room_mode_medium.json"
+    },
+    {
+      "category": "vowel_land",
+      "from": {
+        "category": "vowels",
+        "key": "er",
+        "tables_ref": "vowels.er"
+      },
+      "to": {
+        "category": "landmarks",
+        "key": "room_mode_small",
+        "tables_ref": "landmarks.room_mode_small"
+      },
+      "shape_path": "C:\\Users\\hooki\\Trench\\vault\\_shapes\\vowel_land\\er_to_room_mode_small.json"
+    },
+    {
+      "category": "vowel_land",
+      "from": {
+        "category": "vowels",
+        "key": "er",
+        "tables_ref": "vowels.er"
+      },
+      "to": {
+        "category": "landmarks",
+        "key": "sibilance_band",
+        "tables_ref": "landmarks.sibilance_band"
+      },
+      "shape_path": "C:\\Users\\hooki\\Trench\\vault\\_shapes\\vowel_land\\er_to_sibilance_band.json"
+    },
+    {
+      "category": "vowel_land",
+      "from": {
+        "category": "vowels",
+        "key": "er",
+        "tables_ref": "vowels.er"
+      },
+      "to": {
+        "category": "landmarks",
+        "key": "telephone_band_high",
+        "tables_ref": "landmarks.telephone_band_high"
+      },
+      "shape_path": "C:\\Users\\hooki\\Trench\\vault\\_shapes\\vowel_land\\er_to_telephone_band_high.json"
+    },
+    {
+      "category": "vowel_land",
+      "from": {
+        "category": "vowels",
+        "key": "er",
+        "tables_ref": "vowels.er"
+      },
+      "to": {
+        "category": "landmarks",
+        "key": "telephone_band_low",
+        "tables_ref": "landmarks.telephone_band_low"
+      },
+      "shape_path": "C:\\Users\\hooki\\Trench\\vault\\_shapes\\vowel_land\\er_to_telephone_band_low.json"
+    },
+    {
+      "category": "vowel_land",
+      "from": {
+        "category": "vowels",
+        "key": "er",
+        "tables_ref": "vowels.er"
+      },
+      "to": {
+        "category": "landmarks",
+        "key": "vocal_tract_f1_floor",
+        "tables_ref": "landmarks.vocal_tract_f1_floor"
+      },
+      "shape_path": "C:\\Users\\hooki\\Trench\\vault\\_shapes\\vowel_land\\er_to_vocal_tract_f1_floor.json"
+    },
+    {
+      "category": "vowel_land",
+      "from": {
+        "category": "vowels",
+        "key": "ih",
+        "tables_ref": "vowels.ih"
+      },
+      "to": {
+        "category": "landmarks",
+        "key": "air_band",
+        "tables_ref": "landmarks.air_band"
+      },
+      "shape_path": "C:\\Users\\hooki\\Trench\\vault\\_shapes\\vowel_land\\ih_to_air_band.json"
+    },
+    {
+      "category": "vowel_land",
+      "from": {
+        "category": "vowels",
+        "key": "ih",
+        "tables_ref": "vowels.ih"
+      },
+      "to": {
+        "category": "landmarks",
+        "key": "chest_resonance",
+        "tables_ref": "landmarks.chest_resonance"
+      },
+      "shape_path": "C:\\Users\\hooki\\Trench\\vault\\_shapes\\vowel_land\\ih_to_chest_resonance.json"
+    },
+    {
+      "category": "vowel_land",
+      "from": {
+        "category": "vowels",
+        "key": "ih",
+        "tables_ref": "vowels.ih"
+      },
+      "to": {
+        "category": "landmarks",
+        "key": "ear_canal_resonance",
+        "tables_ref": "landmarks.ear_canal_resonance"
+      },
+      "shape_path": "C:\\Users\\hooki\\Trench\\vault\\_shapes\\vowel_land\\ih_to_ear_canal_resonance.json"
+    },
+    {
+      "category": "vowel_land",
+      "from": {
+        "category": "vowels",
+        "key": "ih",
+        "tables_ref": "vowels.ih"
+      },
+      "to": {
+        "category": "landmarks",
+        "key": "presence_peak",
+        "tables_ref": "landmarks.presence_peak"
+      },
+      "shape_path": "C:\\Users\\hooki\\Trench\\vault\\_shapes\\vowel_land\\ih_to_presence_peak.json"
+    },
+    {
+      "category": "vowel_land",
+      "from": {
+        "category": "vowels",
+        "key": "ih",
+        "tables_ref": "vowels.ih"
+      },
+      "to": {
+        "category": "landmarks",
+        "key": "room_mode_medium",
+        "tables_ref": "landmarks.room_mode_medium"
+      },
+      "shape_path": "C:\\Users\\hooki\\Trench\\vault\\_shapes\\vowel_land\\ih_to_room_mode_medium.json"
+    },
+    {
+      "category": "vowel_land",
+      "from": {
+        "category": "vowels",
+        "key": "ih",
+        "tables_ref": "vowels.ih"
+      },
+      "to": {
+        "category": "landmarks",
+        "key": "room_mode_small",
+        "tables_ref": "landmarks.room_mode_small"
+      },
+      "shape_path": "C:\\Users\\hooki\\Trench\\vault\\_shapes\\vowel_land\\ih_to_room_mode_small.json"
+    },
+    {
+      "category": "vowel_land",
+      "from": {
+        "category": "vowels",
+        "key": "ih",
+        "tables_ref": "vowels.ih"
+      },
+      "to": {
+        "category": "landmarks",
+        "key": "sibilance_band",
+        "tables_ref": "landmarks.sibilance_band"
+      },
+      "shape_path": "C:\\Users\\hooki\\Trench\\vault\\_shapes\\vowel_land\\ih_to_sibilance_band.json"
+    },
+    {
+      "category": "vowel_land",
+      "from": {
+        "category": "vowels",
+        "key": "ih",
+        "tables_ref": "vowels.ih"
+      },
+      "to": {
+        "category": "landmarks",
+        "key": "telephone_band_high",
+        "tables_ref": "landmarks.telephone_band_high"
+      },
+      "shape_path": "C:\\Users\\hooki\\Trench\\vault\\_shapes\\vowel_land\\ih_to_telephone_band_high.json"
+    },
+    {
+      "category": "vowel_land",
+      "from": {
+        "category": "vowels",
+        "key": "ih",
+        "tables_ref": "vowels.ih"
+      },
+      "to": {
+        "category": "landmarks",
+        "key": "telephone_band_low",
+        "tables_ref": "landmarks.telephone_band_low"
+      },
+      "shape_path": "C:\\Users\\hooki\\Trench\\vault\\_shapes\\vowel_land\\ih_to_telephone_band_low.json"
+    },
+    {
+      "category": "vowel_land",
+      "from": {
+        "category": "vowels",
+        "key": "ih",
+        "tables_ref": "vowels.ih"
+      },
+      "to": {
+        "category": "landmarks",
+        "key": "vocal_tract_f1_floor",
+        "tables_ref": "landmarks.vocal_tract_f1_floor"
+      },
+      "shape_path": "C:\\Users\\hooki\\Trench\\vault\\_shapes\\vowel_land\\ih_to_vocal_tract_f1_floor.json"
+    },
+    {
+      "category": "vowel_land",
+      "from": {
+        "category": "vowels",
+        "key": "oo",
+        "tables_ref": "vowels.oo"
+      },
+      "to": {
+        "category": "landmarks",
+        "key": "air_band",
+        "tables_ref": "landmarks.air_band"
+      },
+      "shape_path": "C:\\Users\\hooki\\Trench\\vault\\_shapes\\vowel_land\\oo_to_air_band.json"
+    },
+    {
+      "category": "vowel_land",
+      "from": {
+        "category": "vowels",
+        "key": "oo",
+        "tables_ref": "vowels.oo"
+      },
+      "to": {
+        "category": "landmarks",
+        "key": "chest_resonance",
+        "tables_ref": "landmarks.chest_resonance"
+      },
+      "shape_path": "C:\\Users\\hooki\\Trench\\vault\\_shapes\\vowel_land\\oo_to_chest_resonance.json"
+    },
+    {
+      "category": "vowel_land",
+      "from": {
+        "category": "vowels",
+        "key": "oo",
+        "tables_ref": "vowels.oo"
+      },
+      "to": {
+        "category": "landmarks",
+        "key": "ear_canal_resonance",
+        "tables_ref": "landmarks.ear_canal_resonance"
+      },
+      "shape_path": "C:\\Users\\hooki\\Trench\\vault\\_shapes\\vowel_land\\oo_to_ear_canal_resonance.json"
+    },
+    {
+      "category": "vowel_land",
+      "from": {
+        "category": "vowels",
+        "key": "oo",
+        "tables_ref": "vowels.oo"
+      },
+      "to": {
+        "category": "landmarks",
+        "key": "presence_peak",
+        "tables_ref": "landmarks.presence_peak"
+      },
+      "shape_path": "C:\\Users\\hooki\\Trench\\vault\\_shapes\\vowel_land\\oo_to_presence_peak.json"
+    },
+    {
+      "category": "vowel_land",
+      "from": {
+        "category": "vowels",
+        "key": "oo",
+        "tables_ref": "vowels.oo"
+      },
+      "to": {
+        "category": "landmarks",
+        "key": "room_mode_medium",
+        "tables_ref": "landmarks.room_mode_medium"
+      },
+      "shape_path": "C:\\Users\\hooki\\Trench\\vault\\_shapes\\vowel_land\\oo_to_room_mode_medium.json"
+    },
+    {
+      "category": "vowel_land",
+      "from": {
+        "category": "vowels",
+        "key": "oo",
+        "tables_ref": "vowels.oo"
+      },
+      "to": {
+        "category": "landmarks",
+        "key": "room_mode_small",
+        "tables_ref": "landmarks.room_mode_small"
+      },
+      "shape_path": "C:\\Users\\hooki\\Trench\\vault\\_shapes\\vowel_land\\oo_to_room_mode_small.json"
+    },
+    {
+      "category": "vowel_land",
+      "from": {
+        "category": "vowels",
+        "key": "oo",
+        "tables_ref": "vowels.oo"
+      },
+      "to": {
+        "category": "landmarks",
+        "key": "sibilance_band",
+        "tables_ref": "landmarks.sibilance_band"
+      },
+      "shape_path": "C:\\Users\\hooki\\Trench\\vault\\_shapes\\vowel_land\\oo_to_sibilance_band.json"
+    },
+    {
+      "category": "vowel_land",
+      "from": {
+        "category": "vowels",
+        "key": "oo",
+        "tables_ref": "vowels.oo"
+      },
+      "to": {
+        "category": "landmarks",
+        "key": "telephone_band_high",
+        "tables_ref": "landmarks.telephone_band_high"
+      },
+      "shape_path": "C:\\Users\\hooki\\Trench\\vault\\_shapes\\vowel_land\\oo_to_telephone_band_high.json"
+    },
+    {
+      "category": "vowel_land",
+      "from": {
+        "category": "vowels",
+        "key": "oo",
+        "tables_ref": "vowels.oo"
+      },
+      "to": {
+        "category": "landmarks",
+        "key": "telephone_band_low",
+        "tables_ref": "landmarks.telephone_band_low"
+      },
+      "shape_path": "C:\\Users\\hooki\\Trench\\vault\\_shapes\\vowel_land\\oo_to_telephone_band_low.json"
+    },
+    {
+      "category": "vowel_land",
+      "from": {
+        "category": "vowels",
+        "key": "oo",
+        "tables_ref": "vowels.oo"
+      },
+      "to": {
+        "category": "landmarks",
+        "key": "vocal_tract_f1_floor",
+        "tables_ref": "landmarks.vocal_tract_f1_floor"
+      },
+      "shape_path": "C:\\Users\\hooki\\Trench\\vault\\_shapes\\vowel_land\\oo_to_vocal_tract_f1_floor.json"
+    },
+    {
+      "category": "vowel_land",
+      "from": {
+        "category": "vowels",
+        "key": "schwa",
+        "tables_ref": "vowels.schwa"
+      },
+      "to": {
+        "category": "landmarks",
+        "key": "air_band",
+        "tables_ref": "landmarks.air_band"
+      },
+      "shape_path": "C:\\Users\\hooki\\Trench\\vault\\_shapes\\vowel_land\\schwa_to_air_band.json"
+    },
+    {
+      "category": "vowel_land",
+      "from": {
+        "category": "vowels",
+        "key": "schwa",
+        "tables_ref": "vowels.schwa"
+      },
+      "to": {
+        "category": "landmarks",
+        "key": "chest_resonance",
+        "tables_ref": "landmarks.chest_resonance"
+      },
+      "shape_path": "C:\\Users\\hooki\\Trench\\vault\\_shapes\\vowel_land\\schwa_to_chest_resonance.json"
+    },
+    {
+      "category": "vowel_land",
+      "from": {
+        "category": "vowels",
+        "key": "schwa",
+        "tables_ref": "vowels.schwa"
+      },
+      "to": {
+        "category": "landmarks",
+        "key": "ear_canal_resonance",
+        "tables_ref": "landmarks.ear_canal_resonance"
+      },
+      "shape_path": "C:\\Users\\hooki\\Trench\\vault\\_shapes\\vowel_land\\schwa_to_ear_canal_resonance.json"
+    },
+    {
+      "category": "vowel_land",
+      "from": {
+        "category": "vowels",
+        "key": "schwa",
+        "tables_ref": "vowels.schwa"
+      },
+      "to": {
+        "category": "landmarks",
+        "key": "presence_peak",
+        "tables_ref": "landmarks.presence_peak"
+      },
+      "shape_path": "C:\\Users\\hooki\\Trench\\vault\\_shapes\\vowel_land\\schwa_to_presence_peak.json"
+    },
+    {
+      "category": "vowel_land",
+      "from": {
+        "category": "vowels",
+        "key": "schwa",
+        "tables_ref": "vowels.schwa"
+      },
+      "to": {
+        "category": "landmarks",
+        "key": "room_mode_medium",
+        "tables_ref": "landmarks.room_mode_medium"
+      },
+      "shape_path": "C:\\Users\\hooki\\Trench\\vault\\_shapes\\vowel_land\\schwa_to_room_mode_medium.json"
+    },
+    {
+      "category": "vowel_land",
+      "from": {
+        "category": "vowels",
+        "key": "schwa",
+        "tables_ref": "vowels.schwa"
+      },
+      "to": {
+        "category": "landmarks",
+        "key": "room_mode_small",
+        "tables_ref": "landmarks.room_mode_small"
+      },
+      "shape_path": "C:\\Users\\hooki\\Trench\\vault\\_shapes\\vowel_land\\schwa_to_room_mode_small.json"
+    },
+    {
+      "category": "vowel_land",
+      "from": {
+        "category": "vowels",
+        "key": "schwa",
+        "tables_ref": "vowels.schwa"
+      },
+      "to": {
+        "category": "landmarks",
+        "key": "sibilance_band",
+        "tables_ref": "landmarks.sibilance_band"
+      },
+      "shape_path": "C:\\Users\\hooki\\Trench\\vault\\_shapes\\vowel_land\\schwa_to_sibilance_band.json"
+    },
+    {
+      "category": "vowel_land",
+      "from": {
+        "category": "vowels",
+        "key": "schwa",
+        "tables_ref": "vowels.schwa"
+      },
+      "to": {
+        "category": "landmarks",
+        "key": "telephone_band_high",
+        "tables_ref": "landmarks.telephone_band_high"
+      },
+      "shape_path": "C:\\Users\\hooki\\Trench\\vault\\_shapes\\vowel_land\\schwa_to_telephone_band_high.json"
+    },
+    {
+      "category": "vowel_land",
+      "from": {
+        "category": "vowels",
+        "key": "schwa",
+        "tables_ref": "vowels.schwa"
+      },
+      "to": {
+        "category": "landmarks",
+        "key": "telephone_band_low",
+        "tables_ref": "landmarks.telephone_band_low"
+      },
+      "shape_path": "C:\\Users\\hooki\\Trench\\vault\\_shapes\\vowel_land\\schwa_to_telephone_band_low.json"
+    },
+    {
+      "category": "vowel_land",
+      "from": {
+        "category": "vowels",
+        "key": "schwa",
+        "tables_ref": "vowels.schwa"
+      },
+      "to": {
+        "category": "landmarks",
+        "key": "vocal_tract_f1_floor",
+        "tables_ref": "landmarks.vocal_tract_f1_floor"
+      },
+      "shape_path": "C:\\Users\\hooki\\Trench\\vault\\_shapes\\vowel_land\\schwa_to_vocal_tract_f1_floor.json"
+    },
+    {
+      "category": "vowel_land",
+      "from": {
+        "category": "vowels",
+        "key": "uh",
+        "tables_ref": "vowels.uh"
+      },
+      "to": {
+        "category": "landmarks",
+        "key": "air_band",
+        "tables_ref": "landmarks.air_band"
+      },
+      "shape_path": "C:\\Users\\hooki\\Trench\\vault\\_shapes\\vowel_land\\uh_to_air_band.json"
+    },
+    {
+      "category": "vowel_land",
+      "from": {
+        "category": "vowels",
+        "key": "uh",
+        "tables_ref": "vowels.uh"
+      },
+      "to": {
+        "category": "landmarks",
+        "key": "chest_resonance",
+        "tables_ref": "landmarks.chest_resonance"
+      },
+      "shape_path": "C:\\Users\\hooki\\Trench\\vault\\_shapes\\vowel_land\\uh_to_chest_resonance.json"
+    },
+    {
+      "category": "vowel_land",
+      "from": {
+        "category": "vowels",
+        "key": "uh",
+        "tables_ref": "vowels.uh"
+      },
+      "to": {
+        "category": "landmarks",
+        "key": "ear_canal_resonance",
+        "tables_ref": "landmarks.ear_canal_resonance"
+      },
+      "shape_path": "C:\\Users\\hooki\\Trench\\vault\\_shapes\\vowel_land\\uh_to_ear_canal_resonance.json"
+    },
+    {
+      "category": "vowel_land",
+      "from": {
+        "category": "vowels",
+        "key": "uh",
+        "tables_ref": "vowels.uh"
+      },
+      "to": {
+        "category": "landmarks",
+        "key": "presence_peak",
+        "tables_ref": "landmarks.presence_peak"
+      },
+      "shape_path": "C:\\Users\\hooki\\Trench\\vault\\_shapes\\vowel_land\\uh_to_presence_peak.json"
+    },
+    {
+      "category": "vowel_land",
+      "from": {
+        "category": "vowels",
+        "key": "uh",
+        "tables_ref": "vowels.uh"
+      },
+      "to": {
+        "category": "landmarks",
+        "key": "room_mode_medium",
+        "tables_ref": "landmarks.room_mode_medium"
+      },
+      "shape_path": "C:\\Users\\hooki\\Trench\\vault\\_shapes\\vowel_land\\uh_to_room_mode_medium.json"
+    },
+    {
+      "category": "vowel_land",
+      "from": {
+        "category": "vowels",
+        "key": "uh",
+        "tables_ref": "vowels.uh"
+      },
+      "to": {
+        "category": "landmarks",
+        "key": "room_mode_small",
+        "tables_ref": "landmarks.room_mode_small"
+      },
+      "shape_path": "C:\\Users\\hooki\\Trench\\vault\\_shapes\\vowel_land\\uh_to_room_mode_small.json"
+    },
+    {
+      "category": "vowel_land",
+      "from": {
+        "category": "vowels",
+        "key": "uh",
+        "tables_ref": "vowels.uh"
+      },
+      "to": {
+        "category": "landmarks",
+        "key": "sibilance_band",
+        "tables_ref": "landmarks.sibilance_band"
+      },
+      "shape_path": "C:\\Users\\hooki\\Trench\\vault\\_shapes\\vowel_land\\uh_to_sibilance_band.json"
+    },
+    {
+      "category": "vowel_land",
+      "from": {
+        "category": "vowels",
+        "key": "uh",
+        "tables_ref": "vowels.uh"
+      },
+      "to": {
+        "category": "landmarks",
+        "key": "telephone_band_high",
+        "tables_ref": "landmarks.telephone_band_high"
+      },
+      "shape_path": "C:\\Users\\hooki\\Trench\\vault\\_shapes\\vowel_land\\uh_to_telephone_band_high.json"
+    },
+    {
+      "category": "vowel_land",
+      "from": {
+        "category": "vowels",
+        "key": "uh",
+        "tables_ref": "vowels.uh"
+      },
+      "to": {
+        "category": "landmarks",
+        "key": "telephone_band_low",
+        "tables_ref": "landmarks.telephone_band_low"
+      },
+      "shape_path": "C:\\Users\\hooki\\Trench\\vault\\_shapes\\vowel_land\\uh_to_telephone_band_low.json"
+    },
+    {
+      "category": "vowel_land",
+      "from": {
+        "category": "vowels",
+        "key": "uh",
+        "tables_ref": "vowels.uh"
+      },
+      "to": {
+        "category": "landmarks",
+        "key": "vocal_tract_f1_floor",
+        "tables_ref": "landmarks.vocal_tract_f1_floor"
+      },
+      "shape_path": "C:\\Users\\hooki\\Trench\\vault\\_shapes\\vowel_land\\uh_to_vocal_tract_f1_floor.json"
+    }
+  ],
+  "p2k": {
+    "inventory_path": "C:\\Users\\hooki\\Trench\\vault\\_phonemes\\p2k_phoneme_inventory.json",
+    "corner_atlas_path": "C:\\Users\\hooki\\Trench\\vault\\_phonemes\\p2k_corner_atlas.jsonl",
+    "clusters": 32,
+    "phonemes": {
+      "PH_001": {
+        "count": 2,
+        "novel": false,
+        "vowel_votes": {
+          "er": 1
+        },
+        "canonical": {
+          "token_type": "vowel",
+          "token_key": "er",
+          "tables_ref": "vowels.er",
+          "shape_path": "C:\\Users\\hooki\\Trench\\vault\\_shapes\\vowels\\er.json"
+        },
+        "atlas_stats": {
+          "n_examples": 2,
+          "closest_vowel_votes": {
+            "er": 1,
+            "ae": 1
+          },
+          "mouth_band_top": "throat",
+          "stress_top": "violent",
+          "top_filters": [
+            "MegaSweepz"
+          ]
+        },
+        "representatives": [
+          {
+            "id": "P2k_024",
+            "corner": "M100_Q100",
+            "filter_name": "MegaSweepz"
+          },
+          {
+            "id": "P2k_024",
+            "corner": "M100_Q0",
+            "filter_name": "MegaSweepz"
+          }
+        ]
+      },
+      "PH_002": {
+        "count": 3,
+        "novel": false,
+        "vowel_votes": {
+          "ah": 1
+        },
+        "canonical": {
+          "token_type": "vowel",
+          "token_key": "ah",
+          "tables_ref": "vowels.ah",
+          "shape_path": "C:\\Users\\hooki\\Trench\\vault\\_shapes\\vowels\\ah.json"
+        },
+        "atlas_stats": {
+          "n_examples": 3,
+          "closest_vowel_votes": {
+            "aw": 2,
+            "ah": 1
+          },
+          "mouth_band_top": "chest",
+          "stress_top": "violent",
+          "top_filters": [
+            "4 Pole Bandpass",
+            "MegaSweepz"
+          ]
+        },
+        "representatives": [
+          {
+            "id": "P2k_024",
+            "corner": "M0_Q0",
+            "filter_name": "MegaSweepz"
+          },
+          {
+            "id": "P2k_007",
+            "corner": "M0_Q0",
+            "filter_name": "4 Pole Bandpass"
+          },
+          {
+            "id": "P2k_007",
+            "corner": "M0_Q100",
+            "filter_name": "4 Pole Bandpass"
+          }
+        ]
+      },
+      "PH_003": {
+        "count": 3,
+        "novel": true,
+        "vowel_votes": {},
+        "canonical": {
+          "token_type": "vowel",
+          "token_key": "ae",
+          "tables_ref": "vowels.ae",
+          "shape_path": "C:\\Users\\hooki\\Trench\\vault\\_shapes\\vowels\\ae.json"
+        },
+        "atlas_stats": {
+          "n_examples": 3,
+          "closest_vowel_votes": {
+            "ae": 2,
+            "ah": 1
+          },
+          "mouth_band_top": "mouth",
+          "stress_top": "violent",
+          "top_filters": [
+            "4 Pole Bandpass",
+            "MegaSweepz"
+          ]
+        },
+        "representatives": [
+          {
+            "id": "P2k_007",
+            "corner": "M100_Q0",
+            "filter_name": "4 Pole Bandpass"
+          },
+          {
+            "id": "P2k_024",
+            "corner": "M0_Q100",
+            "filter_name": "MegaSweepz"
+          },
+          {
+            "id": "P2k_007",
+            "corner": "M100_Q100",
+            "filter_name": "4 Pole Bandpass"
+          }
+        ]
+      },
+      "PH_004": {
+        "count": 2,
+        "novel": true,
+        "vowel_votes": {},
+        "canonical": {
+          "token_type": "heritage",
+          "token_key": "ph_004",
+          "tables_ref": "heritage.ph_004",
+          "shape_path": "C:\\Users\\hooki\\Trench\\vault\\_shapes\\heritage_phonemes\\ph_004.json"
+        },
+        "atlas_stats": {
+          "n_examples": 2,
+          "closest_vowel_votes": {},
+          "mouth_band_top": "mouth",
+          "stress_top": "calm",
+          "top_filters": [
+            "Vocal Oo-Ah"
+          ]
+        },
+        "representatives": [
+          {
+            "id": "P2k_017",
+            "corner": "M0_Q0",
+            "filter_name": "Vocal Oo-Ah"
+          },
+          {
+            "id": "P2k_017",
+            "corner": "M100_Q0",
+            "filter_name": "Vocal Oo-Ah"
+          }
+        ]
+      },
+      "PH_005": {
+        "count": 1,
+        "novel": false,
+        "vowel_votes": {
+          "ih": 1
+        },
+        "canonical": {
+          "token_type": "vowel",
+          "token_key": "ih",
+          "tables_ref": "vowels.ih",
+          "shape_path": "C:\\Users\\hooki\\Trench\\vault\\_shapes\\vowels\\ih.json"
+        },
+        "atlas_stats": {
+          "n_examples": 1,
+          "closest_vowel_votes": {
+            "ih": 1
+          },
+          "mouth_band_top": "throat",
+          "stress_top": "strained",
+          "top_filters": [
+            "Vocal Ah-Ay-Ee"
+          ]
+        },
+        "representatives": [
+          {
+            "id": "P2k_016",
+            "corner": "M100_Q0",
+            "filter_name": "Vocal Ah-Ay-Ee"
+          }
+        ]
+      },
+      "PH_006": {
+        "count": 10,
+        "novel": false,
+        "vowel_votes": {
+          "er": 1,
+          "ah": 1
+        },
+        "canonical": {
+          "token_type": "vowel",
+          "token_key": "ah",
+          "tables_ref": "vowels.ah",
+          "shape_path": "C:\\Users\\hooki\\Trench\\vault\\_shapes\\vowels\\ah.json"
+        },
+        "atlas_stats": {
+          "n_examples": 10,
+          "closest_vowel_votes": {
+            "ae": 3,
+            "er": 1,
+            "ah": 1
+          },
+          "mouth_band_top": "mouth",
+          "stress_top": "calm",
+          "top_filters": [
+            "Flanger Lite",
+            "Vocal Oo-Ah",
+            "2 Pole Bandpass"
+          ]
+        },
+        "representatives": [
+          {
+            "id": "P2k_017",
+            "corner": "M0_Q100",
+            "filter_name": "Vocal Oo-Ah"
+          },
+          {
+            "id": "P2k_015",
+            "corner": "M0_Q0",
+            "filter_name": "Flanger Lite"
+          },
+          {
+            "id": "P2k_006",
+            "corner": "M100_Q100",
+            "filter_name": "2 Pole Bandpass"
+          }
+        ]
+      },
+      "PH_007": {
+        "count": 6,
+        "novel": true,
+        "vowel_votes": {},
+        "canonical": {
+          "token_type": "vowel",
+          "token_key": "ae",
+          "tables_ref": "vowels.ae",
+          "shape_path": "C:\\Users\\hooki\\Trench\\vault\\_shapes\\vowels\\ae.json"
+        },
+        "atlas_stats": {
+          "n_examples": 6,
+          "closest_vowel_votes": {
+            "ae": 3
+          },
+          "mouth_band_top": "throat",
+          "stress_top": "strained",
+          "top_filters": [
+            "Early Rizer",
+            "Dual EQ Morph",
+            "Flanger Lite"
+          ]
+        },
+        "representatives": [
+          {
+            "id": "P2k_025",
+            "corner": "M0_Q0",
+            "filter_name": "Early Rizer"
+          },
+          {
+            "id": "P2k_015",
+            "corner": "M100_Q100",
+            "filter_name": "Flanger Lite"
+          },
+          {
+            "id": "P2k_025",
+            "corner": "M100_Q0",
+            "filter_name": "Early Rizer"
+          }
+        ]
+      },
+      "PH_008": {
+        "count": 4,
+        "novel": true,
+        "vowel_votes": {},
+        "canonical": {
+          "token_type": "vowel",
+          "token_key": "ae",
+          "tables_ref": "vowels.ae",
+          "shape_path": "C:\\Users\\hooki\\Trench\\vault\\_shapes\\vowels\\ae.json"
+        },
+        "atlas_stats": {
+          "n_examples": 4,
+          "closest_vowel_votes": {
+            "ae": 1
+          },
+          "mouth_band_top": "throat",
+          "stress_top": "calm",
+          "top_filters": [
+            "4 Pole Highpass",
+            "2 Pole Bandpass",
+            "Meaty Gizmo"
+          ]
+        },
+        "representatives": [
+          {
+            "id": "P2k_027",
+            "corner": "M0_Q100",
+            "filter_name": "Meaty Gizmo"
+          },
+          {
+            "id": "P2k_005",
+            "corner": "M0_Q100",
+            "filter_name": "4 Pole Highpass"
+          },
+          {
+            "id": "P2k_030",
+            "corner": "M0_Q100",
+            "filter_name": "Fuzzi Face"
+          }
+        ]
+      },
+      "PH_009": {
+        "count": 2,
+        "novel": true,
+        "vowel_votes": {},
+        "canonical": {
+          "token_type": "heritage",
+          "token_key": "ph_009",
+          "tables_ref": "heritage.ph_009",
+          "shape_path": "C:\\Users\\hooki\\Trench\\vault\\_shapes\\heritage_phonemes\\ph_009.json"
+        },
+        "atlas_stats": {
+          "n_examples": 2,
+          "closest_vowel_votes": {},
+          "mouth_band_top": "chest",
+          "stress_top": "strained",
+          "top_filters": [
+            "Swept EQ 3/1 Octave",
+            "BassBox 303"
+          ]
+        },
+        "representatives": [
+          {
+            "id": "P2k_029",
+            "corner": "M0_Q0",
+            "filter_name": "BassBox 303"
+          },
+          {
+            "id": "P2k_011",
+            "corner": "M0_Q0",
+            "filter_name": "Swept EQ 3/1 Octave"
+          }
+        ]
+      },
+      "PH_010": {
+        "count": 3,
+        "novel": false,
+        "vowel_votes": {
+          "ih": 2,
+          "ee": 1
+        },
+        "canonical": {
+          "token_type": "vowel",
+          "token_key": "ih",
+          "tables_ref": "vowels.ih",
+          "shape_path": "C:\\Users\\hooki\\Trench\\vault\\_shapes\\vowels\\ih.json"
+        },
+        "atlas_stats": {
+          "n_examples": 3,
+          "closest_vowel_votes": {
+            "ih": 2,
+            "ee": 1
+          },
+          "mouth_band_top": "chest",
+          "stress_top": "strained",
+          "top_filters": [
+            "Klub Klassik",
+            "Swept EQ 3/1 Octave"
+          ]
+        },
+        "representatives": [
+          {
+            "id": "P2k_028",
+            "corner": "M0_Q100",
+            "filter_name": "Klub Klassik"
+          },
+          {
+            "id": "P2k_011",
+            "corner": "M100_Q0",
+            "filter_name": "Swept EQ 3/1 Octave"
+          },
+          {
+            "id": "P2k_028",
+            "corner": "M100_Q0",
+            "filter_name": "Klub Klassik"
+          }
+        ]
+      },
+      "PH_011": {
+        "count": 1,
+        "novel": true,
+        "vowel_votes": {},
+        "canonical": {
+          "token_type": "heritage",
+          "token_key": "ph_011",
+          "tables_ref": "heritage.ph_011",
+          "shape_path": "C:\\Users\\hooki\\Trench\\vault\\_shapes\\heritage_phonemes\\ph_011.json"
+        },
+        "atlas_stats": {
+          "n_examples": 1,
+          "closest_vowel_votes": {},
+          "mouth_band_top": "teeth",
+          "stress_top": "calm",
+          "top_filters": [
+            "Contrary Bandpass"
+          ]
+        },
+        "representatives": [
+          {
+            "id": "P2k_008",
+            "corner": "M0_Q0",
+            "filter_name": "Contrary Bandpass"
+          }
+        ]
+      },
+      "PH_012": {
+        "count": 1,
+        "novel": true,
+        "vowel_votes": {},
+        "canonical": {
+          "token_type": "vowel",
+          "token_key": "ae",
+          "tables_ref": "vowels.ae",
+          "shape_path": "C:\\Users\\hooki\\Trench\\vault\\_shapes\\vowels\\ae.json"
+        },
+        "atlas_stats": {
+          "n_examples": 1,
+          "closest_vowel_votes": {
+            "ae": 1
+          },
+          "mouth_band_top": "mouth",
+          "stress_top": "strained",
+          "top_filters": [
+            "Dual EQ + LP Morph"
+          ]
+        },
+        "representatives": [
+          {
+            "id": "P2k_019",
+            "corner": "M100_Q100",
+            "filter_name": "Dual EQ + LP Morph"
+          }
+        ]
+      },
+      "PH_013": {
+        "count": 3,
+        "novel": true,
+        "vowel_votes": {},
+        "canonical": {
+          "token_type": "heritage",
+          "token_key": "ph_013",
+          "tables_ref": "heritage.ph_013",
+          "shape_path": "C:\\Users\\hooki\\Trench\\vault\\_shapes\\heritage_phonemes\\ph_013.json"
+        },
+        "atlas_stats": {
+          "n_examples": 3,
+          "closest_vowel_votes": {},
+          "mouth_band_top": "teeth",
+          "stress_top": "calm",
+          "top_filters": [
+            "Swept EQ 3/1 Octave",
+            "Bat Phaser",
+            "BassBox 303"
+          ]
+        },
+        "representatives": [
+          {
+            "id": "P2k_014",
+            "corner": "M100_Q100",
+            "filter_name": "Bat Phaser"
+          },
+          {
+            "id": "P2k_029",
+            "corner": "M100_Q100",
+            "filter_name": "BassBox 303"
+          },
+          {
+            "id": "P2k_011",
+            "corner": "M100_Q100",
+            "filter_name": "Swept EQ 3/1 Octave"
+          }
+        ]
+      },
+      "PH_014": {
+        "count": 2,
+        "novel": true,
+        "vowel_votes": {},
+        "canonical": {
+          "token_type": "vowel",
+          "token_key": "ae",
+          "tables_ref": "vowels.ae",
+          "shape_path": "C:\\Users\\hooki\\Trench\\vault\\_shapes\\vowels\\ae.json"
+        },
+        "atlas_stats": {
+          "n_examples": 2,
+          "closest_vowel_votes": {
+            "ae": 1
+          },
+          "mouth_band_top": "mouth",
+          "stress_top": "calm",
+          "top_filters": [
+            "2 Pole Lowpass",
+            "2 Pole Highpass"
+          ]
+        },
+        "representatives": [
+          {
+            "id": "P2k_001",
+            "corner": "M100_Q0",
+            "filter_name": "2 Pole Lowpass"
+          },
+          {
+            "id": "P2k_004",
+            "corner": "M100_Q0",
+            "filter_name": "2 Pole Highpass"
+          }
+        ]
+      },
+      "PH_015": {
+        "count": 7,
+        "novel": false,
+        "vowel_votes": {
+          "ae": 2
+        },
+        "canonical": {
+          "token_type": "vowel",
+          "token_key": "ae",
+          "tables_ref": "vowels.ae",
+          "shape_path": "C:\\Users\\hooki\\Trench\\vault\\_shapes\\vowels\\ae.json"
+        },
+        "atlas_stats": {
+          "n_examples": 7,
+          "closest_vowel_votes": {
+            "ae": 2,
+            "aw": 1
+          },
+          "mouth_band_top": "mouth",
+          "stress_top": "calm",
+          "top_filters": [
+            "No Filter",
+            "2 Pole Lowpass",
+            "6 Pole Lowpass"
+          ]
+        },
+        "representatives": [
+          {
+            "id": "P2k_001",
+            "corner": "M0_Q0",
+            "filter_name": "2 Pole Lowpass"
+          },
+          {
+            "id": "P2k_000",
+            "corner": "M0_Q100",
+            "filter_name": "No Filter"
+          },
+          {
+            "id": "P2k_008",
+            "corner": "M100_Q0",
+            "filter_name": "Contrary Bandpass"
+          }
+        ]
+      },
+      "PH_016": {
+        "count": 2,
+        "novel": false,
+        "vowel_votes": {
+          "oo": 1
+        },
+        "canonical": {
+          "token_type": "vowel",
+          "token_key": "oo",
+          "tables_ref": "vowels.oo",
+          "shape_path": "C:\\Users\\hooki\\Trench\\vault\\_shapes\\vowels\\oo.json"
+        },
+        "atlas_stats": {
+          "n_examples": 2,
+          "closest_vowel_votes": {
+            "aw": 1,
+            "oo": 1
+          },
+          "mouth_band_top": "chest",
+          "stress_top": "calm",
+          "top_filters": [
+            "4 Pole Lowpass"
+          ]
+        },
+        "representatives": [
+          {
+            "id": "P2k_002",
+            "corner": "M0_Q0",
+            "filter_name": "4 Pole Lowpass"
+          },
+          {
+            "id": "P2k_002",
+            "corner": "M100_Q0",
+            "filter_name": "4 Pole Lowpass"
+          }
+        ]
+      },
+      "PH_017": {
+        "count": 4,
+        "novel": false,
+        "vowel_votes": {
+          "ih": 1,
+          "oo": 1
+        },
+        "canonical": {
+          "token_type": "vowel",
+          "token_key": "ih",
+          "tables_ref": "vowels.ih",
+          "shape_path": "C:\\Users\\hooki\\Trench\\vault\\_shapes\\vowels\\ih.json"
+        },
+        "atlas_stats": {
+          "n_examples": 4,
+          "closest_vowel_votes": {
+            "ae": 2,
+            "ih": 1,
+            "oo": 1
+          },
+          "mouth_band_top": "throat",
+          "stress_top": "strained",
+          "top_filters": [
+            "2 Pole Lowpass",
+            "2 Pole Highpass",
+            "2 Pole Bandpass"
+          ]
+        },
+        "representatives": [
+          {
+            "id": "P2k_001",
+            "corner": "M100_Q100",
+            "filter_name": "2 Pole Lowpass"
+          },
+          {
+            "id": "P2k_006",
+            "corner": "M0_Q100",
+            "filter_name": "2 Pole Bandpass"
+          },
+          {
+            "id": "P2k_004",
+            "corner": "M100_Q100",
+            "filter_name": "2 Pole Highpass"
+          }
+        ]
+      },
+      "PH_018": {
+        "count": 2,
+        "novel": false,
+        "vowel_votes": {
+          "ee": 2
+        },
+        "canonical": {
+          "token_type": "vowel",
+          "token_key": "ee",
+          "tables_ref": "vowels.ee",
+          "shape_path": "C:\\Users\\hooki\\Trench\\vault\\_shapes\\vowels\\ee.json"
+        },
+        "atlas_stats": {
+          "n_examples": 2,
+          "closest_vowel_votes": {
+            "ee": 2
+          },
+          "mouth_band_top": "chest",
+          "stress_top": "strained",
+          "top_filters": [
+            "4 Pole Lowpass"
+          ]
+        },
+        "representatives": [
+          {
+            "id": "P2k_002",
+            "corner": "M100_Q100",
+            "filter_name": "4 Pole Lowpass"
+          },
+          {
+            "id": "P2k_002",
+            "corner": "M0_Q100",
+            "filter_name": "4 Pole Lowpass"
+          }
+        ]
+      },
+      "PH_019": {
+        "count": 3,
+        "novel": false,
+        "vowel_votes": {
+          "oo": 3
+        },
+        "canonical": {
+          "token_type": "vowel",
+          "token_key": "oo",
+          "tables_ref": "vowels.oo",
+          "shape_path": "C:\\Users\\hooki\\Trench\\vault\\_shapes\\vowels\\oo.json"
+        },
+        "atlas_stats": {
+          "n_examples": 3,
+          "closest_vowel_votes": {
+            "oo": 3
+          },
+          "mouth_band_top": "throat",
+          "stress_top": "calm",
+          "top_filters": [
+            "Swept EQ 3/1 Octave",
+            "Vocal Ah-Ay-Ee",
+            "BassBox 303"
+          ]
+        },
+        "representatives": [
+          {
+            "id": "P2k_011",
+            "corner": "M0_Q100",
+            "filter_name": "Swept EQ 3/1 Octave"
+          },
+          {
+            "id": "P2k_029",
+            "corner": "M0_Q100",
+            "filter_name": "BassBox 303"
+          },
+          {
+            "id": "P2k_016",
+            "corner": "M0_Q100",
+            "filter_name": "Vocal Ah-Ay-Ee"
+          }
+        ]
+      },
+      "PH_020": {
+        "count": 2,
+        "novel": false,
+        "vowel_votes": {
+          "ih": 1,
+          "ah": 1
+        },
+        "canonical": {
+          "token_type": "vowel",
+          "token_key": "ah",
+          "tables_ref": "vowels.ah",
+          "shape_path": "C:\\Users\\hooki\\Trench\\vault\\_shapes\\vowels\\ah.json"
+        },
+        "atlas_stats": {
+          "n_examples": 2,
+          "closest_vowel_votes": {
+            "ih": 1,
+            "ah": 1
+          },
+          "mouth_band_top": "throat",
+          "stress_top": "calm",
+          "top_filters": [
+            "Swept EQ 1 Octave",
+            "Klub Klassik"
+          ]
+        },
+        "representatives": [
+          {
+            "id": "P2k_009",
+            "corner": "M0_Q100",
+            "filter_name": "Swept EQ 1 Octave"
+          },
+          {
+            "id": "P2k_028",
+            "corner": "M0_Q0",
+            "filter_name": "Klub Klassik"
+          }
+        ]
+      },
+      "PH_021": {
+        "count": 2,
+        "novel": true,
+        "vowel_votes": {},
+        "canonical": {
+          "token_type": "heritage",
+          "token_key": "ph_021",
+          "tables_ref": "heritage.ph_021",
+          "shape_path": "C:\\Users\\hooki\\Trench\\vault\\_shapes\\heritage_phonemes\\ph_021.json"
+        },
+        "atlas_stats": {
+          "n_examples": 2,
+          "closest_vowel_votes": {},
+          "mouth_band_top": "chest",
+          "stress_top": "strained",
+          "top_filters": [
+            "No Filter",
+            "2 Pole Bandpass"
+          ]
+        },
+        "representatives": [
+          {
+            "id": "P2k_000",
+            "corner": "M0_Q0",
+            "filter_name": "No Filter"
+          },
+          {
+            "id": "P2k_006",
+            "corner": "M0_Q0",
+            "filter_name": "2 Pole Bandpass"
+          }
+        ]
+      },
+      "PH_022": {
+        "count": 1,
+        "novel": false,
+        "vowel_votes": {
+          "uh": 1
+        },
+        "canonical": {
+          "token_type": "vowel",
+          "token_key": "uh",
+          "tables_ref": "vowels.uh",
+          "shape_path": "C:\\Users\\hooki\\Trench\\vault\\_shapes\\vowels\\uh.json"
+        },
+        "atlas_stats": {
+          "n_examples": 1,
+          "closest_vowel_votes": {
+            "uh": 1
+          },
+          "mouth_band_top": "chest",
+          "stress_top": "strained",
+          "top_filters": [
+            "Swept EQ 1 Octave"
+          ]
+        },
+        "representatives": [
+          {
+            "id": "P2k_009",
+            "corner": "M100_Q0",
+            "filter_name": "Swept EQ 1 Octave"
+          }
+        ]
+      },
+      "PH_023": {
+        "count": 4,
+        "novel": true,
+        "vowel_votes": {},
+        "canonical": {
+          "token_type": "heritage",
+          "token_key": "ph_023",
+          "tables_ref": "heritage.ph_023",
+          "shape_path": "C:\\Users\\hooki\\Trench\\vault\\_shapes\\heritage_phonemes\\ph_023.json"
+        },
+        "atlas_stats": {
+          "n_examples": 4,
+          "closest_vowel_votes": {},
+          "mouth_band_top": "chest",
+          "stress_top": "strained",
+          "top_filters": [
+            "No Filter",
+            "6 Pole Lowpass",
+            "2 Pole Highpass"
+          ]
+        },
+        "representatives": [
+          {
+            "id": "P2k_031",
+            "corner": "M100_Q0",
+            "filter_name": "Dead Ringer"
+          },
+          {
+            "id": "P2k_003",
+            "corner": "M0_Q0",
+            "filter_name": "6 Pole Lowpass"
+          },
+          {
+            "id": "P2k_004",
+            "corner": "M0_Q0",
+            "filter_name": "2 Pole Highpass"
+          }
+        ]
+      },
+      "PH_024": {
+        "count": 4,
+        "novel": false,
+        "vowel_votes": {
+          "ae": 2,
+          "ih": 2
+        },
+        "canonical": {
+          "token_type": "vowel",
+          "token_key": "ae",
+          "tables_ref": "vowels.ae",
+          "shape_path": "C:\\Users\\hooki\\Trench\\vault\\_shapes\\vowels\\ae.json"
+        },
+        "atlas_stats": {
+          "n_examples": 4,
+          "closest_vowel_votes": {
+            "ae": 2,
+            "ih": 2
+          },
+          "mouth_band_top": "chest",
+          "stress_top": "violent",
+          "top_filters": [
+            "Millennium",
+            "TB or Not TB"
+          ]
+        },
+        "representatives": [
+          {
+            "id": "P2k_026",
+            "corner": "M0_Q100",
+            "filter_name": "Millennium"
+          },
+          {
+            "id": "P2k_026",
+            "corner": "M100_Q100",
+            "filter_name": "Millennium"
+          },
+          {
+            "id": "P2k_032",
+            "corner": "M100_Q0",
+            "filter_name": "TB or Not TB"
+          }
+        ]
+      },
+      "PH_025": {
+        "count": 6,
+        "novel": false,
+        "vowel_votes": {
+          "ae": 1
+        },
+        "canonical": {
+          "token_type": "vowel",
+          "token_key": "ae",
+          "tables_ref": "vowels.ae",
+          "shape_path": "C:\\Users\\hooki\\Trench\\vault\\_shapes\\vowels\\ae.json"
+        },
+        "atlas_stats": {
+          "n_examples": 6,
+          "closest_vowel_votes": {
+            "ae": 2
+          },
+          "mouth_band_top": "throat",
+          "stress_top": "calm",
+          "top_filters": [
+            "4 Pole Highpass",
+            "Vocal Ah-Ay-Ee",
+            "Ace of Bass"
+          ]
+        },
+        "representatives": [
+          {
+            "id": "P2k_005",
+            "corner": "M100_Q100",
+            "filter_name": "4 Pole Highpass"
+          },
+          {
+            "id": "P2k_027",
+            "corner": "M100_Q100",
+            "filter_name": "Meaty Gizmo"
+          },
+          {
+            "id": "P2k_030",
+            "corner": "M100_Q100",
+            "filter_name": "Fuzzi Face"
+          }
+        ]
+      },
+      "PH_026": {
+        "count": 4,
+        "novel": false,
+        "vowel_votes": {
+          "ae": 3,
+          "uh": 1
+        },
+        "canonical": {
+          "token_type": "vowel",
+          "token_key": "ae",
+          "tables_ref": "vowels.ae",
+          "shape_path": "C:\\Users\\hooki\\Trench\\vault\\_shapes\\vowels\\ae.json"
+        },
+        "atlas_stats": {
+          "n_examples": 4,
+          "closest_vowel_votes": {
+            "ae": 3,
+            "uh": 1
+          },
+          "mouth_band_top": "chest",
+          "stress_top": "calm",
+          "top_filters": [
+            "4 Pole Highpass",
+            "Swept EQ 1 Octave",
+            "Meaty Gizmo"
+          ]
+        },
+        "representatives": [
+          {
+            "id": "P2k_027",
+            "corner": "M0_Q0",
+            "filter_name": "Meaty Gizmo"
+          },
+          {
+            "id": "P2k_005",
+            "corner": "M0_Q0",
+            "filter_name": "4 Pole Highpass"
+          },
+          {
+            "id": "P2k_030",
+            "corner": "M0_Q0",
+            "filter_name": "Fuzzi Face"
+          }
+        ]
+      },
+      "PH_027": {
+        "count": 8,
+        "novel": false,
+        "vowel_votes": {
+          "oo": 1,
+          "ae": 4
+        },
+        "canonical": {
+          "token_type": "vowel",
+          "token_key": "ae",
+          "tables_ref": "vowels.ae",
+          "shape_path": "C:\\Users\\hooki\\Trench\\vault\\_shapes\\vowels\\ae.json"
+        },
+        "atlas_stats": {
+          "n_examples": 8,
+          "closest_vowel_votes": {
+            "ae": 7,
+            "oo": 1
+          },
+          "mouth_band_top": "chest",
+          "stress_top": "calm",
+          "top_filters": [
+            "Phaser 2",
+            "Peak/Shelf Morph",
+            "Phaser 1"
+          ]
+        },
+        "representatives": [
+          {
+            "id": "P2k_013",
+            "corner": "M0_Q0",
+            "filter_name": "Phaser 2"
+          },
+          {
+            "id": "P2k_013",
+            "corner": "M100_Q0",
+            "filter_name": "Phaser 2"
+          },
+          {
+            "id": "P2k_021",
+            "corner": "M0_Q100",
+            "filter_name": "Peak/Shelf Morph"
+          }
+        ]
+      },
+      "PH_028": {
+        "count": 4,
+        "novel": true,
+        "vowel_votes": {},
+        "canonical": {
+          "token_type": "heritage",
+          "token_key": "ph_028",
+          "tables_ref": "heritage.ph_028",
+          "shape_path": "C:\\Users\\hooki\\Trench\\vault\\_shapes\\heritage_phonemes\\ph_028.json"
+        },
+        "atlas_stats": {
+          "n_examples": 4,
+          "closest_vowel_votes": {},
+          "mouth_band_top": "mouth",
+          "stress_top": "calm",
+          "top_filters": [
+            "TB or Not TB",
+            "Millennium"
+          ]
+        },
+        "representatives": [
+          {
+            "id": "P2k_032",
+            "corner": "M100_Q100",
+            "filter_name": "TB or Not TB"
+          },
+          {
+            "id": "P2k_026",
+            "corner": "M0_Q0",
+            "filter_name": "Millennium"
+          },
+          {
+            "id": "P2k_032",
+            "corner": "M0_Q100",
+            "filter_name": "TB or Not TB"
+          }
+        ]
+      },
+      "PH_029": {
+        "count": 7,
+        "novel": false,
+        "vowel_votes": {
+          "ae": 2
+        },
+        "canonical": {
+          "token_type": "vowel",
+          "token_key": "ae",
+          "tables_ref": "vowels.ae",
+          "shape_path": "C:\\Users\\hooki\\Trench\\vault\\_shapes\\vowels\\ae.json"
+        },
+        "atlas_stats": {
+          "n_examples": 7,
+          "closest_vowel_votes": {
+            "ae": 7
+          },
+          "mouth_band_top": "throat",
+          "stress_top": "calm",
+          "top_filters": [
+            "Swept EQ 2/1 Octave",
+            "Dual EQ Morph/Expression",
+            "Ace of Bass"
+          ]
+        },
+        "representatives": [
+          {
+            "id": "P2k_023",
+            "corner": "M100_Q100",
+            "filter_name": "Ace of Bass"
+          },
+          {
+            "id": "P2k_010",
+            "corner": "M100_Q100",
+            "filter_name": "Swept EQ 2/1 Octave"
+          },
+          {
+            "id": "P2k_023",
+            "corner": "M0_Q100",
+            "filter_name": "Ace of Bass"
+          }
+        ]
+      },
+      "PH_030": {
+        "count": 6,
+        "novel": false,
+        "vowel_votes": {
+          "ee": 1,
+          "ae": 1,
+          "ih": 1,
+          "aw": 1
+        },
+        "canonical": {
+          "token_type": "vowel",
+          "token_key": "ae",
+          "tables_ref": "vowels.ae",
+          "shape_path": "C:\\Users\\hooki\\Trench\\vault\\_shapes\\vowels\\ae.json"
+        },
+        "atlas_stats": {
+          "n_examples": 6,
+          "closest_vowel_votes": {
+            "ae": 3,
+            "ee": 1,
+            "ih": 1,
+            "aw": 1
+          },
+          "mouth_band_top": "throat",
+          "stress_top": "calm",
+          "top_filters": [
+            "Phaser 1",
+            "2 Pole Lowpass",
+            "6 Pole Lowpass"
+          ]
+        },
+        "representatives": [
+          {
+            "id": "P2k_012",
+            "corner": "M100_Q0",
+            "filter_name": "Phaser 1"
+          },
+          {
+            "id": "P2k_031",
+            "corner": "M0_Q100",
+            "filter_name": "Dead Ringer"
+          },
+          {
+            "id": "P2k_001",
+            "corner": "M0_Q100",
+            "filter_name": "2 Pole Lowpass"
+          }
+        ]
+      },
+      "PH_031": {
+        "count": 5,
+        "novel": false,
+        "vowel_votes": {
+          "ae": 2,
+          "oo": 1
+        },
+        "canonical": {
+          "token_type": "vowel",
+          "token_key": "ae",
+          "tables_ref": "vowels.ae",
+          "shape_path": "C:\\Users\\hooki\\Trench\\vault\\_shapes\\vowels\\ae.json"
+        },
+        "atlas_stats": {
+          "n_examples": 5,
+          "closest_vowel_votes": {
+            "ae": 4,
+            "oo": 1
+          },
+          "mouth_band_top": "throat",
+          "stress_top": "calm",
+          "top_filters": [
+            "Morph Designer",
+            "6 Pole Lowpass",
+            "2 Pole Highpass"
+          ]
+        },
+        "representatives": [
+          {
+            "id": "P2k_022",
+            "corner": "M0_Q100",
+            "filter_name": "Morph Designer"
+          },
+          {
+            "id": "P2k_022",
+            "corner": "M0_Q0",
+            "filter_name": "Morph Designer"
+          },
+          {
+            "id": "P2k_003",
+            "corner": "M0_Q100",
+            "filter_name": "6 Pole Lowpass"
+          }
+        ]
+      },
+      "PH_032": {
+        "count": 18,
+        "novel": false,
+        "vowel_votes": {
+          "ae": 2,
+          "oo": 2,
+          "ah": 1,
+          "er": 1
+        },
+        "canonical": {
+          "token_type": "vowel",
+          "token_key": "ae",
+          "tables_ref": "vowels.ae",
+          "shape_path": "C:\\Users\\hooki\\Trench\\vault\\_shapes\\vowels\\ae.json"
+        },
+        "atlas_stats": {
+          "n_examples": 18,
+          "closest_vowel_votes": {
+            "ae": 13,
+            "oo": 2,
+            "ah": 1,
+            "er": 1
+          },
+          "mouth_band_top": "throat",
+          "stress_top": "strained",
+          "top_filters": [
+            "Bat Phaser",
+            "Contrary Bandpass",
+            "Swept EQ 2/1 Octave"
+          ]
+        },
+        "representatives": [
+          {
+            "id": "P2k_021",
+            "corner": "M0_Q0",
+            "filter_name": "Peak/Shelf Morph"
+          },
+          {
+            "id": "P2k_020",
+            "corner": "M0_Q100",
+            "filter_name": "Dual EQ Morph/Expression"
+          },
+          {
+            "id": "P2k_010",
+            "corner": "M0_Q0",
+            "filter_name": "Swept EQ 2/1 Octave"
+          }
+        ]
+      }
+    },
+    "unmapped_clusters": [],
+    "unmapped_clusters_filled": [
+      "PH_004",
+      "PH_009",
+      "PH_011",
+      "PH_013",
+      "PH_021",
+      "PH_023",
+      "PH_028"
+    ],
+    "heritage_tokens_path": "C:\\Users\\hooki\\Trench\\vault\\_phonemes\\heritage_phoneme_tokens.json"
+  },
+  "warnings": {
+    "missing_shape_files": []
+  },
+  "shape_bank_extensions": {
+    "heritage_phonemes_path": "C:\\Users\\hooki\\Trench\\vault\\_shapes\\heritage_phonemes",
+    "heritage_token_path": "C:\\Users\\hooki\\Trench\\vault\\_phonemes\\heritage_phoneme_tokens.json",
+    "heritage_static_targets": 7,
+    "heritage_sonic_table_path": "C:\\Users\\hooki\\Trench\\docs\\sonic_tables\\heritage_phonemes.json"
+  }
+}

@@ -1,0 +1,375 @@
+{
+  "generated_at": "2026-04-12T14:40:50",
+  "unmapped_clusters_filled": [
+    "PH_004",
+    "PH_009",
+    "PH_011",
+    "PH_013",
+    "PH_021",
+    "PH_023",
+    "PH_028"
+  ],
+  "shape_dir": "C:\\Users\\hooki\\Trench\\vault\\_shapes\\heritage_phonemes",
+  "tokens": {
+    "PH_004": {
+      "token_type": "heritage",
+      "token_key": "ph_004",
+      "tables_ref": "heritage.ph_004",
+      "label": "PH_004 (Vocal Oo-Ah)",
+      "shape_path": "C:\\Users\\hooki\\Trench\\vault\\_shapes\\heritage_phonemes\\ph_004.json",
+      "count": 2,
+      "top_filters": [
+        "Vocal Oo-Ah"
+      ],
+      "representatives": [
+        {
+          "id": "P2k_017",
+          "corner": "M0_Q0",
+          "filter_name": "Vocal Oo-Ah"
+        },
+        {
+          "id": "P2k_017",
+          "corner": "M100_Q0",
+          "filter_name": "Vocal Oo-Ah"
+        }
+      ],
+      "medoid": {
+        "id": "P2k_017",
+        "corner": "M0_Q0",
+        "filter_name": "Vocal Oo-Ah",
+        "mouth_band": "mouth",
+        "stress": "calm",
+        "response": {
+          "peak_db": 3.5,
+          "notch_db": -63.5,
+          "dynamic_range_db": 67.0,
+          "centroid_hz": 1690.2,
+          "num_peaks": 5,
+          "num_notches": 5
+        },
+        "vector_dist2": 1.3283100510235
+      },
+      "bark_hint": {
+        "pole_hz_pair": [
+          913.3,
+          4389.0
+        ],
+        "bark_pair": [
+          7.939785207139164,
+          17.788682104491627
+        ]
+      }
+    },
+    "PH_009": {
+      "token_type": "heritage",
+      "token_key": "ph_009",
+      "tables_ref": "heritage.ph_009",
+      "label": "PH_009 (Swept EQ 3/1 Octave, BassBox 303)",
+      "shape_path": "C:\\Users\\hooki\\Trench\\vault\\_shapes\\heritage_phonemes\\ph_009.json",
+      "count": 2,
+      "top_filters": [
+        "Swept EQ 3/1 Octave",
+        "BassBox 303"
+      ],
+      "representatives": [
+        {
+          "id": "P2k_029",
+          "corner": "M0_Q0",
+          "filter_name": "BassBox 303"
+        },
+        {
+          "id": "P2k_011",
+          "corner": "M0_Q0",
+          "filter_name": "Swept EQ 3/1 Octave"
+        }
+      ],
+      "medoid": {
+        "id": "P2k_011",
+        "corner": "M0_Q0",
+        "filter_name": "Swept EQ 3/1 Octave",
+        "mouth_band": "chest",
+        "stress": "strained",
+        "response": {
+          "peak_db": -0.0,
+          "notch_db": -125.0,
+          "dynamic_range_db": 124.9,
+          "centroid_hz": 133.3,
+          "num_peaks": 3,
+          "num_notches": 3
+        },
+        "vector_dist2": 0.01382083535724999
+      },
+      "bark_hint": {
+        "pole_hz_pair": [
+          79.4,
+          478.6
+        ],
+        "bark_pair": [
+          0.7839141545984827,
+          4.549419426490792
+        ]
+      }
+    },
+    "PH_011": {
+      "token_type": "heritage",
+      "token_key": "ph_011",
+      "tables_ref": "heritage.ph_011",
+      "label": "PH_011 (Contrary Bandpass)",
+      "shape_path": "C:\\Users\\hooki\\Trench\\vault\\_shapes\\heritage_phonemes\\ph_011.json",
+      "count": 1,
+      "top_filters": [
+        "Contrary Bandpass"
+      ],
+      "representatives": [
+        {
+          "id": "P2k_008",
+          "corner": "M0_Q0",
+          "filter_name": "Contrary Bandpass"
+        }
+      ],
+      "medoid": {
+        "id": "P2k_008",
+        "corner": "M0_Q0",
+        "filter_name": "Contrary Bandpass",
+        "mouth_band": "teeth",
+        "stress": "calm",
+        "response": {
+          "peak_db": 1.8,
+          "notch_db": -64.9,
+          "dynamic_range_db": 66.7,
+          "centroid_hz": 3907.2,
+          "num_peaks": 3,
+          "num_notches": 3
+        },
+        "vector_dist2": 0.0
+      },
+      "bark_hint": {
+        "pole_hz_pair": [
+          2415.4,
+          10406.8
+        ],
+        "bark_pair": [
+          14.297625383986563,
+          22.606534205237644
+        ]
+      }
+    },
+    "PH_013": {
+      "token_type": "heritage",
+      "token_key": "ph_013",
+      "tables_ref": "heritage.ph_013",
+      "label": "PH_013 (Swept EQ 3/1 Octave, Bat Phaser)",
+      "shape_path": "C:\\Users\\hooki\\Trench\\vault\\_shapes\\heritage_phonemes\\ph_013.json",
+      "count": 3,
+      "top_filters": [
+        "Swept EQ 3/1 Octave",
+        "Bat Phaser",
+        "BassBox 303"
+      ],
+      "representatives": [
+        {
+          "id": "P2k_014",
+          "corner": "M100_Q100",
+          "filter_name": "Bat Phaser"
+        },
+        {
+          "id": "P2k_029",
+          "corner": "M100_Q100",
+          "filter_name": "BassBox 303"
+        },
+        {
+          "id": "P2k_011",
+          "corner": "M100_Q100",
+          "filter_name": "Swept EQ 3/1 Octave"
+        }
+      ],
+      "medoid": {
+        "id": "P2k_014",
+        "corner": "M100_Q100",
+        "filter_name": "Bat Phaser",
+        "mouth_band": "teeth",
+        "stress": "calm",
+        "response": {
+          "peak_db": 17.1,
+          "notch_db": -67.8,
+          "dynamic_range_db": 84.9,
+          "centroid_hz": 5823.9,
+          "num_peaks": 2,
+          "num_notches": 2
+        },
+        "vector_dist2": 2.18527747061
+      },
+      "bark_hint": {
+        "pole_hz_pair": [
+          1437.9,
+          8426.2
+        ],
+        "bark_pair": [
+          10.91486511410032,
+          21.55941475085109
+        ]
+      }
+    },
+    "PH_021": {
+      "token_type": "heritage",
+      "token_key": "ph_021",
+      "tables_ref": "heritage.ph_021",
+      "label": "PH_021 (No Filter, 2 Pole Bandpass)",
+      "shape_path": "C:\\Users\\hooki\\Trench\\vault\\_shapes\\heritage_phonemes\\ph_021.json",
+      "count": 2,
+      "top_filters": [
+        "No Filter",
+        "2 Pole Bandpass"
+      ],
+      "representatives": [
+        {
+          "id": "P2k_000",
+          "corner": "M0_Q0",
+          "filter_name": "No Filter"
+        },
+        {
+          "id": "P2k_006",
+          "corner": "M0_Q0",
+          "filter_name": "2 Pole Bandpass"
+        }
+      ],
+      "medoid": {
+        "id": "P2k_000",
+        "corner": "M0_Q0",
+        "filter_name": "No Filter",
+        "mouth_band": "chest",
+        "stress": "strained",
+        "response": {
+          "peak_db": -1.9,
+          "notch_db": -166.9,
+          "dynamic_range_db": 165.0,
+          "centroid_hz": 164.7,
+          "num_peaks": 4,
+          "num_notches": 5
+        },
+        "vector_dist2": 8.80236805779725
+      },
+      "bark_hint": {
+        "pole_hz_pair": [
+          3516.3,
+          10259.2
+        ],
+        "bark_pair": [
+          16.522781024930755,
+          22.542029188434775
+        ]
+      }
+    },
+    "PH_023": {
+      "token_type": "heritage",
+      "token_key": "ph_023",
+      "tables_ref": "heritage.ph_023",
+      "label": "PH_023 (No Filter, 6 Pole Lowpass)",
+      "shape_path": "C:\\Users\\hooki\\Trench\\vault\\_shapes\\heritage_phonemes\\ph_023.json",
+      "count": 4,
+      "top_filters": [
+        "No Filter",
+        "6 Pole Lowpass",
+        "2 Pole Highpass"
+      ],
+      "representatives": [
+        {
+          "id": "P2k_031",
+          "corner": "M100_Q0",
+          "filter_name": "Dead Ringer"
+        },
+        {
+          "id": "P2k_003",
+          "corner": "M0_Q0",
+          "filter_name": "6 Pole Lowpass"
+        },
+        {
+          "id": "P2k_004",
+          "corner": "M0_Q0",
+          "filter_name": "2 Pole Highpass"
+        }
+      ],
+      "medoid": {
+        "id": "P2k_031",
+        "corner": "M100_Q0",
+        "filter_name": "Dead Ringer",
+        "mouth_band": "chest",
+        "stress": "violent",
+        "response": {
+          "peak_db": 3.8,
+          "notch_db": -196.5,
+          "dynamic_range_db": 200.2,
+          "centroid_hz": 52.8,
+          "num_peaks": 5,
+          "num_notches": 5
+        },
+        "vector_dist2": 3.347652019014437
+      },
+      "bark_hint": {
+        "pole_hz_pair": [
+          45.3,
+          10190.4
+        ],
+        "bark_pair": [
+          0.44751498062620837,
+          22.51130269402448
+        ]
+      }
+    },
+    "PH_028": {
+      "token_type": "heritage",
+      "token_key": "ph_028",
+      "tables_ref": "heritage.ph_028",
+      "label": "PH_028 (TB or Not TB, Millennium)",
+      "shape_path": "C:\\Users\\hooki\\Trench\\vault\\_shapes\\heritage_phonemes\\ph_028.json",
+      "count": 4,
+      "top_filters": [
+        "TB or Not TB",
+        "Millennium"
+      ],
+      "representatives": [
+        {
+          "id": "P2k_032",
+          "corner": "M100_Q100",
+          "filter_name": "TB or Not TB"
+        },
+        {
+          "id": "P2k_026",
+          "corner": "M0_Q0",
+          "filter_name": "Millennium"
+        },
+        {
+          "id": "P2k_032",
+          "corner": "M0_Q100",
+          "filter_name": "TB or Not TB"
+        }
+      ],
+      "medoid": {
+        "id": "P2k_032",
+        "corner": "M100_Q100",
+        "filter_name": "TB or Not TB",
+        "mouth_band": "mouth",
+        "stress": "strained",
+        "response": {
+          "peak_db": 23.2,
+          "notch_db": -101.1,
+          "dynamic_range_db": 124.3,
+          "centroid_hz": 2211.4,
+          "num_peaks": 5,
+          "num_notches": 5
+        },
+        "vector_dist2": 1.111411725866875
+      },
+      "bark_hint": {
+        "pole_hz_pair": [
+          3141.0,
+          5468.3
+        ],
+        "bark_pair": [
+          15.870958201868637,
+          19.060746119883
+        ]
+      }
+    }
+  }
+}
