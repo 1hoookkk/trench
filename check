@@ -47,7 +47,7 @@ echo "  OK"
 step "passthrough null targets (static < -120 dBFS, dynamic < -90 dBFS)"
 cargo test -p trench-core --test null_targets --quiet 2>&1 | grep -E "(null peak residual|test result|FAIL)" | sed 's/^/  /'
 
-step "hardware parity null (Talking Hedz, report-only)"
+step "P2K parity null (35 canonical skins, hard fail at > -140 dB)"
 PYTHONPATH=. python tools/parity_null.py 2>&1 | sed 's/^/  /'
 
 step "cartridges validate against schema"
