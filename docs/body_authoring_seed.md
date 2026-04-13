@@ -15,8 +15,8 @@ You are authoring 4 shipping filter bodies for TRENCH, a cartridge-based morph f
 The runtime is frozen. The authoring layer may use friendlier abstractions, but it must compile back into the existing 4-corner, 6-stage `compiled-v1` format.
 
 Read these first:
-- [SPEC.md](C:\Users\hooki\trench-juce\SPEC.md)
-- [SHIPPING.md](C:\Users\hooki\trench-juce\SHIPPING.md)
+- `SPEC.md`
+- `BODIES.md`
 
 ## The 4 Bodies
 
@@ -128,7 +128,7 @@ But the final shipping body must still compile to:
 
 ## Candidate Standard
 
-Generate four candidates per shipping name. Keep only candidates that respect the written brief in [SHIPPING.md](C:\Users\hooki\trench-juce\SHIPPING.md).
+Generate four candidates per shipping name. Keep only candidates that respect the written brief in `BODIES.md`.
 
 Reject a candidate if:
 - it loses the invariant

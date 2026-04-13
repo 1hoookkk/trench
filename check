@@ -1,0 +1,54 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+cd "$(dirname "$0")"
+
+step() { printf '\n=== %s ===\n' "$1"; }
+
+step "canonical doc set exists"
+for f in CLAUDE.md SPEC.md DOCTRINE.md MODES.md BODIES.md PHONEMES.md cartridge.schema.json; do
+  if [[ -f "$f" ]]; then
+    printf '  %-22s OK\n' "$f"
+  else
+    printf '  %-22s MISSING\n' "$f"
+    exit 1
+  fi
+done
+
+step "no orphan SHIPPING.md"
+if [[ -e SHIPPING.md ]]; then
+  echo "  SHIPPING.md still exists (should be BODIES.md)"
+  exit 1
+fi
+echo "  OK"
+
+step "rust workspace check (lib + tests, type-only)"
+cargo check --workspace --tests --quiet
+
+step "pyruntime imports"
+python -c "import pyruntime, pyruntime.analysis, pyruntime.compiled_v1"
+echo "  OK"
+
+step "cartridges validate against schema"
+python - <<'PY'
+import json, sys
+from pathlib import Path
+import jsonschema
+schema = json.loads(Path("cartridge.schema.json").read_text())
+ok = bad = 0
+for p in Path("cartridges").rglob("*.json"):
+    try:
+        d = json.loads(p.read_text())
+    except Exception as e:
+        print(f"  PARSE FAIL {p}: {e}"); bad += 1; continue
+    if not isinstance(d, dict) or d.get("format") != "compiled-v1":
+        continue
+    try:
+        jsonschema.validate(d, schema); ok += 1
+    except jsonschema.ValidationError as e:
+        print(f"  FAIL {p}: {e.message[:200]}"); bad += 1
+print(f"  {ok} compiled-v1 cartridges OK, {bad} failed")
+sys.exit(1 if bad else 0)
+PY
+
+printf '\nall checks passed\n'

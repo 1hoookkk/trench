@@ -499,7 +499,7 @@ This keeps the world as grammar and the body as sentence.
       "shipping invariant gates"
     ],
     "doctrine_inputs": [
-      "SHIPPING.md Speaker Knockerz brief",
+      "BODIES.md Speaker Knockerz brief",
       "TRENCH identity as stress simulator"
     ],
     "notes": [

@@ -1,0 +1,54 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://trench/cartridge.schema.json",
+  "title": "TRENCH compiled-v1 cartridge",
+  "description": "Wire format for cartridges consumed by the JUCE plugin. Authoritative loader: pyruntime/compiled_v1.py. Validated by ./check.",
+  "type": "object",
+  "required": ["format", "keyframes"],
+  "additionalProperties": true,
+  "properties": {
+    "format": { "type": "string", "const": "compiled-v1" },
+    "name":   { "type": "string", "minLength": 1 },
+    "sampleRate": { "type": "number", "exclusiveMinimum": 0 },
+    "keyframes": {
+      "type": "array",
+      "minItems": 4,
+      "items": { "$ref": "#/$defs/keyframe" },
+      "contains": { "properties": { "label": { "const": "M0_Q0"     } }, "required": ["label"] },
+      "allOf": [
+        { "contains": { "properties": { "label": { "const": "M0_Q100"   } }, "required": ["label"] } },
+        { "contains": { "properties": { "label": { "const": "M100_Q0"   } }, "required": ["label"] } },
+        { "contains": { "properties": { "label": { "const": "M100_Q100" } }, "required": ["label"] } }
+      ]
+    }
+  },
+  "$defs": {
+    "keyframe": {
+      "type": "object",
+      "required": ["label", "stages"],
+      "properties": {
+        "label": { "type": "string", "enum": ["M0_Q0", "M0_Q100", "M100_Q0", "M100_Q100"] },
+        "morph": { "type": "number" },
+        "q":     { "type": "number" },
+        "boost": { "type": "number" },
+        "stages": {
+          "type": "array",
+          "minItems": 12,
+          "maxItems": 12,
+          "items": { "$ref": "#/$defs/stage" }
+        }
+      }
+    },
+    "stage": {
+      "type": "object",
+      "required": ["c0", "c1", "c2", "c3", "c4"],
+      "properties": {
+        "c0": { "type": "number" },
+        "c1": { "type": "number" },
+        "c2": { "type": "number" },
+        "c3": { "type": "number" },
+        "c4": { "type": "number" }
+      }
+    }
+  }
+}
