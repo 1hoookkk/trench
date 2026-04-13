@@ -35,3 +35,10 @@ hs_err_pid*.log
 replay_pid*.log
 batch_log.txt
 pdf_out.txt
+
+# Large generated assets (hygiene)
+/docs/identity/iterations/
+/docs/calibration/*.html
+/docs/calibration/**/*.png
+/tools/*.wav
+/dev/*.bin
