@@ -259,7 +259,7 @@ def main() -> int:
         "render_pipeline": "raw stage -> SOS cascade -> AGC -> * boost -> float32 WAV",
         "playback_sample_rate": int(sr),
         "container_subtype": "FLOAT (float32, 24-bit mantissa, ~-150 dB null floor)",
-        "supersedes": "trenchwork_clean/ref/hedz*.wav (broken Cheat Engine capture)",
+        "supersedes": "trenchwork_clean/ref/_BROKEN_CE_CAPTURE_QUARANTINE/hedz*.wav (broken Cheat Engine capture, quarantined)",
     }
     (OUT / "PROVENANCE.json").write_text(json.dumps(provenance, indent=2))
 

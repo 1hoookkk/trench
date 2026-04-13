@@ -25,5 +25,5 @@
   "render_pipeline": "raw stage -> SOS cascade -> AGC -> * boost -> float32 WAV",
   "playback_sample_rate": 44100,
   "container_subtype": "FLOAT (float32, 24-bit mantissa, ~-150 dB null floor)",
-  "supersedes": "trenchwork_clean/ref/hedz*.wav (broken Cheat Engine capture)"
+  "supersedes": "trenchwork_clean/ref/_BROKEN_CE_CAPTURE_QUARANTINE/hedz*.wav (broken Cheat Engine capture, quarantined)"
 }
