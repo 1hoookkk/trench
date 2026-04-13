@@ -1,0 +1,387 @@
+{
+  "P2k_000": {
+    "source": "datasets/p2k_skins/P2k_000.json",
+    "boost": 4.0,
+    "stage_count": 6,
+    "corners": [
+      "M0_Q0",
+      "M0_Q100",
+      "M100_Q0",
+      "M100_Q100"
+    ]
+  },
+  "P2k_001": {
+    "source": "datasets/p2k_skins/P2k_001.json",
+    "boost": 4.0,
+    "stage_count": 6,
+    "corners": [
+      "M0_Q0",
+      "M0_Q100",
+      "M100_Q0",
+      "M100_Q100"
+    ]
+  },
+  "P2k_002": {
+    "source": "datasets/p2k_skins/P2k_002.json",
+    "boost": 4.0,
+    "stage_count": 6,
+    "corners": [
+      "M0_Q0",
+      "M0_Q100",
+      "M100_Q0",
+      "M100_Q100"
+    ]
+  },
+  "P2k_003": {
+    "source": "datasets/p2k_skins/P2k_003.json",
+    "boost": 4.0,
+    "stage_count": 6,
+    "corners": [
+      "M0_Q0",
+      "M0_Q100",
+      "M100_Q0",
+      "M100_Q100"
+    ]
+  },
+  "P2k_004": {
+    "source": "datasets/p2k_skins/P2k_004.json",
+    "boost": 4.0,
+    "stage_count": 6,
+    "corners": [
+      "M0_Q0",
+      "M0_Q100",
+      "M100_Q0",
+      "M100_Q100"
+    ]
+  },
+  "P2k_005": {
+    "source": "datasets/p2k_skins/P2k_005.json",
+    "boost": 4.0,
+    "stage_count": 6,
+    "corners": [
+      "M0_Q0",
+      "M0_Q100",
+      "M100_Q0",
+      "M100_Q100"
+    ]
+  },
+  "P2k_006": {
+    "source": "datasets/p2k_skins/P2k_006.json",
+    "boost": 4.0,
+    "stage_count": 6,
+    "corners": [
+      "M0_Q0",
+      "M0_Q100",
+      "M100_Q0",
+      "M100_Q100"
+    ]
+  },
+  "P2k_007": {
+    "source": "datasets/p2k_skins/P2k_007.json",
+    "boost": 4.0,
+    "stage_count": 6,
+    "corners": [
+      "M0_Q0",
+      "M0_Q100",
+      "M100_Q0",
+      "M100_Q100"
+    ]
+  },
+  "P2k_008": {
+    "source": "datasets/p2k_skins/P2k_008.json",
+    "boost": 4.0,
+    "stage_count": 6,
+    "corners": [
+      "M0_Q0",
+      "M0_Q100",
+      "M100_Q0",
+      "M100_Q100"
+    ]
+  },
+  "P2k_009": {
+    "source": "datasets/p2k_skins/P2k_009.json",
+    "boost": 4.0,
+    "stage_count": 6,
+    "corners": [
+      "M0_Q0",
+      "M0_Q100",
+      "M100_Q0",
+      "M100_Q100"
+    ]
+  },
+  "P2k_010": {
+    "source": "datasets/p2k_skins/P2k_010.json",
+    "boost": 4.0,
+    "stage_count": 6,
+    "corners": [
+      "M0_Q0",
+      "M0_Q100",
+      "M100_Q0",
+      "M100_Q100"
+    ]
+  },
+  "P2k_011": {
+    "source": "datasets/p2k_skins/P2k_011.json",
+    "boost": 4.0,
+    "stage_count": 6,
+    "corners": [
+      "M0_Q0",
+      "M0_Q100",
+      "M100_Q0",
+      "M100_Q100"
+    ]
+  },
+  "P2k_012": {
+    "source": "datasets/p2k_skins/P2k_012.json",
+    "boost": 4.0,
+    "stage_count": 6,
+    "corners": [
+      "M0_Q0",
+      "M0_Q100",
+      "M100_Q0",
+      "M100_Q100"
+    ]
+  },
+  "P2k_013": {
+    "source": "datasets/p2k_skins/P2k_013.json",
+    "boost": 4.0,
+    "stage_count": 6,
+    "corners": [
+      "M0_Q0",
+      "M0_Q100",
+      "M100_Q0",
+      "M100_Q100"
+    ]
+  },
+  "P2k_014": {
+    "source": "datasets/p2k_skins/P2k_014.json",
+    "boost": 4.0,
+    "stage_count": 6,
+    "corners": [
+      "M0_Q0",
+      "M0_Q100",
+      "M100_Q0",
+      "M100_Q100"
+    ]
+  },
+  "P2k_015": {
+    "source": "datasets/p2k_skins/P2k_015.json",
+    "boost": 4.0,
+    "stage_count": 6,
+    "corners": [
+      "M0_Q0",
+      "M0_Q100",
+      "M100_Q0",
+      "M100_Q100"
+    ]
+  },
+  "P2k_016": {
+    "source": "datasets/p2k_skins/P2k_016.json",
+    "boost": 4.0,
+    "stage_count": 6,
+    "corners": [
+      "M0_Q0",
+      "M0_Q100",
+      "M100_Q0",
+      "M100_Q100"
+    ]
+  },
+  "P2k_017": {
+    "source": "datasets/p2k_skins/P2k_017.json",
+    "boost": 4.0,
+    "stage_count": 6,
+    "corners": [
+      "M0_Q0",
+      "M0_Q100",
+      "M100_Q0",
+      "M100_Q100"
+    ]
+  },
+  "P2k_018": {
+    "source": "datasets/p2k_skins/P2k_018.json",
+    "boost": 4.0,
+    "stage_count": 6,
+    "corners": [
+      "M0_Q0",
+      "M0_Q100",
+      "M100_Q0",
+      "M100_Q100"
+    ]
+  },
+  "P2k_019": {
+    "source": "datasets/p2k_skins/P2k_019.json",
+    "boost": 4.0,
+    "stage_count": 6,
+    "corners": [
+      "M0_Q0",
+      "M0_Q100",
+      "M100_Q0",
+      "M100_Q100"
+    ]
+  },
+  "P2k_020": {
+    "source": "datasets/p2k_skins/P2k_020.json",
+    "boost": 4.0,
+    "stage_count": 6,
+    "corners": [
+      "M0_Q0",
+      "M0_Q100",
+      "M100_Q0",
+      "M100_Q100"
+    ]
+  },
+  "P2k_021": {
+    "source": "datasets/p2k_skins/P2k_021.json",
+    "boost": 4.0,
+    "stage_count": 6,
+    "corners": [
+      "M0_Q0",
+      "M0_Q100",
+      "M100_Q0",
+      "M100_Q100"
+    ]
+  },
+  "P2k_022": {
+    "source": "datasets/p2k_skins/P2k_022.json",
+    "boost": 4.0,
+    "stage_count": 6,
+    "corners": [
+      "M0_Q0",
+      "M0_Q100",
+      "M100_Q0",
+      "M100_Q100"
+    ]
+  },
+  "P2k_023": {
+    "source": "datasets/p2k_skins/P2k_023.json",
+    "boost": 4.0,
+    "stage_count": 6,
+    "corners": [
+      "M0_Q0",
+      "M0_Q100",
+      "M100_Q0",
+      "M100_Q100"
+    ]
+  },
+  "P2k_024": {
+    "source": "datasets/p2k_skins/P2k_024.json",
+    "boost": 4.0,
+    "stage_count": 6,
+    "corners": [
+      "M0_Q0",
+      "M0_Q100",
+      "M100_Q0",
+      "M100_Q100"
+    ]
+  },
+  "P2k_025": {
+    "source": "datasets/p2k_skins/P2k_025.json",
+    "boost": 4.0,
+    "stage_count": 6,
+    "corners": [
+      "M0_Q0",
+      "M0_Q100",
+      "M100_Q0",
+      "M100_Q100"
+    ]
+  },
+  "P2k_026": {
+    "source": "datasets/p2k_skins/P2k_026.json",
+    "boost": 4.0,
+    "stage_count": 6,
+    "corners": [
+      "M0_Q0",
+      "M0_Q100",
+      "M100_Q0",
+      "M100_Q100"
+    ]
+  },
+  "P2k_027": {
+    "source": "datasets/p2k_skins/P2k_027.json",
+    "boost": 4.0,
+    "stage_count": 6,
+    "corners": [
+      "M0_Q0",
+      "M0_Q100",
+      "M100_Q0",
+      "M100_Q100"
+    ]
+  },
+  "P2k_028": {
+    "source": "datasets/p2k_skins/P2k_028.json",
+    "boost": 4.0,
+    "stage_count": 6,
+    "corners": [
+      "M0_Q0",
+      "M0_Q100",
+      "M100_Q0",
+      "M100_Q100"
+    ]
+  },
+  "P2k_029": {
+    "source": "datasets/p2k_skins/P2k_029.json",
+    "boost": 4.0,
+    "stage_count": 6,
+    "corners": [
+      "M0_Q0",
+      "M0_Q100",
+      "M100_Q0",
+      "M100_Q100"
+    ]
+  },
+  "P2k_030": {
+    "source": "datasets/p2k_skins/P2k_030.json",
+    "boost": 4.0,
+    "stage_count": 6,
+    "corners": [
+      "M0_Q0",
+      "M0_Q100",
+      "M100_Q0",
+      "M100_Q100"
+    ]
+  },
+  "P2k_031": {
+    "source": "datasets/p2k_skins/P2k_031.json",
+    "boost": 4.0,
+    "stage_count": 6,
+    "corners": [
+      "M0_Q0",
+      "M0_Q100",
+      "M100_Q0",
+      "M100_Q100"
+    ]
+  },
+  "P2k_032": {
+    "source": "datasets/p2k_skins/P2k_032.json",
+    "boost": 4.0,
+    "stage_count": 6,
+    "corners": [
+      "M0_Q0",
+      "M0_Q100",
+      "M100_Q0",
+      "M100_Q100"
+    ]
+  },
+  "Vocal_Ah_Ay_Ee": {
+    "source": "datasets/p2k_skins/Vocal_Ah_Ay_Ee.json",
+    "boost": 4.0,
+    "stage_count": 3,
+    "corners": [
+      "M0_Q0",
+      "M0_Q100",
+      "M100_Q0",
+      "M100_Q100"
+    ]
+  },
+  "Vocal_Oo_Ah": {
+    "source": "datasets/p2k_skins/Vocal_Oo_Ah.json",
+    "boost": 4.0,
+    "stage_count": 3,
+    "corners": [
+      "M0_Q0",
+      "M0_Q100",
+      "M100_Q0",
+      "M100_Q100"
+    ]
+  }
+}

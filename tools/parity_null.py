@@ -22,15 +22,16 @@ import numpy as np
 import soundfile as sf
 from scipy.signal import sosfilt
 
-REF_DIR = Path(r"C:/Users/hooki/trenchwork_clean/ref")
-CART = Path(r"C:/Users/hooki/trenchwork_clean/cartridges/00_talking_hedz.json")
+DRY = Path(r"C:/Users/hooki/trenchwork_clean/ref/bypassed-pinknoise.wav")
+# Canonical raw P2K skin source (sha256 9fb1bef0d0212980 for P2k_013).
+SKINS = Path(r"C:/Users/hooki/trenchwork_clean/datasets/p2k_skins")
+# Canonical references rendered by tools/render_canonical_refs.py from each
+# skin in SKINS. MANIFEST.json lists which skins were rendered and where.
+REF_DIR = Path(r"C:/Users/hooki/Trench/ref/canonical")
 
-CORNERS = [
-    ("M0_Q0",     "hedzm0q0.wav"),
-    ("M0_Q100",   "hedzmorph0q100.wav"),
-    ("M100_Q0",   "hedzmorph100q0.wav"),
-    ("M100_Q100", "hedzmorph100q100.wav"),
-]
+CORNERS = ("M0_Q0", "M0_Q100", "M100_Q0", "M100_Q100")
+# Null worse than this triggers a failure exit code.
+FAIL_THRESHOLD_DB = -140.0
 
 # AGC_TABLE ported from trenchwork_clean/trench-core/src/agc.rs
 AGC_TABLE = np.array(
@@ -98,74 +99,103 @@ def apply_dc_block(samples: np.ndarray, sample_rate: float = 44100.0) -> np.ndar
     return out
 
 
-def best_fit_null(pred: np.ndarray, ref: np.ndarray, lag_search: int = 512):
+def best_fit_null(pred: np.ndarray, ref: np.ndarray, lag_search: int = 0):
+    """Lag-aligned best-fit-gain null. Canonical references are rendered
+    through the exact same pipeline as `pred`, so lag=0 is correct and we
+    skip the search by default."""
     n = min(len(pred), len(ref))
-    pred = pred[:n].astype(np.float64)
-    ref = ref[:n].astype(np.float64)
-    best = (0, 0.0, float("inf"), 0.0, 0.0)  # lag, gain, rms, peak, ref_rms
-    ref_rms_full = float(np.sqrt(np.mean(ref * ref)))
-    for lag in range(-lag_search, lag_search + 1):
-        if lag >= 0:
-            p = pred[: n - lag]
-            r = ref[lag:]
-        else:
-            p = pred[-lag:]
-            r = ref[: n + lag]
-        if len(p) < 1024:
-            continue
-        den = float((p * p).sum())
-        if den <= 0:
-            continue
-        gain = float((p * r).sum() / den)
-        res = r - gain * p
-        rms = float(np.sqrt(np.mean(res * res)))
-        if rms < best[2]:
-            peak = float(np.max(np.abs(res)))
-            ref_rms = float(np.sqrt(np.mean(r * r)))
-            best = (lag, gain, rms, peak, ref_rms)
-    return best
+    p = pred[:n].astype(np.float64, copy=False)
+    r = ref[:n].astype(np.float64, copy=False)
+    den = float(np.dot(p, p))
+    if den <= 0.0:
+        return (0, 0.0, 0.0, 0.0, 0.0)
+    gain = float(np.dot(p, r) / den)
+    res = r - gain * p
+    rms = float(np.sqrt(float(np.dot(res, res)) / n))
+    peak = float(np.max(np.abs(res)))
+    ref_rms = float(np.sqrt(float(np.dot(r, r)) / n))
+    return (0, gain, rms, peak, ref_rms)
 
 
 def corner_keyframe(body: dict, label: str) -> dict:
-    kf = next((k for k in body["keyframes"] if k.get("label") == label), None)
-    if kf is None:
-        raise RuntimeError(f"missing corner {label}")
-    return kf
+    """Accept both layouts: trenchwork_clean cartridge wire form
+    (keyframes list) and canonical raw p2k_skins form (corners dict)."""
+    if "keyframes" in body:
+        kf = next((k for k in body["keyframes"] if k.get("label") == label), None)
+        if kf is None:
+            raise RuntimeError(f"missing corner {label}")
+        return kf
+    if "corners" in body:
+        corner = body["corners"].get(label)
+        if corner is None:
+            raise RuntimeError(f"missing corner {label}")
+        return {
+            "stages": corner["stages"],
+            "boost": float(body.get("boost", 1.0)),
+        }
+    raise RuntimeError("cartridge has neither 'keyframes' nor 'corners'")
 
 
 def main() -> int:
-    if not REF_DIR.exists() or not CART.exists():
-        print(f"reference data missing; skip ({REF_DIR.exists()=} {CART.exists()=})")
+    manifest_path = REF_DIR / "MANIFEST.json"
+    if not REF_DIR.exists() or not manifest_path.exists() or not SKINS.exists() or not DRY.exists():
+        print(
+            f"parity inputs missing; skip "
+            f"({REF_DIR.exists()=} {manifest_path.exists()=} {SKINS.exists()=} {DRY.exists()=})"
+        )
         return 0
 
-    body = json.loads(CART.read_text())
-    dry = mono(sf.read(str(REF_DIR / "bypassed-pinknoise.wav"))[0])
+    manifest = json.loads(manifest_path.read_text())
+    dry = mono(sf.read(str(DRY))[0])
 
-    print(f"cartridge:  {CART.name}  ({body.get('name')})")
-    print(f"dry input:  bypassed-pinknoise.wav  {len(dry)} samples")
+    print(f"dry input:  {DRY.name}  {len(dry)} samples")
+    print(f"refs:       {REF_DIR}  ({len(manifest)} skins)")
     print(f"pipeline:   raw-ROM → SOS cascade → AGC → ×boost → lag+gain null")
+    print(f"fail at:    rel_null > {FAIL_THRESHOLD_DB:.0f} dB")
     print()
-    print(f"{'corner':10} {'boost':>6} {'lag':>5} {'gain':>8} "
-          f"{'peak_res':>10} {'rms_res':>10} {'ref_rms':>10} {'rel_null':>10}")
+    print(f"{'skin':24} {'boost':>6} {'worst_corner':>12} {'lag':>5} {'gain':>8} {'rel_null':>11}")
 
-    for label, wav in CORNERS:
-        ref_path = REF_DIR / wav
-        if not ref_path.exists():
-            print(f"{label:10} missing {wav}")
+    failures: list[tuple[str, str, float]] = []
+    import gc
+    for name in sorted(manifest):
+        cart_path = SKINS / f"{name}.json"
+        body = json.loads(cart_path.read_text())
+        worst = (None, 0.0, 0, 1.0)  # corner, rel_db, lag, gain
+        for label in CORNERS:
+            wav = REF_DIR / f"{name}_{label}.wav"
+            if not wav.exists():
+                continue
+            ref = mono(sf.read(str(wav))[0])
+            kf = corner_keyframe(body, label)
+            sos = build_sos(kf["stages"])
+            boost = float(kf.get("boost", 1.0))
+            cascaded = sosfilt(sos, dry)
+            pred = apply_agc(cascaded) * boost
+            lag, gain, rms, _peak, ref_rms = best_fit_null(pred, ref)
+            rel = db(rms) - db(ref_rms)
+            if worst[0] is None or rel > worst[1]:
+                worst = (label, rel, lag, gain)
+            del ref, sos, cascaded, pred
+        gc.collect()
+        if worst[0] is None:
+            print(f"{name:24} no refs")
             continue
-        ref = mono(sf.read(str(ref_path))[0])
-        kf = corner_keyframe(body, label)
-        sos = build_sos(kf["stages"])
-        boost = float(kf.get("boost", 1.0))
-        cascaded = sosfilt(sos, dry.copy())
-        pred = apply_agc(cascaded) * boost
-        lag, gain, rms, peak, ref_rms = best_fit_null(pred, ref)
-        rel = db(rms) - db(ref_rms)
+        boost = float(body.get("boost", 1.0))
+        marker = " " if worst[1] <= FAIL_THRESHOLD_DB else "!"
         print(
-            f"{label:10} {boost:6.2f} {lag:5d} {gain:8.4f} "
-            f"{db(peak):+9.1f}dB {db(rms):+9.1f}dB "
-            f"{db(ref_rms):+9.1f}dB {rel:+9.1f}dB"
+            f"{marker}{name:23} {boost:6.2f} {worst[0]:>12} "
+            f"{worst[2]:5d} {worst[3]:8.4f} {worst[1]:+8.1f} dB"
         )
+        if worst[1] > FAIL_THRESHOLD_DB:
+            failures.append((name, worst[0], worst[1]))
+
+    print()
+    if failures:
+        print(f"FAIL: {len(failures)}/{len(manifest)} skins exceeded {FAIL_THRESHOLD_DB:.0f} dB")
+        for name, corner, rel in failures:
+            print(f"  {name}  worst corner {corner}  rel_null={rel:+.1f}dB")
+        return 1
+    print(f"OK: {len(manifest)}/{len(manifest)} skins null at <= {FAIL_THRESHOLD_DB:.0f} dB")
     return 0
 
 

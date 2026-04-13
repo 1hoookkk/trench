@@ -1,0 +1,11 @@
+{
+  "source_cartridge": "trenchwork_clean/datasets/p2k_skins/P2k_013.json",
+  "source_sha256_prefix": "9fb1bef0d0212980",
+  "dry_input": "trenchwork_clean/ref/bypassed-pinknoise.wav",
+  "pipeline": "raw-ROM stage \u2192 scipy.signal.sosfilt cascade \u2192 AGC (16-entry table) \u2192 \u00d7boost",
+  "sample_rate": 44100,
+  "stage_count": 6,
+  "boost": 4.0,
+  "subtype": "FLOAT (32-bit IEEE)",
+  "replaces": "trenchwork_clean/ref/hedz*.wav (rendered from buggy 5-stage Cheat Engine capture)"
+}
