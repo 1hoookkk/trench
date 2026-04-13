@@ -3,6 +3,21 @@ set -euo pipefail
 
 cd "$(dirname "$0")"
 
+# Ensure MSVC link.exe wins over Git Bash /usr/bin/link when cargo links test
+# binaries. Without this, rustc picks the hardlink utility and fails with
+# "missing operand after ' ■'".
+for msvc_root in \
+  "/c/Program Files/Microsoft Visual Studio/2022/Community/VC/Tools/MSVC" \
+  "/c/Program Files (x86)/Microsoft Visual Studio/2022/BuildTools/VC/Tools/MSVC"; do
+  if [[ -d "$msvc_root" ]]; then
+    msvc_ver=$(ls "$msvc_root" 2>/dev/null | sort -V | tail -1)
+    if [[ -n "$msvc_ver" && -x "$msvc_root/$msvc_ver/bin/Hostx64/x64/link.exe" ]]; then
+      export PATH="$msvc_root/$msvc_ver/bin/Hostx64/x64:$PATH"
+      break
+    fi
+  fi
+done
+
 step() { printf '\n=== %s ===\n' "$1"; }
 
 step "canonical doc set exists"
@@ -28,6 +43,12 @@ cargo check --workspace --tests --quiet
 step "pyruntime imports"
 python -c "import pyruntime, pyruntime.analysis, pyruntime.compiled_v1"
 echo "  OK"
+
+step "passthrough null targets (static < -120 dBFS, dynamic < -90 dBFS)"
+cargo test -p trench-core --test null_targets --quiet 2>&1 | grep -E "(null peak residual|test result|FAIL)" | sed 's/^/  /'
+
+step "hardware parity null (Talking Hedz, report-only)"
+PYTHONPATH=. python tools/parity_null.py 2>&1 | sed 's/^/  /'
 
 step "cartridges validate against schema"
 python - <<'PY'

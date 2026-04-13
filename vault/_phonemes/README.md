@@ -23,10 +23,6 @@ The 7 previously-unmapped clusters are represented as `heritage.*` tokens and
 - `heritage.ph_023`
 - `heritage.ph_028`
 
-## Bark scale references
-- `docs/sonic_tables/tables_bark.json`
-- `docs/sonic_tables/sonic_tables_unified_bark.json`
-
 ## Legacy / raw
 - `p2k_phoneme_inventory.json` — raw clustering output (no canonical mapping)
 - `p2k_phoneme_aliases.json` — pre-fill aliases
