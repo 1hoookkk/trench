@@ -1,0 +1,3515 @@
+{
+  "cards": [
+    {
+      "provenance": "CUBE",
+      "title": "Cube 000",
+      "source_path": "C:\\Users\\hooki\\Trench\\datasets\\morpheus_zplane_library.json#cube=0",
+      "card_id": "d21d1df7c42a5e3f",
+      "corner_png": "img/cube_cube_000_d21d1df7c42a5e3f__corners.png",
+      "strips_png": "img/cube_cube_000_d21d1df7c42a5e3f__strips.png",
+      "metadata": {
+        "name": "Cube 000",
+        "provenance": "CUBE",
+        "source_path": "C:\\Users\\hooki\\Trench\\datasets\\morpheus_zplane_library.json#cube=0",
+        "corners": {
+          "M0_Q0": {
+            "response": {
+              "peak_db": 69.9,
+              "notch_db": -56.0,
+              "dynamic_range_db": 125.9,
+              "centroid_hz": 2892.4,
+              "num_peaks": 3,
+              "num_notches": 2
+            },
+            "mouth_band": "teeth",
+            "stress": "strained",
+            "closest_vowel": {
+              "key": "ae",
+              "label": "AE (/\u00e6/ had)",
+              "dist_st": 29.75,
+              "f1_hz": 3255.2,
+              "f2_hz": 3255.2,
+              "confidence": "none"
+            }
+          },
+          "M0_Q100": {
+            "response": {
+              "peak_db": 101.0,
+              "notch_db": -47.3,
+              "dynamic_range_db": 148.3,
+              "centroid_hz": 9712.8,
+              "num_peaks": 3,
+              "num_notches": 2
+            },
+            "mouth_band": "air",
+            "stress": "violent",
+            "closest_vowel": null
+          },
+          "M100_Q0": {
+            "response": {
+              "peak_db": 106.0,
+              "notch_db": -58.7,
+              "dynamic_range_db": 164.7,
+              "centroid_hz": 3212.7,
+              "num_peaks": 2,
+              "num_notches": 1
+            },
+            "mouth_band": "teeth",
+            "stress": "violent",
+            "closest_vowel": {
+              "key": "ae",
+              "label": "AE (/\u00e6/ had)",
+              "dist_st": 29.75,
+              "f1_hz": 3255.2,
+              "f2_hz": 3255.2,
+              "confidence": "none"
+            }
+          },
+          "M100_Q100": {
+            "response": {
+              "peak_db": 96.8,
+              "notch_db": -48.6,
+              "dynamic_range_db": 145.4,
+              "centroid_hz": 8257.4,
+              "num_peaks": 3,
+              "num_notches": 2
+            },
+            "mouth_band": "air",
+            "stress": "violent",
+            "closest_vowel": null
+          }
+        },
+        "stability": {
+          "worst_peak_db": 132.7,
+          "cliff_count": 15,
+          "midpoint_audit": {
+            "passed": false,
+            "worst_peak_db": 102.9,
+            "worst_point": {
+              "morph": 1.0,
+              "q": 0.0
+            },
+            "peak_limit_db": 40.0,
+            "points": [
+              {
+                "morph": 0.0,
+                "q": 0.0,
+                "peak_db": 69.9
+              },
+              {
+                "morph": 0.0,
+                "q": 1.0,
+                "peak_db": 93.0
+              },
+              {
+                "morph": 0.25,
+                "q": 0.0,
+                "peak_db": 72.5
+              },
+              {
+                "morph": 0.25,
+                "q": 1.0,
+                "peak_db": 72.1
+              },
+              {
+                "morph": 0.5,
+                "q": 0.0,
+                "peak_db": 75.2
+              },
+              {
+                "morph": 0.5,
+                "q": 1.0,
+                "peak_db": 80.9
+              },
+              {
+                "morph": 0.75,
+                "q": 0.0,
+                "peak_db": 83.0
+              },
+              {
+                "morph": 0.75,
+                "q": 1.0,
+                "peak_db": 93.7
+              },
+              {
+                "morph": 1.0,
+                "q": 0.0,
+                "peak_db": 102.9
+              },
+              {
+                "morph": 1.0,
+                "q": 1.0,
+                "peak_db": 77.5
+              }
+            ]
+          }
+        }
+      }
+    },
+    {
+      "provenance": "CUBE",
+      "title": "Cube 001",
+      "source_path": "C:\\Users\\hooki\\Trench\\datasets\\morpheus_zplane_library.json#cube=1",
+      "card_id": "75b7621eb5ee867b",
+      "corner_png": "img/cube_cube_001_75b7621eb5ee867b__corners.png",
+      "strips_png": "img/cube_cube_001_75b7621eb5ee867b__strips.png",
+      "metadata": {
+        "name": "Cube 001",
+        "provenance": "CUBE",
+        "source_path": "C:\\Users\\hooki\\Trench\\datasets\\morpheus_zplane_library.json#cube=1",
+        "corners": {
+          "M0_Q0": {
+            "response": {
+              "peak_db": 99.6,
+              "notch_db": -50.3,
+              "dynamic_range_db": 149.8,
+              "centroid_hz": 811.5,
+              "num_peaks": 2,
+              "num_notches": 1
+            },
+            "mouth_band": "throat",
+            "stress": "violent",
+            "closest_vowel": {
+              "key": "ae",
+              "label": "AE (/\u00e6/ had)",
+              "dist_st": 6.45,
+              "f1_hz": 957.4,
+              "f2_hz": 1685.1,
+              "confidence": "medium"
+            }
+          },
+          "M0_Q100": {
+            "response": {
+              "peak_db": 164.1,
+              "notch_db": -48.1,
+              "dynamic_range_db": 212.2,
+              "centroid_hz": 57.8,
+              "num_peaks": 0,
+              "num_notches": 0
+            },
+            "mouth_band": "chest",
+            "stress": "violent",
+            "closest_vowel": null
+          },
+          "M100_Q0": {
+            "response": {
+              "peak_db": 124.9,
+              "notch_db": -45.1,
+              "dynamic_range_db": 170.0,
+              "centroid_hz": 219.1,
+              "num_peaks": 2,
+              "num_notches": 2
+            },
+            "mouth_band": "chest",
+            "stress": "violent",
+            "closest_vowel": {
+              "key": "oo",
+              "label": "OO (/u/ who)",
+              "dist_st": 5.16,
+              "f1_hz": 306.4,
+              "f2_hz": 957.4,
+              "confidence": "medium"
+            }
+          },
+          "M100_Q100": {
+            "response": {
+              "peak_db": 75.6,
+              "notch_db": -44.0,
+              "dynamic_range_db": 119.6,
+              "centroid_hz": 5869.1,
+              "num_peaks": 3,
+              "num_notches": 2
+            },
+            "mouth_band": "teeth",
+            "stress": "strained",
+            "closest_vowel": null
+          }
+        },
+        "stability": {
+          "worst_peak_db": 164.1,
+          "cliff_count": 15,
+          "midpoint_audit": {
+            "passed": false,
+            "worst_peak_db": 164.1,
+            "worst_point": {
+              "morph": 0.0,
+              "q": 1.0
+            },
+            "peak_limit_db": 40.0,
+            "points": [
+              {
+                "morph": 0.0,
+                "q": 0.0,
+                "peak_db": 99.6
+              },
+              {
+                "morph": 0.0,
+                "q": 1.0,
+                "peak_db": 164.1
+              },
+              {
+                "morph": 0.25,
+                "q": 0.0,
+                "peak_db": 74.7
+              },
+              {
+                "morph": 0.25,
+                "q": 1.0,
+                "peak_db": 72.0
+              },
+              {
+                "morph": 0.5,
+                "q": 0.0,
+                "peak_db": 69.2
+              },
+              {
+                "morph": 0.5,
+                "q": 1.0,
+                "peak_db": 79.3
+              },
+              {
+                "morph": 0.75,
+                "q": 0.0,
+                "peak_db": 73.4
+              },
+              {
+                "morph": 0.75,
+                "q": 1.0,
+                "peak_db": 63.7
+              },
+              {
+                "morph": 1.0,
+                "q": 0.0,
+                "peak_db": 124.0
+              },
+              {
+                "morph": 1.0,
+                "q": 1.0,
+                "peak_db": 74.3
+              }
+            ]
+          }
+        }
+      }
+    },
+    {
+      "provenance": "CUBE",
+      "title": "Cube 002",
+      "source_path": "C:\\Users\\hooki\\Trench\\datasets\\morpheus_zplane_library.json#cube=2",
+      "card_id": "ae1a6ed0e719f3c3",
+      "corner_png": "img/cube_cube_002_ae1a6ed0e719f3c3__corners.png",
+      "strips_png": "img/cube_cube_002_ae1a6ed0e719f3c3__strips.png",
+      "metadata": {
+        "name": "Cube 002",
+        "provenance": "CUBE",
+        "source_path": "C:\\Users\\hooki\\Trench\\datasets\\morpheus_zplane_library.json#cube=2",
+        "corners": {
+          "M0_Q0": {
+            "response": {
+              "peak_db": 61.5,
+              "notch_db": -42.4,
+              "dynamic_range_db": 103.9,
+              "centroid_hz": 7104.2,
+              "num_peaks": 2,
+              "num_notches": 1
+            },
+            "mouth_band": "air",
+            "stress": "strained",
+            "closest_vowel": null
+          },
+          "M0_Q100": {
+            "response": {
+              "peak_db": 103.5,
+              "notch_db": -43.1,
+              "dynamic_range_db": 146.5,
+              "centroid_hz": 89.4,
+              "num_peaks": 1,
+              "num_notches": 1
+            },
+            "mouth_band": "chest",
+            "stress": "violent",
+            "closest_vowel": {
+              "key": "ae",
+              "label": "AE (/\u00e6/ had)",
+              "dist_st": 22.32,
+              "f1_hz": 2259.5,
+              "f2_hz": 2527.6,
+              "confidence": "none"
+            }
+          },
+          "M100_Q0": {
+            "response": {
+              "peak_db": 58.5,
+              "notch_db": -39.2,
+              "dynamic_range_db": 97.7,
+              "centroid_hz": 6207.3,
+              "num_peaks": 2,
+              "num_notches": 1
+            },
+            "mouth_band": "teeth",
+            "stress": "strained",
+            "closest_vowel": null
+          },
+          "M100_Q100": {
+            "response": {
+              "peak_db": 96.5,
+              "notch_db": -58.4,
+              "dynamic_range_db": 154.9,
+              "centroid_hz": 1791.8,
+              "num_peaks": 3,
+              "num_notches": 2
+            },
+            "mouth_band": "mouth",
+            "stress": "violent",
+            "closest_vowel": {
+              "key": "ae",
+              "label": "AE (/\u00e6/ had)",
+              "dist_st": 18.97,
+              "f1_hz": 1608.5,
+              "f2_hz": 3255.2,
+              "confidence": "none"
+            }
+          }
+        },
+        "stability": {
+          "worst_peak_db": 115.3,
+          "cliff_count": 14,
+          "midpoint_audit": {
+            "passed": false,
+            "worst_peak_db": 115.3,
+            "worst_point": {
+              "morph": 0.75,
+              "q": 1.0
+            },
+            "peak_limit_db": 40.0,
+            "points": [
+              {
+                "morph": 0.0,
+                "q": 0.0,
+                "peak_db": 63.0
+              },
+              {
+                "morph": 0.0,
+                "q": 1.0,
+                "peak_db": 103.5
+              },
+              {
+                "morph": 0.25,
+                "q": 0.0,
+                "peak_db": 67.0
+              },
+              {
+                "morph": 0.25,
+                "q": 1.0,
+                "peak_db": 85.3
+              },
+              {
+                "morph": 0.5,
+                "q": 0.0,
+                "peak_db": 64.3
+              },
+              {
+                "morph": 0.5,
+                "q": 1.0,
+                "peak_db": 76.2
+              },
+              {
+                "morph": 0.75,
+                "q": 0.0,
+                "peak_db": 76.4
+              },
+              {
+                "morph": 0.75,
+                "q": 1.0,
+                "peak_db": 115.3
+              },
+              {
+                "morph": 1.0,
+                "q": 0.0,
+                "peak_db": 51.6
+              },
+              {
+                "morph": 1.0,
+                "q": 1.0,
+                "peak_db": 91.9
+              }
+            ]
+          }
+        }
+      }
+    },
+    {
+      "provenance": "CUBE",
+      "title": "Cube 003",
+      "source_path": "C:\\Users\\hooki\\Trench\\datasets\\morpheus_zplane_library.json#cube=3",
+      "card_id": "a43fbb97baf663e6",
+      "corner_png": "img/cube_cube_003_a43fbb97baf663e6__corners.png",
+      "strips_png": "img/cube_cube_003_a43fbb97baf663e6__strips.png",
+      "metadata": {
+        "name": "Cube 003",
+        "provenance": "CUBE",
+        "source_path": "C:\\Users\\hooki\\Trench\\datasets\\morpheus_zplane_library.json#cube=3",
+        "corners": {
+          "M0_Q0": {
+            "response": {
+              "peak_db": 97.2,
+              "notch_db": -59.2,
+              "dynamic_range_db": 156.4,
+              "centroid_hz": 91.6,
+              "num_peaks": 4,
+              "num_notches": 4
+            },
+            "mouth_band": "chest",
+            "stress": "violent",
+            "closest_vowel": null
+          },
+          "M0_Q100": {
+            "response": {
+              "peak_db": 81.2,
+              "notch_db": -47.9,
+              "dynamic_range_db": 129.2,
+              "centroid_hz": 3348.3,
+              "num_peaks": 2,
+              "num_notches": 2
+            },
+            "mouth_band": "teeth",
+            "stress": "strained",
+            "closest_vowel": null
+          },
+          "M100_Q0": {
+            "response": {
+              "peak_db": 130.6,
+              "notch_db": -40.2,
+              "dynamic_range_db": 170.8,
+              "centroid_hz": 45.4,
+              "num_peaks": 2,
+              "num_notches": 2
+            },
+            "mouth_band": "chest",
+            "stress": "violent",
+            "closest_vowel": null
+          },
+          "M100_Q100": {
+            "response": {
+              "peak_db": 83.8,
+              "notch_db": -53.9,
+              "dynamic_range_db": 137.7,
+              "centroid_hz": 3108.5,
+              "num_peaks": 3,
+              "num_notches": 2
+            },
+            "mouth_band": "teeth",
+            "stress": "strained",
+            "closest_vowel": {
+              "key": "ae",
+              "label": "AE (/\u00e6/ had)",
+              "dist_st": 29.75,
+              "f1_hz": 3255.2,
+              "f2_hz": 3255.2,
+              "confidence": "none"
+            }
+          }
+        },
+        "stability": {
+          "worst_peak_db": 130.6,
+          "cliff_count": 15,
+          "midpoint_audit": {
+            "passed": false,
+            "worst_peak_db": 130.6,
+            "worst_point": {
+              "morph": 1.0,
+              "q": 0.0
+            },
+            "peak_limit_db": 40.0,
+            "points": [
+              {
+                "morph": 0.0,
+                "q": 0.0,
+                "peak_db": 97.2
+              },
+              {
+                "morph": 0.0,
+                "q": 1.0,
+                "peak_db": 78.6
+              },
+              {
+                "morph": 0.25,
+                "q": 0.0,
+                "peak_db": 67.6
+              },
+              {
+                "morph": 0.25,
+                "q": 1.0,
+                "peak_db": 79.1
+              },
+              {
+                "morph": 0.5,
+                "q": 0.0,
+                "peak_db": 81.9
+              },
+              {
+                "morph": 0.5,
+                "q": 1.0,
+                "peak_db": 67.8
+              },
+              {
+                "morph": 0.75,
+                "q": 0.0,
+                "peak_db": 59.7
+              },
+              {
+                "morph": 0.75,
+                "q": 1.0,
+                "peak_db": 62.9
+              },
+              {
+                "morph": 1.0,
+                "q": 0.0,
+                "peak_db": 130.6
+              },
+              {
+                "morph": 1.0,
+                "q": 1.0,
+                "peak_db": 80.5
+              }
+            ]
+          }
+        }
+      }
+    },
+    {
+      "provenance": "CUBE",
+      "title": "Cube 004",
+      "source_path": "C:\\Users\\hooki\\Trench\\datasets\\morpheus_zplane_library.json#cube=4",
+      "card_id": "19628040aa20e65b",
+      "corner_png": "img/cube_cube_004_19628040aa20e65b__corners.png",
+      "strips_png": "img/cube_cube_004_19628040aa20e65b__strips.png",
+      "metadata": {
+        "name": "Cube 004",
+        "provenance": "CUBE",
+        "source_path": "C:\\Users\\hooki\\Trench\\datasets\\morpheus_zplane_library.json#cube=4",
+        "corners": {
+          "M0_Q0": {
+            "response": {
+              "peak_db": 61.3,
+              "notch_db": -45.3,
+              "dynamic_range_db": 106.6,
+              "centroid_hz": 4424.3,
+              "num_peaks": 4,
+              "num_notches": 3
+            },
+            "mouth_band": "teeth",
+            "stress": "strained",
+            "closest_vowel": null
+          },
+          "M0_Q100": {
+            "response": {
+              "peak_db": 70.6,
+              "notch_db": -46.4,
+              "dynamic_range_db": 116.9,
+              "centroid_hz": 2445.7,
+              "num_peaks": 3,
+              "num_notches": 2
+            },
+            "mouth_band": "mouth",
+            "stress": "strained",
+            "closest_vowel": {
+              "key": "ae",
+              "label": "AE (/\u00e6/ had)",
+              "dist_st": 23.63,
+              "f1_hz": 2259.5,
+              "f2_hz": 3102.0,
+              "confidence": "none"
+            }
+          },
+          "M100_Q0": {
+            "response": {
+              "peak_db": 126.9,
+              "notch_db": -63.0,
+              "dynamic_range_db": 189.9,
+              "centroid_hz": 357.4,
+              "num_peaks": 1,
+              "num_notches": 1
+            },
+            "mouth_band": "chest",
+            "stress": "violent",
+            "closest_vowel": {
+              "key": "ae",
+              "label": "AE (/\u00e6/ had)",
+              "dist_st": 20.39,
+              "f1_hz": 2106.3,
+              "f2_hz": 2106.3,
+              "confidence": "none"
+            }
+          },
+          "M100_Q100": {
+            "response": {
+              "peak_db": 143.5,
+              "notch_db": -55.9,
+              "dynamic_range_db": 199.4,
+              "centroid_hz": 6507.5,
+              "num_peaks": 1,
+              "num_notches": 0
+            },
+            "mouth_band": "teeth",
+            "stress": "violent",
+            "closest_vowel": null
+          }
+        },
+        "stability": {
+          "worst_peak_db": 140.4,
+          "cliff_count": 13,
+          "midpoint_audit": {
+            "passed": false,
+            "worst_peak_db": 140.4,
+            "worst_point": {
+              "morph": 1.0,
+              "q": 1.0
+            },
+            "peak_limit_db": 40.0,
+            "points": [
+              {
+                "morph": 0.0,
+                "q": 0.0,
+                "peak_db": 50.9
+              },
+              {
+                "morph": 0.0,
+                "q": 1.0,
+                "peak_db": 70.3
+              },
+              {
+                "morph": 0.25,
+                "q": 0.0,
+                "peak_db": 65.7
+              },
+              {
+                "morph": 0.25,
+                "q": 1.0,
+                "peak_db": 74.6
+              },
+              {
+                "morph": 0.5,
+                "q": 0.0,
+                "peak_db": 72.8
+              },
+              {
+                "morph": 0.5,
+                "q": 1.0,
+                "peak_db": 73.0
+              },
+              {
+                "morph": 0.75,
+                "q": 0.0,
+                "peak_db": 93.2
+              },
+              {
+                "morph": 0.75,
+                "q": 1.0,
+                "peak_db": 103.2
+              },
+              {
+                "morph": 1.0,
+                "q": 0.0,
+                "peak_db": 125.1
+              },
+              {
+                "morph": 1.0,
+                "q": 1.0,
+                "peak_db": 140.4
+              }
+            ]
+          }
+        }
+      }
+    },
+    {
+      "provenance": "CUBE",
+      "title": "Cube 005",
+      "source_path": "C:\\Users\\hooki\\Trench\\datasets\\morpheus_zplane_library.json#cube=5",
+      "card_id": "2d86a8c4e3cab12c",
+      "corner_png": "img/cube_cube_005_2d86a8c4e3cab12c__corners.png",
+      "strips_png": "img/cube_cube_005_2d86a8c4e3cab12c__strips.png",
+      "metadata": {
+        "name": "Cube 005",
+        "provenance": "CUBE",
+        "source_path": "C:\\Users\\hooki\\Trench\\datasets\\morpheus_zplane_library.json#cube=5",
+        "corners": {
+          "M0_Q0": {
+            "response": {
+              "peak_db": 143.0,
+              "notch_db": -50.3,
+              "dynamic_range_db": 193.3,
+              "centroid_hz": 57.9,
+              "num_peaks": 3,
+              "num_notches": 3
+            },
+            "mouth_band": "chest",
+            "stress": "violent",
+            "closest_vowel": null
+          },
+          "M0_Q100": {
+            "response": {
+              "peak_db": 71.4,
+              "notch_db": -42.7,
+              "dynamic_range_db": 114.0,
+              "centroid_hz": 614.7,
+              "num_peaks": 3,
+              "num_notches": 2
+            },
+            "mouth_band": "throat",
+            "stress": "strained",
+            "closest_vowel": {
+              "key": "ah",
+              "label": "AH (/\u0251/ father)",
+              "dist_st": 5.42,
+              "f1_hz": 957.4,
+              "f2_hz": 1225.5,
+              "confidence": "medium"
+            }
+          },
+          "M100_Q0": {
+            "response": {
+              "peak_db": 43.0,
+              "notch_db": -31.2,
+              "dynamic_range_db": 74.2,
+              "centroid_hz": 1751.3,
+              "num_peaks": 3,
+              "num_notches": 2
+            },
+            "mouth_band": "mouth",
+            "stress": "calm",
+            "closest_vowel": null
+          },
+          "M100_Q100": {
+            "response": {
+              "peak_db": 135.0,
+              "notch_db": -62.4,
+              "dynamic_range_db": 197.4,
+              "centroid_hz": 3181.3,
+              "num_peaks": 1,
+              "num_notches": 0
+            },
+            "mouth_band": "teeth",
+            "stress": "violent",
+            "closest_vowel": {
+              "key": "ae",
+              "label": "AE (/\u00e6/ had)",
+              "dist_st": 29.75,
+              "f1_hz": 3255.2,
+              "f2_hz": 3255.2,
+              "confidence": "none"
+            }
+          }
+        },
+        "stability": {
+          "worst_peak_db": 143.0,
+          "cliff_count": 9,
+          "midpoint_audit": {
+            "passed": false,
+            "worst_peak_db": 143.0,
+            "worst_point": {
+              "morph": 0.0,
+              "q": 0.0
+            },
+            "peak_limit_db": 40.0,
+            "points": [
+              {
+                "morph": 0.0,
+                "q": 0.0,
+                "peak_db": 143.0
+              },
+              {
+                "morph": 0.0,
+                "q": 1.0,
+                "peak_db": 71.2
+              },
+              {
+                "morph": 0.25,
+                "q": 0.0,
+                "peak_db": 62.8
+              },
+              {
+                "morph": 0.25,
+                "q": 1.0,
+                "peak_db": 59.2
+              },
+              {
+                "morph": 0.5,
+                "q": 0.0,
+                "peak_db": 44.8
+              },
+              {
+                "morph": 0.5,
+                "q": 1.0,
+                "peak_db": 62.5
+              },
+              {
+                "morph": 0.75,
+                "q": 0.0,
+                "peak_db": 36.4
+              },
+              {
+                "morph": 0.75,
+                "q": 1.0,
+                "peak_db": 80.5
+              },
+              {
+                "morph": 1.0,
+                "q": 0.0,
+                "peak_db": 40.3
+              },
+              {
+                "morph": 1.0,
+                "q": 1.0,
+                "peak_db": 131.5
+              }
+            ]
+          }
+        }
+      }
+    },
+    {
+      "provenance": "P2K",
+      "title": "P2k_000",
+      "source_path": "C:\\Users\\hooki\\Trench\\datasets\\p2k_skins\\P2k_000.json",
+      "card_id": "799090f70053e13b",
+      "corner_png": "img/p2k_p2k_000_799090f70053e13b__corners.png",
+      "strips_png": "img/p2k_p2k_000_799090f70053e13b__strips.png",
+      "metadata": {
+        "name": "P2k_000",
+        "provenance": "P2K",
+        "source_path": "C:\\Users\\hooki\\Trench\\datasets\\p2k_skins\\P2k_000.json",
+        "corners": {
+          "M0_Q0": {
+            "response": {
+              "peak_db": -1.9,
+              "notch_db": -166.5,
+              "dynamic_range_db": 164.6,
+              "centroid_hz": 165.4,
+              "num_peaks": 4,
+              "num_notches": 5
+            },
+            "mouth_band": "chest",
+            "stress": "strained",
+            "closest_vowel": null
+          },
+          "M0_Q100": {
+            "response": {
+              "peak_db": -0.0,
+              "notch_db": -49.7,
+              "dynamic_range_db": 49.7,
+              "centroid_hz": 1089.7,
+              "num_peaks": 2,
+              "num_notches": 3
+            },
+            "mouth_band": "mouth",
+            "stress": "calm",
+            "closest_vowel": {
+              "key": "ae",
+              "label": "AE (/\u00e6/ had)",
+              "dist_st": 5.68,
+              "f1_hz": 798.0,
+              "f2_hz": 2247.3,
+              "confidence": "medium"
+            }
+          },
+          "M100_Q0": {
+            "response": {
+              "peak_db": 13.3,
+              "notch_db": -142.1,
+              "dynamic_range_db": 155.4,
+              "centroid_hz": 82.9,
+              "num_peaks": 6,
+              "num_notches": 6
+            },
+            "mouth_band": "chest",
+            "stress": "strained",
+            "closest_vowel": null
+          },
+          "M100_Q100": {
+            "response": {
+              "peak_db": 19.2,
+              "notch_db": -70.9,
+              "dynamic_range_db": 90.2,
+              "centroid_hz": 1518.3,
+              "num_peaks": 6,
+              "num_notches": 6
+            },
+            "mouth_band": "mouth",
+            "stress": "calm",
+            "closest_vowel": {
+              "key": "ae",
+              "label": "AE (/\u00e6/ had)",
+              "dist_st": 6.54,
+              "f1_hz": 871.2,
+              "f2_hz": 2221.7,
+              "confidence": "medium"
+            }
+          }
+        },
+        "stability": {
+          "worst_peak_db": 20.5,
+          "cliff_count": 0,
+          "midpoint_audit": {
+            "passed": true,
+            "worst_peak_db": 20.5,
+            "worst_point": {
+              "morph": 1.0,
+              "q": 1.0
+            },
+            "peak_limit_db": 40.0,
+            "points": [
+              {
+                "morph": 0.0,
+                "q": 0.0,
+                "peak_db": -1.9
+              },
+              {
+                "morph": 0.0,
+                "q": 1.0,
+                "peak_db": -0.0
+              },
+              {
+                "morph": 0.25,
+                "q": 0.0,
+                "peak_db": -3.2
+              },
+              {
+                "morph": 0.25,
+                "q": 1.0,
+                "peak_db": 0.7
+              },
+              {
+                "morph": 0.5,
+                "q": 0.0,
+                "peak_db": -4.6
+              },
+              {
+                "morph": 0.5,
+                "q": 1.0,
+                "peak_db": 1.6
+              },
+              {
+                "morph": 0.75,
+                "q": 0.0,
+                "peak_db": -5.6
+              },
+              {
+                "morph": 0.75,
+                "q": 1.0,
+                "peak_db": 4.8
+              },
+              {
+                "morph": 1.0,
+                "q": 0.0,
+                "peak_db": 13.3
+              },
+              {
+                "morph": 1.0,
+                "q": 1.0,
+                "peak_db": 20.5
+              }
+            ]
+          }
+        }
+      }
+    },
+    {
+      "provenance": "P2K",
+      "title": "P2k_001",
+      "source_path": "C:\\Users\\hooki\\Trench\\datasets\\p2k_skins\\P2k_001.json",
+      "card_id": "7d047846df7ab206",
+      "corner_png": "img/p2k_p2k_001_7d047846df7ab206__corners.png",
+      "strips_png": "img/p2k_p2k_001_7d047846df7ab206__strips.png",
+      "metadata": {
+        "name": "P2k_001",
+        "provenance": "P2K",
+        "source_path": "C:\\Users\\hooki\\Trench\\datasets\\p2k_skins\\P2k_001.json",
+        "corners": {
+          "M0_Q0": {
+            "response": {
+              "peak_db": 4.3,
+              "notch_db": -58.2,
+              "dynamic_range_db": 62.5,
+              "centroid_hz": 872.3,
+              "num_peaks": 2,
+              "num_notches": 3
+            },
+            "mouth_band": "throat",
+            "stress": "calm",
+            "closest_vowel": null
+          },
+          "M0_Q100": {
+            "response": {
+              "peak_db": 4.2,
+              "notch_db": -110.7,
+              "dynamic_range_db": 114.9,
+              "centroid_hz": 158.8,
+              "num_peaks": 4,
+              "num_notches": 4
+            },
+            "mouth_band": "chest",
+            "stress": "strained",
+            "closest_vowel": {
+              "key": "ae",
+              "label": "AE (/\u00e6/ had)",
+              "dist_st": 13.69,
+              "f1_hz": 1200.4,
+              "f2_hz": 2884.3,
+              "confidence": "low"
+            }
+          },
+          "M100_Q0": {
+            "response": {
+              "peak_db": 15.4,
+              "notch_db": -76.1,
+              "dynamic_range_db": 91.5,
+              "centroid_hz": 2021.2,
+              "num_peaks": 4,
+              "num_notches": 3
+            },
+            "mouth_band": "mouth",
+            "stress": "calm",
+            "closest_vowel": null
+          },
+          "M100_Q100": {
+            "response": {
+              "peak_db": 9.7,
+              "notch_db": -101.1,
+              "dynamic_range_db": 110.9,
+              "centroid_hz": 315.3,
+              "num_peaks": 6,
+              "num_notches": 6
+            },
+            "mouth_band": "chest",
+            "stress": "strained",
+            "closest_vowel": {
+              "key": "ae",
+              "label": "AE (/\u00e6/ had)",
+              "dist_st": 16.67,
+              "f1_hz": 1608.6,
+              "f2_hz": 2477.5,
+              "confidence": "none"
+            }
+          }
+        },
+        "stability": {
+          "worst_peak_db": 28.3,
+          "cliff_count": 0,
+          "midpoint_audit": {
+            "passed": true,
+            "worst_peak_db": 28.3,
+            "worst_point": {
+              "morph": 0.5,
+              "q": 1.0
+            },
+            "peak_limit_db": 40.0,
+            "points": [
+              {
+                "morph": 0.0,
+                "q": 0.0,
+                "peak_db": 4.0
+              },
+              {
+                "morph": 0.0,
+                "q": 1.0,
+                "peak_db": 4.2
+              },
+              {
+                "morph": 0.25,
+                "q": 0.0,
+                "peak_db": -0.8
+              },
+              {
+                "morph": 0.25,
+                "q": 1.0,
+                "peak_db": 27.0
+              },
+              {
+                "morph": 0.5,
+                "q": 0.0,
+                "peak_db": 5.3
+              },
+              {
+                "morph": 0.5,
+                "q": 1.0,
+                "peak_db": 28.3
+              },
+              {
+                "morph": 0.75,
+                "q": 0.0,
+                "peak_db": 1.9
+              },
+              {
+                "morph": 0.75,
+                "q": 1.0,
+                "peak_db": 25.1
+              },
+              {
+                "morph": 1.0,
+                "q": 0.0,
+                "peak_db": 15.8
+              },
+              {
+                "morph": 1.0,
+                "q": 1.0,
+                "peak_db": 8.3
+              }
+            ]
+          }
+        }
+      }
+    },
+    {
+      "provenance": "P2K",
+      "title": "P2k_002",
+      "source_path": "C:\\Users\\hooki\\Trench\\datasets\\p2k_skins\\P2k_002.json",
+      "card_id": "e6cec1dfb3fd772a",
+      "corner_png": "img/p2k_p2k_002_e6cec1dfb3fd772a__corners.png",
+      "strips_png": "img/p2k_p2k_002_e6cec1dfb3fd772a__strips.png",
+      "metadata": {
+        "name": "P2k_002",
+        "provenance": "P2K",
+        "source_path": "C:\\Users\\hooki\\Trench\\datasets\\p2k_skins\\P2k_002.json",
+        "corners": {
+          "M0_Q0": {
+            "response": {
+              "peak_db": 0.4,
+              "notch_db": -121.5,
+              "dynamic_range_db": 121.9,
+              "centroid_hz": 380.4,
+              "num_peaks": 0,
+              "num_notches": 1
+            },
+            "mouth_band": "chest",
+            "stress": "strained",
+            "closest_vowel": {
+              "key": "aw",
+              "label": "AW (/\u0254/ saw)",
+              "dist_st": 18.12,
+              "f1_hz": 277.5,
+              "f2_hz": 392.9,
+              "confidence": "none"
+            }
+          },
+          "M0_Q100": {
+            "response": {
+              "peak_db": -0.0,
+              "notch_db": -138.5,
+              "dynamic_range_db": 138.4,
+              "centroid_hz": 257.2,
+              "num_peaks": 1,
+              "num_notches": 2
+            },
+            "mouth_band": "chest",
+            "stress": "strained",
+            "closest_vowel": {
+              "key": "ee",
+              "label": "EE (/i/ heed)",
+              "dist_st": 2.04,
+              "f1_hz": 313.3,
+              "f2_hz": 2145.8,
+              "confidence": "high"
+            }
+          },
+          "M100_Q0": {
+            "response": {
+              "peak_db": 13.5,
+              "notch_db": -157.4,
+              "dynamic_range_db": 170.9,
+              "centroid_hz": 202.7,
+              "num_peaks": 2,
+              "num_notches": 2
+            },
+            "mouth_band": "chest",
+            "stress": "violent",
+            "closest_vowel": {
+              "key": "oo",
+              "label": "OO (/u/ who)",
+              "dist_st": 6.17,
+              "f1_hz": 269.6,
+              "f2_hz": 980.4,
+              "confidence": "medium"
+            }
+          },
+          "M100_Q100": {
+            "response": {
+              "peak_db": -0.0,
+              "notch_db": -132.2,
+              "dynamic_range_db": 132.1,
+              "centroid_hz": 327.9,
+              "num_peaks": 1,
+              "num_notches": 2
+            },
+            "mouth_band": "chest",
+            "stress": "strained",
+            "closest_vowel": {
+              "key": "ee",
+              "label": "EE (/i/ heed)",
+              "dist_st": 4.57,
+              "f1_hz": 264.2,
+              "f2_hz": 2455.6,
+              "confidence": "medium"
+            }
+          }
+        },
+        "stability": {
+          "worst_peak_db": 13.5,
+          "cliff_count": 0,
+          "midpoint_audit": {
+            "passed": true,
+            "worst_peak_db": 13.5,
+            "worst_point": {
+              "morph": 1.0,
+              "q": 0.0
+            },
+            "peak_limit_db": 40.0,
+            "points": [
+              {
+                "morph": 0.0,
+                "q": 0.0,
+                "peak_db": 0.4
+              },
+              {
+                "morph": 0.0,
+                "q": 1.0,
+                "peak_db": -0.0
+              },
+              {
+                "morph": 0.25,
+                "q": 0.0,
+                "peak_db": 0.4
+              },
+              {
+                "morph": 0.25,
+                "q": 1.0,
+                "peak_db": -0.1
+              },
+              {
+                "morph": 0.5,
+                "q": 0.0,
+                "peak_db": 1.4
+              },
+              {
+                "morph": 0.5,
+                "q": 1.0,
+                "peak_db": -0.1
+              },
+              {
+                "morph": 0.75,
+                "q": 0.0,
+                "peak_db": 4.3
+              },
+              {
+                "morph": 0.75,
+                "q": 1.0,
+                "peak_db": -0.1
+              },
+              {
+                "morph": 1.0,
+                "q": 0.0,
+                "peak_db": 13.5
+              },
+              {
+                "morph": 1.0,
+                "q": 1.0,
+                "peak_db": -0.0
+              }
+            ]
+          }
+        }
+      }
+    },
+    {
+      "provenance": "P2K",
+      "title": "P2k_003",
+      "source_path": "C:\\Users\\hooki\\Trench\\datasets\\p2k_skins\\P2k_003.json",
+      "card_id": "af596298b985e403",
+      "corner_png": "img/p2k_p2k_003_af596298b985e403__corners.png",
+      "strips_png": "img/p2k_p2k_003_af596298b985e403__strips.png",
+      "metadata": {
+        "name": "P2k_003",
+        "provenance": "P2K",
+        "source_path": "C:\\Users\\hooki\\Trench\\datasets\\p2k_skins\\P2k_003.json",
+        "corners": {
+          "M0_Q0": {
+            "response": {
+              "peak_db": 12.4,
+              "notch_db": -150.6,
+              "dynamic_range_db": 163.0,
+              "centroid_hz": 59.2,
+              "num_peaks": 4,
+              "num_notches": 3
+            },
+            "mouth_band": "chest",
+            "stress": "strained",
+            "closest_vowel": null
+          },
+          "M0_Q100": {
+            "response": {
+              "peak_db": 8.0,
+              "notch_db": -71.1,
+              "dynamic_range_db": 79.1,
+              "centroid_hz": 571.4,
+              "num_peaks": 5,
+              "num_notches": 5
+            },
+            "mouth_band": "throat",
+            "stress": "calm",
+            "closest_vowel": {
+              "key": "ae",
+              "label": "AE (/\u00e6/ had)",
+              "dist_st": 7.31,
+              "f1_hz": 871.0,
+              "f2_hz": 2364.0,
+              "confidence": "medium"
+            }
+          },
+          "M100_Q0": {
+            "response": {
+              "peak_db": 2.8,
+              "notch_db": -50.0,
+              "dynamic_range_db": 52.8,
+              "centroid_hz": 1501.4,
+              "num_peaks": 3,
+              "num_notches": 3
+            },
+            "mouth_band": "mouth",
+            "stress": "calm",
+            "closest_vowel": null
+          },
+          "M100_Q100": {
+            "response": {
+              "peak_db": 6.4,
+              "notch_db": -67.5,
+              "dynamic_range_db": 73.9,
+              "centroid_hz": 1150.8,
+              "num_peaks": 3,
+              "num_notches": 4
+            },
+            "mouth_band": "mouth",
+            "stress": "calm",
+            "closest_vowel": {
+              "key": "ee",
+              "label": "EE (/i/ heed)",
+              "dist_st": 3.02,
+              "f1_hz": 316.3,
+              "f2_hz": 2714.4,
+              "confidence": "high"
+            }
+          }
+        },
+        "stability": {
+          "worst_peak_db": 17.8,
+          "cliff_count": 0,
+          "midpoint_audit": {
+            "passed": true,
+            "worst_peak_db": 17.4,
+            "worst_point": {
+              "morph": 0.25,
+              "q": 1.0
+            },
+            "peak_limit_db": 40.0,
+            "points": [
+              {
+                "morph": 0.0,
+                "q": 0.0,
+                "peak_db": 12.3
+              },
+              {
+                "morph": 0.0,
+                "q": 1.0,
+                "peak_db": 8.0
+              },
+              {
+                "morph": 0.25,
+                "q": 0.0,
+                "peak_db": -29.3
+              },
+              {
+                "morph": 0.25,
+                "q": 1.0,
+                "peak_db": 17.4
+              },
+              {
+                "morph": 0.5,
+                "q": 0.0,
+                "peak_db": 1.1
+              },
+              {
+                "morph": 0.5,
+                "q": 1.0,
+                "peak_db": 16.0
+              },
+              {
+                "morph": 0.75,
+                "q": 0.0,
+                "peak_db": 4.8
+              },
+              {
+                "morph": 0.75,
+                "q": 1.0,
+                "peak_db": 14.6
+              },
+              {
+                "morph": 1.0,
+                "q": 0.0,
+                "peak_db": 2.8
+              },
+              {
+                "morph": 1.0,
+                "q": 1.0,
+                "peak_db": 10.4
+              }
+            ]
+          }
+        }
+      }
+    },
+    {
+      "provenance": "P2K",
+      "title": "P2k_004",
+      "source_path": "C:\\Users\\hooki\\Trench\\datasets\\p2k_skins\\P2k_004.json",
+      "card_id": "28077ec82a906294",
+      "corner_png": "img/p2k_p2k_004_28077ec82a906294__corners.png",
+      "strips_png": "img/p2k_p2k_004_28077ec82a906294__strips.png",
+      "metadata": {
+        "name": "P2k_004",
+        "provenance": "P2K",
+        "source_path": "C:\\Users\\hooki\\Trench\\datasets\\p2k_skins\\P2k_004.json",
+        "corners": {
+          "M0_Q0": {
+            "response": {
+              "peak_db": 12.4,
+              "notch_db": -150.6,
+              "dynamic_range_db": 163.0,
+              "centroid_hz": 59.2,
+              "num_peaks": 4,
+              "num_notches": 3
+            },
+            "mouth_band": "chest",
+            "stress": "strained",
+            "closest_vowel": null
+          },
+          "M0_Q100": {
+            "response": {
+              "peak_db": 8.0,
+              "notch_db": -71.1,
+              "dynamic_range_db": 79.1,
+              "centroid_hz": 571.4,
+              "num_peaks": 5,
+              "num_notches": 5
+            },
+            "mouth_band": "throat",
+            "stress": "calm",
+            "closest_vowel": {
+              "key": "ae",
+              "label": "AE (/\u00e6/ had)",
+              "dist_st": 7.31,
+              "f1_hz": 871.0,
+              "f2_hz": 2364.0,
+              "confidence": "medium"
+            }
+          },
+          "M100_Q0": {
+            "response": {
+              "peak_db": 26.9,
+              "notch_db": -34.5,
+              "dynamic_range_db": 61.3,
+              "centroid_hz": 3012.2,
+              "num_peaks": 4,
+              "num_notches": 3
+            },
+            "mouth_band": "teeth",
+            "stress": "calm",
+            "closest_vowel": {
+              "key": "ae",
+              "label": "AE (/\u00e6/ had)",
+              "dist_st": 23.38,
+              "f1_hz": 2377.3,
+              "f2_hz": 2632.3,
+              "confidence": "none"
+            }
+          },
+          "M100_Q100": {
+            "response": {
+              "peak_db": 5.3,
+              "notch_db": -70.0,
+              "dynamic_range_db": 75.3,
+              "centroid_hz": 646.1,
+              "num_peaks": 5,
+              "num_notches": 5
+            },
+            "mouth_band": "throat",
+            "stress": "calm",
+            "closest_vowel": {
+              "key": "ih",
+              "label": "IH (/\u026a/ hid)",
+              "dist_st": 4.65,
+              "f1_hz": 511.0,
+              "f2_hz": 2483.0,
+              "confidence": "medium"
+            }
+          }
+        },
+        "stability": {
+          "worst_peak_db": 34.6,
+          "cliff_count": 0,
+          "midpoint_audit": {
+            "passed": true,
+            "worst_peak_db": 23.4,
+            "worst_point": {
+              "morph": 1.0,
+              "q": 0.0
+            },
+            "peak_limit_db": 40.0,
+            "points": [
+              {
+                "morph": 0.0,
+                "q": 0.0,
+                "peak_db": 12.3
+              },
+              {
+                "morph": 0.0,
+                "q": 1.0,
+                "peak_db": 8.0
+              },
+              {
+                "morph": 0.25,
+                "q": 0.0,
+                "peak_db": -20.7
+              },
+              {
+                "morph": 0.25,
+                "q": 1.0,
+                "peak_db": 11.2
+              },
+              {
+                "morph": 0.5,
+                "q": 0.0,
+                "peak_db": 16.6
+              },
+              {
+                "morph": 0.5,
+                "q": 1.0,
+                "peak_db": 22.0
+              },
+              {
+                "morph": 0.75,
+                "q": 0.0,
+                "peak_db": 19.2
+              },
+              {
+                "morph": 0.75,
+                "q": 1.0,
+                "peak_db": 16.0
+              },
+              {
+                "morph": 1.0,
+                "q": 0.0,
+                "peak_db": 23.4
+              },
+              {
+                "morph": 1.0,
+                "q": 1.0,
+                "peak_db": 5.3
+              }
+            ]
+          }
+        }
+      }
+    },
+    {
+      "provenance": "P2K",
+      "title": "P2k_005",
+      "source_path": "C:\\Users\\hooki\\Trench\\datasets\\p2k_skins\\P2k_005.json",
+      "card_id": "f47403c35e89384e",
+      "corner_png": "img/p2k_p2k_005_f47403c35e89384e__corners.png",
+      "strips_png": "img/p2k_p2k_005_f47403c35e89384e__strips.png",
+      "metadata": {
+        "name": "P2k_005",
+        "provenance": "P2K",
+        "source_path": "C:\\Users\\hooki\\Trench\\datasets\\p2k_skins\\P2k_005.json",
+        "corners": {
+          "M0_Q0": {
+            "response": {
+              "peak_db": -0.0,
+              "notch_db": -89.9,
+              "dynamic_range_db": 89.9,
+              "centroid_hz": 386.1,
+              "num_peaks": 2,
+              "num_notches": 2
+            },
+            "mouth_band": "chest",
+            "stress": "calm",
+            "closest_vowel": {
+              "key": "ae",
+              "label": "AE (/\u00e6/ had)",
+              "dist_st": 7.18,
+              "f1_hz": 881.8,
+              "f2_hz": 2315.1,
+              "confidence": "medium"
+            }
+          },
+          "M0_Q100": {
+            "response": {
+              "peak_db": 4.2,
+              "notch_db": -43.7,
+              "dynamic_range_db": 47.9,
+              "centroid_hz": 976.9,
+              "num_peaks": 3,
+              "num_notches": 2
+            },
+            "mouth_band": "throat",
+            "stress": "calm",
+            "closest_vowel": null
+          },
+          "M100_Q0": {
+            "response": {
+              "peak_db": 25.2,
+              "notch_db": -106.3,
+              "dynamic_range_db": 131.4,
+              "centroid_hz": 565.4,
+              "num_peaks": 4,
+              "num_notches": 4
+            },
+            "mouth_band": "throat",
+            "stress": "strained",
+            "closest_vowel": {
+              "key": "ae",
+              "label": "AE (/\u00e6/ had)",
+              "dist_st": 5.08,
+              "f1_hz": 870.6,
+              "f2_hz": 1560.6,
+              "confidence": "medium"
+            }
+          },
+          "M100_Q100": {
+            "response": {
+              "peak_db": 10.1,
+              "notch_db": -47.2,
+              "dynamic_range_db": 57.3,
+              "centroid_hz": 850.1,
+              "num_peaks": 5,
+              "num_notches": 5
+            },
+            "mouth_band": "throat",
+            "stress": "calm",
+            "closest_vowel": {
+              "key": "ae",
+              "label": "AE (/\u00e6/ had)",
+              "dist_st": 14.28,
+              "f1_hz": 1024.8,
+              "f2_hz": 3456.2,
+              "confidence": "none"
+            }
+          }
+        },
+        "stability": {
+          "worst_peak_db": 26.6,
+          "cliff_count": 0,
+          "midpoint_audit": {
+            "passed": true,
+            "worst_peak_db": 25.1,
+            "worst_point": {
+              "morph": 0.75,
+              "q": 1.0
+            },
+            "peak_limit_db": 40.0,
+            "points": [
+              {
+                "morph": 0.0,
+                "q": 0.0,
+                "peak_db": -0.0
+              },
+              {
+                "morph": 0.0,
+                "q": 1.0,
+                "peak_db": 4.2
+              },
+              {
+                "morph": 0.25,
+                "q": 0.0,
+                "peak_db": -4.4
+              },
+              {
+                "morph": 0.25,
+                "q": 1.0,
+                "peak_db": 9.1
+              },
+              {
+                "morph": 0.5,
+                "q": 0.0,
+                "peak_db": 2.4
+              },
+              {
+                "morph": 0.5,
+                "q": 1.0,
+                "peak_db": 15.4
+              },
+              {
+                "morph": 0.75,
+                "q": 0.0,
+                "peak_db": 7.3
+              },
+              {
+                "morph": 0.75,
+                "q": 1.0,
+                "peak_db": 25.1
+              },
+              {
+                "morph": 1.0,
+                "q": 0.0,
+                "peak_db": 24.9
+              },
+              {
+                "morph": 1.0,
+                "q": 1.0,
+                "peak_db": 10.1
+              }
+            ]
+          }
+        }
+      }
+    },
+    {
+      "provenance": "VAULT",
+      "title": "Aluminum Siding C2",
+      "source_path": "C:\\Users\\hooki\\Trench\\vault\\_vocal_pack_2026-04-11\\shipping\\Aluminum_Siding__Glass_Whistle.json",
+      "card_id": "e7050f3690f32e71",
+      "corner_png": "img/vault_aluminum_siding_c2_e7050f3690f32e71__corners.png",
+      "strips_png": "img/vault_aluminum_siding_c2_e7050f3690f32e71__strips.png",
+      "metadata": {
+        "name": "Aluminum Siding C2",
+        "provenance": "VAULT",
+        "source_path": "C:\\Users\\hooki\\Trench\\vault\\_vocal_pack_2026-04-11\\shipping\\Aluminum_Siding__Glass_Whistle.json",
+        "corners": {
+          "M0_Q0": {
+            "response": {
+              "peak_db": 16.5,
+              "notch_db": -124.6,
+              "dynamic_range_db": 141.1,
+              "centroid_hz": 15339.8,
+              "num_peaks": 4,
+              "num_notches": 4
+            },
+            "mouth_band": "air",
+            "stress": "strained",
+            "closest_vowel": {
+              "key": "oo",
+              "label": "OO (/u/ who)",
+              "dist_st": 5.28,
+              "f1_hz": 263.6,
+              "f2_hz": 1116.3,
+              "confidence": "medium"
+            }
+          },
+          "M0_Q100": {
+            "response": {
+              "peak_db": -4.5,
+              "notch_db": -91.8,
+              "dynamic_range_db": 87.3,
+              "centroid_hz": 10232.8,
+              "num_peaks": 4,
+              "num_notches": 4
+            },
+            "mouth_band": "air",
+            "stress": "calm",
+            "closest_vowel": null
+          },
+          "M100_Q0": {
+            "response": {
+              "peak_db": 17.5,
+              "notch_db": -87.8,
+              "dynamic_range_db": 105.4,
+              "centroid_hz": 7023.2,
+              "num_peaks": 4,
+              "num_notches": 5
+            },
+            "mouth_band": "air",
+            "stress": "strained",
+            "closest_vowel": {
+              "key": "oo",
+              "label": "OO (/u/ who)",
+              "dist_st": 5.83,
+              "f1_hz": 280.2,
+              "f2_hz": 970.6,
+              "confidence": "medium"
+            }
+          },
+          "M100_Q100": {
+            "response": {
+              "peak_db": 15.2,
+              "notch_db": -54.3,
+              "dynamic_range_db": 69.6,
+              "centroid_hz": 7352.4,
+              "num_peaks": 5,
+              "num_notches": 5
+            },
+            "mouth_band": "air",
+            "stress": "calm",
+            "closest_vowel": null
+          }
+        },
+        "stability": {
+          "worst_peak_db": 17.5,
+          "cliff_count": 0,
+          "midpoint_audit": {
+            "passed": true,
+            "worst_peak_db": 17.5,
+            "worst_point": {
+              "morph": 1.0,
+              "q": 0.0
+            },
+            "peak_limit_db": 40.0,
+            "points": [
+              {
+                "morph": 0.0,
+                "q": 0.0,
+                "peak_db": 16.5
+              },
+              {
+                "morph": 0.0,
+                "q": 1.0,
+                "peak_db": -4.6
+              },
+              {
+                "morph": 0.25,
+                "q": 0.0,
+                "peak_db": 2.6
+              },
+              {
+                "morph": 0.25,
+                "q": 1.0,
+                "peak_db": 2.9
+              },
+              {
+                "morph": 0.5,
+                "q": 0.0,
+                "peak_db": 11.7
+              },
+              {
+                "morph": 0.5,
+                "q": 1.0,
+                "peak_db": 9.8
+              },
+              {
+                "morph": 0.75,
+                "q": 0.0,
+                "peak_db": 13.2
+              },
+              {
+                "morph": 0.75,
+                "q": 1.0,
+                "peak_db": 11.5
+              },
+              {
+                "morph": 1.0,
+                "q": 0.0,
+                "peak_db": 17.5
+              },
+              {
+                "morph": 1.0,
+                "q": 1.0,
+                "peak_db": 15.3
+              }
+            ]
+          }
+        }
+      }
+    },
+    {
+      "provenance": "VAULT",
+      "title": "Cul-De-Sac C3",
+      "source_path": "C:\\Users\\hooki\\Trench\\vault\\_vocal_pack_2026-04-11\\shipping\\Cul_De_Sac__Comb_Dust.json",
+      "card_id": "280660202d6e9d59",
+      "corner_png": "img/vault_cul_de_sac_c3_280660202d6e9d59__corners.png",
+      "strips_png": "img/vault_cul_de_sac_c3_280660202d6e9d59__strips.png",
+      "metadata": {
+        "name": "Cul-De-Sac C3",
+        "provenance": "VAULT",
+        "source_path": "C:\\Users\\hooki\\Trench\\vault\\_vocal_pack_2026-04-11\\shipping\\Cul_De_Sac__Comb_Dust.json",
+        "corners": {
+          "M0_Q0": {
+            "response": {
+              "peak_db": 9.7,
+              "notch_db": -107.7,
+              "dynamic_range_db": 117.4,
+              "centroid_hz": 1951.1,
+              "num_peaks": 2,
+              "num_notches": 1
+            },
+            "mouth_band": "mouth",
+            "stress": "strained",
+            "closest_vowel": {
+              "key": "ee",
+              "label": "EE (/i/ heed)",
+              "dist_st": 6.45,
+              "f1_hz": 325.0,
+              "f2_hz": 3358.3,
+              "confidence": "medium"
+            }
+          },
+          "M0_Q100": {
+            "response": {
+              "peak_db": 10.0,
+              "notch_db": -107.3,
+              "dynamic_range_db": 117.3,
+              "centroid_hz": 1940.6,
+              "num_peaks": 2,
+              "num_notches": 1
+            },
+            "mouth_band": "mouth",
+            "stress": "strained",
+            "closest_vowel": {
+              "key": "ee",
+              "label": "EE (/i/ heed)",
+              "dist_st": 6.3,
+              "f1_hz": 327.7,
+              "f2_hz": 3332.1,
+              "confidence": "medium"
+            }
+          },
+          "M100_Q0": {
+            "response": {
+              "peak_db": -3.8,
+              "notch_db": -99.5,
+              "dynamic_range_db": 95.7,
+              "centroid_hz": 1430.1,
+              "num_peaks": 3,
+              "num_notches": 2
+            },
+            "mouth_band": "mouth",
+            "stress": "calm",
+            "closest_vowel": {
+              "key": "ae",
+              "label": "AE (/\u00e6/ had)",
+              "dist_st": 20.94,
+              "f1_hz": 1829.2,
+              "f2_hz": 3297.8,
+              "confidence": "none"
+            }
+          },
+          "M100_Q100": {
+            "response": {
+              "peak_db": -3.5,
+              "notch_db": -94.7,
+              "dynamic_range_db": 91.2,
+              "centroid_hz": 1427.2,
+              "num_peaks": 3,
+              "num_notches": 2
+            },
+            "mouth_band": "mouth",
+            "stress": "calm",
+            "closest_vowel": {
+              "key": "ae",
+              "label": "AE (/\u00e6/ had)",
+              "dist_st": 20.77,
+              "f1_hz": 1817.6,
+              "f2_hz": 3272.2,
+              "confidence": "none"
+            }
+          }
+        },
+        "stability": {
+          "worst_peak_db": 10.0,
+          "cliff_count": 0,
+          "midpoint_audit": {
+            "passed": true,
+            "worst_peak_db": 10.0,
+            "worst_point": {
+              "morph": 0.0,
+              "q": 1.0
+            },
+            "peak_limit_db": 40.0,
+            "points": [
+              {
+                "morph": 0.0,
+                "q": 0.0,
+                "peak_db": 9.7
+              },
+              {
+                "morph": 0.0,
+                "q": 1.0,
+                "peak_db": 10.0
+              },
+              {
+                "morph": 0.25,
+                "q": 0.0,
+                "peak_db": -11.8
+              },
+              {
+                "morph": 0.25,
+                "q": 1.0,
+                "peak_db": -11.8
+              },
+              {
+                "morph": 0.5,
+                "q": 0.0,
+                "peak_db": -5.5
+              },
+              {
+                "morph": 0.5,
+                "q": 1.0,
+                "peak_db": -5.3
+              },
+              {
+                "morph": 0.75,
+                "q": 0.0,
+                "peak_db": -4.2
+              },
+              {
+                "morph": 0.75,
+                "q": 1.0,
+                "peak_db": -3.9
+              },
+              {
+                "morph": 1.0,
+                "q": 0.0,
+                "peak_db": -3.8
+              },
+              {
+                "morph": 1.0,
+                "q": 1.0,
+                "peak_db": -3.5
+              }
+            ]
+          }
+        }
+      }
+    },
+    {
+      "provenance": "VAULT",
+      "title": "Small Talk Ah-Ee C1",
+      "source_path": "C:\\Users\\hooki\\Trench\\vault\\_vocal_pack_2026-04-11\\shipping\\Small_Talk__Open_Bite.json",
+      "card_id": "9c9840c10f6a42f1",
+      "corner_png": "img/vault_small_talk_ah_ee_c1_9c9840c10f6a42f1__corners.png",
+      "strips_png": "img/vault_small_talk_ah_ee_c1_9c9840c10f6a42f1__strips.png",
+      "metadata": {
+        "name": "Small Talk Ah-Ee C1",
+        "provenance": "VAULT",
+        "source_path": "C:\\Users\\hooki\\Trench\\vault\\_vocal_pack_2026-04-11\\shipping\\Small_Talk__Open_Bite.json",
+        "corners": {
+          "M0_Q0": {
+            "response": {
+              "peak_db": -2.9,
+              "notch_db": -160.1,
+              "dynamic_range_db": 157.2,
+              "centroid_hz": 883.1,
+              "num_peaks": 1,
+              "num_notches": 0
+            },
+            "mouth_band": "throat",
+            "stress": "strained",
+            "closest_vowel": {
+              "key": "ah",
+              "label": "AH (/\u0251/ father)",
+              "dist_st": 0.0,
+              "f1_hz": 700.0,
+              "f2_hz": 1220.0,
+              "confidence": "high"
+            }
+          },
+          "M0_Q100": {
+            "response": {
+              "peak_db": 5.9,
+              "notch_db": -160.6,
+              "dynamic_range_db": 166.5,
+              "centroid_hz": 1022.3,
+              "num_peaks": 1,
+              "num_notches": 0
+            },
+            "mouth_band": "mouth",
+            "stress": "strained",
+            "closest_vowel": {
+              "key": "ah",
+              "label": "AH (/\u0251/ father)",
+              "dist_st": 2.97,
+              "f1_hz": 830.0,
+              "f2_hz": 1246.0,
+              "confidence": "high"
+            }
+          },
+          "M100_Q0": {
+            "response": {
+              "peak_db": -11.6,
+              "notch_db": -159.8,
+              "dynamic_range_db": 148.2,
+              "centroid_hz": 1854.0,
+              "num_peaks": 1,
+              "num_notches": 0
+            },
+            "mouth_band": "mouth",
+            "stress": "strained",
+            "closest_vowel": {
+              "key": "ee",
+              "label": "EE (/i/ heed)",
+              "dist_st": 0.0,
+              "f1_hz": 342.0,
+              "f2_hz": 2322.0,
+              "confidence": "high"
+            }
+          },
+          "M100_Q100": {
+            "response": {
+              "peak_db": -0.4,
+              "notch_db": -160.4,
+              "dynamic_range_db": 160.0,
+              "centroid_hz": 1787.8,
+              "num_peaks": 1,
+              "num_notches": 0
+            },
+            "mouth_band": "mouth",
+            "stress": "strained",
+            "closest_vowel": {
+              "key": "eh",
+              "label": "EH (/\u025b/ head)",
+              "dist_st": 4.11,
+              "f1_hz": 543.6,
+              "f2_hz": 2127.6,
+              "confidence": "medium"
+            }
+          }
+        },
+        "stability": {
+          "worst_peak_db": 5.9,
+          "cliff_count": 0,
+          "midpoint_audit": {
+            "passed": true,
+            "worst_peak_db": 5.9,
+            "worst_point": {
+              "morph": 0.0,
+              "q": 1.0
+            },
+            "peak_limit_db": 40.0,
+            "points": [
+              {
+                "morph": 0.0,
+                "q": 0.0,
+                "peak_db": -2.9
+              },
+              {
+                "morph": 0.0,
+                "q": 1.0,
+                "peak_db": 5.9
+              },
+              {
+                "morph": 0.25,
+                "q": 0.0,
+                "peak_db": -7.8
+              },
+              {
+                "morph": 0.25,
+                "q": 1.0,
+                "peak_db": 1.5
+              },
+              {
+                "morph": 0.5,
+                "q": 0.0,
+                "peak_db": -11.3
+              },
+              {
+                "morph": 0.5,
+                "q": 1.0,
+                "peak_db": -0.6
+              },
+              {
+                "morph": 0.75,
+                "q": 0.0,
+                "peak_db": -12.0
+              },
+              {
+                "morph": 0.75,
+                "q": 1.0,
+                "peak_db": -0.9
+              },
+              {
+                "morph": 1.0,
+                "q": 0.0,
+                "peak_db": -11.7
+              },
+              {
+                "morph": 1.0,
+                "q": 1.0,
+                "peak_db": -0.4
+              }
+            ]
+          }
+        }
+      }
+    },
+    {
+      "provenance": "VAULT",
+      "title": "Small Talk Ah-Ee C2",
+      "source_path": "C:\\Users\\hooki\\Trench\\vault\\_vocal_pack_2026-04-11\\shipping\\Small_Talk__Yawn_To_Bite.json",
+      "card_id": "47e3140f78691241",
+      "corner_png": "img/vault_small_talk_ah_ee_c2_47e3140f78691241__corners.png",
+      "strips_png": "img/vault_small_talk_ah_ee_c2_47e3140f78691241__strips.png",
+      "metadata": {
+        "name": "Small Talk Ah-Ee C2",
+        "provenance": "VAULT",
+        "source_path": "C:\\Users\\hooki\\Trench\\vault\\_vocal_pack_2026-04-11\\shipping\\Small_Talk__Yawn_To_Bite.json",
+        "corners": {
+          "M0_Q0": {
+            "response": {
+              "peak_db": -1.0,
+              "notch_db": -158.7,
+              "dynamic_range_db": 157.8,
+              "centroid_hz": 706.6,
+              "num_peaks": 1,
+              "num_notches": 0
+            },
+            "mouth_band": "throat",
+            "stress": "strained",
+            "closest_vowel": {
+              "key": "oo",
+              "label": "OO (/u/ who)",
+              "dist_st": 0.0,
+              "f1_hz": 350.0,
+              "f2_hz": 1250.0,
+              "confidence": "high"
+            }
+          },
+          "M0_Q100": {
+            "response": {
+              "peak_db": 7.8,
+              "notch_db": -159.2,
+              "dynamic_range_db": 167.0,
+              "centroid_hz": 860.0,
+              "num_peaks": 1,
+              "num_notches": 0
+            },
+            "mouth_band": "throat",
+            "stress": "strained",
+            "closest_vowel": {
+              "key": "er",
+              "label": "ER (/\u025d/ bird)",
+              "dist_st": 1.77,
+              "f1_hz": 516.0,
+              "f2_hz": 1236.0,
+              "confidence": "high"
+            }
+          },
+          "M100_Q0": {
+            "response": {
+              "peak_db": 10.5,
+              "notch_db": -171.6,
+              "dynamic_range_db": 182.1,
+              "centroid_hz": 811.9,
+              "num_peaks": 1,
+              "num_notches": 1
+            },
+            "mouth_band": "throat",
+            "stress": "violent",
+            "closest_vowel": {
+              "key": "ee",
+              "label": "EE (/i/ heed)",
+              "dist_st": 0.0,
+              "f1_hz": 342.0,
+              "f2_hz": 2322.0,
+              "confidence": "high"
+            }
+          },
+          "M100_Q100": {
+            "response": {
+              "peak_db": 23.3,
+              "notch_db": -172.3,
+              "dynamic_range_db": 195.6,
+              "centroid_hz": 1073.7,
+              "num_peaks": 2,
+              "num_notches": 1
+            },
+            "mouth_band": "mouth",
+            "stress": "violent",
+            "closest_vowel": {
+              "key": "ih",
+              "label": "IH (/\u026a/ hid)",
+              "dist_st": 3.1,
+              "f1_hz": 509.6,
+              "f2_hz": 2093.6,
+              "confidence": "high"
+            }
+          }
+        },
+        "stability": {
+          "worst_peak_db": 23.2,
+          "cliff_count": 0,
+          "midpoint_audit": {
+            "passed": true,
+            "worst_peak_db": 23.2,
+            "worst_point": {
+              "morph": 1.0,
+              "q": 1.0
+            },
+            "peak_limit_db": 40.0,
+            "points": [
+              {
+                "morph": 0.0,
+                "q": 0.0,
+                "peak_db": -1.0
+              },
+              {
+                "morph": 0.0,
+                "q": 1.0,
+                "peak_db": 7.8
+              },
+              {
+                "morph": 0.25,
+                "q": 0.0,
+                "peak_db": 12.5
+              },
+              {
+                "morph": 0.25,
+                "q": 1.0,
+                "peak_db": 20.4
+              },
+              {
+                "morph": 0.5,
+                "q": 0.0,
+                "peak_db": 10.7
+              },
+              {
+                "morph": 0.5,
+                "q": 1.0,
+                "peak_db": 22.4
+              },
+              {
+                "morph": 0.75,
+                "q": 0.0,
+                "peak_db": 11.0
+              },
+              {
+                "morph": 0.75,
+                "q": 1.0,
+                "peak_db": 23.2
+              },
+              {
+                "morph": 1.0,
+                "q": 0.0,
+                "peak_db": 10.4
+              },
+              {
+                "morph": 1.0,
+                "q": 1.0,
+                "peak_db": 23.2
+              }
+            ]
+          }
+        }
+      }
+    },
+    {
+      "provenance": "VAULT",
+      "title": "Speaker Knockerz C3",
+      "source_path": "C:\\Users\\hooki\\Trench\\vault\\_vocal_pack_2026-04-11\\shipping\\Speaker_Knockerz__Rattle_Howl.json",
+      "card_id": "96a153e3f215a7c8",
+      "corner_png": "img/vault_speaker_knockerz_c3_96a153e3f215a7c8__corners.png",
+      "strips_png": "img/vault_speaker_knockerz_c3_96a153e3f215a7c8__strips.png",
+      "metadata": {
+        "name": "Speaker Knockerz C3",
+        "provenance": "VAULT",
+        "source_path": "C:\\Users\\hooki\\Trench\\vault\\_vocal_pack_2026-04-11\\shipping\\Speaker_Knockerz__Rattle_Howl.json",
+        "corners": {
+          "M0_Q0": {
+            "response": {
+              "peak_db": -39.6,
+              "notch_db": -170.3,
+              "dynamic_range_db": 130.7,
+              "centroid_hz": 634.1,
+              "num_peaks": 2,
+              "num_notches": 1
+            },
+            "mouth_band": "throat",
+            "stress": "strained",
+            "closest_vowel": {
+              "key": "uh",
+              "label": "UH (/\u028a/ hood)",
+              "dist_st": 7.63,
+              "f1_hz": 300.0,
+              "f2_hz": 820.0,
+              "confidence": "medium"
+            }
+          },
+          "M0_Q100": {
+            "response": {
+              "peak_db": -22.5,
+              "notch_db": -171.8,
+              "dynamic_range_db": 149.3,
+              "centroid_hz": 595.9,
+              "num_peaks": 1,
+              "num_notches": 0
+            },
+            "mouth_band": "throat",
+            "stress": "strained",
+            "closest_vowel": {
+              "key": "aw",
+              "label": "AW (/\u0254/ saw)",
+              "dist_st": 20.42,
+              "f1_hz": 299.4,
+              "f2_hz": 312.6,
+              "confidence": "none"
+            }
+          },
+          "M100_Q0": {
+            "response": {
+              "peak_db": 1.0,
+              "notch_db": -86.2,
+              "dynamic_range_db": 87.2,
+              "centroid_hz": 467.5,
+              "num_peaks": 4,
+              "num_notches": 3
+            },
+            "mouth_band": "throat",
+            "stress": "calm",
+            "closest_vowel": {
+              "key": "uh",
+              "label": "UH (/\u028a/ hood)",
+              "dist_st": 1.47,
+              "f1_hz": 420.0,
+              "f2_hz": 950.0,
+              "confidence": "high"
+            }
+          },
+          "M100_Q100": {
+            "response": {
+              "peak_db": 15.6,
+              "notch_db": -90.9,
+              "dynamic_range_db": 106.6,
+              "centroid_hz": 399.0,
+              "num_peaks": 3,
+              "num_notches": 2
+            },
+            "mouth_band": "chest",
+            "stress": "strained",
+            "closest_vowel": {
+              "key": "aw",
+              "label": "AW (/\u0254/ saw)",
+              "dist_st": 14.81,
+              "f1_hz": 323.6,
+              "f2_hz": 442.4,
+              "confidence": "none"
+            }
+          }
+        },
+        "stability": {
+          "worst_peak_db": 32.6,
+          "cliff_count": 0,
+          "midpoint_audit": {
+            "passed": true,
+            "worst_peak_db": 32.6,
+            "worst_point": {
+              "morph": 0.5,
+              "q": 1.0
+            },
+            "peak_limit_db": 40.0,
+            "points": [
+              {
+                "morph": 0.0,
+                "q": 0.0,
+                "peak_db": -39.6
+              },
+              {
+                "morph": 0.0,
+                "q": 1.0,
+                "peak_db": -22.5
+              },
+              {
+                "morph": 0.25,
+                "q": 0.0,
+                "peak_db": 9.3
+              },
+              {
+                "morph": 0.25,
+                "q": 1.0,
+                "peak_db": 27.7
+              },
+              {
+                "morph": 0.5,
+                "q": 0.0,
+                "peak_db": 9.6
+              },
+              {
+                "morph": 0.5,
+                "q": 1.0,
+                "peak_db": 32.6
+              },
+              {
+                "morph": 0.75,
+                "q": 0.0,
+                "peak_db": 4.8
+              },
+              {
+                "morph": 0.75,
+                "q": 1.0,
+                "peak_db": 31.5
+              },
+              {
+                "morph": 1.0,
+                "q": 0.0,
+                "peak_db": 1.0
+              },
+              {
+                "morph": 1.0,
+                "q": 1.0,
+                "peak_db": 15.6
+              }
+            ]
+          }
+        }
+      }
+    },
+    {
+      "provenance": "VAULT",
+      "title": "Speaker Knockerz C4",
+      "source_path": "C:\\Users\\hooki\\Trench\\vault\\_vocal_pack_2026-04-11\\shipping\\Speaker_Knockerz__Fracture_Hiss.json",
+      "card_id": "b0d5eb020e46e0fd",
+      "corner_png": "img/vault_speaker_knockerz_c4_b0d5eb020e46e0fd__corners.png",
+      "strips_png": "img/vault_speaker_knockerz_c4_b0d5eb020e46e0fd__strips.png",
+      "metadata": {
+        "name": "Speaker Knockerz C4",
+        "provenance": "VAULT",
+        "source_path": "C:\\Users\\hooki\\Trench\\vault\\_vocal_pack_2026-04-11\\shipping\\Speaker_Knockerz__Fracture_Hiss.json",
+        "corners": {
+          "M0_Q0": {
+            "response": {
+              "peak_db": -50.9,
+              "notch_db": -126.4,
+              "dynamic_range_db": 75.5,
+              "centroid_hz": 1218.6,
+              "num_peaks": 4,
+              "num_notches": 3
+            },
+            "mouth_band": "mouth",
+            "stress": "calm",
+            "closest_vowel": {
+              "key": "oo",
+              "label": "OO (/u/ who)",
+              "dist_st": 2.42,
+              "f1_hz": 400.0,
+              "f2_hz": 1200.0,
+              "confidence": "high"
+            }
+          },
+          "M0_Q100": {
+            "response": {
+              "peak_db": -43.0,
+              "notch_db": -123.5,
+              "dynamic_range_db": 80.6,
+              "centroid_hz": 1274.7,
+              "num_peaks": 3,
+              "num_notches": 2
+            },
+            "mouth_band": "mouth",
+            "stress": "calm",
+            "closest_vowel": {
+              "key": "aw",
+              "label": "AW (/\u0254/ saw)",
+              "dist_st": 18.81,
+              "f1_hz": 272.6,
+              "f2_hz": 378.4,
+              "confidence": "none"
+            }
+          },
+          "M100_Q0": {
+            "response": {
+              "peak_db": -14.1,
+              "notch_db": -102.7,
+              "dynamic_range_db": 88.6,
+              "centroid_hz": 498.4,
+              "num_peaks": 3,
+              "num_notches": 2
+            },
+            "mouth_band": "throat",
+            "stress": "calm",
+            "closest_vowel": {
+              "key": "uh",
+              "label": "UH (/\u028a/ hood)",
+              "dist_st": 12.17,
+              "f1_hz": 260.0,
+              "f2_hz": 640.0,
+              "confidence": "low"
+            }
+          },
+          "M100_Q100": {
+            "response": {
+              "peak_db": -0.6,
+              "notch_db": -111.7,
+              "dynamic_range_db": 111.1,
+              "centroid_hz": 458.3,
+              "num_peaks": 3,
+              "num_notches": 2
+            },
+            "mouth_band": "throat",
+            "stress": "strained",
+            "closest_vowel": {
+              "key": "aw",
+              "label": "AW (/\u0254/ saw)",
+              "dist_st": 22.14,
+              "f1_hz": 251.9,
+              "f2_hz": 314.0,
+              "confidence": "none"
+            }
+          }
+        },
+        "stability": {
+          "worst_peak_db": -0.6,
+          "cliff_count": 0,
+          "midpoint_audit": {
+            "passed": true,
+            "worst_peak_db": -0.6,
+            "worst_point": {
+              "morph": 1.0,
+              "q": 1.0
+            },
+            "peak_limit_db": 40.0,
+            "points": [
+              {
+                "morph": 0.0,
+                "q": 0.0,
+                "peak_db": -50.9
+              },
+              {
+                "morph": 0.0,
+                "q": 1.0,
+                "peak_db": -43.0
+              },
+              {
+                "morph": 0.25,
+                "q": 0.0,
+                "peak_db": -18.3
+              },
+              {
+                "morph": 0.25,
+                "q": 1.0,
+                "peak_db": -6.6
+              },
+              {
+                "morph": 0.5,
+                "q": 0.0,
+                "peak_db": -15.2
+              },
+              {
+                "morph": 0.5,
+                "q": 1.0,
+                "peak_db": -2.9
+              },
+              {
+                "morph": 0.75,
+                "q": 0.0,
+                "peak_db": -14.2
+              },
+              {
+                "morph": 0.75,
+                "q": 1.0,
+                "peak_db": -1.4
+              },
+              {
+                "morph": 1.0,
+                "q": 0.0,
+                "peak_db": -14.1
+              },
+              {
+                "morph": 1.0,
+                "q": 1.0,
+                "peak_db": -0.6
+              }
+            ]
+          }
+        }
+      }
+    },
+    {
+      "provenance": "XML",
+      "title": "100",
+      "source_path": "C:\\Users\\hooki\\OneDrive\\Documents\\Creative Professional\\Emulator X Family\\Templates\\Filter\\100.xml",
+      "card_id": "f528c4dfe13c1b60",
+      "corner_png": "img/xml_100_f528c4dfe13c1b60__corners.png",
+      "strips_png": "img/xml_100_f528c4dfe13c1b60__strips.png",
+      "metadata": {
+        "name": "100",
+        "provenance": "XML",
+        "source_path": "C:\\Users\\hooki\\OneDrive\\Documents\\Creative Professional\\Emulator X Family\\Templates\\Filter\\100.xml",
+        "corners": {
+          "M0_Q0": {
+            "response": {
+              "peak_db": -91.2,
+              "notch_db": -217.8,
+              "dynamic_range_db": 126.6,
+              "centroid_hz": 2090.1,
+              "num_peaks": 1,
+              "num_notches": 0
+            },
+            "mouth_band": "mouth",
+            "stress": "strained",
+            "closest_vowel": null
+          },
+          "M0_Q100": {
+            "response": {
+              "peak_db": -91.2,
+              "notch_db": -217.8,
+              "dynamic_range_db": 126.6,
+              "centroid_hz": 2090.1,
+              "num_peaks": 1,
+              "num_notches": 0
+            },
+            "mouth_band": "mouth",
+            "stress": "strained",
+            "closest_vowel": null
+          },
+          "M100_Q0": {
+            "response": {
+              "peak_db": -37.0,
+              "notch_db": -115.6,
+              "dynamic_range_db": 78.6,
+              "centroid_hz": 1894.0,
+              "num_peaks": 1,
+              "num_notches": 0
+            },
+            "mouth_band": "mouth",
+            "stress": "calm",
+            "closest_vowel": null
+          },
+          "M100_Q100": {
+            "response": {
+              "peak_db": -37.0,
+              "notch_db": -115.6,
+              "dynamic_range_db": 78.6,
+              "centroid_hz": 1894.0,
+              "num_peaks": 1,
+              "num_notches": 0
+            },
+            "mouth_band": "mouth",
+            "stress": "calm",
+            "closest_vowel": null
+          }
+        },
+        "stability": {
+          "worst_peak_db": -37.0,
+          "cliff_count": 0,
+          "midpoint_audit": {
+            "passed": true,
+            "worst_peak_db": -37.0,
+            "worst_point": {
+              "morph": 1.0,
+              "q": 0.0
+            },
+            "peak_limit_db": 40.0,
+            "points": [
+              {
+                "morph": 0.0,
+                "q": 0.0,
+                "peak_db": -91.2
+              },
+              {
+                "morph": 0.0,
+                "q": 1.0,
+                "peak_db": -91.2
+              },
+              {
+                "morph": 0.25,
+                "q": 0.0,
+                "peak_db": -65.1
+              },
+              {
+                "morph": 0.25,
+                "q": 1.0,
+                "peak_db": -65.1
+              },
+              {
+                "morph": 0.5,
+                "q": 0.0,
+                "peak_db": -53.0
+              },
+              {
+                "morph": 0.5,
+                "q": 1.0,
+                "peak_db": -53.0
+              },
+              {
+                "morph": 0.75,
+                "q": 0.0,
+                "peak_db": -44.2
+              },
+              {
+                "morph": 0.75,
+                "q": 1.0,
+                "peak_db": -44.2
+              },
+              {
+                "morph": 1.0,
+                "q": 0.0,
+                "peak_db": -37.0
+              },
+              {
+                "morph": 1.0,
+                "q": 1.0,
+                "peak_db": -37.0
+              }
+            ]
+          }
+        }
+      }
+    },
+    {
+      "provenance": "XML",
+      "title": "50",
+      "source_path": "C:\\Users\\hooki\\OneDrive\\Documents\\Creative Professional\\Emulator X Family\\Templates\\Filter\\50.xml",
+      "card_id": "1cb7182c35a12c69",
+      "corner_png": "img/xml_50_1cb7182c35a12c69__corners.png",
+      "strips_png": "img/xml_50_1cb7182c35a12c69__strips.png",
+      "metadata": {
+        "name": "50",
+        "provenance": "XML",
+        "source_path": "C:\\Users\\hooki\\OneDrive\\Documents\\Creative Professional\\Emulator X Family\\Templates\\Filter\\50.xml",
+        "corners": {
+          "M0_Q0": {
+            "response": {
+              "peak_db": -91.9,
+              "notch_db": -217.4,
+              "dynamic_range_db": 125.5,
+              "centroid_hz": 2080.6,
+              "num_peaks": 1,
+              "num_notches": 0
+            },
+            "mouth_band": "mouth",
+            "stress": "strained",
+            "closest_vowel": null
+          },
+          "M0_Q100": {
+            "response": {
+              "peak_db": -91.9,
+              "notch_db": -217.4,
+              "dynamic_range_db": 125.5,
+              "centroid_hz": 2080.6,
+              "num_peaks": 1,
+              "num_notches": 0
+            },
+            "mouth_band": "mouth",
+            "stress": "strained",
+            "closest_vowel": null
+          },
+          "M100_Q0": {
+            "response": {
+              "peak_db": -37.7,
+              "notch_db": -115.4,
+              "dynamic_range_db": 77.7,
+              "centroid_hz": 1884.8,
+              "num_peaks": 1,
+              "num_notches": 0
+            },
+            "mouth_band": "mouth",
+            "stress": "calm",
+            "closest_vowel": null
+          },
+          "M100_Q100": {
+            "response": {
+              "peak_db": -37.7,
+              "notch_db": -115.4,
+              "dynamic_range_db": 77.7,
+              "centroid_hz": 1884.8,
+              "num_peaks": 1,
+              "num_notches": 0
+            },
+            "mouth_band": "mouth",
+            "stress": "calm",
+            "closest_vowel": null
+          }
+        },
+        "stability": {
+          "worst_peak_db": -37.7,
+          "cliff_count": 0,
+          "midpoint_audit": {
+            "passed": true,
+            "worst_peak_db": -37.7,
+            "worst_point": {
+              "morph": 1.0,
+              "q": 0.0
+            },
+            "peak_limit_db": 40.0,
+            "points": [
+              {
+                "morph": 0.0,
+                "q": 0.0,
+                "peak_db": -91.9
+              },
+              {
+                "morph": 0.0,
+                "q": 1.0,
+                "peak_db": -91.9
+              },
+              {
+                "morph": 0.25,
+                "q": 0.0,
+                "peak_db": -65.9
+              },
+              {
+                "morph": 0.25,
+                "q": 1.0,
+                "peak_db": -65.9
+              },
+              {
+                "morph": 0.5,
+                "q": 0.0,
+                "peak_db": -53.8
+              },
+              {
+                "morph": 0.5,
+                "q": 1.0,
+                "peak_db": -53.8
+              },
+              {
+                "morph": 0.75,
+                "q": 0.0,
+                "peak_db": -45.0
+              },
+              {
+                "morph": 0.75,
+                "q": 1.0,
+                "peak_db": -45.0
+              },
+              {
+                "morph": 1.0,
+                "q": 0.0,
+                "peak_db": -37.7
+              },
+              {
+                "morph": 1.0,
+                "q": 1.0,
+                "peak_db": -37.7
+              }
+            ]
+          }
+        }
+      }
+    },
+    {
+      "provenance": "XML",
+      "title": "All Off Designer",
+      "source_path": "C:\\Program Files (x86)\\Creative Professional\\Emulator X Family\\Templates\\Filter\\All Off Designer.xml",
+      "card_id": "ae1ce985d2918fad",
+      "corner_png": "img/xml_all_off_designer_ae1ce985d2918fad__corners.png",
+      "strips_png": "img/xml_all_off_designer_ae1ce985d2918fad__strips.png",
+      "metadata": {
+        "name": "All Off Designer",
+        "provenance": "XML",
+        "source_path": "C:\\Program Files (x86)\\Creative Professional\\Emulator X Family\\Templates\\Filter\\All Off Designer.xml",
+        "corners": {
+          "M0_Q0": {
+            "response": {
+              "peak_db": 0.0,
+              "notch_db": 0.0,
+              "dynamic_range_db": 0.0,
+              "centroid_hz": 2847.7,
+              "num_peaks": 0,
+              "num_notches": 0
+            },
+            "mouth_band": "teeth",
+            "stress": "calm",
+            "closest_vowel": null
+          },
+          "M0_Q100": {
+            "response": {
+              "peak_db": 0.0,
+              "notch_db": 0.0,
+              "dynamic_range_db": 0.0,
+              "centroid_hz": 2847.7,
+              "num_peaks": 0,
+              "num_notches": 0
+            },
+            "mouth_band": "teeth",
+            "stress": "calm",
+            "closest_vowel": null
+          },
+          "M100_Q0": {
+            "response": {
+              "peak_db": 0.0,
+              "notch_db": 0.0,
+              "dynamic_range_db": 0.0,
+              "centroid_hz": 2847.7,
+              "num_peaks": 0,
+              "num_notches": 0
+            },
+            "mouth_band": "teeth",
+            "stress": "calm",
+            "closest_vowel": null
+          },
+          "M100_Q100": {
+            "response": {
+              "peak_db": 0.0,
+              "notch_db": 0.0,
+              "dynamic_range_db": 0.0,
+              "centroid_hz": 2847.7,
+              "num_peaks": 0,
+              "num_notches": 0
+            },
+            "mouth_band": "teeth",
+            "stress": "calm",
+            "closest_vowel": null
+          }
+        },
+        "stability": {
+          "worst_peak_db": 0.0,
+          "cliff_count": 0,
+          "midpoint_audit": {
+            "passed": true,
+            "worst_peak_db": 0.0,
+            "worst_point": {
+              "morph": 0.0,
+              "q": 0.0
+            },
+            "peak_limit_db": 40.0,
+            "points": [
+              {
+                "morph": 0.0,
+                "q": 0.0,
+                "peak_db": 0.0
+              },
+              {
+                "morph": 0.0,
+                "q": 1.0,
+                "peak_db": 0.0
+              },
+              {
+                "morph": 0.25,
+                "q": 0.0,
+                "peak_db": 0.0
+              },
+              {
+                "morph": 0.25,
+                "q": 1.0,
+                "peak_db": 0.0
+              },
+              {
+                "morph": 0.5,
+                "q": 0.0,
+                "peak_db": 0.0
+              },
+              {
+                "morph": 0.5,
+                "q": 1.0,
+                "peak_db": 0.0
+              },
+              {
+                "morph": 0.75,
+                "q": 0.0,
+                "peak_db": 0.0
+              },
+              {
+                "morph": 0.75,
+                "q": 1.0,
+                "peak_db": 0.0
+              },
+              {
+                "morph": 1.0,
+                "q": 0.0,
+                "peak_db": 0.0
+              },
+              {
+                "morph": 1.0,
+                "q": 1.0,
+                "peak_db": 0.0
+              }
+            ]
+          }
+        }
+      }
+    },
+    {
+      "provenance": "XML",
+      "title": "All Off Designer",
+      "source_path": "C:\\Program Files\\Creative Professional\\Emulator X Family\\Templates\\Filter\\All Off Designer.xml",
+      "card_id": "e815845cab3c4421",
+      "corner_png": "img/xml_all_off_designer_e815845cab3c4421__corners.png",
+      "strips_png": "img/xml_all_off_designer_e815845cab3c4421__strips.png",
+      "metadata": {
+        "name": "All Off Designer",
+        "provenance": "XML",
+        "source_path": "C:\\Program Files\\Creative Professional\\Emulator X Family\\Templates\\Filter\\All Off Designer.xml",
+        "corners": {
+          "M0_Q0": {
+            "response": {
+              "peak_db": 0.0,
+              "notch_db": 0.0,
+              "dynamic_range_db": 0.0,
+              "centroid_hz": 2847.7,
+              "num_peaks": 0,
+              "num_notches": 0
+            },
+            "mouth_band": "teeth",
+            "stress": "calm",
+            "closest_vowel": null
+          },
+          "M0_Q100": {
+            "response": {
+              "peak_db": 0.0,
+              "notch_db": 0.0,
+              "dynamic_range_db": 0.0,
+              "centroid_hz": 2847.7,
+              "num_peaks": 0,
+              "num_notches": 0
+            },
+            "mouth_band": "teeth",
+            "stress": "calm",
+            "closest_vowel": null
+          },
+          "M100_Q0": {
+            "response": {
+              "peak_db": 0.0,
+              "notch_db": 0.0,
+              "dynamic_range_db": 0.0,
+              "centroid_hz": 2847.7,
+              "num_peaks": 0,
+              "num_notches": 0
+            },
+            "mouth_band": "teeth",
+            "stress": "calm",
+            "closest_vowel": null
+          },
+          "M100_Q100": {
+            "response": {
+              "peak_db": 0.0,
+              "notch_db": 0.0,
+              "dynamic_range_db": 0.0,
+              "centroid_hz": 2847.7,
+              "num_peaks": 0,
+              "num_notches": 0
+            },
+            "mouth_band": "teeth",
+            "stress": "calm",
+            "closest_vowel": null
+          }
+        },
+        "stability": {
+          "worst_peak_db": 0.0,
+          "cliff_count": 0,
+          "midpoint_audit": {
+            "passed": true,
+            "worst_peak_db": 0.0,
+            "worst_point": {
+              "morph": 0.0,
+              "q": 0.0
+            },
+            "peak_limit_db": 40.0,
+            "points": [
+              {
+                "morph": 0.0,
+                "q": 0.0,
+                "peak_db": 0.0
+              },
+              {
+                "morph": 0.0,
+                "q": 1.0,
+                "peak_db": 0.0
+              },
+              {
+                "morph": 0.25,
+                "q": 0.0,
+                "peak_db": 0.0
+              },
+              {
+                "morph": 0.25,
+                "q": 1.0,
+                "peak_db": 0.0
+              },
+              {
+                "morph": 0.5,
+                "q": 0.0,
+                "peak_db": 0.0
+              },
+              {
+                "morph": 0.5,
+                "q": 1.0,
+                "peak_db": 0.0
+              },
+              {
+                "morph": 0.75,
+                "q": 0.0,
+                "peak_db": 0.0
+              },
+              {
+                "morph": 0.75,
+                "q": 1.0,
+                "peak_db": 0.0
+              },
+              {
+                "morph": 1.0,
+                "q": 0.0,
+                "peak_db": 0.0
+              },
+              {
+                "morph": 1.0,
+                "q": 1.0,
+                "peak_db": 0.0
+              }
+            ]
+          }
+        }
+      }
+    },
+    {
+      "provenance": "XML",
+      "title": "All Off Designer",
+      "source_path": "C:\\Users\\hooki\\OneDrive\\Documents\\Creative Professional\\Emulator X Family\\Templates\\Filter\\All Off Designer.xml",
+      "card_id": "41a1e908f7ac7bc0",
+      "corner_png": "img/xml_all_off_designer_41a1e908f7ac7bc0__corners.png",
+      "strips_png": "img/xml_all_off_designer_41a1e908f7ac7bc0__strips.png",
+      "metadata": {
+        "name": "All Off Designer",
+        "provenance": "XML",
+        "source_path": "C:\\Users\\hooki\\OneDrive\\Documents\\Creative Professional\\Emulator X Family\\Templates\\Filter\\All Off Designer.xml",
+        "corners": {
+          "M0_Q0": {
+            "response": {
+              "peak_db": 0.0,
+              "notch_db": 0.0,
+              "dynamic_range_db": 0.0,
+              "centroid_hz": 2847.7,
+              "num_peaks": 0,
+              "num_notches": 0
+            },
+            "mouth_band": "teeth",
+            "stress": "calm",
+            "closest_vowel": null
+          },
+          "M0_Q100": {
+            "response": {
+              "peak_db": 0.0,
+              "notch_db": 0.0,
+              "dynamic_range_db": 0.0,
+              "centroid_hz": 2847.7,
+              "num_peaks": 0,
+              "num_notches": 0
+            },
+            "mouth_band": "teeth",
+            "stress": "calm",
+            "closest_vowel": null
+          },
+          "M100_Q0": {
+            "response": {
+              "peak_db": 0.0,
+              "notch_db": 0.0,
+              "dynamic_range_db": 0.0,
+              "centroid_hz": 2847.7,
+              "num_peaks": 0,
+              "num_notches": 0
+            },
+            "mouth_band": "teeth",
+            "stress": "calm",
+            "closest_vowel": null
+          },
+          "M100_Q100": {
+            "response": {
+              "peak_db": 0.0,
+              "notch_db": 0.0,
+              "dynamic_range_db": 0.0,
+              "centroid_hz": 2847.7,
+              "num_peaks": 0,
+              "num_notches": 0
+            },
+            "mouth_band": "teeth",
+            "stress": "calm",
+            "closest_vowel": null
+          }
+        },
+        "stability": {
+          "worst_peak_db": 0.0,
+          "cliff_count": 0,
+          "midpoint_audit": {
+            "passed": true,
+            "worst_peak_db": 0.0,
+            "worst_point": {
+              "morph": 0.0,
+              "q": 0.0
+            },
+            "peak_limit_db": 40.0,
+            "points": [
+              {
+                "morph": 0.0,
+                "q": 0.0,
+                "peak_db": 0.0
+              },
+              {
+                "morph": 0.0,
+                "q": 1.0,
+                "peak_db": 0.0
+              },
+              {
+                "morph": 0.25,
+                "q": 0.0,
+                "peak_db": 0.0
+              },
+              {
+                "morph": 0.25,
+                "q": 1.0,
+                "peak_db": 0.0
+              },
+              {
+                "morph": 0.5,
+                "q": 0.0,
+                "peak_db": 0.0
+              },
+              {
+                "morph": 0.5,
+                "q": 1.0,
+                "peak_db": 0.0
+              },
+              {
+                "morph": 0.75,
+                "q": 0.0,
+                "peak_db": 0.0
+              },
+              {
+                "morph": 0.75,
+                "q": 1.0,
+                "peak_db": 0.0
+              },
+              {
+                "morph": 1.0,
+                "q": 0.0,
+                "peak_db": 0.0
+              },
+              {
+                "morph": 1.0,
+                "q": 1.0,
+                "peak_db": 0.0
+              }
+            ]
+          }
+        }
+      }
+    },
+    {
+      "provenance": "XML",
+      "title": "Bass Boost LP 1",
+      "source_path": "C:\\Program Files\\Creative Professional\\Emulator X Family\\Templates\\Filter\\Bass Boost LP 1.xml",
+      "card_id": "d5037241b9ae06ab",
+      "corner_png": "img/xml_bass_boost_lp_1_d5037241b9ae06ab__corners.png",
+      "strips_png": "img/xml_bass_boost_lp_1_d5037241b9ae06ab__strips.png",
+      "metadata": {
+        "name": "Bass Boost LP 1",
+        "provenance": "XML",
+        "source_path": "C:\\Program Files\\Creative Professional\\Emulator X Family\\Templates\\Filter\\Bass Boost LP 1.xml",
+        "corners": {
+          "M0_Q0": {
+            "response": {
+              "peak_db": -58.4,
+              "notch_db": -79.0,
+              "dynamic_range_db": 20.6,
+              "centroid_hz": 1500.8,
+              "num_peaks": 0,
+              "num_notches": 0
+            },
+            "mouth_band": "mouth",
+            "stress": "calm",
+            "closest_vowel": null
+          },
+          "M0_Q100": {
+            "response": {
+              "peak_db": -58.4,
+              "notch_db": -79.0,
+              "dynamic_range_db": 20.6,
+              "centroid_hz": 1500.8,
+              "num_peaks": 0,
+              "num_notches": 0
+            },
+            "mouth_band": "mouth",
+            "stress": "calm",
+            "closest_vowel": null
+          },
+          "M100_Q0": {
+            "response": {
+              "peak_db": -58.7,
+              "notch_db": -76.5,
+              "dynamic_range_db": 17.8,
+              "centroid_hz": 1696.6,
+              "num_peaks": 0,
+              "num_notches": 1
+            },
+            "mouth_band": "mouth",
+            "stress": "calm",
+            "closest_vowel": null
+          },
+          "M100_Q100": {
+            "response": {
+              "peak_db": -58.7,
+              "notch_db": -76.5,
+              "dynamic_range_db": 17.8,
+              "centroid_hz": 1696.6,
+              "num_peaks": 0,
+              "num_notches": 1
+            },
+            "mouth_band": "mouth",
+            "stress": "calm",
+            "closest_vowel": null
+          }
+        },
+        "stability": {
+          "worst_peak_db": -58.4,
+          "cliff_count": 0,
+          "midpoint_audit": {
+            "passed": true,
+            "worst_peak_db": -58.4,
+            "worst_point": {
+              "morph": 0.0,
+              "q": 0.0
+            },
+            "peak_limit_db": 40.0,
+            "points": [
+              {
+                "morph": 0.0,
+                "q": 0.0,
+                "peak_db": -58.4
+              },
+              {
+                "morph": 0.0,
+                "q": 1.0,
+                "peak_db": -58.4
+              },
+              {
+                "morph": 0.25,
+                "q": 0.0,
+                "peak_db": -58.6
+              },
+              {
+                "morph": 0.25,
+                "q": 1.0,
+                "peak_db": -58.6
+              },
+              {
+                "morph": 0.5,
+                "q": 0.0,
+                "peak_db": -58.7
+              },
+              {
+                "morph": 0.5,
+                "q": 1.0,
+                "peak_db": -58.7
+              },
+              {
+                "morph": 0.75,
+                "q": 0.0,
+                "peak_db": -58.7
+              },
+              {
+                "morph": 0.75,
+                "q": 1.0,
+                "peak_db": -58.7
+              },
+              {
+                "morph": 1.0,
+                "q": 0.0,
+                "peak_db": -58.7
+              },
+              {
+                "morph": 1.0,
+                "q": 1.0,
+                "peak_db": -58.7
+              }
+            ]
+          }
+        }
+      }
+    }
+  ]
+}

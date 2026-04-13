@@ -1,0 +1,287 @@
+{
+  "version": "calibration-v2",
+  "count": 11,
+  "missing": [
+    {
+      "filter_type": 34,
+      "name": "Boland Bass",
+      "priority": "HIGH",
+      "reason": "No bass-synthesis calibration anchor"
+    },
+    {
+      "filter_type": 43,
+      "name": "Eeh to Aah",
+      "priority": "LOW",
+      "reason": "Reverse vowel morph, adjacent to Ooh_to_Eee"
+    },
+    {
+      "filter_type": 50,
+      "name": "Acid Ravage",
+      "priority": "LOW",
+      "reason": "Aggressive acid, adjacent to Razor Blades"
+    },
+    {
+      "filter_type": 51,
+      "name": "Bassomatic",
+      "priority": "HIGH",
+      "reason": "Distinct bass strategy without calibration"
+    },
+    {
+      "filter_type": 52,
+      "name": "Lucifer's Q",
+      "priority": "CRITICAL",
+      "reason": "Only Q-dominant body, no oracle for Q-axis lead behavior"
+    }
+  ],
+  "re_tables": {
+    "semitone_table": {
+      "count": 64,
+      "type": "float64",
+      "values": [
+        308.835675,
+        327.2,
+        346.656324,
+        367.269582,
+        389.108568,
+        412.246168,
+        436.7596,
+        462.730678,
+        490.246076,
+        519.397624,
+        550.282614,
+        583.004121,
+        617.67135,
+        654.4,
+        693.312649,
+        734.539164,
+        778.217136,
+        824.492335,
+        873.519201,
+        925.461355,
+        980.492151,
+        1038.795248,
+        1100.565228,
+        1166.008242,
+        1235.3427,
+        1308.8,
+        1386.625298,
+        1469.078329,
+        1556.434272,
+        1648.98467,
+        1747.038401,
+        1850.92271,
+        1960.984302,
+        2077.590497,
+        2201.130457,
+        2332.016485,
+        2470.685401,
+        2617.6,
+        2773.250596,
+        2938.156658,
+        3112.868544,
+        3297.96934,
+        3494.076802,
+        3701.845421,
+        3921.968604,
+        4155.180994,
+        4402.260913,
+        4664.032969,
+        4941.370802,
+        5235.2,
+        5546.501192,
+        5876.313315,
+        6225.737088,
+        6595.93868,
+        6988.153605,
+        7403.690842,
+        7843.937209,
+        8310.361987,
+        8804.521826,
+        9328.065938,
+        9882.741604,
+        10470.4,
+        11093.002383,
+        11752.626631
+      ]
+    },
+    "q_radius_table_size": 512
+  },
+  "skins": [
+    {
+      "name": "BassBox 303",
+      "file": "BassBox_303.json",
+      "filter_type": 0,
+      "strategy": "FREQUENCY_SWAP",
+      "stage_count": 6,
+      "boost": 4.0,
+      "m0q0_peak_db": 12.0,
+      "m0q0_cancellation_db": 32.6,
+      "m0q0_shared_c4": 0.2222,
+      "m0q0_freq_range": [
+        79.4,
+        17683.3
+      ],
+      "morph_freq_delta": 7454.1
+    },
+    {
+      "name": "Ear Bender",
+      "file": "Ear_Bender.json",
+      "filter_type": 0,
+      "strategy": "HF_WALL_FOLD",
+      "stage_count": 6,
+      "boost": 4.0,
+      "m0q0_peak_db": 12.0,
+      "m0q0_cancellation_db": 20.5,
+      "m0q0_shared_c4": 0.4582,
+      "m0q0_freq_range": [
+        301.8,
+        15836.8
+      ],
+      "morph_freq_delta": 1596.7
+    },
+    {
+      "name": "Early Rizer",
+      "file": "Early_Rizer.json",
+      "filter_type": 0,
+      "strategy": "FIXED_ANCHOR",
+      "stage_count": 6,
+      "boost": 4.0,
+      "m0q0_peak_db": 17.6,
+      "m0q0_cancellation_db": 27.3,
+      "m0q0_shared_c4": 0.4889,
+      "m0q0_freq_range": [
+        553.5,
+        16995.4
+      ],
+      "morph_freq_delta": 2891.1
+    },
+    {
+      "name": "Freak Shifta",
+      "file": "Freak_Shifta.json",
+      "filter_type": 0,
+      "strategy": "BROADBAND_DIFFUSER",
+      "stage_count": 6,
+      "boost": 4.0,
+      "m0q0_peak_db": 24.7,
+      "m0q0_cancellation_db": 16.4,
+      "m0q0_shared_c4": 0.8962,
+      "m0q0_freq_range": [
+        857.9,
+        15645.2
+      ],
+      "morph_freq_delta": 1922.1
+    },
+    {
+      "name": "Fuzzi Face",
+      "file": "Fuzzi_Face.json",
+      "filter_type": 0,
+      "strategy": "RESONANCE_PHALANX",
+      "stage_count": 6,
+      "boost": 4.0,
+      "m0q0_peak_db": 30.9,
+      "m0q0_cancellation_db": -0.7,
+      "m0q0_shared_c4": 0.0101,
+      "m0q0_freq_range": [
+        321.9,
+        4035.5
+      ],
+      "morph_freq_delta": 1207.5
+    },
+    {
+      "name": "Meaty Gizmo",
+      "file": "Meaty_Gizmo.json",
+      "filter_type": 0,
+      "strategy": "ONE_VS_FIVE",
+      "stage_count": 6,
+      "boost": 4.0,
+      "m0q0_peak_db": 24.4,
+      "m0q0_cancellation_db": 58.7,
+      "m0q0_shared_c4": 0.1938,
+      "m0q0_freq_range": [
+        58.7,
+        16276.7
+      ],
+      "morph_freq_delta": 6992.6
+    },
+    {
+      "name": "Millennium",
+      "file": "Millennium.json",
+      "filter_type": 0,
+      "strategy": "HF_WALL_FOLD",
+      "stage_count": 6,
+      "boost": 4.0,
+      "m0q0_peak_db": 36.5,
+      "m0q0_cancellation_db": 11.0,
+      "m0q0_shared_c4": 0.778,
+      "m0q0_freq_range": [
+        3629.5,
+        14662.9
+      ],
+      "morph_freq_delta": 6382.3
+    },
+    {
+      "name": "Ooh to Eee (approx)",
+      "file": "Ooh_to_Eee_(approx).json",
+      "filter_type": 0,
+      "strategy": "VOWEL_FORMANT",
+      "stage_count": 6,
+      "boost": 4.0,
+      "m0q0_peak_db": 43.6,
+      "m0q0_cancellation_db": 7.6,
+      "m0q0_shared_c4": 0.0146,
+      "m0q0_freq_range": [
+        222.5,
+        2483.0
+      ],
+      "morph_freq_delta": 1067.3
+    },
+    {
+      "name": "Radio Craze",
+      "file": "Radio_Craze.json",
+      "filter_type": 0,
+      "strategy": "CONSTRUCTIVE_RADIO",
+      "stage_count": 6,
+      "boost": 4.0,
+      "m0q0_peak_db": 56.6,
+      "m0q0_cancellation_db": -22.5,
+      "m0q0_shared_c4": 0.7119,
+      "m0q0_freq_range": [
+        199.1,
+        9964.6
+      ],
+      "morph_freq_delta": 1308.0
+    },
+    {
+      "name": "Razor Blades",
+      "file": "Razor_Blades.json",
+      "filter_type": 0,
+      "strategy": "NYQUIST_SHARPENING",
+      "stage_count": 6,
+      "boost": 4.0,
+      "m0q0_peak_db": 21.6,
+      "m0q0_cancellation_db": 21.3,
+      "m0q0_shared_c4": 0.7712,
+      "m0q0_freq_range": [
+        443.2,
+        13518.5
+      ],
+      "morph_freq_delta": 2701.2
+    },
+    {
+      "name": "Talking Hedz",
+      "file": "Talking_Hedz.json",
+      "filter_type": 0,
+      "strategy": "RADIUS_ONLY_MORPH",
+      "stage_count": 6,
+      "boost": 4.0,
+      "m0q0_peak_db": 18.4,
+      "m0q0_cancellation_db": 41.3,
+      "m0q0_shared_c4": 0.5619,
+      "m0q0_freq_range": [
+        199.4,
+        9320.9
+      ],
+      "morph_freq_delta": 232.5
+    }
+  ]
+}
