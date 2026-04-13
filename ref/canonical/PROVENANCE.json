@@ -1,11 +1,29 @@
 {
-  "source_cartridge": "trenchwork_clean/datasets/p2k_skins/P2k_013.json",
-  "source_sha256_prefix": "9fb1bef0d0212980",
-  "dry_input": "trenchwork_clean/ref/bypassed-pinknoise.wav",
-  "pipeline": "raw-ROM stage \u2192 scipy.signal.sosfilt cascade \u2192 AGC (16-entry table) \u2192 \u00d7boost",
-  "sample_rate": 44100,
-  "stage_count": 6,
-  "boost": 4.0,
-  "subtype": "FLOAT (32-bit IEEE)",
-  "replaces": "trenchwork_clean/ref/hedz*.wav (rendered from buggy 5-stage Cheat Engine capture)"
+  "version": "canonical-v2",
+  "description": "TRENCH parity gate references. Two source classes.",
+  "raw_p2k_skins": {
+    "path": "datasets/p2k_skins/",
+    "count": 35,
+    "format": "{corners: {LABEL: {stages: [{a1, r, val1, val2, val3, flag}]}}}",
+    "canonical_sha256_p2k_013_prefix": "9fb1bef0d0212980",
+    "upstream": "trenchwork_clean/datasets/p2k_skins (byte-identical)"
+  },
+  "calibration_re": {
+    "path": "docs/calibration/",
+    "count": 6,
+    "format": "{sample_rate, corners: {LABEL: {stages: [{pole_freq_hz, radius, val1, val2, val3, c4_b0, ...}]}}}",
+    "a1_derivation": "a1 = -2 * radius * cos(2*pi * pole_freq_hz / sample_rate_authored)",
+    "skipped_dupes_of_raw": [
+      "BassBox_303",
+      "Early_Rizer",
+      "Fuzzi_Face",
+      "Meaty_Gizmo",
+      "Millennium"
+    ]
+  },
+  "dry_input": "C:/Users/hooki/trenchwork_clean/ref/bypassed-pinknoise.wav",
+  "render_pipeline": "raw stage -> SOS cascade -> AGC -> * boost -> float32 WAV",
+  "playback_sample_rate": 44100,
+  "container_subtype": "FLOAT (float32, 24-bit mantissa, ~-150 dB null floor)",
+  "supersedes": "trenchwork_clean/ref/hedz*.wav (broken Cheat Engine capture)"
 }

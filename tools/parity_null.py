@@ -1,20 +1,26 @@
-"""Parity null: TRENCH DSP pipeline vs Talking Hedz hardware reference.
+"""Parity null: TRENCH DSP pipeline vs canonical references.
 
-Pipeline (matches trenchwork_clean trench-core::engine::FilterEngine):
-    raw ROM stage → (a1, r, val1, val2, val3, flag) → (b0,b1,b2,a1,a2)
-      flag=0  → b0=1, b1=b2=0       (final stage lowpass reinterpretation)
-      flag=1  → b0=1+val1, b1=a1+val2, b2=r²-val3
-    → scipy.signal.sosfilt cascade (6 serial stages, no clamp)
-    → per-sample AGC (16-entry table, verified against EmulatorX.dll)
-    → best-fit lag + gain null vs hardware capture
+Walks ref/canonical/MANIFEST.json. Each entry carries a per-skin source
+path (relative to the Trench root) and a source_type:
 
-The AGC is the missing runtime gain-staging piece. Its table and
-algorithm are ported from trenchwork_clean/trench-core/src/agc.rs
-(documented as verified against the EmulatorX.dll binary).
+  - raw_p2k_skin  : datasets/p2k_skins/*.json (33 numbered + 2 vocal)
+                    stage form {a1, r, val1, val2, val3, flag}
+  - calibration_re: docs/calibration/*.json (6 ft=33-55 extractions)
+                    stage form {pole_freq_hz, radius, val1, val2, val3, ...}
+                    a1 is reconstructed: a1 = -2r*cos(2pi*f/sample_rate_authored)
+
+Pipeline:
+    source stage -> (b0, b1, b2, a1, a2) -> scipy.signal.sosfilt
+                 -> per-sample AGC (16-entry table from agc.rs)
+                 -> * boost
+                 -> best-fit gain null vs reference WAV (lag=0)
+
+Hard fail at rel_null > FAIL_THRESHOLD_DB.
 """
 from __future__ import annotations
 
 import json
+import math
 import sys
 from pathlib import Path
 
@@ -22,12 +28,9 @@ import numpy as np
 import soundfile as sf
 from scipy.signal import sosfilt
 
+ROOT = Path(__file__).resolve().parent.parent
 DRY = Path(r"C:/Users/hooki/trenchwork_clean/ref/bypassed-pinknoise.wav")
-# Canonical raw P2K skin source (sha256 9fb1bef0d0212980 for P2k_013).
-SKINS = Path(r"C:/Users/hooki/trenchwork_clean/datasets/p2k_skins")
-# Canonical references rendered by tools/render_canonical_refs.py from each
-# skin in SKINS. MANIFEST.json lists which skins were rendered and where.
-REF_DIR = Path(r"C:/Users/hooki/Trench/ref/canonical")
+REF_DIR = ROOT / "ref" / "canonical"
 
 CORNERS = ("M0_Q0", "M0_Q100", "M100_Q0", "M100_Q100")
 # Null worse than this triggers a failure exit code.
@@ -50,11 +53,10 @@ def mono(d: np.ndarray) -> np.ndarray:
     return d[:, 0] if d.ndim > 1 else d
 
 
-def stage_coefficients(stage: dict) -> tuple[float, float, float, float, float]:
-    """Raw ROM stage → (b0,b1,b2,a1,a2). Matches the RE stage-response model
-    and the FilterEngine coefficient path."""
+def stage_coefficients_raw(stage: dict) -> tuple[float, float, float, float, float]:
+    """Raw p2k_skin stage → (b0, b1, b2, a1, a2)."""
     a1 = float(stage["a1"])
-    r = min(float(stage["r"]), 0.999999)  # stability clamp
+    r = min(float(stage["r"]), 0.999999)
     a2 = r * r
     if float(stage.get("flag", 1.0)) < 0.5:
         b0, b1, b2 = 1.0, 0.0, 0.0
@@ -65,10 +67,34 @@ def stage_coefficients(stage: dict) -> tuple[float, float, float, float, float]:
     return b0, b1, b2, a1, a2
 
 
-def build_sos(stages: list[dict]) -> np.ndarray:
+def stage_coefficients_calibration(
+    stage: dict, sample_rate_authored: float
+) -> tuple[float, float, float, float, float]:
+    """Calibration stage → (b0, b1, b2, a1, a2). Reconstructs a1 from
+    pole_freq_hz + radius at the calibration's authoring sample rate."""
+    r = min(float(stage["radius"]), 0.999999)
+    f = float(stage["pole_freq_hz"])
+    a1 = -2.0 * r * math.cos(2.0 * math.pi * f / float(sample_rate_authored))
+    a2 = r * r
+    val1 = float(stage.get("val1", 0.0))
+    val2 = float(stage.get("val2", 0.0))
+    val3 = float(stage.get("val3", 0.0))
+    if val1 == 0.0 and val2 == 0.0 and val3 == 0.0:
+        b0, b1, b2 = 1.0, 0.0, 0.0
+    else:
+        b0 = 1.0 + val1
+        b1 = a1 + val2
+        b2 = a2 - val3
+    return b0, b1, b2, a1, a2
+
+
+def build_sos(stages: list[dict], source_type: str, sample_rate_authored: float) -> np.ndarray:
     rows = []
     for st in stages:
-        b0, b1, b2, a1, a2 = stage_coefficients(st)
+        if source_type == "calibration_re":
+            b0, b1, b2, a1, a2 = stage_coefficients_calibration(st, sample_rate_authored)
+        else:
+            b0, b1, b2, a1, a2 = stage_coefficients_raw(st)
         rows.append([b0, b1, b2, 1.0, a1, a2])
     return np.asarray(rows, dtype=np.float64)
 
@@ -117,31 +143,22 @@ def best_fit_null(pred: np.ndarray, ref: np.ndarray, lag_search: int = 0):
     return (0, gain, rms, peak, ref_rms)
 
 
-def corner_keyframe(body: dict, label: str) -> dict:
-    """Accept both layouts: trenchwork_clean cartridge wire form
-    (keyframes list) and canonical raw p2k_skins form (corners dict)."""
-    if "keyframes" in body:
-        kf = next((k for k in body["keyframes"] if k.get("label") == label), None)
-        if kf is None:
-            raise RuntimeError(f"missing corner {label}")
-        return kf
-    if "corners" in body:
-        corner = body["corners"].get(label)
-        if corner is None:
-            raise RuntimeError(f"missing corner {label}")
-        return {
-            "stages": corner["stages"],
-            "boost": float(body.get("boost", 1.0)),
-        }
-    raise RuntimeError("cartridge has neither 'keyframes' nor 'corners'")
+def load_source(entry: dict) -> tuple[dict, str, float]:
+    """Resolve a manifest entry's source file. Returns (body, source_type,
+    sample_rate_authored)."""
+    src = ROOT / entry["source"]
+    body = json.loads(src.read_text())
+    src_type = entry.get("source_type", "raw_p2k_skin")
+    sr_auth = float(entry.get("sample_rate_authored", 39062.5))
+    return body, src_type, sr_auth
 
 
 def main() -> int:
     manifest_path = REF_DIR / "MANIFEST.json"
-    if not REF_DIR.exists() or not manifest_path.exists() or not SKINS.exists() or not DRY.exists():
+    if not REF_DIR.exists() or not manifest_path.exists() or not DRY.exists():
         print(
             f"parity inputs missing; skip "
-            f"({REF_DIR.exists()=} {manifest_path.exists()=} {SKINS.exists()=} {DRY.exists()=})"
+            f"({REF_DIR.exists()=} {manifest_path.exists()=} {DRY.exists()=})"
         )
         return 0
 
@@ -149,53 +166,56 @@ def main() -> int:
     dry = mono(sf.read(str(DRY))[0])
 
     print(f"dry input:  {DRY.name}  {len(dry)} samples")
-    print(f"refs:       {REF_DIR}  ({len(manifest)} skins)")
-    print(f"pipeline:   raw-ROM → SOS cascade → AGC → ×boost → lag+gain null")
+    print(f"refs:       {REF_DIR}  ({len(manifest)} entries)")
+    print(f"pipeline:   source stage -> SOS cascade -> AGC -> *boost -> gain null")
     print(f"fail at:    rel_null > {FAIL_THRESHOLD_DB:.0f} dB")
     print()
-    print(f"{'skin':24} {'boost':>6} {'worst_corner':>12} {'lag':>5} {'gain':>8} {'rel_null':>11}")
+    print(f"{'name':28} {'src':4} {'boost':>6} {'worst_corner':>12} {'gain':>8} {'rel_null':>11}")
 
     failures: list[tuple[str, str, float]] = []
     import gc
     for name in sorted(manifest):
-        cart_path = SKINS / f"{name}.json"
-        body = json.loads(cart_path.read_text())
-        worst = (None, 0.0, 0, 1.0)  # corner, rel_db, lag, gain
+        entry = manifest[name]
+        body, src_type, sr_auth = load_source(entry)
+        worst = (None, 0.0, 1.0)  # corner, rel_db, gain
         for label in CORNERS:
             wav = REF_DIR / f"{name}_{label}.wav"
             if not wav.exists():
                 continue
             ref = mono(sf.read(str(wav))[0])
-            kf = corner_keyframe(body, label)
-            sos = build_sos(kf["stages"])
-            boost = float(kf.get("boost", 1.0))
+            corner = body["corners"].get(label)
+            if corner is None:
+                continue
+            sos = build_sos(corner["stages"], src_type, sr_auth)
+            boost = float(entry.get("boost", body.get("boost", 1.0)))
             cascaded = sosfilt(sos, dry)
             pred = apply_agc(cascaded) * boost
-            lag, gain, rms, _peak, ref_rms = best_fit_null(pred, ref)
+            _lag, gain, rms, _peak, ref_rms = best_fit_null(pred, ref)
             rel = db(rms) - db(ref_rms)
             if worst[0] is None or rel > worst[1]:
-                worst = (label, rel, lag, gain)
+                worst = (label, rel, gain)
             del ref, sos, cascaded, pred
         gc.collect()
         if worst[0] is None:
-            print(f"{name:24} no refs")
+            print(f"{name:28} no refs")
             continue
-        boost = float(body.get("boost", 1.0))
+        boost = float(entry.get("boost", 1.0))
         marker = " " if worst[1] <= FAIL_THRESHOLD_DB else "!"
+        tag = "raw" if src_type == "raw_p2k_skin" else "cal"
         print(
-            f"{marker}{name:23} {boost:6.2f} {worst[0]:>12} "
-            f"{worst[2]:5d} {worst[3]:8.4f} {worst[1]:+8.1f} dB"
+            f"{marker}{name:27} {tag:>4} {boost:6.2f} {worst[0]:>12} "
+            f"{worst[2]:8.4f} {worst[1]:+8.1f} dB"
         )
         if worst[1] > FAIL_THRESHOLD_DB:
             failures.append((name, worst[0], worst[1]))
 
     print()
     if failures:
-        print(f"FAIL: {len(failures)}/{len(manifest)} skins exceeded {FAIL_THRESHOLD_DB:.0f} dB")
+        print(f"FAIL: {len(failures)}/{len(manifest)} entries exceeded {FAIL_THRESHOLD_DB:.0f} dB")
         for name, corner, rel in failures:
             print(f"  {name}  worst corner {corner}  rel_null={rel:+.1f}dB")
         return 1
-    print(f"OK: {len(manifest)}/{len(manifest)} skins null at <= {FAIL_THRESHOLD_DB:.0f} dB")
+    print(f"OK: {len(manifest)}/{len(manifest)} entries null at <= {FAIL_THRESHOLD_DB:.0f} dB")
     return 0
 
 
