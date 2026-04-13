@@ -1,10 +1,18 @@
-# TRENCH SESSION STATE — 2026-04-13 (rev 3)
+# TRENCH SESSION STATE — 2026-04-13 (rev 4)
 
 Context reset dump. Full content, no compaction. Read this before resuming.
-Supersedes rev 2 from earlier this session.
+Supersedes rev 3 from earlier this session.
 
-Rev 3 adds: P2K source-of-truth resolution, Cheat Engine capture bug, canonical
-reference regeneration, bit-exact parity gate covering all 35 skins.
+Rev 3 added: P2K source-of-truth resolution, Cheat Engine capture bug, canonical
+reference regeneration, bit-exact parity gate covering all 35 raw skins.
+
+Rev 4 adds: calibration_re bridge into parity gate (6 ft=33-55 filter types
+recovered from existing docs/calibration/ data — Talking Hedz, Ear Bender,
+Razor Blades, Radio Craze, Freak Shifta, Ooh to Eee), MANIFEST schema bump
+to per-entry source/source_type/sample_rate_authored, parity_null.py rewritten
+for manifest-driven dispatch, render_canonical_refs.py repointed to local
+datasets/p2k_skins/ (no cross-workspace dep). Real extraction gap is now
+17 of 56, not 23.
 
 ## Workspace map (three directories, three domains)
 
@@ -193,59 +201,121 @@ raw extraction.
 
 `trenchwork_clean/datasets/p2k_filter_names.json` — 56 confirmed P2K filter
 names extracted from EmulatorX.dll resource string tables 31-35 via Ghidra.
-Indices 0-55. We have raw stage JSON for 33 of these 56 (indices 0-32).
-Indices 33-55 (23 names) are in the name table but have no extracted stage
-data in any p2k_skins dir. The user's "50 P2K skins" recollection was an
-approximation of this 56-entry name space.
+Indices 0-55. The same file's `note_types_33_55` field documents that the
+ROM table extraction at offset 0xE5610 only yields valid coefficient data
+for types 0-32; types 33-55 require a different ROM offset or runtime
+capture.
 
-## Bit-exact parity gate (built this session)
+**Coverage as of rev 4: 41 of 56.**
 
-Fully wired. All 35 canonical P2K skins null at **-151.9 dB** (float32
-round-trip quantization floor) via `python tools/parity_null.py`.
+- 33 raw extractions at `Trench/datasets/p2k_skins/P2k_000.json` ..
+  `P2k_032.json`, format `{a1, r, val1, val2, val3, flag}` per stage.
+- 2 alternate-extraction vocal files at `Vocal_Ah_Ay_Ee.json` /
+  `Vocal_Oo_Ah.json` — same filter types as P2k_016/017 but 3-stage
+  alternate captures (hash-distinct).
+- 6 calibration-derived extractions at `Trench/docs/calibration/`:
+  ft=33 Ooh to Eee (approx), ft=36 Talking Hedz, ft=41 Razor Blades,
+  ft=42 Radio Craze, ft=46 Freak Shifta, ft=54 Ear Bender. Format
+  `{pole_freq_hz, radius, val1, val2, val3, c4_b0, role, zeros, ...}`
+  per stage; `a1` is reconstructed at the calibration's authoring rate
+  (`a1 = -2r·cos(2π·pole_freq_hz/sample_rate_authored)`) and matches
+  raw extractions to f64 precision.
 
-### New tools
+**Still missing: 17 of 56.** 5 on the wishlist in
+`docs/calibration/index.json`: ft=52 Lucifer's Q (CRITICAL), ft=34 Boland
+Bass (HIGH), ft=51 Bassomatic (HIGH), ft=43 Eeh to Aah (LOW), ft=50 Acid
+Ravage (LOW). 12 unlisted: ft=35 Multi Q Vox, 37 Zoom Peaks, 38 DJ Alkaline,
+39 Bass Tracer, 40 Rogue Hertz, 44 Ubu Orator, 45 Deep Bouche, 47 Cruz
+Pusher, 48 Angelz Hairz, 49 Dream Weava, 53 Tooth Comb, 55 Klang Kling.
 
-**`tools/render_canonical_refs.py`** (new, 100 lines):
-- Reads every `*.json` in `trenchwork_clean/datasets/p2k_skins/` (35 skins).
-- Pipeline: raw stage → `[b0,b1,b2,1,a1,a2]` SOS matrix → `scipy.signal.sosfilt(dry)` → `apply_agc` (16-entry table, python port of trench-core agc.rs) → `* boost`.
+5 calibration files are duplicates of raw extractions (BassBox_303 →
+P2k_029, Early_Rizer → P2k_025, Fuzzi_Face → P2k_030, Meaty_Gizmo → P2k_027,
+Millennium → P2k_026) and are skipped via `CALIBRATION_DUPES` in
+`tools/render_canonical_refs.py` to avoid double-counting the same filter
+type. Calibration of these 5 would still null bit-exact through the
+adapter; the skip is purely about not inflating the entry count.
+
+## Bit-exact parity gate (built this session, extended in rev 4)
+
+Fully wired. All 41 entries (35 raw + 6 calibration_re) null at **-151.9 dB**
+(float32 round-trip quantization floor) via `python tools/parity_null.py`.
+Reads `ref/canonical/MANIFEST.json` and dispatches on `source_type` per
+entry. No cross-workspace dependency on `trenchwork_clean/` for source
+files — both `datasets/p2k_skins/` and `docs/calibration/` are local.
+
+### Tools (rev 4)
+
+**`tools/render_canonical_refs.py`** (~260 lines):
+- Reads `Trench/datasets/p2k_skins/*.json` (35 raw skins) — local copy, byte-identical to the trenchwork_clean original.
+- Reads `Trench/docs/calibration/*.json` (11 calibrated, 5 skipped via `CALIBRATION_DUPES`, 6 rendered).
+- Per source type, chooses an adapter:
+  - `raw_stage_co(s)`: uses `s["a1"]` directly (raw p2k_skin format).
+  - `calibration_stage_co(s, sample_rate_authored)`: reconstructs `a1 = -2r·cos(2π·pole_freq_hz / sample_rate_authored)`. flag is implied (any nonzero `val1/val2/val3` → resonator branch).
+- Pipeline (shared): `[b0,b1,b2,1,a1,a2]` SOS → `scipy.signal.sosfilt(dry)` → `apply_agc` (16-entry agc.rs port) → `* boost`.
 - Dry input: `trenchwork_clean/ref/bypassed-pinknoise.wav` (132694 samples, 44100 Hz, mono `[:,0]`).
-- Writes 4 corner WAVs per skin to `Trench/ref/canonical/<name>_<corner>.wav` as float32 (subtype `FLOAT`, not PCM_16 — PCM_16 clips M100 corners whose peak exceeds 1.0 after the 4× boost).
-- Writes `ref/canonical/MANIFEST.json` listing each skin with source path, boost, stage_count, rendered corners.
-- Total output: 140 reference WAVs + 1 manifest.
+- Writes 4 corner WAVs per entry to `Trench/ref/canonical/<name>_<corner>.wav` as float32 (`subtype="FLOAT"`).
+- Writes `MANIFEST.json` (per-entry: `source`, `source_type`, `boost`, `stage_count`, `sample_rate_authored`, `corners`) and `PROVENANCE.json` (`canonical-v2`, both source classes documented).
+- Total output: 164 reference WAVs (35×4 raw + 6×4 calibration_re) + 2 metadata files.
 
-**`tools/parity_null.py`** (rewritten, ~210 lines):
-- Enumerates `ref/canonical/MANIFEST.json`, loads each skin's raw JSON from `p2k_skins/`, re-renders via the same pipeline, compares to the corresponding canonical WAV.
-- Null method: `gain = dot(pred, ref) / dot(pred, pred)`, `res = ref - gain*pred`, `rel_null = 20*log10(rms(res) / rms(ref))`. Lag search disabled (`lag_search=0`) because references are rendered through the exact same pipeline — no offset to discover.
-- Threshold: `FAIL_THRESHOLD_DB = -140.0`. Anything above fails with exit code 1 and lists offending skins.
-- Output: one line per skin showing worst-corner null. Final `OK: N/N` or `FAIL: k/N` line.
-- Uses `gc.collect()` per-skin to survive Windows low-memory conditions (system was at 95%+ RAM this session from an unrelated process; numpy was failing 1 MB allocations without the GC force).
+**`tools/parity_null.py`** (~240 lines):
+- Walks `MANIFEST.json` entries. Each entry resolves its own source via `ROOT / entry["source"]`.
+- Dispatches on `entry["source_type"]` (`raw_p2k_skin` or `calibration_re`) to pick the right `stage_coefficients_*` adapter.
+- Uses `entry["sample_rate_authored"]` for calibration_re a1 reconstruction.
+- Same null math as before: `gain = dot(pred, ref) / dot(pred, pred)`, `res = ref - gain*pred`, `rel_null = 20*log10(rms(res)/rms(ref))`. `FAIL_THRESHOLD_DB = -140.0`. Hard-fails (exit 1) on any entry above threshold.
+- Output: one line per entry tagged `raw` or `cal`, showing worst-corner null.
+- Per-entry `gc.collect()` for Windows low-memory survival.
 
-**`ref/canonical/PROVENANCE.json`** — chain of custody pointing at canonical
-source, dry input, pipeline description, sample rate, stage count, boost,
-subtype. Also notes the legacy hedz*.wav files as the thing it replaces.
+**`ref/canonical/PROVENANCE.json`** (`canonical-v2`):
+- `raw_p2k_skins`: path, count, format, canonical sha256 prefix, upstream parity note.
+- `calibration_re`: path, count, format, a1 derivation formula, list of skipped duplicates.
+- Dry input, render pipeline, playback sample rate, container subtype, supersedes note for the legacy `hedz*.wav`.
 
-**`ref/canonical/MANIFEST.json`** — 35 entries, one per skin, with source
-path, boost, stage_count, corner list.
+**`ref/canonical/MANIFEST.json`** — 41 entries:
+```json
+{
+  "P2k_000": {
+    "source": "datasets/p2k_skins/P2k_000.json",
+    "source_type": "raw_p2k_skin",
+    "boost": 4.0,
+    "stage_count": 6,
+    "sample_rate_authored": 39062.5,
+    "corners": ["M0_Q0", "M0_Q100", "M100_Q0", "M100_Q100"]
+  },
+  "cal_Talking_Hedz": {
+    "source": "docs/calibration/Talking_Hedz.json",
+    "source_type": "calibration_re",
+    "boost": 4.0,
+    "stage_count": 6,
+    "sample_rate_authored": 39062.5,
+    "corners": ["M0_Q0", "M0_Q100", "M100_Q0", "M100_Q100"]
+  }
+}
+```
 
 ### Parity gate current state
 
 ```
 $ python tools/parity_null.py
 dry input:  bypassed-pinknoise.wav  132694 samples
-refs:       C:\Users\hooki\Trench\ref\canonical  (35 skins)
-pipeline:   raw-ROM → SOS cascade → AGC → ×boost → lag+gain null
+refs:       C:\Users\hooki\Trench\ref\canonical  (41 entries)
+pipeline:   source stage -> SOS cascade -> AGC -> *boost -> gain null
 fail at:    rel_null > -140 dB
 
-skin                      boost worst_corner   lag     gain    rel_null
- P2k_000                   4.00      M100_Q0     0   1.0000   -151.9 dB
- P2k_001                   4.00    M100_Q100     0   1.0000   -151.9 dB
- ...                       ...          ...     0   1.0000   ...
- Vocal_Oo_Ah               4.00      M0_Q100     0   1.0000   -151.9 dB
+name                         src   boost worst_corner     gain    rel_null
+ P2k_000                      raw   4.00      M100_Q0   1.0000   -151.9 dB
+ ...                          raw   4.00          ...   1.0000   -151.9 dB
+ Vocal_Oo_Ah                  raw   4.00      M0_Q100   1.0000   -151.9 dB
+ cal_Ear_Bender               cal   4.00      M100_Q0   1.0000   -151.8 dB
+ cal_Freak_Shifta             cal   4.00    M100_Q100   1.0000   -151.9 dB
+ cal_Ooh_to_Eee_approx        cal   4.00      M0_Q100   1.0000   -151.9 dB
+ cal_Radio_Craze              cal   4.00      M100_Q0   1.0000   -151.9 dB
+ cal_Razor_Blades             cal   4.00        M0_Q0   1.0000   -151.9 dB
+ cal_Talking_Hedz             cal   4.00        M0_Q0   1.0000   -151.9 dB
 
-OK: 35/35 skins null at <= -140 dB
+OK: 41/41 entries null at <= -140 dB
 ```
 
-All 35 skins null at the float32 quantization floor. Gate passes. Exit 0.
+All 41 entries null at the float32 storage floor. Gate passes. Exit 0.
 
 ### Null score definition
 
@@ -320,25 +390,23 @@ values would be handled transparently).
 Branch `chore/git-hygiene`:
 
 - `7ecfbbc session state rev 2: post-execution handoff dump`
-- `42e798b audition: LP-in-morph candidate body (6-stage, no 7th global LP)` — `cartridges/auditions/lp_in_morph.json` (375 lines)
-- `cfc3f70 port AGC from trenchwork_clean trench-core` — `trench-core/src/agc.rs` (89 lines, 5 unit tests pass), `trench-core/src/lib.rs` adds `pub mod agc`
+- `42e798b audition: LP-in-morph candidate body (6-stage, no 7th global LP)`
+- `cfc3f70 port AGC from trenchwork_clean trench-core` — `trench-core/src/agc.rs` (89 lines, 5 unit tests pass)
+- `29cad8c parity: canonical P2K references + 35-skin bit-exact gate` (rev 3 work)
+- `880abd1 session state rev 3: P2K truth chain + bit-exact parity gate` (rev 3 work)
+- `88a6425 check: relabel parity step (35 P2K skins, hard fail at >-140 dB)` (rev 4)
+- `d3cce63 parity: extend gate to 41 entries (35 raw + 6 calibration_re)` (rev 4)
 
 Earlier in the session (committed in background): `0cb3f29`, `507bca7`,
 `5a1ae92`, `8d30aae`, `adab1e9` — lean workspace, cartridge schema,
 ./check, parity_null v1, null target tests, research docs.
 
-**This rev 3 block of work is UNCOMMITTED on disk:**
+**This rev 4 block of work is UNCOMMITTED on disk:**
 
-- `tools/render_canonical_refs.py` (new, ~120 lines)
-- `tools/parity_null.py` (rewritten — removed lag search, switched to per-skin iteration with MANIFEST, added SKINS constant, added FAIL_THRESHOLD_DB, DRY+SKINS+REF_DIR constant layout)
-- `ref/canonical/` (new directory, 140 wavs + MANIFEST.json + PROVENANCE.json)
-- `dev/SESSION_STATE.md` (this file, rev 3)
+- `dev/SESSION_STATE.md` (this file, rev 4) — describes the calibration_re bridge, 41/56 coverage, and the 17-filter gap breakdown.
 
-Operator must commit these before clearing the session. Suggested commit
-split:
-1. `parity: canonical P2K references + 35-skin bit-exact gate` — covers
-   `tools/render_canonical_refs.py`, `tools/parity_null.py`, `ref/canonical/`
-2. `session state rev 3` — `dev/SESSION_STATE.md`
+Operator must commit before clearing the session. Suggested message:
+`session state rev 4: calibration_re bridge + 41-entry parity gate`
 
 ## Domain 1 truths reconfirmed or added this session
 
@@ -347,9 +415,12 @@ split:
    by `trenchwork_clean/pyruntime/encode.py`. Verified at 1e-7 against
    canonical raw for all 4 corners of P2k_013.
 
-2. **Canonical P2K raw stage data is at `trenchwork_clean/datasets/p2k_skins/`**
-   (35 skins). Byte-identical copies exist in ~15 workspace locations. All
-   agree. This is the immutable source of truth for P2K filter bodies.
+2. **Canonical P2K raw stage data is at `Trench/datasets/p2k_skins/`**
+   (35 skins, byte-identical to `trenchwork_clean/datasets/p2k_skins/`
+   and ~13 other workspace locations). The local Trench copy is now the
+   parity gate's source of truth — no cross-workspace dependency. All
+   copies agree, and this is the immutable source of truth for raw-format
+   P2K filter bodies.
 
 3. **`trenchwork_clean/cartridges/00_talking_hedz.json` has M0_Q100 ↔ M100_Q0
    stage data swapped.** Do not load it in any parity pipeline.
@@ -364,10 +435,11 @@ split:
 5. **Legacy `trenchwork_clean/ref/hedz*.wav` are unusable for parity.**
    Should be quarantined or deleted. Replaced by `Trench/ref/canonical/`.
 
-6. **Parity gate passes at -151.9 dB across all 35 P2K skins.** The gate
-   is a deterministic regression check for cascade math, AGC table, and
-   boost application. Any future divergence in any of these produces a
-   null worse than -140 dB and fails the gate.
+6. **Parity gate passes at -151.9 dB across all 41 entries** (35 raw +
+   6 calibration_re). The gate is a deterministic regression check for
+   cascade math, AGC table, boost application, and now a1 reconstruction
+   from calibration `pole_freq_hz` + `radius`. Any future divergence in
+   any of these produces a null worse than -140 dB and fails the gate.
 
 7. **Minifloat coefficient quantization does not degrade high-Q nulls.**
    Tested round-trip encode→decode→recombine via
@@ -388,6 +460,36 @@ split:
    reference are aligned. The gap in rev 2 was time-domain-only, not
    spectral. Re-verified after switching to canonical refs: all nulls
    land at -151.9 dB with gain = 1.0000 and lag = 0.
+
+10. **Calibration data IS extraction.** `Trench/docs/calibration/*.json`
+    holds 11 reverse-engineered P2K filter dumps with per-stage
+    `pole_freq_hz, radius, val1, val2, val3, c4_b0, role, zeros`. The
+    raw a1 can be reconstructed at the calibration's authoring sample
+    rate (`a1 = -2r·cos(2π·f/sr)`) and produces bit-exact nulls vs the
+    raw_p2k_skin path through the same SOS+AGC+boost pipeline. This was
+    not understood prior to rev 4 — calibration was treated as an
+    annotation overlay rather than a second extraction class. Six of
+    the eleven cover ft=33-55 filter types absent from the ROM-table
+    extraction at offset 0xE5610: Talking Hedz (36), Ear Bender (54),
+    Razor Blades (41), Radio Craze (42), Freak Shifta (46), Ooh to Eee
+    (33, marked approx). The remaining five duplicate raw P2k_NNN
+    entries and are skipped by `CALIBRATION_DUPES`.
+
+11. **Real P2K coverage gap is 17 of 56, not 23.** With 41 entries in
+    the parity gate, the still-missing filter types are:
+    - 5 wishlisted in `docs/calibration/index.json::missing`:
+      ft=52 Lucifer's Q (CRITICAL, only Q-dominant body),
+      ft=34 Boland Bass (HIGH), ft=51 Bassomatic (HIGH),
+      ft=43 Eeh to Aah (LOW), ft=50 Acid Ravage (LOW).
+    - 12 unlisted: ft=35 Multi Q Vox, 37 Zoom Peaks, 38 DJ Alkaline,
+      39 Bass Tracer, 40 Rogue Hertz, 44 Ubu Orator, 45 Deep Bouche,
+      47 Cruz Pusher, 48 Angelz Hairz, 49 Dream Weava, 53 Tooth Comb,
+      55 Klang Kling.
+    Closing further requires either ROM-offset discovery for those
+    indices in the Planet Phatt / Orbit ROM binaries, or in-memory
+    capture from a running EmulatorX3 process avoiding the off-by-one
+    stage indexing, val1-as-b0, and radius drift bugs that broke the
+    Cheat Engine capture.
 
 ## Trench-mcp tooling state
 
@@ -439,64 +541,74 @@ parity or compile pipelines.
    session's commits are accumulating on a side branch. Merge/rebase
    strategy still not decided.
 
-6. **Hardware parity step in `./check` is report-only.** Previously
-   printed numbers against broken hedz*.wav; now that parity_null.py
-   is bit-exact against canonical refs, `./check` should be updated
-   to FAIL on non-zero exit from parity_null. One-line change in
-   `./check`; not yet applied.
-
 ## Next steps (ordered)
 
-1. **Commit rev 3 work.** Split into two commits as noted above.
-2. **Update `./check`** to propagate the parity_null.py exit code as a
-   hard gate. One-line change: remove the `|| true` or equivalent
-   soft-skip if present; otherwise already correct.
-3. **Port `FilterEngine` + DC blocker** from
+1. **Commit rev 4 SESSION_STATE update.** One file, one commit message:
+   `session state rev 4: calibration_re bridge + 41-entry parity gate`.
+2. **Port `FilterEngine` + DC blocker** from
    `trenchwork_clean/trench-core/src/engine.rs` (1429 lines) into
    `Trench/trench-core/src/`. Keep the Trench `Cascade` frozen per
    doctrine; the port is a new `engine` module built on top of the
    existing `Cascade` + the already-ported `agc`. Dedicated session.
-4. **Write rust `canonical_parity` integration test.** Loads each
+   Other trenchwork_clean files left out of the original lean cut
+   that may need to come over (or be deliberately rejected): `cdomain.rs`
+   (660 lines, coefficient domain conversion), `minifloat.rs` (608
+   lines, u16 codec — only needed if Trench plans to round-trip
+   through the legacy minifloat-domain kernel form), `emu_resonator.rs`
+   (540 lines, E-mu stage impl), `policy.rs` (500 lines), `encode.rs`
+   (311 lines, StageParams→EncodedCoeffs in shifted form — incompatible
+   with Trench's direct biquad form, would need a converter), `kernel.rs`
+   (223 lines), `types.rs` (67 lines). `historical.rs` (325 lines) is
+   the heritage compiler path and must NOT come over per doctrine.
+3. **Write rust `canonical_parity` integration test.** Loads each
    `cartridges/p2k/*.json`, processes the dry pink noise via the rust
    cascade + AGC + boost, writes corner WAVs to `ref/rust_render/`,
    asserts bit-exact null vs `ref/canonical/` (threshold ≈ -140 dB to
    match the python gate, or tighter if rust does all-f64 internally).
    This binds the python reference chain to the rust shipping path.
-5. **Delete or quarantine `trenchwork_clean/ref/hedz*.wav`.** The files
+   Should also load the 6 calibration_re entries via the same loader
+   path the python gate uses, to keep coverage at 41/41.
+4. **Delete or quarantine `trenchwork_clean/ref/hedz*.wav`.** The files
    are rendered from the broken CE capture and have no further purpose.
    Keep one copy tagged `_BROKEN_CE_CAPTURE_QUARANTINE` if the operator
    wants it preserved as evidence. Update any docs that reference these
    wavs.
-6. **Locate or reconstruct dry input for benchmark captures.** Next-tier
+5. **Locate or reconstruct dry input for benchmark captures.** Next-tier
    goal — unlocks hardware-level parity testing for all 33 P2K presets
    against real hardware recordings. Not blocking v1 shipping.
-7. **Author Speaker Knockerz / Cul-De-Sac / Aluminum Siding / Small Talk
+6. **Author Speaker Knockerz / Cul-De-Sac / Aluminum Siding / Small Talk
    Ah-Ee candidates** using the LP-in-morph pattern proven in
    `cartridges/auditions/lp_in_morph.json`. Each candidate validated
    against `cartridge.schema.json` and its `BODIES.md` "how to know it's
    wrong" rubric.
-8. **Decide branch strategy** for `chore/git-hygiene` — merge to
+7. **Decide branch strategy** for `chore/git-hygiene` — merge to
    `codex/v1`, rebase, or open PR. Operator decision.
-9. **Fill name coverage for indices 33-55 in `p2k_filter_names.json`.**
-   23 named P2K filters are in the EmulatorX.dll resource string table
-   but have no extracted raw-ROM stage JSON in `p2k_skins/`. If those
-   filters exist in the ROM at addresses not yet parsed, add them to
-   the canonical set. If they don't exist in the ROM (string-table-only
-   slots), document that explicitly.
+8. **Fill remaining 17 of 56 name coverage.** The five wishlisted
+   filters in `docs/calibration/index.json::missing` (Lucifer's Q
+   CRITICAL, Boland Bass HIGH, Bassomatic HIGH, Eeh to Aah LOW, Acid
+   Ravage LOW) plus 12 unlisted (Multi Q Vox, Zoom Peaks, DJ Alkaline,
+   Bass Tracer, Rogue Hertz, Ubu Orator, Deep Bouche, Cruz Pusher,
+   Angelz Hairz, Dream Weava, Tooth Comb, Klang Kling). Either find a
+   second ROM offset for indices 33-55 in the Planet Phatt / Orbit ROM
+   binaries, or capture from a running EmulatorX3 process via memory
+   inspection — explicitly avoiding the off-by-one stage indexing,
+   val1-as-b0, and radius drift bugs that broke the prior CE capture.
 
 ## Operator handoff cue
 
-When the operator resumes, the python parity chain is complete and
-passing. The cleanest next action is **commit rev 3 work** (step 1),
-then start the **rust FilterEngine port** (step 3) which is the bridge
-to rust parity. The python gate gives an immediate regression check
-while porting — any rust test that produces WAVs differing from
+When the operator resumes, the python parity chain covers 41 of 56
+P2K filter types at -151.9 dB bit-exact. The cleanest next action is
+**commit rev 4 SESSION_STATE update** (step 1), then start the
+**rust FilterEngine port** (step 2) which is the bridge to rust
+parity. The python gate gives an immediate regression check while
+porting — any rust test that produces WAVs differing from
 `ref/canonical/` by more than the f32 quantization floor is evidence
-of a cascade/AGC/boost divergence that needs immediate attention.
+of a cascade / AGC / boost / a1-reconstruction divergence that needs
+immediate attention.
 
 The rev 2 "Q=100 bass residual" and "M0_Q0 2× amplitude" mysteries are
-both fully closed and should not consume any further analysis time.
-Upstream Cheat Engine capture bugs (off-by-one stages, val1-as-b0,
-radius drift) were the root cause. The canonical 6-stage raw ROM
-extraction has been the correct source all along; the parity pipeline
-now uses it exclusively.
+fully closed (root cause: upstream Cheat Engine capture bugs). The
+rev 3 belief that calibration data was an annotation overlay rather
+than a second extraction class is also closed (rev 4 truth #10). The
+canonical 6-stage raw ROM extraction and the calibration RE dumps are
+both first-class sources for the parity pipeline now.
