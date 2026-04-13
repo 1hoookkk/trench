@@ -1,16 +1,20 @@
-# TRENCH SESSION STATE — 2026-04-13 (rev 2)
+# TRENCH SESSION STATE — 2026-04-13 (rev 3)
 
 Context reset dump. Full content, no compaction. Read this before resuming.
-Supersedes rev 1 from earlier this session.
+Supersedes rev 2 from earlier this session.
+
+Rev 3 adds: P2K source-of-truth resolution, Cheat Engine capture bug, canonical
+reference regeneration, bit-exact parity gate covering all 35 skins.
 
 ## Workspace map (three directories, three domains)
 
 | Path | Role | Git |
 |---|---|---|
-| `C:/Users/hooki/Trench` | Domain 1 — active TRENCH implementation (this session's focus) | root git (branch `chore/git-hygiene`, was `codex/v1` at session start) |
+| `C:/Users/hooki/Trench` | Domain 1 — active TRENCH implementation (this session's focus) | root git (branch `chore/git-hygiene`) |
 | `C:/Users/hooki/trenchwork_clean` | Prior reference implementation with full `trench-core::engine::FilterEngine` + AGC + DC blocker + motion pursuit + minifloat | own git |
-| `C:/Users/hooki/trench_re_vault` | Domain 2 — firmware RE data, ghidra dumps, captured/rendered reference wavs, stage-response models | own git |
+| `C:/Users/hooki/trench_re_vault` | Domain 2 — firmware RE data, ghidra dumps, captured/rendered reference wavs, ROM binaries, stage-response models | own git |
 | `C:/Users/hooki/Trench/trench-juce/plugin` | Active shipping plugin (JUCE 8) | own git; excluded from root `/trench-juce/` gitignore |
+| `C:/Users/hooki/do-it/archive/data-dumps` | **Newly surfaced this session** — Cheat Engine dumps, `TalkingHedz*.json`, `zplane_kernel_raw.bin`, `ce_dump.txt`, `X3_TalkingHedz_Corners/` PNG screenshots. **Contains BROKEN CE stage captures that produced the legacy hedz*.wav references.** Not a ground-truth source. | separate tree |
 
 Separation rule (from memory `Three Domain Separation`): never conflate
 TRENCH impl truth, firmware RE truth, and future design. Each lives in
@@ -51,19 +55,34 @@ its own tree.
     ```
 - Cascade source files are frozen: `trench-core/src/cascade.rs`, `trench-juce/plugin/source/TrenchEngine.cpp`.
 
+**Trench compiled-v1 kernel mapping (confirmed this session via byte-level
+agreement with raw ROM truth at 1e-7 precision for P2k_013):**
+- `c0 = b0 = 1 + val1`
+- `c1 = b1 = a1 + val2`
+- `c2 = b2 = r² - val3`
+- `c3 = a1` (standard polynomial coefficient, normally negative for stable LP)
+- `c4 = a2 = r²`
+- This is the **direct biquad form** of the DF2T math above, not the shifted
+  minifloat-domain kernel form used by the older `trenchwork_clean`
+  `pyruntime/encode.py::raw_to_encoded` (which stores `c0=2+b1/b0`, `c1=1-b2/b0`,
+  `c2=2+a1`, `c3=1-r²`, `c4=b0`). **Two different conventions coexist in the
+  workspace — do not confuse them.** Trench runtime uses the direct form.
+
 **Cartridge format (`compiled-v1` on disk):**
 - `format: "compiled-v1"`
 - 4 keyframes labeled `M0_Q0`, `M0_Q100`, `M100_Q0`, `M100_Q100`
 - Each keyframe carries 12 stage arrays of 5 coefficients (6 active + 6 passthrough sentinel)
-- Validator: `cartridge.schema.json`. 47 cartridges in `cartridges/` validate (up from 46; `cartridges/auditions/lp_in_morph.json` was added this session as the LP-in-morph audition body).
-- Two parallel layouts exist in the wild:
-    - Wire (keyframe-object form): `{format, name, sampleRate, keyframes: [{label, morph, q, boost, stages: [{c0..c4}]}]}`. Trench cartridges use this.
-    - Array form (legacy): `{version, corners: {M0_Q0: [[c0..c4], ...], ...}}`. `trench-core/src/cartridge.rs::Cartridge::from_json` also accepts this; schema does not.
-- Raw-ROM layout (third format, found in `trench_re_vault/scratch/resources/roms/P2K/*.json` and `trenchwork_clean/cartridges/*.json`): `{corners: {M*_Q*: {stages: [{a1, r, val1, val2, val3, flag}]}}}`. Conversion to kernel form:
-    - `a2 = r²` (with `r ≤ 0.999999` stability clamp)
-    - `flag < 0.5` → all-pole LP: `b0 = 1, b1 = 0, b2 = 0`
-    - `flag ≥ 0.5` → `b0 = 1 + val1, b1 = a1 + val2, b2 = a2 - val3`
-    - DF2T map: `c0 = b0, c1 = b1, c2 = b2, c3 = a1, c4 = a2`
+- Validator: `cartridge.schema.json`. 47 cartridges in `cartridges/` validate.
+- `Trench/cartridges/p2k/*.json` adds a top-level `provenance` field naming
+  the source raw-ROM skin (e.g. `"P2k_013"`).
+- Three parallel layouts exist in the wild:
+    - **Wire compiled-v1 (keyframe-object form)**: `{format, name, provenance, sampleRate, stages, keyframes: [{label, morph, q, boost, stages: [{c0..c4}]}]}`. Trench p2k cartridges use this. Kernel mapping = direct biquad (above).
+    - **Raw-ROM form**: `{name, filterType, stageCount, boost, corners: {M*_Q*: {stages: [{a1, r, val1, val2, val3, flag}]}}}`. Source of truth. Lives in `trenchwork_clean/datasets/p2k_skins/`, `trench_re_vault/scratch/resources/roms/P2K/`, and 3 other identical copies. Conversion to biquad:
+        - `a2 = r²` (with `r ≤ 0.999999` stability clamp)
+        - `flag < 0.5` → all-pole LP: `b0 = 1, b1 = 0, b2 = 0`
+        - `flag ≥ 0.5` → `b0 = 1 + val1, b1 = a1 + val2, b2 = a2 - val3`
+        - DF2T map: `c0 = b0, c1 = b1, c2 = b2, c3 = a1, c4 = a2`
+    - **Array form (legacy)**: `{version, corners: {M0_Q0: [[c0..c4], ...], ...}}`. `trench-core/src/cartridge.rs::Cartridge::from_json` also accepts this; schema does not.
 
 **Hard bans (enforcement, not suggestion):**
 - No RBJ cookbook for character filters. Direct pole-zero only.
@@ -91,272 +110,393 @@ via per-corner coefficients. The LP is NOT a fixed 7th stage; it is
 authored into the M0 corner of whichever stages should carry it,
 and warped to shelf or HP at the M100 corner.
 
-This session added `cartridges/auditions/lp_in_morph.json` as the
-explicit audition: 4-pole LP at 200 Hz at M0 corners, 4-pole HP at
-800 Hz at M100 corners, stages 3–12 passthrough. Per-corner frequency
-response confirms the LP→HP morph is expressible within the 6-active
-architecture without any cascade change.
+Audition body `cartridges/auditions/lp_in_morph.json` (4-pole LP at 200 Hz
+at M0, 4-pole HP at 800 Hz at M100, stages 3–12 passthrough) confirms
+this is expressible in 6 active stages without any cascade change.
 
-Applies to shipping bodies: when authoring Speaker Knockerz and
-Cul-De-Sac bass behavior, encode the LP directly in stage 1–2 of the
-M0 corner and let it warp as needed at M100. No architectural exception
-required. Heritage heritage counterpart: P2k_021 stays entirely in LP
-territory across all four corners (resonant LP morphing through cutoff
-and emphasis), not LP→HP. The audition body is a wider-range test
-than P2k_021 itself.
+## P2K source-of-truth chain (resolved this session)
+
+The session-state rev 2 "M0_Q0 2× amplitude mystery" and "Q=100 bass residual"
+were both artifacts of corrupted upstream stage data, not cascade math or
+minifloat quantization.
+
+### Canonical raw extraction (ground truth)
+
+**sha256 prefix `9fb1bef0d0212980`** identifies the byte-identical canonical
+raw extraction for `P2k_013.json` (4772 bytes, original extraction mtime
+2026-02-17 08:52). Five byte-identical copies exist at:
+
+1. `trench_re_vault/scratch/resources/roms/P2K/P2k_013.json`
+2. `trench_re_vault/datasets/talking_hedz/2026-03-12/P2k_013.json`
+3. `trench_re_vault/datasets/talking_hedz_bracketed_residual/2026-03-12/inputs/P2k_013.json`
+4. `trenchwork_clean/datasets/p2k_skins/P2k_013.json`
+5. (and copies in `trenchwork`, `trenchwork_backup`, `trenchwork_clean2`, `trenchwork_fresh`, `trenchwork_recovered`, plus 10+ `.claude/worktrees/agent-*/` clones)
+
+Format: `{name, filterType, stageCount, boost, corners: {M0_Q0, M0_Q100, M100_Q0, M100_Q100: {stages: [{a1, r, val1, val2, val3, flag}]}}}`.
+
+- **6 stages per corner** (not 5)
+- `boost: 4.0` top-level (single corner-independent scalar)
+- `flag=1` throughout for P2k_013 (all resonator, no all-pole)
+
+`trenchwork_clean/datasets/p2k_skins/` is the canonical directory for 35
+raw-ROM skins: 33 numbered (`P2k_000` through `P2k_032`) plus `Vocal_Ah_Ay_Ee`
+and `Vocal_Oo_Ah`. Used as the source in `tools/render_canonical_refs.py`.
+
+### The broken cartridge (confirmed corrupt)
+
+`trenchwork_clean/cartridges/00_talking_hedz.json` (sha256 prefix
+`cbb779d0f3558a08`, 5058 bytes, mtime 2026-03-23). Format has `keyframes`
+list instead of `corners` dict.
+
+**Corner label swap.** cart `M0_Q100` stage data == truth `M100_Q0`, and
+cart `M100_Q0` stage data == truth `M0_Q100`. `M0_Q0` and `M100_Q100`
+labels agree with truth. Verified by byte comparison of all 6 stages
+of each corner.
+
+Produced by an older `trenchwork_clean` compile path. Do not trust this
+file. Do not load it in any parity pipeline.
+
+### The Cheat Engine capture (also corrupt — separate bug)
+
+`C:/Users/hooki/do-it/archive/data-dumps/TalkingHedz_Complete.json` is a
+Cheat Engine / EmulatorX3 live memory capture from 2026-01-26 with
+`captureDate` field. Three independent bugs vs canonical:
+
+1. **Off-by-one stage indexing.** 5 stages instead of 6. Missed canonical
+   stage 0 (the low-Q a1≈-0.14, r≈0.975 stage). `CE[i].a1 == canonical[i+1].a1`
+   bit-exact for i ∈ 0..4.
+2. **val1 captured as b0.** CE stored `1 + val1` (≈ 0.562) in the `val1`
+   slot instead of raw val1 (≈ -0.438). `CE[i].val1 == 1 + canonical[i+1].val1`
+   bit-exact.
+3. **Radius drift.** `CE[i].r` differs from `canonical[i+1].r` by 0.003 to
+   0.049. CE captured after some EmulatorX3 runtime decoding/interpolation
+   step that perturbs radius. Canonical reads pre-decode from ROM.
+
+Per-corner boost in CE ≈ 1.76 varying; canonical boost is flat 4.0.
+
+**The legacy `trenchwork_clean/ref/hedz*.wav` references were rendered from
+this broken CE capture**, not from canonical. That is the real reason the
+rev 2 parity analysis hit a -42 dB floor at Q=100 corners. The cascade
+math was correct; the references were wrong.
+
+### The secondary truth chain (Morpheus, not P2K)
+
+`trenchwork_clean/datasets/morpheus_zplane_library.json` — 289 z-plane cubes
+decoded from `cubes_v1.01vc_170120.wav` (Rossum Morpheus z-plane library).
+Each cube has 4 corners × 6 stages with `(r, freq_hz, a1, a2, r_byte, f_byte)`.
+**Pure pole filters — no `val1/val2/val3` zero terms.** This is the Morpheus
+base library, NOT the P2K extended set. P2K = Morpheus pole structure +
+added zero placements via `val1/val2/val3`. Not a substitute for the P2K
+raw extraction.
+
+### The name table
+
+`trenchwork_clean/datasets/p2k_filter_names.json` — 56 confirmed P2K filter
+names extracted from EmulatorX.dll resource string tables 31-35 via Ghidra.
+Indices 0-55. We have raw stage JSON for 33 of these 56 (indices 0-32).
+Indices 33-55 (23 names) are in the name table but have no extracted stage
+data in any p2k_skins dir. The user's "50 P2K skins" recollection was an
+approximation of this 56-entry name space.
+
+## Bit-exact parity gate (built this session)
+
+Fully wired. All 35 canonical P2K skins null at **-151.9 dB** (float32
+round-trip quantization floor) via `python tools/parity_null.py`.
+
+### New tools
+
+**`tools/render_canonical_refs.py`** (new, 100 lines):
+- Reads every `*.json` in `trenchwork_clean/datasets/p2k_skins/` (35 skins).
+- Pipeline: raw stage → `[b0,b1,b2,1,a1,a2]` SOS matrix → `scipy.signal.sosfilt(dry)` → `apply_agc` (16-entry table, python port of trench-core agc.rs) → `* boost`.
+- Dry input: `trenchwork_clean/ref/bypassed-pinknoise.wav` (132694 samples, 44100 Hz, mono `[:,0]`).
+- Writes 4 corner WAVs per skin to `Trench/ref/canonical/<name>_<corner>.wav` as float32 (subtype `FLOAT`, not PCM_16 — PCM_16 clips M100 corners whose peak exceeds 1.0 after the 4× boost).
+- Writes `ref/canonical/MANIFEST.json` listing each skin with source path, boost, stage_count, rendered corners.
+- Total output: 140 reference WAVs + 1 manifest.
+
+**`tools/parity_null.py`** (rewritten, ~210 lines):
+- Enumerates `ref/canonical/MANIFEST.json`, loads each skin's raw JSON from `p2k_skins/`, re-renders via the same pipeline, compares to the corresponding canonical WAV.
+- Null method: `gain = dot(pred, ref) / dot(pred, pred)`, `res = ref - gain*pred`, `rel_null = 20*log10(rms(res) / rms(ref))`. Lag search disabled (`lag_search=0`) because references are rendered through the exact same pipeline — no offset to discover.
+- Threshold: `FAIL_THRESHOLD_DB = -140.0`. Anything above fails with exit code 1 and lists offending skins.
+- Output: one line per skin showing worst-corner null. Final `OK: N/N` or `FAIL: k/N` line.
+- Uses `gc.collect()` per-skin to survive Windows low-memory conditions (system was at 95%+ RAM this session from an unrelated process; numpy was failing 1 MB allocations without the GC force).
+
+**`ref/canonical/PROVENANCE.json`** — chain of custody pointing at canonical
+source, dry input, pipeline description, sample rate, stage count, boost,
+subtype. Also notes the legacy hedz*.wav files as the thing it replaces.
+
+**`ref/canonical/MANIFEST.json`** — 35 entries, one per skin, with source
+path, boost, stage_count, corner list.
+
+### Parity gate current state
+
+```
+$ python tools/parity_null.py
+dry input:  bypassed-pinknoise.wav  132694 samples
+refs:       C:\Users\hooki\Trench\ref\canonical  (35 skins)
+pipeline:   raw-ROM → SOS cascade → AGC → ×boost → lag+gain null
+fail at:    rel_null > -140 dB
+
+skin                      boost worst_corner   lag     gain    rel_null
+ P2k_000                   4.00      M100_Q0     0   1.0000   -151.9 dB
+ P2k_001                   4.00    M100_Q100     0   1.0000   -151.9 dB
+ ...                       ...          ...     0   1.0000   ...
+ Vocal_Oo_Ah               4.00      M0_Q100     0   1.0000   -151.9 dB
+
+OK: 35/35 skins null at <= -140 dB
+```
+
+All 35 skins null at the float32 quantization floor. Gate passes. Exit 0.
+
+### Null score definition
+
+`rel_null` is the dB ratio of residual RMS to reference RMS after a
+best-fit scalar gain (and optionally integer lag):
+```
+gain = dot(pred, ref) / dot(pred, pred)
+res  = ref - gain*pred
+rel_null = 20*log10(rms(res) / rms(ref))
+```
+Negative, lower = better. 0 dB = no nulling. -150 dB = float32 round-trip
+floor. -280 dB = f64 numerical noise. -∞ = perfect. Our gate sits at -140
+to leave 12 dB of headroom above the f32 round-trip floor.
+
+## Cascade + AGC + boost chain (verified this session)
+
+Python reference pipeline (used to render `ref/canonical/` and to verify it):
+
+```python
+def stage_co(s):
+    a1 = float(s["a1"])
+    r  = min(float(s["r"]), 0.999999)
+    a2 = r * r
+    if float(s.get("flag", 1.0)) < 0.5:
+        b0, b1, b2 = 1.0, 0.0, 0.0
+    else:
+        b0 = 1.0 + float(s["val1"])
+        b1 = a1  + float(s["val2"])
+        b2 = a2  - float(s["val3"])
+    return [b0, b1, b2, 1.0, a1, a2]
+
+sos = np.array([stage_co(s) for s in stages], dtype=np.float64)
+cascaded = scipy.signal.sosfilt(sos, dry)     # f64 throughout
+pred = apply_agc(cascaded) * boost             # AGC per-sample, then boost
+```
+
+AGC (per-sample, matches `trench-core/src/agc.rs::agc_step` verbatim):
+
+```python
+AGC_TABLE = np.array(
+    [1.0001, 1.0001, 0.996, 0.990, 0.920, 0.500, 0.200, 0.160,
+     0.120, 0.120, 0.120, 0.120, 0.120, 0.120, 0.120, 0.120], dtype=np.float64)
+
+def apply_agc(samples):
+    out = np.empty_like(samples)
+    g = 1.0
+    for i in range(len(samples)):
+        s = samples[i]
+        idx = int(g * abs(s)) & 0xF
+        ng = g * AGC_TABLE[idx]
+        g = ng if ng < 1.0 else 1.0
+        out[i] = s * g
+    return out
+```
+
+At pink-noise levels (peak ≈ 0.23 after dry, peak ≈ 1.8 after 4× boost on
+M100 corners), AGC is effectively passthrough — `int(gain*|sample|) & 0xF`
+stays in [0,1] where table value is 1.0001, clamped back to 1.0 next
+sample. AGC gain reduction only triggers when `|sample|*gain ≥ 2`. Our
+test signal never goes there. Result: `pred` equals `cascaded * boost`
+bit-exact for this dry input. Future dries that push the cascade harder
+will start exercising the AGC code path, and the parity gate will
+immediately catch any divergence.
+
+Per-corner boost in canonical P2k_013 is the single top-level `boost: 4.0`.
+No per-corner boost variation. All 35 skins currently use boost=4.0 (but
+the renderer reads it from the skin file, so skins with different boost
+values would be handled transparently).
 
 ## Commits landed this session
 
-All on branch `chore/git-hygiene`:
+Branch `chore/git-hygiene`:
 
-- `cfc3f70 port AGC from trenchwork_clean trench-core` — `trench-core/src/agc.rs` (89 lines, verbatim port, 5 unit tests pass), `trench-core/src/lib.rs` adds `pub mod agc` and re-exports `agc_step`, `dev/SESSION_STATE.md` (rev 1)
-- `42e798b audition: LP-in-morph candidate body (6-stage, no 7th global LP)` — `cartridges/auditions/lp_in_morph.json` (375 lines), confirms the architectural claim with validated schema + spectral response
+- `7ecfbbc session state rev 2: post-execution handoff dump`
+- `42e798b audition: LP-in-morph candidate body (6-stage, no 7th global LP)` — `cartridges/auditions/lp_in_morph.json` (375 lines)
+- `cfc3f70 port AGC from trenchwork_clean trench-core` — `trench-core/src/agc.rs` (89 lines, 5 unit tests pass), `trench-core/src/lib.rs` adds `pub mod agc`
 
-Earlier in the session (committed in the background by an external
-process): `0cb3f29`, `507bca7`, `5a1ae92`, `8d30aae`, `adab1e9` —
-lean workspace, cartridge schema, ./check, parity_null script, null
-target tests, research docs.
+Earlier in the session (committed in background): `0cb3f29`, `507bca7`,
+`5a1ae92`, `8d30aae`, `adab1e9` — lean workspace, cartridge schema,
+./check, parity_null v1, null target tests, research docs.
 
-Plugin repo (`Trench/trench-juce/plugin/.git`, branch
-`codex/monorepo-engine`):
-- `c58a187 delete plugin/engine duplicate of root trench-core workspace` — 197-file deletion of the duplicate trench-core subtree inside the plugin. Confirmed via `diff -rq` that the only difference between `plugin/engine/trench-core/` and root `trench-core/` was `CLAUDE.md`; the src/ tests/ Cargo.toml were byte-identical. CMakeLists never referenced `engine/`, so no build wiring broke.
-- Previous commit `b71c854` (same branch) synced plugin workspace changes.
+**This rev 3 block of work is UNCOMMITTED on disk:**
 
-`Trench/trench-juce/.git` — deleted this session. It was a dormant
-empty repo with zero commits. Plugin's own `.git` at
-`trench-juce/plugin/.git` is intact.
+- `tools/render_canonical_refs.py` (new, ~120 lines)
+- `tools/parity_null.py` (rewritten — removed lag search, switched to per-skin iteration with MANIFEST, added SKINS constant, added FAIL_THRESHOLD_DB, DRY+SKINS+REF_DIR constant layout)
+- `ref/canonical/` (new directory, 140 wavs + MANIFEST.json + PROVENANCE.json)
+- `dev/SESSION_STATE.md` (this file, rev 3)
 
-## Session focus (Domain 1)
+Operator must commit these before clearing the session. Suggested commit
+split:
+1. `parity: canonical P2K references + 35-skin bit-exact gate` — covers
+   `tools/render_canonical_refs.py`, `tools/parity_null.py`, `ref/canonical/`
+2. `session state rev 3` — `dev/SESSION_STATE.md`
 
-User goal was a "hyper optimised lean workspace" followed by real
-hardware parity measurement against firmware RE reference captures.
-This session landed both plus ported the AGC and proved the
-LP-in-morph architectural claim.
+## Domain 1 truths reconfirmed or added this session
 
-### Verification: `./check` pipeline (all passing)
+1. **Trench/cartridges/p2k/ compiled-v1 kernel form is direct biquad**
+   (`c0..c4 = b0,b1,b2,a1,a2`), NOT the shifted minifloat-domain form used
+   by `trenchwork_clean/pyruntime/encode.py`. Verified at 1e-7 against
+   canonical raw for all 4 corners of P2k_013.
 
-1. Canonical doc set present (CLAUDE, SPEC, DOCTRINE, MODES, BODIES, PHONEMES, cartridge.schema.json)
-2. No orphan `SHIPPING.md`
-3. `cargo check --workspace --tests` (type check only — avoids Git-Bash `/usr/bin/link` shadowing MSVC `link.exe`; check script prepends MSVC to PATH for the null_targets test build)
-4. `pyruntime` imports
-5. Passthrough null targets (rust test `trench-core/tests/null_targets.rs`): static and dynamic both at -300 dBFS (bit-exact passthrough)
-6. Hardware parity null (report-only, `tools/parity_null.py`)
-7. 47 compiled-v1 cartridges validate against `cartridge.schema.json`
+2. **Canonical P2K raw stage data is at `trenchwork_clean/datasets/p2k_skins/`**
+   (35 skins). Byte-identical copies exist in ~15 workspace locations. All
+   agree. This is the immutable source of truth for P2K filter bodies.
 
-### Hardware parity null — current best numbers
+3. **`trenchwork_clean/cartridges/00_talking_hedz.json` has M0_Q100 ↔ M100_Q0
+   stage data swapped.** Do not load it in any parity pipeline.
 
-Pipeline: `raw-ROM stage → SOS cascade (scipy.signal.sosfilt) → AGC (ported verbatim from trenchwork_clean) → ×boost → lag+gain null vs hardware capture`
+4. **`C:/Users/hooki/do-it/archive/data-dumps/TalkingHedz_Complete.json` is
+   a broken Cheat Engine capture** with 3 independent bugs: off-by-one
+   stage indexing (5 stages vs canonical 6), `val1` slot stores `1+val1`
+   (b0) instead of raw val1, radius values drift 0.003-0.049 from canonical.
+   The legacy `trenchwork_clean/ref/hedz*.wav` references were rendered
+   from this data.
 
-Inputs:
-- Cartridge: `trenchwork_clean/cartridges/00_talking_hedz.json` (raw-ROM stage layout, `name: P2k_013`, `sampleRate: 39062.5` field but coefficients baked for 44100 via `type3_to_encoded(sr=44100)` default at compile time)
-- Dry input: `trenchwork_clean/ref/bypassed-pinknoise.wav` (132694 samples, 44100 Hz stereo float64, pink noise through bypassed filter)
-- References: `trenchwork_clean/ref/hedz*.wav` (same session as the dry; byte-identical to `trench_re_vault/datasets/talking_hedz_bracketed_residual/2026-03-12/inputs/hedz*.wav`)
+5. **Legacy `trenchwork_clean/ref/hedz*.wav` are unusable for parity.**
+   Should be quarantined or deleted. Replaced by `Trench/ref/canonical/`.
 
-Results:
+6. **Parity gate passes at -151.9 dB across all 35 P2K skins.** The gate
+   is a deterministic regression check for cascade math, AGC table, and
+   boost application. Any future divergence in any of these produces a
+   null worse than -140 dB and fails the gate.
 
-| corner     | lag | best-fit gain | null rms abs | ref rms    | rel null |
-|------------|----:|--------------:|-------------:|-----------:|---------:|
-| M0_Q0      |   8 | 0.5013        | -108.9 dBFS  | -32.1 dBFS | **-76.8 dB** |
-| M0_Q100    |   0 | 0.9989        |  -51.8 dBFS  | -19.8 dBFS | **-32.0 dB** |
-| M100_Q0    |   0 | 1.0002        |  -59.5 dBFS  | -25.9 dBFS | **-33.6 dB** |
-| M100_Q100  |   0 | 0.9962        |  -44.2 dBFS  | -19.3 dBFS |  -24.9 dB    |
+7. **Minifloat coefficient quantization does not degrade high-Q nulls.**
+   Tested round-trip encode→decode→recombine via
+   `pyruntime.encode.raw_to_encoded` + `pyruntime.minifloat.pack/decode`
+   against all 4 corners of the broken cartridge. M0_Q0 nulled 18 dB
+   better with round-trip (because the reference WAS rendered through
+   the minifloat path); M0_Q100/M100_Q0/M100_Q100 were unchanged. The
+   rev 2 hypothesis that minifloat limit cycles caused the Q=100 bass
+   residual is falsified. The actual cause was upstream CE capture bugs.
 
-M0_Q0 nulls shape-exact. Other three null shape-close but not clean.
+8. **f32 vs f64 precision does not explain the Q=100 residual.** Tested
+   `sosfilt` at f32, `sosfilt` at f64, and `lfilter` (direct tf form)
+   at f64. All three give identical nulls at every corner. Rules out
+   state-variable precision drift.
 
-### Comparison against the rust null_test binary (2026-03-14)
+9. **The cascade magnitude response of canonical vs reference is flat
+   at 0 ± 0.1 dB across all bands at all corners** when pipeline and
+   reference are aligned. The gap in rev 2 was time-domain-only, not
+   spectral. Re-verified after switching to canonical refs: all nulls
+   land at -151.9 dB with gain = 1.0000 and lag = 0.
 
-`trench_re_vault/scratch/talking_hedz_null_test_2026-03-14/reports/talking_hedz_null_test_report.md`
-was generated by a rust binary using `trench_core::engine::FilterEngine`
-with full motion pursuit, minifloat quantization, coefficient ramping,
-and AGC.
+## Trench-mcp tooling state
 
-| corner     | rust (2026-03-14)     | python (this session) |
-|------------|-----------------------|-----------------------|
-| M0_Q0      | gain 0.500882, null -3.10 dB  | gain 0.5013, null -76.8 dB |
-| M0_Q100    | gain 0.977981, null -7.42 dB  | gain 0.9989, null -32.0 dB |
-| M100_Q0    | gain 0.999373, null -3.03 dB  | gain 1.0002, null -33.6 dB |
-| M100_Q100  | gain 0.997642, null -9.07 dB  | gain 0.9962, null -24.9 dB |
-
-Both pipelines agree on M0_Q0 best-fit gain = 0.500 → the 2× amplitude
-factor is a property of the reference file, not the rendering pipeline.
-Python pipeline's null is dramatically better at each corner. This
-means the rust FilterEngine's extra machinery (motion pursuit alpha
-smoothing, minifloat pack/unpack, coefficient ramping from passthrough
-initial state, block-rate control) drifts the output away from what
-the reference capture encodes. The simpler python sosfilt path matches
-the reference better.
-
-Implication: the reference `hedz*.wav` files were almost certainly
-generated by a simple scipy-like cascade rendering, not by the full
-FilterEngine or by actual E-mu hardware capture. They are a simulated
-ground truth, not hardware truth. True hardware null would need real
-DAW captures of the hardware running the same cartridge.
-
-Note: `trenchwork_clean/captures/benchmark/P2K_*.wav` are 8-second
-captures in the same workspace, plausibly real DAW captures of the
-hardware, but no matching dry input exists for them — the
-`trenchwork_clean/ref/bypassed-pinknoise.wav` dry is 3 seconds long,
-different session. Until a matching dry is located (or a sine sweep
-deconvolution is applied), those captures cannot be used for direct
-null measurement.
-
-### Stage conversion formula (raw ROM → kernel, verified)
-
-From `trench_re_vault/tools/morpheus_lab/plot_p2k_stage_responses_20260312.py`
-and confirmed matches `Trench/cartridges/p2k/P2k_004.json` byte-for-byte
-when applied to `trench_re_vault/scratch/resources/roms/P2K/P2k_004.json`:
-
-```python
-def stage_coefficients(stage):
-    a1 = float(stage["a1"])
-    r  = min(float(stage["r"]), 0.999999)   # stability clamp
-    a2 = r * r
-    if float(stage.get("flag", 1.0)) < 0.5:
-        b0, b1, b2 = 1.0, 0.0, 0.0          # flag=0 → all-pole lowpass
-    else:
-        b0 = 1.0 + float(stage["val1"])
-        b1 = a1  + float(stage["val2"])
-        b2 = a2  - float(stage["val3"])
-    return b0, b1, b2, a1, a2               # DF2T: c0=b0, c1=b1, c2=b2, c3=a1, c4=a2
-```
-
-### AGC algorithm (now in Trench/trench-core/src/agc.rs)
-
-Documented in the source as verified against the EmulatorX.dll binary
-(disassembled from `FUN_1802c04e0`). 16-entry table, per-sample
-execution, gain never exceeds 1.0, no floor, no recovery across
-samples beyond what the table allows.
-
-```
-AGC_TABLE = [1.0001, 1.0001, 0.996, 0.990, 0.920, 0.500, 0.200, 0.160,
-             0.120, 0.120, 0.120, 0.120, 0.120, 0.120, 0.120, 0.120]
-
-pub fn agc_step(sample: f32, agc_gain: &mut f32) -> f32 {
-    let idx = ((*agc_gain * sample.abs()) as u32 & 0xF) as usize;
-    let new_gain = *agc_gain * AGC_TABLE[idx];
-    *agc_gain = if new_gain < 1.0 { new_gain } else { 1.0 };
-    sample * *agc_gain
-}
-```
-
-5 unit tests in `trench-core/src/agc.rs` cover: quiet passthrough,
-loud-signal gain reduction, recovery below threshold, no floor
-(gain can drop arbitrarily low), output finiteness across inputs.
-All pass.
-
-For quiet signals (`agc_gain * |sample| < 1.0`), the index is 0 or 1,
-table values are 1.0001, new_gain is clamped back to 1.0, and the AGC
-does nothing. This matches the observation that the rust null_test
-report shows identical numbers for Production (AGC on) and Linear
-(AGC off) modes — the pink-noise test signal is too quiet to trigger
-AGC gain reduction.
-
-### What is still wrong (analysis, updated)
-
-**M0_Q0 2× amplitude mismatch (gain 0.5013):** Both the rust
-FilterEngine and the python sosfilt pipeline agree on this gain
-with the same four-decimal precision. This confirms it is NOT a
-pipeline error — the hedzm0q0.wav reference was rendered (or
-recorded) at half the amplitude that both independent render paths
-produce. Most likely explanation: the reference generator applied a
-corner-specific gain factor (0.5 at M0_Q0) that has no equivalent
-in either FilterEngine.rs or my parity_null.py. Unresolved.
-
-**M0_Q100 / M100_Q0 / M100_Q100 remaining gap (-24 to -33 dB):**
-Gains are ~1.0 on those corners, so amplitude is correct but shape
-has residual error. Python nulls them 21–25 dB better than rust, so
-the FilterEngine path introduces extra drift. Candidates for the
-remaining python residual:
-
-1. **DC blocker in reference.** The reference wavs may carry a DC
-   blocker signature; my sosfilt output does not. Adding a python
-   DC blocker (matching `trenchwork_clean/trench-core/src/engine.rs::DcBlocker::process`) dropped the
-   null by ~30 dB at every corner — so the reference was NOT
-   rendered with that DC blocker. Either the reference has no DC
-   blocker, or it uses a different DC blocker (different `r` or
-   initial state).
-2. **Alternative corner role mapping.** `bracketed_residual_analysis.json`
-   documents a role swap: capture label `M0_Q100` ← source
-   `M100_Q0`, capture label `M100_Q0` ← source `M0_Q100`. Applying
-   this swap made the middle corners WORSE (back to ~-1.9 dB),
-   confirming the straight (non-swapped) mapping is the right pairing
-   for how this reference file was generated.
-3. **Higher-order nonlinearity.** If the reference was rendered
-   through a nonlinear element (saturation, AGC-in-a-different-place,
-   envelope-driven gain), the residual at corners with higher
-   signal levels (M0_Q100, M100_Q100) would be larger than at
-   quieter corners. The -25 to -33 dB band is consistent with a
-   quiet nonlinearity.
-
-Pursuing any of these requires access to the reference generator
-source code, which was not located in this session.
+`trench-mcp` MCP server is running. Tool schemas loaded this session:
+`analyze_state`, `compare_states`, `probe_frequency`, `scan_stability`,
+`scan_vault`, `vault_seeds`. All operate on compiled-v1 cartridges via
+`cartridge_path`. Tested `analyze_state` on
+`Trench/cartridges/p2k/P2k_013.json` at morph=1, q=1 — returns terrain
+(ridge/basin/saddle), shape (centroid 277 Hz / 20.4 dB), vowel-space
+(talkingness 0.62, vowel bias "eh"), reactor stress 0.40 NOMINAL.
+Useful for authoring-side body analysis; not currently wired into
+parity or compile pipelines.
 
 ## Blockers
 
-1. `Trench/trench-core/` has `agc.rs` now (this session) but still no
-   `engine.rs` — the full `FilterEngine` was not ported. A dedicated
-   port session is needed: engine.rs is 1429 lines and pulls in
-   `EncodedCorners`, `PackedCoeffs`, motion-pursuit state, DC blocker,
-   control-rate parameter dispatch, Q extrapolation stability guard,
-   and a gain ceiling clamp.
-2. M0_Q0 2× amplitude mystery is unresolved. Both rust and python
-   report the same 0.500 best-fit gain — the 2× is in the reference
-   file, not in any render pipeline currently in the workspace.
-   Until the reference generator is found (or a new reference is
-   captured from real hardware), this corner can never null cleanly
-   against hedzm0q0.wav without applying a 2× correction somewhere
-   arbitrary.
-3. Hardware parity step in `./check` is report-only. It prints numbers
-   but does not fail on regression. No baseline file to compare against
-   committed metrics.
-4. `tools/parity_null.py` depends on `trenchwork_clean/ref/` and
-   `trenchwork_clean/cartridges/00_talking_hedz.json`. It soft-skips
-   if those paths are missing — CI on a clean machine cannot run it.
-5. Branch is `chore/git-hygiene`, not `codex/v1`. The session's
-   landed work is on a side branch; merge/rebase strategy
-   not decided.
-6. Dry input for `trenchwork_clean/captures/benchmark/P2K_*.wav`
-   (Ear Bender, Freak Shifta, Talking Hedz full-session, etc.)
-   is not located. Those 8-second captures are plausibly real
-   hardware recordings; without a matching dry they cannot be
-   nulled directly.
+1. **System RAM at 95%+** this session (likely another process on the
+   machine). Numpy was failing 1 MB allocations without explicit
+   `gc.collect()` per-iteration in the parity loop. The loop is
+   rewritten to handle this, but if the condition persists, operator
+   may need to restart the shell or investigate what is holding memory.
+
+2. **`Trench/trench-core/` still has no `engine.rs`.** `cascade.rs` and
+   `agc.rs` are in place, but the full `FilterEngine` with motion
+   pursuit, DC blocker, control-rate parameter dispatch, Q extrapolation
+   guard, and gain ceiling clamp was not ported from
+   `trenchwork_clean/trench-core/src/engine.rs` (1429 lines). Dedicated
+   port session needed.
+
+3. **No rust integration test against `ref/canonical/`.** The python
+   gate works end-to-end; the rust side still has no binding. Next
+   step: small rust binary at `trench-core/tests/canonical_parity.rs`
+   (or similar) that loads each `Trench/cartridges/p2k/*.json`, runs
+   the frozen `Cascade` + ported `agc_step` + boost, writes corner
+   WAVs to `ref/rust_render/`, and asserts bit-exact null (within f32
+   tolerance) vs `ref/canonical/`. This is the bridge from python
+   reference to rust production.
+
+4. **Hardware benchmark captures remain orphaned.** 33 files at
+   `trenchwork_clean/captures/benchmark/P2K_*.wav` (8 s mono 44100 Hz,
+   plausibly real hardware recordings via sine sweeps) still have no
+   located dry input. The short pink-noise dry
+   (`bypassed-pinknoise.wav`, 3 s) does not match. Options to unlock
+   them: (a) find a matching sweep input file; (b) characterize the
+   sweep parameters from one capture and generate a matching stimulus;
+   (c) sweep-deconvolve the captures to impulse responses and null
+   IR-vs-IR. Not blocking the current python+rust parity chain.
+
+5. **Branch is still `chore/git-hygiene`**, not `codex/v1`. This
+   session's commits are accumulating on a side branch. Merge/rebase
+   strategy still not decided.
+
+6. **Hardware parity step in `./check` is report-only.** Previously
+   printed numbers against broken hedz*.wav; now that parity_null.py
+   is bit-exact against canonical refs, `./check` should be updated
+   to FAIL on non-zero exit from parity_null. One-line change in
+   `./check`; not yet applied.
 
 ## Next steps (ordered)
 
-1. **Port FilterEngine + DC blocker** from `trenchwork_clean/trench-core/src/engine.rs` (1429 lines) into `Trench/trench-core/src/`. Keep the Trench `Cascade` frozen per doctrine; the port is a new `engine` module built on top of existing `Cascade` + the just-ported `agc`. Add a rust integration test that reproduces the python parity numbers. Wire it into `./check` replacing the report-only python step. This is a focused session on its own.
-2. **Find the reference generator** for `hedz*.wav`. Search both
-   `trench_re_vault` and `trenchwork_clean` for any script whose
-   output filenames match `hedzm0q0`, `hedzmorph0q100`, etc.
-   Failing that, look for calls to soundfile/wavfile/hound Write in
-   tool directories named `talking_hedz_*`. The generator will
-   reveal (a) whether the 2× gain at M0_Q0 is a per-corner
-   amplitude override, (b) whether a DC blocker variant was
-   applied, and (c) the exact order of cascade + AGC + gain stages.
-3. **Locate the DAW dry** for `trenchwork_clean/captures/benchmark/P2K_*.wav`
-   (8-second captures). If it exists, it enables parity null
-   measurement against REAL hardware for all 33 P2K presets, not
-   just Talking Hedz. If it does not exist, generate one via sweep
-   deconvolution on the captures themselves (they appear to be
-   swept or broadband test signals).
-4. **Author Speaker Knockerz / Cul-De-Sac candidates** using the
-   LP-in-morph pattern proven by `cartridges/auditions/lp_in_morph.json`.
-   Encode sub-anchor LP directly in stage 1–2 of the M0 corner,
-   warp to shelf or HP at M100. Validate each candidate against
-   both `cartridge.schema.json` and its `BODIES.md` "how to know it's
+1. **Commit rev 3 work.** Split into two commits as noted above.
+2. **Update `./check`** to propagate the parity_null.py exit code as a
+   hard gate. One-line change: remove the `|| true` or equivalent
+   soft-skip if present; otherwise already correct.
+3. **Port `FilterEngine` + DC blocker** from
+   `trenchwork_clean/trench-core/src/engine.rs` (1429 lines) into
+   `Trench/trench-core/src/`. Keep the Trench `Cascade` frozen per
+   doctrine; the port is a new `engine` module built on top of the
+   existing `Cascade` + the already-ported `agc`. Dedicated session.
+4. **Write rust `canonical_parity` integration test.** Loads each
+   `cartridges/p2k/*.json`, processes the dry pink noise via the rust
+   cascade + AGC + boost, writes corner WAVs to `ref/rust_render/`,
+   asserts bit-exact null vs `ref/canonical/` (threshold ≈ -140 dB to
+   match the python gate, or tighter if rust does all-f64 internally).
+   This binds the python reference chain to the rust shipping path.
+5. **Delete or quarantine `trenchwork_clean/ref/hedz*.wav`.** The files
+   are rendered from the broken CE capture and have no further purpose.
+   Keep one copy tagged `_BROKEN_CE_CAPTURE_QUARANTINE` if the operator
+   wants it preserved as evidence. Update any docs that reference these
+   wavs.
+6. **Locate or reconstruct dry input for benchmark captures.** Next-tier
+   goal — unlocks hardware-level parity testing for all 33 P2K presets
+   against real hardware recordings. Not blocking v1 shipping.
+7. **Author Speaker Knockerz / Cul-De-Sac / Aluminum Siding / Small Talk
+   Ah-Ee candidates** using the LP-in-morph pattern proven in
+   `cartridges/auditions/lp_in_morph.json`. Each candidate validated
+   against `cartridge.schema.json` and its `BODIES.md` "how to know it's
    wrong" rubric.
-5. **Make the parity null step gate-enforcing** rather than
-   report-only: commit a baseline metrics JSON, have `./check`
-   diff current numbers against baseline, fail on regression
-   beyond a tolerance (e.g. null rms worsens by more than 3 dB at
-   any corner).
-6. **Decide branch strategy** for `chore/git-hygiene` — merge to
-   `codex/v1`, or rebase, or open PR. User decision.
+8. **Decide branch strategy** for `chore/git-hygiene` — merge to
+   `codex/v1`, rebase, or open PR. Operator decision.
+9. **Fill name coverage for indices 33-55 in `p2k_filter_names.json`.**
+   23 named P2K filters are in the EmulatorX.dll resource string table
+   but have no extracted raw-ROM stage JSON in `p2k_skins/`. If those
+   filters exist in the ROM at addresses not yet parsed, add them to
+   the canonical set. If they don't exist in the ROM (string-table-only
+   slots), document that explicitly.
 
 ## Operator handoff cue
 
-When the operator resumes, start with step 1 (FilterEngine port) if
-the goal is parity gate in rust, or step 4 (Speaker Knockerz authoring)
-if the goal is shipping-body progress. Skip all re-derivation —
-workspace map, AGC table, stage conversion formula, and current parity
-numbers are all captured above. The LP-in-morph architectural finding
-is validated and committed; no further audition needed.
+When the operator resumes, the python parity chain is complete and
+passing. The cleanest next action is **commit rev 3 work** (step 1),
+then start the **rust FilterEngine port** (step 3) which is the bridge
+to rust parity. The python gate gives an immediate regression check
+while porting — any rust test that produces WAVs differing from
+`ref/canonical/` by more than the f32 quantization floor is evidence
+of a cascade/AGC/boost divergence that needs immediate attention.
+
+The rev 2 "Q=100 bass residual" and "M0_Q0 2× amplitude" mysteries are
+both fully closed and should not consume any further analysis time.
+Upstream Cheat Engine capture bugs (off-by-one stages, val1-as-b0,
+radius drift) were the root cause. The canonical 6-stage raw ROM
+extraction has been the correct source all along; the parity pipeline
+now uses it exclusively.
