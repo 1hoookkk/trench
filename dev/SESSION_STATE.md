@@ -664,3 +664,166 @@ rev 3 belief that calibration data was an annotation overlay rather
 than a second extraction class is also closed (rev 4 truth #10). The
 canonical 6-stage raw ROM extraction and the calibration RE dumps are
 both first-class sources for the parity pipeline now.
+
+---
+
+## Rev 4 corrections (2026-04-14, in-session addendum)
+
+### Truth #11 was wrong — there is no 17-of-56 P2K extraction gap
+
+Earlier session belief that 17 of 56 P2K filter types are unextracted is
+**incorrect**. Cross-checked against `re-proven-facts.md`:
+
+- The DLL P2K static ROM table at `DAT_1806d762e` contains **exactly 33
+  entries** (`sub_index` 0..32), filled by `FUN_1802d3ce0`
+  (CPhantomFilterP2k). Reading past index 32 hits ASCII string data.
+- Menu-to-table mapping: `ft = sub_index + 23`. So menu ft=23..55 (33
+  entries: Ace of Bass through Klang Kling) is exactly the ROM table.
+- All 33 are already extracted as `datasets/p2k_skins/P2k_000.json` ..
+  `P2k_032.json`. Sub-index naming, not menu-ft naming. Cross-check
+  validated this session: P2k_011 = ft=34 Boland Bass, P2k_028 = ft=51
+  Bass-O-Matic, P2k_029 = ft=52 Lucifer's Q, P2k_032 = ft=55 Klang Kling.
+- The 17 menu names rev 4 listed as "still missing" (Boland Bass,
+  Lucifer's Q, etc.) are **already in the corpus** under their P2k_NNN
+  sub-index names. The agent that produced rev 4 conflated menu ft with
+  P2k sub-index.
+
+The genuine remaining gap is the **22 computed filter classes** at menu
+ft=0..22 (LP/HP/BP/Phaser/Vocal/Morph/etc.). Those are not in the static
+ROM table at all — they're per-class compiler functions
+(`FUN_1802c5d60`, `FUN_1802c5e40`, `FUN_1802c6020`, etc.). Different
+extraction path entirely. P2K ROM coverage is **33/33 closed**.
+
+### P2K ROM decode pipeline — fully closed this session
+
+End-to-end byte-level decode reverse-engineered against `P2k_001`..
+`P2k_013` from a 13440-byte ROM dump (`dev/emx_p2k_rom_dump.bin`,
+captured via the GhidraMCP plugin's Python console reading 56 entries
+of 240 bytes from `0x1806d762e`). Validation: 13/13 reachable
+sub-indices null at f32 quantization floor, worst single-coef diff
+0.00023, mean ~1e-7.
+
+**Address layout.** The Ghidra label `DAT_1806d762e` sits **30 bytes
+inside** the first real entry, not at the entry boundary. Decompile of
+`FUN_1802d3ce0` reads `puVar6 - 15` u16 (= base − 30 bytes) on the
+first stage iteration. To dump the full table, start at
+`0x1806d762e - 0x1e = 0x1806d7610` and read
+`33 sub_idx × 4 sr_idx × 240 = 31680` bytes.
+
+**Index formula.** `real_entry_index = sub_idx * 4 + sr_idx`, where
+`sr_idx ∈ {0:44100, 1:48000, 2:96000, 3:192000}` and `sub_idx ∈ 0..32`.
+TRENCH uses `sr_idx=0` exclusively.
+
+**Per-entry layout.** 240 bytes = 120 u16 = 6 stages × 4 corners × 5
+words. Stage-major, corner-inner. Within each 20-u16 stage row:
+
+| Position (within stage row) | Corner            | Struct dest |
+|---|---|---|
+| `[0..4]`   | M0_Q0     | `0x2c0` |
+| `[5..9]`   | M0_Q100   | `0x2fc` |
+| `[10..14]` | M100_Q0   | `0x338` |
+| `[15..19]` | M100_Q100 | `0x374` |
+
+**Per-stage 5-word storage** (5 u16 → 5 kernel coefficients):
+
+| Word | Stored value             |
+|---|---|
+| `w0` | `encode((c0 - c1) / 4)` |
+| `w1` | `encode(c1)`            |
+| `w2` | `encode((c2 - c3) / 4)` |
+| `w3` | `encode(c3)`            |
+| `w4` | `encode(c4 / 4)`        |
+
+`encode/decode` is the E-mu u16 minifloat (4-bit exp bias 15, 12-bit
+mantissa, sentinels `0x0000=0`, `0xFFFF=1`) implemented in
+`trench-core/src/minifloat.rs` and `pyruntime/minifloat.py`.
+
+**Recombine** (5 u16 → 5 floats): with `d_i = decode(w_i)`,
+```
+c0 = d0 * 4 + d1
+c1 = d1
+c2 = d2 * 4 + d3
+c3 = d3
+c4 = d4 * 4
+```
+
+NOTE: this differs from the existing `pyruntime.minifloat.pack/decode`
+helper, which omits the `* 4` on `c4`. The existing helper is wrong
+about `c4` storage; downstream code that round-trips through it
+preserves the error symmetrically and so the bug was invisible until
+the ROM was decoded directly. **Open repair item:** fix
+`pyruntime.minifloat.pack` (encode `coeffs.c4 / 4`, not `coeffs.c4`)
+and the matching path in `trench-core/src/minifloat.rs::interpolate_packed`
+if it ships in any consumer. Currently no Trench-side consumer of the
+packed form exists (Trench uses direct biquad cartridges, not packed
+minifloat), so this is a documentation correction rather than a
+behavioral bug.
+
+**Encoded → physics** (already proven in `pyruntime/encode.py`):
+```
+b0 = c4
+b1 = (c0 - 2) * b0
+b2 = (1 - c1) * b0
+a1 = c2 - 2
+a2 = 1 - c3
+val1 = b0 - 1
+val2 = b1 - a1
+val3 = a2 - b2
+r    = sqrt(a2)
+```
+
+**Reachable sub-indices in current dump.** Because of the −30-byte
+shift, `real_entry[0]` is missing its first 30 bytes; `real_entry[1]`
+through `real_entry[~55]` are recoverable via index translation
+`u16_window = u16[N*120 - 15 : (N+1)*120 - 15]`. At `sr_idx=0` that
+means `sub_idx ∈ 1..13` are validatable from the current dump — and
+all 13 are bit-exact (worst 0.00023, well under 0.001 threshold). To
+get sub_idx=0 and sub_idx=14..32, re-dump from `0x1806d7610` with
+size 31680.
+
+**Re-extraction is not currently necessary.** All 33 sub-indices were
+already extracted to `datasets/p2k_skins/P2k_000.json`..`P2k_032.json`
+prior to this session (origin: an earlier extraction tool that read
+the raw physics values directly). The ROM byte-level decode this
+session is independent confirmation, not a replacement source.
+
+### Genuine open extraction work
+
+The 22 computed filter classes (menu ft=0..22) are the real RE gap.
+They are produced at runtime by class-specific compiler functions in
+EmulatorX.dll, not stored as static coefficient tables:
+
+| Vtable slot | Compiler           | Class                       | Notes |
+|---|---|---|---|
+| 0 | `FUN_1802c57f0`    | Vocal1 / Batman slot 9     | CLOSED — `Vocal_Ah_Ay_Ee.json` |
+| 1 | `FUN_1802c58d0`    | Vocal2 / Batman slot 13    | CLOSED — `Vocal_Oo_Ah.json` |
+| 2 | `FUN_1802c5d60`    | CPhantomMorph1             | identified, not extracted |
+| 3 | `FUN_1802c5e40`    | CPhantomMorphLP (Q-table)  | identified, not extracted |
+| 4 | `FUN_1802c5f10`    | CPhantomMorphLPX           | identified, not extracted |
+| 5 | `FUN_1802c6020`    | CPhantomMorph2 (BW split)  | decompiled, runtime PENDING |
+| 6 | `FUN_1802c6590`    | CPhantomMorphDesigner      | proven w/ 79 vector oracles |
+| 7 | `FUN_1802d3ce0`    | CPhantomFilterP2k          | CLOSED this session |
+| 8 | `FUN_1804dc710`    | passthrough/null           | N/A |
+
+Whether any of these are needed for v1 ship is an authoring call, not
+an RE call. The 4 v1 shipping bodies don't depend on heritage filter
+classes; they're authored against `BODIES.md` rubrics on top of the
+P2K-derived sonic table.
+
+### Action items closed by this addendum
+
+- Rev 4 next-step #9 ("fill remaining 17 of 56 name coverage") is
+  **closed as a misunderstanding**, not by extraction. P2K ROM is 33/33.
+  If new RE work targets the 22 computed classes, that's a different
+  axis with a different priority and would warrant its own next-step
+  entry rather than continuing to call it a "P2K gap".
+- The `pyruntime.minifloat.pack/decode` helper has a `c4` storage bug
+  vs the actual ROM; documented above for repair when a consumer
+  appears.
+
+### Files added this addendum
+
+- `dev/emx_p2k_rom_dump.bin` — 13440-byte raw ROM dump (56 partial
+  entries, sub_idx 0..13 partially recoverable). Kept as evidence of
+  the decode reversal; not consumed by any pipeline. Re-dump from
+  `0x1806d7610` for full coverage when needed.
