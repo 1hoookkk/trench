@@ -24,6 +24,14 @@ EXPECTED_BODIES = (
     "Cul-De-Sac",
 )
 
+# Map public names to scorecard result keys
+_BODY_KEY = {
+    "Speaker Knockerz": "speaker_knockerz",
+    "Aluminum Siding": "aluminum_siding",
+    "Small Talk Ah-Ee": "small_talk",
+    "Cul-De-Sac": "cul_de_sac",
+}
+
 
 def _run(cmd: list[str]) -> None:
     print(f"$ {' '.join(cmd)}")
@@ -150,7 +158,9 @@ def main() -> None:
 
     summary_rows = scorecard.get("summary", [])
     by_body = {row.get("body"): row for row in summary_rows}
+    results = scorecard.get("results", {})
     failures: list[str] = []
+    gate_failures: dict[str, list[str]] = {}
     selected: dict[str, dict] = {}
 
     for body in EXPECTED_BODIES:
@@ -168,11 +178,23 @@ def main() -> None:
         if int(row.get("holdout_wins", 0)) < 2:
             failures.append(f"{body}: holdout_wins<2")
 
+        # Extract detailed gate failures from the chosen candidate
+        body_key = _BODY_KEY.get(body)
+        if body_key and body_key in results:
+            body_result = results[body_key]
+            chosen = body_result.get("chosen_from_design") or body_result.get("chosen")
+            if chosen:
+                cand_gate = chosen.get("candidate", {}).get("gate", {})
+                cand_failures = cand_gate.get("failures", [])
+                if cand_failures:
+                    gate_failures[body] = cand_failures
+
     gate_report = {
         "generated_at_utc": datetime.now(timezone.utc).isoformat(),
         "passed": len(failures) == 0,
         "expected_bodies": list(EXPECTED_BODIES),
         "failures": failures,
+        "gate_failures": gate_failures,
         "scorecard_path": str(scorecard_path),
         "protocol": scorecard.get("protocol", {}),
         "selected": selected,
@@ -209,6 +231,15 @@ def main() -> None:
         lines += ["", "## Failures", ""]
         for item in failures:
             lines.append(f"- {item}")
+
+    if gate_failures:
+        lines += ["", "## Detailed Gate Failures", ""]
+        for body, body_failures in gate_failures.items():
+            lines.append(f"### {body}")
+            lines.append("")
+            for f in body_failures:
+                lines.append(f"- {f}")
+            lines.append("")
     gate_md.write_text("\n".join(lines), encoding="utf-8")
 
     print(gate_json)
