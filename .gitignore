@@ -30,3 +30,8 @@ trench-operator.skill
 /vault/_clip_bin/
 /vault/_diagnostics/
 /vault/_overnight/
+/vault/_shapes/
+hs_err_pid*.log
+replay_pid*.log
+batch_log.txt
+pdf_out.txt
