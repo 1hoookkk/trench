@@ -491,6 +491,44 @@ Operator must commit before clearing the session. Suggested message:
     stage indexing, val1-as-b0, and radius drift bugs that broke the
     Cheat Engine capture.
 
+12. **`cartridges/p2k/*.json` have f32-quantized coefficients** (~6e-8
+    per coef) compared to the f64 values computed directly from
+    `datasets/p2k_skins/*.json`. The compile path that produced these
+    cartridges round-tripped through f32 somewhere. At low-Q stages
+    this is invisible (-150 dB residual) but high-Q resonators amplify
+    the per-coef error catastrophically: a first-pass rust integration
+    test that loaded compiled cartridges and rendered through the rust
+    cascade produced -58 to -119 dB nulls vs the python references,
+    while the same test loading raw skins via an inline parser
+    produces -274 to -303 dB nulls. The shipping plugin currently
+    consumes these f32-quantized cartridges through `Cartridge::from_json`
+    and is therefore producing slightly degraded coefficients vs the
+    raw ROM truth. The rev 4 rust canonical_parity test in
+    `trench-core/tests/canonical_parity.rs` works around this by
+    loading raw skins directly and validating the Cascade math in
+    isolation. **Open question for the FilterEngine port:** should
+    the compile path be redone in f64, or should a cartridge schema
+    bump preserve f64 coefficients on disk? Documenting here as a
+    finding, not yet acting on it.
+
+13. **`trench_core::agc::agc_step` operates in f32**, while the python
+    parity reference and the rev 4 rust canonical_parity test both
+    use f64 AGC. AGC is path-dependent (branch index =
+    `int(gain*|sample|) & 0xF`), so f32 quantization at any sample
+    where the cascade output peaks above ~1.0 produces a different
+    gain trajectory and tens of dB of residual. Two corners trigger
+    this in the current corpus: `P2k_004 M100_Q0` (cascade output
+    peak ~7.83) and `P2k_032 M0_Q0` (peak ~6.83). At corners where
+    cascade output stays below 1.0, AGC is effectively a no-op (table
+    index 0 → 1.0001 → clamped to 1.0) and f32 vs f64 produce
+    identical results. **Open question for the FilterEngine port:**
+    should `agc_step` keep an f32 entry point for JUCE buffer
+    parity, or expose an f64 variant for engine internals to use,
+    or migrate entirely to f64? The rev 4 rust canonical_parity test
+    sidesteps this by using an inline f64 mirror (`agc_step_f64`)
+    rather than calling the shipping `agc_step`. Documenting here
+    as a finding.
+
 ## Trench-mcp tooling state
 
 `trench-mcp` MCP server is running. Tool schemas loaded this session:
@@ -543,13 +581,24 @@ parity or compile pipelines.
 
 ## Next steps (ordered)
 
-1. **Commit rev 4 SESSION_STATE update.** One file, one commit message:
-   `session state rev 4: calibration_re bridge + 41-entry parity gate`.
-2. **Port `FilterEngine` + DC blocker** from
+1. ✅ **Done.** Rev 4 SESSION_STATE committed (`6629956`). Findings
+   #12 and #13 added inline above.
+2. ✅ **Done.** Rust canonical_parity test landed (`1257cf9`).
+   `trench-core/tests/canonical_parity.rs`. 132 corners checked,
+   worst pass -147.4 dB, 130 nulls at f64 noise floor (-274 to -303
+   dB). Wired into `./check`. Coverage gap: 2 vocal alternates
+   (3-stage, need passthrough pad) and 6 calibration_re entries
+   (need rust calibration loader). 33 of 41 entries covered.
+3. **Port `FilterEngine` + DC blocker** from
    `trenchwork_clean/trench-core/src/engine.rs` (1429 lines) into
    `Trench/trench-core/src/`. Keep the Trench `Cascade` frozen per
    doctrine; the port is a new `engine` module built on top of the
    existing `Cascade` + the already-ported `agc`. Dedicated session.
+   **Open questions to resolve during port** (truths #12 and #13):
+   - Should the cartridge compile path be redone in f64 to eliminate
+     the ~6e-8 coefficient quantization, or is a schema bump cleaner?
+   - Should `agc_step` migrate to f64, expose an f64 variant alongside
+     the f32 one, or stay f32 with the engine doing the conversion?
    Other trenchwork_clean files left out of the original lean cut
    that may need to come over (or be deliberately rejected): `cdomain.rs`
    (660 lines, coefficient domain conversion), `minifloat.rs` (608
@@ -560,30 +609,27 @@ parity or compile pipelines.
    with Trench's direct biquad form, would need a converter), `kernel.rs`
    (223 lines), `types.rs` (67 lines). `historical.rs` (325 lines) is
    the heritage compiler path and must NOT come over per doctrine.
-3. **Write rust `canonical_parity` integration test.** Loads each
-   `cartridges/p2k/*.json`, processes the dry pink noise via the rust
-   cascade + AGC + boost, writes corner WAVs to `ref/rust_render/`,
-   asserts bit-exact null vs `ref/canonical/` (threshold ≈ -140 dB to
-   match the python gate, or tighter if rust does all-f64 internally).
-   This binds the python reference chain to the rust shipping path.
-   Should also load the 6 calibration_re entries via the same loader
-   path the python gate uses, to keep coverage at 41/41.
-4. **Delete or quarantine `trenchwork_clean/ref/hedz*.wav`.** The files
+4. **Extend rust canonical_parity to cover the 8 missing entries.**
+   Add raw vocal-alternate handling (3-stage, pad with passthrough)
+   and a rust calibration loader (or just inline the same minimal
+   `RawSkin` parser approach with a calibration variant) so the
+   rust test reaches 41/41 coverage matching the python gate.
+5. **Delete or quarantine `trenchwork_clean/ref/hedz*.wav`.** The files
    are rendered from the broken CE capture and have no further purpose.
    Keep one copy tagged `_BROKEN_CE_CAPTURE_QUARANTINE` if the operator
    wants it preserved as evidence. Update any docs that reference these
    wavs.
-5. **Locate or reconstruct dry input for benchmark captures.** Next-tier
+6. **Locate or reconstruct dry input for benchmark captures.** Next-tier
    goal — unlocks hardware-level parity testing for all 33 P2K presets
    against real hardware recordings. Not blocking v1 shipping.
-6. **Author Speaker Knockerz / Cul-De-Sac / Aluminum Siding / Small Talk
+7. **Author Speaker Knockerz / Cul-De-Sac / Aluminum Siding / Small Talk
    Ah-Ee candidates** using the LP-in-morph pattern proven in
    `cartridges/auditions/lp_in_morph.json`. Each candidate validated
    against `cartridge.schema.json` and its `BODIES.md` "how to know it's
    wrong" rubric.
-7. **Decide branch strategy** for `chore/git-hygiene` — merge to
+8. **Decide branch strategy** for `chore/git-hygiene` — merge to
    `codex/v1`, rebase, or open PR. Operator decision.
-8. **Fill remaining 17 of 56 name coverage.** The five wishlisted
+9. **Fill remaining 17 of 56 name coverage.** The five wishlisted
    filters in `docs/calibration/index.json::missing` (Lucifer's Q
    CRITICAL, Boland Bass HIGH, Bassomatic HIGH, Eeh to Aah LOW, Acid
    Ravage LOW) plus 12 unlisted (Multi Q Vox, Zoom Peaks, DJ Alkaline,
@@ -596,15 +642,21 @@ parity or compile pipelines.
 
 ## Operator handoff cue
 
-When the operator resumes, the python parity chain covers 41 of 56
-P2K filter types at -151.9 dB bit-exact. The cleanest next action is
-**commit rev 4 SESSION_STATE update** (step 1), then start the
-**rust FilterEngine port** (step 2) which is the bridge to rust
-parity. The python gate gives an immediate regression check while
-porting — any rust test that produces WAVs differing from
-`ref/canonical/` by more than the f32 quantization floor is evidence
-of a cascade / AGC / boost / a1-reconstruction divergence that needs
-immediate attention.
+Both parity gates are green: python `tools/parity_null.py` covers 41
+of 56 P2K filter types at -151.9 dB (35 raw + 6 calibration_re), and
+rust `cargo test -p trench-core --test canonical_parity --release`
+covers 33 raw skins (132 corners) at worst-pass -147.4 dB. `./check`
+ties both into a single hard gate. The cleanest next action is the
+**rust FilterEngine port** (step 3) which is the bridge from cascade
+parity to a full DSP runtime. Both parity gates give an immediate
+regression check while porting — any change that pushes either above
+its threshold is evidence of a cascade / AGC / boost / a1-reconstruction
+divergence that needs immediate attention.
+
+Open questions for the FilterEngine port (truths #12 and #13):
+the f32 cartridge coefficient quantization (compile path) and the
+f32 vs f64 AGC gain trajectory divergence. Document the chosen
+resolution at port time.
 
 The rev 2 "Q=100 bass residual" and "M0_Q0 2× amplitude" mysteries are
 fully closed (root cause: upstream Cheat Engine capture bugs). The
