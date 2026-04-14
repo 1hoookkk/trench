@@ -5,6 +5,7 @@
   "tokens": [
     {
       "id": "consonants.p",
+      "pill": "P",
       "label": "P plosive burst",
       "category": "consonants",
       "key": "p",
@@ -12,6 +13,7 @@
     },
     {
       "id": "consonants.s",
+      "pill": "S",
       "label": "S fricative",
       "category": "consonants",
       "key": "s",
@@ -19,6 +21,7 @@
     },
     {
       "id": "consonants.sh",
+      "pill": "SH",
       "label": "SH fricative",
       "category": "consonants",
       "key": "sh",
@@ -26,6 +29,7 @@
     },
     {
       "id": "consonants.t",
+      "pill": "T",
       "label": "T plosive burst",
       "category": "consonants",
       "key": "t",
@@ -33,6 +37,7 @@
     },
     {
       "id": "electronic.acid",
+      "pill": "ACID",
       "label": "Acid Sweep",
       "category": "electronic",
       "key": "acid",
@@ -40,6 +45,7 @@
     },
     {
       "id": "electronic.telephone",
+      "pill": "PHN",
       "label": "Telephone Band",
       "category": "electronic",
       "key": "telephone",
@@ -47,6 +53,7 @@
     },
     {
       "id": "heritage.ph_004",
+      "pill": "H04",
       "label": "PH_004 (Vocal Oo-Ah)",
       "category": "heritage_phonemes",
       "key": "ph_004",
@@ -54,6 +61,7 @@
     },
     {
       "id": "heritage.ph_009",
+      "pill": "H09",
       "label": "PH_009 (Swept EQ 3/1 Octave, BassBox 303)",
       "category": "heritage_phonemes",
       "key": "ph_009",
@@ -61,6 +69,7 @@
     },
     {
       "id": "heritage.ph_011",
+      "pill": "H11",
       "label": "PH_011 (Contrary Bandpass)",
       "category": "heritage_phonemes",
       "key": "ph_011",
@@ -68,6 +77,7 @@
     },
     {
       "id": "heritage.ph_013",
+      "pill": "H13",
       "label": "PH_013 (Swept EQ 3/1 Octave, Bat Phaser)",
       "category": "heritage_phonemes",
       "key": "ph_013",
@@ -75,6 +85,7 @@
     },
     {
       "id": "heritage.ph_021",
+      "pill": "H21",
       "label": "PH_021 (No Filter, 2 Pole Bandpass)",
       "category": "heritage_phonemes",
       "key": "ph_021",
@@ -82,6 +93,7 @@
     },
     {
       "id": "heritage.ph_023",
+      "pill": "H23",
       "label": "PH_023 (No Filter, 6 Pole Lowpass)",
       "category": "heritage_phonemes",
       "key": "ph_023",
@@ -89,6 +101,7 @@
     },
     {
       "id": "heritage.ph_028",
+      "pill": "H28",
       "label": "PH_028 (TB or Not TB, Millennium)",
       "category": "heritage_phonemes",
       "key": "ph_028",
@@ -96,6 +109,7 @@
     },
     {
       "id": "instruments.bassoon",
+      "pill": "BSN",
       "label": "Bassoon body",
       "category": "instruments",
       "key": "bassoon",
@@ -103,6 +117,7 @@
     },
     {
       "id": "instruments.clarinet",
+      "pill": "CLR",
       "label": "Clarinet body",
       "category": "instruments",
       "key": "clarinet",
@@ -110,6 +125,7 @@
     },
     {
       "id": "instruments.flute",
+      "pill": "FLT",
       "label": "Flute body",
       "category": "instruments",
       "key": "flute",
@@ -117,6 +133,7 @@
     },
     {
       "id": "instruments.french_horn",
+      "pill": "FH",
       "label": "French horn body",
       "category": "instruments",
       "key": "french_horn",
@@ -124,6 +141,7 @@
     },
     {
       "id": "instruments.oboe",
+      "pill": "OB",
       "label": "Oboe body",
       "category": "instruments",
       "key": "oboe",
@@ -131,6 +149,7 @@
     },
     {
       "id": "instruments.trumpet",
+      "pill": "TRP",
       "label": "Trumpet body",
       "category": "instruments",
       "key": "trumpet",
@@ -138,6 +157,7 @@
     },
     {
       "id": "instruments.tuba",
+      "pill": "TBA",
       "label": "Tuba body",
       "category": "instruments",
       "key": "tuba",
@@ -145,6 +165,7 @@
     },
     {
       "id": "landmarks.air_band",
+      "pill": "AIR",
       "label": "air_band",
       "category": "landmarks",
       "key": "air_band",
@@ -152,6 +173,7 @@
     },
     {
       "id": "landmarks.chest_resonance",
+      "pill": "CHST",
       "label": "chest_resonance",
       "category": "landmarks",
       "key": "chest_resonance",
@@ -159,6 +181,7 @@
     },
     {
       "id": "landmarks.ear_canal_resonance",
+      "pill": "ECR",
       "label": "ear_canal_resonance",
       "category": "landmarks",
       "key": "ear_canal_resonance",
@@ -166,6 +189,7 @@
     },
     {
       "id": "landmarks.presence_peak",
+      "pill": "PRS",
       "label": "presence_peak",
       "category": "landmarks",
       "key": "presence_peak",
@@ -173,6 +197,7 @@
     },
     {
       "id": "landmarks.room_mode_medium",
+      "pill": "RMM",
       "label": "room_mode_medium",
       "category": "landmarks",
       "key": "room_mode_medium",
@@ -180,6 +205,7 @@
     },
     {
       "id": "landmarks.room_mode_small",
+      "pill": "RMS",
       "label": "room_mode_small",
       "category": "landmarks",
       "key": "room_mode_small",
@@ -187,6 +213,7 @@
     },
     {
       "id": "landmarks.sibilance_band",
+      "pill": "SIB",
       "label": "sibilance_band",
       "category": "landmarks",
       "key": "sibilance_band",
@@ -194,6 +221,7 @@
     },
     {
       "id": "landmarks.telephone_band_high",
+      "pill": "THI",
       "label": "telephone_band_high",
       "category": "landmarks",
       "key": "telephone_band_high",
@@ -201,6 +229,7 @@
     },
     {
       "id": "landmarks.telephone_band_low",
+      "pill": "TLO",
       "label": "telephone_band_low",
       "category": "landmarks",
       "key": "telephone_band_low",
@@ -208,6 +237,7 @@
     },
     {
       "id": "landmarks.vocal_tract_f1_floor",
+      "pill": "F1F",
       "label": "vocal_tract_f1_floor",
       "category": "landmarks",
       "key": "vocal_tract_f1_floor",
@@ -215,6 +245,7 @@
     },
     {
       "id": "measured_bells.berlin_freedom",
+      "pill": "BRL",
       "label": "berlin_freedom",
       "category": "measured_bells",
       "key": "berlin_freedom",
@@ -222,6 +253,7 @@
     },
     {
       "id": "measured_bells.freiburg_hosanna",
+      "pill": "FRB",
       "label": "freiburg_hosanna",
       "category": "measured_bells",
       "key": "freiburg_hosanna",
@@ -229,6 +261,7 @@
     },
     {
       "id": "measured_bells.st_mary_le_tower",
+      "pill": "STM",
       "label": "st_mary_le_tower",
       "category": "measured_bells",
       "key": "st_mary_le_tower",
@@ -236,6 +269,7 @@
     },
     {
       "id": "measured_bells.stretched_treble",
+      "pill": "STR",
       "label": "stretched_treble",
       "category": "measured_bells",
       "key": "stretched_treble",
@@ -243,6 +277,7 @@
     },
     {
       "id": "moog.moog_bass_compensated",
+      "pill": "MGB",
       "label": "Moog LPF (bass boost)",
       "category": "moog",
       "key": "moog_bass_compensated",
@@ -250,6 +285,7 @@
     },
     {
       "id": "moog.moog_self_oscillating",
+      "pill": "MGO",
       "label": "Moog self-oscillation",
       "category": "moog",
       "key": "moog_self_oscillating",
@@ -257,6 +293,7 @@
     },
     {
       "id": "moog.moog_uncompensated",
+      "pill": "MGU",
       "label": "Moog LPF (no bass comp)",
       "category": "moog",
       "key": "moog_uncompensated",
@@ -264,6 +301,7 @@
     },
     {
       "id": "nasals.nasal_m",
+      "pill": "M",
       "label": "M murmur",
       "category": "nasals",
       "key": "nasal_m",
@@ -271,6 +309,7 @@
     },
     {
       "id": "nasals.nasal_n",
+      "pill": "N",
       "label": "N murmur",
       "category": "nasals",
       "key": "nasal_n",
@@ -278,6 +317,7 @@
     },
     {
       "id": "singer.singers_formant",
+      "pill": "SF",
       "label": "Singer's Formant (ring)",
       "category": "singer",
       "key": "singers_formant",
@@ -285,6 +325,7 @@
     },
     {
       "id": "vowels.ae",
+      "pill": "AE",
       "label": "AE (/\u00e6/ had)",
       "category": "vowels",
       "key": "ae",
@@ -292,6 +333,7 @@
     },
     {
       "id": "vowels.ah",
+      "pill": "AH",
       "label": "AH (/\u0251/ father)",
       "category": "vowels",
       "key": "ah",
@@ -299,6 +341,7 @@
     },
     {
       "id": "vowels.aw",
+      "pill": "AW",
       "label": "AW (/\u0254/ saw)",
       "category": "vowels",
       "key": "aw",
@@ -306,6 +349,7 @@
     },
     {
       "id": "vowels.ee",
+      "pill": "EE",
       "label": "EE (/i/ heed)",
       "category": "vowels",
       "key": "ee",
@@ -313,6 +357,7 @@
     },
     {
       "id": "vowels.eh",
+      "pill": "EH",
       "label": "EH (/\u025b/ head)",
       "category": "vowels",
       "key": "eh",
@@ -320,6 +365,7 @@
     },
     {
       "id": "vowels.er",
+      "pill": "ER",
       "label": "ER (/\u025d/ bird)",
       "category": "vowels",
       "key": "er",
@@ -327,6 +373,7 @@
     },
     {
       "id": "vowels.ih",
+      "pill": "IH",
       "label": "IH (/\u026a/ hid)",
       "category": "vowels",
       "key": "ih",
@@ -334,6 +381,7 @@
     },
     {
       "id": "vowels.oo",
+      "pill": "OO",
       "label": "OO (/u/ who)",
       "category": "vowels",
       "key": "oo",
@@ -341,6 +389,7 @@
     },
     {
       "id": "vowels.schwa",
+      "pill": "SC",
       "label": "SCHWA (/\u0259/ about)",
       "category": "vowels",
       "key": "schwa",
@@ -348,6 +397,7 @@
     },
     {
       "id": "vowels.uh",
+      "pill": "UH",
       "label": "UH (/\u028a/ hood)",
       "category": "vowels",
       "key": "uh",
