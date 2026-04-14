@@ -1,0 +1,357 @@
+{
+  "format": "phoneme-pill-manifest-v1",
+  "generated_from": "vault/_phonemes/token_inventory_unified_v2.json",
+  "token_count": 50,
+  "tokens": [
+    {
+      "id": "consonants.p",
+      "label": "P plosive burst",
+      "category": "consonants",
+      "key": "p",
+      "path": "cartridges/engine/consonants/p.json"
+    },
+    {
+      "id": "consonants.s",
+      "label": "S fricative",
+      "category": "consonants",
+      "key": "s",
+      "path": "cartridges/engine/consonants/s.json"
+    },
+    {
+      "id": "consonants.sh",
+      "label": "SH fricative",
+      "category": "consonants",
+      "key": "sh",
+      "path": "cartridges/engine/consonants/sh.json"
+    },
+    {
+      "id": "consonants.t",
+      "label": "T plosive burst",
+      "category": "consonants",
+      "key": "t",
+      "path": "cartridges/engine/consonants/t.json"
+    },
+    {
+      "id": "electronic.acid",
+      "label": "Acid Sweep",
+      "category": "electronic",
+      "key": "acid",
+      "path": "cartridges/engine/electronic/acid.json"
+    },
+    {
+      "id": "electronic.telephone",
+      "label": "Telephone Band",
+      "category": "electronic",
+      "key": "telephone",
+      "path": "cartridges/engine/electronic/telephone.json"
+    },
+    {
+      "id": "heritage.ph_004",
+      "label": "PH_004 (Vocal Oo-Ah)",
+      "category": "heritage_phonemes",
+      "key": "ph_004",
+      "path": "cartridges/engine/heritage_phonemes/ph_004.json"
+    },
+    {
+      "id": "heritage.ph_009",
+      "label": "PH_009 (Swept EQ 3/1 Octave, BassBox 303)",
+      "category": "heritage_phonemes",
+      "key": "ph_009",
+      "path": "cartridges/engine/heritage_phonemes/ph_009.json"
+    },
+    {
+      "id": "heritage.ph_011",
+      "label": "PH_011 (Contrary Bandpass)",
+      "category": "heritage_phonemes",
+      "key": "ph_011",
+      "path": "cartridges/engine/heritage_phonemes/ph_011.json"
+    },
+    {
+      "id": "heritage.ph_013",
+      "label": "PH_013 (Swept EQ 3/1 Octave, Bat Phaser)",
+      "category": "heritage_phonemes",
+      "key": "ph_013",
+      "path": "cartridges/engine/heritage_phonemes/ph_013.json"
+    },
+    {
+      "id": "heritage.ph_021",
+      "label": "PH_021 (No Filter, 2 Pole Bandpass)",
+      "category": "heritage_phonemes",
+      "key": "ph_021",
+      "path": "cartridges/engine/heritage_phonemes/ph_021.json"
+    },
+    {
+      "id": "heritage.ph_023",
+      "label": "PH_023 (No Filter, 6 Pole Lowpass)",
+      "category": "heritage_phonemes",
+      "key": "ph_023",
+      "path": "cartridges/engine/heritage_phonemes/ph_023.json"
+    },
+    {
+      "id": "heritage.ph_028",
+      "label": "PH_028 (TB or Not TB, Millennium)",
+      "category": "heritage_phonemes",
+      "key": "ph_028",
+      "path": "cartridges/engine/heritage_phonemes/ph_028.json"
+    },
+    {
+      "id": "instruments.bassoon",
+      "label": "Bassoon body",
+      "category": "instruments",
+      "key": "bassoon",
+      "path": "cartridges/engine/instruments/bassoon.json"
+    },
+    {
+      "id": "instruments.clarinet",
+      "label": "Clarinet body",
+      "category": "instruments",
+      "key": "clarinet",
+      "path": "cartridges/engine/instruments/clarinet.json"
+    },
+    {
+      "id": "instruments.flute",
+      "label": "Flute body",
+      "category": "instruments",
+      "key": "flute",
+      "path": "cartridges/engine/instruments/flute.json"
+    },
+    {
+      "id": "instruments.french_horn",
+      "label": "French horn body",
+      "category": "instruments",
+      "key": "french_horn",
+      "path": "cartridges/engine/instruments/french_horn.json"
+    },
+    {
+      "id": "instruments.oboe",
+      "label": "Oboe body",
+      "category": "instruments",
+      "key": "oboe",
+      "path": "cartridges/engine/instruments/oboe.json"
+    },
+    {
+      "id": "instruments.trumpet",
+      "label": "Trumpet body",
+      "category": "instruments",
+      "key": "trumpet",
+      "path": "cartridges/engine/instruments/trumpet.json"
+    },
+    {
+      "id": "instruments.tuba",
+      "label": "Tuba body",
+      "category": "instruments",
+      "key": "tuba",
+      "path": "cartridges/engine/instruments/tuba.json"
+    },
+    {
+      "id": "landmarks.air_band",
+      "label": "air_band",
+      "category": "landmarks",
+      "key": "air_band",
+      "path": "cartridges/engine/landmarks/air_band.json"
+    },
+    {
+      "id": "landmarks.chest_resonance",
+      "label": "chest_resonance",
+      "category": "landmarks",
+      "key": "chest_resonance",
+      "path": "cartridges/engine/landmarks/chest_resonance.json"
+    },
+    {
+      "id": "landmarks.ear_canal_resonance",
+      "label": "ear_canal_resonance",
+      "category": "landmarks",
+      "key": "ear_canal_resonance",
+      "path": "cartridges/engine/landmarks/ear_canal_resonance.json"
+    },
+    {
+      "id": "landmarks.presence_peak",
+      "label": "presence_peak",
+      "category": "landmarks",
+      "key": "presence_peak",
+      "path": "cartridges/engine/landmarks/presence_peak.json"
+    },
+    {
+      "id": "landmarks.room_mode_medium",
+      "label": "room_mode_medium",
+      "category": "landmarks",
+      "key": "room_mode_medium",
+      "path": "cartridges/engine/landmarks/room_mode_medium.json"
+    },
+    {
+      "id": "landmarks.room_mode_small",
+      "label": "room_mode_small",
+      "category": "landmarks",
+      "key": "room_mode_small",
+      "path": "cartridges/engine/landmarks/room_mode_small.json"
+    },
+    {
+      "id": "landmarks.sibilance_band",
+      "label": "sibilance_band",
+      "category": "landmarks",
+      "key": "sibilance_band",
+      "path": "cartridges/engine/landmarks/sibilance_band.json"
+    },
+    {
+      "id": "landmarks.telephone_band_high",
+      "label": "telephone_band_high",
+      "category": "landmarks",
+      "key": "telephone_band_high",
+      "path": "cartridges/engine/landmarks/telephone_band_high.json"
+    },
+    {
+      "id": "landmarks.telephone_band_low",
+      "label": "telephone_band_low",
+      "category": "landmarks",
+      "key": "telephone_band_low",
+      "path": "cartridges/engine/landmarks/telephone_band_low.json"
+    },
+    {
+      "id": "landmarks.vocal_tract_f1_floor",
+      "label": "vocal_tract_f1_floor",
+      "category": "landmarks",
+      "key": "vocal_tract_f1_floor",
+      "path": "cartridges/engine/landmarks/vocal_tract_f1_floor.json"
+    },
+    {
+      "id": "measured_bells.berlin_freedom",
+      "label": "berlin_freedom",
+      "category": "measured_bells",
+      "key": "berlin_freedom",
+      "path": "cartridges/engine/measured_bells/berlin_freedom.json"
+    },
+    {
+      "id": "measured_bells.freiburg_hosanna",
+      "label": "freiburg_hosanna",
+      "category": "measured_bells",
+      "key": "freiburg_hosanna",
+      "path": "cartridges/engine/measured_bells/freiburg_hosanna.json"
+    },
+    {
+      "id": "measured_bells.st_mary_le_tower",
+      "label": "st_mary_le_tower",
+      "category": "measured_bells",
+      "key": "st_mary_le_tower",
+      "path": "cartridges/engine/measured_bells/st_mary_le_tower.json"
+    },
+    {
+      "id": "measured_bells.stretched_treble",
+      "label": "stretched_treble",
+      "category": "measured_bells",
+      "key": "stretched_treble",
+      "path": "cartridges/engine/measured_bells/stretched_treble.json"
+    },
+    {
+      "id": "moog.moog_bass_compensated",
+      "label": "Moog LPF (bass boost)",
+      "category": "moog",
+      "key": "moog_bass_compensated",
+      "path": "cartridges/engine/moog/moog_bass_compensated.json"
+    },
+    {
+      "id": "moog.moog_self_oscillating",
+      "label": "Moog self-oscillation",
+      "category": "moog",
+      "key": "moog_self_oscillating",
+      "path": "cartridges/engine/moog/moog_self_oscillating.json"
+    },
+    {
+      "id": "moog.moog_uncompensated",
+      "label": "Moog LPF (no bass comp)",
+      "category": "moog",
+      "key": "moog_uncompensated",
+      "path": "cartridges/engine/moog/moog_uncompensated.json"
+    },
+    {
+      "id": "nasals.nasal_m",
+      "label": "M murmur",
+      "category": "nasals",
+      "key": "nasal_m",
+      "path": "cartridges/engine/nasals/nasal_m.json"
+    },
+    {
+      "id": "nasals.nasal_n",
+      "label": "N murmur",
+      "category": "nasals",
+      "key": "nasal_n",
+      "path": "cartridges/engine/nasals/nasal_n.json"
+    },
+    {
+      "id": "singer.singers_formant",
+      "label": "Singer's Formant (ring)",
+      "category": "singer",
+      "key": "singers_formant",
+      "path": "cartridges/engine/singer/singers_formant.json"
+    },
+    {
+      "id": "vowels.ae",
+      "label": "AE (/\u00e6/ had)",
+      "category": "vowels",
+      "key": "ae",
+      "path": "cartridges/engine/vowels/ae.json"
+    },
+    {
+      "id": "vowels.ah",
+      "label": "AH (/\u0251/ father)",
+      "category": "vowels",
+      "key": "ah",
+      "path": "cartridges/engine/vowels/ah.json"
+    },
+    {
+      "id": "vowels.aw",
+      "label": "AW (/\u0254/ saw)",
+      "category": "vowels",
+      "key": "aw",
+      "path": "cartridges/engine/vowels/aw.json"
+    },
+    {
+      "id": "vowels.ee",
+      "label": "EE (/i/ heed)",
+      "category": "vowels",
+      "key": "ee",
+      "path": "cartridges/engine/vowels/ee.json"
+    },
+    {
+      "id": "vowels.eh",
+      "label": "EH (/\u025b/ head)",
+      "category": "vowels",
+      "key": "eh",
+      "path": "cartridges/engine/vowels/eh.json"
+    },
+    {
+      "id": "vowels.er",
+      "label": "ER (/\u025d/ bird)",
+      "category": "vowels",
+      "key": "er",
+      "path": "cartridges/engine/vowels/er.json"
+    },
+    {
+      "id": "vowels.ih",
+      "label": "IH (/\u026a/ hid)",
+      "category": "vowels",
+      "key": "ih",
+      "path": "cartridges/engine/vowels/ih.json"
+    },
+    {
+      "id": "vowels.oo",
+      "label": "OO (/u/ who)",
+      "category": "vowels",
+      "key": "oo",
+      "path": "cartridges/engine/vowels/oo.json"
+    },
+    {
+      "id": "vowels.schwa",
+      "label": "SCHWA (/\u0259/ about)",
+      "category": "vowels",
+      "key": "schwa",
+      "path": "cartridges/engine/vowels/schwa.json"
+    },
+    {
+      "id": "vowels.uh",
+      "label": "UH (/\u028a/ hood)",
+      "category": "vowels",
+      "key": "uh",
+      "path": "cartridges/engine/vowels/uh.json"
+    }
+  ]
+}
