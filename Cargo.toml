@@ -1,5 +1,5 @@
 [workspace]
-members = ["trench-codec", "trench-core", "trench-live", "xtask"]
+members = ["trench-core", "trench-live", "xtask"]
 resolver = "2"
 
 # Dependencies compile at full optimization; your crate stays debug-fast

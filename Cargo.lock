@@ -1690,10 +1690,6 @@ dependencies = [
 ]
 
 [[package]]
-name = "trench-codec"
-version = "0.1.0"
-
-[[package]]
 name = "trench-core"
 version = "0.1.0"
 dependencies = [
