@@ -1,7 +1,7 @@
 //! Cross-language parity gate for the baked Talking Hedz cartridge.
 //!
 //! **What this test proves.** The integer heritage grid in
-//! `vault/_phonemes/heritage_designer_sections.json`, compiled through
+//! `cartridges/engine/_source/heritage_designer_sections.json`, compiled through
 //! the stdlib DF2T emulator in `tools/bake_hedz_const.py`, produces
 //! the same audio sample-for-sample as the Rust `Cascade` when fed
 //! the same static coefficients and the same unit impulse. If this

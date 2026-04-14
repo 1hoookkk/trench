@@ -30,6 +30,11 @@ fn collect_cartridges(dir: &Path, out: &mut Vec<PathBuf>) {
     for entry in entries.flatten() {
         let path = entry.path();
         if path.is_dir() {
+            // `_source/` holds the upstream inventory + shape bank the
+            // bake reads from — not shipping cartridges. Skip it.
+            if path.file_name().and_then(|s| s.to_str()) == Some("_source") {
+                continue;
+            }
             collect_cartridges(&path, out);
         } else if path.extension().and_then(|s| s.to_str()) == Some("json")
             && path.file_name().and_then(|s| s.to_str()) != Some("manifest.json")

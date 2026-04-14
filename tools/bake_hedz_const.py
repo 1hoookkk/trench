@@ -1,7 +1,7 @@
 """Bake Talking Hedz heritage template → Rust const arrays + golden impulse response.
 
-Reads `vault/_phonemes/heritage_designer_sections.json`, pulls the `hedz`
-template's 30-integer authoring grid, compiles it to 4-corner × 6-stage ×
+Reads `cartridges/engine/_source/heritage_designer_sections.json`, pulls
+the `hedz` template's 30-integer authoring grid, compiles it to 4-corner × 6-stage ×
 5-coefficient kernel-form floats via the E-mu type 1/2/3 firmware recipes,
 runs an impulse through the resulting DF2T cascade at each corner, and
 emits two Rust source files:
@@ -36,7 +36,9 @@ import struct
 from pathlib import Path
 
 REPO = Path(__file__).resolve().parents[1]
-DEFAULT_INVENTORY = REPO / "vault" / "_phonemes" / "heritage_designer_sections.json"
+DEFAULT_INVENTORY = (
+    REPO / "cartridges" / "engine" / "_source" / "heritage_designer_sections.json"
+)
 DEFAULT_ROM = REPO / "trench-core" / "src" / "hedz_rom.rs"
 DEFAULT_GOLDEN = REPO / "trench-core" / "src" / "hedz_golden.rs"
 
@@ -276,7 +278,7 @@ def run_impulse(corner_stages: list[tuple[float, ...]], length: int, boost: floa
 # Rust codegen
 # ---------------------------------------------------------------------------
 
-_ROM_HEADER = """//! Talking Hedz cartridge — baked from `vault/_phonemes/heritage_designer_sections.json`.
+_ROM_HEADER = """//! Talking Hedz cartridge — baked from `cartridges/engine/_source/heritage_designer_sections.json`.
 //!
 //! DO NOT EDIT BY HAND. Regenerate with `python tools/bake_hedz_const.py`.
 //!

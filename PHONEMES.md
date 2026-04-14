@@ -7,16 +7,18 @@ touches stages, poles, zeros, frequencies, or Q values directly.
 ## Token vocabulary
 
 Tokens come from the unified phoneme inventory at
-`vault/_phonemes/token_inventory_unified_v2.json`. Each token is a static
-sonic location derived from one of:
+`cartridges/engine/_source/token_inventory_unified_v2.json`. Each
+token is a static sonic location whose `compiled-v1` shape file lives
+under `cartridges/engine/_source/shapes/<category>/<key>.json`.
 
-- the sonic tables (`docs/sonic_tables/tables.json`) — vowels, nasals,
-  landmarks, boundaries
-- the heritage phoneme set (`vault/_phonemes/heritage_phoneme_tokens.json`)
-- shape bank bodies at `vault/_shapes/`
+A token name is a stable string. The compiler resolves names to
+spectral state via the inventory. Unknown token names fail the
+compile.
 
-A token name is a stable string. The compiler resolves names to spectral
-state via the inventory. Unknown token names fail the compile.
+The shipping flat pill layout at `cartridges/engine/<category>/<key>.json`
+is a derived rebuild, produced by `tools/bake_phoneme_pills.py` from
+the `_source/` subtree. Do not hand-edit the flat layout — edit
+`_source/` and re-bake.
 
 ## Grid
 

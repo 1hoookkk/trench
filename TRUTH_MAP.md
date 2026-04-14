@@ -46,10 +46,9 @@ Everything else is a research script.
 
 | Tool | Writes what |
 |---|---|
-| `tools/extract_emu_filter_params.py` | `vault/_phonemes/heritage_designer_sections.json` — heritage integer grids (read-only data for forge targeting) |
+| `tools/extract_emu_filter_params.py` | `cartridges/engine/_source/heritage_designer_sections.json` — heritage integer grids (upstream data for forge targeting and hedz bake) |
 | `tools/bake_hedz_const.py` | `trench-core/src/hedz_rom.rs`, `trench-core/src/hedz_golden.rs` — hardcoded Talking Hedz cartridge + golden impulse vector for the cross-language parity test |
-| `pyruntime/forge_shipping.py` + `pyruntime/forge_shipping_finalists.py` | Shipping body candidates under `vault/_shipping_finalists/` |
-| `tools/author_sonic_bank.py` | `vault/_shapes/` shape-bank regeneration |
+| `tools/bake_phoneme_pills.py` | `cartridges/engine/<category>/<key>.json` + `cartridges/engine/manifest.json` — shipping pill layout baked from `cartridges/engine/_source/` |
 | `tools/parity_null.py` | P2K parity gate consumed by `./check` |
 
 ## Archive / non-canonical paths
@@ -68,11 +67,7 @@ active runtime or the verification command.
 - `docs/notebooklm/packs/` — imported NotebookLM bundle packs
   (ground-truth, ship-engine, frontier). Research context; the real
   ground truth is the integer grid in
-  `vault/_phonemes/heritage_designer_sections.json`.
-- `vault/_atlas/`, `vault/_cracked/`, `vault/_diagnostics/`,
-  `vault/_plots/`, `vault/_profiles/`, `vault/_scorecards/`,
-  `vault/_triage/`, `vault/_splice_candidates/`,
-  `vault/_vocal_pack_2026-04-11/` — authoring scratch and diagnostics.
+  `cartridges/engine/_source/heritage_designer_sections.json`.
 - `pyruntime/api.py` and everything `forge_*.py` that isn't
   `forge_shipping*` — FastAPI research cockpit. Serves the authoring
   UI, not the shipping runtime.

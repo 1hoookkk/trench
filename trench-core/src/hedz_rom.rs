@@ -1,4 +1,4 @@
-//! Talking Hedz cartridge — baked from `vault/_phonemes/heritage_designer_sections.json`.
+//! Talking Hedz cartridge — baked from `cartridges/engine/_source/heritage_designer_sections.json`.
 //!
 //! DO NOT EDIT BY HAND. Regenerate with `python tools/bake_hedz_const.py`.
 //!

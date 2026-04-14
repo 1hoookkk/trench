@@ -30,10 +30,10 @@ filter trajectory. Windows JUCE 8 standalone + VST3.
 - Shipping bodies + rubrics: `BODIES.md`
 - Phoneme authoring contract: `PHONEMES.md`
 - Shipping phoneme pills: `cartridges/engine/` baked from
-  `vault/_phonemes/token_inventory_unified_v2.json` via
-  `tools/bake_phoneme_pills.py`
+  `cartridges/engine/_source/token_inventory_unified_v2.json` +
+  `cartridges/engine/_source/shapes/` via `tools/bake_phoneme_pills.py`
 - Hardcoded Talking Hedz ROM: `trench-core/src/hedz_rom.rs` baked from
-  `vault/_phonemes/heritage_designer_sections.json` via
+  `cartridges/engine/_source/heritage_designer_sections.json` via
   `tools/bake_hedz_const.py`
 - Verify workspace: `./check`
 - Active shipping plugin: `trench-juce/plugin/`

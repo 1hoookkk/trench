@@ -1,6 +1,6 @@
 {
   "format": "phoneme-pill-manifest-v1",
-  "generated_from": "vault/_phonemes/token_inventory_unified_v2.json",
+  "generated_from": "cartridges/engine/_source/token_inventory_unified_v2.json",
   "token_count": 50,
   "tokens": [
     {

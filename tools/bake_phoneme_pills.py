@@ -1,18 +1,27 @@
 """Bake phoneme pills from the unified token inventory → cartridges/engine/.
 
-Reads `vault/_phonemes/token_inventory_unified_v2.json`, copies each token's
-referenced shape file from `vault/_shapes/<category>/<key>.json` to
-`cartridges/engine/<category>/<key>.json`, and writes a single manifest at
-`cartridges/engine/manifest.json` mapping short labels to cartridge paths.
+Reads `cartridges/engine/_source/token_inventory_unified_v2.json` and
+the shape files under `cartridges/engine/_source/shapes/<cat>/<key>.json`,
+and rebuilds the shipping pill directory `cartridges/engine/` alongside
+a single manifest at `cartridges/engine/manifest.json` that maps short
+labels to cartridge paths.
 
 No re-authoring, no schema transformation. The shape files under
-`vault/_shapes/` are already `compiled-v1` cartridges that load directly
-through `trench_core::Cartridge::from_json`. This tool just lifts the ones
-the canonical inventory names into the shipping directory, gives them a
-stable path, and produces a Looperator-pill-friendly manifest.
+`cartridges/engine/_source/shapes/` are already `compiled-v1` cartridges
+that load directly through `trench_core::Cartridge::from_json`. This
+tool just lifts the inventory-named subset out of the source tree into
+the top level of `cartridges/engine/` so the runtime has a stable flat
+directory structure and the user gets a Looperator-pill-friendly
+manifest.
+
+The `_source/` subtree used to live under `vault/_phonemes/` and
+`vault/_shapes/`. It was moved into the shipping directory so the
+shipping chain is self-contained — a fresh clone can build and test
+without needing the (now-deleted) vault research tree.
 
 Stdlib only. Runs in any clean venv. Re-runnable — each run is a clean
-rebuild of `cartridges/engine/` from source.
+rebuild of the flat pill layout in `cartridges/engine/` from
+`cartridges/engine/_source/`.
 """
 from __future__ import annotations
 
@@ -21,8 +30,9 @@ import shutil
 from pathlib import Path
 
 REPO = Path(__file__).resolve().parents[1]
-INVENTORY = REPO / "vault" / "_phonemes" / "token_inventory_unified_v2.json"
-SHAPES = REPO / "vault" / "_shapes"
+SOURCE = REPO / "cartridges" / "engine" / "_source"
+INVENTORY = SOURCE / "token_inventory_unified_v2.json"
+SHAPES = SOURCE / "shapes"
 ENGINE = REPO / "cartridges" / "engine"
 
 # ---------------------------------------------------------------------------
@@ -124,10 +134,18 @@ def main() -> int:
     if not tokens:
         raise SystemExit(f"empty inventory: {INVENTORY}")
 
-    # Clean rebuild — the engine dir is derived, so we own it fully.
+    # Clean rebuild of the flat pill layout. The engine dir is mostly
+    # derived, but `_source/` lives inside it and is SOURCE — we must
+    # not touch it. Delete everything else under ENGINE and re-create.
     if ENGINE.exists():
-        shutil.rmtree(ENGINE)
-    ENGINE.mkdir(parents=True)
+        for entry in ENGINE.iterdir():
+            if entry.name == "_source":
+                continue
+            if entry.is_dir():
+                shutil.rmtree(entry)
+            else:
+                entry.unlink()
+    ENGINE.mkdir(parents=True, exist_ok=True)
 
     manifest_entries: list[dict] = []
     missing: list[str] = []

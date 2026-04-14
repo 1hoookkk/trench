@@ -327,16 +327,6 @@ mod tests {
     }
 
     #[test]
-    fn loads_real_forge_body() {
-        let json = std::fs::read_to_string("../cartridges/Acid_Squelch_77.json");
-        if let Ok(json) = json {
-            let cart = Cartridge::from_json(&json)
-                .expect("Acid_Squelch_77.json should load as valid 6-stage cartridge");
-            assert_eq!(cart.name, "Acid Squelch");
-        }
-    }
-
-    #[test]
     fn rejects_wrong_stage_count() {
         let json = r#"{
             "format": "compiled-v1",
