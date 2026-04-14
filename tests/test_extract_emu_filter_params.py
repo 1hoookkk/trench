@@ -4,6 +4,15 @@ Stdlib unittest only — no pytest dep — so this runs in `./check`
 without expanding the toolchain. Run directly with::
 
     python -m unittest tests.test_extract_emu_filter_params -v
+
+The fixtures under `tests/fixtures/notebooklm/` are the real NotebookLM
+markdown exports of the E-mu MorphDesigner XML (10-13-templates-filter-
+*.md, 83 templates total). The Talking Hedz stage-1 anchor and the
+three documented `shape_id` alias groups from
+`docs/looperator/filter_cube_display_model.md:60-64` are the ground
+truth this test pins against. If any anchor or alias-group hash
+changes, the parser or the canonical hash scheme has drifted and
+needs reconciliation, not "tolerance".
 """
 from __future__ import annotations
 
@@ -11,6 +20,7 @@ import json
 import sys
 import tempfile
 import unittest
+from collections import defaultdict
 from pathlib import Path
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
@@ -35,19 +45,29 @@ try:
 except Exception:
     _PYRUNTIME_AVAILABLE = False
 
-FIXTURE = REPO_ROOT / "tests" / "fixtures" / "notebooklm_hedz_excerpt.md"
+NOTEBOOKLM_DIR = REPO_ROOT / "tests" / "fixtures" / "notebooklm"
+HEDZ_FILE = NOTEBOOKLM_DIR / "13-templates-filter-04.md"
+
+# Documented canonical alias groups — the only validation anchor for
+# the shape_id hash scheme. Source: docs/looperator/filter_cube_display_model.md:60-64.
+EXPECTED_ALIAS_GROUPS = {
+    "abs108_b352f374685b": {"AC Wow", "AC Morph"},
+    "abs144_b5c825095c87": {"50", "100", "hedz0", "d", "hedz"},
+    "abs144_7949e309f941": {"morph0q100", "morph100q100", "ssssss"},
+}
 
 
 class ParseNotebookLMExportTests(unittest.TestCase):
     def setUp(self) -> None:
-        self.text = FIXTURE.read_text(encoding="utf-8")
+        self.text = HEDZ_FILE.read_text(encoding="utf-8")
         self.templates = parse_notebooklm_export(self.text)
 
     def test_hedz_stage1_locks_user_quoted_truth(self) -> None:
-        """Stage 1 of synthetic_hedz must equal the user-quoted Talking
-        Hedz `13-templates-filter-04.md` values verbatim. If this fails
-        the parser broke the only real anchor in the fixture."""
-        tpl = self.templates["synthetic_hedz"]
+        """Stage 1 of `hedz` must equal the user-quoted Talking Hedz
+        `13-templates-filter-04.md` values verbatim. If this fails the
+        parser regressed against the only ground-truth anchor we have
+        from the user's original task description."""
+        tpl = self.templates["hedz"]
         s1 = tpl.sections[0]
         self.assertEqual(s1["index"], 1)
         self.assertEqual(s1["type"], 3)
@@ -57,50 +77,42 @@ class ParseNotebookLMExportTests(unittest.TestCase):
         self.assertEqual(s1["high_gain"], 87)
 
     def test_type_absolute_and_filter_defaults(self) -> None:
-        hedz = self.templates["synthetic_hedz"]
+        hedz = self.templates["hedz"]
         self.assertEqual(hedz.type_absolute, 144)
-        self.assertEqual(hedz.frequency, 0.0)
-        self.assertEqual(hedz.gain, 0.0)
+        self.assertAlmostEqual(hedz.frequency, 1.0)
+        self.assertAlmostEqual(hedz.gain, 1.0)
 
-        acwow = self.templates["synthetic_acwow"]
-        self.assertEqual(acwow.type_absolute, 108)
-        self.assertAlmostEqual(acwow.frequency, 0.5)
-        self.assertAlmostEqual(acwow.gain, 0.25)
-
-    def test_all_six_sections_populated_for_full_template(self) -> None:
-        hedz = self.templates["synthetic_hedz"]
+    def test_all_six_sections_present(self) -> None:
+        hedz = self.templates["hedz"]
         self.assertEqual(len(hedz.sections), 6)
         for i, sec in enumerate(hedz.sections, start=1):
             self.assertEqual(sec["index"], i)
-            # Every section in synthetic_hedz is non-empty by construction.
-            self.assertNotEqual(sec["type"], 0)
 
-    def test_missing_sections_zero_fill(self) -> None:
-        """synthetic_acwow only sets sections 1 and 3 in the fixture;
-        sections 2, 4, 5, 6 must default to all-zero entries."""
-        acwow = self.templates["synthetic_acwow"]
-        self.assertEqual(len(acwow.sections), 6)
-        for missing_idx in (2, 4, 5, 6):
-            sec = acwow.sections[missing_idx - 1]
-            self.assertEqual(sec["index"], missing_idx)
-            self.assertEqual(sec["type"], 0)
-            self.assertEqual(sec["low_freq"], 0)
-            self.assertEqual(sec["low_gain"], 0)
-            self.assertEqual(sec["high_freq"], 0)
-            self.assertEqual(sec["high_gain"], 0)
+    def test_multi_word_template_names_parse(self) -> None:
+        """Real E-mu names contain spaces and digits — the parser
+        must not split on them. File 13 contains `morph0q100`,
+        `morph100q100`, `ssssss`. File 10 contains `All Off Designer`
+        and `Bass Boost LP 1`. Verify both shapes parse from their
+        respective files."""
+        # File 13 templates
+        for name in ("hedz", "hedz0", "morph0q100", "morph100q100", "ssssss"):
+            self.assertIn(name, self.templates, f"missing {name!r} from file 13")
 
-    def test_template_first_seen_order_is_stable(self) -> None:
-        names = list(self.templates.keys())
-        self.assertEqual(names, ["synthetic_hedz", "synthetic_acwow"])
+        text10 = (NOTEBOOKLM_DIR / "10-templates-filter-01.md").read_text(encoding="utf-8")
+        templates10 = parse_notebooklm_export(text10)
+        for name in ("All Off Designer", "Bass Boost LP 1"):
+            self.assertIn(name, templates10, f"missing {name!r} from file 10")
 
     def test_unrelated_lines_are_ignored(self) -> None:
-        """Prose, headings, and bullets that don't match the
-        `<name>/filter/...` shape must be silently dropped."""
+        """Prose, headings, `@type: long` schema bullets, and bullets
+        that don't match the `<name>/filter/...:<number>` shape must
+        be silently dropped."""
         noisy = (
             "# Some heading\n"
             "Some prose paragraph.\n"
             "- not_a_filter_bullet: 42\n"
             "- foo/notfilter/something: 5\n"
+            "- bar/filter/designer-section[1]/type @type: long\n"
             "- bar/filter/designer-section[1]/type: 7\n"
         )
         templates = parse_notebooklm_export(noisy)
@@ -145,24 +157,59 @@ class ShapeIdTests(unittest.TestCase):
 
 class InventoryTests(unittest.TestCase):
     def setUp(self) -> None:
-        self.templates = parse_notebooklm_export(
-            FIXTURE.read_text(encoding="utf-8")
-        )
-        self.inventory = to_inventory(self.templates, extracted_from="fixture")
+        self.templates = extract_directory(NOTEBOOKLM_DIR)
+        self.inventory = to_inventory(self.templates, extracted_from="fixtures")
 
     def test_inventory_format_and_count(self) -> None:
         self.assertEqual(self.inventory["format"], INVENTORY_FORMAT)
-        self.assertEqual(self.inventory["template_count"], 2)
-        self.assertEqual(self.inventory["extracted_from"], "fixture")
+        # 83 templates in 10-13-templates-filter-*.md (file headers say
+        # "Templates in this file: 25/25/25/8 of 83").
+        self.assertEqual(self.inventory["template_count"], 83)
+        self.assertEqual(self.inventory["extracted_from"], "fixtures")
 
     def test_inventory_round_trips_through_json(self) -> None:
         blob = json.dumps(self.inventory)
         decoded = json.loads(blob)
         self.assertEqual(decoded["format"], INVENTORY_FORMAT)
-        hedz = next(t for t in decoded["templates"] if t["name"] == "synthetic_hedz")
+        hedz = next(t for t in decoded["templates"] if t["name"] == "hedz")
         self.assertEqual(hedz["sections"][0]["type"], 3)
+        self.assertEqual(hedz["sections"][0]["low_gain"], 127)
         self.assertEqual(hedz["sections"][0]["high_freq"], 116)
         self.assertEqual(hedz["sections"][0]["high_gain"], 87)
+
+    def test_canonical_alias_groups_reproduce(self) -> None:
+        """The three documented `shape_id` alias groups from
+        docs/looperator/filter_cube_display_model.md:60-64 must
+        reproduce exactly. If any of these break, the canonical hash
+        scheme has drifted — fix `shape_id_for`, do not relax the test."""
+        groups: dict[str, set[str]] = defaultdict(set)
+        for entry in self.inventory["templates"]:
+            groups[entry["shape_id"]].add(entry["name"])
+
+        for shape_id, expected_names in EXPECTED_ALIAS_GROUPS.items():
+            actual = groups.get(shape_id, set())
+            self.assertEqual(
+                actual,
+                expected_names,
+                f"alias group {shape_id} drifted: expected {sorted(expected_names)} "
+                f"got {sorted(actual)}",
+            )
+
+    def test_type_absolute_distribution_matches_source(self) -> None:
+        """Files 10-12 are 25 templates each, file 13 is 8 → 83 total.
+        Distribution against the real markdown should be 108=72,
+        144=9, 140=2. The 4-template gap vs the canonical
+        analysis script's count of 79 (108=70, 144=9) is the four
+        fully-zeroed bypass templates the canonical filtered out:
+        `All Off Designer`, `des` (108) and `tb`, `w` (140). The
+        parser intentionally keeps them so the inventory is faithful
+        to the source markdown."""
+        ta_counts: dict[int | None, int] = defaultdict(int)
+        for entry in self.inventory["templates"]:
+            ta_counts[entry["type_absolute"]] += 1
+        self.assertEqual(ta_counts[108], 72)
+        self.assertEqual(ta_counts[144], 9)
+        self.assertEqual(ta_counts[140], 2)
 
     @unittest.skipUnless(_PYRUNTIME_AVAILABLE, "pyruntime (numpy) not importable")
     def test_designer_compile_load_inventory_round_trip(self) -> None:
@@ -176,10 +223,7 @@ class InventoryTests(unittest.TestCase):
             inv_path.write_text(json.dumps(self.inventory))
 
             templates = designer_compile.load_inventory(inv_path)
-            self.assertEqual(len(templates), 2)
-
-            names = {t.name for t in templates}
-            self.assertEqual(names, {"synthetic_hedz", "synthetic_acwow"})
+            self.assertEqual(len(templates), 83)
 
             for tpl in templates:
                 self.assertEqual(len(tpl.sections), 6)
@@ -202,9 +246,14 @@ class InventoryTests(unittest.TestCase):
 
 class ExtractDirectoryTests(unittest.TestCase):
     def test_single_file_extraction(self) -> None:
-        templates = extract_directory(FIXTURE)
-        self.assertIn("synthetic_hedz", templates)
-        self.assertIn("synthetic_acwow", templates)
+        templates = extract_directory(HEDZ_FILE)
+        self.assertIn("hedz", templates)
+        # File 13 header: "Templates in this file: 8 of 83".
+        self.assertEqual(len(templates), 8)
+
+    def test_directory_walk_extracts_all_83_templates(self) -> None:
+        templates = extract_directory(NOTEBOOKLM_DIR)
+        self.assertEqual(len(templates), 83)
 
     def test_directory_walk_merges_split_bundles(self) -> None:
         """Templates split across files (the NotebookLM 10-13 case)

@@ -44,11 +44,14 @@ from typing import Iterable
 INVENTORY_FORMAT = "heritage-designer-sections-v1"
 
 # One authoritative bullet pattern. Captures:
-#   name  — template identifier (anything up to the first '/')
+#   name  — template identifier (anything up to '/filter/'; allows spaces
+#           and digits because real E-mu names are e.g. "All Off Designer",
+#           "Bass Boost LP 1", "6 Pole Exteme Q")
 #   rest  — everything between '/filter/' and ':'
-#   value — integer or float right-hand side
+#   value — integer or float right-hand side. Must be numeric — this
+#           rejects the parallel `... @type: long` schema lines.
 _BULLET_RE = re.compile(
-    r"^\s*[-*]?\s*(?P<name>[A-Za-z0-9_][^/\s]*)/filter/(?P<rest>\S+?):\s*(?P<value>-?\d+(?:\.\d+)?)\s*$"
+    r"^\s*-\s*(?P<name>[^/\n][^/]*?)/filter/(?P<rest>\S+?):\s*(?P<value>-?\d+(?:\.\d+)?)\s*$"
 )
 
 _SECTION_RE = re.compile(
@@ -96,6 +99,21 @@ class RawTemplate:
     def set_section_field(self, idx: int, field_name: str, value: int) -> None:
         # idx is 1..6, list is 0..5
         self.sections[idx - 1][_FIELD_KEY[field_name]] = int(value)
+
+    def is_populated(self) -> bool:
+        """True if any structural field is set.
+
+        Filters out templates whose only matched bullets were
+        morph-param[N] entries (which we deliberately don't dispatch).
+        type_absolute alone is enough to count — `All Off Designer` is
+        a real template even though all six sections are zeroed.
+        """
+        if self.type_absolute is not None:
+            return True
+        for sec in self.sections:
+            if any(sec[k] for k in ("type", "low_freq", "low_gain", "high_freq", "high_gain")):
+                return True
+        return False
 
 
 def parse_notebooklm_export(text: str) -> "OrderedDict[str, RawTemplate]":
@@ -179,15 +197,27 @@ def extract_directory(root: Path) -> "OrderedDict[str, RawTemplate]":
 
 
 def shape_id_for(template: RawTemplate) -> str:
-    """Stable shape_id matching the convention in
-    docs/looperator/filter_cube_display_model.md:62 (`abs<n>_<hex12>`).
+    """Stable shape_id matching the canonical convention from
+    `analysis/build_filter_cube_display_model.py` (the upstream RE
+    parser) as documented in
+    docs/looperator/filter_cube_display_model.md:7 and the alias
+    groups at lines 60-64.
 
-    Hashes the 30-integer section tuple only — frequency/gain defaults
-    are display-time parameters per the same doc and must not perturb
-    the structural identity.
+    Canonical scheme — DO NOT change without re-verifying against the
+    three documented alias anchors:
+      - `abs108_b352f374685b` (AC Wow / AC Morph)
+      - `abs144_b5c825095c87` (50, 100, hedz0, d, hedz)
+      - `abs144_7949e309f941` (morph0q100, morph100q100, ssssss)
+
+    The hash payload is the Python `repr()` of a tuple of six 5-tuples,
+    where each inner tuple is ordered `(type, low_gain, low_freq,
+    high_gain, high_freq)` — note the gain-before-freq ordering, which
+    matches the doc's "type, low_gain, low_freq, high_gain, high_freq"
+    enumeration. SHA-256, first 12 hex chars. type_absolute namespaces
+    the result so 108- and 144-family shapes can't collide.
     """
     payload_tuple = tuple(
-        (s["type"], s["low_freq"], s["low_gain"], s["high_freq"], s["high_gain"])
+        (s["type"], s["low_gain"], s["low_freq"], s["high_gain"], s["high_freq"])
         for s in template.sections
     )
     digest = hashlib.sha256(repr(payload_tuple).encode("utf-8")).hexdigest()[:12]
@@ -202,6 +232,8 @@ def to_inventory(
     """Render templates into the heritage-designer-sections-v1 schema."""
     out_templates = []
     for tpl in templates.values():
+        if not tpl.is_populated():
+            continue
         out_templates.append(
             {
                 "name": tpl.name,

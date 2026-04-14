@@ -1,0 +1,4738 @@
+{
+  "format": "heritage-designer-sections-v1",
+  "extracted_from": "tests/fixtures/notebooklm",
+  "template_count": 83,
+  "templates": [
+    {
+      "name": "All Off Designer",
+      "type_absolute": 108,
+      "frequency": 0.0,
+      "gain": 0.5,
+      "shape_id": "abs108_b779c5477b82",
+      "sections": [
+        {
+          "index": 1,
+          "type": 0,
+          "low_freq": 0,
+          "low_gain": 0,
+          "high_freq": 114,
+          "high_gain": 127
+        },
+        {
+          "index": 2,
+          "type": 0,
+          "low_freq": 0,
+          "low_gain": 0,
+          "high_freq": 100,
+          "high_gain": 122
+        },
+        {
+          "index": 3,
+          "type": 0,
+          "low_freq": 0,
+          "low_gain": 0,
+          "high_freq": 0,
+          "high_gain": 0
+        },
+        {
+          "index": 4,
+          "type": 0,
+          "low_freq": 0,
+          "low_gain": 0,
+          "high_freq": 0,
+          "high_gain": 0
+        },
+        {
+          "index": 5,
+          "type": 0,
+          "low_freq": 0,
+          "low_gain": 0,
+          "high_freq": 0,
+          "high_gain": 0
+        },
+        {
+          "index": 6,
+          "type": 0,
+          "low_freq": 0,
+          "low_gain": 0,
+          "high_freq": 0,
+          "high_gain": 0
+        }
+      ]
+    },
+    {
+      "name": "Bass Boost LP 1",
+      "type_absolute": 108,
+      "frequency": 0.0,
+      "gain": 0.0,
+      "shape_id": "abs108_ff42a1bbc3b6",
+      "sections": [
+        {
+          "index": 1,
+          "type": 2,
+          "low_freq": 25,
+          "low_gain": 92,
+          "high_freq": 103,
+          "high_gain": 0
+        },
+        {
+          "index": 2,
+          "type": 0,
+          "low_freq": 19,
+          "low_gain": 0,
+          "high_freq": 34,
+          "high_gain": 0
+        },
+        {
+          "index": 3,
+          "type": 1,
+          "low_freq": 0,
+          "low_gain": 107,
+          "high_freq": 0,
+          "high_gain": 109
+        },
+        {
+          "index": 4,
+          "type": 0,
+          "low_freq": 12,
+          "low_gain": 127,
+          "high_freq": 12,
+          "high_gain": 100
+        },
+        {
+          "index": 5,
+          "type": 1,
+          "low_freq": 5,
+          "low_gain": 101,
+          "high_freq": 12,
+          "high_gain": 101
+        },
+        {
+          "index": 6,
+          "type": 2,
+          "low_freq": 19,
+          "low_gain": 0,
+          "high_freq": 103,
+          "high_gain": 127
+        }
+      ]
+    },
+    {
+      "name": "Bass Boost LP 2",
+      "type_absolute": 108,
+      "frequency": 0.0,
+      "gain": 0.0,
+      "shape_id": "abs108_70f1e2eca788",
+      "sections": [
+        {
+          "index": 1,
+          "type": 2,
+          "low_freq": 6,
+          "low_gain": 64,
+          "high_freq": 117,
+          "high_gain": 0
+        },
+        {
+          "index": 2,
+          "type": 1,
+          "low_freq": 0,
+          "low_gain": 64,
+          "high_freq": 0,
+          "high_gain": 127
+        },
+        {
+          "index": 3,
+          "type": 1,
+          "low_freq": 10,
+          "low_gain": 64,
+          "high_freq": 10,
+          "high_gain": 114
+        },
+        {
+          "index": 4,
+          "type": 0,
+          "low_freq": 0,
+          "low_gain": 127,
+          "high_freq": 99,
+          "high_gain": 0
+        },
+        {
+          "index": 5,
+          "type": 0,
+          "low_freq": 0,
+          "low_gain": 0,
+          "high_freq": 0,
+          "high_gain": 0
+        },
+        {
+          "index": 6,
+          "type": 0,
+          "low_freq": 0,
+          "low_gain": 0,
+          "high_freq": 0,
+          "high_gain": 0
+        }
+      ]
+    },
+    {
+      "name": "Bass MAssive",
+      "type_absolute": 108,
+      "frequency": 0.0,
+      "gain": 1.0,
+      "shape_id": "abs108_19e8b2c322ca",
+      "sections": [
+        {
+          "index": 1,
+          "type": 2,
+          "low_freq": 0,
+          "low_gain": 0,
+          "high_freq": 23,
+          "high_gain": 0
+        },
+        {
+          "index": 2,
+          "type": 2,
+          "low_freq": 57,
+          "low_gain": 0,
+          "high_freq": 70,
+          "high_gain": 0
+        },
+        {
+          "index": 3,
+          "type": 1,
+          "low_freq": 0,
+          "low_gain": 0,
+          "high_freq": 45,
+          "high_gain": 8
+        },
+        {
+          "index": 4,
+          "type": 0,
+          "low_freq": 0,
+          "low_gain": 0,
+          "high_freq": 0,
+          "high_gain": 0
+        },
+        {
+          "index": 5,
+          "type": 0,
+          "low_freq": 0,
+          "low_gain": 0,
+          "high_freq": 0,
+          "high_gain": 0
+        },
+        {
+          "index": 6,
+          "type": 0,
+          "low_freq": 0,
+          "low_gain": 0,
+          "high_freq": 0,
+          "high_gain": 0
+        }
+      ]
+    },
+    {
+      "name": "Bass Shaper",
+      "type_absolute": 108,
+      "frequency": 0.0,
+      "gain": 0.5,
+      "shape_id": "abs108_b483483e6030",
+      "sections": [
+        {
+          "index": 1,
+          "type": 1,
+          "low_freq": 0,
+          "low_gain": 108,
+          "high_freq": 34,
+          "high_gain": 88
+        },
+        {
+          "index": 2,
+          "type": 2,
+          "low_freq": 12,
+          "low_gain": 107,
+          "high_freq": 60,
+          "high_gain": 81
+        },
+        {
+          "index": 3,
+          "type": 2,
+          "low_freq": 41,
+          "low_gain": 74,
+          "high_freq": 38,
+          "high_gain": 88
+        },
+        {
+          "index": 4,
+          "type": 0,
+          "low_freq": 68,
+          "low_gain": 109,
+          "high_freq": 85,
+          "high_gain": 102
+        },
+        {
+          "index": 5,
+          "type": 0,
+          "low_freq": 0,
+          "low_gain": 0,
+          "high_freq": 0,
+          "high_gain": 0
+        },
+        {
+          "index": 6,
+          "type": 0,
+          "low_freq": 0,
+          "low_gain": 0,
+          "high_freq": 0,
+          "high_gain": 0
+        }
+      ]
+    },
+    {
+      "name": "Brite EQ",
+      "type_absolute": 108,
+      "frequency": 0.0,
+      "gain": 0.5,
+      "shape_id": "abs108_94f281f29d24",
+      "sections": [
+        {
+          "index": 1,
+          "type": 1,
+          "low_freq": 0,
+          "low_gain": 127,
+          "high_freq": 0,
+          "high_gain": 80
+        },
+        {
+          "index": 2,
+          "type": 1,
+          "low_freq": 49,
+          "low_gain": 0,
+          "high_freq": 49,
+          "high_gain": 127
+        },
+        {
+          "index": 3,
+          "type": 1,
+          "low_freq": 116,
+          "low_gain": 127,
+          "high_freq": 82,
+          "high_gain": 127
+        },
+        {
+          "index": 4,
+          "type": 0,
+          "low_freq": 0,
+          "low_gain": 0,
+          "high_freq": 0,
+          "high_gain": 0
+        },
+        {
+          "index": 5,
+          "type": 0,
+          "low_freq": 0,
+          "low_gain": 0,
+          "high_freq": 0,
+          "high_gain": 0
+        },
+        {
+          "index": 6,
+          "type": 0,
+          "low_freq": 0,
+          "low_gain": 0,
+          "high_freq": 0,
+          "high_gain": 0
+        }
+      ]
+    },
+    {
+      "name": "Broad Range",
+      "type_absolute": 108,
+      "frequency": 0.0,
+      "gain": 0.289157,
+      "shape_id": "abs108_21f644b5b6e0",
+      "sections": [
+        {
+          "index": 1,
+          "type": 3,
+          "low_freq": 8,
+          "low_gain": 82,
+          "high_freq": 57,
+          "high_gain": 70
+        },
+        {
+          "index": 2,
+          "type": 2,
+          "low_freq": 54,
+          "low_gain": 43,
+          "high_freq": 88,
+          "high_gain": 90
+        },
+        {
+          "index": 3,
+          "type": 2,
+          "low_freq": 101,
+          "low_gain": 12,
+          "high_freq": 109,
+          "high_gain": 30
+        },
+        {
+          "index": 4,
+          "type": 1,
+          "low_freq": 76,
+          "low_gain": 107,
+          "high_freq": 94,
+          "high_gain": 115
+        },
+        {
+          "index": 5,
+          "type": 0,
+          "low_freq": 0,
+          "low_gain": 0,
+          "high_freq": 0,
+          "high_gain": 0
+        },
+        {
+          "index": 6,
+          "type": 0,
+          "low_freq": 0,
+          "low_gain": 0,
+          "high_freq": 0,
+          "high_gain": 0
+        }
+      ]
+    },
+    {
+      "name": "Buzzy",
+      "type_absolute": 108,
+      "frequency": 0.0,
+      "gain": 0.5,
+      "shape_id": "abs108_7949e309f941",
+      "sections": [
+        {
+          "index": 1,
+          "type": 2,
+          "low_freq": 0,
+          "low_gain": 0,
+          "high_freq": 127,
+          "high_gain": 127
+        },
+        {
+          "index": 2,
+          "type": 1,
+          "low_freq": 0,
+          "low_gain": 0,
+          "high_freq": 100,
+          "high_gain": 122
+        },
+        {
+          "index": 3,
+          "type": 0,
+          "low_freq": 0,
+          "low_gain": 0,
+          "high_freq": 0,
+          "high_gain": 0
+        },
+        {
+          "index": 4,
+          "type": 0,
+          "low_freq": 0,
+          "low_gain": 0,
+          "high_freq": 0,
+          "high_gain": 0
+        },
+        {
+          "index": 5,
+          "type": 0,
+          "low_freq": 0,
+          "low_gain": 0,
+          "high_freq": 0,
+          "high_gain": 0
+        },
+        {
+          "index": 6,
+          "type": 0,
+          "low_freq": 0,
+          "low_gain": 0,
+          "high_freq": 0,
+          "high_gain": 0
+        }
+      ]
+    },
+    {
+      "name": "Complex BP 1",
+      "type_absolute": 108,
+      "frequency": 0.0,
+      "gain": 0.0,
+      "shape_id": "abs108_b5c825095c87",
+      "sections": [
+        {
+          "index": 1,
+          "type": 3,
+          "low_freq": 0,
+          "low_gain": 127,
+          "high_freq": 116,
+          "high_gain": 87
+        },
+        {
+          "index": 2,
+          "type": 1,
+          "low_freq": 15,
+          "low_gain": 0,
+          "high_freq": 33,
+          "high_gain": 0
+        },
+        {
+          "index": 3,
+          "type": 1,
+          "low_freq": 33,
+          "low_gain": 127,
+          "high_freq": 51,
+          "high_gain": 127
+        },
+        {
+          "index": 4,
+          "type": 1,
+          "low_freq": 51,
+          "low_gain": 0,
+          "high_freq": 70,
+          "high_gain": 0
+        },
+        {
+          "index": 5,
+          "type": 1,
+          "low_freq": 70,
+          "low_gain": 127,
+          "high_freq": 89,
+          "high_gain": 127
+        },
+        {
+          "index": 6,
+          "type": 2,
+          "low_freq": 0,
+          "low_gain": 127,
+          "high_freq": 127,
+          "high_gain": 127
+        }
+      ]
+    },
+    {
+      "name": "Complex BP 2",
+      "type_absolute": 108,
+      "frequency": 0.0,
+      "gain": 0.0,
+      "shape_id": "abs108_6ceb971a04b6",
+      "sections": [
+        {
+          "index": 1,
+          "type": 3,
+          "low_freq": 0,
+          "low_gain": 0,
+          "high_freq": 67,
+          "high_gain": 127
+        },
+        {
+          "index": 2,
+          "type": 3,
+          "low_freq": 0,
+          "low_gain": 0,
+          "high_freq": 114,
+          "high_gain": 127
+        },
+        {
+          "index": 3,
+          "type": 3,
+          "low_freq": 0,
+          "low_gain": 0,
+          "high_freq": 107,
+          "high_gain": 127
+        },
+        {
+          "index": 4,
+          "type": 2,
+          "low_freq": 0,
+          "low_gain": 64,
+          "high_freq": 127,
+          "high_gain": 127
+        },
+        {
+          "index": 5,
+          "type": 0,
+          "low_freq": 0,
+          "low_gain": 0,
+          "high_freq": 0,
+          "high_gain": 0
+        },
+        {
+          "index": 6,
+          "type": 0,
+          "low_freq": 0,
+          "low_gain": 0,
+          "high_freq": 0,
+          "high_gain": 0
+        }
+      ]
+    },
+    {
+      "name": "ContrarySweeps",
+      "type_absolute": 108,
+      "frequency": 0.0,
+      "gain": 0.566265,
+      "shape_id": "abs108_f6deffb4bae4",
+      "sections": [
+        {
+          "index": 1,
+          "type": 1,
+          "low_freq": 0,
+          "low_gain": 127,
+          "high_freq": 113,
+          "high_gain": 0
+        },
+        {
+          "index": 2,
+          "type": 1,
+          "low_freq": 5,
+          "low_gain": 127,
+          "high_freq": 113,
+          "high_gain": 0
+        },
+        {
+          "index": 3,
+          "type": 1,
+          "low_freq": 113,
+          "low_gain": 127,
+          "high_freq": 14,
+          "high_gain": 0
+        },
+        {
+          "index": 4,
+          "type": 1,
+          "low_freq": 114,
+          "low_gain": 127,
+          "high_freq": 21,
+          "high_gain": 0
+        },
+        {
+          "index": 5,
+          "type": 1,
+          "low_freq": 93,
+          "low_gain": 127,
+          "high_freq": 78,
+          "high_gain": 127
+        },
+        {
+          "index": 6,
+          "type": 3,
+          "low_freq": 0,
+          "low_gain": 60,
+          "high_freq": 0,
+          "high_gain": 62
+        }
+      ]
+    },
+    {
+      "name": "Crackberry",
+      "type_absolute": 108,
+      "frequency": 0.41,
+      "gain": 0.0,
+      "shape_id": "abs108_2dfb0a0f35b7",
+      "sections": [
+        {
+          "index": 1,
+          "type": 1,
+          "low_freq": 0,
+          "low_gain": 0,
+          "high_freq": 127,
+          "high_gain": 0
+        },
+        {
+          "index": 2,
+          "type": 1,
+          "low_freq": 0,
+          "low_gain": 0,
+          "high_freq": 127,
+          "high_gain": 0
+        },
+        {
+          "index": 3,
+          "type": 1,
+          "low_freq": 0,
+          "low_gain": 0,
+          "high_freq": 127,
+          "high_gain": 0
+        },
+        {
+          "index": 4,
+          "type": 1,
+          "low_freq": 0,
+          "low_gain": 127,
+          "high_freq": 61,
+          "high_gain": 127
+        },
+        {
+          "index": 5,
+          "type": 3,
+          "low_freq": 0,
+          "low_gain": 127,
+          "high_freq": 114,
+          "high_gain": 127
+        },
+        {
+          "index": 6,
+          "type": 2,
+          "low_freq": 0,
+          "low_gain": 127,
+          "high_freq": 127,
+          "high_gain": 127
+        }
+      ]
+    },
+    {
+      "name": "AC Crazy Rez",
+      "type_absolute": 108,
+      "frequency": 0.0,
+      "gain": 0.361446,
+      "shape_id": "abs108_7866bde05c2c",
+      "sections": [
+        {
+          "index": 1,
+          "type": 1,
+          "low_freq": 21,
+          "low_gain": 127,
+          "high_freq": 68,
+          "high_gain": 127
+        },
+        {
+          "index": 2,
+          "type": 1,
+          "low_freq": 23,
+          "low_gain": 127,
+          "high_freq": 69,
+          "high_gain": 114
+        },
+        {
+          "index": 3,
+          "type": 1,
+          "low_freq": 31,
+          "low_gain": 127,
+          "high_freq": 102,
+          "high_gain": 127
+        },
+        {
+          "index": 4,
+          "type": 0,
+          "low_freq": 0,
+          "low_gain": 0,
+          "high_freq": 0,
+          "high_gain": 0
+        },
+        {
+          "index": 5,
+          "type": 0,
+          "low_freq": 0,
+          "low_gain": 0,
+          "high_freq": 0,
+          "high_gain": 0
+        },
+        {
+          "index": 6,
+          "type": 0,
+          "low_freq": 0,
+          "low_gain": 0,
+          "high_freq": 0,
+          "high_gain": 0
+        }
+      ]
+    },
+    {
+      "name": "Crispy",
+      "type_absolute": 108,
+      "frequency": 0.0,
+      "gain": 0.5,
+      "shape_id": "abs108_ab14df10f1af",
+      "sections": [
+        {
+          "index": 1,
+          "type": 1,
+          "low_freq": 0,
+          "low_gain": 74,
+          "high_freq": 102,
+          "high_gain": 121
+        },
+        {
+          "index": 2,
+          "type": 2,
+          "low_freq": 127,
+          "low_gain": 110,
+          "high_freq": 75,
+          "high_gain": 76
+        },
+        {
+          "index": 3,
+          "type": 1,
+          "low_freq": 41,
+          "low_gain": 127,
+          "high_freq": 101,
+          "high_gain": 127
+        },
+        {
+          "index": 4,
+          "type": 0,
+          "low_freq": 68,
+          "low_gain": 109,
+          "high_freq": 85,
+          "high_gain": 102
+        },
+        {
+          "index": 5,
+          "type": 0,
+          "low_freq": 0,
+          "low_gain": 0,
+          "high_freq": 0,
+          "high_gain": 0
+        },
+        {
+          "index": 6,
+          "type": 0,
+          "low_freq": 0,
+          "low_gain": 0,
+          "high_freq": 0,
+          "high_gain": 0
+        }
+      ]
+    },
+    {
+      "name": "Double Peak Lo Pass",
+      "type_absolute": 108,
+      "frequency": 0.0,
+      "gain": 0.5,
+      "shape_id": "abs108_368c812fd285",
+      "sections": [
+        {
+          "index": 1,
+          "type": 2,
+          "low_freq": 0,
+          "low_gain": 58,
+          "high_freq": 127,
+          "high_gain": 64
+        },
+        {
+          "index": 2,
+          "type": 2,
+          "low_freq": 37,
+          "low_gain": 96,
+          "high_freq": 97,
+          "high_gain": 79
+        },
+        {
+          "index": 3,
+          "type": 0,
+          "low_freq": 88,
+          "low_gain": 104,
+          "high_freq": 94,
+          "high_gain": 80
+        },
+        {
+          "index": 4,
+          "type": 0,
+          "low_freq": 76,
+          "low_gain": 107,
+          "high_freq": 94,
+          "high_gain": 115
+        },
+        {
+          "index": 5,
+          "type": 0,
+          "low_freq": 0,
+          "low_gain": 0,
+          "high_freq": 0,
+          "high_gain": 0
+        },
+        {
+          "index": 6,
+          "type": 0,
+          "low_freq": 0,
+          "low_gain": 0,
+          "high_freq": 0,
+          "high_gain": 0
+        }
+      ]
+    },
+    {
+      "name": "EQ Crossing",
+      "type_absolute": 108,
+      "frequency": 0.0,
+      "gain": 0.5,
+      "shape_id": "abs108_ee659ff7f625",
+      "sections": [
+        {
+          "index": 1,
+          "type": 1,
+          "low_freq": 0,
+          "low_gain": 127,
+          "high_freq": 127,
+          "high_gain": 127
+        },
+        {
+          "index": 2,
+          "type": 1,
+          "low_freq": 44,
+          "low_gain": 0,
+          "high_freq": 113,
+          "high_gain": 0
+        },
+        {
+          "index": 3,
+          "type": 1,
+          "low_freq": 78,
+          "low_gain": 127,
+          "high_freq": 41,
+          "high_gain": 127
+        },
+        {
+          "index": 4,
+          "type": 1,
+          "low_freq": 28,
+          "low_gain": 0,
+          "high_freq": 63,
+          "high_gain": 10
+        },
+        {
+          "index": 5,
+          "type": 0,
+          "low_freq": 0,
+          "low_gain": 0,
+          "high_freq": 0,
+          "high_gain": 0
+        },
+        {
+          "index": 6,
+          "type": 0,
+          "low_freq": 0,
+          "low_gain": 0,
+          "high_freq": 0,
+          "high_gain": 0
+        }
+      ]
+    },
+    {
+      "name": "EQ Notch Shifter",
+      "type_absolute": 108,
+      "frequency": 0.0,
+      "gain": 0.5,
+      "shape_id": "abs108_5f814fa0e5cf",
+      "sections": [
+        {
+          "index": 1,
+          "type": 1,
+          "low_freq": 0,
+          "low_gain": 127,
+          "high_freq": 23,
+          "high_gain": 127
+        },
+        {
+          "index": 2,
+          "type": 1,
+          "low_freq": 45,
+          "low_gain": 127,
+          "high_freq": 68,
+          "high_gain": 127
+        },
+        {
+          "index": 3,
+          "type": 1,
+          "low_freq": 88,
+          "low_gain": 127,
+          "high_freq": 112,
+          "high_gain": 127
+        },
+        {
+          "index": 4,
+          "type": 0,
+          "low_freq": 0,
+          "low_gain": 0,
+          "high_freq": 0,
+          "high_gain": 0
+        },
+        {
+          "index": 5,
+          "type": 0,
+          "low_freq": 0,
+          "low_gain": 0,
+          "high_freq": 0,
+          "high_gain": 0
+        },
+        {
+          "index": 6,
+          "type": 0,
+          "low_freq": 0,
+          "low_gain": 0,
+          "high_freq": 0,
+          "high_gain": 0
+        }
+      ]
+    },
+    {
+      "name": "EQ Shifter",
+      "type_absolute": 108,
+      "frequency": 0.0,
+      "gain": 0.5,
+      "shape_id": "abs108_5398baa1b841",
+      "sections": [
+        {
+          "index": 1,
+          "type": 1,
+          "low_freq": 0,
+          "low_gain": 127,
+          "high_freq": 46,
+          "high_gain": 127
+        },
+        {
+          "index": 2,
+          "type": 1,
+          "low_freq": 94,
+          "low_gain": 127,
+          "high_freq": 94,
+          "high_gain": 0
+        },
+        {
+          "index": 3,
+          "type": 1,
+          "low_freq": 47,
+          "low_gain": 127,
+          "high_freq": 87,
+          "high_gain": 73
+        },
+        {
+          "index": 4,
+          "type": 0,
+          "low_freq": 0,
+          "low_gain": 0,
+          "high_freq": 0,
+          "high_gain": 0
+        },
+        {
+          "index": 5,
+          "type": 0,
+          "low_freq": 0,
+          "low_gain": 0,
+          "high_freq": 0,
+          "high_gain": 0
+        },
+        {
+          "index": 6,
+          "type": 0,
+          "low_freq": 0,
+          "low_gain": 0,
+          "high_freq": 0,
+          "high_gain": 0
+        }
+      ]
+    },
+    {
+      "name": "AC EX 1",
+      "type_absolute": 108,
+      "frequency": 0.0,
+      "gain": 1.0,
+      "shape_id": "abs108_864e2eee52d7",
+      "sections": [
+        {
+          "index": 1,
+          "type": 1,
+          "low_freq": 85,
+          "low_gain": 127,
+          "high_freq": 55,
+          "high_gain": 55
+        },
+        {
+          "index": 2,
+          "type": 2,
+          "low_freq": 29,
+          "low_gain": 65,
+          "high_freq": 60,
+          "high_gain": 114
+        },
+        {
+          "index": 3,
+          "type": 1,
+          "low_freq": 107,
+          "low_gain": 113,
+          "high_freq": 102,
+          "high_gain": 5
+        },
+        {
+          "index": 4,
+          "type": 0,
+          "low_freq": 0,
+          "low_gain": 0,
+          "high_freq": 0,
+          "high_gain": 0
+        },
+        {
+          "index": 5,
+          "type": 0,
+          "low_freq": 0,
+          "low_gain": 0,
+          "high_freq": 0,
+          "high_gain": 0
+        },
+        {
+          "index": 6,
+          "type": 0,
+          "low_freq": 0,
+          "low_gain": 0,
+          "high_freq": 0,
+          "high_gain": 0
+        }
+      ]
+    },
+    {
+      "name": "AC EX 2",
+      "type_absolute": 108,
+      "frequency": 0.422,
+      "gain": 1.0,
+      "shape_id": "abs108_860e3af30ed4",
+      "sections": [
+        {
+          "index": 1,
+          "type": 1,
+          "low_freq": 85,
+          "low_gain": 127,
+          "high_freq": 55,
+          "high_gain": 0
+        },
+        {
+          "index": 2,
+          "type": 2,
+          "low_freq": 29,
+          "low_gain": 65,
+          "high_freq": 60,
+          "high_gain": 0
+        },
+        {
+          "index": 3,
+          "type": 1,
+          "low_freq": 9,
+          "low_gain": 0,
+          "high_freq": 102,
+          "high_gain": 127
+        },
+        {
+          "index": 4,
+          "type": 1,
+          "low_freq": 0,
+          "low_gain": 0,
+          "high_freq": 101,
+          "high_gain": 0
+        },
+        {
+          "index": 5,
+          "type": 0,
+          "low_freq": 0,
+          "low_gain": 0,
+          "high_freq": 0,
+          "high_gain": 0
+        },
+        {
+          "index": 6,
+          "type": 0,
+          "low_freq": 0,
+          "low_gain": 0,
+          "high_freq": 0,
+          "high_gain": 0
+        }
+      ]
+    },
+    {
+      "name": "Harmonic LP 1",
+      "type_absolute": 108,
+      "frequency": 0.0,
+      "gain": 0.0,
+      "shape_id": "abs108_0d844a965422",
+      "sections": [
+        {
+          "index": 1,
+          "type": 2,
+          "low_freq": 4,
+          "low_gain": 67,
+          "high_freq": 123,
+          "high_gain": 0
+        },
+        {
+          "index": 2,
+          "type": 1,
+          "low_freq": 30,
+          "low_gain": 110,
+          "high_freq": 54,
+          "high_gain": 111
+        },
+        {
+          "index": 3,
+          "type": 1,
+          "low_freq": 0,
+          "low_gain": 22,
+          "high_freq": 0,
+          "high_gain": 91
+        },
+        {
+          "index": 4,
+          "type": 1,
+          "low_freq": 25,
+          "low_gain": 0,
+          "high_freq": 47,
+          "high_gain": 0
+        },
+        {
+          "index": 5,
+          "type": 0,
+          "low_freq": 0,
+          "low_gain": 0,
+          "high_freq": 0,
+          "high_gain": 0
+        },
+        {
+          "index": 6,
+          "type": 0,
+          "low_freq": 0,
+          "low_gain": 0,
+          "high_freq": 0,
+          "high_gain": 0
+        }
+      ]
+    },
+    {
+      "name": "Harmonic LP 2",
+      "type_absolute": 108,
+      "frequency": 0.0,
+      "gain": 0.0,
+      "shape_id": "abs108_20f2fd0546d3",
+      "sections": [
+        {
+          "index": 1,
+          "type": 1,
+          "low_freq": 0,
+          "low_gain": 127,
+          "high_freq": 15,
+          "high_gain": 117
+        },
+        {
+          "index": 2,
+          "type": 1,
+          "low_freq": 15,
+          "low_gain": 127,
+          "high_freq": 33,
+          "high_gain": 117
+        },
+        {
+          "index": 3,
+          "type": 1,
+          "low_freq": 33,
+          "low_gain": 127,
+          "high_freq": 51,
+          "high_gain": 117
+        },
+        {
+          "index": 4,
+          "type": 1,
+          "low_freq": 51,
+          "low_gain": 127,
+          "high_freq": 70,
+          "high_gain": 117
+        },
+        {
+          "index": 5,
+          "type": 1,
+          "low_freq": 70,
+          "low_gain": 127,
+          "high_freq": 89,
+          "high_gain": 117
+        },
+        {
+          "index": 6,
+          "type": 2,
+          "low_freq": 0,
+          "low_gain": 0,
+          "high_freq": 127,
+          "high_gain": 63
+        }
+      ]
+    },
+    {
+      "name": "Harmonic LP 3",
+      "type_absolute": 108,
+      "frequency": 0.0,
+      "gain": 0.0,
+      "shape_id": "abs108_b8d7c6cb471a",
+      "sections": [
+        {
+          "index": 1,
+          "type": 1,
+          "low_freq": 0,
+          "low_gain": 127,
+          "high_freq": 10,
+          "high_gain": 117
+        },
+        {
+          "index": 2,
+          "type": 1,
+          "low_freq": 11,
+          "low_gain": 127,
+          "high_freq": 23,
+          "high_gain": 120
+        },
+        {
+          "index": 3,
+          "type": 1,
+          "low_freq": 24,
+          "low_gain": 127,
+          "high_freq": 34,
+          "high_gain": 117
+        },
+        {
+          "index": 4,
+          "type": 1,
+          "low_freq": 35,
+          "low_gain": 127,
+          "high_freq": 50,
+          "high_gain": 112
+        },
+        {
+          "index": 5,
+          "type": 1,
+          "low_freq": 47,
+          "low_gain": 127,
+          "high_freq": 89,
+          "high_gain": 104
+        },
+        {
+          "index": 6,
+          "type": 2,
+          "low_freq": 0,
+          "low_gain": 0,
+          "high_freq": 127,
+          "high_gain": 63
+        }
+      ]
+    },
+    {
+      "name": "Harmonic LP 4",
+      "type_absolute": 108,
+      "frequency": 0.0,
+      "gain": 0.0,
+      "shape_id": "abs108_f6b6f7f98b5f",
+      "sections": [
+        {
+          "index": 1,
+          "type": 1,
+          "low_freq": 0,
+          "low_gain": 127,
+          "high_freq": 64,
+          "high_gain": 127
+        },
+        {
+          "index": 2,
+          "type": 1,
+          "low_freq": 2,
+          "low_gain": 127,
+          "high_freq": 33,
+          "high_gain": 127
+        },
+        {
+          "index": 3,
+          "type": 1,
+          "low_freq": 5,
+          "low_gain": 127,
+          "high_freq": 51,
+          "high_gain": 127
+        },
+        {
+          "index": 4,
+          "type": 2,
+          "low_freq": 0,
+          "low_gain": 0,
+          "high_freq": 107,
+          "high_gain": 80
+        },
+        {
+          "index": 5,
+          "type": 0,
+          "low_freq": 0,
+          "low_gain": 0,
+          "high_freq": 0,
+          "high_gain": 0
+        },
+        {
+          "index": 6,
+          "type": 3,
+          "low_freq": 33,
+          "low_gain": 0,
+          "high_freq": 0,
+          "high_gain": 127
+        }
+      ]
+    },
+    {
+      "name": "Harmonic LP 5",
+      "type_absolute": 108,
+      "frequency": 0.0,
+      "gain": 0.0,
+      "shape_id": "abs108_7b82f6c2ac6b",
+      "sections": [
+        {
+          "index": 1,
+          "type": 1,
+          "low_freq": 0,
+          "low_gain": 127,
+          "high_freq": 15,
+          "high_gain": 127
+        },
+        {
+          "index": 2,
+          "type": 1,
+          "low_freq": 15,
+          "low_gain": 0,
+          "high_freq": 33,
+          "high_gain": 0
+        },
+        {
+          "index": 3,
+          "type": 1,
+          "low_freq": 33,
+          "low_gain": 127,
+          "high_freq": 51,
+          "high_gain": 127
+        },
+        {
+          "index": 4,
+          "type": 1,
+          "low_freq": 51,
+          "low_gain": 0,
+          "high_freq": 70,
+          "high_gain": 0
+        },
+        {
+          "index": 5,
+          "type": 1,
+          "low_freq": 70,
+          "low_gain": 127,
+          "high_freq": 89,
+          "high_gain": 127
+        },
+        {
+          "index": 6,
+          "type": 2,
+          "low_freq": 0,
+          "low_gain": 127,
+          "high_freq": 127,
+          "high_gain": 127
+        }
+      ]
+    },
+    {
+      "name": "HarmonicTweak",
+      "type_absolute": 108,
+      "frequency": 0.687,
+      "gain": 0.542169,
+      "shape_id": "abs108_1da54aed1039",
+      "sections": [
+        {
+          "index": 1,
+          "type": 1,
+          "low_freq": 41,
+          "low_gain": 0,
+          "high_freq": 41,
+          "high_gain": 127
+        },
+        {
+          "index": 2,
+          "type": 1,
+          "low_freq": 60,
+          "low_gain": 127,
+          "high_freq": 60,
+          "high_gain": 0
+        },
+        {
+          "index": 3,
+          "type": 1,
+          "low_freq": 79,
+          "low_gain": 0,
+          "high_freq": 79,
+          "high_gain": 127
+        },
+        {
+          "index": 4,
+          "type": 1,
+          "low_freq": 98,
+          "low_gain": 127,
+          "high_freq": 98,
+          "high_gain": 0
+        },
+        {
+          "index": 5,
+          "type": 1,
+          "low_freq": 118,
+          "low_gain": 0,
+          "high_freq": 118,
+          "high_gain": 127
+        },
+        {
+          "index": 6,
+          "type": 1,
+          "low_freq": 23,
+          "low_gain": 127,
+          "high_freq": 23,
+          "high_gain": 0
+        }
+      ]
+    },
+    {
+      "name": "HiClassLoPass",
+      "type_absolute": 108,
+      "frequency": 0.0,
+      "gain": 0.0,
+      "shape_id": "abs108_c060a9e41ae3",
+      "sections": [
+        {
+          "index": 1,
+          "type": 1,
+          "low_freq": 0,
+          "low_gain": 0,
+          "high_freq": 127,
+          "high_gain": 127
+        },
+        {
+          "index": 2,
+          "type": 1,
+          "low_freq": 127,
+          "low_gain": 127,
+          "high_freq": 14,
+          "high_gain": 0
+        },
+        {
+          "index": 3,
+          "type": 2,
+          "low_freq": 54,
+          "low_gain": 71,
+          "high_freq": 121,
+          "high_gain": 127
+        },
+        {
+          "index": 4,
+          "type": 1,
+          "low_freq": 127,
+          "low_gain": 127,
+          "high_freq": 0,
+          "high_gain": 0
+        },
+        {
+          "index": 5,
+          "type": 0,
+          "low_freq": 47,
+          "low_gain": 0,
+          "high_freq": 127,
+          "high_gain": 0
+        },
+        {
+          "index": 6,
+          "type": 0,
+          "low_freq": 0,
+          "low_gain": 0,
+          "high_freq": 0,
+          "high_gain": 0
+        }
+      ]
+    },
+    {
+      "name": "KindaComby",
+      "type_absolute": 108,
+      "frequency": 0.0,
+      "gain": 0.0,
+      "shape_id": "abs108_d61b1de64fdb",
+      "sections": [
+        {
+          "index": 1,
+          "type": 1,
+          "low_freq": 7,
+          "low_gain": 64,
+          "high_freq": 23,
+          "high_gain": 0
+        },
+        {
+          "index": 2,
+          "type": 1,
+          "low_freq": 23,
+          "low_gain": 0,
+          "high_freq": 41,
+          "high_gain": 64
+        },
+        {
+          "index": 3,
+          "type": 1,
+          "low_freq": 41,
+          "low_gain": 64,
+          "high_freq": 60,
+          "high_gain": 0
+        },
+        {
+          "index": 4,
+          "type": 1,
+          "low_freq": 60,
+          "low_gain": 0,
+          "high_freq": 79,
+          "high_gain": 64
+        },
+        {
+          "index": 5,
+          "type": 1,
+          "low_freq": 79,
+          "low_gain": 64,
+          "high_freq": 98,
+          "high_gain": 0
+        },
+        {
+          "index": 6,
+          "type": 1,
+          "low_freq": 98,
+          "low_gain": 0,
+          "high_freq": 118,
+          "high_gain": 64
+        }
+      ]
+    },
+    {
+      "name": "Lo Pass Slicer",
+      "type_absolute": 108,
+      "frequency": 0.0,
+      "gain": 0.5,
+      "shape_id": "abs108_e7c11f75261d",
+      "sections": [
+        {
+          "index": 1,
+          "type": 2,
+          "low_freq": 0,
+          "low_gain": 0,
+          "high_freq": 127,
+          "high_gain": 0
+        },
+        {
+          "index": 2,
+          "type": 2,
+          "low_freq": 50,
+          "low_gain": 89,
+          "high_freq": 87,
+          "high_gain": 127
+        },
+        {
+          "index": 3,
+          "type": 2,
+          "low_freq": 75,
+          "low_gain": 127,
+          "high_freq": 101,
+          "high_gain": 90
+        },
+        {
+          "index": 4,
+          "type": 0,
+          "low_freq": 68,
+          "low_gain": 109,
+          "high_freq": 85,
+          "high_gain": 102
+        },
+        {
+          "index": 5,
+          "type": 0,
+          "low_freq": 0,
+          "low_gain": 0,
+          "high_freq": 0,
+          "high_gain": 0
+        },
+        {
+          "index": 6,
+          "type": 0,
+          "low_freq": 0,
+          "low_gain": 0,
+          "high_freq": 0,
+          "high_gain": 0
+        }
+      ]
+    },
+    {
+      "name": "Lotsa Notches",
+      "type_absolute": 108,
+      "frequency": 0.0,
+      "gain": 0.5,
+      "shape_id": "abs108_127fee53b8e4",
+      "sections": [
+        {
+          "index": 1,
+          "type": 1,
+          "low_freq": 0,
+          "low_gain": 0,
+          "high_freq": 82,
+          "high_gain": 0
+        },
+        {
+          "index": 2,
+          "type": 1,
+          "low_freq": 3,
+          "low_gain": 0,
+          "high_freq": 83,
+          "high_gain": 0
+        },
+        {
+          "index": 3,
+          "type": 1,
+          "low_freq": 5,
+          "low_gain": 0,
+          "high_freq": 91,
+          "high_gain": 0
+        },
+        {
+          "index": 4,
+          "type": 1,
+          "low_freq": 8,
+          "low_gain": 0,
+          "high_freq": 94,
+          "high_gain": 0
+        },
+        {
+          "index": 5,
+          "type": 1,
+          "low_freq": 9,
+          "low_gain": 0,
+          "high_freq": 98,
+          "high_gain": 0
+        },
+        {
+          "index": 6,
+          "type": 1,
+          "low_freq": 11,
+          "low_gain": 0,
+          "high_freq": 102,
+          "high_gain": 0
+        }
+      ]
+    },
+    {
+      "name": "Low Freq Hi Rez LP 1",
+      "type_absolute": 108,
+      "frequency": 0.0,
+      "gain": 0.0,
+      "shape_id": "abs108_a40d126e2c42",
+      "sections": [
+        {
+          "index": 1,
+          "type": 2,
+          "low_freq": 0,
+          "low_gain": 127,
+          "high_freq": 127,
+          "high_gain": 0
+        },
+        {
+          "index": 2,
+          "type": 0,
+          "low_freq": 25,
+          "low_gain": 0,
+          "high_freq": 54,
+          "high_gain": 0
+        },
+        {
+          "index": 3,
+          "type": 0,
+          "low_freq": 0,
+          "low_gain": 0,
+          "high_freq": 0,
+          "high_gain": 0
+        },
+        {
+          "index": 4,
+          "type": 0,
+          "low_freq": 0,
+          "low_gain": 127,
+          "high_freq": 99,
+          "high_gain": 0
+        },
+        {
+          "index": 5,
+          "type": 0,
+          "low_freq": 0,
+          "low_gain": 0,
+          "high_freq": 0,
+          "high_gain": 0
+        },
+        {
+          "index": 6,
+          "type": 0,
+          "low_freq": 0,
+          "low_gain": 0,
+          "high_freq": 0,
+          "high_gain": 0
+        }
+      ]
+    },
+    {
+      "name": "Low Freq Hi Rez LP 2",
+      "type_absolute": 108,
+      "frequency": 0.0,
+      "gain": 0.0,
+      "shape_id": "abs108_79da7c26e99a",
+      "sections": [
+        {
+          "index": 1,
+          "type": 2,
+          "low_freq": 0,
+          "low_gain": 127,
+          "high_freq": 127,
+          "high_gain": 0
+        },
+        {
+          "index": 2,
+          "type": 2,
+          "low_freq": 0,
+          "low_gain": 56,
+          "high_freq": 127,
+          "high_gain": 0
+        },
+        {
+          "index": 3,
+          "type": 2,
+          "low_freq": 0,
+          "low_gain": 24,
+          "high_freq": 127,
+          "high_gain": 0
+        },
+        {
+          "index": 4,
+          "type": 0,
+          "low_freq": 0,
+          "low_gain": 127,
+          "high_freq": 99,
+          "high_gain": 0
+        },
+        {
+          "index": 5,
+          "type": 0,
+          "low_freq": 0,
+          "low_gain": 0,
+          "high_freq": 0,
+          "high_gain": 0
+        },
+        {
+          "index": 6,
+          "type": 0,
+          "low_freq": 0,
+          "low_gain": 0,
+          "high_freq": 0,
+          "high_gain": 0
+        }
+      ]
+    },
+    {
+      "name": "Low to High Pass",
+      "type_absolute": 108,
+      "frequency": 0.0,
+      "gain": 0.5,
+      "shape_id": "abs108_c585cf0206b9",
+      "sections": [
+        {
+          "index": 1,
+          "type": 3,
+          "low_freq": 0,
+          "low_gain": 0,
+          "high_freq": 114,
+          "high_gain": 127
+        },
+        {
+          "index": 2,
+          "type": 2,
+          "low_freq": 94,
+          "low_gain": 0,
+          "high_freq": 127,
+          "high_gain": 0
+        },
+        {
+          "index": 3,
+          "type": 0,
+          "low_freq": 41,
+          "low_gain": 69,
+          "high_freq": 82,
+          "high_gain": 88
+        },
+        {
+          "index": 4,
+          "type": 0,
+          "low_freq": 68,
+          "low_gain": 109,
+          "high_freq": 85,
+          "high_gain": 102
+        },
+        {
+          "index": 5,
+          "type": 0,
+          "low_freq": 0,
+          "low_gain": 0,
+          "high_freq": 0,
+          "high_gain": 0
+        },
+        {
+          "index": 6,
+          "type": 0,
+          "low_freq": 0,
+          "low_gain": 0,
+          "high_freq": 0,
+          "high_gain": 0
+        }
+      ]
+    },
+    {
+      "name": "Low Pass Pleasure",
+      "type_absolute": 108,
+      "frequency": 0.036,
+      "gain": 0.5,
+      "shape_id": "abs108_245a0d6b5f5e",
+      "sections": [
+        {
+          "index": 1,
+          "type": 2,
+          "low_freq": 66,
+          "low_gain": 91,
+          "high_freq": 92,
+          "high_gain": 83
+        },
+        {
+          "index": 2,
+          "type": 2,
+          "low_freq": 127,
+          "low_gain": 82,
+          "high_freq": 54,
+          "high_gain": 122
+        },
+        {
+          "index": 3,
+          "type": 0,
+          "low_freq": 101,
+          "low_gain": 56,
+          "high_freq": 57,
+          "high_gain": 69
+        },
+        {
+          "index": 4,
+          "type": 0,
+          "low_freq": 0,
+          "low_gain": 0,
+          "high_freq": 0,
+          "high_gain": 0
+        },
+        {
+          "index": 5,
+          "type": 0,
+          "low_freq": 0,
+          "low_gain": 0,
+          "high_freq": 0,
+          "high_gain": 0
+        },
+        {
+          "index": 6,
+          "type": 0,
+          "low_freq": 0,
+          "low_gain": 0,
+          "high_freq": 0,
+          "high_gain": 0
+        }
+      ]
+    },
+    {
+      "name": "MidScooper",
+      "type_absolute": 108,
+      "frequency": 1.0,
+      "gain": 0.0,
+      "shape_id": "abs108_2f207de073cd",
+      "sections": [
+        {
+          "index": 1,
+          "type": 1,
+          "low_freq": 66,
+          "low_gain": 0,
+          "high_freq": 68,
+          "high_gain": 127
+        },
+        {
+          "index": 2,
+          "type": 1,
+          "low_freq": 63,
+          "low_gain": 0,
+          "high_freq": 70,
+          "high_gain": 127
+        },
+        {
+          "index": 3,
+          "type": 1,
+          "low_freq": 60,
+          "low_gain": 0,
+          "high_freq": 73,
+          "high_gain": 127
+        },
+        {
+          "index": 4,
+          "type": 1,
+          "low_freq": 57,
+          "low_gain": 0,
+          "high_freq": 74,
+          "high_gain": 127
+        },
+        {
+          "index": 5,
+          "type": 1,
+          "low_freq": 54,
+          "low_gain": 0,
+          "high_freq": 76,
+          "high_gain": 127
+        },
+        {
+          "index": 6,
+          "type": 1,
+          "low_freq": 49,
+          "low_gain": 0,
+          "high_freq": 79,
+          "high_gain": 127
+        }
+      ]
+    },
+    {
+      "name": "ModernLoPass",
+      "type_absolute": 108,
+      "frequency": 0.0,
+      "gain": 0.0,
+      "shape_id": "abs108_e6b2bb6380c8",
+      "sections": [
+        {
+          "index": 1,
+          "type": 1,
+          "low_freq": 0,
+          "low_gain": 127,
+          "high_freq": 127,
+          "high_gain": 0
+        },
+        {
+          "index": 2,
+          "type": 2,
+          "low_freq": 63,
+          "low_gain": 0,
+          "high_freq": 111,
+          "high_gain": 127
+        },
+        {
+          "index": 3,
+          "type": 3,
+          "low_freq": 0,
+          "low_gain": 112,
+          "high_freq": 16,
+          "high_gain": 76
+        },
+        {
+          "index": 4,
+          "type": 1,
+          "low_freq": 0,
+          "low_gain": 127,
+          "high_freq": 127,
+          "high_gain": 93
+        },
+        {
+          "index": 5,
+          "type": 1,
+          "low_freq": 0,
+          "low_gain": 127,
+          "high_freq": 127,
+          "high_gain": 127
+        },
+        {
+          "index": 6,
+          "type": 1,
+          "low_freq": 106,
+          "low_gain": 84,
+          "high_freq": 127,
+          "high_gain": 127
+        }
+      ]
+    },
+    {
+      "name": "AC Morpeus Like",
+      "type_absolute": 108,
+      "frequency": 0.0,
+      "gain": 1.0,
+      "shape_id": "abs108_284034601caf",
+      "sections": [
+        {
+          "index": 1,
+          "type": 2,
+          "low_freq": 21,
+          "low_gain": 127,
+          "high_freq": 82,
+          "high_gain": 127
+        },
+        {
+          "index": 2,
+          "type": 2,
+          "low_freq": 29,
+          "low_gain": 65,
+          "high_freq": 78,
+          "high_gain": 114
+        },
+        {
+          "index": 3,
+          "type": 3,
+          "low_freq": 0,
+          "low_gain": 113,
+          "high_freq": 127,
+          "high_gain": 120
+        },
+        {
+          "index": 4,
+          "type": 0,
+          "low_freq": 0,
+          "low_gain": 0,
+          "high_freq": 0,
+          "high_gain": 0
+        },
+        {
+          "index": 5,
+          "type": 0,
+          "low_freq": 0,
+          "low_gain": 0,
+          "high_freq": 0,
+          "high_gain": 0
+        },
+        {
+          "index": 6,
+          "type": 0,
+          "low_freq": 0,
+          "low_gain": 0,
+          "high_freq": 0,
+          "high_gain": 0
+        }
+      ]
+    },
+    {
+      "name": "AC Morph",
+      "type_absolute": 108,
+      "frequency": 0.0,
+      "gain": 0.566265,
+      "shape_id": "abs108_b352f374685b",
+      "sections": [
+        {
+          "index": 1,
+          "type": 2,
+          "low_freq": 32,
+          "low_gain": 127,
+          "high_freq": 104,
+          "high_gain": 39
+        },
+        {
+          "index": 2,
+          "type": 3,
+          "low_freq": 82,
+          "low_gain": 101,
+          "high_freq": 41,
+          "high_gain": 70
+        },
+        {
+          "index": 3,
+          "type": 0,
+          "low_freq": 0,
+          "low_gain": 0,
+          "high_freq": 0,
+          "high_gain": 0
+        },
+        {
+          "index": 4,
+          "type": 0,
+          "low_freq": 0,
+          "low_gain": 0,
+          "high_freq": 0,
+          "high_gain": 0
+        },
+        {
+          "index": 5,
+          "type": 0,
+          "low_freq": 0,
+          "low_gain": 0,
+          "high_freq": 0,
+          "high_gain": 0
+        },
+        {
+          "index": 6,
+          "type": 0,
+          "low_freq": 0,
+          "low_gain": 0,
+          "high_freq": 0,
+          "high_gain": 0
+        }
+      ]
+    },
+    {
+      "name": "Multi Band Cut + Boost",
+      "type_absolute": 108,
+      "frequency": 0.0,
+      "gain": 0.5,
+      "shape_id": "abs108_bd06bd4dbff9",
+      "sections": [
+        {
+          "index": 1,
+          "type": 1,
+          "low_freq": 4,
+          "low_gain": 0,
+          "high_freq": 4,
+          "high_gain": 127
+        },
+        {
+          "index": 2,
+          "type": 1,
+          "low_freq": 39,
+          "low_gain": 0,
+          "high_freq": 39,
+          "high_gain": 127
+        },
+        {
+          "index": 3,
+          "type": 1,
+          "low_freq": 63,
+          "low_gain": 0,
+          "high_freq": 63,
+          "high_gain": 127
+        },
+        {
+          "index": 4,
+          "type": 1,
+          "low_freq": 82,
+          "low_gain": 0,
+          "high_freq": 82,
+          "high_gain": 127
+        },
+        {
+          "index": 5,
+          "type": 1,
+          "low_freq": 108,
+          "low_gain": 0,
+          "high_freq": 108,
+          "high_gain": 127
+        },
+        {
+          "index": 6,
+          "type": 1,
+          "low_freq": 0,
+          "low_gain": 0,
+          "high_freq": 0,
+          "high_gain": 127
+        }
+      ]
+    },
+    {
+      "name": "NotchSweeper",
+      "type_absolute": 108,
+      "frequency": 0.458,
+      "gain": 0.0,
+      "shape_id": "abs108_6ed314cec192",
+      "sections": [
+        {
+          "index": 1,
+          "type": 3,
+          "low_freq": 0,
+          "low_gain": 0,
+          "high_freq": 28,
+          "high_gain": 0
+        },
+        {
+          "index": 2,
+          "type": 1,
+          "low_freq": 95,
+          "low_gain": 127,
+          "high_freq": 113,
+          "high_gain": 127
+        },
+        {
+          "index": 3,
+          "type": 1,
+          "low_freq": 0,
+          "low_gain": 0,
+          "high_freq": 113,
+          "high_gain": 0
+        },
+        {
+          "index": 4,
+          "type": 1,
+          "low_freq": 0,
+          "low_gain": 0,
+          "high_freq": 113,
+          "high_gain": 0
+        },
+        {
+          "index": 5,
+          "type": 1,
+          "low_freq": 0,
+          "low_gain": 0,
+          "high_freq": 113,
+          "high_gain": 0
+        },
+        {
+          "index": 6,
+          "type": 1,
+          "low_freq": 0,
+          "low_gain": 0,
+          "high_freq": 113,
+          "high_gain": 0
+        }
+      ]
+    },
+    {
+      "name": "On the Edge",
+      "type_absolute": 108,
+      "frequency": 0.0,
+      "gain": 0.566265,
+      "shape_id": "abs108_f6f645d431e9",
+      "sections": [
+        {
+          "index": 1,
+          "type": 2,
+          "low_freq": 0,
+          "low_gain": 45,
+          "high_freq": 54,
+          "high_gain": 48
+        },
+        {
+          "index": 2,
+          "type": 3,
+          "low_freq": 14,
+          "low_gain": 27,
+          "high_freq": 69,
+          "high_gain": 75
+        },
+        {
+          "index": 3,
+          "type": 2,
+          "low_freq": 41,
+          "low_gain": 69,
+          "high_freq": 82,
+          "high_gain": 88
+        },
+        {
+          "index": 4,
+          "type": 2,
+          "low_freq": 68,
+          "low_gain": 109,
+          "high_freq": 85,
+          "high_gain": 102
+        },
+        {
+          "index": 5,
+          "type": 0,
+          "low_freq": 0,
+          "low_gain": 0,
+          "high_freq": 0,
+          "high_gain": 0
+        },
+        {
+          "index": 6,
+          "type": 0,
+          "low_freq": 0,
+          "low_gain": 0,
+          "high_freq": 0,
+          "high_gain": 0
+        }
+      ]
+    },
+    {
+      "name": "One to Two Peaks",
+      "type_absolute": 108,
+      "frequency": 0.0,
+      "gain": 0.5,
+      "shape_id": "abs108_9932bff68e63",
+      "sections": [
+        {
+          "index": 1,
+          "type": 1,
+          "low_freq": 0,
+          "low_gain": 127,
+          "high_freq": 125,
+          "high_gain": 116
+        },
+        {
+          "index": 2,
+          "type": 2,
+          "low_freq": 0,
+          "low_gain": 71,
+          "high_freq": 107,
+          "high_gain": 105
+        },
+        {
+          "index": 3,
+          "type": 0,
+          "low_freq": 41,
+          "low_gain": 69,
+          "high_freq": 82,
+          "high_gain": 88
+        },
+        {
+          "index": 4,
+          "type": 0,
+          "low_freq": 68,
+          "low_gain": 109,
+          "high_freq": 85,
+          "high_gain": 102
+        },
+        {
+          "index": 5,
+          "type": 0,
+          "low_freq": 0,
+          "low_gain": 0,
+          "high_freq": 0,
+          "high_gain": 0
+        },
+        {
+          "index": 6,
+          "type": 0,
+          "low_freq": 0,
+          "low_gain": 0,
+          "high_freq": 0,
+          "high_gain": 0
+        }
+      ]
+    },
+    {
+      "name": "Oyoyoyoyoy",
+      "type_absolute": 108,
+      "frequency": 0.0,
+      "gain": 1.0,
+      "shape_id": "abs108_676a265d718f",
+      "sections": [
+        {
+          "index": 1,
+          "type": 1,
+          "low_freq": 85,
+          "low_gain": 127,
+          "high_freq": 55,
+          "high_gain": 55
+        },
+        {
+          "index": 2,
+          "type": 1,
+          "low_freq": 29,
+          "low_gain": 65,
+          "high_freq": 60,
+          "high_gain": 114
+        },
+        {
+          "index": 3,
+          "type": 1,
+          "low_freq": 107,
+          "low_gain": 113,
+          "high_freq": 102,
+          "high_gain": 5
+        },
+        {
+          "index": 4,
+          "type": 1,
+          "low_freq": 0,
+          "low_gain": 0,
+          "high_freq": 0,
+          "high_gain": 0
+        },
+        {
+          "index": 5,
+          "type": 1,
+          "low_freq": 16,
+          "low_gain": 127,
+          "high_freq": 78,
+          "high_gain": 0
+        },
+        {
+          "index": 6,
+          "type": 1,
+          "low_freq": 44,
+          "low_gain": 0,
+          "high_freq": 77,
+          "high_gain": 0
+        }
+      ]
+    },
+    {
+      "name": "Peak Shifter 2",
+      "type_absolute": 108,
+      "frequency": 0.0,
+      "gain": 0.5,
+      "shape_id": "abs108_e285409a3ee3",
+      "sections": [
+        {
+          "index": 1,
+          "type": 1,
+          "low_freq": 19,
+          "low_gain": 112,
+          "high_freq": 72,
+          "high_gain": 117
+        },
+        {
+          "index": 2,
+          "type": 1,
+          "low_freq": 44,
+          "low_gain": 112,
+          "high_freq": 94,
+          "high_gain": 112
+        },
+        {
+          "index": 3,
+          "type": 1,
+          "low_freq": 70,
+          "low_gain": 112,
+          "high_freq": 117,
+          "high_gain": 114
+        },
+        {
+          "index": 4,
+          "type": 0,
+          "low_freq": 91,
+          "low_gain": 112,
+          "high_freq": 127,
+          "high_gain": 112
+        },
+        {
+          "index": 5,
+          "type": 0,
+          "low_freq": 0,
+          "low_gain": 0,
+          "high_freq": 0,
+          "high_gain": 0
+        },
+        {
+          "index": 6,
+          "type": 0,
+          "low_freq": 0,
+          "low_gain": 0,
+          "high_freq": 0,
+          "high_gain": 0
+        }
+      ]
+    },
+    {
+      "name": "Peak Shifter",
+      "type_absolute": 108,
+      "frequency": 0.0,
+      "gain": 0.5,
+      "shape_id": "abs108_d433212e3af9",
+      "sections": [
+        {
+          "index": 1,
+          "type": 1,
+          "low_freq": 27,
+          "low_gain": 121,
+          "high_freq": 88,
+          "high_gain": 92
+        },
+        {
+          "index": 2,
+          "type": 2,
+          "low_freq": 76,
+          "low_gain": 79,
+          "high_freq": 102,
+          "high_gain": 60
+        },
+        {
+          "index": 3,
+          "type": 1,
+          "low_freq": 69,
+          "low_gain": 7,
+          "high_freq": 52,
+          "high_gain": 121
+        },
+        {
+          "index": 4,
+          "type": 1,
+          "low_freq": 112,
+          "low_gain": 127,
+          "high_freq": 32,
+          "high_gain": 74
+        },
+        {
+          "index": 5,
+          "type": 0,
+          "low_freq": 0,
+          "low_gain": 0,
+          "high_freq": 0,
+          "high_gain": 0
+        },
+        {
+          "index": 6,
+          "type": 0,
+          "low_freq": 0,
+          "low_gain": 0,
+          "high_freq": 0,
+          "high_gain": 0
+        }
+      ]
+    },
+    {
+      "name": "AC Phasey One",
+      "type_absolute": 108,
+      "frequency": 0.0,
+      "gain": 0.566265,
+      "shape_id": "abs108_89c7b831e19d",
+      "sections": [
+        {
+          "index": 1,
+          "type": 1,
+          "low_freq": 32,
+          "low_gain": 127,
+          "high_freq": 104,
+          "high_gain": 39
+        },
+        {
+          "index": 2,
+          "type": 1,
+          "low_freq": 47,
+          "low_gain": 94,
+          "high_freq": 105,
+          "high_gain": 63
+        },
+        {
+          "index": 3,
+          "type": 1,
+          "low_freq": 48,
+          "low_gain": 82,
+          "high_freq": 111,
+          "high_gain": 70
+        },
+        {
+          "index": 4,
+          "type": 1,
+          "low_freq": 56,
+          "low_gain": 0,
+          "high_freq": 59,
+          "high_gain": 0
+        },
+        {
+          "index": 5,
+          "type": 1,
+          "low_freq": 0,
+          "low_gain": 0,
+          "high_freq": 116,
+          "high_gain": 0
+        },
+        {
+          "index": 6,
+          "type": 1,
+          "low_freq": 3,
+          "low_gain": 0,
+          "high_freq": 114,
+          "high_gain": 0
+        }
+      ]
+    },
+    {
+      "name": "Rezzy LP 1",
+      "type_absolute": 108,
+      "frequency": 0.0,
+      "gain": 0.0,
+      "shape_id": "abs108_9ee7f0f9a157",
+      "sections": [
+        {
+          "index": 1,
+          "type": 2,
+          "low_freq": 0,
+          "low_gain": 80,
+          "high_freq": 105,
+          "high_gain": 82
+        },
+        {
+          "index": 2,
+          "type": 2,
+          "low_freq": 16,
+          "low_gain": 127,
+          "high_freq": 99,
+          "high_gain": 127
+        },
+        {
+          "index": 3,
+          "type": 1,
+          "low_freq": 60,
+          "low_gain": 127,
+          "high_freq": 0,
+          "high_gain": 88
+        },
+        {
+          "index": 4,
+          "type": 0,
+          "low_freq": 42,
+          "low_gain": 0,
+          "high_freq": 45,
+          "high_gain": 0
+        },
+        {
+          "index": 5,
+          "type": 0,
+          "low_freq": 0,
+          "low_gain": 0,
+          "high_freq": 0,
+          "high_gain": 0
+        },
+        {
+          "index": 6,
+          "type": 0,
+          "low_freq": 0,
+          "low_gain": 0,
+          "high_freq": 0,
+          "high_gain": 0
+        }
+      ]
+    },
+    {
+      "name": "Rezzy LP 2",
+      "type_absolute": 108,
+      "frequency": 0.0,
+      "gain": 0.0,
+      "shape_id": "abs108_60be638f0456",
+      "sections": [
+        {
+          "index": 1,
+          "type": 2,
+          "low_freq": 0,
+          "low_gain": 64,
+          "high_freq": 127,
+          "high_gain": 127
+        },
+        {
+          "index": 2,
+          "type": 2,
+          "low_freq": 0,
+          "low_gain": 0,
+          "high_freq": 91,
+          "high_gain": 109
+        },
+        {
+          "index": 3,
+          "type": 0,
+          "low_freq": 0,
+          "low_gain": 0,
+          "high_freq": 0,
+          "high_gain": 0
+        },
+        {
+          "index": 4,
+          "type": 0,
+          "low_freq": 0,
+          "low_gain": 0,
+          "high_freq": 0,
+          "high_gain": 0
+        },
+        {
+          "index": 5,
+          "type": 0,
+          "low_freq": 0,
+          "low_gain": 0,
+          "high_freq": 0,
+          "high_gain": 0
+        },
+        {
+          "index": 6,
+          "type": 0,
+          "low_freq": 0,
+          "low_gain": 0,
+          "high_freq": 0,
+          "high_gain": 0
+        }
+      ]
+    },
+    {
+      "name": "Rezzy LP 3",
+      "type_absolute": 108,
+      "frequency": 0.0,
+      "gain": 0.0,
+      "shape_id": "abs108_2521bd178d43",
+      "sections": [
+        {
+          "index": 1,
+          "type": 2,
+          "low_freq": 0,
+          "low_gain": 0,
+          "high_freq": 127,
+          "high_gain": 0
+        },
+        {
+          "index": 2,
+          "type": 2,
+          "low_freq": 0,
+          "low_gain": 19,
+          "high_freq": 96,
+          "high_gain": 19
+        },
+        {
+          "index": 3,
+          "type": 2,
+          "low_freq": 0,
+          "low_gain": 44,
+          "high_freq": 107,
+          "high_gain": 44
+        },
+        {
+          "index": 4,
+          "type": 2,
+          "low_freq": 0,
+          "low_gain": 64,
+          "high_freq": 109,
+          "high_gain": 64
+        },
+        {
+          "index": 5,
+          "type": 2,
+          "low_freq": 0,
+          "low_gain": 76,
+          "high_freq": 116,
+          "high_gain": 76
+        },
+        {
+          "index": 6,
+          "type": 2,
+          "low_freq": 0,
+          "low_gain": 108,
+          "high_freq": 119,
+          "high_gain": 108
+        }
+      ]
+    },
+    {
+      "name": "Rolling Frequency",
+      "type_absolute": 108,
+      "frequency": 0.0,
+      "gain": 0.5,
+      "shape_id": "abs108_09168a34dcb5",
+      "sections": [
+        {
+          "index": 1,
+          "type": 2,
+          "low_freq": 19,
+          "low_gain": 71,
+          "high_freq": 107,
+          "high_gain": 63
+        },
+        {
+          "index": 2,
+          "type": 2,
+          "low_freq": 92,
+          "low_gain": 96,
+          "high_freq": 110,
+          "high_gain": 79
+        },
+        {
+          "index": 3,
+          "type": 1,
+          "low_freq": 63,
+          "low_gain": 112,
+          "high_freq": 78,
+          "high_gain": 80
+        },
+        {
+          "index": 4,
+          "type": 1,
+          "low_freq": 52,
+          "low_gain": 105,
+          "high_freq": 58,
+          "high_gain": 86
+        },
+        {
+          "index": 5,
+          "type": 1,
+          "low_freq": 92,
+          "low_gain": 125,
+          "high_freq": 0,
+          "high_gain": 0
+        },
+        {
+          "index": 6,
+          "type": 0,
+          "low_freq": 0,
+          "low_gain": 0,
+          "high_freq": 0,
+          "high_gain": 0
+        }
+      ]
+    },
+    {
+      "name": "Rolling Frequency 2",
+      "type_absolute": 108,
+      "frequency": 0.0,
+      "gain": 0.5,
+      "shape_id": "abs108_c6533ddfa26b",
+      "sections": [
+        {
+          "index": 1,
+          "type": 2,
+          "low_freq": 19,
+          "low_gain": 71,
+          "high_freq": 107,
+          "high_gain": 63
+        },
+        {
+          "index": 2,
+          "type": 2,
+          "low_freq": 92,
+          "low_gain": 96,
+          "high_freq": 110,
+          "high_gain": 79
+        },
+        {
+          "index": 3,
+          "type": 1,
+          "low_freq": 63,
+          "low_gain": 112,
+          "high_freq": 78,
+          "high_gain": 80
+        },
+        {
+          "index": 4,
+          "type": 1,
+          "low_freq": 52,
+          "low_gain": 105,
+          "high_freq": 58,
+          "high_gain": 86
+        },
+        {
+          "index": 5,
+          "type": 1,
+          "low_freq": 92,
+          "low_gain": 125,
+          "high_freq": 0,
+          "high_gain": 0
+        },
+        {
+          "index": 6,
+          "type": 3,
+          "low_freq": 22,
+          "low_gain": 123,
+          "high_freq": 0,
+          "high_gain": 0
+        }
+      ]
+    },
+    {
+      "name": "6 Pole Exteme Q",
+      "type_absolute": 108,
+      "frequency": 0.0,
+      "gain": 0.5,
+      "shape_id": "abs108_f2d685e1f4c1",
+      "sections": [
+        {
+          "index": 1,
+          "type": 2,
+          "low_freq": 26,
+          "low_gain": 127,
+          "high_freq": 127,
+          "high_gain": 76
+        },
+        {
+          "index": 2,
+          "type": 2,
+          "low_freq": 26,
+          "low_gain": 127,
+          "high_freq": 127,
+          "high_gain": 76
+        },
+        {
+          "index": 3,
+          "type": 2,
+          "low_freq": 26,
+          "low_gain": 127,
+          "high_freq": 127,
+          "high_gain": 76
+        },
+        {
+          "index": 4,
+          "type": 0,
+          "low_freq": 21,
+          "low_gain": 127,
+          "high_freq": 127,
+          "high_gain": 0
+        },
+        {
+          "index": 5,
+          "type": 0,
+          "low_freq": 0,
+          "low_gain": 0,
+          "high_freq": 0,
+          "high_gain": 0
+        },
+        {
+          "index": 6,
+          "type": 0,
+          "low_freq": 0,
+          "low_gain": 0,
+          "high_freq": 0,
+          "high_gain": 0
+        }
+      ]
+    },
+    {
+      "name": "SizzleSync",
+      "type_absolute": 108,
+      "frequency": 0.0,
+      "gain": 0.0,
+      "shape_id": "abs108_5d7f945a528a",
+      "sections": [
+        {
+          "index": 1,
+          "type": 1,
+          "low_freq": 57,
+          "low_gain": 0,
+          "high_freq": 0,
+          "high_gain": 6
+        },
+        {
+          "index": 2,
+          "type": 1,
+          "low_freq": 57,
+          "low_gain": 127,
+          "high_freq": 127,
+          "high_gain": 0
+        },
+        {
+          "index": 3,
+          "type": 1,
+          "low_freq": 57,
+          "low_gain": 127,
+          "high_freq": 57,
+          "high_gain": 0
+        },
+        {
+          "index": 4,
+          "type": 1,
+          "low_freq": 57,
+          "low_gain": 127,
+          "high_freq": 57,
+          "high_gain": 0
+        },
+        {
+          "index": 5,
+          "type": 0,
+          "low_freq": 0,
+          "low_gain": 0,
+          "high_freq": 0,
+          "high_gain": 0
+        },
+        {
+          "index": 6,
+          "type": 0,
+          "low_freq": 0,
+          "low_gain": 0,
+          "high_freq": 0,
+          "high_gain": 0
+        }
+      ]
+    },
+    {
+      "name": "Slightly Phased",
+      "type_absolute": 108,
+      "frequency": 0.0,
+      "gain": 0.5,
+      "shape_id": "abs108_180b8e71cbd8",
+      "sections": [
+        {
+          "index": 1,
+          "type": 1,
+          "low_freq": 58,
+          "low_gain": 127,
+          "high_freq": 104,
+          "high_gain": 107
+        },
+        {
+          "index": 2,
+          "type": 2,
+          "low_freq": 41,
+          "low_gain": 94,
+          "high_freq": 89,
+          "high_gain": 60
+        },
+        {
+          "index": 3,
+          "type": 1,
+          "low_freq": 11,
+          "low_gain": 0,
+          "high_freq": 102,
+          "high_gain": 0
+        },
+        {
+          "index": 4,
+          "type": 0,
+          "low_freq": 97,
+          "low_gain": 98,
+          "high_freq": 80,
+          "high_gain": 52
+        },
+        {
+          "index": 5,
+          "type": 0,
+          "low_freq": 0,
+          "low_gain": 0,
+          "high_freq": 0,
+          "high_gain": 0
+        },
+        {
+          "index": 6,
+          "type": 0,
+          "low_freq": 0,
+          "low_gain": 0,
+          "high_freq": 0,
+          "high_gain": 0
+        }
+      ]
+    },
+    {
+      "name": "Steep 8 Pole",
+      "type_absolute": 108,
+      "frequency": 0.0,
+      "gain": 0.5,
+      "shape_id": "abs108_f4028c879528",
+      "sections": [
+        {
+          "index": 1,
+          "type": 2,
+          "low_freq": 0,
+          "low_gain": 0,
+          "high_freq": 127,
+          "high_gain": 0
+        },
+        {
+          "index": 2,
+          "type": 2,
+          "low_freq": 110,
+          "low_gain": 0,
+          "high_freq": 127,
+          "high_gain": 0
+        },
+        {
+          "index": 3,
+          "type": 2,
+          "low_freq": 94,
+          "low_gain": 0,
+          "high_freq": 127,
+          "high_gain": 0
+        },
+        {
+          "index": 4,
+          "type": 2,
+          "low_freq": 82,
+          "low_gain": 0,
+          "high_freq": 127,
+          "high_gain": 0
+        },
+        {
+          "index": 5,
+          "type": 0,
+          "low_freq": 0,
+          "low_gain": 0,
+          "high_freq": 0,
+          "high_gain": 0
+        },
+        {
+          "index": 6,
+          "type": 0,
+          "low_freq": 0,
+          "low_gain": 0,
+          "high_freq": 0,
+          "high_gain": 0
+        }
+      ]
+    },
+    {
+      "name": "Steep High Pass",
+      "type_absolute": 108,
+      "frequency": 0.0,
+      "gain": 0.5,
+      "shape_id": "abs108_e8286aec8928",
+      "sections": [
+        {
+          "index": 1,
+          "type": 3,
+          "low_freq": 27,
+          "low_gain": 127,
+          "high_freq": 67,
+          "high_gain": 127
+        },
+        {
+          "index": 2,
+          "type": 3,
+          "low_freq": 0,
+          "low_gain": 85,
+          "high_freq": 91,
+          "high_gain": 127
+        },
+        {
+          "index": 3,
+          "type": 2,
+          "low_freq": 67,
+          "low_gain": 127,
+          "high_freq": 96,
+          "high_gain": 76
+        },
+        {
+          "index": 4,
+          "type": 0,
+          "low_freq": 68,
+          "low_gain": 109,
+          "high_freq": 85,
+          "high_gain": 102
+        },
+        {
+          "index": 5,
+          "type": 0,
+          "low_freq": 0,
+          "low_gain": 0,
+          "high_freq": 0,
+          "high_gain": 0
+        },
+        {
+          "index": 6,
+          "type": 0,
+          "low_freq": 0,
+          "low_gain": 0,
+          "high_freq": 0,
+          "high_gain": 0
+        }
+      ]
+    },
+    {
+      "name": "Multi Peak Hi Pass",
+      "type_absolute": 108,
+      "frequency": 0.0,
+      "gain": 0.5,
+      "shape_id": "abs108_5698a2fdd4a6",
+      "sections": [
+        {
+          "index": 1,
+          "type": 1,
+          "low_freq": 0,
+          "low_gain": 126,
+          "high_freq": 127,
+          "high_gain": 127
+        },
+        {
+          "index": 2,
+          "type": 2,
+          "low_freq": 69,
+          "low_gain": 0,
+          "high_freq": 100,
+          "high_gain": 122
+        },
+        {
+          "index": 3,
+          "type": 3,
+          "low_freq": 0,
+          "low_gain": 63,
+          "high_freq": 78,
+          "high_gain": 95
+        },
+        {
+          "index": 4,
+          "type": 0,
+          "low_freq": 0,
+          "low_gain": 0,
+          "high_freq": 0,
+          "high_gain": 0
+        },
+        {
+          "index": 5,
+          "type": 0,
+          "low_freq": 0,
+          "low_gain": 0,
+          "high_freq": 0,
+          "high_gain": 0
+        },
+        {
+          "index": 6,
+          "type": 0,
+          "low_freq": 0,
+          "low_gain": 0,
+          "high_freq": 0,
+          "high_gain": 0
+        }
+      ]
+    },
+    {
+      "name": "Super Bass Ringer",
+      "type_absolute": 108,
+      "frequency": 0.0,
+      "gain": 0.5,
+      "shape_id": "abs108_4655eff657d7",
+      "sections": [
+        {
+          "index": 1,
+          "type": 1,
+          "low_freq": 13,
+          "low_gain": 127,
+          "high_freq": 58,
+          "high_gain": 127
+        },
+        {
+          "index": 2,
+          "type": 2,
+          "low_freq": 47,
+          "low_gain": 107,
+          "high_freq": 60,
+          "high_gain": 90
+        },
+        {
+          "index": 3,
+          "type": 1,
+          "low_freq": 13,
+          "low_gain": 127,
+          "high_freq": 58,
+          "high_gain": 88
+        },
+        {
+          "index": 4,
+          "type": 0,
+          "low_freq": 68,
+          "low_gain": 109,
+          "high_freq": 85,
+          "high_gain": 102
+        },
+        {
+          "index": 5,
+          "type": 0,
+          "low_freq": 0,
+          "low_gain": 0,
+          "high_freq": 0,
+          "high_gain": 0
+        },
+        {
+          "index": 6,
+          "type": 0,
+          "low_freq": 0,
+          "low_gain": 0,
+          "high_freq": 0,
+          "high_gain": 0
+        }
+      ]
+    },
+    {
+      "name": "Super Steep Q",
+      "type_absolute": 108,
+      "frequency": 0.0,
+      "gain": 0.5,
+      "shape_id": "abs108_d8868433e536",
+      "sections": [
+        {
+          "index": 1,
+          "type": 1,
+          "low_freq": 0,
+          "low_gain": 127,
+          "high_freq": 127,
+          "high_gain": 127
+        },
+        {
+          "index": 2,
+          "type": 1,
+          "low_freq": 0,
+          "low_gain": 127,
+          "high_freq": 127,
+          "high_gain": 127
+        },
+        {
+          "index": 3,
+          "type": 0,
+          "low_freq": 48,
+          "low_gain": 127,
+          "high_freq": 41,
+          "high_gain": 127
+        },
+        {
+          "index": 4,
+          "type": 0,
+          "low_freq": 68,
+          "low_gain": 109,
+          "high_freq": 85,
+          "high_gain": 102
+        },
+        {
+          "index": 5,
+          "type": 0,
+          "low_freq": 0,
+          "low_gain": 0,
+          "high_freq": 0,
+          "high_gain": 0
+        },
+        {
+          "index": 6,
+          "type": 0,
+          "low_freq": 0,
+          "low_gain": 0,
+          "high_freq": 0,
+          "high_gain": 0
+        }
+      ]
+    },
+    {
+      "name": "SuperLoPass",
+      "type_absolute": 108,
+      "frequency": 0.0,
+      "gain": 0.0,
+      "shape_id": "abs108_b298b23d1aa6",
+      "sections": [
+        {
+          "index": 1,
+          "type": 2,
+          "low_freq": 63,
+          "low_gain": 0,
+          "high_freq": 127,
+          "high_gain": 63
+        },
+        {
+          "index": 2,
+          "type": 2,
+          "low_freq": 55,
+          "low_gain": 0,
+          "high_freq": 127,
+          "high_gain": 62
+        },
+        {
+          "index": 3,
+          "type": 2,
+          "low_freq": 44,
+          "low_gain": 0,
+          "high_freq": 127,
+          "high_gain": 63
+        },
+        {
+          "index": 4,
+          "type": 2,
+          "low_freq": 26,
+          "low_gain": 0,
+          "high_freq": 127,
+          "high_gain": 61
+        },
+        {
+          "index": 5,
+          "type": 2,
+          "low_freq": 0,
+          "low_gain": 0,
+          "high_freq": 127,
+          "high_gain": 63
+        },
+        {
+          "index": 6,
+          "type": 0,
+          "low_freq": 0,
+          "low_gain": 0,
+          "high_freq": 0,
+          "high_gain": 0
+        }
+      ]
+    },
+    {
+      "name": "Super1kHiPass",
+      "type_absolute": 108,
+      "frequency": 0.0,
+      "gain": 0.0,
+      "shape_id": "abs108_b939a0f3f4be",
+      "sections": [
+        {
+          "index": 1,
+          "type": 3,
+          "low_freq": 0,
+          "low_gain": 64,
+          "high_freq": 63,
+          "high_gain": 64
+        },
+        {
+          "index": 2,
+          "type": 3,
+          "low_freq": 0,
+          "low_gain": 64,
+          "high_freq": 63,
+          "high_gain": 64
+        },
+        {
+          "index": 3,
+          "type": 3,
+          "low_freq": 0,
+          "low_gain": 64,
+          "high_freq": 63,
+          "high_gain": 64
+        },
+        {
+          "index": 4,
+          "type": 3,
+          "low_freq": 0,
+          "low_gain": 64,
+          "high_freq": 63,
+          "high_gain": 64
+        },
+        {
+          "index": 5,
+          "type": 3,
+          "low_freq": 0,
+          "low_gain": 64,
+          "high_freq": 63,
+          "high_gain": 64
+        },
+        {
+          "index": 6,
+          "type": 3,
+          "low_freq": 0,
+          "low_gain": 64,
+          "high_freq": 63,
+          "high_gain": 64
+        }
+      ]
+    },
+    {
+      "name": "Three Point Morph",
+      "type_absolute": 108,
+      "frequency": 0.0,
+      "gain": 0.5,
+      "shape_id": "abs108_43b0e9bbdf94",
+      "sections": [
+        {
+          "index": 1,
+          "type": 2,
+          "low_freq": 56,
+          "low_gain": 97,
+          "high_freq": 127,
+          "high_gain": 32
+        },
+        {
+          "index": 2,
+          "type": 2,
+          "low_freq": 37,
+          "low_gain": 96,
+          "high_freq": 97,
+          "high_gain": 79
+        },
+        {
+          "index": 3,
+          "type": 1,
+          "low_freq": 68,
+          "low_gain": 112,
+          "high_freq": 103,
+          "high_gain": 80
+        },
+        {
+          "index": 4,
+          "type": 0,
+          "low_freq": 76,
+          "low_gain": 107,
+          "high_freq": 94,
+          "high_gain": 115
+        },
+        {
+          "index": 5,
+          "type": 0,
+          "low_freq": 0,
+          "low_gain": 0,
+          "high_freq": 0,
+          "high_gain": 0
+        },
+        {
+          "index": 6,
+          "type": 0,
+          "low_freq": 0,
+          "low_gain": 0,
+          "high_freq": 0,
+          "high_gain": 0
+        }
+      ]
+    },
+    {
+      "name": "TwinPeaks",
+      "type_absolute": 108,
+      "frequency": 0.0,
+      "gain": 0.0,
+      "shape_id": "abs108_a5e1918be89d",
+      "sections": [
+        {
+          "index": 1,
+          "type": 2,
+          "low_freq": 78,
+          "low_gain": 127,
+          "high_freq": 99,
+          "high_gain": 0
+        },
+        {
+          "index": 2,
+          "type": 3,
+          "low_freq": 0,
+          "low_gain": 127,
+          "high_freq": 78,
+          "high_gain": 0
+        },
+        {
+          "index": 3,
+          "type": 0,
+          "low_freq": 0,
+          "low_gain": 0,
+          "high_freq": 0,
+          "high_gain": 0
+        },
+        {
+          "index": 4,
+          "type": 0,
+          "low_freq": 0,
+          "low_gain": 0,
+          "high_freq": 0,
+          "high_gain": 0
+        },
+        {
+          "index": 5,
+          "type": 0,
+          "low_freq": 0,
+          "low_gain": 0,
+          "high_freq": 0,
+          "high_gain": 0
+        },
+        {
+          "index": 6,
+          "type": 0,
+          "low_freq": 0,
+          "low_gain": 0,
+          "high_freq": 0,
+          "high_gain": 0
+        }
+      ]
+    },
+    {
+      "name": "Voxxy LP 1",
+      "type_absolute": 108,
+      "frequency": 0.0,
+      "gain": 0.0,
+      "shape_id": "abs108_1d8689245997",
+      "sections": [
+        {
+          "index": 1,
+          "type": 2,
+          "low_freq": 19,
+          "low_gain": 29,
+          "high_freq": 81,
+          "high_gain": 86
+        },
+        {
+          "index": 2,
+          "type": 1,
+          "low_freq": 86,
+          "low_gain": 127,
+          "high_freq": 97,
+          "high_gain": 127
+        },
+        {
+          "index": 3,
+          "type": 1,
+          "low_freq": 100,
+          "low_gain": 0,
+          "high_freq": 107,
+          "high_gain": 127
+        },
+        {
+          "index": 4,
+          "type": 0,
+          "low_freq": 0,
+          "low_gain": 127,
+          "high_freq": 0,
+          "high_gain": 126
+        },
+        {
+          "index": 5,
+          "type": 0,
+          "low_freq": 0,
+          "low_gain": 0,
+          "high_freq": 116,
+          "high_gain": 0
+        },
+        {
+          "index": 6,
+          "type": 0,
+          "low_freq": 0,
+          "low_gain": 0,
+          "high_freq": 119,
+          "high_gain": 0
+        }
+      ]
+    },
+    {
+      "name": "Voxxy LP 2",
+      "type_absolute": 108,
+      "frequency": 0.0,
+      "gain": 0.0,
+      "shape_id": "abs108_d79feb05c300",
+      "sections": [
+        {
+          "index": 1,
+          "type": 2,
+          "low_freq": 0,
+          "low_gain": 0,
+          "high_freq": 82,
+          "high_gain": 57
+        },
+        {
+          "index": 2,
+          "type": 1,
+          "low_freq": 86,
+          "low_gain": 127,
+          "high_freq": 97,
+          "high_gain": 127
+        },
+        {
+          "index": 3,
+          "type": 1,
+          "low_freq": 100,
+          "low_gain": 0,
+          "high_freq": 107,
+          "high_gain": 127
+        },
+        {
+          "index": 4,
+          "type": 2,
+          "low_freq": 0,
+          "low_gain": 127,
+          "high_freq": 69,
+          "high_gain": 127
+        },
+        {
+          "index": 5,
+          "type": 1,
+          "low_freq": 0,
+          "low_gain": 109,
+          "high_freq": 0,
+          "high_gain": 109
+        },
+        {
+          "index": 6,
+          "type": 0,
+          "low_freq": 0,
+          "low_gain": 0,
+          "high_freq": 119,
+          "high_gain": 0
+        }
+      ]
+    },
+    {
+      "name": "AC Wow",
+      "type_absolute": 108,
+      "frequency": 0.0,
+      "gain": 0.566265,
+      "shape_id": "abs108_b352f374685b",
+      "sections": [
+        {
+          "index": 1,
+          "type": 2,
+          "low_freq": 32,
+          "low_gain": 127,
+          "high_freq": 104,
+          "high_gain": 39
+        },
+        {
+          "index": 2,
+          "type": 3,
+          "low_freq": 82,
+          "low_gain": 101,
+          "high_freq": 41,
+          "high_gain": 70
+        },
+        {
+          "index": 3,
+          "type": 0,
+          "low_freq": 0,
+          "low_gain": 0,
+          "high_freq": 0,
+          "high_gain": 0
+        },
+        {
+          "index": 4,
+          "type": 0,
+          "low_freq": 0,
+          "low_gain": 0,
+          "high_freq": 0,
+          "high_gain": 0
+        },
+        {
+          "index": 5,
+          "type": 0,
+          "low_freq": 0,
+          "low_gain": 0,
+          "high_freq": 0,
+          "high_gain": 0
+        },
+        {
+          "index": 6,
+          "type": 0,
+          "low_freq": 0,
+          "low_gain": 0,
+          "high_freq": 0,
+          "high_gain": 0
+        }
+      ]
+    },
+    {
+      "name": "Wah Wah",
+      "type_absolute": 108,
+      "frequency": 0.0,
+      "gain": 0.5,
+      "shape_id": "abs108_9e03f1913186",
+      "sections": [
+        {
+          "index": 1,
+          "type": 2,
+          "low_freq": 45,
+          "low_gain": 88,
+          "high_freq": 74,
+          "high_gain": 88
+        },
+        {
+          "index": 2,
+          "type": 3,
+          "low_freq": 48,
+          "low_gain": 0,
+          "high_freq": 58,
+          "high_gain": 0
+        },
+        {
+          "index": 3,
+          "type": 0,
+          "low_freq": 45,
+          "low_gain": 0,
+          "high_freq": 48,
+          "high_gain": 0
+        },
+        {
+          "index": 4,
+          "type": 0,
+          "low_freq": 0,
+          "low_gain": 0,
+          "high_freq": 0,
+          "high_gain": 0
+        },
+        {
+          "index": 5,
+          "type": 0,
+          "low_freq": 0,
+          "low_gain": 0,
+          "high_freq": 0,
+          "high_gain": 0
+        },
+        {
+          "index": 6,
+          "type": 0,
+          "low_freq": 0,
+          "low_gain": 0,
+          "high_freq": 0,
+          "high_gain": 0
+        }
+      ]
+    },
+    {
+      "name": "Wah Wah 2",
+      "type_absolute": 108,
+      "frequency": 0.0,
+      "gain": 0.5,
+      "shape_id": "abs108_ce91ffe2dca4",
+      "sections": [
+        {
+          "index": 1,
+          "type": 2,
+          "low_freq": 45,
+          "low_gain": 88,
+          "high_freq": 85,
+          "high_gain": 88
+        },
+        {
+          "index": 2,
+          "type": 3,
+          "low_freq": 47,
+          "low_gain": 0,
+          "high_freq": 47,
+          "high_gain": 0
+        },
+        {
+          "index": 3,
+          "type": 0,
+          "low_freq": 45,
+          "low_gain": 0,
+          "high_freq": 48,
+          "high_gain": 0
+        },
+        {
+          "index": 4,
+          "type": 0,
+          "low_freq": 0,
+          "low_gain": 0,
+          "high_freq": 0,
+          "high_gain": 0
+        },
+        {
+          "index": 5,
+          "type": 0,
+          "low_freq": 0,
+          "low_gain": 0,
+          "high_freq": 0,
+          "high_gain": 0
+        },
+        {
+          "index": 6,
+          "type": 0,
+          "low_freq": 0,
+          "low_gain": 0,
+          "high_freq": 0,
+          "high_gain": 0
+        }
+      ]
+    },
+    {
+      "name": "Wah Wah 3",
+      "type_absolute": 108,
+      "frequency": 0.0,
+      "gain": 0.5,
+      "shape_id": "abs108_aac59e703937",
+      "sections": [
+        {
+          "index": 1,
+          "type": 1,
+          "low_freq": 44,
+          "low_gain": 123,
+          "high_freq": 76,
+          "high_gain": 114
+        },
+        {
+          "index": 2,
+          "type": 2,
+          "low_freq": 52,
+          "low_gain": 0,
+          "high_freq": 82,
+          "high_gain": 0
+        },
+        {
+          "index": 3,
+          "type": 3,
+          "low_freq": 25,
+          "low_gain": 0,
+          "high_freq": 28,
+          "high_gain": 0
+        },
+        {
+          "index": 4,
+          "type": 0,
+          "low_freq": 0,
+          "low_gain": 0,
+          "high_freq": 15,
+          "high_gain": 0
+        },
+        {
+          "index": 5,
+          "type": 0,
+          "low_freq": 0,
+          "low_gain": 0,
+          "high_freq": 0,
+          "high_gain": 0
+        },
+        {
+          "index": 6,
+          "type": 0,
+          "low_freq": 0,
+          "low_gain": 0,
+          "high_freq": 0,
+          "high_gain": 0
+        }
+      ]
+    },
+    {
+      "name": "100",
+      "type_absolute": 144,
+      "frequency": 1.0,
+      "gain": 1.0,
+      "shape_id": "abs144_b5c825095c87",
+      "sections": [
+        {
+          "index": 1,
+          "type": 3,
+          "low_freq": 0,
+          "low_gain": 127,
+          "high_freq": 116,
+          "high_gain": 87
+        },
+        {
+          "index": 2,
+          "type": 1,
+          "low_freq": 15,
+          "low_gain": 0,
+          "high_freq": 33,
+          "high_gain": 0
+        },
+        {
+          "index": 3,
+          "type": 1,
+          "low_freq": 33,
+          "low_gain": 127,
+          "high_freq": 51,
+          "high_gain": 127
+        },
+        {
+          "index": 4,
+          "type": 1,
+          "low_freq": 51,
+          "low_gain": 0,
+          "high_freq": 70,
+          "high_gain": 0
+        },
+        {
+          "index": 5,
+          "type": 1,
+          "low_freq": 70,
+          "low_gain": 127,
+          "high_freq": 89,
+          "high_gain": 127
+        },
+        {
+          "index": 6,
+          "type": 2,
+          "low_freq": 0,
+          "low_gain": 127,
+          "high_freq": 127,
+          "high_gain": 127
+        }
+      ]
+    },
+    {
+      "name": "3",
+      "type_absolute": 108,
+      "frequency": 0.0,
+      "gain": 1.0,
+      "shape_id": "abs108_cd801a9489ca",
+      "sections": [
+        {
+          "index": 1,
+          "type": 2,
+          "low_freq": 8,
+          "low_gain": 127,
+          "high_freq": 0,
+          "high_gain": 0
+        },
+        {
+          "index": 2,
+          "type": 2,
+          "low_freq": 82,
+          "low_gain": 123,
+          "high_freq": 127,
+          "high_gain": 127
+        },
+        {
+          "index": 3,
+          "type": 2,
+          "low_freq": 127,
+          "low_gain": 127,
+          "high_freq": 25,
+          "high_gain": 81
+        },
+        {
+          "index": 4,
+          "type": 2,
+          "low_freq": 98,
+          "low_gain": 118,
+          "high_freq": 127,
+          "high_gain": 110
+        },
+        {
+          "index": 5,
+          "type": 2,
+          "low_freq": 103,
+          "low_gain": 114,
+          "high_freq": 102,
+          "high_gain": 123
+        },
+        {
+          "index": 6,
+          "type": 2,
+          "low_freq": 102,
+          "low_gain": 127,
+          "high_freq": 69,
+          "high_gain": 127
+        }
+      ]
+    },
+    {
+      "name": "50",
+      "type_absolute": 144,
+      "frequency": 0.5,
+      "gain": 1.0,
+      "shape_id": "abs144_b5c825095c87",
+      "sections": [
+        {
+          "index": 1,
+          "type": 3,
+          "low_freq": 0,
+          "low_gain": 127,
+          "high_freq": 116,
+          "high_gain": 87
+        },
+        {
+          "index": 2,
+          "type": 1,
+          "low_freq": 15,
+          "low_gain": 0,
+          "high_freq": 33,
+          "high_gain": 0
+        },
+        {
+          "index": 3,
+          "type": 1,
+          "low_freq": 33,
+          "low_gain": 127,
+          "high_freq": 51,
+          "high_gain": 127
+        },
+        {
+          "index": 4,
+          "type": 1,
+          "low_freq": 51,
+          "low_gain": 0,
+          "high_freq": 70,
+          "high_gain": 0
+        },
+        {
+          "index": 5,
+          "type": 1,
+          "low_freq": 70,
+          "low_gain": 127,
+          "high_freq": 89,
+          "high_gain": 127
+        },
+        {
+          "index": 6,
+          "type": 2,
+          "low_freq": 0,
+          "low_gain": 127,
+          "high_freq": 127,
+          "high_gain": 127
+        }
+      ]
+    },
+    {
+      "name": "d",
+      "type_absolute": 144,
+      "frequency": 0.0,
+      "gain": 0.0,
+      "shape_id": "abs144_b5c825095c87",
+      "sections": [
+        {
+          "index": 1,
+          "type": 3,
+          "low_freq": 0,
+          "low_gain": 127,
+          "high_freq": 116,
+          "high_gain": 87
+        },
+        {
+          "index": 2,
+          "type": 1,
+          "low_freq": 15,
+          "low_gain": 0,
+          "high_freq": 33,
+          "high_gain": 0
+        },
+        {
+          "index": 3,
+          "type": 1,
+          "low_freq": 33,
+          "low_gain": 127,
+          "high_freq": 51,
+          "high_gain": 127
+        },
+        {
+          "index": 4,
+          "type": 1,
+          "low_freq": 51,
+          "low_gain": 0,
+          "high_freq": 70,
+          "high_gain": 0
+        },
+        {
+          "index": 5,
+          "type": 1,
+          "low_freq": 70,
+          "low_gain": 127,
+          "high_freq": 89,
+          "high_gain": 127
+        },
+        {
+          "index": 6,
+          "type": 2,
+          "low_freq": 0,
+          "low_gain": 127,
+          "high_freq": 127,
+          "high_gain": 127
+        }
+      ]
+    },
+    {
+      "name": "des",
+      "type_absolute": 108,
+      "frequency": 0.0,
+      "gain": 0.0,
+      "shape_id": "abs108_36d7f67581ca",
+      "sections": [
+        {
+          "index": 1,
+          "type": 0,
+          "low_freq": 0,
+          "low_gain": 0,
+          "high_freq": 0,
+          "high_gain": 0
+        },
+        {
+          "index": 2,
+          "type": 0,
+          "low_freq": 0,
+          "low_gain": 0,
+          "high_freq": 0,
+          "high_gain": 0
+        },
+        {
+          "index": 3,
+          "type": 0,
+          "low_freq": 0,
+          "low_gain": 0,
+          "high_freq": 0,
+          "high_gain": 0
+        },
+        {
+          "index": 4,
+          "type": 0,
+          "low_freq": 0,
+          "low_gain": 0,
+          "high_freq": 0,
+          "high_gain": 0
+        },
+        {
+          "index": 5,
+          "type": 0,
+          "low_freq": 0,
+          "low_gain": 0,
+          "high_freq": 0,
+          "high_gain": 0
+        },
+        {
+          "index": 6,
+          "type": 0,
+          "low_freq": 0,
+          "low_gain": 0,
+          "high_freq": 0,
+          "high_gain": 0
+        }
+      ]
+    },
+    {
+      "name": "dxx",
+      "type_absolute": 144,
+      "frequency": 0.518,
+      "gain": 0.5,
+      "shape_id": "abs144_b6db2b2bb9d2",
+      "sections": [
+        {
+          "index": 1,
+          "type": 2,
+          "low_freq": 0,
+          "low_gain": 0,
+          "high_freq": 114,
+          "high_gain": 127
+        },
+        {
+          "index": 2,
+          "type": 0,
+          "low_freq": 0,
+          "low_gain": 0,
+          "high_freq": 100,
+          "high_gain": 122
+        },
+        {
+          "index": 3,
+          "type": 0,
+          "low_freq": 0,
+          "low_gain": 0,
+          "high_freq": 0,
+          "high_gain": 0
+        },
+        {
+          "index": 4,
+          "type": 0,
+          "low_freq": 0,
+          "low_gain": 0,
+          "high_freq": 0,
+          "high_gain": 0
+        },
+        {
+          "index": 5,
+          "type": 0,
+          "low_freq": 0,
+          "low_gain": 0,
+          "high_freq": 0,
+          "high_gain": 0
+        },
+        {
+          "index": 6,
+          "type": 0,
+          "low_freq": 0,
+          "low_gain": 0,
+          "high_freq": 0,
+          "high_gain": 0
+        }
+      ]
+    },
+    {
+      "name": "hedz",
+      "type_absolute": 144,
+      "frequency": 1.0,
+      "gain": 1.0,
+      "shape_id": "abs144_b5c825095c87",
+      "sections": [
+        {
+          "index": 1,
+          "type": 3,
+          "low_freq": 0,
+          "low_gain": 127,
+          "high_freq": 116,
+          "high_gain": 87
+        },
+        {
+          "index": 2,
+          "type": 1,
+          "low_freq": 15,
+          "low_gain": 0,
+          "high_freq": 33,
+          "high_gain": 0
+        },
+        {
+          "index": 3,
+          "type": 1,
+          "low_freq": 33,
+          "low_gain": 127,
+          "high_freq": 51,
+          "high_gain": 127
+        },
+        {
+          "index": 4,
+          "type": 1,
+          "low_freq": 51,
+          "low_gain": 0,
+          "high_freq": 70,
+          "high_gain": 0
+        },
+        {
+          "index": 5,
+          "type": 1,
+          "low_freq": 70,
+          "low_gain": 127,
+          "high_freq": 89,
+          "high_gain": 127
+        },
+        {
+          "index": 6,
+          "type": 2,
+          "low_freq": 0,
+          "low_gain": 127,
+          "high_freq": 127,
+          "high_gain": 127
+        }
+      ]
+    },
+    {
+      "name": "hedz0",
+      "type_absolute": 144,
+      "frequency": 0.0,
+      "gain": 0.0,
+      "shape_id": "abs144_b5c825095c87",
+      "sections": [
+        {
+          "index": 1,
+          "type": 3,
+          "low_freq": 0,
+          "low_gain": 127,
+          "high_freq": 116,
+          "high_gain": 87
+        },
+        {
+          "index": 2,
+          "type": 1,
+          "low_freq": 15,
+          "low_gain": 0,
+          "high_freq": 33,
+          "high_gain": 0
+        },
+        {
+          "index": 3,
+          "type": 1,
+          "low_freq": 33,
+          "low_gain": 127,
+          "high_freq": 51,
+          "high_gain": 127
+        },
+        {
+          "index": 4,
+          "type": 1,
+          "low_freq": 51,
+          "low_gain": 0,
+          "high_freq": 70,
+          "high_gain": 0
+        },
+        {
+          "index": 5,
+          "type": 1,
+          "low_freq": 70,
+          "low_gain": 127,
+          "high_freq": 89,
+          "high_gain": 127
+        },
+        {
+          "index": 6,
+          "type": 2,
+          "low_freq": 0,
+          "low_gain": 127,
+          "high_freq": 127,
+          "high_gain": 127
+        }
+      ]
+    },
+    {
+      "name": "morph0q100",
+      "type_absolute": 144,
+      "frequency": 0.0,
+      "gain": 1.0,
+      "shape_id": "abs144_7949e309f941",
+      "sections": [
+        {
+          "index": 1,
+          "type": 2,
+          "low_freq": 0,
+          "low_gain": 0,
+          "high_freq": 127,
+          "high_gain": 127
+        },
+        {
+          "index": 2,
+          "type": 1,
+          "low_freq": 0,
+          "low_gain": 0,
+          "high_freq": 100,
+          "high_gain": 122
+        },
+        {
+          "index": 3,
+          "type": 0,
+          "low_freq": 0,
+          "low_gain": 0,
+          "high_freq": 0,
+          "high_gain": 0
+        },
+        {
+          "index": 4,
+          "type": 0,
+          "low_freq": 0,
+          "low_gain": 0,
+          "high_freq": 0,
+          "high_gain": 0
+        },
+        {
+          "index": 5,
+          "type": 0,
+          "low_freq": 0,
+          "low_gain": 0,
+          "high_freq": 0,
+          "high_gain": 0
+        },
+        {
+          "index": 6,
+          "type": 0,
+          "low_freq": 0,
+          "low_gain": 0,
+          "high_freq": 0,
+          "high_gain": 0
+        }
+      ]
+    },
+    {
+      "name": "morph100q100",
+      "type_absolute": 144,
+      "frequency": 1.0,
+      "gain": 1.0,
+      "shape_id": "abs144_7949e309f941",
+      "sections": [
+        {
+          "index": 1,
+          "type": 2,
+          "low_freq": 0,
+          "low_gain": 0,
+          "high_freq": 127,
+          "high_gain": 127
+        },
+        {
+          "index": 2,
+          "type": 1,
+          "low_freq": 0,
+          "low_gain": 0,
+          "high_freq": 100,
+          "high_gain": 122
+        },
+        {
+          "index": 3,
+          "type": 0,
+          "low_freq": 0,
+          "low_gain": 0,
+          "high_freq": 0,
+          "high_gain": 0
+        },
+        {
+          "index": 4,
+          "type": 0,
+          "low_freq": 0,
+          "low_gain": 0,
+          "high_freq": 0,
+          "high_gain": 0
+        },
+        {
+          "index": 5,
+          "type": 0,
+          "low_freq": 0,
+          "low_gain": 0,
+          "high_freq": 0,
+          "high_gain": 0
+        },
+        {
+          "index": 6,
+          "type": 0,
+          "low_freq": 0,
+          "low_gain": 0,
+          "high_freq": 0,
+          "high_gain": 0
+        }
+      ]
+    },
+    {
+      "name": "sd",
+      "type_absolute": 108,
+      "frequency": 0.0,
+      "gain": 0.5,
+      "shape_id": "abs108_b6db2b2bb9d2",
+      "sections": [
+        {
+          "index": 1,
+          "type": 2,
+          "low_freq": 0,
+          "low_gain": 0,
+          "high_freq": 114,
+          "high_gain": 127
+        },
+        {
+          "index": 2,
+          "type": 0,
+          "low_freq": 0,
+          "low_gain": 0,
+          "high_freq": 100,
+          "high_gain": 122
+        },
+        {
+          "index": 3,
+          "type": 0,
+          "low_freq": 0,
+          "low_gain": 0,
+          "high_freq": 0,
+          "high_gain": 0
+        },
+        {
+          "index": 4,
+          "type": 0,
+          "low_freq": 0,
+          "low_gain": 0,
+          "high_freq": 0,
+          "high_gain": 0
+        },
+        {
+          "index": 5,
+          "type": 0,
+          "low_freq": 0,
+          "low_gain": 0,
+          "high_freq": 0,
+          "high_gain": 0
+        },
+        {
+          "index": 6,
+          "type": 0,
+          "low_freq": 0,
+          "low_gain": 0,
+          "high_freq": 0,
+          "high_gain": 0
+        }
+      ]
+    },
+    {
+      "name": "ssssss",
+      "type_absolute": 144,
+      "frequency": 0.0,
+      "gain": 0.5,
+      "shape_id": "abs144_7949e309f941",
+      "sections": [
+        {
+          "index": 1,
+          "type": 2,
+          "low_freq": 0,
+          "low_gain": 0,
+          "high_freq": 127,
+          "high_gain": 127
+        },
+        {
+          "index": 2,
+          "type": 1,
+          "low_freq": 0,
+          "low_gain": 0,
+          "high_freq": 100,
+          "high_gain": 122
+        },
+        {
+          "index": 3,
+          "type": 0,
+          "low_freq": 0,
+          "low_gain": 0,
+          "high_freq": 0,
+          "high_gain": 0
+        },
+        {
+          "index": 4,
+          "type": 0,
+          "low_freq": 0,
+          "low_gain": 0,
+          "high_freq": 0,
+          "high_gain": 0
+        },
+        {
+          "index": 5,
+          "type": 0,
+          "low_freq": 0,
+          "low_gain": 0,
+          "high_freq": 0,
+          "high_gain": 0
+        },
+        {
+          "index": 6,
+          "type": 0,
+          "low_freq": 0,
+          "low_gain": 0,
+          "high_freq": 0,
+          "high_gain": 0
+        }
+      ]
+    },
+    {
+      "name": "tb",
+      "type_absolute": 140,
+      "frequency": 1.0,
+      "gain": 1.0,
+      "shape_id": "abs140_36d7f67581ca",
+      "sections": [
+        {
+          "index": 1,
+          "type": 0,
+          "low_freq": 0,
+          "low_gain": 0,
+          "high_freq": 0,
+          "high_gain": 0
+        },
+        {
+          "index": 2,
+          "type": 0,
+          "low_freq": 0,
+          "low_gain": 0,
+          "high_freq": 0,
+          "high_gain": 0
+        },
+        {
+          "index": 3,
+          "type": 0,
+          "low_freq": 0,
+          "low_gain": 0,
+          "high_freq": 0,
+          "high_gain": 0
+        },
+        {
+          "index": 4,
+          "type": 0,
+          "low_freq": 0,
+          "low_gain": 0,
+          "high_freq": 0,
+          "high_gain": 0
+        },
+        {
+          "index": 5,
+          "type": 0,
+          "low_freq": 0,
+          "low_gain": 0,
+          "high_freq": 0,
+          "high_gain": 0
+        },
+        {
+          "index": 6,
+          "type": 0,
+          "low_freq": 0,
+          "low_gain": 0,
+          "high_freq": 0,
+          "high_gain": 0
+        }
+      ]
+    },
+    {
+      "name": "w",
+      "type_absolute": 140,
+      "frequency": 0.0,
+      "gain": 0.0,
+      "shape_id": "abs140_36d7f67581ca",
+      "sections": [
+        {
+          "index": 1,
+          "type": 0,
+          "low_freq": 0,
+          "low_gain": 0,
+          "high_freq": 0,
+          "high_gain": 0
+        },
+        {
+          "index": 2,
+          "type": 0,
+          "low_freq": 0,
+          "low_gain": 0,
+          "high_freq": 0,
+          "high_gain": 0
+        },
+        {
+          "index": 3,
+          "type": 0,
+          "low_freq": 0,
+          "low_gain": 0,
+          "high_freq": 0,
+          "high_gain": 0
+        },
+        {
+          "index": 4,
+          "type": 0,
+          "low_freq": 0,
+          "low_gain": 0,
+          "high_freq": 0,
+          "high_gain": 0
+        },
+        {
+          "index": 5,
+          "type": 0,
+          "low_freq": 0,
+          "low_gain": 0,
+          "high_freq": 0,
+          "high_gain": 0
+        },
+        {
+          "index": 6,
+          "type": 0,
+          "low_freq": 0,
+          "low_gain": 0,
+          "high_freq": 0,
+          "high_gain": 0
+        }
+      ]
+    }
+  ]
+}

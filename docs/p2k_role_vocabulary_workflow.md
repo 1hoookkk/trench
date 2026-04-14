@@ -46,3 +46,27 @@ Quality modes:
 ## Notes
 - This workflow uses only P2k corpus for vocabulary training.
 - Shipping names remain the only normative label anchor for target selection.
+
+## 5) Heritage MorphDesigner integer grids (NotebookLM extraction)
+
+E-mu shipped the MorphDesigner XML authoring grid alongside the
+compiled P2K ROMs. The 30-integer recipe per template
+(6 stages × `(type, low_freq, low_gain, high_freq, high_gain)`) lives
+plaintext in the NotebookLM markdown exports under
+`tests/fixtures/notebooklm/10-13-templates-filter-*.md` (83 templates
+total). To rehydrate the inventory:
+
+```bash
+python tools/extract_emu_filter_params.py \
+    --input tests/fixtures/notebooklm/ \
+    --out vault/_phonemes/heritage_designer_sections.json
+```
+
+Output is `heritage-designer-sections-v1`: a flat list of templates
+each carrying `name`, `type_absolute`, `frequency`, `gain`, `shape_id`
+(canonical 12-char sha256 prefix matching
+`docs/looperator/filter_cube_display_model.md:60-64`), and the
+six-section integer grid. Downstream consumers load it with
+`pyruntime.designer_compile.load_inventory(path)`, which returns
+`DesignerTemplate` records the existing
+`compile_designer` / `compile_designer_to_body` path already handles.
