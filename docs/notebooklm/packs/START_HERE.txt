@@ -1,0 +1,21 @@
+NotebookLM import packs
+=======================
+
+Use these folders directly:
+
+1. ground-truth
+2. ship-engine
+3. frontier
+
+Each folder contains:
+
+- the curated local source files for that notebook
+- a `WEB_URLS.txt` file for any online sources to add manually
+
+Do not upload these stale sources into permanent notebooks:
+
+- C:\Users\hooki\trenchwork\HANDOFF.md
+- C:\Users\hooki\trenchwork\docs\03_ENGINE_BEHAVIOR.md
+- C:\Users\hooki\.claude\projects\C--Users-hooki-trenchwork\memory\technical_manifesto.md
+- C:\Users\hooki\Downloads\TRENCH_PROJECT_BIBLE.md.pdf
+- C:\Users\hooki\Downloads\deep-research-report.md
