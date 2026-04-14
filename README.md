@@ -16,10 +16,11 @@ docs; everything else is implementation detail.
 Runs doc-set sanity, cargo type-check across the workspace, pyruntime imports.
 The live filesystem is the repo index — there is no precomputed snapshot.
 
-## Shape bank (what we’re building right now)
-- Shape bank docs: `vault/_shapes/README.md`
-- P2K phoneme inventory docs: `vault/_phonemes/README.md`
-- Regenerate the full bank: `python tools/author_sonic_bank.py --pairs --out-root vault/_shapes`
+## Shipping phoneme pills
+- Flat layout: `cartridges/engine/<category>/<key>.json`
+- Pill manifest: `cartridges/engine/manifest.json`
+- Upstream source: `cartridges/engine/_source/`
+- Rebuild from source: `python tools/bake_phoneme_pills.py`
 
 ## Entrypoints
 - Rust workspace: `Cargo.toml`
