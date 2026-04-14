@@ -56,6 +56,12 @@ cargo test -p trench-core --test canonical_parity --release --quiet 2>&1 | grep 
 step "rust hedz cascade cross-language parity (4 corners vs python bake)"
 cargo test -p trench-core --test hedz_cascade --release --quiet 2>&1 | grep -E "(test result|FAIL)" | sed 's/^/  /'
 
+step "rust engine pills smoke (every cartridges/engine/*.json loads)"
+cargo test -p trench-core --test engine_pills --release --quiet 2>&1 | grep -E "(test result|FAIL)" | sed 's/^/  /'
+
+step "rust vowel formant classification (8 ok + 2 known-drift: aw, oo)"
+cargo test -p trench-core --test vowel_formants --release --quiet 2>&1 | grep -E "(test result|FAIL)" | sed 's/^/  /'
+
 step "cartridges validate against schema"
 python - <<'PY'
 import json, sys
