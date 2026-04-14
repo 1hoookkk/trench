@@ -10,6 +10,7 @@ Two distinct paths live here:
 """
 from __future__ import annotations
 
+import json
 import math
 import xml.etree.ElementTree as ET
 from dataclasses import dataclass
@@ -132,6 +133,59 @@ def parse_xml(path: str) -> DesignerTemplate:
         frequency=frequency,
         gain=gain,
     )
+
+
+def load_inventory(path: str | Path) -> list[DesignerTemplate]:
+    """Load a heritage-designer-sections-v1 inventory into DesignerTemplates.
+
+    The inventory is the output of `tools/extract_emu_filter_params.py`,
+    which parses NotebookLM markdown exports of the E-mu MorphDesigner
+    XML templates. Schema mirrors `parse_xml` field-by-field — section
+    keys are `type`, `low_freq`, `low_gain`, `high_freq`, `high_gain` —
+    so this helper just rehydrates the same `DesignerSection` /
+    `DesignerTemplate` records `parse_xml` already returns. From here
+    the existing `compile_designer` / `compile_designer_to_body` path
+    is unchanged.
+    """
+    data = json.loads(Path(path).read_text(encoding="utf-8"))
+    if data.get("format") != "heritage-designer-sections-v1":
+        raise ValueError(
+            f"unexpected inventory format: {data.get('format')!r} "
+            "(expected 'heritage-designer-sections-v1')"
+        )
+
+    templates: list[DesignerTemplate] = []
+    for entry in data.get("templates", []):
+        sections: list[DesignerSection] = []
+        raw_sections = entry.get("sections", [])
+        # Index by `index` field so out-of-order or sparse sections are
+        # placed correctly; missing indices fall back to a zeroed bypass.
+        by_index = {int(s.get("index", i + 1)): s for i, s in enumerate(raw_sections)}
+        for i in range(1, 7):
+            s = by_index.get(i)
+            if s is None:
+                sections.append(DesignerSection(0, 0, 0, 0, 0))
+                continue
+            sections.append(
+                DesignerSection(
+                    type=int(s.get("type", 0)),
+                    low_freq=int(s.get("low_freq", 0)),
+                    low_gain=int(s.get("low_gain", 0)),
+                    high_freq=int(s.get("high_freq", 0)),
+                    high_gain=int(s.get("high_gain", 0)),
+                )
+            )
+
+        templates.append(
+            DesignerTemplate(
+                name=str(entry.get("name", "")),
+                sections=sections,
+                frequency=float(entry.get("frequency", 0.0)),
+                gain=float(entry.get("gain", 0.0)),
+            )
+        )
+
+    return templates
 
 
 def _compile_packed(type_id: int, freq_packed: int, gain_packed: int, shift: int = 0) -> tuple[StageParams, EncodedCoeffs]:
