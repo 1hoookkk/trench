@@ -40,10 +40,6 @@ echo "  OK"
 step "rust workspace check (lib + tests, type-only)"
 cargo check --workspace --tests --quiet
 
-step "pyruntime imports"
-python -c "import pyruntime, pyruntime.analysis, pyruntime.compiled_v1"
-echo "  OK"
-
 step "passthrough null targets (static < -120 dBFS, dynamic < -90 dBFS)"
 cargo test -p trench-core --test null_targets --quiet 2>&1 | grep -E "(null peak residual|test result|FAIL)" | sed 's/^/  /'
 

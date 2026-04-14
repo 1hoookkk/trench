@@ -136,7 +136,7 @@ impl Plugin for TrenchLive {
         //    - block on channels, signals, or atomics that can spin
         //
         //  If you need to edit this function, re-read
-        //  `pyruntime/CLAUDE.md` and `trench-core/CLAUDE.md` first.
+        //  `trench-core/CLAUDE.md` first.
         // ================================================================
 
         let morph = self.params.morph.value() as f64;

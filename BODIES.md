@@ -166,4 +166,4 @@ balanced sampling, and fails unless all 4 shipping bodies are
 
 Only the 4 names above are normative: `Speaker Knockerz`, `Aluminum Siding`,
 `Small Talk Ah-Ee`, `Cul-De-Sac`. Measurable release logic lives in code
-(`pyruntime.analysis.shipping_gate`), not prose.
+(the forge-side shipping gate, in the sibling authoring repo), not prose.

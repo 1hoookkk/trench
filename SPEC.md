@@ -45,7 +45,8 @@ constant 1.0.
 ## 2. Cartridge format (`compiled-v1`)
 
 The plugin consumes immutable JSON cartridges. Authoritative loader:
-`pyruntime/compiled_v1.py`. Schema: `cartridge.schema.json`.
+`trench-core/src/cartridge.rs::Cartridge::from_json`. Schema:
+`cartridge.schema.json`.
 
 ```json
 {

@@ -58,11 +58,14 @@ The compiler MUST NOT:
 
 ## What's built, what's TBD
 
-- Token inventory: built (`vault/_phonemes/`).
-- Shape bank (token bodies): built (`vault/_shapes/`).
+- Token inventory: built (`cartridges/engine/_source/token_inventory_unified_v2.json`).
+- Shape bank (token bodies): built (`cartridges/engine/_source/shapes/`).
+- Shipping flat pill layout: built (`cartridges/engine/<category>/<key>.json`
+  via `tools/bake_phoneme_pills.py`).
 - Grid UI: TBD. v1 goal.
 - Compiler (grid → cartridge): TBD. v1 goal.
 
-Until the compiler ships, candidate cartridges come from the forge
-(`pyruntime/target.py` + `macro_compile.py`) and are hand-audited against
-`BODIES.md` rubrics.
+Until the compiler ships, candidate pills come from the forge (sibling
+authoring repo, out of shipping tree) and are hand-audited against
+`BODIES.md` rubrics and the `trench-core/tests/vowel_formants.rs`
+classification gate.

@@ -26,17 +26,18 @@ it is either archive/non-canonical or queued for deletion.
   `boost`.
 - **Rust loader**: `trench-core/src/cartridge.rs::Cartridge::from_json`
   — accepts both the keyframe format above and the array format
-  (`corners.M0_Q0 = [[c0..c4], ...]`).
-- **Python serializer**: `pyruntime/body.py::Body::to_compiled_json`.
+  (`corners.M0_Q0 = [[c0..c4], ...]`). This is the authoritative
+  loader; the shipping chain has no Python loader.
 
 ## Verification command
 
     ./check
 
 Runs, in order: canonical doc set check, cargo type-check the whole
-workspace, `pyruntime` import check, null-target test, 41-entry
-P2K parity null (hard fail at > -140 dB), Rust cascade parity vs 33
-raw skins × 4 corners (hard fail at > -120 dB), and
+workspace, null-target test, 41-entry P2K parity null (hard fail at
+> -140 dB), Rust cascade parity vs 33 raw skins × 4 corners (hard
+fail at > -120 dB), hedz cross-language parity, engine pill loader
+smoke, vowel formant label classification, and
 `cartridge.schema.json` validation across `cartridges/**/*.json`.
 
 ## Authoring tools allowed to touch shipping
@@ -68,9 +69,10 @@ active runtime or the verification command.
   (ground-truth, ship-engine, frontier). Research context; the real
   ground truth is the integer grid in
   `cartridges/engine/_source/heritage_designer_sections.json`.
-- `pyruntime/api.py` and everything `forge_*.py` that isn't
-  `forge_shipping*` — FastAPI research cockpit. Serves the authoring
-  UI, not the shipping runtime.
+- Forge authoring cockpit — lives in a sibling repo, out of this
+  shipping tree. Owns taste, body authoring, shape-bank generation,
+  and the candidate → ship gate. Not imported, referenced, or
+  required by anything under this repo.
 - `docs/archive/`, `docs/archive_symbol_inventory_2026-04-09.*` —
   snapshot-at-date inventories; historical only.
 
@@ -149,7 +151,7 @@ way, claims of correctness that lean on "trust me". One line per
 bluff. Rank by how badly it would hurt if I believed it.
 
 **Where the rules are fiction.** Read every rule in `CLAUDE.md`,
-`DOCTRINE.md`, `pyruntime/CLAUDE.md`, and `trench-core/CLAUDE.md`.
+`DOCTRINE.md`, and `trench-core/CLAUDE.md`.
 For each rule, count how many times the actual code already breaks
 it. If a rule is broken five or more times, it's not a rule — it's
 decoration. Tell me per rule: rewrite the rule to match reality, or

@@ -13,8 +13,10 @@ docs; everything else is implementation detail.
 ## Verify the workspace
     ./check
 
-Runs doc-set sanity, cargo type-check across the workspace, pyruntime imports.
-The live filesystem is the repo index — there is no precomputed snapshot.
+Runs doc-set sanity, cargo type-check across the workspace, shipping
+pill loader smoke, vowel-formant label classification, hedz cross-
+language parity, and P2K parity-null against `ref/canonical/`. The
+live filesystem is the repo index — there is no precomputed snapshot.
 
 ## Shipping phoneme pills
 - Flat layout: `cartridges/engine/<category>/<key>.json`
@@ -24,6 +26,6 @@ The live filesystem is the repo index — there is no precomputed snapshot.
 
 ## Entrypoints
 - Rust workspace: `Cargo.toml`
-- Python runtime API: `pyruntime/api.py`
 - JUCE plugin repo (sibling tree): `trench-juce/plugin/`
+- Authoring cockpit (sibling repo, out of shipping tree): `trench-forge/`
 

@@ -2,7 +2,7 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://trench/cartridge.schema.json",
   "title": "TRENCH compiled-v1 cartridge",
-  "description": "Wire format for cartridges consumed by the JUCE plugin. Authoritative loader: pyruntime/compiled_v1.py. Validated by ./check.",
+  "description": "Wire format for cartridges consumed by the JUCE plugin. Authoritative loader: trench-core/src/cartridge.rs::Cartridge::from_json. Validated by ./check.",
   "type": "object",
   "required": ["format", "keyframes"],
   "additionalProperties": true,

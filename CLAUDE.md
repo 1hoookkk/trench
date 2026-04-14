@@ -37,5 +37,5 @@ filter trajectory. Windows JUCE 8 standalone + VST3.
   `tools/bake_hedz_const.py`
 - Verify workspace: `./check`
 - Active shipping plugin: `trench-juce/plugin/`
-- Subtree rules: `trench-core/CLAUDE.md`, `pyruntime/CLAUDE.md`
+- Subtree rules: `trench-core/CLAUDE.md`
 - Repo index: live filesystem. Doctrine wins; no precomputed snapshot.
