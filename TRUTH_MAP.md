@@ -93,93 +93,119 @@ Claims with evidence. The purge order is safest-first.
 
 ## Architect Prompts
 
-Pastable one-shots. Each forces evidence, classification, or a
-decision. No handwaving, no teaching tone, no management-speak. Pick
-the one that fits the moment.
+Questions you can paste to me during TRENCH work. Each one forces me
+to do the digging and report back in plain terms — no jargon, no
+hedging, no "it depends", no hiding behind complexity. I own the
+implementation. You own the decision. These prompts put me in the
+position where I have to give you something you can actually act on.
 
-**Active truth.** Name every file the shipping binary actually
-executes. Entry point → call chain → leaf. Anything not named is
-dead, quarantine, or a lie. Output a table: file, evidence, verdict.
+**What actually runs.** Tell me every file the shipping plugin
+actually uses when it makes sound. For each one, show me the
+evidence — what loads it, what calls into it. Anything you can't
+prove is loaded is either dead or lying. Give me a short list, not
+a tour.
 
-**Live-path proof.** For `<behavior>`, trace the call chain from the
-shipping entry point to the leaf. If two paths reach it, name both
-and kill one with a one-line reason. Forbidden answer: "keep both".
+**Which path ships.** For `<thing>`, walk me through exactly what
+happens from the moment I touch it to the moment sound comes out.
+If there's more than one way the codebase could do it, name every
+way and tell me which one is actually the one that ships. You are
+not allowed to answer "keep both".
 
-**Invariant enforcement.** List every invariant this module claims in
-docstrings or comments. Per invariant, cite the test or runtime
-assertion that enforces it. Comment-only = not enforced — report
-those as liabilities, not invariants.
+**What's actually enforced.** Pick a rule or invariant the code
+claims in a comment, a docstring, or a name. Tell me whether
+there's a real check — a test or a runtime guard — that enforces
+it. If it only exists as words, mark it as a wish, not a rule.
+Wishes are liabilities.
 
-**Post-regression triage.** Paste after every failure. The gate that
-just failed: name it. Then, in order:
-1. What changed — commits since last green, files per commit.
-2. What path is active — which code the failing behavior actually
-   runs (entry → leaf).
-3. What proof failed — exact test, assertion, got / expected / delta.
-4. What is now suspect — intersection of (files touched) ∩ (active
-   path) ∩ (upstream of the failing assertion).
-5. What to do — per suspect, one verdict: REVERT / ISOLATE /
-   DELETE / KEEP, plus one line of evidence.
-Do not write a root-cause narrative until the five are answered.
+**What just broke.** Something failed. Before you write a single
+sentence of explanation, do these five things in order:
+1. What changed — every commit since the last time the repo was
+   green, and which files each one touched.
+2. Which code the broken thing actually uses — name the path from
+   the plugin entry point to where the failure is.
+3. What the failure was — the exact name of the test or check, what
+   it expected, what it got, and how far off.
+4. Which files are now suspect — the overlap between "files that
+   changed" and "files the broken thing uses".
+5. What to do — for each suspect, give me one word: REVERT,
+   ISOLATE, DELETE, or KEEP, plus one sentence of why.
+Only after those five are answered are you allowed to tell me the
+root cause story.
 
-**Deletion census.** Every file, module, crate, and top-level
-function with zero inbound references from the shipping entry points.
-Classify: DEAD (delete), QUARANTINE (move to archive/), LIVE (prove
-it with one call site). Sort by line count descending.
+**What's safe to delete.** Find every file, folder, crate, or big
+function in this repo that nothing else actually uses. For each
+one, mark it DEAD (delete it), QUARANTINE (move to an archive
+folder so history survives), or LIVE (prove it with one caller).
+Sort by size, biggest first. No "maybe useful later" — that's how
+the repo got bloated in the first place.
 
-**Boundary audit.** Audit every import that crosses `<boundary>`.
-Report violations as `file:line — from → to`. Each violation is
-either a bug to fix or the boundary is fiction — pick per violation.
-No softening.
+**Where the rules get broken.** The repo has a rule: `<quote it>`.
+Check every piece of code that could cross that rule. For each
+violation, show me the file and a short description, and tell me
+whether it's a bug to fix or whether the rule is fiction. Pick per
+violation. No softening, no averaging.
 
-**Fake-solidity sweep.** Name every place the repo claims solidity it
-hasn't earned: tests that assert nothing sharp, invariants in
-comments without enforcement, docs that describe desired state as if
-it were current, code gated behind `cfg(debug)` masquerading as a
-runtime guarantee, magic numbers without derivation. One line per
-lie. Rank by blast radius.
+**Where the repo is bluffing.** Name every place this codebase is
+claiming more solidity than it has actually earned. I want examples
+like: tests that don't really test what their name says, invariants
+that live in comments but never get checked at runtime, docs that
+describe what we wish the system did as if it already works that
+way, claims of correctness that lean on "trust me". One line per
+bluff. Rank by how badly it would hurt if I believed it.
 
-**Doctrine drift.** Every rule in `CLAUDE.md` / `DOCTRINE.md` /
-`pyruntime/CLAUDE.md` / `trench-core/CLAUDE.md` that the code
-violates. Count violations per rule. Any rule with ≥ 5 violations is
-fiction — rewrite the rule or fix the code, pick per rule.
+**Where the rules are fiction.** Read every rule in `CLAUDE.md`,
+`DOCTRINE.md`, `pyruntime/CLAUDE.md`, and `trench-core/CLAUDE.md`.
+For each rule, count how many times the actual code already breaks
+it. If a rule is broken five or more times, it's not a rule — it's
+decoration. Tell me per rule: rewrite the rule to match reality, or
+fix the code to match the rule.
 
-**Gate coverage.** For every step in `./check`, state what it
-actually proves vs what its name implies. Flag every step whose name
-overstates the assertion. Columns: step, claim, actual_assert,
-overstatement_severity.
+**What `./check` actually proves.** Go through every step in
+`./check` and tell me, in one sentence each, what the step
+genuinely proves — compared to what its name makes it sound like it
+proves. Flag every step whose name oversells what the test is
+actually locking down.
 
-**Hot-path allocation sweep.** Every `String::new`, `Vec::new`,
-`Box::new`, `clone()`, `to_string()`, `format!`, heap collection,
-lock acquire, or syscall reachable from the audio callback / JUCE
-`processBlock` / trench-core `Cascade::process_block_mono`. Zero is
-the target. Output file:line plus one line of justification per hit.
+**What could glitch the audio.** Look at the audio callback and
+everything it calls. Find every place in there that allocates
+memory, takes a lock, touches a file, parses text, or does anything
+that's not pure math. Any of those can make the audio stutter.
+Target is zero. For each one, show me where it is and tell me
+whether it has to stay or can be killed.
 
-**Silent panic sweep.** Every `.unwrap()`, `.expect()`, `panic!`,
-`todo!()`, `unimplemented!()`, and naked `assert!` reachable from the
-shipping entry point. Classify: INTENTIONAL_INVARIANT (documented,
-keep), MISSING_VALIDATION (fix), LAZY (fix or delete the caller).
-Include file:line and the calling chain.
+**What could crash.** Find every place in the shipping code that
+can blow up when something unexpected happens. For each one, tell
+me: is this on purpose (a real invariant, documented, keep it), a
+missing sanity check (we should handle this properly), or lazy
+(someone skipped error handling and left a bomb)? Show me where.
 
-**Duplication census.** Every concept with more than one
-representation in the repo. Output: concept, representations
-(path:line), canonical candidate, drift evidence. If no clear
-canonical, flag CONFLICT and recommend a resolution.
+**Where the same thing lives twice.** Find every concept in the
+repo that has more than one implementation. For each: name the
+concept, name every place it lives, tell me which one should be
+the canonical version, and show me how the copies have drifted
+apart. If none of them is obviously canonical, flag it as a
+conflict and recommend which one I should make canonical.
 
-**Ship blockers.** Given HEAD, list everything that blocks shipping.
-Classify: BLOCKING_BUG / MISSING_TEST / UNPROVEN_CLAIM /
-ARCHITECTURAL_DEBT. Rank by blast radius if shipped as-is. "Nice to
-haves" are forbidden — if it's not blocking, it's not on the list.
+**Can this ship.** Given the current state of the repo, list
+everything standing between here and a release I can be confident
+in. For each one, tell me whether it's a real bug, a test we're
+missing, a claim we haven't proven, or architectural debt. Rank by
+how bad it would be if we shipped anyway. Nothing "nice to have" —
+if it's not blocking the release, it doesn't belong on this list.
 
-**Architectural choice.** `<feature>` has N implementations. List
-each with evidence of LIVE / DEAD / CONTESTED. Recommend exactly one
-to keep and the rest to delete, one-line evidence per verdict.
-Forbidden answers: "keep both", "depends", "it's complicated".
+**Force a choice.** `<some feature>` has more than one
+implementation. List them. Show me the evidence of which one is
+live, which is dead, and which is contested. Then tell me: keep
+exactly one, delete the rest, one sentence of reasoning per
+verdict. You are not allowed to say "keep both", "it depends", or
+"it's complicated".
 
-**Scope drift.** This branch was opened to do `<intent>`. List every
-change that isn't `<intent>`. Per change: FOLD_IN (belongs),
-SPLIT_OUT (new branch), REVERT (mistake). Deliver as a diff grouping
-with filenames.
+**What this branch shouldn't contain.** This branch was supposed to
+do `<X>`. List every change on the branch that isn't `<X>`. For
+each stray change tell me: does it belong (fold in), should it move
+to a separate branch (split out), or is it a mistake (revert)?
+Group them into those three buckets so I can decide the whole pile
+at once.
 
 ## Notes
 
