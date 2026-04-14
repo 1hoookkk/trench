@@ -15,7 +15,9 @@
 //! the `trenchwork_clean` engine. See SESSION_STATE rev 4 for the split.
 
 use crate::agc::agc_step;
-use crate::cartridge::{Cartridge, CornerData, NUM_COEFFS, NUM_STAGES};
+use crate::cartridge::{Cartridge, CornerData};
+#[cfg(test)]
+use crate::cartridge::{NUM_COEFFS, NUM_STAGES};
 use crate::cascade::{Cascade, BLOCK_SIZE};
 
 /// First-order DC blocker (~20 Hz highpass).
