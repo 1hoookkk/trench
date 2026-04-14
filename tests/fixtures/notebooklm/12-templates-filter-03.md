@@ -1,0 +1,2208 @@
+﻿# Emulator X Family Templates - Filter (3 of 4)
+
+Source category: C:\Users\hooki\OneDrive\Documents\Creative Professional\Emulator X Family\Templates\Filter
+Templates in this file: 25 of 83
+TOC file: C:\Users\hooki\OneDrive\Documents\Creative Professional\Emulator X Family\Templates\Filter\template.toc
+
+## Included Templates
+- Rolling Frequency 2
+- Six Pole Exteme Q
+- Sizzle Sync
+- Slightly Phased
+- Steep 8 Pole
+- Steep Hi Pass
+- Multi Peak Hi Pass
+- Super Bass Ringer
+- Super Steep Q
+- Super Lo Pass
+- Super Hi Pass
+- Three Point Morph
+- Twin Peaks
+- Voxxy LP 1
+- Voxxy LP 2
+- Wow
+- Wah Wah 1
+- Wah Wah 2
+- Wah Wah 3
+- 100
+- 3
+- 50
+- d
+- des
+- dxx
+
+## Rolling Frequency 2
+
+Source XML: C:\Users\hooki\OneDrive\Documents\Creative Professional\Emulator X Family\Templates\Filter\Rolling Frequency 2.xml
+Root attribute - module: Filter
+Root attribute - name: Rolling Frequency 2
+
+- Rolling Frequency 2 @module: Filter
+- Rolling Frequency 2 @name: Rolling Frequency 2
+- Rolling Frequency 2/filter/frequency @type: float
+- Rolling Frequency 2/filter/frequency: 0
+- Rolling Frequency 2/filter/gain @type: float
+- Rolling Frequency 2/filter/gain: 0.5
+- Rolling Frequency 2/filter/morph-param[3] @type: long
+- Rolling Frequency 2/filter/morph-param[3]: 0
+- Rolling Frequency 2/filter/morph-param[4] @type: long
+- Rolling Frequency 2/filter/morph-param[4]: 0
+- Rolling Frequency 2/filter/morph-param[5] @type: long
+- Rolling Frequency 2/filter/morph-param[5]: 0
+- Rolling Frequency 2/filter/morph-param[6] @type: long
+- Rolling Frequency 2/filter/morph-param[6]: 0
+- Rolling Frequency 2/filter/morph-param[7] @type: long
+- Rolling Frequency 2/filter/morph-param[7]: 0
+- Rolling Frequency 2/filter/morph-param[8] @type: long
+- Rolling Frequency 2/filter/morph-param[8]: 0
+- Rolling Frequency 2/filter/designer-section[1]/low-gain @type: long
+- Rolling Frequency 2/filter/designer-section[1]/low-gain: 71
+- Rolling Frequency 2/filter/designer-section[1]/low-freq @type: long
+- Rolling Frequency 2/filter/designer-section[1]/low-freq: 19
+- Rolling Frequency 2/filter/designer-section[1]/high-gain @type: long
+- Rolling Frequency 2/filter/designer-section[1]/high-gain: 63
+- Rolling Frequency 2/filter/designer-section[1]/high-freq @type: long
+- Rolling Frequency 2/filter/designer-section[1]/high-freq: 107
+- Rolling Frequency 2/filter/designer-section[1]/type @type: long
+- Rolling Frequency 2/filter/designer-section[1]/type: 2
+- Rolling Frequency 2/filter/designer-section[2]/low-gain @type: long
+- Rolling Frequency 2/filter/designer-section[2]/low-gain: 96
+- Rolling Frequency 2/filter/designer-section[2]/low-freq @type: long
+- Rolling Frequency 2/filter/designer-section[2]/low-freq: 92
+- Rolling Frequency 2/filter/designer-section[2]/high-gain @type: long
+- Rolling Frequency 2/filter/designer-section[2]/high-gain: 79
+- Rolling Frequency 2/filter/designer-section[2]/high-freq @type: long
+- Rolling Frequency 2/filter/designer-section[2]/high-freq: 110
+- Rolling Frequency 2/filter/designer-section[2]/type @type: long
+- Rolling Frequency 2/filter/designer-section[2]/type: 2
+- Rolling Frequency 2/filter/designer-section[3]/low-gain @type: long
+- Rolling Frequency 2/filter/designer-section[3]/low-gain: 112
+- Rolling Frequency 2/filter/designer-section[3]/low-freq @type: long
+- Rolling Frequency 2/filter/designer-section[3]/low-freq: 63
+- Rolling Frequency 2/filter/designer-section[3]/high-gain @type: long
+- Rolling Frequency 2/filter/designer-section[3]/high-gain: 80
+- Rolling Frequency 2/filter/designer-section[3]/high-freq @type: long
+- Rolling Frequency 2/filter/designer-section[3]/high-freq: 78
+- Rolling Frequency 2/filter/designer-section[3]/type @type: long
+- Rolling Frequency 2/filter/designer-section[3]/type: 1
+- Rolling Frequency 2/filter/designer-section[4]/low-gain @type: long
+- Rolling Frequency 2/filter/designer-section[4]/low-gain: 105
+- Rolling Frequency 2/filter/designer-section[4]/low-freq @type: long
+- Rolling Frequency 2/filter/designer-section[4]/low-freq: 52
+- Rolling Frequency 2/filter/designer-section[4]/high-gain @type: long
+- Rolling Frequency 2/filter/designer-section[4]/high-gain: 86
+- Rolling Frequency 2/filter/designer-section[4]/high-freq @type: long
+- Rolling Frequency 2/filter/designer-section[4]/high-freq: 58
+- Rolling Frequency 2/filter/designer-section[4]/type @type: long
+- Rolling Frequency 2/filter/designer-section[4]/type: 1
+- Rolling Frequency 2/filter/designer-section[5]/low-gain @type: long
+- Rolling Frequency 2/filter/designer-section[5]/low-gain: 125
+- Rolling Frequency 2/filter/designer-section[5]/low-freq @type: long
+- Rolling Frequency 2/filter/designer-section[5]/low-freq: 92
+- Rolling Frequency 2/filter/designer-section[5]/high-gain @type: long
+- Rolling Frequency 2/filter/designer-section[5]/high-gain: 0
+- Rolling Frequency 2/filter/designer-section[5]/high-freq @type: long
+- Rolling Frequency 2/filter/designer-section[5]/high-freq: 0
+- Rolling Frequency 2/filter/designer-section[5]/type @type: long
+- Rolling Frequency 2/filter/designer-section[5]/type: 1
+- Rolling Frequency 2/filter/designer-section[6]/low-gain @type: long
+- Rolling Frequency 2/filter/designer-section[6]/low-gain: 123
+- Rolling Frequency 2/filter/designer-section[6]/low-freq @type: long
+- Rolling Frequency 2/filter/designer-section[6]/low-freq: 22
+- Rolling Frequency 2/filter/designer-section[6]/high-gain @type: long
+- Rolling Frequency 2/filter/designer-section[6]/high-gain: 0
+- Rolling Frequency 2/filter/designer-section[6]/high-freq @type: long
+- Rolling Frequency 2/filter/designer-section[6]/high-freq: 0
+- Rolling Frequency 2/filter/designer-section[6]/type @type: long
+- Rolling Frequency 2/filter/designer-section[6]/type: 3
+- Rolling Frequency 2/filter/type-absolute @type: long
+- Rolling Frequency 2/filter/type-absolute: 108
+
+## Six Pole Exteme Q
+
+Source XML: C:\Users\hooki\OneDrive\Documents\Creative Professional\Emulator X Family\Templates\Filter\Six Pole Exteme Q.xml
+Root attribute - module: Filter
+Root attribute - name: 6 Pole Exteme Q
+
+- 6 Pole Exteme Q @module: Filter
+- 6 Pole Exteme Q @name: 6 Pole Exteme Q
+- 6 Pole Exteme Q/filter/frequency @type: float
+- 6 Pole Exteme Q/filter/frequency: 0
+- 6 Pole Exteme Q/filter/gain @type: float
+- 6 Pole Exteme Q/filter/gain: 0.5
+- 6 Pole Exteme Q/filter/morph-param[3] @type: long
+- 6 Pole Exteme Q/filter/morph-param[3]: 0
+- 6 Pole Exteme Q/filter/morph-param[4] @type: long
+- 6 Pole Exteme Q/filter/morph-param[4]: 0
+- 6 Pole Exteme Q/filter/morph-param[5] @type: long
+- 6 Pole Exteme Q/filter/morph-param[5]: 0
+- 6 Pole Exteme Q/filter/morph-param[6] @type: long
+- 6 Pole Exteme Q/filter/morph-param[6]: 0
+- 6 Pole Exteme Q/filter/morph-param[7] @type: long
+- 6 Pole Exteme Q/filter/morph-param[7]: 0
+- 6 Pole Exteme Q/filter/morph-param[8] @type: long
+- 6 Pole Exteme Q/filter/morph-param[8]: 0
+- 6 Pole Exteme Q/filter/designer-section[1]/low-gain @type: long
+- 6 Pole Exteme Q/filter/designer-section[1]/low-gain: 127
+- 6 Pole Exteme Q/filter/designer-section[1]/low-freq @type: long
+- 6 Pole Exteme Q/filter/designer-section[1]/low-freq: 26
+- 6 Pole Exteme Q/filter/designer-section[1]/high-gain @type: long
+- 6 Pole Exteme Q/filter/designer-section[1]/high-gain: 76
+- 6 Pole Exteme Q/filter/designer-section[1]/high-freq @type: long
+- 6 Pole Exteme Q/filter/designer-section[1]/high-freq: 127
+- 6 Pole Exteme Q/filter/designer-section[1]/type @type: long
+- 6 Pole Exteme Q/filter/designer-section[1]/type: 2
+- 6 Pole Exteme Q/filter/designer-section[2]/low-gain @type: long
+- 6 Pole Exteme Q/filter/designer-section[2]/low-gain: 127
+- 6 Pole Exteme Q/filter/designer-section[2]/low-freq @type: long
+- 6 Pole Exteme Q/filter/designer-section[2]/low-freq: 26
+- 6 Pole Exteme Q/filter/designer-section[2]/high-gain @type: long
+- 6 Pole Exteme Q/filter/designer-section[2]/high-gain: 76
+- 6 Pole Exteme Q/filter/designer-section[2]/high-freq @type: long
+- 6 Pole Exteme Q/filter/designer-section[2]/high-freq: 127
+- 6 Pole Exteme Q/filter/designer-section[2]/type @type: long
+- 6 Pole Exteme Q/filter/designer-section[2]/type: 2
+- 6 Pole Exteme Q/filter/designer-section[3]/low-gain @type: long
+- 6 Pole Exteme Q/filter/designer-section[3]/low-gain: 127
+- 6 Pole Exteme Q/filter/designer-section[3]/low-freq @type: long
+- 6 Pole Exteme Q/filter/designer-section[3]/low-freq: 26
+- 6 Pole Exteme Q/filter/designer-section[3]/high-gain @type: long
+- 6 Pole Exteme Q/filter/designer-section[3]/high-gain: 76
+- 6 Pole Exteme Q/filter/designer-section[3]/high-freq @type: long
+- 6 Pole Exteme Q/filter/designer-section[3]/high-freq: 127
+- 6 Pole Exteme Q/filter/designer-section[3]/type @type: long
+- 6 Pole Exteme Q/filter/designer-section[3]/type: 2
+- 6 Pole Exteme Q/filter/designer-section[4]/low-gain @type: long
+- 6 Pole Exteme Q/filter/designer-section[4]/low-gain: 127
+- 6 Pole Exteme Q/filter/designer-section[4]/low-freq @type: long
+- 6 Pole Exteme Q/filter/designer-section[4]/low-freq: 21
+- 6 Pole Exteme Q/filter/designer-section[4]/high-gain @type: long
+- 6 Pole Exteme Q/filter/designer-section[4]/high-gain: 0
+- 6 Pole Exteme Q/filter/designer-section[4]/high-freq @type: long
+- 6 Pole Exteme Q/filter/designer-section[4]/high-freq: 127
+- 6 Pole Exteme Q/filter/designer-section[4]/type @type: long
+- 6 Pole Exteme Q/filter/designer-section[4]/type: 0
+- 6 Pole Exteme Q/filter/designer-section[5]/low-gain @type: long
+- 6 Pole Exteme Q/filter/designer-section[5]/low-gain: 0
+- 6 Pole Exteme Q/filter/designer-section[5]/low-freq @type: long
+- 6 Pole Exteme Q/filter/designer-section[5]/low-freq: 0
+- 6 Pole Exteme Q/filter/designer-section[5]/high-gain @type: long
+- 6 Pole Exteme Q/filter/designer-section[5]/high-gain: 0
+- 6 Pole Exteme Q/filter/designer-section[5]/high-freq @type: long
+- 6 Pole Exteme Q/filter/designer-section[5]/high-freq: 0
+- 6 Pole Exteme Q/filter/designer-section[5]/type @type: long
+- 6 Pole Exteme Q/filter/designer-section[5]/type: 0
+- 6 Pole Exteme Q/filter/designer-section[6]/low-gain @type: long
+- 6 Pole Exteme Q/filter/designer-section[6]/low-gain: 0
+- 6 Pole Exteme Q/filter/designer-section[6]/low-freq @type: long
+- 6 Pole Exteme Q/filter/designer-section[6]/low-freq: 0
+- 6 Pole Exteme Q/filter/designer-section[6]/high-gain @type: long
+- 6 Pole Exteme Q/filter/designer-section[6]/high-gain: 0
+- 6 Pole Exteme Q/filter/designer-section[6]/high-freq @type: long
+- 6 Pole Exteme Q/filter/designer-section[6]/high-freq: 0
+- 6 Pole Exteme Q/filter/designer-section[6]/type @type: long
+- 6 Pole Exteme Q/filter/designer-section[6]/type: 0
+- 6 Pole Exteme Q/filter/type-absolute @type: long
+- 6 Pole Exteme Q/filter/type-absolute: 108
+
+## Sizzle Sync
+
+Source XML: C:\Users\hooki\OneDrive\Documents\Creative Professional\Emulator X Family\Templates\Filter\Sizzle Sync.xml
+Root attribute - module: Filter
+Root attribute - name: SizzleSync
+
+- SizzleSync @module: Filter
+- SizzleSync @name: SizzleSync
+- SizzleSync/filter/frequency @type: float
+- SizzleSync/filter/frequency: 0
+- SizzleSync/filter/gain @type: float
+- SizzleSync/filter/gain: 0
+- SizzleSync/filter/morph-param[3] @type: long
+- SizzleSync/filter/morph-param[3]: 0
+- SizzleSync/filter/morph-param[4] @type: long
+- SizzleSync/filter/morph-param[4]: 0
+- SizzleSync/filter/morph-param[5] @type: long
+- SizzleSync/filter/morph-param[5]: 0
+- SizzleSync/filter/morph-param[6] @type: long
+- SizzleSync/filter/morph-param[6]: 0
+- SizzleSync/filter/morph-param[7] @type: long
+- SizzleSync/filter/morph-param[7]: 0
+- SizzleSync/filter/morph-param[8] @type: long
+- SizzleSync/filter/morph-param[8]: 0
+- SizzleSync/filter/designer-section[1]/low-gain @type: long
+- SizzleSync/filter/designer-section[1]/low-gain: 0
+- SizzleSync/filter/designer-section[1]/low-freq @type: long
+- SizzleSync/filter/designer-section[1]/low-freq: 57
+- SizzleSync/filter/designer-section[1]/high-gain @type: long
+- SizzleSync/filter/designer-section[1]/high-gain: 6
+- SizzleSync/filter/designer-section[1]/high-freq @type: long
+- SizzleSync/filter/designer-section[1]/high-freq: 0
+- SizzleSync/filter/designer-section[1]/type @type: long
+- SizzleSync/filter/designer-section[1]/type: 1
+- SizzleSync/filter/designer-section[2]/low-gain @type: long
+- SizzleSync/filter/designer-section[2]/low-gain: 127
+- SizzleSync/filter/designer-section[2]/low-freq @type: long
+- SizzleSync/filter/designer-section[2]/low-freq: 57
+- SizzleSync/filter/designer-section[2]/high-gain @type: long
+- SizzleSync/filter/designer-section[2]/high-gain: 0
+- SizzleSync/filter/designer-section[2]/high-freq @type: long
+- SizzleSync/filter/designer-section[2]/high-freq: 127
+- SizzleSync/filter/designer-section[2]/type @type: long
+- SizzleSync/filter/designer-section[2]/type: 1
+- SizzleSync/filter/designer-section[3]/low-gain @type: long
+- SizzleSync/filter/designer-section[3]/low-gain: 127
+- SizzleSync/filter/designer-section[3]/low-freq @type: long
+- SizzleSync/filter/designer-section[3]/low-freq: 57
+- SizzleSync/filter/designer-section[3]/high-gain @type: long
+- SizzleSync/filter/designer-section[3]/high-gain: 0
+- SizzleSync/filter/designer-section[3]/high-freq @type: long
+- SizzleSync/filter/designer-section[3]/high-freq: 57
+- SizzleSync/filter/designer-section[3]/type @type: long
+- SizzleSync/filter/designer-section[3]/type: 1
+- SizzleSync/filter/designer-section[4]/low-gain @type: long
+- SizzleSync/filter/designer-section[4]/low-gain: 127
+- SizzleSync/filter/designer-section[4]/low-freq @type: long
+- SizzleSync/filter/designer-section[4]/low-freq: 57
+- SizzleSync/filter/designer-section[4]/high-gain @type: long
+- SizzleSync/filter/designer-section[4]/high-gain: 0
+- SizzleSync/filter/designer-section[4]/high-freq @type: long
+- SizzleSync/filter/designer-section[4]/high-freq: 57
+- SizzleSync/filter/designer-section[4]/type @type: long
+- SizzleSync/filter/designer-section[4]/type: 1
+- SizzleSync/filter/designer-section[5]/low-gain @type: long
+- SizzleSync/filter/designer-section[5]/low-gain: 0
+- SizzleSync/filter/designer-section[5]/low-freq @type: long
+- SizzleSync/filter/designer-section[5]/low-freq: 0
+- SizzleSync/filter/designer-section[5]/high-gain @type: long
+- SizzleSync/filter/designer-section[5]/high-gain: 0
+- SizzleSync/filter/designer-section[5]/high-freq @type: long
+- SizzleSync/filter/designer-section[5]/high-freq: 0
+- SizzleSync/filter/designer-section[5]/type @type: long
+- SizzleSync/filter/designer-section[5]/type: 0
+- SizzleSync/filter/designer-section[6]/low-gain @type: long
+- SizzleSync/filter/designer-section[6]/low-gain: 0
+- SizzleSync/filter/designer-section[6]/low-freq @type: long
+- SizzleSync/filter/designer-section[6]/low-freq: 0
+- SizzleSync/filter/designer-section[6]/high-gain @type: long
+- SizzleSync/filter/designer-section[6]/high-gain: 0
+- SizzleSync/filter/designer-section[6]/high-freq @type: long
+- SizzleSync/filter/designer-section[6]/high-freq: 0
+- SizzleSync/filter/designer-section[6]/type @type: long
+- SizzleSync/filter/designer-section[6]/type: 0
+- SizzleSync/filter/type-absolute @type: long
+- SizzleSync/filter/type-absolute: 108
+
+## Slightly Phased
+
+Source XML: C:\Users\hooki\OneDrive\Documents\Creative Professional\Emulator X Family\Templates\Filter\Slightly Phased.xml
+Root attribute - module: Filter
+Root attribute - name: Slightly Phased
+
+- Slightly Phased @module: Filter
+- Slightly Phased @name: Slightly Phased
+- Slightly Phased/filter/frequency @type: float
+- Slightly Phased/filter/frequency: 0
+- Slightly Phased/filter/gain @type: float
+- Slightly Phased/filter/gain: 0.5
+- Slightly Phased/filter/morph-param[3] @type: long
+- Slightly Phased/filter/morph-param[3]: 0
+- Slightly Phased/filter/morph-param[4] @type: long
+- Slightly Phased/filter/morph-param[4]: 0
+- Slightly Phased/filter/morph-param[5] @type: long
+- Slightly Phased/filter/morph-param[5]: 0
+- Slightly Phased/filter/morph-param[6] @type: long
+- Slightly Phased/filter/morph-param[6]: 0
+- Slightly Phased/filter/morph-param[7] @type: long
+- Slightly Phased/filter/morph-param[7]: 0
+- Slightly Phased/filter/morph-param[8] @type: long
+- Slightly Phased/filter/morph-param[8]: 0
+- Slightly Phased/filter/designer-section[1]/low-gain @type: long
+- Slightly Phased/filter/designer-section[1]/low-gain: 127
+- Slightly Phased/filter/designer-section[1]/low-freq @type: long
+- Slightly Phased/filter/designer-section[1]/low-freq: 58
+- Slightly Phased/filter/designer-section[1]/high-gain @type: long
+- Slightly Phased/filter/designer-section[1]/high-gain: 107
+- Slightly Phased/filter/designer-section[1]/high-freq @type: long
+- Slightly Phased/filter/designer-section[1]/high-freq: 104
+- Slightly Phased/filter/designer-section[1]/type @type: long
+- Slightly Phased/filter/designer-section[1]/type: 1
+- Slightly Phased/filter/designer-section[2]/low-gain @type: long
+- Slightly Phased/filter/designer-section[2]/low-gain: 94
+- Slightly Phased/filter/designer-section[2]/low-freq @type: long
+- Slightly Phased/filter/designer-section[2]/low-freq: 41
+- Slightly Phased/filter/designer-section[2]/high-gain @type: long
+- Slightly Phased/filter/designer-section[2]/high-gain: 60
+- Slightly Phased/filter/designer-section[2]/high-freq @type: long
+- Slightly Phased/filter/designer-section[2]/high-freq: 89
+- Slightly Phased/filter/designer-section[2]/type @type: long
+- Slightly Phased/filter/designer-section[2]/type: 2
+- Slightly Phased/filter/designer-section[3]/low-gain @type: long
+- Slightly Phased/filter/designer-section[3]/low-gain: 0
+- Slightly Phased/filter/designer-section[3]/low-freq @type: long
+- Slightly Phased/filter/designer-section[3]/low-freq: 11
+- Slightly Phased/filter/designer-section[3]/high-gain @type: long
+- Slightly Phased/filter/designer-section[3]/high-gain: 0
+- Slightly Phased/filter/designer-section[3]/high-freq @type: long
+- Slightly Phased/filter/designer-section[3]/high-freq: 102
+- Slightly Phased/filter/designer-section[3]/type @type: long
+- Slightly Phased/filter/designer-section[3]/type: 1
+- Slightly Phased/filter/designer-section[4]/low-gain @type: long
+- Slightly Phased/filter/designer-section[4]/low-gain: 98
+- Slightly Phased/filter/designer-section[4]/low-freq @type: long
+- Slightly Phased/filter/designer-section[4]/low-freq: 97
+- Slightly Phased/filter/designer-section[4]/high-gain @type: long
+- Slightly Phased/filter/designer-section[4]/high-gain: 52
+- Slightly Phased/filter/designer-section[4]/high-freq @type: long
+- Slightly Phased/filter/designer-section[4]/high-freq: 80
+- Slightly Phased/filter/designer-section[4]/type @type: long
+- Slightly Phased/filter/designer-section[4]/type: 0
+- Slightly Phased/filter/designer-section[5]/low-gain @type: long
+- Slightly Phased/filter/designer-section[5]/low-gain: 0
+- Slightly Phased/filter/designer-section[5]/low-freq @type: long
+- Slightly Phased/filter/designer-section[5]/low-freq: 0
+- Slightly Phased/filter/designer-section[5]/high-gain @type: long
+- Slightly Phased/filter/designer-section[5]/high-gain: 0
+- Slightly Phased/filter/designer-section[5]/high-freq @type: long
+- Slightly Phased/filter/designer-section[5]/high-freq: 0
+- Slightly Phased/filter/designer-section[5]/type @type: long
+- Slightly Phased/filter/designer-section[5]/type: 0
+- Slightly Phased/filter/designer-section[6]/low-gain @type: long
+- Slightly Phased/filter/designer-section[6]/low-gain: 0
+- Slightly Phased/filter/designer-section[6]/low-freq @type: long
+- Slightly Phased/filter/designer-section[6]/low-freq: 0
+- Slightly Phased/filter/designer-section[6]/high-gain @type: long
+- Slightly Phased/filter/designer-section[6]/high-gain: 0
+- Slightly Phased/filter/designer-section[6]/high-freq @type: long
+- Slightly Phased/filter/designer-section[6]/high-freq: 0
+- Slightly Phased/filter/designer-section[6]/type @type: long
+- Slightly Phased/filter/designer-section[6]/type: 0
+- Slightly Phased/filter/type-absolute @type: long
+- Slightly Phased/filter/type-absolute: 108
+
+## Steep 8 Pole
+
+Source XML: C:\Users\hooki\OneDrive\Documents\Creative Professional\Emulator X Family\Templates\Filter\Steep 8 Pole.xml
+Root attribute - module: Filter
+Root attribute - name: Steep 8 Pole
+
+- Steep 8 Pole @module: Filter
+- Steep 8 Pole @name: Steep 8 Pole
+- Steep 8 Pole/filter/frequency @type: float
+- Steep 8 Pole/filter/frequency: 0
+- Steep 8 Pole/filter/gain @type: float
+- Steep 8 Pole/filter/gain: 0.5
+- Steep 8 Pole/filter/morph-param[3] @type: long
+- Steep 8 Pole/filter/morph-param[3]: 0
+- Steep 8 Pole/filter/morph-param[4] @type: long
+- Steep 8 Pole/filter/morph-param[4]: 0
+- Steep 8 Pole/filter/morph-param[5] @type: long
+- Steep 8 Pole/filter/morph-param[5]: 0
+- Steep 8 Pole/filter/morph-param[6] @type: long
+- Steep 8 Pole/filter/morph-param[6]: 0
+- Steep 8 Pole/filter/morph-param[7] @type: long
+- Steep 8 Pole/filter/morph-param[7]: 0
+- Steep 8 Pole/filter/morph-param[8] @type: long
+- Steep 8 Pole/filter/morph-param[8]: 0
+- Steep 8 Pole/filter/designer-section[1]/low-gain @type: long
+- Steep 8 Pole/filter/designer-section[1]/low-gain: 0
+- Steep 8 Pole/filter/designer-section[1]/low-freq @type: long
+- Steep 8 Pole/filter/designer-section[1]/low-freq: 0
+- Steep 8 Pole/filter/designer-section[1]/high-gain @type: long
+- Steep 8 Pole/filter/designer-section[1]/high-gain: 0
+- Steep 8 Pole/filter/designer-section[1]/high-freq @type: long
+- Steep 8 Pole/filter/designer-section[1]/high-freq: 127
+- Steep 8 Pole/filter/designer-section[1]/type @type: long
+- Steep 8 Pole/filter/designer-section[1]/type: 2
+- Steep 8 Pole/filter/designer-section[2]/low-gain @type: long
+- Steep 8 Pole/filter/designer-section[2]/low-gain: 0
+- Steep 8 Pole/filter/designer-section[2]/low-freq @type: long
+- Steep 8 Pole/filter/designer-section[2]/low-freq: 110
+- Steep 8 Pole/filter/designer-section[2]/high-gain @type: long
+- Steep 8 Pole/filter/designer-section[2]/high-gain: 0
+- Steep 8 Pole/filter/designer-section[2]/high-freq @type: long
+- Steep 8 Pole/filter/designer-section[2]/high-freq: 127
+- Steep 8 Pole/filter/designer-section[2]/type @type: long
+- Steep 8 Pole/filter/designer-section[2]/type: 2
+- Steep 8 Pole/filter/designer-section[3]/low-gain @type: long
+- Steep 8 Pole/filter/designer-section[3]/low-gain: 0
+- Steep 8 Pole/filter/designer-section[3]/low-freq @type: long
+- Steep 8 Pole/filter/designer-section[3]/low-freq: 94
+- Steep 8 Pole/filter/designer-section[3]/high-gain @type: long
+- Steep 8 Pole/filter/designer-section[3]/high-gain: 0
+- Steep 8 Pole/filter/designer-section[3]/high-freq @type: long
+- Steep 8 Pole/filter/designer-section[3]/high-freq: 127
+- Steep 8 Pole/filter/designer-section[3]/type @type: long
+- Steep 8 Pole/filter/designer-section[3]/type: 2
+- Steep 8 Pole/filter/designer-section[4]/low-gain @type: long
+- Steep 8 Pole/filter/designer-section[4]/low-gain: 0
+- Steep 8 Pole/filter/designer-section[4]/low-freq @type: long
+- Steep 8 Pole/filter/designer-section[4]/low-freq: 82
+- Steep 8 Pole/filter/designer-section[4]/high-gain @type: long
+- Steep 8 Pole/filter/designer-section[4]/high-gain: 0
+- Steep 8 Pole/filter/designer-section[4]/high-freq @type: long
+- Steep 8 Pole/filter/designer-section[4]/high-freq: 127
+- Steep 8 Pole/filter/designer-section[4]/type @type: long
+- Steep 8 Pole/filter/designer-section[4]/type: 2
+- Steep 8 Pole/filter/designer-section[5]/low-gain @type: long
+- Steep 8 Pole/filter/designer-section[5]/low-gain: 0
+- Steep 8 Pole/filter/designer-section[5]/low-freq @type: long
+- Steep 8 Pole/filter/designer-section[5]/low-freq: 0
+- Steep 8 Pole/filter/designer-section[5]/high-gain @type: long
+- Steep 8 Pole/filter/designer-section[5]/high-gain: 0
+- Steep 8 Pole/filter/designer-section[5]/high-freq @type: long
+- Steep 8 Pole/filter/designer-section[5]/high-freq: 0
+- Steep 8 Pole/filter/designer-section[5]/type @type: long
+- Steep 8 Pole/filter/designer-section[5]/type: 0
+- Steep 8 Pole/filter/designer-section[6]/low-gain @type: long
+- Steep 8 Pole/filter/designer-section[6]/low-gain: 0
+- Steep 8 Pole/filter/designer-section[6]/low-freq @type: long
+- Steep 8 Pole/filter/designer-section[6]/low-freq: 0
+- Steep 8 Pole/filter/designer-section[6]/high-gain @type: long
+- Steep 8 Pole/filter/designer-section[6]/high-gain: 0
+- Steep 8 Pole/filter/designer-section[6]/high-freq @type: long
+- Steep 8 Pole/filter/designer-section[6]/high-freq: 0
+- Steep 8 Pole/filter/designer-section[6]/type @type: long
+- Steep 8 Pole/filter/designer-section[6]/type: 0
+- Steep 8 Pole/filter/type-absolute @type: long
+- Steep 8 Pole/filter/type-absolute: 108
+
+## Steep Hi Pass
+
+Source XML: C:\Users\hooki\OneDrive\Documents\Creative Professional\Emulator X Family\Templates\Filter\Steep Hi Pass.xml
+Root attribute - module: Filter
+Root attribute - name: Steep High Pass
+
+- Steep High Pass @module: Filter
+- Steep High Pass @name: Steep High Pass
+- Steep High Pass/filter/frequency @type: float
+- Steep High Pass/filter/frequency: 0
+- Steep High Pass/filter/gain @type: float
+- Steep High Pass/filter/gain: 0.5
+- Steep High Pass/filter/morph-param[3] @type: long
+- Steep High Pass/filter/morph-param[3]: 0
+- Steep High Pass/filter/morph-param[4] @type: long
+- Steep High Pass/filter/morph-param[4]: 0
+- Steep High Pass/filter/morph-param[5] @type: long
+- Steep High Pass/filter/morph-param[5]: 0
+- Steep High Pass/filter/morph-param[6] @type: long
+- Steep High Pass/filter/morph-param[6]: 0
+- Steep High Pass/filter/morph-param[7] @type: long
+- Steep High Pass/filter/morph-param[7]: 0
+- Steep High Pass/filter/morph-param[8] @type: long
+- Steep High Pass/filter/morph-param[8]: 0
+- Steep High Pass/filter/designer-section[1]/low-gain @type: long
+- Steep High Pass/filter/designer-section[1]/low-gain: 127
+- Steep High Pass/filter/designer-section[1]/low-freq @type: long
+- Steep High Pass/filter/designer-section[1]/low-freq: 27
+- Steep High Pass/filter/designer-section[1]/high-gain @type: long
+- Steep High Pass/filter/designer-section[1]/high-gain: 127
+- Steep High Pass/filter/designer-section[1]/high-freq @type: long
+- Steep High Pass/filter/designer-section[1]/high-freq: 67
+- Steep High Pass/filter/designer-section[1]/type @type: long
+- Steep High Pass/filter/designer-section[1]/type: 3
+- Steep High Pass/filter/designer-section[2]/low-gain @type: long
+- Steep High Pass/filter/designer-section[2]/low-gain: 85
+- Steep High Pass/filter/designer-section[2]/low-freq @type: long
+- Steep High Pass/filter/designer-section[2]/low-freq: 0
+- Steep High Pass/filter/designer-section[2]/high-gain @type: long
+- Steep High Pass/filter/designer-section[2]/high-gain: 127
+- Steep High Pass/filter/designer-section[2]/high-freq @type: long
+- Steep High Pass/filter/designer-section[2]/high-freq: 91
+- Steep High Pass/filter/designer-section[2]/type @type: long
+- Steep High Pass/filter/designer-section[2]/type: 3
+- Steep High Pass/filter/designer-section[3]/low-gain @type: long
+- Steep High Pass/filter/designer-section[3]/low-gain: 127
+- Steep High Pass/filter/designer-section[3]/low-freq @type: long
+- Steep High Pass/filter/designer-section[3]/low-freq: 67
+- Steep High Pass/filter/designer-section[3]/high-gain @type: long
+- Steep High Pass/filter/designer-section[3]/high-gain: 76
+- Steep High Pass/filter/designer-section[3]/high-freq @type: long
+- Steep High Pass/filter/designer-section[3]/high-freq: 96
+- Steep High Pass/filter/designer-section[3]/type @type: long
+- Steep High Pass/filter/designer-section[3]/type: 2
+- Steep High Pass/filter/designer-section[4]/low-gain @type: long
+- Steep High Pass/filter/designer-section[4]/low-gain: 109
+- Steep High Pass/filter/designer-section[4]/low-freq @type: long
+- Steep High Pass/filter/designer-section[4]/low-freq: 68
+- Steep High Pass/filter/designer-section[4]/high-gain @type: long
+- Steep High Pass/filter/designer-section[4]/high-gain: 102
+- Steep High Pass/filter/designer-section[4]/high-freq @type: long
+- Steep High Pass/filter/designer-section[4]/high-freq: 85
+- Steep High Pass/filter/designer-section[4]/type @type: long
+- Steep High Pass/filter/designer-section[4]/type: 0
+- Steep High Pass/filter/designer-section[5]/low-gain @type: long
+- Steep High Pass/filter/designer-section[5]/low-gain: 0
+- Steep High Pass/filter/designer-section[5]/low-freq @type: long
+- Steep High Pass/filter/designer-section[5]/low-freq: 0
+- Steep High Pass/filter/designer-section[5]/high-gain @type: long
+- Steep High Pass/filter/designer-section[5]/high-gain: 0
+- Steep High Pass/filter/designer-section[5]/high-freq @type: long
+- Steep High Pass/filter/designer-section[5]/high-freq: 0
+- Steep High Pass/filter/designer-section[5]/type @type: long
+- Steep High Pass/filter/designer-section[5]/type: 0
+- Steep High Pass/filter/designer-section[6]/low-gain @type: long
+- Steep High Pass/filter/designer-section[6]/low-gain: 0
+- Steep High Pass/filter/designer-section[6]/low-freq @type: long
+- Steep High Pass/filter/designer-section[6]/low-freq: 0
+- Steep High Pass/filter/designer-section[6]/high-gain @type: long
+- Steep High Pass/filter/designer-section[6]/high-gain: 0
+- Steep High Pass/filter/designer-section[6]/high-freq @type: long
+- Steep High Pass/filter/designer-section[6]/high-freq: 0
+- Steep High Pass/filter/designer-section[6]/type @type: long
+- Steep High Pass/filter/designer-section[6]/type: 0
+- Steep High Pass/filter/type-absolute @type: long
+- Steep High Pass/filter/type-absolute: 108
+
+## Multi Peak Hi Pass
+
+Source XML: C:\Users\hooki\OneDrive\Documents\Creative Professional\Emulator X Family\Templates\Filter\Multi Peak Hi Pass.xml
+Root attribute - module: Filter
+Root attribute - name: Multi Peak Hi Pass
+
+- Multi Peak Hi Pass @module: Filter
+- Multi Peak Hi Pass @name: Multi Peak Hi Pass
+- Multi Peak Hi Pass/filter/frequency @type: float
+- Multi Peak Hi Pass/filter/frequency: 0
+- Multi Peak Hi Pass/filter/gain @type: float
+- Multi Peak Hi Pass/filter/gain: 0.5
+- Multi Peak Hi Pass/filter/morph-param[3] @type: long
+- Multi Peak Hi Pass/filter/morph-param[3]: 0
+- Multi Peak Hi Pass/filter/morph-param[4] @type: long
+- Multi Peak Hi Pass/filter/morph-param[4]: 0
+- Multi Peak Hi Pass/filter/morph-param[5] @type: long
+- Multi Peak Hi Pass/filter/morph-param[5]: 0
+- Multi Peak Hi Pass/filter/morph-param[6] @type: long
+- Multi Peak Hi Pass/filter/morph-param[6]: 0
+- Multi Peak Hi Pass/filter/morph-param[7] @type: long
+- Multi Peak Hi Pass/filter/morph-param[7]: 0
+- Multi Peak Hi Pass/filter/morph-param[8] @type: long
+- Multi Peak Hi Pass/filter/morph-param[8]: 0
+- Multi Peak Hi Pass/filter/designer-section[1]/low-gain @type: long
+- Multi Peak Hi Pass/filter/designer-section[1]/low-gain: 126
+- Multi Peak Hi Pass/filter/designer-section[1]/low-freq @type: long
+- Multi Peak Hi Pass/filter/designer-section[1]/low-freq: 0
+- Multi Peak Hi Pass/filter/designer-section[1]/high-gain @type: long
+- Multi Peak Hi Pass/filter/designer-section[1]/high-gain: 127
+- Multi Peak Hi Pass/filter/designer-section[1]/high-freq @type: long
+- Multi Peak Hi Pass/filter/designer-section[1]/high-freq: 127
+- Multi Peak Hi Pass/filter/designer-section[1]/type @type: long
+- Multi Peak Hi Pass/filter/designer-section[1]/type: 1
+- Multi Peak Hi Pass/filter/designer-section[2]/low-gain @type: long
+- Multi Peak Hi Pass/filter/designer-section[2]/low-gain: 0
+- Multi Peak Hi Pass/filter/designer-section[2]/low-freq @type: long
+- Multi Peak Hi Pass/filter/designer-section[2]/low-freq: 69
+- Multi Peak Hi Pass/filter/designer-section[2]/high-gain @type: long
+- Multi Peak Hi Pass/filter/designer-section[2]/high-gain: 122
+- Multi Peak Hi Pass/filter/designer-section[2]/high-freq @type: long
+- Multi Peak Hi Pass/filter/designer-section[2]/high-freq: 100
+- Multi Peak Hi Pass/filter/designer-section[2]/type @type: long
+- Multi Peak Hi Pass/filter/designer-section[2]/type: 2
+- Multi Peak Hi Pass/filter/designer-section[3]/low-gain @type: long
+- Multi Peak Hi Pass/filter/designer-section[3]/low-gain: 63
+- Multi Peak Hi Pass/filter/designer-section[3]/low-freq @type: long
+- Multi Peak Hi Pass/filter/designer-section[3]/low-freq: 0
+- Multi Peak Hi Pass/filter/designer-section[3]/high-gain @type: long
+- Multi Peak Hi Pass/filter/designer-section[3]/high-gain: 95
+- Multi Peak Hi Pass/filter/designer-section[3]/high-freq @type: long
+- Multi Peak Hi Pass/filter/designer-section[3]/high-freq: 78
+- Multi Peak Hi Pass/filter/designer-section[3]/type @type: long
+- Multi Peak Hi Pass/filter/designer-section[3]/type: 3
+- Multi Peak Hi Pass/filter/designer-section[4]/low-gain @type: long
+- Multi Peak Hi Pass/filter/designer-section[4]/low-gain: 0
+- Multi Peak Hi Pass/filter/designer-section[4]/low-freq @type: long
+- Multi Peak Hi Pass/filter/designer-section[4]/low-freq: 0
+- Multi Peak Hi Pass/filter/designer-section[4]/high-gain @type: long
+- Multi Peak Hi Pass/filter/designer-section[4]/high-gain: 0
+- Multi Peak Hi Pass/filter/designer-section[4]/high-freq @type: long
+- Multi Peak Hi Pass/filter/designer-section[4]/high-freq: 0
+- Multi Peak Hi Pass/filter/designer-section[4]/type @type: long
+- Multi Peak Hi Pass/filter/designer-section[4]/type: 0
+- Multi Peak Hi Pass/filter/designer-section[5]/low-gain @type: long
+- Multi Peak Hi Pass/filter/designer-section[5]/low-gain: 0
+- Multi Peak Hi Pass/filter/designer-section[5]/low-freq @type: long
+- Multi Peak Hi Pass/filter/designer-section[5]/low-freq: 0
+- Multi Peak Hi Pass/filter/designer-section[5]/high-gain @type: long
+- Multi Peak Hi Pass/filter/designer-section[5]/high-gain: 0
+- Multi Peak Hi Pass/filter/designer-section[5]/high-freq @type: long
+- Multi Peak Hi Pass/filter/designer-section[5]/high-freq: 0
+- Multi Peak Hi Pass/filter/designer-section[5]/type @type: long
+- Multi Peak Hi Pass/filter/designer-section[5]/type: 0
+- Multi Peak Hi Pass/filter/designer-section[6]/low-gain @type: long
+- Multi Peak Hi Pass/filter/designer-section[6]/low-gain: 0
+- Multi Peak Hi Pass/filter/designer-section[6]/low-freq @type: long
+- Multi Peak Hi Pass/filter/designer-section[6]/low-freq: 0
+- Multi Peak Hi Pass/filter/designer-section[6]/high-gain @type: long
+- Multi Peak Hi Pass/filter/designer-section[6]/high-gain: 0
+- Multi Peak Hi Pass/filter/designer-section[6]/high-freq @type: long
+- Multi Peak Hi Pass/filter/designer-section[6]/high-freq: 0
+- Multi Peak Hi Pass/filter/designer-section[6]/type @type: long
+- Multi Peak Hi Pass/filter/designer-section[6]/type: 0
+- Multi Peak Hi Pass/filter/type-absolute @type: long
+- Multi Peak Hi Pass/filter/type-absolute: 108
+
+## Super Bass Ringer
+
+Source XML: C:\Users\hooki\OneDrive\Documents\Creative Professional\Emulator X Family\Templates\Filter\Super Bass Ringer.xml
+Root attribute - module: Filter
+Root attribute - name: Super Bass Ringer
+
+- Super Bass Ringer @module: Filter
+- Super Bass Ringer @name: Super Bass Ringer
+- Super Bass Ringer/filter/frequency @type: float
+- Super Bass Ringer/filter/frequency: 0
+- Super Bass Ringer/filter/gain @type: float
+- Super Bass Ringer/filter/gain: 0.5
+- Super Bass Ringer/filter/morph-param[3] @type: long
+- Super Bass Ringer/filter/morph-param[3]: 0
+- Super Bass Ringer/filter/morph-param[4] @type: long
+- Super Bass Ringer/filter/morph-param[4]: 0
+- Super Bass Ringer/filter/morph-param[5] @type: long
+- Super Bass Ringer/filter/morph-param[5]: 0
+- Super Bass Ringer/filter/morph-param[6] @type: long
+- Super Bass Ringer/filter/morph-param[6]: 0
+- Super Bass Ringer/filter/morph-param[7] @type: long
+- Super Bass Ringer/filter/morph-param[7]: 0
+- Super Bass Ringer/filter/morph-param[8] @type: long
+- Super Bass Ringer/filter/morph-param[8]: 0
+- Super Bass Ringer/filter/designer-section[1]/low-gain @type: long
+- Super Bass Ringer/filter/designer-section[1]/low-gain: 127
+- Super Bass Ringer/filter/designer-section[1]/low-freq @type: long
+- Super Bass Ringer/filter/designer-section[1]/low-freq: 13
+- Super Bass Ringer/filter/designer-section[1]/high-gain @type: long
+- Super Bass Ringer/filter/designer-section[1]/high-gain: 127
+- Super Bass Ringer/filter/designer-section[1]/high-freq @type: long
+- Super Bass Ringer/filter/designer-section[1]/high-freq: 58
+- Super Bass Ringer/filter/designer-section[1]/type @type: long
+- Super Bass Ringer/filter/designer-section[1]/type: 1
+- Super Bass Ringer/filter/designer-section[2]/low-gain @type: long
+- Super Bass Ringer/filter/designer-section[2]/low-gain: 107
+- Super Bass Ringer/filter/designer-section[2]/low-freq @type: long
+- Super Bass Ringer/filter/designer-section[2]/low-freq: 47
+- Super Bass Ringer/filter/designer-section[2]/high-gain @type: long
+- Super Bass Ringer/filter/designer-section[2]/high-gain: 90
+- Super Bass Ringer/filter/designer-section[2]/high-freq @type: long
+- Super Bass Ringer/filter/designer-section[2]/high-freq: 60
+- Super Bass Ringer/filter/designer-section[2]/type @type: long
+- Super Bass Ringer/filter/designer-section[2]/type: 2
+- Super Bass Ringer/filter/designer-section[3]/low-gain @type: long
+- Super Bass Ringer/filter/designer-section[3]/low-gain: 127
+- Super Bass Ringer/filter/designer-section[3]/low-freq @type: long
+- Super Bass Ringer/filter/designer-section[3]/low-freq: 13
+- Super Bass Ringer/filter/designer-section[3]/high-gain @type: long
+- Super Bass Ringer/filter/designer-section[3]/high-gain: 88
+- Super Bass Ringer/filter/designer-section[3]/high-freq @type: long
+- Super Bass Ringer/filter/designer-section[3]/high-freq: 58
+- Super Bass Ringer/filter/designer-section[3]/type @type: long
+- Super Bass Ringer/filter/designer-section[3]/type: 1
+- Super Bass Ringer/filter/designer-section[4]/low-gain @type: long
+- Super Bass Ringer/filter/designer-section[4]/low-gain: 109
+- Super Bass Ringer/filter/designer-section[4]/low-freq @type: long
+- Super Bass Ringer/filter/designer-section[4]/low-freq: 68
+- Super Bass Ringer/filter/designer-section[4]/high-gain @type: long
+- Super Bass Ringer/filter/designer-section[4]/high-gain: 102
+- Super Bass Ringer/filter/designer-section[4]/high-freq @type: long
+- Super Bass Ringer/filter/designer-section[4]/high-freq: 85
+- Super Bass Ringer/filter/designer-section[4]/type @type: long
+- Super Bass Ringer/filter/designer-section[4]/type: 0
+- Super Bass Ringer/filter/designer-section[5]/low-gain @type: long
+- Super Bass Ringer/filter/designer-section[5]/low-gain: 0
+- Super Bass Ringer/filter/designer-section[5]/low-freq @type: long
+- Super Bass Ringer/filter/designer-section[5]/low-freq: 0
+- Super Bass Ringer/filter/designer-section[5]/high-gain @type: long
+- Super Bass Ringer/filter/designer-section[5]/high-gain: 0
+- Super Bass Ringer/filter/designer-section[5]/high-freq @type: long
+- Super Bass Ringer/filter/designer-section[5]/high-freq: 0
+- Super Bass Ringer/filter/designer-section[5]/type @type: long
+- Super Bass Ringer/filter/designer-section[5]/type: 0
+- Super Bass Ringer/filter/designer-section[6]/low-gain @type: long
+- Super Bass Ringer/filter/designer-section[6]/low-gain: 0
+- Super Bass Ringer/filter/designer-section[6]/low-freq @type: long
+- Super Bass Ringer/filter/designer-section[6]/low-freq: 0
+- Super Bass Ringer/filter/designer-section[6]/high-gain @type: long
+- Super Bass Ringer/filter/designer-section[6]/high-gain: 0
+- Super Bass Ringer/filter/designer-section[6]/high-freq @type: long
+- Super Bass Ringer/filter/designer-section[6]/high-freq: 0
+- Super Bass Ringer/filter/designer-section[6]/type @type: long
+- Super Bass Ringer/filter/designer-section[6]/type: 0
+- Super Bass Ringer/filter/type-absolute @type: long
+- Super Bass Ringer/filter/type-absolute: 108
+
+## Super Steep Q
+
+Source XML: C:\Users\hooki\OneDrive\Documents\Creative Professional\Emulator X Family\Templates\Filter\Super Steep Q.xml
+Root attribute - module: Filter
+Root attribute - name: Super Steep Q
+
+- Super Steep Q @module: Filter
+- Super Steep Q @name: Super Steep Q
+- Super Steep Q/filter/frequency @type: float
+- Super Steep Q/filter/frequency: 0
+- Super Steep Q/filter/gain @type: float
+- Super Steep Q/filter/gain: 0.5
+- Super Steep Q/filter/morph-param[3] @type: long
+- Super Steep Q/filter/morph-param[3]: 0
+- Super Steep Q/filter/morph-param[4] @type: long
+- Super Steep Q/filter/morph-param[4]: 0
+- Super Steep Q/filter/morph-param[5] @type: long
+- Super Steep Q/filter/morph-param[5]: 0
+- Super Steep Q/filter/morph-param[6] @type: long
+- Super Steep Q/filter/morph-param[6]: 0
+- Super Steep Q/filter/morph-param[7] @type: long
+- Super Steep Q/filter/morph-param[7]: 0
+- Super Steep Q/filter/morph-param[8] @type: long
+- Super Steep Q/filter/morph-param[8]: 0
+- Super Steep Q/filter/designer-section[1]/low-gain @type: long
+- Super Steep Q/filter/designer-section[1]/low-gain: 127
+- Super Steep Q/filter/designer-section[1]/low-freq @type: long
+- Super Steep Q/filter/designer-section[1]/low-freq: 0
+- Super Steep Q/filter/designer-section[1]/high-gain @type: long
+- Super Steep Q/filter/designer-section[1]/high-gain: 127
+- Super Steep Q/filter/designer-section[1]/high-freq @type: long
+- Super Steep Q/filter/designer-section[1]/high-freq: 127
+- Super Steep Q/filter/designer-section[1]/type @type: long
+- Super Steep Q/filter/designer-section[1]/type: 1
+- Super Steep Q/filter/designer-section[2]/low-gain @type: long
+- Super Steep Q/filter/designer-section[2]/low-gain: 127
+- Super Steep Q/filter/designer-section[2]/low-freq @type: long
+- Super Steep Q/filter/designer-section[2]/low-freq: 0
+- Super Steep Q/filter/designer-section[2]/high-gain @type: long
+- Super Steep Q/filter/designer-section[2]/high-gain: 127
+- Super Steep Q/filter/designer-section[2]/high-freq @type: long
+- Super Steep Q/filter/designer-section[2]/high-freq: 127
+- Super Steep Q/filter/designer-section[2]/type @type: long
+- Super Steep Q/filter/designer-section[2]/type: 1
+- Super Steep Q/filter/designer-section[3]/low-gain @type: long
+- Super Steep Q/filter/designer-section[3]/low-gain: 127
+- Super Steep Q/filter/designer-section[3]/low-freq @type: long
+- Super Steep Q/filter/designer-section[3]/low-freq: 48
+- Super Steep Q/filter/designer-section[3]/high-gain @type: long
+- Super Steep Q/filter/designer-section[3]/high-gain: 127
+- Super Steep Q/filter/designer-section[3]/high-freq @type: long
+- Super Steep Q/filter/designer-section[3]/high-freq: 41
+- Super Steep Q/filter/designer-section[3]/type @type: long
+- Super Steep Q/filter/designer-section[3]/type: 0
+- Super Steep Q/filter/designer-section[4]/low-gain @type: long
+- Super Steep Q/filter/designer-section[4]/low-gain: 109
+- Super Steep Q/filter/designer-section[4]/low-freq @type: long
+- Super Steep Q/filter/designer-section[4]/low-freq: 68
+- Super Steep Q/filter/designer-section[4]/high-gain @type: long
+- Super Steep Q/filter/designer-section[4]/high-gain: 102
+- Super Steep Q/filter/designer-section[4]/high-freq @type: long
+- Super Steep Q/filter/designer-section[4]/high-freq: 85
+- Super Steep Q/filter/designer-section[4]/type @type: long
+- Super Steep Q/filter/designer-section[4]/type: 0
+- Super Steep Q/filter/designer-section[5]/low-gain @type: long
+- Super Steep Q/filter/designer-section[5]/low-gain: 0
+- Super Steep Q/filter/designer-section[5]/low-freq @type: long
+- Super Steep Q/filter/designer-section[5]/low-freq: 0
+- Super Steep Q/filter/designer-section[5]/high-gain @type: long
+- Super Steep Q/filter/designer-section[5]/high-gain: 0
+- Super Steep Q/filter/designer-section[5]/high-freq @type: long
+- Super Steep Q/filter/designer-section[5]/high-freq: 0
+- Super Steep Q/filter/designer-section[5]/type @type: long
+- Super Steep Q/filter/designer-section[5]/type: 0
+- Super Steep Q/filter/designer-section[6]/low-gain @type: long
+- Super Steep Q/filter/designer-section[6]/low-gain: 0
+- Super Steep Q/filter/designer-section[6]/low-freq @type: long
+- Super Steep Q/filter/designer-section[6]/low-freq: 0
+- Super Steep Q/filter/designer-section[6]/high-gain @type: long
+- Super Steep Q/filter/designer-section[6]/high-gain: 0
+- Super Steep Q/filter/designer-section[6]/high-freq @type: long
+- Super Steep Q/filter/designer-section[6]/high-freq: 0
+- Super Steep Q/filter/designer-section[6]/type @type: long
+- Super Steep Q/filter/designer-section[6]/type: 0
+- Super Steep Q/filter/type-absolute @type: long
+- Super Steep Q/filter/type-absolute: 108
+
+## Super Lo Pass
+
+Source XML: C:\Users\hooki\OneDrive\Documents\Creative Professional\Emulator X Family\Templates\Filter\Super Lo Pass.xml
+Root attribute - module: Filter
+Root attribute - name: SuperLoPass
+
+- SuperLoPass @module: Filter
+- SuperLoPass @name: SuperLoPass
+- SuperLoPass/filter/frequency @type: float
+- SuperLoPass/filter/frequency: 0
+- SuperLoPass/filter/gain @type: float
+- SuperLoPass/filter/gain: 0
+- SuperLoPass/filter/morph-param[3] @type: long
+- SuperLoPass/filter/morph-param[3]: 0
+- SuperLoPass/filter/morph-param[4] @type: long
+- SuperLoPass/filter/morph-param[4]: 0
+- SuperLoPass/filter/morph-param[5] @type: long
+- SuperLoPass/filter/morph-param[5]: 0
+- SuperLoPass/filter/morph-param[6] @type: long
+- SuperLoPass/filter/morph-param[6]: 0
+- SuperLoPass/filter/morph-param[7] @type: long
+- SuperLoPass/filter/morph-param[7]: 0
+- SuperLoPass/filter/morph-param[8] @type: long
+- SuperLoPass/filter/morph-param[8]: 0
+- SuperLoPass/filter/designer-section[1]/low-gain @type: long
+- SuperLoPass/filter/designer-section[1]/low-gain: 0
+- SuperLoPass/filter/designer-section[1]/low-freq @type: long
+- SuperLoPass/filter/designer-section[1]/low-freq: 63
+- SuperLoPass/filter/designer-section[1]/high-gain @type: long
+- SuperLoPass/filter/designer-section[1]/high-gain: 63
+- SuperLoPass/filter/designer-section[1]/high-freq @type: long
+- SuperLoPass/filter/designer-section[1]/high-freq: 127
+- SuperLoPass/filter/designer-section[1]/type @type: long
+- SuperLoPass/filter/designer-section[1]/type: 2
+- SuperLoPass/filter/designer-section[2]/low-gain @type: long
+- SuperLoPass/filter/designer-section[2]/low-gain: 0
+- SuperLoPass/filter/designer-section[2]/low-freq @type: long
+- SuperLoPass/filter/designer-section[2]/low-freq: 55
+- SuperLoPass/filter/designer-section[2]/high-gain @type: long
+- SuperLoPass/filter/designer-section[2]/high-gain: 62
+- SuperLoPass/filter/designer-section[2]/high-freq @type: long
+- SuperLoPass/filter/designer-section[2]/high-freq: 127
+- SuperLoPass/filter/designer-section[2]/type @type: long
+- SuperLoPass/filter/designer-section[2]/type: 2
+- SuperLoPass/filter/designer-section[3]/low-gain @type: long
+- SuperLoPass/filter/designer-section[3]/low-gain: 0
+- SuperLoPass/filter/designer-section[3]/low-freq @type: long
+- SuperLoPass/filter/designer-section[3]/low-freq: 44
+- SuperLoPass/filter/designer-section[3]/high-gain @type: long
+- SuperLoPass/filter/designer-section[3]/high-gain: 63
+- SuperLoPass/filter/designer-section[3]/high-freq @type: long
+- SuperLoPass/filter/designer-section[3]/high-freq: 127
+- SuperLoPass/filter/designer-section[3]/type @type: long
+- SuperLoPass/filter/designer-section[3]/type: 2
+- SuperLoPass/filter/designer-section[4]/low-gain @type: long
+- SuperLoPass/filter/designer-section[4]/low-gain: 0
+- SuperLoPass/filter/designer-section[4]/low-freq @type: long
+- SuperLoPass/filter/designer-section[4]/low-freq: 26
+- SuperLoPass/filter/designer-section[4]/high-gain @type: long
+- SuperLoPass/filter/designer-section[4]/high-gain: 61
+- SuperLoPass/filter/designer-section[4]/high-freq @type: long
+- SuperLoPass/filter/designer-section[4]/high-freq: 127
+- SuperLoPass/filter/designer-section[4]/type @type: long
+- SuperLoPass/filter/designer-section[4]/type: 2
+- SuperLoPass/filter/designer-section[5]/low-gain @type: long
+- SuperLoPass/filter/designer-section[5]/low-gain: 0
+- SuperLoPass/filter/designer-section[5]/low-freq @type: long
+- SuperLoPass/filter/designer-section[5]/low-freq: 0
+- SuperLoPass/filter/designer-section[5]/high-gain @type: long
+- SuperLoPass/filter/designer-section[5]/high-gain: 63
+- SuperLoPass/filter/designer-section[5]/high-freq @type: long
+- SuperLoPass/filter/designer-section[5]/high-freq: 127
+- SuperLoPass/filter/designer-section[5]/type @type: long
+- SuperLoPass/filter/designer-section[5]/type: 2
+- SuperLoPass/filter/designer-section[6]/low-gain @type: long
+- SuperLoPass/filter/designer-section[6]/low-gain: 0
+- SuperLoPass/filter/designer-section[6]/low-freq @type: long
+- SuperLoPass/filter/designer-section[6]/low-freq: 0
+- SuperLoPass/filter/designer-section[6]/high-gain @type: long
+- SuperLoPass/filter/designer-section[6]/high-gain: 0
+- SuperLoPass/filter/designer-section[6]/high-freq @type: long
+- SuperLoPass/filter/designer-section[6]/high-freq: 0
+- SuperLoPass/filter/designer-section[6]/type @type: long
+- SuperLoPass/filter/designer-section[6]/type: 0
+- SuperLoPass/filter/type-absolute @type: long
+- SuperLoPass/filter/type-absolute: 108
+
+## Super Hi Pass
+
+Source XML: C:\Users\hooki\OneDrive\Documents\Creative Professional\Emulator X Family\Templates\Filter\Super Hi Pass.xml
+Root attribute - module: Filter
+Root attribute - name: Super1kHiPass
+
+- Super1kHiPass @module: Filter
+- Super1kHiPass @name: Super1kHiPass
+- Super1kHiPass/filter/frequency @type: float
+- Super1kHiPass/filter/frequency: 0
+- Super1kHiPass/filter/gain @type: float
+- Super1kHiPass/filter/gain: 0
+- Super1kHiPass/filter/morph-param[3] @type: long
+- Super1kHiPass/filter/morph-param[3]: 0
+- Super1kHiPass/filter/morph-param[4] @type: long
+- Super1kHiPass/filter/morph-param[4]: 0
+- Super1kHiPass/filter/morph-param[5] @type: long
+- Super1kHiPass/filter/morph-param[5]: 0
+- Super1kHiPass/filter/morph-param[6] @type: long
+- Super1kHiPass/filter/morph-param[6]: 0
+- Super1kHiPass/filter/morph-param[7] @type: long
+- Super1kHiPass/filter/morph-param[7]: 0
+- Super1kHiPass/filter/morph-param[8] @type: long
+- Super1kHiPass/filter/morph-param[8]: 0
+- Super1kHiPass/filter/designer-section[1]/low-gain @type: long
+- Super1kHiPass/filter/designer-section[1]/low-gain: 64
+- Super1kHiPass/filter/designer-section[1]/low-freq @type: long
+- Super1kHiPass/filter/designer-section[1]/low-freq: 0
+- Super1kHiPass/filter/designer-section[1]/high-gain @type: long
+- Super1kHiPass/filter/designer-section[1]/high-gain: 64
+- Super1kHiPass/filter/designer-section[1]/high-freq @type: long
+- Super1kHiPass/filter/designer-section[1]/high-freq: 63
+- Super1kHiPass/filter/designer-section[1]/type @type: long
+- Super1kHiPass/filter/designer-section[1]/type: 3
+- Super1kHiPass/filter/designer-section[2]/low-gain @type: long
+- Super1kHiPass/filter/designer-section[2]/low-gain: 64
+- Super1kHiPass/filter/designer-section[2]/low-freq @type: long
+- Super1kHiPass/filter/designer-section[2]/low-freq: 0
+- Super1kHiPass/filter/designer-section[2]/high-gain @type: long
+- Super1kHiPass/filter/designer-section[2]/high-gain: 64
+- Super1kHiPass/filter/designer-section[2]/high-freq @type: long
+- Super1kHiPass/filter/designer-section[2]/high-freq: 63
+- Super1kHiPass/filter/designer-section[2]/type @type: long
+- Super1kHiPass/filter/designer-section[2]/type: 3
+- Super1kHiPass/filter/designer-section[3]/low-gain @type: long
+- Super1kHiPass/filter/designer-section[3]/low-gain: 64
+- Super1kHiPass/filter/designer-section[3]/low-freq @type: long
+- Super1kHiPass/filter/designer-section[3]/low-freq: 0
+- Super1kHiPass/filter/designer-section[3]/high-gain @type: long
+- Super1kHiPass/filter/designer-section[3]/high-gain: 64
+- Super1kHiPass/filter/designer-section[3]/high-freq @type: long
+- Super1kHiPass/filter/designer-section[3]/high-freq: 63
+- Super1kHiPass/filter/designer-section[3]/type @type: long
+- Super1kHiPass/filter/designer-section[3]/type: 3
+- Super1kHiPass/filter/designer-section[4]/low-gain @type: long
+- Super1kHiPass/filter/designer-section[4]/low-gain: 64
+- Super1kHiPass/filter/designer-section[4]/low-freq @type: long
+- Super1kHiPass/filter/designer-section[4]/low-freq: 0
+- Super1kHiPass/filter/designer-section[4]/high-gain @type: long
+- Super1kHiPass/filter/designer-section[4]/high-gain: 64
+- Super1kHiPass/filter/designer-section[4]/high-freq @type: long
+- Super1kHiPass/filter/designer-section[4]/high-freq: 63
+- Super1kHiPass/filter/designer-section[4]/type @type: long
+- Super1kHiPass/filter/designer-section[4]/type: 3
+- Super1kHiPass/filter/designer-section[5]/low-gain @type: long
+- Super1kHiPass/filter/designer-section[5]/low-gain: 64
+- Super1kHiPass/filter/designer-section[5]/low-freq @type: long
+- Super1kHiPass/filter/designer-section[5]/low-freq: 0
+- Super1kHiPass/filter/designer-section[5]/high-gain @type: long
+- Super1kHiPass/filter/designer-section[5]/high-gain: 64
+- Super1kHiPass/filter/designer-section[5]/high-freq @type: long
+- Super1kHiPass/filter/designer-section[5]/high-freq: 63
+- Super1kHiPass/filter/designer-section[5]/type @type: long
+- Super1kHiPass/filter/designer-section[5]/type: 3
+- Super1kHiPass/filter/designer-section[6]/low-gain @type: long
+- Super1kHiPass/filter/designer-section[6]/low-gain: 64
+- Super1kHiPass/filter/designer-section[6]/low-freq @type: long
+- Super1kHiPass/filter/designer-section[6]/low-freq: 0
+- Super1kHiPass/filter/designer-section[6]/high-gain @type: long
+- Super1kHiPass/filter/designer-section[6]/high-gain: 64
+- Super1kHiPass/filter/designer-section[6]/high-freq @type: long
+- Super1kHiPass/filter/designer-section[6]/high-freq: 63
+- Super1kHiPass/filter/designer-section[6]/type @type: long
+- Super1kHiPass/filter/designer-section[6]/type: 3
+- Super1kHiPass/filter/type-absolute @type: long
+- Super1kHiPass/filter/type-absolute: 108
+
+## Three Point Morph
+
+Source XML: C:\Users\hooki\OneDrive\Documents\Creative Professional\Emulator X Family\Templates\Filter\Three Point Morph.xml
+Root attribute - module: Filter
+Root attribute - name: Three Point Morph
+
+- Three Point Morph @module: Filter
+- Three Point Morph @name: Three Point Morph
+- Three Point Morph/filter/frequency @type: float
+- Three Point Morph/filter/frequency: 0
+- Three Point Morph/filter/gain @type: float
+- Three Point Morph/filter/gain: 0.5
+- Three Point Morph/filter/morph-param[3] @type: long
+- Three Point Morph/filter/morph-param[3]: 0
+- Three Point Morph/filter/morph-param[4] @type: long
+- Three Point Morph/filter/morph-param[4]: 0
+- Three Point Morph/filter/morph-param[5] @type: long
+- Three Point Morph/filter/morph-param[5]: 0
+- Three Point Morph/filter/morph-param[6] @type: long
+- Three Point Morph/filter/morph-param[6]: 0
+- Three Point Morph/filter/morph-param[7] @type: long
+- Three Point Morph/filter/morph-param[7]: 0
+- Three Point Morph/filter/morph-param[8] @type: long
+- Three Point Morph/filter/morph-param[8]: 0
+- Three Point Morph/filter/designer-section[1]/low-gain @type: long
+- Three Point Morph/filter/designer-section[1]/low-gain: 97
+- Three Point Morph/filter/designer-section[1]/low-freq @type: long
+- Three Point Morph/filter/designer-section[1]/low-freq: 56
+- Three Point Morph/filter/designer-section[1]/high-gain @type: long
+- Three Point Morph/filter/designer-section[1]/high-gain: 32
+- Three Point Morph/filter/designer-section[1]/high-freq @type: long
+- Three Point Morph/filter/designer-section[1]/high-freq: 127
+- Three Point Morph/filter/designer-section[1]/type @type: long
+- Three Point Morph/filter/designer-section[1]/type: 2
+- Three Point Morph/filter/designer-section[2]/low-gain @type: long
+- Three Point Morph/filter/designer-section[2]/low-gain: 96
+- Three Point Morph/filter/designer-section[2]/low-freq @type: long
+- Three Point Morph/filter/designer-section[2]/low-freq: 37
+- Three Point Morph/filter/designer-section[2]/high-gain @type: long
+- Three Point Morph/filter/designer-section[2]/high-gain: 79
+- Three Point Morph/filter/designer-section[2]/high-freq @type: long
+- Three Point Morph/filter/designer-section[2]/high-freq: 97
+- Three Point Morph/filter/designer-section[2]/type @type: long
+- Three Point Morph/filter/designer-section[2]/type: 2
+- Three Point Morph/filter/designer-section[3]/low-gain @type: long
+- Three Point Morph/filter/designer-section[3]/low-gain: 112
+- Three Point Morph/filter/designer-section[3]/low-freq @type: long
+- Three Point Morph/filter/designer-section[3]/low-freq: 68
+- Three Point Morph/filter/designer-section[3]/high-gain @type: long
+- Three Point Morph/filter/designer-section[3]/high-gain: 80
+- Three Point Morph/filter/designer-section[3]/high-freq @type: long
+- Three Point Morph/filter/designer-section[3]/high-freq: 103
+- Three Point Morph/filter/designer-section[3]/type @type: long
+- Three Point Morph/filter/designer-section[3]/type: 1
+- Three Point Morph/filter/designer-section[4]/low-gain @type: long
+- Three Point Morph/filter/designer-section[4]/low-gain: 107
+- Three Point Morph/filter/designer-section[4]/low-freq @type: long
+- Three Point Morph/filter/designer-section[4]/low-freq: 76
+- Three Point Morph/filter/designer-section[4]/high-gain @type: long
+- Three Point Morph/filter/designer-section[4]/high-gain: 115
+- Three Point Morph/filter/designer-section[4]/high-freq @type: long
+- Three Point Morph/filter/designer-section[4]/high-freq: 94
+- Three Point Morph/filter/designer-section[4]/type @type: long
+- Three Point Morph/filter/designer-section[4]/type: 0
+- Three Point Morph/filter/designer-section[5]/low-gain @type: long
+- Three Point Morph/filter/designer-section[5]/low-gain: 0
+- Three Point Morph/filter/designer-section[5]/low-freq @type: long
+- Three Point Morph/filter/designer-section[5]/low-freq: 0
+- Three Point Morph/filter/designer-section[5]/high-gain @type: long
+- Three Point Morph/filter/designer-section[5]/high-gain: 0
+- Three Point Morph/filter/designer-section[5]/high-freq @type: long
+- Three Point Morph/filter/designer-section[5]/high-freq: 0
+- Three Point Morph/filter/designer-section[5]/type @type: long
+- Three Point Morph/filter/designer-section[5]/type: 0
+- Three Point Morph/filter/designer-section[6]/low-gain @type: long
+- Three Point Morph/filter/designer-section[6]/low-gain: 0
+- Three Point Morph/filter/designer-section[6]/low-freq @type: long
+- Three Point Morph/filter/designer-section[6]/low-freq: 0
+- Three Point Morph/filter/designer-section[6]/high-gain @type: long
+- Three Point Morph/filter/designer-section[6]/high-gain: 0
+- Three Point Morph/filter/designer-section[6]/high-freq @type: long
+- Three Point Morph/filter/designer-section[6]/high-freq: 0
+- Three Point Morph/filter/designer-section[6]/type @type: long
+- Three Point Morph/filter/designer-section[6]/type: 0
+- Three Point Morph/filter/type-absolute @type: long
+- Three Point Morph/filter/type-absolute: 108
+
+## Twin Peaks
+
+Source XML: C:\Users\hooki\OneDrive\Documents\Creative Professional\Emulator X Family\Templates\Filter\Twin Peaks.xml
+Root attribute - module: Filter
+Root attribute - name: TwinPeaks
+
+- TwinPeaks @module: Filter
+- TwinPeaks @name: TwinPeaks
+- TwinPeaks/filter/frequency @type: float
+- TwinPeaks/filter/frequency: 0
+- TwinPeaks/filter/gain @type: float
+- TwinPeaks/filter/gain: 0
+- TwinPeaks/filter/morph-param[3] @type: long
+- TwinPeaks/filter/morph-param[3]: 0
+- TwinPeaks/filter/morph-param[4] @type: long
+- TwinPeaks/filter/morph-param[4]: 0
+- TwinPeaks/filter/morph-param[5] @type: long
+- TwinPeaks/filter/morph-param[5]: 0
+- TwinPeaks/filter/morph-param[6] @type: long
+- TwinPeaks/filter/morph-param[6]: 0
+- TwinPeaks/filter/morph-param[7] @type: long
+- TwinPeaks/filter/morph-param[7]: 0
+- TwinPeaks/filter/morph-param[8] @type: long
+- TwinPeaks/filter/morph-param[8]: 0
+- TwinPeaks/filter/designer-section[1]/low-gain @type: long
+- TwinPeaks/filter/designer-section[1]/low-gain: 127
+- TwinPeaks/filter/designer-section[1]/low-freq @type: long
+- TwinPeaks/filter/designer-section[1]/low-freq: 78
+- TwinPeaks/filter/designer-section[1]/high-gain @type: long
+- TwinPeaks/filter/designer-section[1]/high-gain: 0
+- TwinPeaks/filter/designer-section[1]/high-freq @type: long
+- TwinPeaks/filter/designer-section[1]/high-freq: 99
+- TwinPeaks/filter/designer-section[1]/type @type: long
+- TwinPeaks/filter/designer-section[1]/type: 2
+- TwinPeaks/filter/designer-section[2]/low-gain @type: long
+- TwinPeaks/filter/designer-section[2]/low-gain: 127
+- TwinPeaks/filter/designer-section[2]/low-freq @type: long
+- TwinPeaks/filter/designer-section[2]/low-freq: 0
+- TwinPeaks/filter/designer-section[2]/high-gain @type: long
+- TwinPeaks/filter/designer-section[2]/high-gain: 0
+- TwinPeaks/filter/designer-section[2]/high-freq @type: long
+- TwinPeaks/filter/designer-section[2]/high-freq: 78
+- TwinPeaks/filter/designer-section[2]/type @type: long
+- TwinPeaks/filter/designer-section[2]/type: 3
+- TwinPeaks/filter/designer-section[3]/low-gain @type: long
+- TwinPeaks/filter/designer-section[3]/low-gain: 0
+- TwinPeaks/filter/designer-section[3]/low-freq @type: long
+- TwinPeaks/filter/designer-section[3]/low-freq: 0
+- TwinPeaks/filter/designer-section[3]/high-gain @type: long
+- TwinPeaks/filter/designer-section[3]/high-gain: 0
+- TwinPeaks/filter/designer-section[3]/high-freq @type: long
+- TwinPeaks/filter/designer-section[3]/high-freq: 0
+- TwinPeaks/filter/designer-section[3]/type @type: long
+- TwinPeaks/filter/designer-section[3]/type: 0
+- TwinPeaks/filter/designer-section[4]/low-gain @type: long
+- TwinPeaks/filter/designer-section[4]/low-gain: 0
+- TwinPeaks/filter/designer-section[4]/low-freq @type: long
+- TwinPeaks/filter/designer-section[4]/low-freq: 0
+- TwinPeaks/filter/designer-section[4]/high-gain @type: long
+- TwinPeaks/filter/designer-section[4]/high-gain: 0
+- TwinPeaks/filter/designer-section[4]/high-freq @type: long
+- TwinPeaks/filter/designer-section[4]/high-freq: 0
+- TwinPeaks/filter/designer-section[4]/type @type: long
+- TwinPeaks/filter/designer-section[4]/type: 0
+- TwinPeaks/filter/designer-section[5]/low-gain @type: long
+- TwinPeaks/filter/designer-section[5]/low-gain: 0
+- TwinPeaks/filter/designer-section[5]/low-freq @type: long
+- TwinPeaks/filter/designer-section[5]/low-freq: 0
+- TwinPeaks/filter/designer-section[5]/high-gain @type: long
+- TwinPeaks/filter/designer-section[5]/high-gain: 0
+- TwinPeaks/filter/designer-section[5]/high-freq @type: long
+- TwinPeaks/filter/designer-section[5]/high-freq: 0
+- TwinPeaks/filter/designer-section[5]/type @type: long
+- TwinPeaks/filter/designer-section[5]/type: 0
+- TwinPeaks/filter/designer-section[6]/low-gain @type: long
+- TwinPeaks/filter/designer-section[6]/low-gain: 0
+- TwinPeaks/filter/designer-section[6]/low-freq @type: long
+- TwinPeaks/filter/designer-section[6]/low-freq: 0
+- TwinPeaks/filter/designer-section[6]/high-gain @type: long
+- TwinPeaks/filter/designer-section[6]/high-gain: 0
+- TwinPeaks/filter/designer-section[6]/high-freq @type: long
+- TwinPeaks/filter/designer-section[6]/high-freq: 0
+- TwinPeaks/filter/designer-section[6]/type @type: long
+- TwinPeaks/filter/designer-section[6]/type: 0
+- TwinPeaks/filter/type-absolute @type: long
+- TwinPeaks/filter/type-absolute: 108
+
+## Voxxy LP 1
+
+Source XML: C:\Users\hooki\OneDrive\Documents\Creative Professional\Emulator X Family\Templates\Filter\Voxxy LP 1.xml
+Root attribute - module: Filter
+Root attribute - name: Voxxy LP 1
+
+- Voxxy LP 1 @module: Filter
+- Voxxy LP 1 @name: Voxxy LP 1
+- Voxxy LP 1/filter/frequency @type: float
+- Voxxy LP 1/filter/frequency: 0
+- Voxxy LP 1/filter/gain @type: float
+- Voxxy LP 1/filter/gain: 0
+- Voxxy LP 1/filter/morph-param[3] @type: long
+- Voxxy LP 1/filter/morph-param[3]: 0
+- Voxxy LP 1/filter/morph-param[4] @type: long
+- Voxxy LP 1/filter/morph-param[4]: 0
+- Voxxy LP 1/filter/morph-param[5] @type: long
+- Voxxy LP 1/filter/morph-param[5]: 0
+- Voxxy LP 1/filter/morph-param[6] @type: long
+- Voxxy LP 1/filter/morph-param[6]: 0
+- Voxxy LP 1/filter/morph-param[7] @type: long
+- Voxxy LP 1/filter/morph-param[7]: 0
+- Voxxy LP 1/filter/morph-param[8] @type: long
+- Voxxy LP 1/filter/morph-param[8]: 0
+- Voxxy LP 1/filter/designer-section[1]/low-gain @type: long
+- Voxxy LP 1/filter/designer-section[1]/low-gain: 29
+- Voxxy LP 1/filter/designer-section[1]/low-freq @type: long
+- Voxxy LP 1/filter/designer-section[1]/low-freq: 19
+- Voxxy LP 1/filter/designer-section[1]/high-gain @type: long
+- Voxxy LP 1/filter/designer-section[1]/high-gain: 86
+- Voxxy LP 1/filter/designer-section[1]/high-freq @type: long
+- Voxxy LP 1/filter/designer-section[1]/high-freq: 81
+- Voxxy LP 1/filter/designer-section[1]/type @type: long
+- Voxxy LP 1/filter/designer-section[1]/type: 2
+- Voxxy LP 1/filter/designer-section[2]/low-gain @type: long
+- Voxxy LP 1/filter/designer-section[2]/low-gain: 127
+- Voxxy LP 1/filter/designer-section[2]/low-freq @type: long
+- Voxxy LP 1/filter/designer-section[2]/low-freq: 86
+- Voxxy LP 1/filter/designer-section[2]/high-gain @type: long
+- Voxxy LP 1/filter/designer-section[2]/high-gain: 127
+- Voxxy LP 1/filter/designer-section[2]/high-freq @type: long
+- Voxxy LP 1/filter/designer-section[2]/high-freq: 97
+- Voxxy LP 1/filter/designer-section[2]/type @type: long
+- Voxxy LP 1/filter/designer-section[2]/type: 1
+- Voxxy LP 1/filter/designer-section[3]/low-gain @type: long
+- Voxxy LP 1/filter/designer-section[3]/low-gain: 0
+- Voxxy LP 1/filter/designer-section[3]/low-freq @type: long
+- Voxxy LP 1/filter/designer-section[3]/low-freq: 100
+- Voxxy LP 1/filter/designer-section[3]/high-gain @type: long
+- Voxxy LP 1/filter/designer-section[3]/high-gain: 127
+- Voxxy LP 1/filter/designer-section[3]/high-freq @type: long
+- Voxxy LP 1/filter/designer-section[3]/high-freq: 107
+- Voxxy LP 1/filter/designer-section[3]/type @type: long
+- Voxxy LP 1/filter/designer-section[3]/type: 1
+- Voxxy LP 1/filter/designer-section[4]/low-gain @type: long
+- Voxxy LP 1/filter/designer-section[4]/low-gain: 127
+- Voxxy LP 1/filter/designer-section[4]/low-freq @type: long
+- Voxxy LP 1/filter/designer-section[4]/low-freq: 0
+- Voxxy LP 1/filter/designer-section[4]/high-gain @type: long
+- Voxxy LP 1/filter/designer-section[4]/high-gain: 126
+- Voxxy LP 1/filter/designer-section[4]/high-freq @type: long
+- Voxxy LP 1/filter/designer-section[4]/high-freq: 0
+- Voxxy LP 1/filter/designer-section[4]/type @type: long
+- Voxxy LP 1/filter/designer-section[4]/type: 0
+- Voxxy LP 1/filter/designer-section[5]/low-gain @type: long
+- Voxxy LP 1/filter/designer-section[5]/low-gain: 0
+- Voxxy LP 1/filter/designer-section[5]/low-freq @type: long
+- Voxxy LP 1/filter/designer-section[5]/low-freq: 0
+- Voxxy LP 1/filter/designer-section[5]/high-gain @type: long
+- Voxxy LP 1/filter/designer-section[5]/high-gain: 0
+- Voxxy LP 1/filter/designer-section[5]/high-freq @type: long
+- Voxxy LP 1/filter/designer-section[5]/high-freq: 116
+- Voxxy LP 1/filter/designer-section[5]/type @type: long
+- Voxxy LP 1/filter/designer-section[5]/type: 0
+- Voxxy LP 1/filter/designer-section[6]/low-gain @type: long
+- Voxxy LP 1/filter/designer-section[6]/low-gain: 0
+- Voxxy LP 1/filter/designer-section[6]/low-freq @type: long
+- Voxxy LP 1/filter/designer-section[6]/low-freq: 0
+- Voxxy LP 1/filter/designer-section[6]/high-gain @type: long
+- Voxxy LP 1/filter/designer-section[6]/high-gain: 0
+- Voxxy LP 1/filter/designer-section[6]/high-freq @type: long
+- Voxxy LP 1/filter/designer-section[6]/high-freq: 119
+- Voxxy LP 1/filter/designer-section[6]/type @type: long
+- Voxxy LP 1/filter/designer-section[6]/type: 0
+- Voxxy LP 1/filter/type-absolute @type: long
+- Voxxy LP 1/filter/type-absolute: 108
+
+## Voxxy LP 2
+
+Source XML: C:\Users\hooki\OneDrive\Documents\Creative Professional\Emulator X Family\Templates\Filter\Voxxy LP 2.xml
+Root attribute - module: Filter
+Root attribute - name: Voxxy LP 2
+
+- Voxxy LP 2 @module: Filter
+- Voxxy LP 2 @name: Voxxy LP 2
+- Voxxy LP 2/filter/frequency @type: float
+- Voxxy LP 2/filter/frequency: 0
+- Voxxy LP 2/filter/gain @type: float
+- Voxxy LP 2/filter/gain: 0
+- Voxxy LP 2/filter/morph-param[3] @type: long
+- Voxxy LP 2/filter/morph-param[3]: 0
+- Voxxy LP 2/filter/morph-param[4] @type: long
+- Voxxy LP 2/filter/morph-param[4]: 0
+- Voxxy LP 2/filter/morph-param[5] @type: long
+- Voxxy LP 2/filter/morph-param[5]: 0
+- Voxxy LP 2/filter/morph-param[6] @type: long
+- Voxxy LP 2/filter/morph-param[6]: 0
+- Voxxy LP 2/filter/morph-param[7] @type: long
+- Voxxy LP 2/filter/morph-param[7]: 0
+- Voxxy LP 2/filter/morph-param[8] @type: long
+- Voxxy LP 2/filter/morph-param[8]: 0
+- Voxxy LP 2/filter/designer-section[1]/low-gain @type: long
+- Voxxy LP 2/filter/designer-section[1]/low-gain: 0
+- Voxxy LP 2/filter/designer-section[1]/low-freq @type: long
+- Voxxy LP 2/filter/designer-section[1]/low-freq: 0
+- Voxxy LP 2/filter/designer-section[1]/high-gain @type: long
+- Voxxy LP 2/filter/designer-section[1]/high-gain: 57
+- Voxxy LP 2/filter/designer-section[1]/high-freq @type: long
+- Voxxy LP 2/filter/designer-section[1]/high-freq: 82
+- Voxxy LP 2/filter/designer-section[1]/type @type: long
+- Voxxy LP 2/filter/designer-section[1]/type: 2
+- Voxxy LP 2/filter/designer-section[2]/low-gain @type: long
+- Voxxy LP 2/filter/designer-section[2]/low-gain: 127
+- Voxxy LP 2/filter/designer-section[2]/low-freq @type: long
+- Voxxy LP 2/filter/designer-section[2]/low-freq: 86
+- Voxxy LP 2/filter/designer-section[2]/high-gain @type: long
+- Voxxy LP 2/filter/designer-section[2]/high-gain: 127
+- Voxxy LP 2/filter/designer-section[2]/high-freq @type: long
+- Voxxy LP 2/filter/designer-section[2]/high-freq: 97
+- Voxxy LP 2/filter/designer-section[2]/type @type: long
+- Voxxy LP 2/filter/designer-section[2]/type: 1
+- Voxxy LP 2/filter/designer-section[3]/low-gain @type: long
+- Voxxy LP 2/filter/designer-section[3]/low-gain: 0
+- Voxxy LP 2/filter/designer-section[3]/low-freq @type: long
+- Voxxy LP 2/filter/designer-section[3]/low-freq: 100
+- Voxxy LP 2/filter/designer-section[3]/high-gain @type: long
+- Voxxy LP 2/filter/designer-section[3]/high-gain: 127
+- Voxxy LP 2/filter/designer-section[3]/high-freq @type: long
+- Voxxy LP 2/filter/designer-section[3]/high-freq: 107
+- Voxxy LP 2/filter/designer-section[3]/type @type: long
+- Voxxy LP 2/filter/designer-section[3]/type: 1
+- Voxxy LP 2/filter/designer-section[4]/low-gain @type: long
+- Voxxy LP 2/filter/designer-section[4]/low-gain: 127
+- Voxxy LP 2/filter/designer-section[4]/low-freq @type: long
+- Voxxy LP 2/filter/designer-section[4]/low-freq: 0
+- Voxxy LP 2/filter/designer-section[4]/high-gain @type: long
+- Voxxy LP 2/filter/designer-section[4]/high-gain: 127
+- Voxxy LP 2/filter/designer-section[4]/high-freq @type: long
+- Voxxy LP 2/filter/designer-section[4]/high-freq: 69
+- Voxxy LP 2/filter/designer-section[4]/type @type: long
+- Voxxy LP 2/filter/designer-section[4]/type: 2
+- Voxxy LP 2/filter/designer-section[5]/low-gain @type: long
+- Voxxy LP 2/filter/designer-section[5]/low-gain: 109
+- Voxxy LP 2/filter/designer-section[5]/low-freq @type: long
+- Voxxy LP 2/filter/designer-section[5]/low-freq: 0
+- Voxxy LP 2/filter/designer-section[5]/high-gain @type: long
+- Voxxy LP 2/filter/designer-section[5]/high-gain: 109
+- Voxxy LP 2/filter/designer-section[5]/high-freq @type: long
+- Voxxy LP 2/filter/designer-section[5]/high-freq: 0
+- Voxxy LP 2/filter/designer-section[5]/type @type: long
+- Voxxy LP 2/filter/designer-section[5]/type: 1
+- Voxxy LP 2/filter/designer-section[6]/low-gain @type: long
+- Voxxy LP 2/filter/designer-section[6]/low-gain: 0
+- Voxxy LP 2/filter/designer-section[6]/low-freq @type: long
+- Voxxy LP 2/filter/designer-section[6]/low-freq: 0
+- Voxxy LP 2/filter/designer-section[6]/high-gain @type: long
+- Voxxy LP 2/filter/designer-section[6]/high-gain: 0
+- Voxxy LP 2/filter/designer-section[6]/high-freq @type: long
+- Voxxy LP 2/filter/designer-section[6]/high-freq: 119
+- Voxxy LP 2/filter/designer-section[6]/type @type: long
+- Voxxy LP 2/filter/designer-section[6]/type: 0
+- Voxxy LP 2/filter/type-absolute @type: long
+- Voxxy LP 2/filter/type-absolute: 108
+
+## Wow
+
+Source XML: C:\Users\hooki\OneDrive\Documents\Creative Professional\Emulator X Family\Templates\Filter\Wow.xml
+Root attribute - module: Filter
+Root attribute - name: AC Wow
+
+- AC Wow @module: Filter
+- AC Wow @name: AC Wow
+- AC Wow/filter/frequency @type: float
+- AC Wow/filter/frequency: 0
+- AC Wow/filter/gain @type: float
+- AC Wow/filter/gain: 0.566265
+- AC Wow/filter/morph-param[3] @type: long
+- AC Wow/filter/morph-param[3]: 0
+- AC Wow/filter/morph-param[4] @type: long
+- AC Wow/filter/morph-param[4]: 0
+- AC Wow/filter/morph-param[5] @type: long
+- AC Wow/filter/morph-param[5]: 0
+- AC Wow/filter/morph-param[6] @type: long
+- AC Wow/filter/morph-param[6]: 0
+- AC Wow/filter/morph-param[7] @type: long
+- AC Wow/filter/morph-param[7]: 0
+- AC Wow/filter/morph-param[8] @type: long
+- AC Wow/filter/morph-param[8]: 0
+- AC Wow/filter/designer-section[1]/low-gain @type: long
+- AC Wow/filter/designer-section[1]/low-gain: 127
+- AC Wow/filter/designer-section[1]/low-freq @type: long
+- AC Wow/filter/designer-section[1]/low-freq: 32
+- AC Wow/filter/designer-section[1]/high-gain @type: long
+- AC Wow/filter/designer-section[1]/high-gain: 39
+- AC Wow/filter/designer-section[1]/high-freq @type: long
+- AC Wow/filter/designer-section[1]/high-freq: 104
+- AC Wow/filter/designer-section[1]/type @type: long
+- AC Wow/filter/designer-section[1]/type: 2
+- AC Wow/filter/designer-section[2]/low-gain @type: long
+- AC Wow/filter/designer-section[2]/low-gain: 101
+- AC Wow/filter/designer-section[2]/low-freq @type: long
+- AC Wow/filter/designer-section[2]/low-freq: 82
+- AC Wow/filter/designer-section[2]/high-gain @type: long
+- AC Wow/filter/designer-section[2]/high-gain: 70
+- AC Wow/filter/designer-section[2]/high-freq @type: long
+- AC Wow/filter/designer-section[2]/high-freq: 41
+- AC Wow/filter/designer-section[2]/type @type: long
+- AC Wow/filter/designer-section[2]/type: 3
+- AC Wow/filter/designer-section[3]/low-gain @type: long
+- AC Wow/filter/designer-section[3]/low-gain: 0
+- AC Wow/filter/designer-section[3]/low-freq @type: long
+- AC Wow/filter/designer-section[3]/low-freq: 0
+- AC Wow/filter/designer-section[3]/high-gain @type: long
+- AC Wow/filter/designer-section[3]/high-gain: 0
+- AC Wow/filter/designer-section[3]/high-freq @type: long
+- AC Wow/filter/designer-section[3]/high-freq: 0
+- AC Wow/filter/designer-section[3]/type @type: long
+- AC Wow/filter/designer-section[3]/type: 0
+- AC Wow/filter/designer-section[4]/low-gain @type: long
+- AC Wow/filter/designer-section[4]/low-gain: 0
+- AC Wow/filter/designer-section[4]/low-freq @type: long
+- AC Wow/filter/designer-section[4]/low-freq: 0
+- AC Wow/filter/designer-section[4]/high-gain @type: long
+- AC Wow/filter/designer-section[4]/high-gain: 0
+- AC Wow/filter/designer-section[4]/high-freq @type: long
+- AC Wow/filter/designer-section[4]/high-freq: 0
+- AC Wow/filter/designer-section[4]/type @type: long
+- AC Wow/filter/designer-section[4]/type: 0
+- AC Wow/filter/designer-section[5]/low-gain @type: long
+- AC Wow/filter/designer-section[5]/low-gain: 0
+- AC Wow/filter/designer-section[5]/low-freq @type: long
+- AC Wow/filter/designer-section[5]/low-freq: 0
+- AC Wow/filter/designer-section[5]/high-gain @type: long
+- AC Wow/filter/designer-section[5]/high-gain: 0
+- AC Wow/filter/designer-section[5]/high-freq @type: long
+- AC Wow/filter/designer-section[5]/high-freq: 0
+- AC Wow/filter/designer-section[5]/type @type: long
+- AC Wow/filter/designer-section[5]/type: 0
+- AC Wow/filter/designer-section[6]/low-gain @type: long
+- AC Wow/filter/designer-section[6]/low-gain: 0
+- AC Wow/filter/designer-section[6]/low-freq @type: long
+- AC Wow/filter/designer-section[6]/low-freq: 0
+- AC Wow/filter/designer-section[6]/high-gain @type: long
+- AC Wow/filter/designer-section[6]/high-gain: 0
+- AC Wow/filter/designer-section[6]/high-freq @type: long
+- AC Wow/filter/designer-section[6]/high-freq: 0
+- AC Wow/filter/designer-section[6]/type @type: long
+- AC Wow/filter/designer-section[6]/type: 0
+- AC Wow/filter/type-absolute @type: long
+- AC Wow/filter/type-absolute: 108
+
+## Wah Wah 1
+
+Source XML: C:\Users\hooki\OneDrive\Documents\Creative Professional\Emulator X Family\Templates\Filter\Wah Wah 1.xml
+Root attribute - module: Filter
+Root attribute - name: Wah Wah
+
+- Wah Wah @module: Filter
+- Wah Wah @name: Wah Wah
+- Wah Wah/filter/frequency @type: float
+- Wah Wah/filter/frequency: 0
+- Wah Wah/filter/gain @type: float
+- Wah Wah/filter/gain: 0.5
+- Wah Wah/filter/morph-param[3] @type: long
+- Wah Wah/filter/morph-param[3]: 0
+- Wah Wah/filter/morph-param[4] @type: long
+- Wah Wah/filter/morph-param[4]: 0
+- Wah Wah/filter/morph-param[5] @type: long
+- Wah Wah/filter/morph-param[5]: 0
+- Wah Wah/filter/morph-param[6] @type: long
+- Wah Wah/filter/morph-param[6]: 0
+- Wah Wah/filter/morph-param[7] @type: long
+- Wah Wah/filter/morph-param[7]: 0
+- Wah Wah/filter/morph-param[8] @type: long
+- Wah Wah/filter/morph-param[8]: 0
+- Wah Wah/filter/designer-section[1]/low-gain @type: long
+- Wah Wah/filter/designer-section[1]/low-gain: 88
+- Wah Wah/filter/designer-section[1]/low-freq @type: long
+- Wah Wah/filter/designer-section[1]/low-freq: 45
+- Wah Wah/filter/designer-section[1]/high-gain @type: long
+- Wah Wah/filter/designer-section[1]/high-gain: 88
+- Wah Wah/filter/designer-section[1]/high-freq @type: long
+- Wah Wah/filter/designer-section[1]/high-freq: 74
+- Wah Wah/filter/designer-section[1]/type @type: long
+- Wah Wah/filter/designer-section[1]/type: 2
+- Wah Wah/filter/designer-section[2]/low-gain @type: long
+- Wah Wah/filter/designer-section[2]/low-gain: 0
+- Wah Wah/filter/designer-section[2]/low-freq @type: long
+- Wah Wah/filter/designer-section[2]/low-freq: 48
+- Wah Wah/filter/designer-section[2]/high-gain @type: long
+- Wah Wah/filter/designer-section[2]/high-gain: 0
+- Wah Wah/filter/designer-section[2]/high-freq @type: long
+- Wah Wah/filter/designer-section[2]/high-freq: 58
+- Wah Wah/filter/designer-section[2]/type @type: long
+- Wah Wah/filter/designer-section[2]/type: 3
+- Wah Wah/filter/designer-section[3]/low-gain @type: long
+- Wah Wah/filter/designer-section[3]/low-gain: 0
+- Wah Wah/filter/designer-section[3]/low-freq @type: long
+- Wah Wah/filter/designer-section[3]/low-freq: 45
+- Wah Wah/filter/designer-section[3]/high-gain @type: long
+- Wah Wah/filter/designer-section[3]/high-gain: 0
+- Wah Wah/filter/designer-section[3]/high-freq @type: long
+- Wah Wah/filter/designer-section[3]/high-freq: 48
+- Wah Wah/filter/designer-section[3]/type @type: long
+- Wah Wah/filter/designer-section[3]/type: 0
+- Wah Wah/filter/designer-section[4]/low-gain @type: long
+- Wah Wah/filter/designer-section[4]/low-gain: 0
+- Wah Wah/filter/designer-section[4]/low-freq @type: long
+- Wah Wah/filter/designer-section[4]/low-freq: 0
+- Wah Wah/filter/designer-section[4]/high-gain @type: long
+- Wah Wah/filter/designer-section[4]/high-gain: 0
+- Wah Wah/filter/designer-section[4]/high-freq @type: long
+- Wah Wah/filter/designer-section[4]/high-freq: 0
+- Wah Wah/filter/designer-section[4]/type @type: long
+- Wah Wah/filter/designer-section[4]/type: 0
+- Wah Wah/filter/designer-section[5]/low-gain @type: long
+- Wah Wah/filter/designer-section[5]/low-gain: 0
+- Wah Wah/filter/designer-section[5]/low-freq @type: long
+- Wah Wah/filter/designer-section[5]/low-freq: 0
+- Wah Wah/filter/designer-section[5]/high-gain @type: long
+- Wah Wah/filter/designer-section[5]/high-gain: 0
+- Wah Wah/filter/designer-section[5]/high-freq @type: long
+- Wah Wah/filter/designer-section[5]/high-freq: 0
+- Wah Wah/filter/designer-section[5]/type @type: long
+- Wah Wah/filter/designer-section[5]/type: 0
+- Wah Wah/filter/designer-section[6]/low-gain @type: long
+- Wah Wah/filter/designer-section[6]/low-gain: 0
+- Wah Wah/filter/designer-section[6]/low-freq @type: long
+- Wah Wah/filter/designer-section[6]/low-freq: 0
+- Wah Wah/filter/designer-section[6]/high-gain @type: long
+- Wah Wah/filter/designer-section[6]/high-gain: 0
+- Wah Wah/filter/designer-section[6]/high-freq @type: long
+- Wah Wah/filter/designer-section[6]/high-freq: 0
+- Wah Wah/filter/designer-section[6]/type @type: long
+- Wah Wah/filter/designer-section[6]/type: 0
+- Wah Wah/filter/type-absolute @type: long
+- Wah Wah/filter/type-absolute: 108
+
+## Wah Wah 2
+
+Source XML: C:\Users\hooki\OneDrive\Documents\Creative Professional\Emulator X Family\Templates\Filter\Wah Wah 2.xml
+Root attribute - module: Filter
+Root attribute - name: Wah Wah 2
+
+- Wah Wah 2 @module: Filter
+- Wah Wah 2 @name: Wah Wah 2
+- Wah Wah 2/filter/frequency @type: float
+- Wah Wah 2/filter/frequency: 0
+- Wah Wah 2/filter/gain @type: float
+- Wah Wah 2/filter/gain: 0.5
+- Wah Wah 2/filter/morph-param[3] @type: long
+- Wah Wah 2/filter/morph-param[3]: 0
+- Wah Wah 2/filter/morph-param[4] @type: long
+- Wah Wah 2/filter/morph-param[4]: 0
+- Wah Wah 2/filter/morph-param[5] @type: long
+- Wah Wah 2/filter/morph-param[5]: 0
+- Wah Wah 2/filter/morph-param[6] @type: long
+- Wah Wah 2/filter/morph-param[6]: 0
+- Wah Wah 2/filter/morph-param[7] @type: long
+- Wah Wah 2/filter/morph-param[7]: 0
+- Wah Wah 2/filter/morph-param[8] @type: long
+- Wah Wah 2/filter/morph-param[8]: 0
+- Wah Wah 2/filter/designer-section[1]/low-gain @type: long
+- Wah Wah 2/filter/designer-section[1]/low-gain: 88
+- Wah Wah 2/filter/designer-section[1]/low-freq @type: long
+- Wah Wah 2/filter/designer-section[1]/low-freq: 45
+- Wah Wah 2/filter/designer-section[1]/high-gain @type: long
+- Wah Wah 2/filter/designer-section[1]/high-gain: 88
+- Wah Wah 2/filter/designer-section[1]/high-freq @type: long
+- Wah Wah 2/filter/designer-section[1]/high-freq: 85
+- Wah Wah 2/filter/designer-section[1]/type @type: long
+- Wah Wah 2/filter/designer-section[1]/type: 2
+- Wah Wah 2/filter/designer-section[2]/low-gain @type: long
+- Wah Wah 2/filter/designer-section[2]/low-gain: 0
+- Wah Wah 2/filter/designer-section[2]/low-freq @type: long
+- Wah Wah 2/filter/designer-section[2]/low-freq: 47
+- Wah Wah 2/filter/designer-section[2]/high-gain @type: long
+- Wah Wah 2/filter/designer-section[2]/high-gain: 0
+- Wah Wah 2/filter/designer-section[2]/high-freq @type: long
+- Wah Wah 2/filter/designer-section[2]/high-freq: 47
+- Wah Wah 2/filter/designer-section[2]/type @type: long
+- Wah Wah 2/filter/designer-section[2]/type: 3
+- Wah Wah 2/filter/designer-section[3]/low-gain @type: long
+- Wah Wah 2/filter/designer-section[3]/low-gain: 0
+- Wah Wah 2/filter/designer-section[3]/low-freq @type: long
+- Wah Wah 2/filter/designer-section[3]/low-freq: 45
+- Wah Wah 2/filter/designer-section[3]/high-gain @type: long
+- Wah Wah 2/filter/designer-section[3]/high-gain: 0
+- Wah Wah 2/filter/designer-section[3]/high-freq @type: long
+- Wah Wah 2/filter/designer-section[3]/high-freq: 48
+- Wah Wah 2/filter/designer-section[3]/type @type: long
+- Wah Wah 2/filter/designer-section[3]/type: 0
+- Wah Wah 2/filter/designer-section[4]/low-gain @type: long
+- Wah Wah 2/filter/designer-section[4]/low-gain: 0
+- Wah Wah 2/filter/designer-section[4]/low-freq @type: long
+- Wah Wah 2/filter/designer-section[4]/low-freq: 0
+- Wah Wah 2/filter/designer-section[4]/high-gain @type: long
+- Wah Wah 2/filter/designer-section[4]/high-gain: 0
+- Wah Wah 2/filter/designer-section[4]/high-freq @type: long
+- Wah Wah 2/filter/designer-section[4]/high-freq: 0
+- Wah Wah 2/filter/designer-section[4]/type @type: long
+- Wah Wah 2/filter/designer-section[4]/type: 0
+- Wah Wah 2/filter/designer-section[5]/low-gain @type: long
+- Wah Wah 2/filter/designer-section[5]/low-gain: 0
+- Wah Wah 2/filter/designer-section[5]/low-freq @type: long
+- Wah Wah 2/filter/designer-section[5]/low-freq: 0
+- Wah Wah 2/filter/designer-section[5]/high-gain @type: long
+- Wah Wah 2/filter/designer-section[5]/high-gain: 0
+- Wah Wah 2/filter/designer-section[5]/high-freq @type: long
+- Wah Wah 2/filter/designer-section[5]/high-freq: 0
+- Wah Wah 2/filter/designer-section[5]/type @type: long
+- Wah Wah 2/filter/designer-section[5]/type: 0
+- Wah Wah 2/filter/designer-section[6]/low-gain @type: long
+- Wah Wah 2/filter/designer-section[6]/low-gain: 0
+- Wah Wah 2/filter/designer-section[6]/low-freq @type: long
+- Wah Wah 2/filter/designer-section[6]/low-freq: 0
+- Wah Wah 2/filter/designer-section[6]/high-gain @type: long
+- Wah Wah 2/filter/designer-section[6]/high-gain: 0
+- Wah Wah 2/filter/designer-section[6]/high-freq @type: long
+- Wah Wah 2/filter/designer-section[6]/high-freq: 0
+- Wah Wah 2/filter/designer-section[6]/type @type: long
+- Wah Wah 2/filter/designer-section[6]/type: 0
+- Wah Wah 2/filter/type-absolute @type: long
+- Wah Wah 2/filter/type-absolute: 108
+
+## Wah Wah 3
+
+Source XML: C:\Users\hooki\OneDrive\Documents\Creative Professional\Emulator X Family\Templates\Filter\Wah Wah 3.xml
+Root attribute - module: Filter
+Root attribute - name: Wah Wah 3
+
+- Wah Wah 3 @module: Filter
+- Wah Wah 3 @name: Wah Wah 3
+- Wah Wah 3/filter/frequency @type: float
+- Wah Wah 3/filter/frequency: 0
+- Wah Wah 3/filter/gain @type: float
+- Wah Wah 3/filter/gain: 0.5
+- Wah Wah 3/filter/morph-param[3] @type: long
+- Wah Wah 3/filter/morph-param[3]: 0
+- Wah Wah 3/filter/morph-param[4] @type: long
+- Wah Wah 3/filter/morph-param[4]: 0
+- Wah Wah 3/filter/morph-param[5] @type: long
+- Wah Wah 3/filter/morph-param[5]: 0
+- Wah Wah 3/filter/morph-param[6] @type: long
+- Wah Wah 3/filter/morph-param[6]: 0
+- Wah Wah 3/filter/morph-param[7] @type: long
+- Wah Wah 3/filter/morph-param[7]: 0
+- Wah Wah 3/filter/morph-param[8] @type: long
+- Wah Wah 3/filter/morph-param[8]: 0
+- Wah Wah 3/filter/designer-section[1]/low-gain @type: long
+- Wah Wah 3/filter/designer-section[1]/low-gain: 123
+- Wah Wah 3/filter/designer-section[1]/low-freq @type: long
+- Wah Wah 3/filter/designer-section[1]/low-freq: 44
+- Wah Wah 3/filter/designer-section[1]/high-gain @type: long
+- Wah Wah 3/filter/designer-section[1]/high-gain: 114
+- Wah Wah 3/filter/designer-section[1]/high-freq @type: long
+- Wah Wah 3/filter/designer-section[1]/high-freq: 76
+- Wah Wah 3/filter/designer-section[1]/type @type: long
+- Wah Wah 3/filter/designer-section[1]/type: 1
+- Wah Wah 3/filter/designer-section[2]/low-gain @type: long
+- Wah Wah 3/filter/designer-section[2]/low-gain: 0
+- Wah Wah 3/filter/designer-section[2]/low-freq @type: long
+- Wah Wah 3/filter/designer-section[2]/low-freq: 52
+- Wah Wah 3/filter/designer-section[2]/high-gain @type: long
+- Wah Wah 3/filter/designer-section[2]/high-gain: 0
+- Wah Wah 3/filter/designer-section[2]/high-freq @type: long
+- Wah Wah 3/filter/designer-section[2]/high-freq: 82
+- Wah Wah 3/filter/designer-section[2]/type @type: long
+- Wah Wah 3/filter/designer-section[2]/type: 2
+- Wah Wah 3/filter/designer-section[3]/low-gain @type: long
+- Wah Wah 3/filter/designer-section[3]/low-gain: 0
+- Wah Wah 3/filter/designer-section[3]/low-freq @type: long
+- Wah Wah 3/filter/designer-section[3]/low-freq: 25
+- Wah Wah 3/filter/designer-section[3]/high-gain @type: long
+- Wah Wah 3/filter/designer-section[3]/high-gain: 0
+- Wah Wah 3/filter/designer-section[3]/high-freq @type: long
+- Wah Wah 3/filter/designer-section[3]/high-freq: 28
+- Wah Wah 3/filter/designer-section[3]/type @type: long
+- Wah Wah 3/filter/designer-section[3]/type: 3
+- Wah Wah 3/filter/designer-section[4]/low-gain @type: long
+- Wah Wah 3/filter/designer-section[4]/low-gain: 0
+- Wah Wah 3/filter/designer-section[4]/low-freq @type: long
+- Wah Wah 3/filter/designer-section[4]/low-freq: 0
+- Wah Wah 3/filter/designer-section[4]/high-gain @type: long
+- Wah Wah 3/filter/designer-section[4]/high-gain: 0
+- Wah Wah 3/filter/designer-section[4]/high-freq @type: long
+- Wah Wah 3/filter/designer-section[4]/high-freq: 15
+- Wah Wah 3/filter/designer-section[4]/type @type: long
+- Wah Wah 3/filter/designer-section[4]/type: 0
+- Wah Wah 3/filter/designer-section[5]/low-gain @type: long
+- Wah Wah 3/filter/designer-section[5]/low-gain: 0
+- Wah Wah 3/filter/designer-section[5]/low-freq @type: long
+- Wah Wah 3/filter/designer-section[5]/low-freq: 0
+- Wah Wah 3/filter/designer-section[5]/high-gain @type: long
+- Wah Wah 3/filter/designer-section[5]/high-gain: 0
+- Wah Wah 3/filter/designer-section[5]/high-freq @type: long
+- Wah Wah 3/filter/designer-section[5]/high-freq: 0
+- Wah Wah 3/filter/designer-section[5]/type @type: long
+- Wah Wah 3/filter/designer-section[5]/type: 0
+- Wah Wah 3/filter/designer-section[6]/low-gain @type: long
+- Wah Wah 3/filter/designer-section[6]/low-gain: 0
+- Wah Wah 3/filter/designer-section[6]/low-freq @type: long
+- Wah Wah 3/filter/designer-section[6]/low-freq: 0
+- Wah Wah 3/filter/designer-section[6]/high-gain @type: long
+- Wah Wah 3/filter/designer-section[6]/high-gain: 0
+- Wah Wah 3/filter/designer-section[6]/high-freq @type: long
+- Wah Wah 3/filter/designer-section[6]/high-freq: 0
+- Wah Wah 3/filter/designer-section[6]/type @type: long
+- Wah Wah 3/filter/designer-section[6]/type: 0
+- Wah Wah 3/filter/type-absolute @type: long
+- Wah Wah 3/filter/type-absolute: 108
+
+## 100
+
+Source XML: C:\Users\hooki\OneDrive\Documents\Creative Professional\Emulator X Family\Templates\Filter\100.xml
+Root attribute - module: Filter
+Root attribute - name: 100
+
+- 100 @module: Filter
+- 100 @name: 100
+- 100/filter/frequency @type: float
+- 100/filter/frequency: 1
+- 100/filter/gain @type: float
+- 100/filter/gain: 1
+- 100/filter/morph-param[3] @type: long
+- 100/filter/morph-param[3]: 0
+- 100/filter/morph-param[4] @type: long
+- 100/filter/morph-param[4]: 0
+- 100/filter/morph-param[5] @type: long
+- 100/filter/morph-param[5]: 0
+- 100/filter/morph-param[6] @type: long
+- 100/filter/morph-param[6]: 0
+- 100/filter/morph-param[7] @type: long
+- 100/filter/morph-param[7]: 0
+- 100/filter/morph-param[8] @type: long
+- 100/filter/morph-param[8]: 0
+- 100/filter/designer-section[1]/low-gain @type: long
+- 100/filter/designer-section[1]/low-gain: 127
+- 100/filter/designer-section[1]/low-freq @type: long
+- 100/filter/designer-section[1]/low-freq: 0
+- 100/filter/designer-section[1]/high-gain @type: long
+- 100/filter/designer-section[1]/high-gain: 87
+- 100/filter/designer-section[1]/high-freq @type: long
+- 100/filter/designer-section[1]/high-freq: 116
+- 100/filter/designer-section[1]/type @type: long
+- 100/filter/designer-section[1]/type: 3
+- 100/filter/designer-section[2]/low-gain @type: long
+- 100/filter/designer-section[2]/low-gain: 0
+- 100/filter/designer-section[2]/low-freq @type: long
+- 100/filter/designer-section[2]/low-freq: 15
+- 100/filter/designer-section[2]/high-gain @type: long
+- 100/filter/designer-section[2]/high-gain: 0
+- 100/filter/designer-section[2]/high-freq @type: long
+- 100/filter/designer-section[2]/high-freq: 33
+- 100/filter/designer-section[2]/type @type: long
+- 100/filter/designer-section[2]/type: 1
+- 100/filter/designer-section[3]/low-gain @type: long
+- 100/filter/designer-section[3]/low-gain: 127
+- 100/filter/designer-section[3]/low-freq @type: long
+- 100/filter/designer-section[3]/low-freq: 33
+- 100/filter/designer-section[3]/high-gain @type: long
+- 100/filter/designer-section[3]/high-gain: 127
+- 100/filter/designer-section[3]/high-freq @type: long
+- 100/filter/designer-section[3]/high-freq: 51
+- 100/filter/designer-section[3]/type @type: long
+- 100/filter/designer-section[3]/type: 1
+- 100/filter/designer-section[4]/low-gain @type: long
+- 100/filter/designer-section[4]/low-gain: 0
+- 100/filter/designer-section[4]/low-freq @type: long
+- 100/filter/designer-section[4]/low-freq: 51
+- 100/filter/designer-section[4]/high-gain @type: long
+- 100/filter/designer-section[4]/high-gain: 0
+- 100/filter/designer-section[4]/high-freq @type: long
+- 100/filter/designer-section[4]/high-freq: 70
+- 100/filter/designer-section[4]/type @type: long
+- 100/filter/designer-section[4]/type: 1
+- 100/filter/designer-section[5]/low-gain @type: long
+- 100/filter/designer-section[5]/low-gain: 127
+- 100/filter/designer-section[5]/low-freq @type: long
+- 100/filter/designer-section[5]/low-freq: 70
+- 100/filter/designer-section[5]/high-gain @type: long
+- 100/filter/designer-section[5]/high-gain: 127
+- 100/filter/designer-section[5]/high-freq @type: long
+- 100/filter/designer-section[5]/high-freq: 89
+- 100/filter/designer-section[5]/type @type: long
+- 100/filter/designer-section[5]/type: 1
+- 100/filter/designer-section[6]/low-gain @type: long
+- 100/filter/designer-section[6]/low-gain: 127
+- 100/filter/designer-section[6]/low-freq @type: long
+- 100/filter/designer-section[6]/low-freq: 0
+- 100/filter/designer-section[6]/high-gain @type: long
+- 100/filter/designer-section[6]/high-gain: 127
+- 100/filter/designer-section[6]/high-freq @type: long
+- 100/filter/designer-section[6]/high-freq: 127
+- 100/filter/designer-section[6]/type @type: long
+- 100/filter/designer-section[6]/type: 2
+- 100/filter/type-absolute @type: long
+- 100/filter/type-absolute: 144
+
+## 3
+
+Source XML: C:\Users\hooki\OneDrive\Documents\Creative Professional\Emulator X Family\Templates\Filter\3.xml
+Root attribute - module: Filter
+Root attribute - name: 3
+
+- 3 @module: Filter
+- 3 @name: 3
+- 3/filter/frequency @type: float
+- 3/filter/frequency: 0
+- 3/filter/gain @type: float
+- 3/filter/gain: 1
+- 3/filter/morph-param[3] @type: long
+- 3/filter/morph-param[3]: 0
+- 3/filter/morph-param[4] @type: long
+- 3/filter/morph-param[4]: 0
+- 3/filter/morph-param[5] @type: long
+- 3/filter/morph-param[5]: 0
+- 3/filter/morph-param[6] @type: long
+- 3/filter/morph-param[6]: 0
+- 3/filter/morph-param[7] @type: long
+- 3/filter/morph-param[7]: 0
+- 3/filter/morph-param[8] @type: long
+- 3/filter/morph-param[8]: 0
+- 3/filter/designer-section[1]/low-gain @type: long
+- 3/filter/designer-section[1]/low-gain: 127
+- 3/filter/designer-section[1]/low-freq @type: long
+- 3/filter/designer-section[1]/low-freq: 8
+- 3/filter/designer-section[1]/high-gain @type: long
+- 3/filter/designer-section[1]/high-gain: 0
+- 3/filter/designer-section[1]/high-freq @type: long
+- 3/filter/designer-section[1]/high-freq: 0
+- 3/filter/designer-section[1]/type @type: long
+- 3/filter/designer-section[1]/type: 2
+- 3/filter/designer-section[2]/low-gain @type: long
+- 3/filter/designer-section[2]/low-gain: 123
+- 3/filter/designer-section[2]/low-freq @type: long
+- 3/filter/designer-section[2]/low-freq: 82
+- 3/filter/designer-section[2]/high-gain @type: long
+- 3/filter/designer-section[2]/high-gain: 127
+- 3/filter/designer-section[2]/high-freq @type: long
+- 3/filter/designer-section[2]/high-freq: 127
+- 3/filter/designer-section[2]/type @type: long
+- 3/filter/designer-section[2]/type: 2
+- 3/filter/designer-section[3]/low-gain @type: long
+- 3/filter/designer-section[3]/low-gain: 127
+- 3/filter/designer-section[3]/low-freq @type: long
+- 3/filter/designer-section[3]/low-freq: 127
+- 3/filter/designer-section[3]/high-gain @type: long
+- 3/filter/designer-section[3]/high-gain: 81
+- 3/filter/designer-section[3]/high-freq @type: long
+- 3/filter/designer-section[3]/high-freq: 25
+- 3/filter/designer-section[3]/type @type: long
+- 3/filter/designer-section[3]/type: 2
+- 3/filter/designer-section[4]/low-gain @type: long
+- 3/filter/designer-section[4]/low-gain: 118
+- 3/filter/designer-section[4]/low-freq @type: long
+- 3/filter/designer-section[4]/low-freq: 98
+- 3/filter/designer-section[4]/high-gain @type: long
+- 3/filter/designer-section[4]/high-gain: 110
+- 3/filter/designer-section[4]/high-freq @type: long
+- 3/filter/designer-section[4]/high-freq: 127
+- 3/filter/designer-section[4]/type @type: long
+- 3/filter/designer-section[4]/type: 2
+- 3/filter/designer-section[5]/low-gain @type: long
+- 3/filter/designer-section[5]/low-gain: 114
+- 3/filter/designer-section[5]/low-freq @type: long
+- 3/filter/designer-section[5]/low-freq: 103
+- 3/filter/designer-section[5]/high-gain @type: long
+- 3/filter/designer-section[5]/high-gain: 123
+- 3/filter/designer-section[5]/high-freq @type: long
+- 3/filter/designer-section[5]/high-freq: 102
+- 3/filter/designer-section[5]/type @type: long
+- 3/filter/designer-section[5]/type: 2
+- 3/filter/designer-section[6]/low-gain @type: long
+- 3/filter/designer-section[6]/low-gain: 127
+- 3/filter/designer-section[6]/low-freq @type: long
+- 3/filter/designer-section[6]/low-freq: 102
+- 3/filter/designer-section[6]/high-gain @type: long
+- 3/filter/designer-section[6]/high-gain: 127
+- 3/filter/designer-section[6]/high-freq @type: long
+- 3/filter/designer-section[6]/high-freq: 69
+- 3/filter/designer-section[6]/type @type: long
+- 3/filter/designer-section[6]/type: 2
+- 3/filter/type-absolute @type: long
+- 3/filter/type-absolute: 108
+
+## 50
+
+Source XML: C:\Users\hooki\OneDrive\Documents\Creative Professional\Emulator X Family\Templates\Filter\50.xml
+Root attribute - module: Filter
+Root attribute - name: 50
+
+- 50 @module: Filter
+- 50 @name: 50
+- 50/filter/frequency @type: float
+- 50/filter/frequency: 0.5
+- 50/filter/gain @type: float
+- 50/filter/gain: 1
+- 50/filter/morph-param[3] @type: long
+- 50/filter/morph-param[3]: 0
+- 50/filter/morph-param[4] @type: long
+- 50/filter/morph-param[4]: 0
+- 50/filter/morph-param[5] @type: long
+- 50/filter/morph-param[5]: 0
+- 50/filter/morph-param[6] @type: long
+- 50/filter/morph-param[6]: 0
+- 50/filter/morph-param[7] @type: long
+- 50/filter/morph-param[7]: 0
+- 50/filter/morph-param[8] @type: long
+- 50/filter/morph-param[8]: 0
+- 50/filter/designer-section[1]/low-gain @type: long
+- 50/filter/designer-section[1]/low-gain: 127
+- 50/filter/designer-section[1]/low-freq @type: long
+- 50/filter/designer-section[1]/low-freq: 0
+- 50/filter/designer-section[1]/high-gain @type: long
+- 50/filter/designer-section[1]/high-gain: 87
+- 50/filter/designer-section[1]/high-freq @type: long
+- 50/filter/designer-section[1]/high-freq: 116
+- 50/filter/designer-section[1]/type @type: long
+- 50/filter/designer-section[1]/type: 3
+- 50/filter/designer-section[2]/low-gain @type: long
+- 50/filter/designer-section[2]/low-gain: 0
+- 50/filter/designer-section[2]/low-freq @type: long
+- 50/filter/designer-section[2]/low-freq: 15
+- 50/filter/designer-section[2]/high-gain @type: long
+- 50/filter/designer-section[2]/high-gain: 0
+- 50/filter/designer-section[2]/high-freq @type: long
+- 50/filter/designer-section[2]/high-freq: 33
+- 50/filter/designer-section[2]/type @type: long
+- 50/filter/designer-section[2]/type: 1
+- 50/filter/designer-section[3]/low-gain @type: long
+- 50/filter/designer-section[3]/low-gain: 127
+- 50/filter/designer-section[3]/low-freq @type: long
+- 50/filter/designer-section[3]/low-freq: 33
+- 50/filter/designer-section[3]/high-gain @type: long
+- 50/filter/designer-section[3]/high-gain: 127
+- 50/filter/designer-section[3]/high-freq @type: long
+- 50/filter/designer-section[3]/high-freq: 51
+- 50/filter/designer-section[3]/type @type: long
+- 50/filter/designer-section[3]/type: 1
+- 50/filter/designer-section[4]/low-gain @type: long
+- 50/filter/designer-section[4]/low-gain: 0
+- 50/filter/designer-section[4]/low-freq @type: long
+- 50/filter/designer-section[4]/low-freq: 51
+- 50/filter/designer-section[4]/high-gain @type: long
+- 50/filter/designer-section[4]/high-gain: 0
+- 50/filter/designer-section[4]/high-freq @type: long
+- 50/filter/designer-section[4]/high-freq: 70
+- 50/filter/designer-section[4]/type @type: long
+- 50/filter/designer-section[4]/type: 1
+- 50/filter/designer-section[5]/low-gain @type: long
+- 50/filter/designer-section[5]/low-gain: 127
+- 50/filter/designer-section[5]/low-freq @type: long
+- 50/filter/designer-section[5]/low-freq: 70
+- 50/filter/designer-section[5]/high-gain @type: long
+- 50/filter/designer-section[5]/high-gain: 127
+- 50/filter/designer-section[5]/high-freq @type: long
+- 50/filter/designer-section[5]/high-freq: 89
+- 50/filter/designer-section[5]/type @type: long
+- 50/filter/designer-section[5]/type: 1
+- 50/filter/designer-section[6]/low-gain @type: long
+- 50/filter/designer-section[6]/low-gain: 127
+- 50/filter/designer-section[6]/low-freq @type: long
+- 50/filter/designer-section[6]/low-freq: 0
+- 50/filter/designer-section[6]/high-gain @type: long
+- 50/filter/designer-section[6]/high-gain: 127
+- 50/filter/designer-section[6]/high-freq @type: long
+- 50/filter/designer-section[6]/high-freq: 127
+- 50/filter/designer-section[6]/type @type: long
+- 50/filter/designer-section[6]/type: 2
+- 50/filter/type-absolute @type: long
+- 50/filter/type-absolute: 144
+
+## d
+
+Source XML: C:\Users\hooki\OneDrive\Documents\Creative Professional\Emulator X Family\Templates\Filter\d.xml
+Root attribute - module: Filter
+Root attribute - name: d
+
+- d @module: Filter
+- d @name: d
+- d/filter/frequency @type: float
+- d/filter/frequency: 0
+- d/filter/gain @type: float
+- d/filter/gain: 0
+- d/filter/morph-param[3] @type: long
+- d/filter/morph-param[3]: 0
+- d/filter/morph-param[4] @type: long
+- d/filter/morph-param[4]: 0
+- d/filter/morph-param[5] @type: long
+- d/filter/morph-param[5]: 0
+- d/filter/morph-param[6] @type: long
+- d/filter/morph-param[6]: 0
+- d/filter/morph-param[7] @type: long
+- d/filter/morph-param[7]: 0
+- d/filter/morph-param[8] @type: long
+- d/filter/morph-param[8]: 0
+- d/filter/designer-section[1]/low-gain @type: long
+- d/filter/designer-section[1]/low-gain: 127
+- d/filter/designer-section[1]/low-freq @type: long
+- d/filter/designer-section[1]/low-freq: 0
+- d/filter/designer-section[1]/high-gain @type: long
+- d/filter/designer-section[1]/high-gain: 87
+- d/filter/designer-section[1]/high-freq @type: long
+- d/filter/designer-section[1]/high-freq: 116
+- d/filter/designer-section[1]/type @type: long
+- d/filter/designer-section[1]/type: 3
+- d/filter/designer-section[2]/low-gain @type: long
+- d/filter/designer-section[2]/low-gain: 0
+- d/filter/designer-section[2]/low-freq @type: long
+- d/filter/designer-section[2]/low-freq: 15
+- d/filter/designer-section[2]/high-gain @type: long
+- d/filter/designer-section[2]/high-gain: 0
+- d/filter/designer-section[2]/high-freq @type: long
+- d/filter/designer-section[2]/high-freq: 33
+- d/filter/designer-section[2]/type @type: long
+- d/filter/designer-section[2]/type: 1
+- d/filter/designer-section[3]/low-gain @type: long
+- d/filter/designer-section[3]/low-gain: 127
+- d/filter/designer-section[3]/low-freq @type: long
+- d/filter/designer-section[3]/low-freq: 33
+- d/filter/designer-section[3]/high-gain @type: long
+- d/filter/designer-section[3]/high-gain: 127
+- d/filter/designer-section[3]/high-freq @type: long
+- d/filter/designer-section[3]/high-freq: 51
+- d/filter/designer-section[3]/type @type: long
+- d/filter/designer-section[3]/type: 1
+- d/filter/designer-section[4]/low-gain @type: long
+- d/filter/designer-section[4]/low-gain: 0
+- d/filter/designer-section[4]/low-freq @type: long
+- d/filter/designer-section[4]/low-freq: 51
+- d/filter/designer-section[4]/high-gain @type: long
+- d/filter/designer-section[4]/high-gain: 0
+- d/filter/designer-section[4]/high-freq @type: long
+- d/filter/designer-section[4]/high-freq: 70
+- d/filter/designer-section[4]/type @type: long
+- d/filter/designer-section[4]/type: 1
+- d/filter/designer-section[5]/low-gain @type: long
+- d/filter/designer-section[5]/low-gain: 127
+- d/filter/designer-section[5]/low-freq @type: long
+- d/filter/designer-section[5]/low-freq: 70
+- d/filter/designer-section[5]/high-gain @type: long
+- d/filter/designer-section[5]/high-gain: 127
+- d/filter/designer-section[5]/high-freq @type: long
+- d/filter/designer-section[5]/high-freq: 89
+- d/filter/designer-section[5]/type @type: long
+- d/filter/designer-section[5]/type: 1
+- d/filter/designer-section[6]/low-gain @type: long
+- d/filter/designer-section[6]/low-gain: 127
+- d/filter/designer-section[6]/low-freq @type: long
+- d/filter/designer-section[6]/low-freq: 0
+- d/filter/designer-section[6]/high-gain @type: long
+- d/filter/designer-section[6]/high-gain: 127
+- d/filter/designer-section[6]/high-freq @type: long
+- d/filter/designer-section[6]/high-freq: 127
+- d/filter/designer-section[6]/type @type: long
+- d/filter/designer-section[6]/type: 2
+- d/filter/type-absolute @type: long
+- d/filter/type-absolute: 144
+
+## des
+
+Source XML: C:\Users\hooki\OneDrive\Documents\Creative Professional\Emulator X Family\Templates\Filter\des.xml
+Root attribute - module: Filter
+Root attribute - name: des
+
+- des @module: Filter
+- des @name: des
+- des/filter/frequency @type: float
+- des/filter/frequency: 0
+- des/filter/gain @type: float
+- des/filter/gain: 0
+- des/filter/morph-param[3] @type: long
+- des/filter/morph-param[3]: 0
+- des/filter/morph-param[4] @type: long
+- des/filter/morph-param[4]: 0
+- des/filter/morph-param[5] @type: long
+- des/filter/morph-param[5]: 0
+- des/filter/morph-param[6] @type: long
+- des/filter/morph-param[6]: 0
+- des/filter/morph-param[7] @type: long
+- des/filter/morph-param[7]: 0
+- des/filter/morph-param[8] @type: long
+- des/filter/morph-param[8]: 0
+- des/filter/designer-section[1]/low-gain @type: long
+- des/filter/designer-section[1]/low-gain: 0
+- des/filter/designer-section[1]/low-freq @type: long
+- des/filter/designer-section[1]/low-freq: 0
+- des/filter/designer-section[1]/high-gain @type: long
+- des/filter/designer-section[1]/high-gain: 0
+- des/filter/designer-section[1]/high-freq @type: long
+- des/filter/designer-section[1]/high-freq: 0
+- des/filter/designer-section[1]/type @type: long
+- des/filter/designer-section[1]/type: 0
+- des/filter/designer-section[2]/low-gain @type: long
+- des/filter/designer-section[2]/low-gain: 0
+- des/filter/designer-section[2]/low-freq @type: long
+- des/filter/designer-section[2]/low-freq: 0
+- des/filter/designer-section[2]/high-gain @type: long
+- des/filter/designer-section[2]/high-gain: 0
+- des/filter/designer-section[2]/high-freq @type: long
+- des/filter/designer-section[2]/high-freq: 0
+- des/filter/designer-section[2]/type @type: long
+- des/filter/designer-section[2]/type: 0
+- des/filter/designer-section[3]/low-gain @type: long
+- des/filter/designer-section[3]/low-gain: 0
+- des/filter/designer-section[3]/low-freq @type: long
+- des/filter/designer-section[3]/low-freq: 0
+- des/filter/designer-section[3]/high-gain @type: long
+- des/filter/designer-section[3]/high-gain: 0
+- des/filter/designer-section[3]/high-freq @type: long
+- des/filter/designer-section[3]/high-freq: 0
+- des/filter/designer-section[3]/type @type: long
+- des/filter/designer-section[3]/type: 0
+- des/filter/designer-section[4]/low-gain @type: long
+- des/filter/designer-section[4]/low-gain: 0
+- des/filter/designer-section[4]/low-freq @type: long
+- des/filter/designer-section[4]/low-freq: 0
+- des/filter/designer-section[4]/high-gain @type: long
+- des/filter/designer-section[4]/high-gain: 0
+- des/filter/designer-section[4]/high-freq @type: long
+- des/filter/designer-section[4]/high-freq: 0
+- des/filter/designer-section[4]/type @type: long
+- des/filter/designer-section[4]/type: 0
+- des/filter/designer-section[5]/low-gain @type: long
+- des/filter/designer-section[5]/low-gain: 0
+- des/filter/designer-section[5]/low-freq @type: long
+- des/filter/designer-section[5]/low-freq: 0
+- des/filter/designer-section[5]/high-gain @type: long
+- des/filter/designer-section[5]/high-gain: 0
+- des/filter/designer-section[5]/high-freq @type: long
+- des/filter/designer-section[5]/high-freq: 0
+- des/filter/designer-section[5]/type @type: long
+- des/filter/designer-section[5]/type: 0
+- des/filter/designer-section[6]/low-gain @type: long
+- des/filter/designer-section[6]/low-gain: 0
+- des/filter/designer-section[6]/low-freq @type: long
+- des/filter/designer-section[6]/low-freq: 0
+- des/filter/designer-section[6]/high-gain @type: long
+- des/filter/designer-section[6]/high-gain: 0
+- des/filter/designer-section[6]/high-freq @type: long
+- des/filter/designer-section[6]/high-freq: 0
+- des/filter/designer-section[6]/type @type: long
+- des/filter/designer-section[6]/type: 0
+- des/filter/type-absolute @type: long
+- des/filter/type-absolute: 108
+
+## dxx
+
+Source XML: C:\Users\hooki\OneDrive\Documents\Creative Professional\Emulator X Family\Templates\Filter\dxx.xml
+Root attribute - module: Filter
+Root attribute - name: dxx
+
+- dxx @module: Filter
+- dxx @name: dxx
+- dxx/filter/frequency @type: float
+- dxx/filter/frequency: 0.518
+- dxx/filter/gain @type: float
+- dxx/filter/gain: 0.5
+- dxx/filter/morph-param[3] @type: long
+- dxx/filter/morph-param[3]: 0
+- dxx/filter/morph-param[4] @type: long
+- dxx/filter/morph-param[4]: 0
+- dxx/filter/morph-param[5] @type: long
+- dxx/filter/morph-param[5]: 0
+- dxx/filter/morph-param[6] @type: long
+- dxx/filter/morph-param[6]: 0
+- dxx/filter/morph-param[7] @type: long
+- dxx/filter/morph-param[7]: 0
+- dxx/filter/morph-param[8] @type: long
+- dxx/filter/morph-param[8]: 0
+- dxx/filter/designer-section[1]/low-gain @type: long
+- dxx/filter/designer-section[1]/low-gain: 0
+- dxx/filter/designer-section[1]/low-freq @type: long
+- dxx/filter/designer-section[1]/low-freq: 0
+- dxx/filter/designer-section[1]/high-gain @type: long
+- dxx/filter/designer-section[1]/high-gain: 127
+- dxx/filter/designer-section[1]/high-freq @type: long
+- dxx/filter/designer-section[1]/high-freq: 114
+- dxx/filter/designer-section[1]/type @type: long
+- dxx/filter/designer-section[1]/type: 2
+- dxx/filter/designer-section[2]/low-gain @type: long
+- dxx/filter/designer-section[2]/low-gain: 0
+- dxx/filter/designer-section[2]/low-freq @type: long
+- dxx/filter/designer-section[2]/low-freq: 0
+- dxx/filter/designer-section[2]/high-gain @type: long
+- dxx/filter/designer-section[2]/high-gain: 122
+- dxx/filter/designer-section[2]/high-freq @type: long
+- dxx/filter/designer-section[2]/high-freq: 100
+- dxx/filter/designer-section[2]/type @type: long
+- dxx/filter/designer-section[2]/type: 0
+- dxx/filter/designer-section[3]/low-gain @type: long
+- dxx/filter/designer-section[3]/low-gain: 0
+- dxx/filter/designer-section[3]/low-freq @type: long
+- dxx/filter/designer-section[3]/low-freq: 0
+- dxx/filter/designer-section[3]/high-gain @type: long
+- dxx/filter/designer-section[3]/high-gain: 0
+- dxx/filter/designer-section[3]/high-freq @type: long
+- dxx/filter/designer-section[3]/high-freq: 0
+- dxx/filter/designer-section[3]/type @type: long
+- dxx/filter/designer-section[3]/type: 0
+- dxx/filter/designer-section[4]/low-gain @type: long
+- dxx/filter/designer-section[4]/low-gain: 0
+- dxx/filter/designer-section[4]/low-freq @type: long
+- dxx/filter/designer-section[4]/low-freq: 0
+- dxx/filter/designer-section[4]/high-gain @type: long
+- dxx/filter/designer-section[4]/high-gain: 0
+- dxx/filter/designer-section[4]/high-freq @type: long
+- dxx/filter/designer-section[4]/high-freq: 0
+- dxx/filter/designer-section[4]/type @type: long
+- dxx/filter/designer-section[4]/type: 0
+- dxx/filter/designer-section[5]/low-gain @type: long
+- dxx/filter/designer-section[5]/low-gain: 0
+- dxx/filter/designer-section[5]/low-freq @type: long
+- dxx/filter/designer-section[5]/low-freq: 0
+- dxx/filter/designer-section[5]/high-gain @type: long
+- dxx/filter/designer-section[5]/high-gain: 0
+- dxx/filter/designer-section[5]/high-freq @type: long
+- dxx/filter/designer-section[5]/high-freq: 0
+- dxx/filter/designer-section[5]/type @type: long
+- dxx/filter/designer-section[5]/type: 0
+- dxx/filter/designer-section[6]/low-gain @type: long
+- dxx/filter/designer-section[6]/low-gain: 0
+- dxx/filter/designer-section[6]/low-freq @type: long
+- dxx/filter/designer-section[6]/low-freq: 0
+- dxx/filter/designer-section[6]/high-gain @type: long
+- dxx/filter/designer-section[6]/high-gain: 0
+- dxx/filter/designer-section[6]/high-freq @type: long
+- dxx/filter/designer-section[6]/high-freq: 0
+- dxx/filter/designer-section[6]/type @type: long
+- dxx/filter/designer-section[6]/type: 0
+- dxx/filter/type-absolute @type: long
+- dxx/filter/type-absolute: 144
+
