@@ -53,6 +53,9 @@ PYTHONPATH=. python tools/parity_null.py 2>&1 | sed 's/^/  /'
 step "rust cascade parity (33 raw skins x 4 corners, hard fail at > -120 dB)"
 cargo test -p trench-core --test canonical_parity --release --quiet 2>&1 | grep -E "(test result|FAIL|rust parity:)" | sed 's/^/  /'
 
+step "rust hedz cascade cross-language parity (4 corners vs python bake)"
+cargo test -p trench-core --test hedz_cascade --release --quiet 2>&1 | grep -E "(test result|FAIL)" | sed 's/^/  /'
+
 step "cartridges validate against schema"
 python - <<'PY'
 import json, sys
