@@ -91,6 +91,96 @@ Claims with evidence. The purge order is safest-first.
 | `trench-core/src/cluster.rs`, `trench-core/src/motor.rs`, `trench-core/src/role.rs`, `trench-core/src/engine.rs` | 800+ lines of Rust that may or may not be consumed by the JUCE plugin. `engine.rs` is exported via `lib.rs:12` but only its own tests use it inside the workspace. `Cluster` / `Motor` / `Role` similarly — audit what the JUCE plugin actually FFI's into before keeping. | Workspace grep + the sibling-repo constraint. |
 | `trench-live/src/editor.rs` | **Already deleted** (Phase 3 of the current surgical slice, pending commit). | `ls trench-live/src/` shows only `lib.rs`. |
 
+## Architect Prompts
+
+Pastable one-shots. Each forces evidence, classification, or a
+decision. No handwaving, no teaching tone, no management-speak. Pick
+the one that fits the moment.
+
+**Active truth.** Name every file the shipping binary actually
+executes. Entry point → call chain → leaf. Anything not named is
+dead, quarantine, or a lie. Output a table: file, evidence, verdict.
+
+**Live-path proof.** For `<behavior>`, trace the call chain from the
+shipping entry point to the leaf. If two paths reach it, name both
+and kill one with a one-line reason. Forbidden answer: "keep both".
+
+**Invariant enforcement.** List every invariant this module claims in
+docstrings or comments. Per invariant, cite the test or runtime
+assertion that enforces it. Comment-only = not enforced — report
+those as liabilities, not invariants.
+
+**Post-regression triage.** Paste after every failure. The gate that
+just failed: name it. Then, in order:
+1. What changed — commits since last green, files per commit.
+2. What path is active — which code the failing behavior actually
+   runs (entry → leaf).
+3. What proof failed — exact test, assertion, got / expected / delta.
+4. What is now suspect — intersection of (files touched) ∩ (active
+   path) ∩ (upstream of the failing assertion).
+5. What to do — per suspect, one verdict: REVERT / ISOLATE /
+   DELETE / KEEP, plus one line of evidence.
+Do not write a root-cause narrative until the five are answered.
+
+**Deletion census.** Every file, module, crate, and top-level
+function with zero inbound references from the shipping entry points.
+Classify: DEAD (delete), QUARANTINE (move to archive/), LIVE (prove
+it with one call site). Sort by line count descending.
+
+**Boundary audit.** Audit every import that crosses `<boundary>`.
+Report violations as `file:line — from → to`. Each violation is
+either a bug to fix or the boundary is fiction — pick per violation.
+No softening.
+
+**Fake-solidity sweep.** Name every place the repo claims solidity it
+hasn't earned: tests that assert nothing sharp, invariants in
+comments without enforcement, docs that describe desired state as if
+it were current, code gated behind `cfg(debug)` masquerading as a
+runtime guarantee, magic numbers without derivation. One line per
+lie. Rank by blast radius.
+
+**Doctrine drift.** Every rule in `CLAUDE.md` / `DOCTRINE.md` /
+`pyruntime/CLAUDE.md` / `trench-core/CLAUDE.md` that the code
+violates. Count violations per rule. Any rule with ≥ 5 violations is
+fiction — rewrite the rule or fix the code, pick per rule.
+
+**Gate coverage.** For every step in `./check`, state what it
+actually proves vs what its name implies. Flag every step whose name
+overstates the assertion. Columns: step, claim, actual_assert,
+overstatement_severity.
+
+**Hot-path allocation sweep.** Every `String::new`, `Vec::new`,
+`Box::new`, `clone()`, `to_string()`, `format!`, heap collection,
+lock acquire, or syscall reachable from the audio callback / JUCE
+`processBlock` / trench-core `Cascade::process_block_mono`. Zero is
+the target. Output file:line plus one line of justification per hit.
+
+**Silent panic sweep.** Every `.unwrap()`, `.expect()`, `panic!`,
+`todo!()`, `unimplemented!()`, and naked `assert!` reachable from the
+shipping entry point. Classify: INTENTIONAL_INVARIANT (documented,
+keep), MISSING_VALIDATION (fix), LAZY (fix or delete the caller).
+Include file:line and the calling chain.
+
+**Duplication census.** Every concept with more than one
+representation in the repo. Output: concept, representations
+(path:line), canonical candidate, drift evidence. If no clear
+canonical, flag CONFLICT and recommend a resolution.
+
+**Ship blockers.** Given HEAD, list everything that blocks shipping.
+Classify: BLOCKING_BUG / MISSING_TEST / UNPROVEN_CLAIM /
+ARCHITECTURAL_DEBT. Rank by blast radius if shipped as-is. "Nice to
+haves" are forbidden — if it's not blocking, it's not on the list.
+
+**Architectural choice.** `<feature>` has N implementations. List
+each with evidence of LIVE / DEAD / CONTESTED. Recommend exactly one
+to keep and the rest to delete, one-line evidence per verdict.
+Forbidden answers: "keep both", "depends", "it's complicated".
+
+**Scope drift.** This branch was opened to do `<intent>`. List every
+change that isn't `<intent>`. Per change: FOLD_IN (belongs),
+SPLIT_OUT (new branch), REVERT (mistake). Deliver as a diff grouping
+with filenames.
+
 ## Notes
 
 - The **sibling-repo invariant** makes everything in this repo's
