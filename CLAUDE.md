@@ -39,3 +39,6 @@ filter trajectory. Windows JUCE 8 standalone + VST3.
 - Active shipping plugin: `trench-juce/plugin/`
 - Subtree rules: `trench-core/CLAUDE.md`
 - Repo index: live filesystem. Doctrine wins; no precomputed snapshot.
+
+## HARD RULE
+any investigation that would read >3 files or >300 cumulative lines gets dispatched to an Explore subagent. The subagent reads the files, you only see its summary. The raw content never enters this parent context.
