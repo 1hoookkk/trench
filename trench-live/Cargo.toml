@@ -6,12 +6,11 @@ edition = "2021"
 [lib]
 crate-type = ["cdylib", "lib"]
 
+# Audio-thread purity: only nih-plug (plugin framework) and trench-core
+# (pure DSP) are allowed. No serde, no baseview, no softbuffer, no
+# crossbeam, no raw-window-handle — there is no editor, no filesystem
+# poll, no JSON reloader, no mutex on the hot path. Adding a dep here
+# is a doctrine decision: it must not run inside `process()`.
 [dependencies]
 nih_plug = { git = "https://github.com/robbert-vdh/nih-plug.git", features = ["standalone"] }
-baseview = { git = "https://github.com/RustAudio/baseview.git", rev = "9a0b42c09d712777b2edb4c5e0cb6baf21e988f0" }
-softbuffer = { version = "0.4.6", default-features = false }
-raw-window-handle = "0.5"
-raw-window-handle-06 = { package = "raw-window-handle", version = "0.6" }
-crossbeam = "0.8"
 trench-core = { path = "../trench-core" }
-serde = { version = "1", features = ["derive"] }
