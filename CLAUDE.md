@@ -12,17 +12,29 @@ filter trajectory. Windows JUCE 8 standalone + VST3.
 
 ## Core model
 - Cartridge-based morph filter instrument.
-- MORPH = travel between authored spectral states.
-- Q = aggression / emphasis behavior across that travel.
-- TYPE = selects the authored body.
+- Cartridges are phoneme pills: morph-invariant, Q-varied spectral
+  states identified by short grid labels.
+- MORPH = travel between pills on the Looperator time grid, scheduled
+  by the compiler. Pills themselves do not morph internally.
+- Q = playback-surface tonal shaping of whichever pill the playhead
+  is currently on.
+- BODY = a named preset sequence of pills (Speaker Knockerz, Aluminum
+  Siding, Small Talk Ah-Ee, Cul-De-Sac per BODIES.md). Compiler TBD.
 
 ## Ground truth
+- Active truth + architect prompts: `TRUTH_MAP.md`
 - Math + contracts: `SPEC.md`
 - Cartridge wire schema: `cartridge.schema.json`
 - Operating modes: `MODES.md`
 - Doctrine (rules, bans, verification, escalation): `DOCTRINE.md`
 - Shipping bodies + rubrics: `BODIES.md`
 - Phoneme authoring contract: `PHONEMES.md`
+- Shipping phoneme pills: `cartridges/engine/` baked from
+  `vault/_phonemes/token_inventory_unified_v2.json` via
+  `tools/bake_phoneme_pills.py`
+- Hardcoded Talking Hedz ROM: `trench-core/src/hedz_rom.rs` baked from
+  `vault/_phonemes/heritage_designer_sections.json` via
+  `tools/bake_hedz_const.py`
 - Verify workspace: `./check`
 - Active shipping plugin: `trench-juce/plugin/`
 - Subtree rules: `trench-core/CLAUDE.md`, `pyruntime/CLAUDE.md`
