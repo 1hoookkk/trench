@@ -257,22 +257,24 @@ def _render_png(repo: Path, stages: list, boost: float, out_name: str) -> None:
 
 
 def main():
-    # Load P2K_013 from git history. The file was deleted in commit
-    # f146fb3 ("drop pre-pill cartridge archives") so we extract via
-    # `git show` rather than keeping a recovered copy in-tree.
+    # All 33 P2K filters (P2k_000–P2k_032) live in git history under
+    # cartridges/p2k/ — deleted in f146fb3 ("drop pre-pill cartridge
+    # archives"). Extract each via `git show` and render all 4 corners.
     repo = Path(__file__).resolve().parents[1]
-    result = subprocess.run(
-        ["git", "-C", str(repo), "show", "f146fb3^:cartridges/p2k/P2k_013.json"],
-        capture_output=True, text=True, check=True,
-    )
-    p2k = json.loads(result.stdout)
 
-    # Render all 4 corners so direct visual A/B against the plugin's
-    # 4 morph/Q settings is possible.
-    render_corner(repo, p2k, "M0_Q0",    "p2k_013_m0_q0.png")
-    render_corner(repo, p2k, "M100_Q0",  "p2k_013_m100_q0.png")
-    render_corner(repo, p2k, "M0_Q100",  "p2k_013_m0_q100.png")
-    render_corner(repo, p2k, "M100_Q100","p2k_013_m100_q100.png")
+    corners = ["M0_Q0", "M100_Q0", "M0_Q100", "M100_Q100"]
+
+    for n in range(33):
+        num = f"{n:03d}"
+        result = subprocess.run(
+            ["git", "-C", str(repo), "show",
+             f"f146fb3^:cartridges/p2k/P2k_{num}.json"],
+            capture_output=True, text=True, check=True,
+        )
+        p2k = json.loads(result.stdout)
+        for corner in corners:
+            out_name = f"p2k_{num}_{corner.lower()}.png"
+            render_corner(repo, p2k, corner, out_name)
 
 
 if __name__ == "__main__":
