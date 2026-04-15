@@ -154,16 +154,18 @@ def main():
     stages = [[s["c0"], s["c1"], s["c2"], s["c3"], s["c4"]] for s in kf["stages"]]
     boost = kf.get("boost", 1.0)
 
-    # Canvas
-    W, H = 640, 360
+    # Canvas — roughly matches the E-mu UI widget aspect ratio
+    # (the plugin's filter display is ~250x180 pixels). Squarer layout
+    # puts the 6 formant peaks visually where they sit in the UI.
+    W, H = 400, 300
     cv = Canvas(W, H, bg=(26, 26, 32))
 
     # Plot area
-    L, R, T, B = 60, 20, 40, 40
+    L, R, T, B = 40, 15, 25, 25
     pw = W - L - R
     ph = H - T - B
     db_min, db_max = -30, 45
-    f_min, f_max = 20.0, 18000.0
+    f_min, f_max = 50.0, 12000.0  # UI widget roughly spans this range
 
     def x_for(f):
         return L + int((math.log10(f) - math.log10(f_min)) / (math.log10(f_max) - math.log10(f_min)) * pw)
