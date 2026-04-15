@@ -1,0 +1,6159 @@
+{
+  "schema_version": "1",
+  "description": "LLM-readable frequency-response index for all 33 E-mu Proteus 2000 filters (P2k_000\u2013P2k_032). Each filter has 4 corners: M=Morph (0=start, 100=end), Q=resonance (0=flat, 100=max). Frequencies in Hz, levels in dBFS. formants: local peaks with topographic prominence >= 3 dB. notches: local troughs with depth >= 6 dB. shape: lowpass|highpass|bandpass|bandstop|peaking|notched|complex. centroid_hz: energy-weighted spectral center of mass. Source: design-time 6-stage biquad model at SR=39062.5 Hz (not the runtime 5-stage plugin model).",
+  "sample_rate_hz": 39062.5,
+  "freq_range_hz": [
+    50.0,
+    12000.0
+  ],
+  "filters": [
+    {
+      "id": "p2k_000",
+      "corners": {
+        "M0_Q0": {
+          "shape": "lowpass",
+          "peak_hz": 50,
+          "peak_db": 5.7,
+          "trough_hz": 12000,
+          "trough_db": -80.1,
+          "centroid_hz": 113,
+          "db_at_100hz": 0.5,
+          "db_at_1khz": -18.6,
+          "db_at_8khz": -52.0,
+          "formants": [
+            {
+              "hz": 3446,
+              "db": -17.2,
+              "prominence_db": 5.1
+            },
+            {
+              "hz": 10165,
+              "db": -51.0,
+              "prominence_db": 3.5
+            }
+          ],
+          "notches": []
+        },
+        "M100_Q0": {
+          "shape": "lowpass",
+          "peak_hz": 87,
+          "peak_db": 25.3,
+          "trough_hz": 12000,
+          "trough_db": -73.3,
+          "centroid_hz": 84,
+          "db_at_100hz": 20.2,
+          "db_at_1khz": -29.6,
+          "db_at_8khz": -71.7,
+          "formants": [
+            {
+              "hz": 87,
+              "db": 25.3,
+              "prominence_db": 10.1
+            },
+            {
+              "hz": 2880,
+              "db": -9.1,
+              "prominence_db": 29.9
+            },
+            {
+              "hz": 10553,
+              "db": -30.8,
+              "prominence_db": 41.0
+            }
+          ],
+          "notches": [
+            {
+              "hz": 2169,
+              "db": -38.9,
+              "depth_db": 29.9
+            },
+            {
+              "hz": 7674,
+              "db": -71.8,
+              "depth_db": 41.0
+            }
+          ]
+        },
+        "M0_Q100": {
+          "shape": "peaking",
+          "peak_hz": 50,
+          "peak_db": 12.0,
+          "trough_hz": 9380,
+          "trough_db": -58.3,
+          "centroid_hz": 392,
+          "db_at_100hz": 12.0,
+          "db_at_1khz": 7.8,
+          "db_at_8khz": -7.0,
+          "formants": [
+            {
+              "hz": 4577,
+              "db": 1.0,
+              "prominence_db": 21.5
+            }
+          ],
+          "notches": [
+            {
+              "hz": 2257,
+              "db": -20.4,
+              "depth_db": 21.5
+            },
+            {
+              "hz": 9380,
+              "db": -58.3,
+              "depth_db": 52.5
+            }
+          ]
+        },
+        "M100_Q100": {
+          "shape": "highpass",
+          "peak_hz": 8009,
+          "peak_db": 32.6,
+          "trough_hz": 3080,
+          "trough_db": -1.7,
+          "centroid_hz": 1622,
+          "db_at_100hz": 12.1,
+          "db_at_1khz": 19.1,
+          "db_at_8khz": 32.1,
+          "formants": [
+            {
+              "hz": 870,
+              "db": 31.2,
+              "prominence_db": 19.2
+            },
+            {
+              "hz": 2215,
+              "db": 17.0,
+              "prominence_db": 13.4
+            },
+            {
+              "hz": 4432,
+              "db": 30.1,
+              "prominence_db": 25.7
+            },
+            {
+              "hz": 8009,
+              "db": 32.6,
+              "prominence_db": 32.2
+            },
+            {
+              "hz": 9686,
+              "db": 15.9,
+              "prominence_db": 12.0
+            },
+            {
+              "hz": 10695,
+              "db": 13.5,
+              "prominence_db": 12.7
+            }
+          ],
+          "notches": [
+            {
+              "hz": 1594,
+              "db": 3.6,
+              "depth_db": 13.4
+            },
+            {
+              "hz": 3080,
+              "db": -1.7,
+              "depth_db": 32.9
+            },
+            {
+              "hz": 5731,
+              "db": 4.4,
+              "depth_db": 25.7
+            },
+            {
+              "hz": 10083,
+              "db": 0.4,
+              "depth_db": 13.1
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "p2k_001",
+      "corners": {
+        "M0_Q0": {
+          "shape": "peaking",
+          "peak_hz": 9738,
+          "peak_db": 16.6,
+          "trough_hz": 7158,
+          "trough_db": -61.2,
+          "centroid_hz": 872,
+          "db_at_100hz": 12.0,
+          "db_at_1khz": 11.3,
+          "db_at_8khz": -14.4,
+          "formants": [
+            {
+              "hz": 9738,
+              "db": 16.6,
+              "prominence_db": 34.1
+            }
+          ],
+          "notches": [
+            {
+              "hz": 7158,
+              "db": -61.2,
+              "depth_db": 73.2
+            }
+          ]
+        },
+        "M100_Q0": {
+          "shape": "peaking",
+          "peak_hz": 2227,
+          "peak_db": 24.2,
+          "trough_hz": 9558,
+          "trough_db": -57.4,
+          "centroid_hz": 1509,
+          "db_at_100hz": 12.0,
+          "db_at_1khz": 13.8,
+          "db_at_8khz": -11.8,
+          "formants": [
+            {
+              "hz": 2227,
+              "db": 24.2,
+              "prominence_db": 12.1
+            }
+          ],
+          "notches": [
+            {
+              "hz": 9558,
+              "db": -57.4,
+              "depth_db": 52.2
+            }
+          ]
+        },
+        "M0_Q100": {
+          "shape": "lowpass",
+          "peak_hz": 106,
+          "peak_db": 16.3,
+          "trough_hz": 4947,
+          "trough_db": -54.6,
+          "centroid_hz": 115,
+          "db_at_100hz": 16.2,
+          "db_at_1khz": -22.8,
+          "db_at_8khz": -37.3,
+          "formants": [
+            {
+              "hz": 106,
+              "db": 16.3,
+              "prominence_db": 3.0
+            },
+            {
+              "hz": 1200,
+              "db": -0.7,
+              "prominence_db": 25.3
+            },
+            {
+              "hz": 2888,
+              "db": 9.1,
+              "prominence_db": 46.9
+            },
+            {
+              "hz": 6950,
+              "db": -36.6,
+              "prominence_db": 9.8
+            }
+          ],
+          "notches": [
+            {
+              "hz": 850,
+              "db": -26.0,
+              "depth_db": 25.3
+            },
+            {
+              "hz": 1691,
+              "db": -37.8,
+              "depth_db": 46.9
+            },
+            {
+              "hz": 4947,
+              "db": -54.6,
+              "depth_db": 18.0
+            }
+          ]
+        },
+        "M100_Q100": {
+          "shape": "lowpass",
+          "peak_hz": 4492,
+          "peak_db": 21.5,
+          "trough_hz": 12000,
+          "trough_db": -35.8,
+          "centroid_hz": 223,
+          "db_at_100hz": 14.8,
+          "db_at_1khz": -21.3,
+          "db_at_8khz": -22.1,
+          "formants": [
+            {
+              "hz": 172,
+              "db": 20.4,
+              "prominence_db": 7.7
+            },
+            {
+              "hz": 1607,
+              "db": 0.9,
+              "prominence_db": 16.5
+            },
+            {
+              "hz": 2479,
+              "db": 6.1,
+              "prominence_db": 16.6
+            },
+            {
+              "hz": 4492,
+              "db": 21.5,
+              "prominence_db": 43.4
+            },
+            {
+              "hz": 5275,
+              "db": -24.2,
+              "prominence_db": 5.0
+            },
+            {
+              "hz": 5934,
+              "db": 14.5,
+              "prominence_db": 44.1
+            }
+          ],
+          "notches": [
+            {
+              "hz": 901,
+              "db": -22.0,
+              "depth_db": 42.4
+            },
+            {
+              "hz": 2007,
+              "db": -15.7,
+              "depth_db": 16.5
+            },
+            {
+              "hz": 3071,
+              "db": -10.5,
+              "depth_db": 16.6
+            },
+            {
+              "hz": 4960,
+              "db": -29.6,
+              "depth_db": 44.1
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "p2k_002",
+      "corners": {
+        "M0_Q0": {
+          "shape": "lowpass",
+          "peak_hz": 219,
+          "peak_db": 12.5,
+          "trough_hz": 12000,
+          "trough_db": -42.9,
+          "centroid_hz": 274,
+          "db_at_100hz": 12.2,
+          "db_at_1khz": 4.1,
+          "db_at_8khz": -23.5,
+          "formants": [],
+          "notches": []
+        },
+        "M100_Q0": {
+          "shape": "lowpass",
+          "peak_hz": 268,
+          "peak_db": 25.5,
+          "trough_hz": 12000,
+          "trough_db": -62.8,
+          "centroid_hz": 230,
+          "db_at_100hz": 13.2,
+          "db_at_1khz": -10.3,
+          "db_at_8khz": -44.2,
+          "formants": [
+            {
+              "hz": 268,
+              "db": 25.5,
+              "prominence_db": 13.2
+            }
+          ],
+          "notches": []
+        },
+        "M0_Q100": {
+          "shape": "lowpass",
+          "peak_hz": 50,
+          "peak_db": 12.0,
+          "trough_hz": 10468,
+          "trough_db": -80.2,
+          "centroid_hz": 237,
+          "db_at_100hz": 11.9,
+          "db_at_1khz": 2.6,
+          "db_at_8khz": -76.5,
+          "formants": [],
+          "notches": []
+        },
+        "M100_Q100": {
+          "shape": "peaking",
+          "peak_hz": 50,
+          "peak_db": 12.0,
+          "trough_hz": 9181,
+          "trough_db": -87.8,
+          "centroid_hz": 303,
+          "db_at_100hz": 11.9,
+          "db_at_1khz": 6.7,
+          "db_at_8khz": -86.7,
+          "formants": [],
+          "notches": []
+        }
+      }
+    },
+    {
+      "id": "p2k_003",
+      "corners": {
+        "M0_Q0": {
+          "shape": "lowpass",
+          "peak_hz": 58,
+          "peak_db": 24.4,
+          "trough_hz": 10927,
+          "trough_db": -137.7,
+          "centroid_hz": 61,
+          "db_at_100hz": 6.5,
+          "db_at_1khz": -37.1,
+          "db_at_8khz": -83.9,
+          "formants": [
+            {
+              "hz": 58,
+              "db": 24.4,
+              "prominence_db": 3.2
+            }
+          ],
+          "notches": [
+            {
+              "hz": 10927,
+              "db": -137.7,
+              "depth_db": 47.0
+            }
+          ]
+        },
+        "M100_Q0": {
+          "shape": "peaking",
+          "peak_hz": 1283,
+          "peak_db": 14.8,
+          "trough_hz": 6517,
+          "trough_db": -51.4,
+          "centroid_hz": 748,
+          "db_at_100hz": 12.0,
+          "db_at_1khz": 14.3,
+          "db_at_8khz": -6.5,
+          "formants": [
+            {
+              "hz": 10329,
+              "db": 5.7,
+              "prominence_db": 6.6
+            }
+          ],
+          "notches": [
+            {
+              "hz": 6517,
+              "db": -51.4,
+              "depth_db": 57.2
+            }
+          ]
+        },
+        "M0_Q100": {
+          "shape": "notched",
+          "peak_hz": 854,
+          "peak_db": 20.0,
+          "trough_hz": 11133,
+          "trough_db": -102.2,
+          "centroid_hz": 510,
+          "db_at_100hz": 12.3,
+          "db_at_1khz": 12.9,
+          "db_at_8khz": -7.2,
+          "formants": [
+            {
+              "hz": 854,
+              "db": 20.0,
+              "prominence_db": 7.9
+            },
+            {
+              "hz": 2363,
+              "db": 7.5,
+              "prominence_db": 14.2
+            },
+            {
+              "hz": 3474,
+              "db": 7.4,
+              "prominence_db": 7.9
+            },
+            {
+              "hz": 5149,
+              "db": 0.3,
+              "prominence_db": 10.2
+            },
+            {
+              "hz": 8205,
+              "db": -5.7,
+              "prominence_db": 9.9
+            }
+          ],
+          "notches": [
+            {
+              "hz": 1607,
+              "db": -6.7,
+              "depth_db": 14.2
+            },
+            {
+              "hz": 4553,
+              "db": -9.9,
+              "depth_db": 10.2
+            },
+            {
+              "hz": 6876,
+              "db": -15.6,
+              "depth_db": 9.9
+            },
+            {
+              "hz": 11133,
+              "db": -102.2,
+              "depth_db": 67.4
+            }
+          ]
+        },
+        "M100_Q100": {
+          "shape": "bandstop",
+          "peak_hz": 2715,
+          "peak_db": 25.4,
+          "trough_hz": 1607,
+          "trough_db": -16.7,
+          "centroid_hz": 1400,
+          "db_at_100hz": 11.9,
+          "db_at_1khz": -4.1,
+          "db_at_8khz": 8.8,
+          "formants": [
+            {
+              "hz": 2715,
+              "db": 25.4,
+              "prominence_db": 39.2
+            },
+            {
+              "hz": 4432,
+              "db": 17.1,
+              "prominence_db": 21.7
+            },
+            {
+              "hz": 7451,
+              "db": 19.3,
+              "prominence_db": 26.4
+            }
+          ],
+          "notches": [
+            {
+              "hz": 1607,
+              "db": -16.7,
+              "depth_db": 28.7
+            },
+            {
+              "hz": 3428,
+              "db": -4.6,
+              "depth_db": 21.7
+            },
+            {
+              "hz": 5081,
+              "db": -7.1,
+              "depth_db": 26.4
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "p2k_004",
+      "corners": {
+        "M0_Q0": {
+          "shape": "lowpass",
+          "peak_hz": 58,
+          "peak_db": 24.4,
+          "trough_hz": 10927,
+          "trough_db": -137.7,
+          "centroid_hz": 61,
+          "db_at_100hz": 6.5,
+          "db_at_1khz": -37.1,
+          "db_at_8khz": -83.9,
+          "formants": [
+            {
+              "hz": 58,
+              "db": 24.4,
+              "prominence_db": 3.2
+            }
+          ],
+          "notches": [
+            {
+              "hz": 10927,
+              "db": -137.7,
+              "depth_db": 47.0
+            }
+          ]
+        },
+        "M100_Q0": {
+          "shape": "peaking",
+          "peak_hz": 2651,
+          "peak_db": 35.5,
+          "trough_hz": 9380,
+          "trough_db": -43.4,
+          "centroid_hz": 2682,
+          "db_at_100hz": 12.0,
+          "db_at_1khz": 13.6,
+          "db_at_8khz": 4.4,
+          "formants": [
+            {
+              "hz": 2651,
+              "db": 35.5,
+              "prominence_db": 23.4
+            },
+            {
+              "hz": 10357,
+              "db": 33.5,
+              "prominence_db": 31.7
+            }
+          ],
+          "notches": [
+            {
+              "hz": 9380,
+              "db": -43.4,
+              "depth_db": 76.9
+            }
+          ]
+        },
+        "M0_Q100": {
+          "shape": "notched",
+          "peak_hz": 854,
+          "peak_db": 20.0,
+          "trough_hz": 11133,
+          "trough_db": -102.2,
+          "centroid_hz": 510,
+          "db_at_100hz": 12.3,
+          "db_at_1khz": 12.9,
+          "db_at_8khz": -7.2,
+          "formants": [
+            {
+              "hz": 854,
+              "db": 20.0,
+              "prominence_db": 7.9
+            },
+            {
+              "hz": 2363,
+              "db": 7.5,
+              "prominence_db": 14.2
+            },
+            {
+              "hz": 3474,
+              "db": 7.4,
+              "prominence_db": 7.9
+            },
+            {
+              "hz": 5149,
+              "db": 0.3,
+              "prominence_db": 10.2
+            },
+            {
+              "hz": 8205,
+              "db": -5.7,
+              "prominence_db": 9.9
+            }
+          ],
+          "notches": [
+            {
+              "hz": 1607,
+              "db": -6.7,
+              "depth_db": 14.2
+            },
+            {
+              "hz": 4553,
+              "db": -9.9,
+              "depth_db": 10.2
+            },
+            {
+              "hz": 6876,
+              "db": -15.6,
+              "depth_db": 9.9
+            },
+            {
+              "hz": 11133,
+              "db": -102.2,
+              "depth_db": 67.4
+            }
+          ]
+        },
+        "M100_Q100": {
+          "shape": "lowpass",
+          "peak_hz": 485,
+          "peak_db": 17.3,
+          "trough_hz": 12000,
+          "trough_db": -18.8,
+          "centroid_hz": 487,
+          "db_at_100hz": 12.3,
+          "db_at_1khz": -0.4,
+          "db_at_8khz": -9.8,
+          "formants": [
+            {
+              "hz": 485,
+              "db": 17.3,
+              "prominence_db": 5.2
+            },
+            {
+              "hz": 2479,
+              "db": 7.1,
+              "prominence_db": 14.8
+            },
+            {
+              "hz": 4516,
+              "db": 8.3,
+              "prominence_db": 9.9
+            },
+            {
+              "hz": 5840,
+              "db": 16.2,
+              "prominence_db": 30.4
+            },
+            {
+              "hz": 9456,
+              "db": -4.8,
+              "prominence_db": 5.9
+            }
+          ],
+          "notches": [
+            {
+              "hz": 1602,
+              "db": -14.3,
+              "depth_db": 30.4
+            },
+            {
+              "hz": 3063,
+              "db": -7.7,
+              "depth_db": 14.8
+            },
+            {
+              "hz": 4947,
+              "db": -1.6,
+              "depth_db": 9.9
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "p2k_005",
+      "corners": {
+        "M0_Q0": {
+          "shape": "lowpass",
+          "peak_hz": 50,
+          "peak_db": 12.0,
+          "trough_hz": 2066,
+          "trough_db": -91.0,
+          "centroid_hz": 191,
+          "db_at_100hz": 11.8,
+          "db_at_1khz": -6.7,
+          "db_at_8khz": -17.1,
+          "formants": [
+            {
+              "hz": 2394,
+              "db": -47.6,
+              "prominence_db": 9.9
+            },
+            {
+              "hz": 9456,
+              "db": -5.1,
+              "prominence_db": 9.5
+            }
+          ],
+          "notches": [
+            {
+              "hz": 2066,
+              "db": -91.0,
+              "depth_db": 85.9
+            },
+            {
+              "hz": 2935,
+              "db": -57.5,
+              "depth_db": 9.9
+            }
+          ]
+        },
+        "M100_Q0": {
+          "shape": "bandpass",
+          "peak_hz": 870,
+          "peak_db": 37.2,
+          "trough_hz": 11344,
+          "trough_db": -109.4,
+          "centroid_hz": 815,
+          "db_at_100hz": 12.1,
+          "db_at_1khz": 20.7,
+          "db_at_8khz": -56.2,
+          "formants": [
+            {
+              "hz": 870,
+              "db": 37.2,
+              "prominence_db": 25.2
+            },
+            {
+              "hz": 1560,
+              "db": 24.0,
+              "prominence_db": 12.9
+            },
+            {
+              "hz": 2350,
+              "db": 0.3,
+              "prominence_db": 14.2
+            },
+            {
+              "hz": 4553,
+              "db": -15.8,
+              "prominence_db": 28.6
+            }
+          ],
+          "notches": [
+            {
+              "hz": 1332,
+              "db": 11.1,
+              "depth_db": 12.9
+            },
+            {
+              "hz": 2094,
+              "db": -13.9,
+              "depth_db": 14.2
+            },
+            {
+              "hz": 2990,
+              "db": -44.4,
+              "depth_db": 28.6
+            },
+            {
+              "hz": 11344,
+              "db": -109.4,
+              "depth_db": 35.8
+            }
+          ]
+        },
+        "M0_Q100": {
+          "shape": "peaking",
+          "peak_hz": 1014,
+          "peak_db": 16.2,
+          "trough_hz": 10724,
+          "trough_db": -44.0,
+          "centroid_hz": 686,
+          "db_at_100hz": 12.1,
+          "db_at_1khz": 16.2,
+          "db_at_8khz": -14.6,
+          "formants": [
+            {
+              "hz": 1014,
+              "db": 16.2,
+              "prominence_db": 4.2
+            },
+            {
+              "hz": 3898,
+              "db": 3.7,
+              "prominence_db": 35.7
+            }
+          ],
+          "notches": [
+            {
+              "hz": 3428,
+              "db": -32.0,
+              "depth_db": 35.7
+            },
+            {
+              "hz": 10724,
+              "db": -44.0,
+              "depth_db": 37.1
+            }
+          ]
+        },
+        "M100_Q100": {
+          "shape": "bandpass",
+          "peak_hz": 1022,
+          "peak_db": 22.1,
+          "trough_hz": 7924,
+          "trough_db": -15.1,
+          "centroid_hz": 829,
+          "db_at_100hz": 12.1,
+          "db_at_1khz": 22.1,
+          "db_at_8khz": -15.1,
+          "formants": [
+            {
+              "hz": 1022,
+              "db": 22.1,
+              "prominence_db": 10.0
+            },
+            {
+              "hz": 3636,
+              "db": 12.1,
+              "prominence_db": 26.9
+            },
+            {
+              "hz": 5670,
+              "db": 3.2,
+              "prominence_db": 6.5
+            },
+            {
+              "hz": 10192,
+              "db": 0.2,
+              "prominence_db": 15.1
+            }
+          ],
+          "notches": [
+            {
+              "hz": 3428,
+              "db": -14.8,
+              "depth_db": 26.9
+            },
+            {
+              "hz": 4397,
+              "db": -3.4,
+              "depth_db": 6.5
+            },
+            {
+              "hz": 7924,
+              "db": -15.1,
+              "depth_db": 15.3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "p2k_006",
+      "corners": {
+        "M0_Q0": {
+          "shape": "lowpass",
+          "peak_hz": 50,
+          "peak_db": 11.8,
+          "trough_hz": 3785,
+          "trough_db": -110.6,
+          "centroid_hz": 131,
+          "db_at_100hz": 11.0,
+          "db_at_1khz": -16.2,
+          "db_at_8khz": -31.2,
+          "formants": [],
+          "notches": [
+            {
+              "hz": 3785,
+              "db": -110.6,
+              "depth_db": 85.9
+            }
+          ]
+        },
+        "M100_Q0": {
+          "shape": "notched",
+          "peak_hz": 1200,
+          "peak_db": 24.1,
+          "trough_hz": 6396,
+          "trough_db": -125.6,
+          "centroid_hz": 522,
+          "db_at_100hz": 15.4,
+          "db_at_1khz": 13.8,
+          "db_at_8khz": -40.3,
+          "formants": [
+            {
+              "hz": 158,
+              "db": 17.7,
+              "prominence_db": 4.7
+            },
+            {
+              "hz": 1200,
+              "db": 24.1,
+              "prominence_db": 22.3
+            },
+            {
+              "hz": 9949,
+              "db": -28.3,
+              "prominence_db": 7.5
+            }
+          ],
+          "notches": [
+            {
+              "hz": 569,
+              "db": 1.8,
+              "depth_db": 15.9
+            },
+            {
+              "hz": 6396,
+              "db": -125.6,
+              "depth_db": 97.4
+            }
+          ]
+        },
+        "M0_Q100": {
+          "shape": "lowpass",
+          "peak_hz": 256,
+          "peak_db": 30.1,
+          "trough_hz": 12000,
+          "trough_db": -40.9,
+          "centroid_hz": 256,
+          "db_at_100hz": 13.3,
+          "db_at_1khz": 2.2,
+          "db_at_8khz": 1.2,
+          "formants": [
+            {
+              "hz": 256,
+              "db": 30.1,
+              "prominence_db": 17.8
+            },
+            {
+              "hz": 1346,
+              "db": 5.9,
+              "prominence_db": 4.6
+            },
+            {
+              "hz": 8117,
+              "db": 2.4,
+              "prominence_db": 11.1
+            }
+          ],
+          "notches": [
+            {
+              "hz": 6161,
+              "db": -8.8,
+              "depth_db": 11.1
+            }
+          ]
+        },
+        "M100_Q100": {
+          "shape": "notched",
+          "peak_hz": 364,
+          "peak_db": 41.5,
+          "trough_hz": 6396,
+          "trough_db": -92.3,
+          "centroid_hz": 787,
+          "db_at_100hz": 14.7,
+          "db_at_1khz": 13.5,
+          "db_at_8khz": 8.9,
+          "formants": [
+            {
+              "hz": 364,
+              "db": 41.5,
+              "prominence_db": 28.7
+            },
+            {
+              "hz": 8633,
+              "db": 21.1,
+              "prominence_db": 4.7
+            },
+            {
+              "hz": 10695,
+              "db": 29.5,
+              "prominence_db": 7.2
+            },
+            {
+              "hz": 11528,
+              "db": 31.1,
+              "prominence_db": 8.7
+            }
+          ],
+          "notches": [
+            {
+              "hz": 6396,
+              "db": -92.3,
+              "depth_db": 123.4
+            },
+            {
+              "hz": 11104,
+              "db": 22.3,
+              "depth_db": 7.2
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "p2k_007",
+      "corners": {
+        "M0_Q0": {
+          "shape": "lowpass",
+          "peak_hz": 374,
+          "peak_db": 30.9,
+          "trough_hz": 4651,
+          "trough_db": -200.0,
+          "centroid_hz": 375,
+          "db_at_100hz": -9.8,
+          "db_at_1khz": -64.1,
+          "db_at_8khz": -200.0,
+          "formants": [
+            {
+              "hz": 374,
+              "db": 30.9,
+              "prominence_db": 42.4
+            },
+            {
+              "hz": 4036,
+              "db": -151.8,
+              "prominence_db": 22.0
+            }
+          ],
+          "notches": [
+            {
+              "hz": 3685,
+              "db": -173.8,
+              "depth_db": 22.0
+            }
+          ]
+        },
+        "M100_Q0": {
+          "shape": "bandpass",
+          "peak_hz": 1507,
+          "peak_db": 31.3,
+          "trough_hz": 11968,
+          "trough_db": -200.0,
+          "centroid_hz": 1549,
+          "db_at_100hz": -11.9,
+          "db_at_1khz": 6.7,
+          "db_at_8khz": -143.1,
+          "formants": [
+            {
+              "hz": 1507,
+              "db": 31.3,
+              "prominence_db": 43.3
+            },
+            {
+              "hz": 2270,
+              "db": 21.9,
+              "prominence_db": 3.5
+            },
+            {
+              "hz": 4036,
+              "db": -20.0,
+              "prominence_db": 19.7
+            }
+          ],
+          "notches": [
+            {
+              "hz": 3775,
+              "db": -39.7,
+              "depth_db": 19.7
+            }
+          ]
+        },
+        "M0_Q100": {
+          "shape": "bandpass",
+          "peak_hz": 931,
+          "peak_db": 43.3,
+          "trough_hz": 4444,
+          "trough_db": -200.0,
+          "centroid_hz": 906,
+          "db_at_100hz": -11.4,
+          "db_at_1khz": 39.8,
+          "db_at_8khz": -200.0,
+          "formants": [
+            {
+              "hz": 931,
+              "db": 43.3,
+              "prominence_db": 55.2
+            },
+            {
+              "hz": 4920,
+              "db": -191.6,
+              "prominence_db": 8.4
+            }
+          ],
+          "notches": []
+        },
+        "M100_Q100": {
+          "shape": "peaking",
+          "peak_hz": 3734,
+          "peak_db": 41.7,
+          "trough_hz": 7988,
+          "trough_db": -129.8,
+          "centroid_hz": 3593,
+          "db_at_100hz": -12.0,
+          "db_at_1khz": -8.1,
+          "db_at_8khz": -119.7,
+          "formants": [
+            {
+              "hz": 3734,
+              "db": 41.7,
+              "prominence_db": 53.8
+            },
+            {
+              "hz": 8656,
+              "db": -91.8,
+              "prominence_db": 16.4
+            }
+          ],
+          "notches": [
+            {
+              "hz": 7988,
+              "db": -129.8,
+              "depth_db": 38.0
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "p2k_008",
+      "corners": {
+        "M0_Q0": {
+          "shape": "lowpass",
+          "peak_hz": 10412,
+          "peak_db": 0.7,
+          "trough_hz": 11133,
+          "trough_db": -81.1,
+          "centroid_hz": 1216,
+          "db_at_100hz": -7.0,
+          "db_at_1khz": -44.3,
+          "db_at_8khz": -13.2,
+          "formants": [
+            {
+              "hz": 2414,
+              "db": -0.2,
+              "prominence_db": 19.8
+            },
+            {
+              "hz": 10412,
+              "db": 0.7,
+              "prominence_db": 54.0
+            }
+          ],
+          "notches": [
+            {
+              "hz": 1067,
+              "db": -53.4,
+              "depth_db": 52.3
+            },
+            {
+              "hz": 3055,
+              "db": -20.0,
+              "depth_db": 19.8
+            },
+            {
+              "hz": 11133,
+              "db": -81.1,
+              "depth_db": 59.9
+            }
+          ]
+        },
+        "M100_Q0": {
+          "shape": "lowpass",
+          "peak_hz": 50,
+          "peak_db": 11.9,
+          "trough_hz": 8382,
+          "trough_db": -55.7,
+          "centroid_hz": 215,
+          "db_at_100hz": 11.6,
+          "db_at_1khz": -28.7,
+          "db_at_8khz": -24.7,
+          "formants": [
+            {
+              "hz": 2782,
+              "db": 8.0,
+              "prominence_db": 46.4
+            }
+          ],
+          "notches": [
+            {
+              "hz": 1067,
+              "db": -38.5,
+              "depth_db": 46.4
+            },
+            {
+              "hz": 8382,
+              "db": -55.7,
+              "depth_db": 57.5
+            }
+          ]
+        },
+        "M0_Q100": {
+          "shape": "notched",
+          "peak_hz": 845,
+          "peak_db": 28.3,
+          "trough_hz": 10165,
+          "trough_db": -84.8,
+          "centroid_hz": 606,
+          "db_at_100hz": 12.3,
+          "db_at_1khz": 13.5,
+          "db_at_8khz": -36.1,
+          "formants": [
+            {
+              "hz": 845,
+              "db": 28.3,
+              "prominence_db": 16.2
+            },
+            {
+              "hz": 2128,
+              "db": 4.0,
+              "prominence_db": 4.1
+            },
+            {
+              "hz": 2834,
+              "db": 3.1,
+              "prominence_db": 10.5
+            },
+            {
+              "hz": 3626,
+              "db": 6.5,
+              "prominence_db": 16.5
+            },
+            {
+              "hz": 4373,
+              "db": 5.6,
+              "prominence_db": 13.1
+            }
+          ],
+          "notches": [
+            {
+              "hz": 2466,
+              "db": -7.4,
+              "depth_db": 10.5
+            },
+            {
+              "hz": 3214,
+              "db": -10.0,
+              "depth_db": 16.5
+            },
+            {
+              "hz": 3908,
+              "db": -7.5,
+              "depth_db": 13.1
+            },
+            {
+              "hz": 10165,
+              "db": -84.8,
+              "depth_db": 40.2
+            }
+          ]
+        },
+        "M100_Q100": {
+          "shape": "notched",
+          "peak_hz": 741,
+          "peak_db": 45.3,
+          "trough_hz": 12000,
+          "trough_db": -41.2,
+          "centroid_hz": 715,
+          "db_at_100hz": 12.3,
+          "db_at_1khz": 8.7,
+          "db_at_8khz": -27.9,
+          "formants": [
+            {
+              "hz": 741,
+              "db": 45.3,
+              "prominence_db": 33.2
+            },
+            {
+              "hz": 2774,
+              "db": 14.1,
+              "prominence_db": 19.2
+            },
+            {
+              "hz": 3616,
+              "db": 12.6,
+              "prominence_db": 17.3
+            },
+            {
+              "hz": 4432,
+              "db": 17.2,
+              "prominence_db": 23.5
+            }
+          ],
+          "notches": [
+            {
+              "hz": 2055,
+              "db": -5.1,
+              "depth_db": 19.2
+            },
+            {
+              "hz": 3214,
+              "db": -6.3,
+              "depth_db": 23.5
+            },
+            {
+              "hz": 3919,
+              "db": -4.8,
+              "depth_db": 17.3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "p2k_009",
+      "corners": {
+        "M0_Q0": {
+          "shape": "peaking",
+          "peak_hz": 372,
+          "peak_db": 17.6,
+          "trough_hz": 3088,
+          "trough_db": -72.8,
+          "centroid_hz": 340,
+          "db_at_100hz": 12.6,
+          "db_at_1khz": 7.2,
+          "db_at_8khz": -18.8,
+          "formants": [
+            {
+              "hz": 372,
+              "db": 17.6,
+              "prominence_db": 5.4
+            }
+          ],
+          "notches": [
+            {
+              "hz": 3088,
+              "db": -72.8,
+              "depth_db": 55.5
+            }
+          ]
+        },
+        "M100_Q0": {
+          "shape": "lowpass",
+          "peak_hz": 357,
+          "peak_db": 50.5,
+          "trough_hz": 12000,
+          "trough_db": -35.0,
+          "centroid_hz": 360,
+          "db_at_100hz": 12.9,
+          "db_at_1khz": 3.5,
+          "db_at_8khz": -20.7,
+          "formants": [
+            {
+              "hz": 357,
+              "db": 50.5,
+              "prominence_db": 38.2
+            },
+            {
+              "hz": 749,
+              "db": 23.5,
+              "prominence_db": 6.4
+            },
+            {
+              "hz": 1969,
+              "db": -2.2,
+              "prominence_db": 4.5
+            }
+          ],
+          "notches": [
+            {
+              "hz": 582,
+              "db": 17.1,
+              "depth_db": 6.4
+            }
+          ]
+        },
+        "M0_Q100": {
+          "shape": "peaking",
+          "peak_hz": 400,
+          "peak_db": 19.8,
+          "trough_hz": 12000,
+          "trough_db": -20.9,
+          "centroid_hz": 699,
+          "db_at_100hz": 13.7,
+          "db_at_1khz": 18.2,
+          "db_at_8khz": -7.4,
+          "formants": [
+            {
+              "hz": 400,
+              "db": 19.8,
+              "prominence_db": 7.3
+            },
+            {
+              "hz": 9791,
+              "db": -3.0,
+              "prominence_db": 5.1
+            }
+          ],
+          "notches": []
+        },
+        "M100_Q100": {
+          "shape": "peaking",
+          "peak_hz": 376,
+          "peak_db": 39.6,
+          "trough_hz": 12000,
+          "trough_db": 2.4,
+          "centroid_hz": 490,
+          "db_at_100hz": 14.6,
+          "db_at_1khz": 14.2,
+          "db_at_8khz": 6.2,
+          "formants": [
+            {
+              "hz": 376,
+              "db": 39.6,
+              "prominence_db": 26.9
+            },
+            {
+              "hz": 10329,
+              "db": 25.8,
+              "prominence_db": 22.1
+            }
+          ],
+          "notches": [
+            {
+              "hz": 5191,
+              "db": 3.6,
+              "depth_db": 22.1
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "p2k_010",
+      "corners": {
+        "M0_Q0": {
+          "shape": "notched",
+          "peak_hz": 3626,
+          "peak_db": 27.7,
+          "trough_hz": 12000,
+          "trough_db": -42.3,
+          "centroid_hz": 1009,
+          "db_at_100hz": 12.3,
+          "db_at_1khz": 9.9,
+          "db_at_8khz": -32.2,
+          "formants": [
+            {
+              "hz": 845,
+              "db": 25.7,
+              "prominence_db": 13.6
+            },
+            {
+              "hz": 2145,
+              "db": 7.8,
+              "prominence_db": 7.8
+            },
+            {
+              "hz": 2842,
+              "db": 14.5,
+              "prominence_db": 9.4
+            },
+            {
+              "hz": 3626,
+              "db": 27.7,
+              "prominence_db": 31.5
+            },
+            {
+              "hz": 4362,
+              "db": 18.9,
+              "prominence_db": 6.3
+            }
+          ],
+          "notches": [
+            {
+              "hz": 1499,
+              "db": -3.8,
+              "depth_db": 29.5
+            },
+            {
+              "hz": 2427,
+              "db": -0.0,
+              "depth_db": 7.8
+            },
+            {
+              "hz": 3146,
+              "db": 5.1,
+              "depth_db": 9.4
+            },
+            {
+              "hz": 4036,
+              "db": 12.6,
+              "depth_db": 6.3
+            }
+          ]
+        },
+        "M100_Q0": {
+          "shape": "notched",
+          "peak_hz": 3616,
+          "peak_db": 42.9,
+          "trough_hz": 12000,
+          "trough_db": -42.6,
+          "centroid_hz": 1377,
+          "db_at_100hz": 12.3,
+          "db_at_1khz": 10.3,
+          "db_at_8khz": -32.5,
+          "formants": [
+            {
+              "hz": 551,
+              "db": 33.2,
+              "prominence_db": 11.6
+            },
+            {
+              "hz": 847,
+              "db": 42.8,
+              "prominence_db": 30.7
+            },
+            {
+              "hz": 2174,
+              "db": 27.3,
+              "prominence_db": 25.6
+            },
+            {
+              "hz": 2827,
+              "db": 37.4,
+              "prominence_db": 32.0
+            },
+            {
+              "hz": 3616,
+              "db": 42.9,
+              "prominence_db": 46.8
+            },
+            {
+              "hz": 4350,
+              "db": 40.0,
+              "prominence_db": 26.8
+            }
+          ],
+          "notches": [
+            {
+              "hz": 1499,
+              "db": -3.8,
+              "depth_db": 46.6
+            },
+            {
+              "hz": 2440,
+              "db": 1.7,
+              "depth_db": 25.6
+            },
+            {
+              "hz": 3146,
+              "db": 5.4,
+              "depth_db": 32.0
+            },
+            {
+              "hz": 4004,
+              "db": 13.1,
+              "depth_db": 26.8
+            }
+          ]
+        },
+        "M0_Q100": {
+          "shape": "lowpass",
+          "peak_hz": 1788,
+          "peak_db": 21.5,
+          "trough_hz": 12000,
+          "trough_db": -47.0,
+          "centroid_hz": 417,
+          "db_at_100hz": 13.6,
+          "db_at_1khz": -12.2,
+          "db_at_8khz": -4.0,
+          "formants": [
+            {
+              "hz": 220,
+              "db": 20.5,
+              "prominence_db": 8.1
+            },
+            {
+              "hz": 1788,
+              "db": 21.5,
+              "prominence_db": 43.9
+            },
+            {
+              "hz": 2896,
+              "db": 16.1,
+              "prominence_db": 16.2
+            },
+            {
+              "hz": 4855,
+              "db": 8.0,
+              "prominence_db": 13.0
+            },
+            {
+              "hz": 8205,
+              "db": 15.6,
+              "prominence_db": 25.3
+            },
+            {
+              "hz": 8844,
+              "db": 7.7,
+              "prominence_db": 13.7
+            }
+          ],
+          "notches": [
+            {
+              "hz": 708,
+              "db": -22.4,
+              "depth_db": 42.9
+            },
+            {
+              "hz": 2089,
+              "db": -0.1,
+              "depth_db": 16.2
+            },
+            {
+              "hz": 7100,
+              "db": -9.7,
+              "depth_db": 25.3
+            },
+            {
+              "hz": 8427,
+              "db": -6.0,
+              "depth_db": 13.7
+            }
+          ]
+        },
+        "M100_Q100": {
+          "shape": "lowpass",
+          "peak_hz": 2935,
+          "peak_db": 39.9,
+          "trough_hz": 12000,
+          "trough_db": -31.9,
+          "centroid_hz": 880,
+          "db_at_100hz": 13.7,
+          "db_at_1khz": -12.2,
+          "db_at_8khz": -1.7,
+          "formants": [
+            {
+              "hz": 228,
+              "db": 37.4,
+              "prominence_db": 25.0
+            },
+            {
+              "hz": 1788,
+              "db": 23.7,
+              "prominence_db": 23.9
+            },
+            {
+              "hz": 2935,
+              "db": 39.9,
+              "prominence_db": 62.3
+            },
+            {
+              "hz": 4777,
+              "db": 39.0,
+              "prominence_db": 42.6
+            },
+            {
+              "hz": 8205,
+              "db": 21.3,
+              "prominence_db": 24.6
+            },
+            {
+              "hz": 8796,
+              "db": 30.0,
+              "prominence_db": 38.6
+            }
+          ],
+          "notches": [
+            {
+              "hz": 708,
+              "db": -22.4,
+              "depth_db": 59.9
+            },
+            {
+              "hz": 3825,
+              "db": -3.6,
+              "depth_db": 42.6
+            },
+            {
+              "hz": 6987,
+              "db": -8.6,
+              "depth_db": 38.6
+            },
+            {
+              "hz": 8427,
+              "db": -3.3,
+              "depth_db": 24.6
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "p2k_011",
+      "corners": {
+        "M0_Q0": {
+          "shape": "lowpass",
+          "peak_hz": 50,
+          "peak_db": 11.8,
+          "trough_hz": 7158,
+          "trough_db": -129.2,
+          "centroid_hz": 145,
+          "db_at_100hz": 11.2,
+          "db_at_1khz": -26.2,
+          "db_at_8khz": -84.3,
+          "formants": [],
+          "notches": [
+            {
+              "hz": 7158,
+              "db": -129.2,
+              "depth_db": 61.2
+            }
+          ]
+        },
+        "M100_Q0": {
+          "shape": "peaking",
+          "peak_hz": 454,
+          "peak_db": 23.2,
+          "trough_hz": 6396,
+          "trough_db": -127.3,
+          "centroid_hz": 396,
+          "db_at_100hz": 13.8,
+          "db_at_1khz": 10.4,
+          "db_at_8khz": -37.6,
+          "formants": [
+            {
+              "hz": 454,
+              "db": 23.2,
+              "prominence_db": 10.7
+            },
+            {
+              "hz": 9923,
+              "db": -18.8,
+              "prominence_db": 13.7
+            }
+          ],
+          "notches": [
+            {
+              "hz": 6396,
+              "db": -127.3,
+              "depth_db": 108.6
+            }
+          ]
+        },
+        "M0_Q100": {
+          "shape": "peaking",
+          "peak_hz": 297,
+          "peak_db": 13.0,
+          "trough_hz": 6396,
+          "trough_db": -103.3,
+          "centroid_hz": 428,
+          "db_at_100hz": 12.2,
+          "db_at_1khz": 8.6,
+          "db_at_8khz": -14.7,
+          "formants": [],
+          "notches": [
+            {
+              "hz": 6396,
+              "db": -103.3,
+              "depth_db": 94.5
+            }
+          ]
+        },
+        "M100_Q100": {
+          "shape": "notched",
+          "peak_hz": 411,
+          "peak_db": 23.6,
+          "trough_hz": 9764,
+          "trough_db": -56.4,
+          "centroid_hz": 531,
+          "db_at_100hz": 14.4,
+          "db_at_1khz": 15.7,
+          "db_at_8khz": 6.3,
+          "formants": [
+            {
+              "hz": 411,
+              "db": 23.6,
+              "prominence_db": 10.9
+            },
+            {
+              "hz": 8405,
+              "db": 8.2,
+              "prominence_db": 5.6
+            },
+            {
+              "hz": 10553,
+              "db": 3.7,
+              "prominence_db": 3.6
+            }
+          ],
+          "notches": [
+            {
+              "hz": 9764,
+              "db": -56.4,
+              "depth_db": 64.3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "p2k_012",
+      "corners": {
+        "M0_Q0": {
+          "shape": "lowpass",
+          "peak_hz": 1788,
+          "peak_db": 20.5,
+          "trough_hz": 6278,
+          "trough_db": -68.7,
+          "centroid_hz": 285,
+          "db_at_100hz": 13.5,
+          "db_at_1khz": -12.4,
+          "db_at_8khz": -20.3,
+          "formants": [
+            {
+              "hz": 220,
+              "db": 20.5,
+              "prominence_db": 8.1
+            },
+            {
+              "hz": 1788,
+              "db": 20.5,
+              "prominence_db": 43.1
+            },
+            {
+              "hz": 2896,
+              "db": 13.5,
+              "prominence_db": 14.9
+            },
+            {
+              "hz": 4829,
+              "db": -1.9,
+              "prominence_db": 8.5
+            },
+            {
+              "hz": 8205,
+              "db": -1.7,
+              "prominence_db": 24.5
+            }
+          ],
+          "notches": [
+            {
+              "hz": 708,
+              "db": -22.6,
+              "depth_db": 43.0
+            },
+            {
+              "hz": 2111,
+              "db": -1.4,
+              "depth_db": 14.9
+            },
+            {
+              "hz": 3961,
+              "db": -10.4,
+              "depth_db": 8.5
+            },
+            {
+              "hz": 6278,
+              "db": -68.7,
+              "depth_db": 67.0
+            }
+          ]
+        },
+        "M100_Q0": {
+          "shape": "bandpass",
+          "peak_hz": 933,
+          "peak_db": 42.3,
+          "trough_hz": 2210,
+          "trough_db": -39.0,
+          "centroid_hz": 995,
+          "db_at_100hz": 12.1,
+          "db_at_1khz": 19.6,
+          "db_at_8khz": -12.7,
+          "formants": [
+            {
+              "hz": 933,
+              "db": 42.3,
+              "prominence_db": 30.2
+            },
+            {
+              "hz": 1827,
+              "db": 22.3,
+              "prominence_db": 36.7
+            },
+            {
+              "hz": 3337,
+              "db": 34.7,
+              "prominence_db": 66.2
+            },
+            {
+              "hz": 4528,
+              "db": 16.7,
+              "prominence_db": 9.9
+            },
+            {
+              "hz": 8271,
+              "db": -12.6,
+              "prominence_db": 5.9
+            }
+          ],
+          "notches": [
+            {
+              "hz": 1455,
+              "db": -14.5,
+              "depth_db": 36.7
+            },
+            {
+              "hz": 2210,
+              "db": -39.0,
+              "depth_db": 73.7
+            },
+            {
+              "hz": 3775,
+              "db": 6.8,
+              "depth_db": 9.9
+            },
+            {
+              "hz": 6095,
+              "db": -31.5,
+              "depth_db": 18.9
+            }
+          ]
+        },
+        "M0_Q100": {
+          "shape": "lowpass",
+          "peak_hz": 255,
+          "peak_db": 15.6,
+          "trough_hz": 6278,
+          "trough_db": -63.2,
+          "centroid_hz": 237,
+          "db_at_100hz": 12.8,
+          "db_at_1khz": 3.8,
+          "db_at_8khz": -9.3,
+          "formants": [
+            {
+              "hz": 255,
+              "db": 15.6,
+              "prominence_db": 3.4
+            },
+            {
+              "hz": 1101,
+              "db": 12.0,
+              "prominence_db": 12.4
+            },
+            {
+              "hz": 3530,
+              "db": 0.5,
+              "prominence_db": 12.2
+            },
+            {
+              "hz": 8963,
+              "db": -7.6,
+              "prominence_db": 4.5
+            }
+          ],
+          "notches": [
+            {
+              "hz": 807,
+              "db": -0.4,
+              "depth_db": 12.4
+            },
+            {
+              "hz": 2192,
+              "db": -11.6,
+              "depth_db": 12.2
+            },
+            {
+              "hz": 6278,
+              "db": -63.2,
+              "depth_db": 55.6
+            }
+          ]
+        },
+        "M100_Q100": {
+          "shape": "bandstop",
+          "peak_hz": 3039,
+          "peak_db": 47.5,
+          "trough_hz": 6517,
+          "trough_db": -26.3,
+          "centroid_hz": 1291,
+          "db_at_100hz": 12.6,
+          "db_at_1khz": 1.8,
+          "db_at_8khz": 8.5,
+          "formants": [
+            {
+              "hz": 412,
+              "db": 43.0,
+              "prominence_db": 30.8
+            },
+            {
+              "hz": 1788,
+              "db": 39.3,
+              "prominence_db": 32.9
+            },
+            {
+              "hz": 3039,
+              "db": 47.5,
+              "prominence_db": 46.4
+            },
+            {
+              "hz": 8820,
+              "db": 8.8,
+              "prominence_db": 5.9
+            }
+          ],
+          "notches": [
+            {
+              "hz": 1144,
+              "db": 1.1,
+              "depth_db": 41.8
+            },
+            {
+              "hz": 2282,
+              "db": 6.3,
+              "depth_db": 32.9
+            },
+            {
+              "hz": 6517,
+              "db": -26.3,
+              "depth_db": 35.2
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "p2k_013",
+      "corners": {
+        "M0_Q0": {
+          "shape": "lowpass",
+          "peak_hz": 194,
+          "peak_db": 18.4,
+          "trough_hz": 6396,
+          "trough_db": -116.0,
+          "centroid_hz": 203,
+          "db_at_100hz": 14.0,
+          "db_at_1khz": 2.5,
+          "db_at_8khz": -25.2,
+          "formants": [
+            {
+              "hz": 194,
+              "db": 18.4,
+              "prominence_db": 5.9
+            },
+            {
+              "hz": 868,
+              "db": 5.7,
+              "prominence_db": 3.0
+            },
+            {
+              "hz": 1543,
+              "db": 1.2,
+              "prominence_db": 3.4
+            },
+            {
+              "hz": 2350,
+              "db": 10.2,
+              "prominence_db": 21.4
+            },
+            {
+              "hz": 4565,
+              "db": -10.3,
+              "prominence_db": 17.8
+            },
+            {
+              "hz": 9330,
+              "db": -1.9,
+              "prominence_db": 17.0
+            }
+          ],
+          "notches": [
+            {
+              "hz": 2012,
+              "db": -11.2,
+              "depth_db": 21.4
+            },
+            {
+              "hz": 3006,
+              "db": -28.2,
+              "depth_db": 17.8
+            },
+            {
+              "hz": 6396,
+              "db": -116.0,
+              "depth_db": 114.1
+            }
+          ]
+        },
+        "M100_Q0": {
+          "shape": "notched",
+          "peak_hz": 157,
+          "peak_db": 36.2,
+          "trough_hz": 6047,
+          "trough_db": -81.0,
+          "centroid_hz": 231,
+          "db_at_100hz": 16.8,
+          "db_at_1khz": 11.8,
+          "db_at_8khz": -29.7,
+          "formants": [
+            {
+              "hz": 157,
+              "db": 36.2,
+              "prominence_db": 23.1
+            },
+            {
+              "hz": 953,
+              "db": 30.5,
+              "prominence_db": 31.2
+            },
+            {
+              "hz": 1511,
+              "db": 27.9,
+              "prominence_db": 28.1
+            },
+            {
+              "hz": 2210,
+              "db": 19.1,
+              "prominence_db": 30.9
+            },
+            {
+              "hz": 4350,
+              "db": 8.7,
+              "prominence_db": 41.1
+            },
+            {
+              "hz": 10165,
+              "db": 23.6,
+              "prominence_db": 41.6
+            }
+          ],
+          "notches": [
+            {
+              "hz": 590,
+              "db": -0.7,
+              "depth_db": 31.2
+            },
+            {
+              "hz": 1928,
+              "db": -11.9,
+              "depth_db": 30.9
+            },
+            {
+              "hz": 2880,
+              "db": -32.5,
+              "depth_db": 41.1
+            },
+            {
+              "hz": 6047,
+              "db": -81.0,
+              "depth_db": 104.6
+            }
+          ]
+        },
+        "M0_Q100": {
+          "shape": "lowpass",
+          "peak_hz": 194,
+          "peak_db": 18.4,
+          "trough_hz": 12000,
+          "trough_db": -26.5,
+          "centroid_hz": 337,
+          "db_at_100hz": 13.9,
+          "db_at_1khz": -15.8,
+          "db_at_8khz": -1.0,
+          "formants": [
+            {
+              "hz": 194,
+              "db": 18.4,
+              "prominence_db": 6.0
+            },
+            {
+              "hz": 1788,
+              "db": 16.4,
+              "prominence_db": 32.6
+            },
+            {
+              "hz": 2382,
+              "db": 11.0,
+              "prominence_db": 8.8
+            },
+            {
+              "hz": 4777,
+              "db": 1.6,
+              "prominence_db": 8.1
+            },
+            {
+              "hz": 8360,
+              "db": 3.6,
+              "prominence_db": 12.1
+            }
+          ],
+          "notches": [
+            {
+              "hz": 901,
+              "db": -16.2,
+              "depth_db": 32.6
+            },
+            {
+              "hz": 2023,
+              "db": 2.2,
+              "depth_db": 8.8
+            },
+            {
+              "hz": 3391,
+              "db": -6.6,
+              "depth_db": 8.1
+            },
+            {
+              "hz": 6623,
+              "db": -8.5,
+              "depth_db": 12.1
+            }
+          ]
+        },
+        "M100_Q100": {
+          "shape": "lowpass",
+          "peak_hz": 194,
+          "peak_db": 39.4,
+          "trough_hz": 12000,
+          "trough_db": -27.0,
+          "centroid_hz": 401,
+          "db_at_100hz": 14.6,
+          "db_at_1khz": -14.9,
+          "db_at_8khz": -9.7,
+          "formants": [
+            {
+              "hz": 194,
+              "db": 39.4,
+              "prominence_db": 26.8
+            },
+            {
+              "hz": 1511,
+              "db": 23.0,
+              "prominence_db": 27.3
+            },
+            {
+              "hz": 2140,
+              "db": 35.2,
+              "prominence_db": 51.6
+            },
+            {
+              "hz": 2407,
+              "db": 31.4,
+              "prominence_db": 20.4
+            },
+            {
+              "hz": 4397,
+              "db": 5.6,
+              "prominence_db": 15.3
+            },
+            {
+              "hz": 8987,
+              "db": 32.7,
+              "prominence_db": 46.0
+            }
+          ],
+          "notches": [
+            {
+              "hz": 847,
+              "db": -16.5,
+              "depth_db": 51.6
+            },
+            {
+              "hz": 1746,
+              "db": -4.3,
+              "depth_db": 27.3
+            },
+            {
+              "hz": 2282,
+              "db": 11.0,
+              "depth_db": 20.4
+            },
+            {
+              "hz": 6712,
+              "db": -13.3,
+              "depth_db": 46.0
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "p2k_014",
+      "corners": {
+        "M0_Q0": {
+          "shape": "lowpass",
+          "peak_hz": 357,
+          "peak_db": 20.6,
+          "trough_hz": 10927,
+          "trough_db": -171.2,
+          "centroid_hz": 136,
+          "db_at_100hz": 9.6,
+          "db_at_1khz": -27.7,
+          "db_at_8khz": -116.8,
+          "formants": [
+            {
+              "hz": 90,
+              "db": 12.1,
+              "prominence_db": 9.0
+            },
+            {
+              "hz": 357,
+              "db": 20.6,
+              "prominence_db": 30.7
+            },
+            {
+              "hz": 1047,
+              "db": -15.6,
+              "prominence_db": 20.3
+            },
+            {
+              "hz": 1741,
+              "db": -50.7,
+              "prominence_db": 4.4
+            }
+          ],
+          "notches": [
+            {
+              "hz": 256,
+              "db": -10.1,
+              "depth_db": 22.2
+            },
+            {
+              "hz": 803,
+              "db": -35.8,
+              "depth_db": 20.3
+            },
+            {
+              "hz": 10927,
+              "db": -171.2,
+              "depth_db": 40.7
+            }
+          ]
+        },
+        "M100_Q0": {
+          "shape": "notched",
+          "peak_hz": 455,
+          "peak_db": 24.7,
+          "trough_hz": 12000,
+          "trough_db": -31.5,
+          "centroid_hz": 1131,
+          "db_at_100hz": -11.8,
+          "db_at_1khz": -11.6,
+          "db_at_8khz": -17.3,
+          "formants": [
+            {
+              "hz": 455,
+              "db": 24.7,
+              "prominence_db": 36.6
+            },
+            {
+              "hz": 1376,
+              "db": 19.2,
+              "prominence_db": 30.8
+            },
+            {
+              "hz": 2282,
+              "db": 13.2,
+              "prominence_db": 20.0
+            },
+            {
+              "hz": 3249,
+              "db": 10.4,
+              "prominence_db": 15.6
+            },
+            {
+              "hz": 4123,
+              "db": 5.6,
+              "prominence_db": 6.6
+            },
+            {
+              "hz": 5067,
+              "db": 2.3,
+              "prominence_db": 4.6
+            }
+          ],
+          "notches": [
+            {
+              "hz": 969,
+              "db": -11.6,
+              "depth_db": 30.8
+            },
+            {
+              "hz": 1842,
+              "db": -6.7,
+              "depth_db": 20.0
+            },
+            {
+              "hz": 2819,
+              "db": -5.2,
+              "depth_db": 15.6
+            },
+            {
+              "hz": 3626,
+              "db": -1.0,
+              "depth_db": 6.6
+            }
+          ]
+        },
+        "M0_Q100": {
+          "shape": "bandpass",
+          "peak_hz": 645,
+          "peak_db": 19.5,
+          "trough_hz": 12000,
+          "trough_db": -26.6,
+          "centroid_hz": 1661,
+          "db_at_100hz": -12.0,
+          "db_at_1khz": -1.9,
+          "db_at_8khz": -12.4,
+          "formants": [
+            {
+              "hz": 645,
+              "db": 19.5,
+              "prominence_db": 31.6
+            },
+            {
+              "hz": 1321,
+              "db": 19.5,
+              "prominence_db": 21.4
+            },
+            {
+              "hz": 2221,
+              "db": 10.4,
+              "prominence_db": 11.3
+            },
+            {
+              "hz": 3275,
+              "db": 8.4,
+              "prominence_db": 4.7
+            },
+            {
+              "hz": 4123,
+              "db": 10.3,
+              "prominence_db": 11.8
+            },
+            {
+              "hz": 5067,
+              "db": 7.2,
+              "prominence_db": 4.6
+            }
+          ],
+          "notches": [
+            {
+              "hz": 1011,
+              "db": -1.9,
+              "depth_db": 21.4
+            },
+            {
+              "hz": 1779,
+              "db": -0.9,
+              "depth_db": 11.3
+            },
+            {
+              "hz": 2789,
+              "db": -1.5,
+              "depth_db": 11.8
+            }
+          ]
+        },
+        "M100_Q100": {
+          "shape": "peaking",
+          "peak_hz": 9976,
+          "peak_db": 29.2,
+          "trough_hz": 6278,
+          "trough_db": -50.1,
+          "centroid_hz": 4802,
+          "db_at_100hz": -10.0,
+          "db_at_1khz": 11.4,
+          "db_at_8khz": 13.5,
+          "formants": [
+            {
+              "hz": 1440,
+              "db": 27.4,
+              "prominence_db": 38.8
+            },
+            {
+              "hz": 9976,
+              "db": 29.2,
+              "prominence_db": 16.6
+            }
+          ],
+          "notches": [
+            {
+              "hz": 6278,
+              "db": -50.1,
+              "depth_db": 77.5
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "p2k_015",
+      "corners": {
+        "M0_Q0": {
+          "shape": "notched",
+          "peak_hz": 1798,
+          "peak_db": 40.1,
+          "trough_hz": 6396,
+          "trough_db": -93.3,
+          "centroid_hz": 2207,
+          "db_at_100hz": 12.1,
+          "db_at_1khz": 17.0,
+          "db_at_8khz": 1.8,
+          "formants": [
+            {
+              "hz": 1798,
+              "db": 40.1,
+              "prominence_db": 28.1
+            },
+            {
+              "hz": 3155,
+              "db": 35.6,
+              "prominence_db": 12.4
+            },
+            {
+              "hz": 5462,
+              "db": 17.3,
+              "prominence_db": 14.1
+            },
+            {
+              "hz": 8633,
+              "db": 27.3,
+              "prominence_db": 19.1
+            },
+            {
+              "hz": 11621,
+              "db": 32.6,
+              "prominence_db": 16.3
+            }
+          ],
+          "notches": [
+            {
+              "hz": 2567,
+              "db": 23.3,
+              "depth_db": 12.4
+            },
+            {
+              "hz": 4639,
+              "db": 3.3,
+              "depth_db": 14.1
+            },
+            {
+              "hz": 6396,
+              "db": -93.3,
+              "depth_db": 125.9
+            },
+            {
+              "hz": 9870,
+              "db": 8.2,
+              "depth_db": 19.1
+            }
+          ]
+        },
+        "M100_Q0": {
+          "shape": "notched",
+          "peak_hz": 1788,
+          "peak_db": 60.7,
+          "trough_hz": 8587,
+          "trough_db": -43.8,
+          "centroid_hz": 2115,
+          "db_at_100hz": 12.1,
+          "db_at_1khz": 17.1,
+          "db_at_8khz": -12.9,
+          "formants": [
+            {
+              "hz": 1788,
+              "db": 60.7,
+              "prominence_db": 48.7
+            },
+            {
+              "hz": 3146,
+              "db": 56.0,
+              "prominence_db": 32.0
+            },
+            {
+              "hz": 5447,
+              "db": 43.5,
+              "prominence_db": 37.1
+            },
+            {
+              "hz": 8796,
+              "db": 20.9,
+              "prominence_db": 25.3
+            },
+            {
+              "hz": 11746,
+              "db": 44.5,
+              "prominence_db": 32.1
+            }
+          ],
+          "notches": [
+            {
+              "hz": 2540,
+              "db": 24.0,
+              "depth_db": 32.0
+            },
+            {
+              "hz": 4504,
+              "db": 6.4,
+              "depth_db": 37.1
+            },
+            {
+              "hz": 8587,
+              "db": -43.8,
+              "depth_db": 88.3
+            },
+            {
+              "hz": 9430,
+              "db": -4.5,
+              "depth_db": 25.3
+            }
+          ]
+        },
+        "M0_Q100": {
+          "shape": "lowpass",
+          "peak_hz": 488,
+          "peak_db": 18.5,
+          "trough_hz": 10165,
+          "trough_db": -31.8,
+          "centroid_hz": 452,
+          "db_at_100hz": 12.3,
+          "db_at_1khz": 3.7,
+          "db_at_8khz": -7.3,
+          "formants": [
+            {
+              "hz": 488,
+              "db": 18.5,
+              "prominence_db": 6.4
+            },
+            {
+              "hz": 6623,
+              "db": 1.8,
+              "prominence_db": 9.6
+            },
+            {
+              "hz": 9686,
+              "db": 3.7,
+              "prominence_db": 24.3
+            }
+          ],
+          "notches": [
+            {
+              "hz": 4145,
+              "db": -20.5,
+              "depth_db": 24.3
+            },
+            {
+              "hz": 7674,
+              "db": -7.8,
+              "depth_db": 9.6
+            },
+            {
+              "hz": 10165,
+              "db": -31.8,
+              "depth_db": 44.8
+            }
+          ]
+        },
+        "M100_Q100": {
+          "shape": "lowpass",
+          "peak_hz": 416,
+          "peak_db": 19.4,
+          "trough_hz": 4004,
+          "trough_db": -21.1,
+          "centroid_hz": 467,
+          "db_at_100hz": 12.4,
+          "db_at_1khz": 0.2,
+          "db_at_8khz": -18.4,
+          "formants": [
+            {
+              "hz": 416,
+              "db": 19.4,
+              "prominence_db": 7.2
+            },
+            {
+              "hz": 6244,
+              "db": 5.4,
+              "prominence_db": 24.8
+            },
+            {
+              "hz": 9738,
+              "db": 12.2,
+              "prominence_db": 12.4
+            },
+            {
+              "hz": 11435,
+              "db": 7.8,
+              "prominence_db": 4.6
+            }
+          ],
+          "notches": [
+            {
+              "hz": 4004,
+              "db": -21.1,
+              "depth_db": 33.3
+            },
+            {
+              "hz": 8205,
+              "db": -19.4,
+              "depth_db": 24.8
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "p2k_016",
+      "corners": {
+        "M0_Q0": {
+          "shape": "lowpass",
+          "peak_hz": 391,
+          "peak_db": 12.0,
+          "trough_hz": 3337,
+          "trough_db": -74.0,
+          "centroid_hz": 330,
+          "db_at_100hz": 12.0,
+          "db_at_1khz": 4.8,
+          "db_at_8khz": -5.0,
+          "formants": [],
+          "notches": [
+            {
+              "hz": 3337,
+              "db": -74.0,
+              "depth_db": 73.5
+            }
+          ]
+        },
+        "M100_Q0": {
+          "shape": "bandpass",
+          "peak_hz": 435,
+          "peak_db": 46.8,
+          "trough_hz": 12000,
+          "trough_db": -29.6,
+          "centroid_hz": 506,
+          "db_at_100hz": 13.7,
+          "db_at_1khz": 21.9,
+          "db_at_8khz": -15.5,
+          "formants": [
+            {
+              "hz": 435,
+              "db": 46.8,
+              "prominence_db": 34.3
+            },
+            {
+              "hz": 1131,
+              "db": 27.9,
+              "prominence_db": 11.1
+            },
+            {
+              "hz": 2028,
+              "db": 38.3,
+              "prominence_db": 24.2
+            },
+            {
+              "hz": 9764,
+              "db": 19.3,
+              "prominence_db": 35.3
+            }
+          ],
+          "notches": [
+            {
+              "hz": 697,
+              "db": 16.8,
+              "depth_db": 11.1
+            },
+            {
+              "hz": 1803,
+              "db": 14.1,
+              "depth_db": 24.2
+            },
+            {
+              "hz": 8541,
+              "db": -16.0,
+              "depth_db": 35.3
+            }
+          ]
+        },
+        "M0_Q100": {
+          "shape": "peaking",
+          "peak_hz": 299,
+          "peak_db": 13.0,
+          "trough_hz": 12000,
+          "trough_db": -23.9,
+          "centroid_hz": 475,
+          "db_at_100hz": 12.2,
+          "db_at_1khz": 8.7,
+          "db_at_8khz": -12.4,
+          "formants": [],
+          "notches": []
+        },
+        "M100_Q100": {
+          "shape": "notched",
+          "peak_hz": 383,
+          "peak_db": 51.9,
+          "trough_hz": 10165,
+          "trough_db": -32.3,
+          "centroid_hz": 401,
+          "db_at_100hz": 14.7,
+          "db_at_1khz": 14.7,
+          "db_at_8khz": 8.5,
+          "formants": [
+            {
+              "hz": 383,
+              "db": 51.9,
+              "prominence_db": 39.1
+            },
+            {
+              "hz": 8473,
+              "db": 19.5,
+              "prominence_db": 17.8
+            },
+            {
+              "hz": 10581,
+              "db": 19.0,
+              "prominence_db": 19.3
+            },
+            {
+              "hz": 11559,
+              "db": 32.5,
+              "prominence_db": 25.4
+            }
+          ],
+          "notches": [
+            {
+              "hz": 5934,
+              "db": 1.7,
+              "depth_db": 17.8
+            },
+            {
+              "hz": 10165,
+              "db": -32.3,
+              "depth_db": 64.7
+            },
+            {
+              "hz": 11044,
+              "db": -0.3,
+              "depth_db": 19.3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "p2k_017",
+      "corners": {
+        "M0_Q0": {
+          "shape": "notched",
+          "peak_hz": 50,
+          "peak_db": 9.2,
+          "trough_hz": 7158,
+          "trough_db": -67.8,
+          "centroid_hz": 592,
+          "db_at_100hz": 5.3,
+          "db_at_1khz": 5.0,
+          "db_at_8khz": -21.1,
+          "formants": [
+            {
+              "hz": 921,
+              "db": 6.6,
+              "prominence_db": 11.7
+            },
+            {
+              "hz": 4397,
+              "db": -1.9,
+              "prominence_db": 13.4
+            },
+            {
+              "hz": 10781,
+              "db": 2.4,
+              "prominence_db": 12.0
+            }
+          ],
+          "notches": [
+            {
+              "hz": 465,
+              "db": -5.1,
+              "depth_db": 11.7
+            },
+            {
+              "hz": 3465,
+              "db": -15.3,
+              "depth_db": 13.4
+            },
+            {
+              "hz": 7158,
+              "db": -67.8,
+              "depth_db": 70.2
+            },
+            {
+              "hz": 11714,
+              "db": -9.6,
+              "depth_db": 7.3
+            }
+          ]
+        },
+        "M100_Q0": {
+          "shape": "notched",
+          "peak_hz": 50,
+          "peak_db": -7.2,
+          "trough_hz": 10752,
+          "trough_db": -71.5,
+          "centroid_hz": 268,
+          "db_at_100hz": -13.2,
+          "db_at_1khz": -15.6,
+          "db_at_8khz": -37.4,
+          "formants": [
+            {
+              "hz": 899,
+              "db": -13.5,
+              "prominence_db": 10.9
+            },
+            {
+              "hz": 3724,
+              "db": -20.1,
+              "prominence_db": 10.1
+            },
+            {
+              "hz": 9870,
+              "db": -34.6,
+              "prominence_db": 3.5
+            },
+            {
+              "hz": 11344,
+              "db": -44.1,
+              "prominence_db": 6.9
+            }
+          ],
+          "notches": [
+            {
+              "hz": 461,
+              "db": -24.3,
+              "depth_db": 10.9
+            },
+            {
+              "hz": 2701,
+              "db": -30.2,
+              "depth_db": 10.1
+            },
+            {
+              "hz": 10752,
+              "db": -71.5,
+              "depth_db": 27.4
+            }
+          ]
+        },
+        "M0_Q100": {
+          "shape": "notched",
+          "peak_hz": 390,
+          "peak_db": 31.7,
+          "trough_hz": 9558,
+          "trough_db": -36.0,
+          "centroid_hz": 441,
+          "db_at_100hz": 14.6,
+          "db_at_1khz": 15.0,
+          "db_at_8khz": 3.7,
+          "formants": [
+            {
+              "hz": 390,
+              "db": 31.7,
+              "prominence_db": 19.0
+            },
+            {
+              "hz": 8564,
+              "db": 7.7,
+              "prominence_db": 6.8
+            },
+            {
+              "hz": 10581,
+              "db": 9.5,
+              "prominence_db": 6.3
+            },
+            {
+              "hz": 11621,
+              "db": 13.7,
+              "prominence_db": 4.4
+            }
+          ],
+          "notches": [
+            {
+              "hz": 6570,
+              "db": 0.8,
+              "depth_db": 6.8
+            },
+            {
+              "hz": 9558,
+              "db": -36.0,
+              "depth_db": 49.7
+            },
+            {
+              "hz": 11074,
+              "db": 3.2,
+              "depth_db": 6.3
+            }
+          ]
+        },
+        "M100_Q100": {
+          "shape": "bandpass",
+          "peak_hz": 496,
+          "peak_db": 49.7,
+          "trough_hz": 12000,
+          "trough_db": -14.3,
+          "centroid_hz": 614,
+          "db_at_100hz": 14.4,
+          "db_at_1khz": 20.5,
+          "db_at_8khz": 0.7,
+          "formants": [
+            {
+              "hz": 496,
+              "db": 49.7,
+              "prominence_db": 37.0
+            },
+            {
+              "hz": 5462,
+              "db": 36.8,
+              "prominence_db": 24.8
+            },
+            {
+              "hz": 9609,
+              "db": 25.4,
+              "prominence_db": 25.1
+            },
+            {
+              "hz": 11344,
+              "db": 11.4,
+              "prominence_db": 22.5
+            }
+          ],
+          "notches": [
+            {
+              "hz": 3121,
+              "db": 12.0,
+              "depth_db": 24.8
+            },
+            {
+              "hz": 8338,
+              "db": 0.3,
+              "depth_db": 25.1
+            },
+            {
+              "hz": 10956,
+              "db": -11.1,
+              "depth_db": 22.5
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "p2k_018",
+      "corners": {
+        "M0_Q0": {
+          "shape": "notched",
+          "peak_hz": 449,
+          "peak_db": 21.6,
+          "trough_hz": 10165,
+          "trough_db": -34.6,
+          "centroid_hz": 516,
+          "db_at_100hz": 12.7,
+          "db_at_1khz": 11.9,
+          "db_at_8khz": -4.6,
+          "formants": [
+            {
+              "hz": 449,
+              "db": 21.6,
+              "prominence_db": 9.4
+            },
+            {
+              "hz": 1361,
+              "db": 15.7,
+              "prominence_db": 4.0
+            },
+            {
+              "hz": 6177,
+              "db": 20.0,
+              "prominence_db": 24.6
+            }
+          ],
+          "notches": [
+            {
+              "hz": 4933,
+              "db": -4.7,
+              "depth_db": 24.6
+            },
+            {
+              "hz": 10165,
+              "db": -34.6,
+              "depth_db": 26.1
+            }
+          ]
+        },
+        "M100_Q0": {
+          "shape": "lowpass",
+          "peak_hz": 1641,
+          "peak_db": 14.2,
+          "trough_hz": 12000,
+          "trough_db": -18.0,
+          "centroid_hz": 651,
+          "db_at_100hz": 12.0,
+          "db_at_1khz": 0.7,
+          "db_at_8khz": -5.3,
+          "formants": [
+            {
+              "hz": 1641,
+              "db": 14.2,
+              "prominence_db": 15.1
+            }
+          ],
+          "notches": [
+            {
+              "hz": 933,
+              "db": -0.9,
+              "depth_db": 13.0
+            }
+          ]
+        },
+        "M0_Q100": {
+          "shape": "lowpass",
+          "peak_hz": 3867,
+          "peak_db": 16.9,
+          "trough_hz": 12000,
+          "trough_db": -62.1,
+          "centroid_hz": 325,
+          "db_at_100hz": 10.0,
+          "db_at_1khz": -13.3,
+          "db_at_8khz": -44.4,
+          "formants": [
+            {
+              "hz": 1134,
+              "db": 8.5,
+              "prominence_db": 31.0
+            },
+            {
+              "hz": 2540,
+              "db": 8.4,
+              "prominence_db": 19.7
+            },
+            {
+              "hz": 3146,
+              "db": 13.4,
+              "prominence_db": 22.8
+            },
+            {
+              "hz": 3867,
+              "db": 16.9,
+              "prominence_db": 52.1
+            },
+            {
+              "hz": 5447,
+              "db": 11.1,
+              "prominence_db": 41.5
+            }
+          ],
+          "notches": [
+            {
+              "hz": 778,
+              "db": -35.2,
+              "depth_db": 46.8
+            },
+            {
+              "hz": 1817,
+              "db": -22.5,
+              "depth_db": 31.0
+            },
+            {
+              "hz": 3483,
+              "db": -9.4,
+              "depth_db": 22.8
+            },
+            {
+              "hz": 4626,
+              "db": -30.4,
+              "depth_db": 41.5
+            }
+          ]
+        },
+        "M100_Q100": {
+          "shape": "lowpass",
+          "peak_hz": 110,
+          "peak_db": 15.6,
+          "trough_hz": 12000,
+          "trough_db": -84.6,
+          "centroid_hz": 223,
+          "db_at_100hz": 15.4,
+          "db_at_1khz": -5.4,
+          "db_at_8khz": -34.7,
+          "formants": [
+            {
+              "hz": 1387,
+              "db": 11.8,
+              "prominence_db": 20.5
+            },
+            {
+              "hz": 1867,
+              "db": 9.6,
+              "prominence_db": 5.0
+            },
+            {
+              "hz": 6535,
+              "db": -9.9,
+              "prominence_db": 25.3
+            },
+            {
+              "hz": 8633,
+              "db": -20.6,
+              "prominence_db": 14.2
+            }
+          ],
+          "notches": [
+            {
+              "hz": 689,
+              "db": -8.7,
+              "depth_db": 20.5
+            },
+            {
+              "hz": 4651,
+              "db": -35.2,
+              "depth_db": 25.3
+            },
+            {
+              "hz": 7882,
+              "db": -34.8,
+              "depth_db": 14.2
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "p2k_019",
+      "corners": {
+        "M0_Q0": {
+          "shape": "notched",
+          "peak_hz": 4933,
+          "peak_db": 57.2,
+          "trough_hz": 8844,
+          "trough_db": -37.6,
+          "centroid_hz": 4912,
+          "db_at_100hz": 5.2,
+          "db_at_1khz": 7.4,
+          "db_at_8khz": -14.2,
+          "formants": [
+            {
+              "hz": 990,
+              "db": 7.4,
+              "prominence_db": 26.5
+            },
+            {
+              "hz": 2245,
+              "db": -10.9,
+              "prominence_db": 24.3
+            },
+            {
+              "hz": 4933,
+              "db": 57.2,
+              "prominence_db": 94.7
+            },
+            {
+              "hz": 10302,
+              "db": -17.1,
+              "prominence_db": 8.8
+            }
+          ],
+          "notches": [
+            {
+              "hz": 400,
+              "db": -19.0,
+              "depth_db": 24.8
+            },
+            {
+              "hz": 1655,
+              "db": -37.5,
+              "depth_db": 44.9
+            },
+            {
+              "hz": 2880,
+              "db": -35.3,
+              "depth_db": 24.3
+            },
+            {
+              "hz": 8844,
+              "db": -37.6,
+              "depth_db": 20.5
+            }
+          ]
+        },
+        "M100_Q0": {
+          "shape": "notched",
+          "peak_hz": 3346,
+          "peak_db": 33.0,
+          "trough_hz": 567,
+          "trough_db": -22.1,
+          "centroid_hz": 3607,
+          "db_at_100hz": 5.7,
+          "db_at_1khz": 12.5,
+          "db_at_8khz": 11.0,
+          "formants": [
+            {
+              "hz": 1650,
+              "db": 20.1,
+              "prominence_db": 29.2
+            },
+            {
+              "hz": 3346,
+              "db": 33.0,
+              "prominence_db": 45.6
+            },
+            {
+              "hz": 6112,
+              "db": 21.8,
+              "prominence_db": 11.2
+            },
+            {
+              "hz": 9949,
+              "db": 3.4,
+              "prominence_db": 5.5
+            }
+          ],
+          "notches": [
+            {
+              "hz": 567,
+              "db": -22.1,
+              "depth_db": 28.0
+            },
+            {
+              "hz": 2174,
+              "db": -9.0,
+              "depth_db": 29.2
+            },
+            {
+              "hz": 5346,
+              "db": 10.6,
+              "depth_db": 11.2
+            }
+          ]
+        },
+        "M0_Q100": {
+          "shape": "bandpass",
+          "peak_hz": 1483,
+          "peak_db": 52.9,
+          "trough_hz": 12000,
+          "trough_db": -42.4,
+          "centroid_hz": 1745,
+          "db_at_100hz": -0.9,
+          "db_at_1khz": 12.9,
+          "db_at_8khz": -32.7,
+          "formants": [
+            {
+              "hz": 1483,
+              "db": 52.9,
+              "prominence_db": 64.0
+            },
+            {
+              "hz": 2658,
+              "db": 49.1,
+              "prominence_db": 24.0
+            },
+            {
+              "hz": 3249,
+              "db": 27.0,
+              "prominence_db": 7.0
+            },
+            {
+              "hz": 4420,
+              "db": 20.0,
+              "prominence_db": 22.6
+            }
+          ],
+          "notches": [
+            {
+              "hz": 253,
+              "db": -11.1,
+              "depth_db": 10.9
+            },
+            {
+              "hz": 2145,
+              "db": 25.1,
+              "depth_db": 24.0
+            },
+            {
+              "hz": 3055,
+              "db": 20.0,
+              "depth_db": 7.0
+            },
+            {
+              "hz": 4112,
+              "db": -2.6,
+              "depth_db": 22.6
+            }
+          ]
+        },
+        "M100_Q100": {
+          "shape": "bandpass",
+          "peak_hz": 3346,
+          "peak_db": 44.0,
+          "trough_hz": 7988,
+          "trough_db": -77.0,
+          "centroid_hz": 2440,
+          "db_at_100hz": -38.8,
+          "db_at_1khz": 17.3,
+          "db_at_8khz": -66.7,
+          "formants": [
+            {
+              "hz": 1552,
+              "db": 39.3,
+              "prominence_db": 11.0
+            },
+            {
+              "hz": 3346,
+              "db": 44.0,
+              "prominence_db": 89.3
+            },
+            {
+              "hz": 4362,
+              "db": 36.5,
+              "prominence_db": 47.1
+            },
+            {
+              "hz": 6177,
+              "db": 22.0,
+              "prominence_db": 45.8
+            },
+            {
+              "hz": 7511,
+              "db": -36.4,
+              "prominence_db": 20.3
+            }
+          ],
+          "notches": [
+            {
+              "hz": 3867,
+              "db": -10.5,
+              "depth_db": 47.1
+            },
+            {
+              "hz": 5580,
+              "db": -23.8,
+              "depth_db": 45.8
+            },
+            {
+              "hz": 7177,
+              "db": -56.8,
+              "depth_db": 20.3
+            },
+            {
+              "hz": 7988,
+              "db": -77.0,
+              "depth_db": 57.2
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "p2k_020",
+      "corners": {
+        "M0_Q0": {
+          "shape": "bandstop",
+          "peak_hz": 8205,
+          "peak_db": 31.4,
+          "trough_hz": 3950,
+          "trough_db": -74.4,
+          "centroid_hz": 1879,
+          "db_at_100hz": 13.5,
+          "db_at_1khz": -12.7,
+          "db_at_8khz": 10.9,
+          "formants": [
+            {
+              "hz": 220,
+              "db": 20.5,
+              "prominence_db": 8.1
+            },
+            {
+              "hz": 1788,
+              "db": 19.7,
+              "prominence_db": 42.4
+            },
+            {
+              "hz": 2888,
+              "db": 10.0,
+              "prominence_db": 12.7
+            },
+            {
+              "hz": 4907,
+              "db": 4.0,
+              "prominence_db": 5.6
+            },
+            {
+              "hz": 8205,
+              "db": 31.4,
+              "prominence_db": 34.6
+            },
+            {
+              "hz": 8844,
+              "db": 26.3,
+              "prominence_db": 15.6
+            }
+          ],
+          "notches": [
+            {
+              "hz": 708,
+              "db": -22.7,
+              "depth_db": 42.4
+            },
+            {
+              "hz": 2145,
+              "db": -2.8,
+              "depth_db": 12.7
+            },
+            {
+              "hz": 3950,
+              "db": -74.4,
+              "depth_db": 94.8
+            },
+            {
+              "hz": 8427,
+              "db": 10.8,
+              "depth_db": 15.6
+            }
+          ]
+        },
+        "M100_Q0": {
+          "shape": "lowpass",
+          "peak_hz": 8796,
+          "peak_db": 40.7,
+          "trough_hz": 4777,
+          "trough_db": -54.5,
+          "centroid_hz": 1171,
+          "db_at_100hz": 13.8,
+          "db_at_1khz": -12.9,
+          "db_at_8khz": 6.1,
+          "formants": [
+            {
+              "hz": 222,
+              "db": 36.4,
+              "prominence_db": 24.0
+            },
+            {
+              "hz": 1788,
+              "db": 22.3,
+              "prominence_db": 24.2
+            },
+            {
+              "hz": 2880,
+              "db": 34.4,
+              "prominence_db": 57.5
+            },
+            {
+              "hz": 8205,
+              "db": 30.0,
+              "prominence_db": 23.8
+            },
+            {
+              "hz": 8796,
+              "db": 40.7,
+              "prominence_db": 48.8
+            }
+          ],
+          "notches": [
+            {
+              "hz": 708,
+              "db": -23.0,
+              "depth_db": 57.5
+            },
+            {
+              "hz": 2111,
+              "db": -1.9,
+              "depth_db": 24.2
+            },
+            {
+              "hz": 4777,
+              "db": -54.5,
+              "depth_db": 90.9
+            },
+            {
+              "hz": 8405,
+              "db": 6.3,
+              "depth_db": 23.8
+            }
+          ]
+        },
+        "M0_Q100": {
+          "shape": "notched",
+          "peak_hz": 845,
+          "peak_db": 25.4,
+          "trough_hz": 12000,
+          "trough_db": -32.5,
+          "centroid_hz": 629,
+          "db_at_100hz": 12.3,
+          "db_at_1khz": 9.5,
+          "db_at_8khz": -19.5,
+          "formants": [
+            {
+              "hz": 845,
+              "db": 25.4,
+              "prominence_db": 13.3
+            },
+            {
+              "hz": 2140,
+              "db": 5.6,
+              "prominence_db": 8.7
+            },
+            {
+              "hz": 2842,
+              "db": 9.6,
+              "prominence_db": 11.7
+            },
+            {
+              "hz": 3626,
+              "db": 15.6,
+              "prominence_db": 13.3
+            },
+            {
+              "hz": 4373,
+              "db": 16.1,
+              "prominence_db": 20.8
+            }
+          ],
+          "notches": [
+            {
+              "hz": 1515,
+              "db": -4.7,
+              "depth_db": 20.8
+            },
+            {
+              "hz": 2440,
+              "db": -3.1,
+              "depth_db": 8.7
+            },
+            {
+              "hz": 3189,
+              "db": -2.0,
+              "depth_db": 11.7
+            },
+            {
+              "hz": 3898,
+              "db": 2.3,
+              "depth_db": 13.3
+            }
+          ]
+        },
+        "M100_Q100": {
+          "shape": "notched",
+          "peak_hz": 847,
+          "peak_db": 40.8,
+          "trough_hz": 12000,
+          "trough_db": -33.7,
+          "centroid_hz": 747,
+          "db_at_100hz": 12.3,
+          "db_at_1khz": 9.2,
+          "db_at_8khz": -20.7,
+          "formants": [
+            {
+              "hz": 533,
+              "db": 38.2,
+              "prominence_db": 18.0
+            },
+            {
+              "hz": 847,
+              "db": 40.8,
+              "prominence_db": 28.7
+            },
+            {
+              "hz": 2140,
+              "db": 29.8,
+              "prominence_db": 33.1
+            },
+            {
+              "hz": 2827,
+              "db": 30.1,
+              "prominence_db": 33.0
+            },
+            {
+              "hz": 3616,
+              "db": 29.4,
+              "prominence_db": 27.9
+            },
+            {
+              "hz": 4350,
+              "db": 35.4,
+              "prominence_db": 40.6
+            }
+          ],
+          "notches": [
+            {
+              "hz": 1507,
+              "db": -5.1,
+              "depth_db": 40.6
+            },
+            {
+              "hz": 2440,
+              "db": -3.4,
+              "depth_db": 33.1
+            },
+            {
+              "hz": 3189,
+              "db": -2.9,
+              "depth_db": 33.0
+            },
+            {
+              "hz": 3887,
+              "db": 1.5,
+              "depth_db": 27.9
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "p2k_021",
+      "corners": {
+        "M0_Q0": {
+          "shape": "notched",
+          "peak_hz": 845,
+          "peak_db": 26.9,
+          "trough_hz": 12000,
+          "trough_db": -30.9,
+          "centroid_hz": 716,
+          "db_at_100hz": 12.2,
+          "db_at_1khz": 11.1,
+          "db_at_8khz": -17.9,
+          "formants": [
+            {
+              "hz": 845,
+              "db": 26.9,
+              "prominence_db": 14.8
+            },
+            {
+              "hz": 2140,
+              "db": 7.2,
+              "prominence_db": 8.7
+            },
+            {
+              "hz": 2842,
+              "db": 11.2,
+              "prominence_db": 11.7
+            },
+            {
+              "hz": 3626,
+              "db": 17.2,
+              "prominence_db": 13.3
+            },
+            {
+              "hz": 4373,
+              "db": 17.7,
+              "prominence_db": 20.8
+            }
+          ],
+          "notches": [
+            {
+              "hz": 1515,
+              "db": -3.1,
+              "depth_db": 20.8
+            },
+            {
+              "hz": 2440,
+              "db": -1.5,
+              "depth_db": 8.7
+            },
+            {
+              "hz": 3189,
+              "db": -0.5,
+              "depth_db": 11.7
+            },
+            {
+              "hz": 3898,
+              "db": 3.8,
+              "depth_db": 13.3
+            }
+          ]
+        },
+        "M100_Q0": {
+          "shape": "lowpass",
+          "peak_hz": 108,
+          "peak_db": 14.3,
+          "trough_hz": 12000,
+          "trough_db": -57.4,
+          "centroid_hz": 137,
+          "db_at_100hz": 14.2,
+          "db_at_1khz": -17.4,
+          "db_at_8khz": -44.5,
+          "formants": [
+            {
+              "hz": 847,
+              "db": 12.8,
+              "prominence_db": 24.2
+            },
+            {
+              "hz": 2140,
+              "db": -0.3,
+              "prominence_db": 27.2
+            },
+            {
+              "hz": 2827,
+              "db": 6.1,
+              "prominence_db": 33.0
+            },
+            {
+              "hz": 3616,
+              "db": 5.5,
+              "prominence_db": 27.9
+            },
+            {
+              "hz": 4350,
+              "db": 11.6,
+              "prominence_db": 41.6
+            }
+          ],
+          "notches": [
+            {
+              "hz": 1487,
+              "db": -30.0,
+              "depth_db": 41.6
+            },
+            {
+              "hz": 2440,
+              "db": -27.5,
+              "depth_db": 27.2
+            },
+            {
+              "hz": 3189,
+              "db": -26.9,
+              "depth_db": 33.0
+            },
+            {
+              "hz": 3887,
+              "db": -22.4,
+              "depth_db": 27.9
+            }
+          ]
+        },
+        "M0_Q100": {
+          "shape": "lowpass",
+          "peak_hz": 194,
+          "peak_db": 18.3,
+          "trough_hz": 5054,
+          "trough_db": -69.2,
+          "centroid_hz": 217,
+          "db_at_100hz": 14.0,
+          "db_at_1khz": 2.4,
+          "db_at_8khz": -16.6,
+          "formants": [
+            {
+              "hz": 194,
+              "db": 18.3,
+              "prominence_db": 5.8
+            },
+            {
+              "hz": 1543,
+              "db": 0.9,
+              "prominence_db": 3.3
+            },
+            {
+              "hz": 2350,
+              "db": 9.4,
+              "prominence_db": 21.2
+            },
+            {
+              "hz": 4409,
+              "db": -18.0,
+              "prominence_db": 11.8
+            },
+            {
+              "hz": 9330,
+              "db": 4.7,
+              "prominence_db": 18.3
+            }
+          ],
+          "notches": [
+            {
+              "hz": 2017,
+              "db": -11.8,
+              "depth_db": 21.2
+            },
+            {
+              "hz": 3006,
+              "db": -29.8,
+              "depth_db": 11.8
+            },
+            {
+              "hz": 5054,
+              "db": -69.2,
+              "depth_db": 73.9
+            }
+          ]
+        },
+        "M100_Q100": {
+          "shape": "lowpass",
+          "peak_hz": 216,
+          "peak_db": 28.0,
+          "trough_hz": 10553,
+          "trough_db": -95.1,
+          "centroid_hz": 241,
+          "db_at_100hz": 14.4,
+          "db_at_1khz": -1.2,
+          "db_at_8khz": -47.5,
+          "formants": [
+            {
+              "hz": 216,
+              "db": 28.0,
+              "prominence_db": 15.4
+            },
+            {
+              "hz": 564,
+              "db": 21.4,
+              "prominence_db": 9.2
+            },
+            {
+              "hz": 1134,
+              "db": 14.4,
+              "prominence_db": 16.5
+            },
+            {
+              "hz": 1954,
+              "db": -5.6,
+              "prominence_db": 13.1
+            },
+            {
+              "hz": 3929,
+              "db": -20.9,
+              "prominence_db": 24.4
+            },
+            {
+              "hz": 9206,
+              "db": -19.0,
+              "prominence_db": 28.8
+            }
+          ],
+          "notches": [
+            {
+              "hz": 936,
+              "db": -2.0,
+              "depth_db": 16.5
+            },
+            {
+              "hz": 2966,
+              "db": -45.3,
+              "depth_db": 24.4
+            },
+            {
+              "hz": 7715,
+              "db": -47.8,
+              "depth_db": 28.8
+            },
+            {
+              "hz": 10553,
+              "db": -95.1,
+              "depth_db": 37.1
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "p2k_022",
+      "corners": {
+        "M0_Q0": {
+          "shape": "lowpass",
+          "peak_hz": 1912,
+          "peak_db": 20.2,
+          "trough_hz": 12000,
+          "trough_db": -45.1,
+          "centroid_hz": 1035,
+          "db_at_100hz": 1.8,
+          "db_at_1khz": -12.2,
+          "db_at_8khz": -32.8,
+          "formants": [
+            {
+              "hz": 227,
+              "db": 17.6,
+              "prominence_db": 17.2
+            },
+            {
+              "hz": 1568,
+              "db": 19.5,
+              "prominence_db": 7.4
+            },
+            {
+              "hz": 1912,
+              "db": 20.2,
+              "prominence_db": 32.6
+            },
+            {
+              "hz": 2546,
+              "db": 9.9,
+              "prominence_db": 13.4
+            },
+            {
+              "hz": 2950,
+              "db": 6.3,
+              "prominence_db": 4.2
+            }
+          ],
+          "notches": [
+            {
+              "hz": 884,
+              "db": -12.5,
+              "depth_db": 30.1
+            },
+            {
+              "hz": 1727,
+              "db": 12.1,
+              "depth_db": 7.4
+            },
+            {
+              "hz": 2325,
+              "db": -3.5,
+              "depth_db": 13.4
+            }
+          ]
+        },
+        "M100_Q0": {
+          "shape": "bandpass",
+          "peak_hz": 992,
+          "peak_db": 37.2,
+          "trough_hz": 12000,
+          "trough_db": -56.0,
+          "centroid_hz": 953,
+          "db_at_100hz": -4.7,
+          "db_at_1khz": 36.1,
+          "db_at_8khz": -43.0,
+          "formants": [
+            {
+              "hz": 436,
+              "db": 25.9,
+              "prominence_db": 14.2
+            },
+            {
+              "hz": 992,
+              "db": 37.2,
+              "prominence_db": 42.9
+            },
+            {
+              "hz": 1350,
+              "db": 31.8,
+              "prominence_db": 14.0
+            },
+            {
+              "hz": 2210,
+              "db": -3.5,
+              "prominence_db": 13.8
+            },
+            {
+              "hz": 3047,
+              "db": -16.8,
+              "prominence_db": 17.6
+            },
+            {
+              "hz": 5122,
+              "db": -17.6,
+              "prominence_db": 26.4
+            }
+          ],
+          "notches": [
+            {
+              "hz": 655,
+              "db": 11.7,
+              "depth_db": 14.2
+            },
+            {
+              "hz": 1197,
+              "db": 17.8,
+              "depth_db": 14.0
+            },
+            {
+              "hz": 2581,
+              "db": -34.4,
+              "depth_db": 17.6
+            },
+            {
+              "hz": 3867,
+              "db": -44.0,
+              "depth_db": 26.4
+            }
+          ]
+        },
+        "M0_Q100": {
+          "shape": "lowpass",
+          "peak_hz": 329,
+          "peak_db": 28.8,
+          "trough_hz": 10165,
+          "trough_db": -70.3,
+          "centroid_hz": 1794,
+          "db_at_100hz": 0.7,
+          "db_at_1khz": -6.7,
+          "db_at_8khz": -11.9,
+          "formants": [
+            {
+              "hz": 329,
+              "db": 28.8,
+              "prominence_db": 28.6
+            },
+            {
+              "hz": 1655,
+              "db": 24.1,
+              "prominence_db": 14.2
+            },
+            {
+              "hz": 2221,
+              "db": 24.7,
+              "prominence_db": 9.7
+            },
+            {
+              "hz": 2789,
+              "db": 28.0,
+              "prominence_db": 34.9
+            },
+            {
+              "hz": 7735,
+              "db": -8.1,
+              "prominence_db": 11.6
+            }
+          ],
+          "notches": [
+            {
+              "hz": 1131,
+              "db": -6.9,
+              "depth_db": 34.9
+            },
+            {
+              "hz": 1902,
+              "db": 9.9,
+              "depth_db": 14.2
+            },
+            {
+              "hz": 6413,
+              "db": -19.7,
+              "depth_db": 11.6
+            },
+            {
+              "hz": 10165,
+              "db": -70.3,
+              "depth_db": 39.0
+            }
+          ]
+        },
+        "M100_Q100": {
+          "shape": "lowpass",
+          "peak_hz": 3096,
+          "peak_db": 34.4,
+          "trough_hz": 7572,
+          "trough_db": -101.6,
+          "centroid_hz": 1782,
+          "db_at_100hz": 1.5,
+          "db_at_1khz": -25.2,
+          "db_at_8khz": -70.9,
+          "formants": [
+            {
+              "hz": 243,
+              "db": 25.3,
+              "prominence_db": 24.9
+            },
+            {
+              "hz": 1912,
+              "db": 14.1,
+              "prominence_db": 26.5
+            },
+            {
+              "hz": 2540,
+              "db": 28.3,
+              "prominence_db": 28.7
+            },
+            {
+              "hz": 2827,
+              "db": 26.4,
+              "prominence_db": 13.1
+            },
+            {
+              "hz": 3096,
+              "db": 34.4,
+              "prominence_db": 83.9
+            },
+            {
+              "hz": 3240,
+              "db": 17.8,
+              "prominence_db": 5.0
+            }
+          ],
+          "notches": [
+            {
+              "hz": 778,
+              "db": -49.5,
+              "depth_db": 74.7
+            },
+            {
+              "hz": 2044,
+              "db": -12.4,
+              "depth_db": 26.5
+            },
+            {
+              "hz": 2708,
+              "db": -0.4,
+              "depth_db": 28.7
+            },
+            {
+              "hz": 7572,
+              "db": -101.6,
+              "depth_db": 40.6
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "p2k_023",
+      "corners": {
+        "M0_Q0": {
+          "shape": "bandpass",
+          "peak_hz": 1090,
+          "peak_db": 24.7,
+          "trough_hz": 9181,
+          "trough_db": -52.5,
+          "centroid_hz": 1115,
+          "db_at_100hz": 13.0,
+          "db_at_1khz": 24.7,
+          "db_at_8khz": 2.0,
+          "formants": [
+            {
+              "hz": 1090,
+              "db": 24.7,
+              "prominence_db": 12.4
+            },
+            {
+              "hz": 3275,
+              "db": 13.2,
+              "prominence_db": 4.3
+            },
+            {
+              "hz": 10329,
+              "db": 15.7,
+              "prominence_db": 4.8
+            }
+          ],
+          "notches": [
+            {
+              "hz": 9181,
+              "db": -52.5,
+              "depth_db": 70.9
+            }
+          ]
+        },
+        "M100_Q0": {
+          "shape": "bandpass",
+          "peak_hz": 5840,
+          "peak_db": 44.7,
+          "trough_hz": 12000,
+          "trough_db": -5.0,
+          "centroid_hz": 5564,
+          "db_at_100hz": 12.2,
+          "db_at_1khz": 19.0,
+          "db_at_8khz": 10.2,
+          "formants": [
+            {
+              "hz": 1027,
+              "db": 19.0,
+              "prominence_db": 7.0
+            },
+            {
+              "hz": 5840,
+              "db": 44.7,
+              "prominence_db": 43.0
+            },
+            {
+              "hz": 9764,
+              "db": 42.1,
+              "prominence_db": 35.7
+            }
+          ],
+          "notches": [
+            {
+              "hz": 2263,
+              "db": 1.6,
+              "depth_db": 17.4
+            },
+            {
+              "hz": 8844,
+              "db": 6.5,
+              "depth_db": 35.7
+            }
+          ]
+        },
+        "M0_Q100": {
+          "shape": "highpass",
+          "peak_hz": 8009,
+          "peak_db": 27.3,
+          "trough_hz": 3121,
+          "trough_db": -3.3,
+          "centroid_hz": 1425,
+          "db_at_100hz": 12.1,
+          "db_at_1khz": 11.5,
+          "db_at_8khz": 26.7,
+          "formants": [
+            {
+              "hz": 749,
+              "db": 25.2,
+              "prominence_db": 13.1
+            },
+            {
+              "hz": 2282,
+              "db": 22.6,
+              "prominence_db": 22.8
+            },
+            {
+              "hz": 4432,
+              "db": 25.6,
+              "prominence_db": 23.2
+            },
+            {
+              "hz": 8009,
+              "db": 27.3,
+              "prominence_db": 29.0
+            },
+            {
+              "hz": 9817,
+              "db": 20.2,
+              "prominence_db": 18.4
+            },
+            {
+              "hz": 10553,
+              "db": 11.0,
+              "prominence_db": 7.4
+            }
+          ],
+          "notches": [
+            {
+              "hz": 1585,
+              "db": -0.2,
+              "depth_db": 22.8
+            },
+            {
+              "hz": 3121,
+              "db": -3.3,
+              "depth_db": 28.5
+            },
+            {
+              "hz": 5747,
+              "db": 2.4,
+              "depth_db": 23.2
+            },
+            {
+              "hz": 8656,
+              "db": 1.8,
+              "depth_db": 18.4
+            }
+          ]
+        },
+        "M100_Q100": {
+          "shape": "notched",
+          "peak_hz": 753,
+          "peak_db": 44.3,
+          "trough_hz": 8987,
+          "trough_db": -80.7,
+          "centroid_hz": 848,
+          "db_at_100hz": 12.2,
+          "db_at_1khz": 13.1,
+          "db_at_8khz": -28.8,
+          "formants": [
+            {
+              "hz": 753,
+              "db": 44.3,
+              "prominence_db": 32.2
+            },
+            {
+              "hz": 1912,
+              "db": 37.8,
+              "prominence_db": 33.6
+            },
+            {
+              "hz": 3240,
+              "db": 32.9,
+              "prominence_db": 35.9
+            },
+            {
+              "hz": 6730,
+              "db": 27.0,
+              "prominence_db": 41.8
+            },
+            {
+              "hz": 9764,
+              "db": 5.7,
+              "prominence_db": 35.6
+            },
+            {
+              "hz": 11809,
+              "db": 20.3,
+              "prominence_db": 13.0
+            }
+          ],
+          "notches": [
+            {
+              "hz": 2637,
+              "db": -3.0,
+              "depth_db": 35.9
+            },
+            {
+              "hz": 4516,
+              "db": -14.8,
+              "depth_db": 41.8
+            },
+            {
+              "hz": 8987,
+              "db": -80.7,
+              "depth_db": 101.1
+            },
+            {
+              "hz": 10083,
+              "db": -29.9,
+              "depth_db": 35.6
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "p2k_024",
+      "corners": {
+        "M0_Q0": {
+          "shape": "lowpass",
+          "peak_hz": 374,
+          "peak_db": 36.9,
+          "trough_hz": 4651,
+          "trough_db": -200.0,
+          "centroid_hz": 375,
+          "db_at_100hz": -3.8,
+          "db_at_1khz": -58.2,
+          "db_at_8khz": -200.0,
+          "formants": [
+            {
+              "hz": 374,
+              "db": 36.9,
+              "prominence_db": 42.4
+            },
+            {
+              "hz": 4036,
+              "db": -149.6,
+              "prominence_db": 21.1
+            }
+          ],
+          "notches": [
+            {
+              "hz": 3714,
+              "db": -170.8,
+              "depth_db": 21.1
+            }
+          ]
+        },
+        "M100_Q0": {
+          "shape": "notched",
+          "peak_hz": 416,
+          "peak_db": 30.1,
+          "trough_hz": 4933,
+          "trough_db": -200.0,
+          "centroid_hz": 466,
+          "db_at_100hz": -4.8,
+          "db_at_1khz": -1.2,
+          "db_at_8khz": -200.0,
+          "formants": [
+            {
+              "hz": 416,
+              "db": 30.1,
+              "prominence_db": 35.8
+            },
+            {
+              "hz": 928,
+              "db": 6.9,
+              "prominence_db": 3.4
+            },
+            {
+              "hz": 1197,
+              "db": -2.9,
+              "prominence_db": 4.9
+            },
+            {
+              "hz": 1405,
+              "db": -7.9,
+              "prominence_db": 11.8
+            }
+          ],
+          "notches": [
+            {
+              "hz": 1343,
+              "db": -19.7,
+              "depth_db": 11.8
+            }
+          ]
+        },
+        "M0_Q100": {
+          "shape": "bandpass",
+          "peak_hz": 1832,
+          "peak_db": 24.5,
+          "trough_hz": 12000,
+          "trough_db": -188.6,
+          "centroid_hz": 1229,
+          "db_at_100hz": -0.1,
+          "db_at_1khz": 8.7,
+          "db_at_8khz": -146.9,
+          "formants": [
+            {
+              "hz": 1087,
+              "db": 13.5,
+              "prominence_db": 14.0
+            },
+            {
+              "hz": 1832,
+              "db": 24.5,
+              "prominence_db": 25.7
+            },
+            {
+              "hz": 3088,
+              "db": 2.0,
+              "prominence_db": 14.2
+            }
+          ],
+          "notches": [
+            {
+              "hz": 1503,
+              "db": -0.5,
+              "depth_db": 14.0
+            },
+            {
+              "hz": 2479,
+              "db": -12.2,
+              "depth_db": 14.2
+            }
+          ]
+        },
+        "M100_Q100": {
+          "shape": "bandpass",
+          "peak_hz": 1101,
+          "peak_db": 31.7,
+          "trough_hz": 12000,
+          "trough_db": -190.3,
+          "centroid_hz": 1293,
+          "db_at_100hz": -0.2,
+          "db_at_1khz": 7.7,
+          "db_at_8khz": -148.6,
+          "formants": [
+            {
+              "hz": 1101,
+              "db": 31.7,
+              "prominence_db": 33.9
+            },
+            {
+              "hz": 1827,
+              "db": 26.3,
+              "prominence_db": 27.9
+            },
+            {
+              "hz": 3146,
+              "db": 24.9,
+              "prominence_db": 37.9
+            }
+          ],
+          "notches": [
+            {
+              "hz": 1511,
+              "db": -1.5,
+              "depth_db": 27.9
+            },
+            {
+              "hz": 2459,
+              "db": -13.1,
+              "depth_db": 37.9
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "p2k_025",
+      "corners": {
+        "M0_Q0": {
+          "shape": "notched",
+          "peak_hz": 3785,
+          "peak_db": 20.7,
+          "trough_hz": 12000,
+          "trough_db": -35.5,
+          "centroid_hz": 1147,
+          "db_at_100hz": 0.2,
+          "db_at_1khz": -5.5,
+          "db_at_8khz": -24.0,
+          "formants": [
+            {
+              "hz": 537,
+              "db": 6.4,
+              "prominence_db": 6.4
+            },
+            {
+              "hz": 3785,
+              "db": 20.7,
+              "prominence_db": 37.6
+            },
+            {
+              "hz": 6177,
+              "db": 11.2,
+              "prominence_db": 28.2
+            },
+            {
+              "hz": 8796,
+              "db": 10.4,
+              "prominence_db": 41.0
+            },
+            {
+              "hz": 11344,
+              "db": 0.6,
+              "prominence_db": 25.9
+            }
+          ],
+          "notches": [
+            {
+              "hz": 2526,
+              "db": -17.0,
+              "depth_db": 23.4
+            },
+            {
+              "hz": 5067,
+              "db": -16.9,
+              "depth_db": 28.2
+            },
+            {
+              "hz": 7273,
+              "db": -30.6,
+              "depth_db": 41.0
+            },
+            {
+              "hz": 10412,
+              "db": -25.2,
+              "depth_db": 25.9
+            }
+          ]
+        },
+        "M100_Q0": {
+          "shape": "notched",
+          "peak_hz": 1511,
+          "peak_db": 24.7,
+          "trough_hz": 6552,
+          "trough_db": -89.5,
+          "centroid_hz": 948,
+          "db_at_100hz": 0.3,
+          "db_at_1khz": -1.0,
+          "db_at_8khz": -75.1,
+          "formants": [
+            {
+              "hz": 549,
+              "db": 7.5,
+              "prominence_db": 7.4
+            },
+            {
+              "hz": 1511,
+              "db": 24.7,
+              "prominence_db": 26.1
+            },
+            {
+              "hz": 2473,
+              "db": 10.8,
+              "prominence_db": 47.4
+            },
+            {
+              "hz": 3867,
+              "db": 4.5,
+              "prominence_db": 28.3
+            },
+            {
+              "hz": 4920,
+              "db": -12.5,
+              "prominence_db": 35.7
+            },
+            {
+              "hz": 7819,
+              "db": -75.1,
+              "prominence_db": 11.1
+            }
+          ],
+          "notches": [
+            {
+              "hz": 2180,
+              "db": -36.7,
+              "depth_db": 47.4
+            },
+            {
+              "hz": 3364,
+              "db": -23.8,
+              "depth_db": 28.3
+            },
+            {
+              "hz": 4540,
+              "db": -48.3,
+              "depth_db": 35.7
+            },
+            {
+              "hz": 6552,
+              "db": -89.5,
+              "depth_db": 14.5
+            }
+          ]
+        },
+        "M0_Q100": {
+          "shape": "notched",
+          "peak_hz": 1954,
+          "peak_db": 33.7,
+          "trough_hz": 5565,
+          "trough_db": -85.6,
+          "centroid_hz": 1872,
+          "db_at_100hz": 0.0,
+          "db_at_1khz": 5.0,
+          "db_at_8khz": -36.0,
+          "formants": [
+            {
+              "hz": 1954,
+              "db": 33.7,
+              "prominence_db": 33.7
+            },
+            {
+              "hz": 3877,
+              "db": 4.4,
+              "prominence_db": 11.1
+            },
+            {
+              "hz": 6535,
+              "db": -14.7,
+              "prominence_db": 21.4
+            },
+            {
+              "hz": 11809,
+              "db": -5.3,
+              "prominence_db": 9.8
+            }
+          ],
+          "notches": [
+            {
+              "hz": 3400,
+              "db": -6.6,
+              "depth_db": 11.1
+            },
+            {
+              "hz": 5565,
+              "db": -85.6,
+              "depth_db": 80.2
+            },
+            {
+              "hz": 7924,
+              "db": -36.1,
+              "depth_db": 21.4
+            }
+          ]
+        },
+        "M100_Q100": {
+          "shape": "notched",
+          "peak_hz": 673,
+          "peak_db": 32.4,
+          "trough_hz": 8450,
+          "trough_db": -29.8,
+          "centroid_hz": 675,
+          "db_at_100hz": 0.2,
+          "db_at_1khz": -0.2,
+          "db_at_8khz": -29.5,
+          "formants": [
+            {
+              "hz": 673,
+              "db": 32.4,
+              "prominence_db": 32.3
+            },
+            {
+              "hz": 3795,
+              "db": 11.5,
+              "prominence_db": 26.6
+            },
+            {
+              "hz": 6517,
+              "db": 11.3,
+              "prominence_db": 34.0
+            },
+            {
+              "hz": 11746,
+              "db": 5.8,
+              "prominence_db": 23.0
+            }
+          ],
+          "notches": [
+            {
+              "hz": 2730,
+              "db": -15.1,
+              "depth_db": 26.6
+            },
+            {
+              "hz": 5191,
+              "db": -22.7,
+              "depth_db": 34.0
+            },
+            {
+              "hz": 8450,
+              "db": -29.8,
+              "depth_db": 35.6
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "p2k_026",
+      "corners": {
+        "M0_Q0": {
+          "shape": "notched",
+          "peak_hz": 3626,
+          "peak_db": 37.0,
+          "trough_hz": 5191,
+          "trough_db": -22.4,
+          "centroid_hz": 3267,
+          "db_at_100hz": 12.0,
+          "db_at_1khz": 12.5,
+          "db_at_8khz": 7.2,
+          "formants": [
+            {
+              "hz": 3626,
+              "db": 37.0,
+              "prominence_db": 24.9
+            },
+            {
+              "hz": 6294,
+              "db": 29.1,
+              "prominence_db": 51.3
+            },
+            {
+              "hz": 8427,
+              "db": 26.5,
+              "prominence_db": 47.3
+            },
+            {
+              "hz": 10412,
+              "db": 20.7,
+              "prominence_db": 41.3
+            }
+          ],
+          "notches": [
+            {
+              "hz": 5191,
+              "db": -22.4,
+              "depth_db": 51.5
+            },
+            {
+              "hz": 7196,
+              "db": -20.9,
+              "depth_db": 47.3
+            },
+            {
+              "hz": 9430,
+              "db": -20.5,
+              "depth_db": 41.3
+            },
+            {
+              "hz": 11405,
+              "db": -22.2,
+              "depth_db": 22.1
+            }
+          ]
+        },
+        "M100_Q0": {
+          "shape": "lowpass",
+          "peak_hz": 412,
+          "peak_db": 40.2,
+          "trough_hz": 12000,
+          "trough_db": -180.2,
+          "centroid_hz": 406,
+          "db_at_100hz": 12.6,
+          "db_at_1khz": 3.2,
+          "db_at_8khz": -123.3,
+          "formants": [
+            {
+              "hz": 412,
+              "db": 40.2,
+              "prominence_db": 28.1
+            },
+            {
+              "hz": 1746,
+              "db": 23.6,
+              "prominence_db": 23.5
+            },
+            {
+              "hz": 3146,
+              "db": -0.1,
+              "prominence_db": 23.7
+            },
+            {
+              "hz": 4920,
+              "db": -33.9,
+              "prominence_db": 18.8
+            },
+            {
+              "hz": 6396,
+              "db": -55.7,
+              "prominence_db": 20.0
+            }
+          ],
+          "notches": [
+            {
+              "hz": 1368,
+              "db": 0.1,
+              "depth_db": 23.5
+            },
+            {
+              "hz": 2759,
+              "db": -23.8,
+              "depth_db": 23.7
+            },
+            {
+              "hz": 4468,
+              "db": -52.7,
+              "depth_db": 18.8
+            },
+            {
+              "hz": 6030,
+              "db": -75.7,
+              "depth_db": 20.0
+            }
+          ]
+        },
+        "M0_Q100": {
+          "shape": "bandpass",
+          "peak_hz": 803,
+          "peak_db": 34.3,
+          "trough_hz": 12000,
+          "trough_db": -142.3,
+          "centroid_hz": 829,
+          "db_at_100hz": 12.2,
+          "db_at_1khz": 20.6,
+          "db_at_8khz": -31.1,
+          "formants": [
+            {
+              "hz": 803,
+              "db": 34.3,
+              "prominence_db": 22.2
+            },
+            {
+              "hz": 1832,
+              "db": 26.7,
+              "prominence_db": 12.4
+            },
+            {
+              "hz": 4664,
+              "db": -3.0,
+              "prominence_db": 11.6
+            },
+            {
+              "hz": 8271,
+              "db": -16.3,
+              "prominence_db": 5.7
+            },
+            {
+              "hz": 8820,
+              "db": -11.2,
+              "prominence_db": 58.2
+            }
+          ],
+          "notches": [
+            {
+              "hz": 1402,
+              "db": 14.3,
+              "depth_db": 12.4
+            },
+            {
+              "hz": 3887,
+              "db": -14.6,
+              "depth_db": 11.6
+            },
+            {
+              "hz": 7177,
+              "db": -69.4,
+              "depth_db": 58.2
+            }
+          ]
+        },
+        "M100_Q100": {
+          "shape": "lowpass",
+          "peak_hz": 368,
+          "peak_db": 21.9,
+          "trough_hz": 12000,
+          "trough_db": -132.9,
+          "centroid_hz": 304,
+          "db_at_100hz": 12.6,
+          "db_at_1khz": 0.1,
+          "db_at_8khz": -36.7,
+          "formants": [
+            {
+              "hz": 368,
+              "db": 21.9,
+              "prominence_db": 9.8
+            },
+            {
+              "hz": 1784,
+              "db": 5.4,
+              "prominence_db": 6.9
+            },
+            {
+              "hz": 4528,
+              "db": -19.4,
+              "prominence_db": 7.6
+            },
+            {
+              "hz": 8656,
+              "db": -29.1,
+              "prominence_db": 50.8
+            }
+          ],
+          "notches": [
+            {
+              "hz": 1283,
+              "db": -1.6,
+              "depth_db": 6.9
+            },
+            {
+              "hz": 3764,
+              "db": -26.9,
+              "depth_db": 7.6
+            },
+            {
+              "hz": 7177,
+              "db": -79.9,
+              "depth_db": 50.8
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "p2k_027",
+      "corners": {
+        "M0_Q0": {
+          "shape": "lowpass",
+          "peak_hz": 50,
+          "peak_db": 12.0,
+          "trough_hz": 3785,
+          "trough_db": -112.5,
+          "centroid_hz": 181,
+          "db_at_100hz": 11.8,
+          "db_at_1khz": -5.0,
+          "db_at_8khz": -29.2,
+          "formants": [
+            {
+              "hz": 3419,
+              "db": -62.0,
+              "prominence_db": 4.4
+            },
+            {
+              "hz": 9456,
+              "db": -16.7,
+              "prominence_db": 9.0
+            }
+          ],
+          "notches": [
+            {
+              "hz": 3785,
+              "db": -112.5,
+              "depth_db": 95.8
+            }
+          ]
+        },
+        "M100_Q0": {
+          "shape": "lowpass",
+          "peak_hz": 175,
+          "peak_db": 35.5,
+          "trough_hz": 3337,
+          "trough_db": -127.9,
+          "centroid_hz": 174,
+          "db_at_100hz": 15.5,
+          "db_at_1khz": -8.2,
+          "db_at_8khz": -45.5,
+          "formants": [
+            {
+              "hz": 175,
+              "db": 35.5,
+              "prominence_db": 22.7
+            },
+            {
+              "hz": 870,
+              "db": 21.1,
+              "prominence_db": 24.7
+            },
+            {
+              "hz": 1560,
+              "db": 1.0,
+              "prominence_db": 22.3
+            },
+            {
+              "hz": 2344,
+              "db": -25.5,
+              "prominence_db": 24.2
+            },
+            {
+              "hz": 4651,
+              "db": -21.8,
+              "prominence_db": 26.4
+            },
+            {
+              "hz": 9764,
+              "db": 4.7,
+              "prominence_db": 44.1
+            }
+          ],
+          "notches": [
+            {
+              "hz": 631,
+              "db": -3.5,
+              "depth_db": 24.7
+            },
+            {
+              "hz": 2106,
+              "db": -49.7,
+              "depth_db": 24.2
+            },
+            {
+              "hz": 3337,
+              "db": -127.9,
+              "depth_db": 132.6
+            },
+            {
+              "hz": 6694,
+              "db": -48.3,
+              "depth_db": 26.4
+            }
+          ]
+        },
+        "M0_Q100": {
+          "shape": "notched",
+          "peak_hz": 1019,
+          "peak_db": 16.3,
+          "trough_hz": 3428,
+          "trough_db": -31.3,
+          "centroid_hz": 745,
+          "db_at_100hz": 12.1,
+          "db_at_1khz": 16.3,
+          "db_at_8khz": -9.8,
+          "formants": [
+            {
+              "hz": 1019,
+              "db": 16.3,
+              "prominence_db": 4.3
+            },
+            {
+              "hz": 3908,
+              "db": 4.6,
+              "prominence_db": 14.4
+            },
+            {
+              "hz": 10724,
+              "db": 2.9,
+              "prominence_db": 4.0
+            }
+          ],
+          "notches": [
+            {
+              "hz": 3428,
+              "db": -31.3,
+              "depth_db": 35.9
+            },
+            {
+              "hz": 7967,
+              "db": -9.8,
+              "depth_db": 12.7
+            }
+          ]
+        },
+        "M100_Q100": {
+          "shape": "notched",
+          "peak_hz": 629,
+          "peak_db": 36.5,
+          "trough_hz": 3428,
+          "trough_db": -40.9,
+          "centroid_hz": 724,
+          "db_at_100hz": 12.3,
+          "db_at_1khz": 10.1,
+          "db_at_8khz": -16.5,
+          "formants": [
+            {
+              "hz": 629,
+              "db": 36.5,
+              "prominence_db": 24.4
+            },
+            {
+              "hz": 3704,
+              "db": 15.7,
+              "prominence_db": 18.1
+            },
+            {
+              "hz": 4639,
+              "db": 29.6,
+              "prominence_db": 46.1
+            },
+            {
+              "hz": 5625,
+              "db": 11.6,
+              "prominence_db": 3.1
+            },
+            {
+              "hz": 10581,
+              "db": 17.8,
+              "prominence_db": 24.7
+            }
+          ],
+          "notches": [
+            {
+              "hz": 3428,
+              "db": -40.9,
+              "depth_db": 70.5
+            },
+            {
+              "hz": 4057,
+              "db": -2.4,
+              "depth_db": 18.1
+            },
+            {
+              "hz": 8009,
+              "db": -16.5,
+              "depth_db": 34.3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "p2k_028",
+      "corners": {
+        "M0_Q0": {
+          "shape": "lowpass",
+          "peak_hz": 111,
+          "peak_db": 14.8,
+          "trough_hz": 3039,
+          "trough_db": -95.6,
+          "centroid_hz": 130,
+          "db_at_100hz": 14.7,
+          "db_at_1khz": -7.7,
+          "db_at_8khz": -23.4,
+          "formants": [
+            {
+              "hz": 751,
+              "db": 6.4,
+              "prominence_db": 9.4
+            }
+          ],
+          "notches": [
+            {
+              "hz": 495,
+              "db": -3.0,
+              "depth_db": 9.4
+            },
+            {
+              "hz": 3039,
+              "db": -95.6,
+              "depth_db": 76.0
+            }
+          ]
+        },
+        "M100_Q0": {
+          "shape": "notched",
+          "peak_hz": 389,
+          "peak_db": 34.1,
+          "trough_hz": 12000,
+          "trough_db": -69.6,
+          "centroid_hz": 638,
+          "db_at_100hz": 1.9,
+          "db_at_1khz": 5.5,
+          "db_at_8khz": -30.5,
+          "formants": [
+            {
+              "hz": 389,
+              "db": 34.1,
+              "prominence_db": 33.6
+            },
+            {
+              "hz": 1354,
+              "db": 27.0,
+              "prominence_db": 21.9
+            },
+            {
+              "hz": 2028,
+              "db": 27.8,
+              "prominence_db": 26.2
+            },
+            {
+              "hz": 9583,
+              "db": -0.2,
+              "prominence_db": 30.9
+            }
+          ],
+          "notches": [
+            {
+              "hz": 678,
+              "db": 1.7,
+              "depth_db": 26.2
+            },
+            {
+              "hz": 1857,
+              "db": 5.1,
+              "depth_db": 21.9
+            },
+            {
+              "hz": 8541,
+              "db": -31.1,
+              "depth_db": 30.9
+            }
+          ]
+        },
+        "M0_Q100": {
+          "shape": "lowpass",
+          "peak_hz": 328,
+          "peak_db": 21.2,
+          "trough_hz": 12000,
+          "trough_db": -61.8,
+          "centroid_hz": 311,
+          "db_at_100hz": 2.3,
+          "db_at_1khz": -5.5,
+          "db_at_8khz": -42.6,
+          "formants": [
+            {
+              "hz": 328,
+              "db": 21.2,
+              "prominence_db": 20.6
+            },
+            {
+              "hz": 9843,
+              "db": -30.5,
+              "prominence_db": 13.1
+            }
+          ],
+          "notches": [
+            {
+              "hz": 8773,
+              "db": -43.7,
+              "depth_db": 13.1
+            }
+          ]
+        },
+        "M100_Q100": {
+          "shape": "bandpass",
+          "peak_hz": 1041,
+          "peak_db": 24.0,
+          "trough_hz": 50,
+          "trough_db": -5.4,
+          "centroid_hz": 1816,
+          "db_at_100hz": -3.9,
+          "db_at_1khz": 23.6,
+          "db_at_8khz": 12.6,
+          "formants": [
+            {
+              "hz": 1041,
+              "db": 24.0,
+              "prominence_db": 26.7
+            },
+            {
+              "hz": 9791,
+              "db": 15.9,
+              "prominence_db": 12.3
+            },
+            {
+              "hz": 11714,
+              "db": 12.8,
+              "prominence_db": 6.1
+            }
+          ],
+          "notches": [
+            {
+              "hz": 4947,
+              "db": 3.6,
+              "depth_db": 12.3
+            },
+            {
+              "hz": 11074,
+              "db": -2.7,
+              "depth_db": 15.6
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "p2k_029",
+      "corners": {
+        "M0_Q0": {
+          "shape": "lowpass",
+          "peak_hz": 50,
+          "peak_db": 11.8,
+          "trough_hz": 6730,
+          "trough_db": -160.7,
+          "centroid_hz": 145,
+          "db_at_100hz": 11.2,
+          "db_at_1khz": -26.1,
+          "db_at_8khz": -81.7,
+          "formants": [],
+          "notches": [
+            {
+              "hz": 6730,
+              "db": -160.7,
+              "depth_db": 92.6
+            }
+          ]
+        },
+        "M100_Q0": {
+          "shape": "lowpass",
+          "peak_hz": 257,
+          "peak_db": 37.1,
+          "trough_hz": 12000,
+          "trough_db": -17.4,
+          "centroid_hz": 616,
+          "db_at_100hz": 13.3,
+          "db_at_1khz": 1.1,
+          "db_at_8khz": -3.1,
+          "formants": [
+            {
+              "hz": 257,
+              "db": 37.1,
+              "prominence_db": 24.8
+            },
+            {
+              "hz": 1376,
+              "db": 32.6,
+              "prominence_db": 31.8
+            },
+            {
+              "hz": 2282,
+              "db": 27.1,
+              "prominence_db": 20.1
+            },
+            {
+              "hz": 3249,
+              "db": 24.5,
+              "prominence_db": 15.7
+            },
+            {
+              "hz": 4123,
+              "db": 19.6,
+              "prominence_db": 6.6
+            },
+            {
+              "hz": 5067,
+              "db": 16.4,
+              "prominence_db": 4.6
+            }
+          ],
+          "notches": [
+            {
+              "hz": 854,
+              "db": 0.8,
+              "depth_db": 31.8
+            },
+            {
+              "hz": 1837,
+              "db": 7.0,
+              "depth_db": 20.1
+            },
+            {
+              "hz": 2819,
+              "db": 8.8,
+              "depth_db": 15.7
+            },
+            {
+              "hz": 3626,
+              "db": 13.0,
+              "depth_db": 6.6
+            }
+          ]
+        },
+        "M0_Q100": {
+          "shape": "lowpass",
+          "peak_hz": 285,
+          "peak_db": 12.8,
+          "trough_hz": 6950,
+          "trough_db": -69.5,
+          "centroid_hz": 358,
+          "db_at_100hz": 12.2,
+          "db_at_1khz": 4.4,
+          "db_at_8khz": -15.8,
+          "formants": [
+            {
+              "hz": 2687,
+              "db": 3.4,
+              "prominence_db": 3.4
+            }
+          ],
+          "notches": [
+            {
+              "hz": 6950,
+              "db": -69.5,
+              "depth_db": 61.3
+            }
+          ]
+        },
+        "M100_Q100": {
+          "shape": "bandpass",
+          "peak_hz": 1175,
+          "peak_db": 49.8,
+          "trough_hz": 8796,
+          "trough_db": -10.8,
+          "centroid_hz": 1395,
+          "db_at_100hz": 14.1,
+          "db_at_1khz": 40.7,
+          "db_at_8khz": 20.3,
+          "formants": [
+            {
+              "hz": 1175,
+              "db": 49.8,
+              "prominence_db": 37.2
+            },
+            {
+              "hz": 10137,
+              "db": 38.0,
+              "prominence_db": 13.4
+            },
+            {
+              "hz": 11405,
+              "db": 31.4,
+              "prominence_db": 6.0
+            }
+          ],
+          "notches": [
+            {
+              "hz": 8796,
+              "db": -10.8,
+              "depth_db": 48.8
+            },
+            {
+              "hz": 10985,
+              "db": 24.6,
+              "depth_db": 6.8
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "p2k_030",
+      "corners": {
+        "M0_Q0": {
+          "shape": "lowpass",
+          "peak_hz": 50,
+          "peak_db": 12.0,
+          "trough_hz": 7572,
+          "trough_db": -94.9,
+          "centroid_hz": 183,
+          "db_at_100hz": 11.8,
+          "db_at_1khz": -4.2,
+          "db_at_8khz": -61.5,
+          "formants": [
+            {
+              "hz": 4676,
+              "db": -39.3,
+              "prominence_db": 15.0
+            },
+            {
+              "hz": 9558,
+              "db": -38.5,
+              "prominence_db": 5.3
+            }
+          ],
+          "notches": [
+            {
+              "hz": 3302,
+              "db": -54.3,
+              "depth_db": 15.0
+            },
+            {
+              "hz": 7572,
+              "db": -94.9,
+              "depth_db": 56.4
+            }
+          ]
+        },
+        "M100_Q0": {
+          "shape": "lowpass",
+          "peak_hz": 50,
+          "peak_db": 11.6,
+          "trough_hz": 2658,
+          "trough_db": -127.7,
+          "centroid_hz": 90,
+          "db_at_100hz": 7.2,
+          "db_at_1khz": -22.4,
+          "db_at_8khz": -54.3,
+          "formants": [
+            {
+              "hz": 870,
+              "db": 7.0,
+              "prominence_db": 24.8
+            },
+            {
+              "hz": 1560,
+              "db": -14.0,
+              "prominence_db": 21.9
+            },
+            {
+              "hz": 2344,
+              "db": -46.0,
+              "prominence_db": 21.4
+            },
+            {
+              "hz": 4565,
+              "db": -44.9,
+              "prominence_db": 12.4
+            },
+            {
+              "hz": 9635,
+              "db": -22.8,
+              "prominence_db": 27.0
+            }
+          ],
+          "notches": [
+            {
+              "hz": 623,
+              "db": -17.9,
+              "depth_db": 24.8
+            },
+            {
+              "hz": 1365,
+              "db": -35.9,
+              "depth_db": 21.9
+            },
+            {
+              "hz": 2140,
+              "db": -67.4,
+              "depth_db": 21.4
+            },
+            {
+              "hz": 2658,
+              "db": -127.7,
+              "depth_db": 104.9
+            }
+          ]
+        },
+        "M0_Q100": {
+          "shape": "bandpass",
+          "peak_hz": 1016,
+          "peak_db": 18.9,
+          "trough_hz": 3428,
+          "trough_db": -27.2,
+          "centroid_hz": 795,
+          "db_at_100hz": 12.1,
+          "db_at_1khz": 18.9,
+          "db_at_8khz": -11.1,
+          "formants": [
+            {
+              "hz": 1016,
+              "db": 18.9,
+              "prominence_db": 6.8
+            },
+            {
+              "hz": 3856,
+              "db": 9.3,
+              "prominence_db": 20.4
+            },
+            {
+              "hz": 10525,
+              "db": 3.9,
+              "prominence_db": 7.4
+            }
+          ],
+          "notches": [
+            {
+              "hz": 3428,
+              "db": -27.2,
+              "depth_db": 36.5
+            },
+            {
+              "hz": 7945,
+              "db": -11.1,
+              "depth_db": 15.0
+            }
+          ]
+        },
+        "M100_Q100": {
+          "shape": "bandpass",
+          "peak_hz": 803,
+          "peak_db": 34.1,
+          "trough_hz": 3428,
+          "trough_db": -29.9,
+          "centroid_hz": 919,
+          "db_at_100hz": 12.2,
+          "db_at_1khz": 18.9,
+          "db_at_8khz": -15.5,
+          "formants": [
+            {
+              "hz": 803,
+              "db": 34.1,
+              "prominence_db": 22.1
+            },
+            {
+              "hz": 3616,
+              "db": 27.9,
+              "prominence_db": 19.3
+            },
+            {
+              "hz": 4112,
+              "db": 33.5,
+              "prominence_db": 48.9
+            },
+            {
+              "hz": 5640,
+              "db": 8.4,
+              "prominence_db": 6.1
+            },
+            {
+              "hz": 10440,
+              "db": 11.8,
+              "prominence_db": 19.0
+            }
+          ],
+          "notches": [
+            {
+              "hz": 3428,
+              "db": -29.9,
+              "depth_db": 63.4
+            },
+            {
+              "hz": 3825,
+              "db": 8.6,
+              "depth_db": 19.3
+            },
+            {
+              "hz": 4765,
+              "db": 2.3,
+              "depth_db": 6.1
+            },
+            {
+              "hz": 7924,
+              "db": -15.5,
+              "depth_db": 27.3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "p2k_031",
+      "corners": {
+        "M0_Q0": {
+          "shape": "peaking",
+          "peak_hz": 50,
+          "peak_db": 12.0,
+          "trough_hz": 3039,
+          "trough_db": -66.3,
+          "centroid_hz": 294,
+          "db_at_100hz": 12.0,
+          "db_at_1khz": 6.1,
+          "db_at_8khz": -21.0,
+          "formants": [
+            {
+              "hz": 3887,
+              "db": -4.9,
+              "prominence_db": 33.5
+            }
+          ],
+          "notches": [
+            {
+              "hz": 3039,
+              "db": -66.3,
+              "depth_db": 61.4
+            }
+          ]
+        },
+        "M100_Q0": {
+          "shape": "lowpass",
+          "peak_hz": 50,
+          "peak_db": 14.9,
+          "trough_hz": 12000,
+          "trough_db": -85.2,
+          "centroid_hz": 64,
+          "db_at_100hz": 1.0,
+          "db_at_1khz": -40.6,
+          "db_at_8khz": -75.5,
+          "formants": [
+            {
+              "hz": 10192,
+              "db": -51.9,
+              "prominence_db": 23.8
+            }
+          ],
+          "notches": [
+            {
+              "hz": 8495,
+              "db": -75.7,
+              "depth_db": 23.8
+            }
+          ]
+        },
+        "M0_Q100": {
+          "shape": "notched",
+          "peak_hz": 666,
+          "peak_db": 16.1,
+          "trough_hz": 4947,
+          "trough_db": -22.0,
+          "centroid_hz": 511,
+          "db_at_100hz": 12.1,
+          "db_at_1khz": 6.8,
+          "db_at_8khz": -0.9,
+          "formants": [
+            {
+              "hz": 666,
+              "db": 16.1,
+              "prominence_db": 4.0
+            },
+            {
+              "hz": 3293,
+              "db": -5.4,
+              "prominence_db": 8.8
+            },
+            {
+              "hz": 5982,
+              "db": 10.5,
+              "prominence_db": 22.9
+            }
+          ],
+          "notches": [
+            {
+              "hz": 1659,
+              "db": -14.1,
+              "depth_db": 8.8
+            },
+            {
+              "hz": 4947,
+              "db": -22.0,
+              "depth_db": 32.4
+            }
+          ]
+        },
+        "M100_Q100": {
+          "shape": "lowpass",
+          "peak_hz": 236,
+          "peak_db": 17.9,
+          "trough_hz": 4960,
+          "trough_db": -26.1,
+          "centroid_hz": 203,
+          "db_at_100hz": 13.2,
+          "db_at_1khz": -16.7,
+          "db_at_8khz": -14.0,
+          "formants": [
+            {
+              "hz": 236,
+              "db": 17.9,
+              "prominence_db": 5.6
+            },
+            {
+              "hz": 2034,
+              "db": 7.2,
+              "prominence_db": 24.3
+            },
+            {
+              "hz": 4480,
+              "db": -2.3,
+              "prominence_db": 11.0
+            },
+            {
+              "hz": 5731,
+              "db": -4.3,
+              "prominence_db": 19.6
+            }
+          ],
+          "notches": [
+            {
+              "hz": 1539,
+              "db": -17.1,
+              "depth_db": 24.3
+            },
+            {
+              "hz": 2466,
+              "db": -13.2,
+              "depth_db": 11.0
+            },
+            {
+              "hz": 4960,
+              "db": -26.1,
+              "depth_db": 21.8
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "p2k_032",
+      "corners": {
+        "M0_Q0": {
+          "shape": "notched",
+          "peak_hz": 4036,
+          "peak_db": 74.2,
+          "trough_hz": 11528,
+          "trough_db": -40.8,
+          "centroid_hz": 4041,
+          "db_at_100hz": 12.0,
+          "db_at_1khz": 12.8,
+          "db_at_8khz": -1.3,
+          "formants": [
+            {
+              "hz": 4036,
+              "db": 74.2,
+              "prominence_db": 62.2
+            },
+            {
+              "hz": 6227,
+              "db": 17.8,
+              "prominence_db": 25.0
+            },
+            {
+              "hz": 8293,
+              "db": 5.4,
+              "prominence_db": 25.8
+            },
+            {
+              "hz": 10468,
+              "db": -7.4,
+              "prominence_db": 24.0
+            }
+          ],
+          "notches": [
+            {
+              "hz": 5219,
+              "db": -7.2,
+              "depth_db": 25.0
+            },
+            {
+              "hz": 7235,
+              "db": -20.4,
+              "depth_db": 25.8
+            },
+            {
+              "hz": 9481,
+              "db": -31.4,
+              "depth_db": 24.0
+            },
+            {
+              "hz": 11528,
+              "db": -40.8,
+              "depth_db": 9.0
+            }
+          ]
+        },
+        "M100_Q0": {
+          "shape": "bandpass",
+          "peak_hz": 933,
+          "peak_db": 54.4,
+          "trough_hz": 12000,
+          "trough_db": -146.6,
+          "centroid_hz": 1141,
+          "db_at_100hz": 12.2,
+          "db_at_1khz": 34.0,
+          "db_at_8khz": -118.9,
+          "formants": [
+            {
+              "hz": 933,
+              "db": 54.4,
+              "prominence_db": 42.3
+            },
+            {
+              "hz": 1655,
+              "db": 52.6,
+              "prominence_db": 29.0
+            },
+            {
+              "hz": 3155,
+              "db": 25.3,
+              "prominence_db": 13.0
+            },
+            {
+              "hz": 3704,
+              "db": 34.9,
+              "prominence_db": 27.0
+            },
+            {
+              "hz": 4639,
+              "db": 2.0,
+              "prominence_db": 14.4
+            },
+            {
+              "hz": 8315,
+              "db": -106.8,
+              "prominence_db": 18.9
+            }
+          ],
+          "notches": [
+            {
+              "hz": 1311,
+              "db": 23.6,
+              "depth_db": 29.0
+            },
+            {
+              "hz": 2553,
+              "db": 7.9,
+              "depth_db": 27.0
+            },
+            {
+              "hz": 4409,
+              "db": -12.4,
+              "depth_db": 14.4
+            },
+            {
+              "hz": 7840,
+              "db": -125.7,
+              "depth_db": 18.9
+            }
+          ]
+        },
+        "M0_Q100": {
+          "shape": "notched",
+          "peak_hz": 1736,
+          "peak_db": 21.9,
+          "trough_hz": 9380,
+          "trough_db": -92.6,
+          "centroid_hz": 1116,
+          "db_at_100hz": 12.0,
+          "db_at_1khz": 15.0,
+          "db_at_8khz": -19.6,
+          "formants": [
+            {
+              "hz": 1736,
+              "db": 21.9,
+              "prominence_db": 9.8
+            },
+            {
+              "hz": 6211,
+              "db": 3.7,
+              "prominence_db": 6.6
+            },
+            {
+              "hz": 8271,
+              "db": -14.6,
+              "prominence_db": 21.1
+            },
+            {
+              "hz": 10496,
+              "db": -23.3,
+              "prominence_db": 24.5
+            }
+          ],
+          "notches": [
+            {
+              "hz": 5261,
+              "db": -3.0,
+              "depth_db": 6.6
+            },
+            {
+              "hz": 7235,
+              "db": -35.7,
+              "depth_db": 21.1
+            },
+            {
+              "hz": 9380,
+              "db": -92.6,
+              "depth_db": 69.3
+            },
+            {
+              "hz": 11528,
+              "db": -47.8,
+              "depth_db": 13.3
+            }
+          ]
+        },
+        "M100_Q100": {
+          "shape": "notched",
+          "peak_hz": 5462,
+          "peak_db": 36.0,
+          "trough_hz": 11936,
+          "trough_db": -107.5,
+          "centroid_hz": 4089,
+          "db_at_100hz": 12.0,
+          "db_at_1khz": 13.0,
+          "db_at_8khz": 9.2,
+          "formants": [
+            {
+              "hz": 5462,
+              "db": 36.0,
+              "prominence_db": 24.0
+            },
+            {
+              "hz": 8227,
+              "db": 25.2,
+              "prominence_db": 21.1
+            },
+            {
+              "hz": 9791,
+              "db": 32.2,
+              "prominence_db": 50.0
+            }
+          ],
+          "notches": [
+            {
+              "hz": 7215,
+              "db": -17.8,
+              "depth_db": 50.0
+            },
+            {
+              "hz": 9255,
+              "db": 4.1,
+              "depth_db": 21.1
+            },
+            {
+              "hz": 11936,
+              "db": -107.5,
+              "depth_db": 16.7
+            }
+          ]
+        }
+      }
+    }
+  ]
+}
