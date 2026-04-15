@@ -138,33 +138,43 @@ def cascade_db(stages, boost, f):
 # Plot P2K M100/Q100 as a 640x360 PNG
 # ---------------------------------------------------------------------------
 
-def main():
-    # Load P2K_013 from git history. The file was deleted in commit
-    # f146fb3 ("drop pre-pill cartridge archives") so we extract via
-    # `git show` rather than keeping a recovered copy in-tree.
-    repo = Path(__file__).resolve().parents[1]
-    result = subprocess.run(
-        ["git", "-C", str(repo), "show", "f146fb3^:cartridges/p2k/P2k_013.json"],
-        capture_output=True, text=True, check=True,
-    )
-    p2k = json.loads(result.stdout)
-
-    # Pick M100_Q100
-    kf = next(k for k in p2k["keyframes"] if k["label"] == "M100_Q100")
+def render_corner(repo: Path, p2k: dict, corner_label: str, out_name: str) -> None:
+    """Render one P2K keyframe at the given corner as a 400x300 PNG
+    in E-mu display style."""
+    kf = next(k for k in p2k["keyframes"] if k["label"] == corner_label)
     stages = [[s["c0"], s["c1"], s["c2"], s["c3"], s["c4"]] for s in kf["stages"]]
     boost = kf.get("boost", 1.0)
+    _render_png(repo, stages, boost, out_name)
+
+
+def _render_png(repo: Path, stages: list, boost: float, out_name: str) -> None:
 
     # Canvas — roughly matches the E-mu UI widget aspect ratio
     # (the plugin's filter display is ~250x180 pixels). Squarer layout
     # puts the 6 formant peaks visually where they sit in the UI.
     W, H = 400, 300
-    cv = Canvas(W, H, bg=(26, 26, 32))
+    # E-mu display color scheme: dark teal background, cyan grid,
+    # bright cyan curve. Matches the Proteus 2000 plugin filter widget.
+    BG        = (10, 28, 32)     # dark teal
+    PLOT_BG   = (4, 18, 22)      # slightly darker inside the plot area
+    GRID_MAJ  = (40, 90, 100)    # major gridlines (octave / 12 dB)
+    GRID_MIN  = (20, 50, 58)     # minor gridlines (between octaves)
+    BORDER    = (60, 130, 140)   # plot area border
+    CURVE     = (106, 252, 216)  # bright cyan curve
+    ZERO_AX   = (80, 180, 190)   # 0 dB axis highlight
+    cv = Canvas(W, H, bg=BG)
 
     # Plot area
     L, R, T, B = 40, 15, 25, 25
     pw = W - L - R
     ph = H - T - B
-    db_min, db_max = -30, 45
+    # Narrower dB range to match E-mu's plugin display. Real UI
+    # clamps anything outside roughly +/- 24 dB so deep notches and
+    # tall peaks both register at the edges without making the rest
+    # of the curve look squashed. This is why the UI at M0/Q0
+    # reads as a smooth lowpass even though the underlying math has
+    # notches dipping to -60 dB — they just clip against the floor.
+    db_min, db_max = -24, 24
     f_min, f_max = 50.0, 12000.0  # UI widget roughly spans this range
 
     def x_for(f):
@@ -176,26 +186,55 @@ def main():
 
     # Plot area background
     for y in range(T, T + ph + 1):
-        cv.hline(L, L + pw, y, (14, 14, 20))
+        cv.hline(L, L + pw, y, PLOT_BG)
 
-    # Grid
-    grid = (42, 42, 53)
-    for f in [50, 100, 200, 500, 1000, 2000, 5000, 10000]:
-        cv.vline(x_for(f), T, T + ph, grid)
-    for db in range(db_min, db_max + 1, 10):
-        color = (85, 85, 85) if db == 0 else grid
-        cv.hline(L, L + pw, y_for(db), color)
+    # Logarithmic frequency grid — octave-spaced majors (every 2x),
+    # with 1/3-octave minors between them (E-mu-style density).
+    # Majors: powers of 2 from 50 Hz up to Nyquist.
+    major_freqs = []
+    f = 50.0
+    while f <= f_max:
+        major_freqs.append(f)
+        f *= 2.0
+    # Minors: 1.26x (1/3 octave) between each major
+    minor_freqs = []
+    for mf in major_freqs[:-1]:
+        minor_freqs.append(mf * 1.2599)  # 2^(1/3)
+        minor_freqs.append(mf * 1.5874)  # 2^(2/3)
+
+    for mf in minor_freqs:
+        if f_min <= mf <= f_max:
+            cv.vline(x_for(mf), T, T + ph, GRID_MIN)
+    for mf in major_freqs:
+        if f_min <= mf <= f_max:
+            cv.vline(x_for(mf), T, T + ph, GRID_MAJ)
+
+    # dB grid — majors every 12 dB, minors every 6 dB, 0 dB
+    # highlighted in the axis color so you can see the "rest"
+    # level at a glance.
+    for dbv in range(-24, 25, 6):
+        if dbv == 0:
+            color = ZERO_AX
+        elif dbv % 12 == 0:
+            color = GRID_MAJ
+        else:
+            color = GRID_MIN
+        cv.hline(L, L + pw, y_for(dbv), color)
 
     # Plot area border
-    border = (58, 58, 70)
-    cv.hline(L, L + pw, T, border)
-    cv.hline(L, L + pw, T + ph, border)
-    cv.vline(L, T, T + ph, border)
-    cv.vline(L + pw, T, T + ph, border)
+    cv.hline(L, L + pw, T, BORDER)
+    cv.hline(L, L + pw, T + ph, BORDER)
+    cv.vline(L, T, T + ph, BORDER)
+    cv.vline(L + pw, T, T + ph, BORDER)
 
-    # Curve: sample 512 log-spaced frequencies
-    curve_color = (255, 184, 74)  # amber
-    N = 512
+    # Curve: sample 4096 log-spaced frequencies. At 512 points we
+    # were undersampling narrow high-Q resonators — adjacent samples
+    # landed on opposite sides of a sharp peak and thick_line drew
+    # jagged V-shapes where the true response is smooth. 4096 gives
+    # ~1200 points per decade, enough that even 20 Hz bandwidth
+    # peaks get 5+ samples across their main lobe.
+    curve_color = CURVE  # bright cyan
+    N = 4096
     prev = None
     for i in range(N):
         f = 10 ** (math.log10(f_min) + (math.log10(f_max) - math.log10(f_min)) * i / (N - 1))
@@ -206,19 +245,34 @@ def main():
             cv.thick_line(prev[0], prev[1], x, y, curve_color)
         prev = (x, y)
 
-    # Find and mark peaks
-    peak_color = (255, 255, 255)
-    peaks_hz = [194, 1509, 2139, 2411, 4399, 8988]
-    for f in peaks_hz:
-        db = cascade_db(stages, boost, f)
-        cv.filled_disc(x_for(f), y_for(db), 3, peak_color)
+    # No peak markers — E-mu's display shows the curve alone, so
+    # leave it clean for direct visual comparison. If you need the
+    # formant frequencies, the earlier console output has them.
 
     # Write out
-    out_path = repo / "plots" / "p2k_013_m100_q100.png"
+    out_path = repo / "plots" / out_name
     out_path.parent.mkdir(exist_ok=True)
     write_png(out_path, cv.px, W, H)
-    print(f"wrote {out_path}")
-    print(f"size: {out_path.stat().st_size} bytes")
+    print(f"wrote {out_path.relative_to(repo)}  ({out_path.stat().st_size} bytes)")
+
+
+def main():
+    # Load P2K_013 from git history. The file was deleted in commit
+    # f146fb3 ("drop pre-pill cartridge archives") so we extract via
+    # `git show` rather than keeping a recovered copy in-tree.
+    repo = Path(__file__).resolve().parents[1]
+    result = subprocess.run(
+        ["git", "-C", str(repo), "show", "f146fb3^:cartridges/p2k/P2k_013.json"],
+        capture_output=True, text=True, check=True,
+    )
+    p2k = json.loads(result.stdout)
+
+    # Render all 4 corners so direct visual A/B against the plugin's
+    # 4 morph/Q settings is possible.
+    render_corner(repo, p2k, "M0_Q0",    "p2k_013_m0_q0.png")
+    render_corner(repo, p2k, "M100_Q0",  "p2k_013_m100_q0.png")
+    render_corner(repo, p2k, "M0_Q100",  "p2k_013_m0_q100.png")
+    render_corner(repo, p2k, "M100_Q100","p2k_013_m100_q100.png")
 
 
 if __name__ == "__main__":
