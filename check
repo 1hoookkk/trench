@@ -63,7 +63,14 @@ fi
 echo "  OK"
 
 step "rust workspace check (lib + tests, type-only)"
-cargo check --workspace --tests --quiet
+# trench-live requires ALSA + X11 + GL system headers (nih-plug standalone).
+# On headless Linux those headers are absent; the plugin targets Windows.
+# Check only trench-core on Linux; check the full workspace on Windows.
+if [[ "$(uname -s)" == "Linux" ]]; then
+  cargo check -p trench-core --tests --quiet
+else
+  cargo check --workspace --tests --quiet
+fi
 
 step "passthrough null targets (static < -120 dBFS, dynamic < -90 dBFS)"
 run_cargo_test cargo test -p trench-core --test null_targets --quiet

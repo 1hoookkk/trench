@@ -8,7 +8,7 @@
 //!   `trench-core/src/emu_params.rs` for the provenance chain that
 //!   produces the hardcoded Talking Hedz cartridge at build time.
 //! - The cartridge is fully const at the Rust level (`trench_core::
-//!   emu_params::HEDZ_CORNERS` + `HEDZ_BOOSTS`). `Cartridge::hedz_rom()`
+//!   emu_params::HEDZ_CORNERS` + `HEDZ_BOOSTS`). `Cartridge::talking_hedz()`
 //!   makes one `String` allocation for the name at plugin init —
 //!   once — and nothing else ever allocates.
 //! - `process()` walks 32-sample control blocks through
@@ -54,7 +54,7 @@ impl Default for TrenchLive {
             // audio thread. The 4×6×5 float cartridge body is copied
             // from `trench_core::emu_params::HEDZ_CORNERS` which lives
             // in .rodata.
-            cartridge: Cartridge::hedz_rom(),
+            cartridge: Cartridge::talking_hedz(),
         }
     }
 }

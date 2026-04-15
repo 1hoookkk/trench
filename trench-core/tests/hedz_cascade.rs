@@ -123,8 +123,8 @@ fn hedz_rom_q_axis_is_collapsed() {
 
 #[test]
 fn hedz_cartridge_builder_wires_const_through() {
-    // Cartridge::hedz_rom() must carry the const arrays verbatim.
-    let cart = Cartridge::hedz_rom();
+    // Cartridge::talking_hedz() must carry the const arrays verbatim.
+    let cart = Cartridge::talking_hedz();
     assert_eq!(cart.name, "Talking Hedz");
     assert_eq!(cart.corners, HEDZ_CORNERS);
     assert_eq!(cart.boosts, HEDZ_BOOSTS);

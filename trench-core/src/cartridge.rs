@@ -187,7 +187,7 @@ impl Cartridge {
     /// plugin init time — zero allocation, zero I/O, zero locks on
     /// the audio thread. See `tools/bake_hedz_const.py` and
     /// `emu_params.rs` for the provenance chain.
-    pub fn hedz_rom() -> Self {
+    pub fn talking_hedz() -> Self {
         Self {
             name: crate::emu_params::HEDZ_NAME.to_string(),
             corners: crate::emu_params::HEDZ_CORNERS,
