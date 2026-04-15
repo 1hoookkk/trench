@@ -9,7 +9,7 @@
 //!
 //!  1. `tools/bake_hedz_const.py` — the Python compile or DF2T math
 //!  2. `trench-core/src/cascade.rs` — the Rust DF2T math
-//!  3. `trench-core/src/hedz_rom.rs` — the committed const coefficients
+//!  3. `trench-core/src/emu_params.rs` — the committed const coefficients
 //!  4. `trench-core/src/hedz_golden.rs` — the committed expected outputs
 //!
 //! Root-cause the drift. Do not loosen the tolerance — `2e-5` is
@@ -29,7 +29,7 @@ use trench_core::hedz_golden::{
     HEDZ_GOLDEN_LEN, HEDZ_GOLDEN_M0_Q0, HEDZ_GOLDEN_M0_Q100, HEDZ_GOLDEN_M100_Q0,
     HEDZ_GOLDEN_M100_Q100,
 };
-use trench_core::hedz_rom::{HEDZ_BOOSTS, HEDZ_CORNERS};
+use trench_core::emu_params::{HEDZ_BOOSTS, HEDZ_CORNERS};
 use trench_core::{Cartridge, Cascade};
 
 /// Peak-error tolerance, matched to the bake script's f32 rounding.

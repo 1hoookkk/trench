@@ -4,7 +4,7 @@ pub mod cascade;
 pub mod cluster;
 pub mod engine;
 pub mod hedz_golden;
-pub mod hedz_rom;
+pub mod emu_params;
 pub mod motor;
 pub mod role;
 

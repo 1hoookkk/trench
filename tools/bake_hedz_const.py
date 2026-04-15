@@ -6,7 +6,7 @@ the `hedz` template's 30-integer authoring grid, compiles it to 4-corner × 6-st
 runs an impulse through the resulting DF2T cascade at each corner, and
 emits two Rust source files:
 
-    trench-core/src/hedz_rom.rs    — the cartridge const arrays
+    trench-core/src/emu_params.rs  — the cartridge const arrays
     trench-core/src/hedz_golden.rs — committed golden impulse-response
                                       vectors per corner, for the Rust
                                       cross-language parity test.
@@ -39,7 +39,7 @@ REPO = Path(__file__).resolve().parents[1]
 DEFAULT_INVENTORY = (
     REPO / "cartridges" / "engine" / "_source" / "heritage_designer_sections.json"
 )
-DEFAULT_ROM = REPO / "trench-core" / "src" / "hedz_rom.rs"
+DEFAULT_ROM = REPO / "trench-core" / "src" / "emu_params.rs"
 DEFAULT_GOLDEN = REPO / "trench-core" / "src" / "hedz_golden.rs"
 
 SR = 44100

@@ -183,15 +183,15 @@ impl Cartridge {
     }
 
     /// Build the hardcoded Talking Hedz cartridge from the baked
-    /// consts in `hedz_rom`. One `String` allocation for the name at
+    /// consts in `emu_params`. One `String` allocation for the name at
     /// plugin init time — zero allocation, zero I/O, zero locks on
     /// the audio thread. See `tools/bake_hedz_const.py` and
-    /// `hedz_rom.rs` for the provenance chain.
+    /// `emu_params.rs` for the provenance chain.
     pub fn hedz_rom() -> Self {
         Self {
-            name: crate::hedz_rom::HEDZ_NAME.to_string(),
-            corners: crate::hedz_rom::HEDZ_CORNERS,
-            boosts: crate::hedz_rom::HEDZ_BOOSTS,
+            name: crate::emu_params::HEDZ_NAME.to_string(),
+            corners: crate::emu_params::HEDZ_CORNERS,
+            boosts: crate::emu_params::HEDZ_BOOSTS,
         }
     }
 

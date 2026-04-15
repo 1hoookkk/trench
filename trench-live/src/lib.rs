@@ -5,10 +5,10 @@
 //! - No filesystem polling, no JSON reloading, no `Mutex`, no `RwLock`,
 //!   no `Arc<AtomicCell<...>>` handoffs into `process()`.
 //! - No editor — see `tools/bake_hedz_const.py` and
-//!   `trench-core/src/hedz_rom.rs` for the provenance chain that
+//!   `trench-core/src/emu_params.rs` for the provenance chain that
 //!   produces the hardcoded Talking Hedz cartridge at build time.
 //! - The cartridge is fully const at the Rust level (`trench_core::
-//!   hedz_rom::HEDZ_CORNERS` + `HEDZ_BOOSTS`). `Cartridge::hedz_rom()`
+//!   emu_params::HEDZ_CORNERS` + `HEDZ_BOOSTS`). `Cartridge::hedz_rom()`
 //!   makes one `String` allocation for the name at plugin init —
 //!   once — and nothing else ever allocates.
 //! - `process()` walks 32-sample control blocks through
@@ -21,7 +21,7 @@
 //! which is lock-free per nih-plug's atomic parameter storage.
 //!
 //! If you find yourself wanting to live-reload a different cartridge:
-//! rebuild the plugin with a different `hedz_rom.rs`. That is not a
+//! rebuild the plugin with a different `emu_params.rs`. That is not a
 //! workflow limitation, it is the point.
 
 use nih_plug::prelude::*;
@@ -52,7 +52,7 @@ impl Default for TrenchLive {
             cascade_r: Cascade::new(),
             // One allocation for the name String. Never touches the
             // audio thread. The 4×6×5 float cartridge body is copied
-            // from `trench_core::hedz_rom::HEDZ_CORNERS` which lives
+            // from `trench_core::emu_params::HEDZ_CORNERS` which lives
             // in .rodata.
             cartridge: Cartridge::hedz_rom(),
         }
