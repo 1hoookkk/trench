@@ -45,7 +45,8 @@ constant 1.0.
 ## 2. Cartridge format (`compiled-v1`)
 
 The plugin consumes immutable JSON cartridges. Authoritative loader:
-`pyruntime/compiled_v1.py`. Schema: `cartridge.schema.json`.
+`trench-core/src/cartridge.rs::Cartridge::from_json`. Schema:
+`cartridge.schema.json`.
 
 ```json
 {
@@ -72,6 +73,22 @@ The plugin consumes immutable JSON cartridges. Authoritative loader:
   + 6 passthrough). Each stage is an object with numeric `c0..c4`.
 - Corners are absolute endpoints of the bilinear surface. No implicit
   midpoints, no per-stage exceptions.
+
+### Provenance: 4-corner is a TRENCH optimization of E-mu's 2-frame Morph Designer
+
+The 4-corner (`M0_Q0`, `M0_Q100`, `M100_Q0`, `M100_Q100`) shape is NOT
+E-mu's native Morph Designer format. E-mu stores 6 sections × 2 frames
+(Lo Morph / Hi Morph) with a live Q/Gain parameter and a ±50% offset
+wheel; biquad coefficients are derived at runtime from the interpolated
+`(type, freq, Q)` tuple. TRENCH precomputes Q0 and Q100 snapshots at
+each morph frame to avoid runtime coefficient computation — a valid
+optimization on the hardware E-mu shipped this on, and free on modern
+CPUs.
+
+The long-term direction is a 2-corner runtime that matches E-mu's
+native behavior exactly; see `docs/architecture/zplane_truth.md`.
+Until that transition ships, the 4-corner shape defined above is
+frozen.
 
 ## 3. Runtime invariants
 
