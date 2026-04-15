@@ -28,10 +28,14 @@ SK_DIR = REPO / "cartridges" / "engine" / "_source" / "shapes" / "speaker_knocke
 
 SR = 39062.5
 
-# Frequency grid: log-spaced from 20 Hz to Nyquist
+# Frequency grid: log-spaced from 20 Hz to Nyquist. 2048 points gives
+# ~0.14% frequency resolution — dense enough to catch narrow formant
+# peaks (typical bw ~1-3% of center frequency) without aliasing the
+# curves. A sparser grid was originally used and hid multi-formant
+# structure in the P2k_013 plot — see this commit's companion fix.
 F_MIN = 20.0
 F_MAX = 18000.0
-N_FREQS = 512
+N_FREQS = 2048
 
 # dB display range
 DB_MIN = -40.0
@@ -219,6 +223,59 @@ def svg_footer() -> str:
     return "</svg>"
 
 
+def find_local_maxima(freqs: list, mags: list, min_prominence_db: float = 3.0) -> list:
+    """Return (hz, db) tuples for every local maximum in the response
+    that rises at least `min_prominence_db` above its surrounding
+    valleys. Filters out trivial ripples so we only mark real formants."""
+    n = len(mags)
+    raw = []
+    for i in range(1, n - 1):
+        if mags[i] > mags[i - 1] and mags[i] > mags[i + 1]:
+            raw.append(i)
+    if not raw:
+        return []
+
+    # Compute per-peak prominence as (peak_db - max(adjacent valley floor))
+    mags_db = [db(m) for m in mags]
+    peaks = []
+    for idx in raw:
+        # Walk left until we find a higher peak or the boundary
+        left_floor = mags_db[idx]
+        j = idx - 1
+        while j > 0 and mags_db[j] < mags_db[idx]:
+            if mags_db[j] < left_floor:
+                left_floor = mags_db[j]
+            j -= 1
+        # Walk right similarly
+        right_floor = mags_db[idx]
+        j = idx + 1
+        while j < n - 1 and mags_db[j] < mags_db[idx]:
+            if mags_db[j] < right_floor:
+                right_floor = mags_db[j]
+            j += 1
+        prominence = mags_db[idx] - max(left_floor, right_floor)
+        if prominence >= min_prominence_db:
+            peaks.append((freqs[idx], mags_db[idx]))
+    return peaks
+
+
+def svg_peak_markers(peaks: list, color: str) -> str:
+    """Draw small circles + hz labels at each peak."""
+    parts = []
+    for hz, dbv in peaks:
+        x = x_for(hz)
+        y = y_for(dbv)
+        parts.append(
+            f'<circle cx="{x:.1f}" cy="{y:.1f}" r="3" fill="{color}" '
+            f'stroke="#ffffff" stroke-width="0.8"/>'
+        )
+        parts.append(
+            f'<text x="{x:.1f}" y="{y - 8:.1f}" fill="#eeeeee" font-size="8" '
+            f'text-anchor="middle">{hz:.0f}</text>'
+        )
+    return "\n".join(parts)
+
+
 # ---------------------------------------------------------------------------
 # Plot 1: P2k_013 Talking Hedz, all 4 corners
 # ---------------------------------------------------------------------------
@@ -269,13 +326,19 @@ def plot_p2k() -> None:
         color = P2K_COLORS.get(label, "#ffffff")
         parts.append(svg_curve(freqs, mags, color, label))
 
-        # Find peak frequency for legend subtitle
-        peak_idx = max(range(len(mags)), key=lambda i: mags[i])
-        peak_hz = freqs[peak_idx]
-        peak_db = db(mags[peak_idx])
-        legend_entries.append(
-            (label, color, f"peak {peak_hz:.0f} Hz ({peak_db:+.0f} dB)")
-        )
+        # Mark every significant local maximum so the multi-formant
+        # structure is visible (fixes the earlier single-peak bug).
+        peaks = find_local_maxima(freqs, mags, min_prominence_db=3.0)
+        parts.append(svg_peak_markers(peaks, color))
+
+        # Legend subtitle: count of peaks + top peak
+        if peaks:
+            top_hz, top_db = max(peaks, key=lambda p: p[1])
+            legend_entries.append(
+                (label, color, f"{len(peaks)} peaks, top {top_hz:.0f} Hz ({top_db:+.0f} dB)")
+            )
+        else:
+            legend_entries.append((label, color, "no peaks (flat/rolloff)"))
 
     parts.append(svg_legend(legend_entries))
     parts.append(svg_footer())
@@ -283,6 +346,153 @@ def plot_p2k() -> None:
     out_path = PLOTS_DIR / "p2k_013_talking_hedz.svg"
     out_path.write_text("\n".join(parts), encoding="utf-8")
     print(f"wrote {out_path.relative_to(REPO)}")
+
+
+# ---------------------------------------------------------------------------
+# Plot 1b: P2K per-corner subplot grid, matching the E-mu UI's single-curve
+# view so direct visual comparison against the plugin screenshots is easy.
+# ---------------------------------------------------------------------------
+
+def plot_p2k_per_corner() -> None:
+    data = load_p2k_from_history()
+    freqs = log_freqs(N_FREQS)
+
+    # 2×2 subplot grid: M0_Q0 | M100_Q0 / M0_Q100 | M100_Q100
+    # Each subplot gets its own mini axes. Canvas grows to fit.
+    sub_w = 460
+    sub_h = 240
+    margin_l_sub = 55
+    margin_r_sub = 18
+    margin_t_sub = 30
+    margin_b_sub = 40
+    plot_w_sub = sub_w - margin_l_sub - margin_r_sub
+    plot_h_sub = sub_h - margin_t_sub - margin_b_sub
+    canvas_w = 2 * sub_w + 40
+    canvas_h = 2 * sub_h + 90
+
+    def x_for_sub(f, origin_x):
+        lo = math.log10(F_MIN)
+        hi = math.log10(F_MAX)
+        return origin_x + margin_l_sub + (math.log10(f) - lo) / (hi - lo) * plot_w_sub
+
+    def y_for_sub(dbv, origin_y):
+        clamped = max(DB_MIN, min(DB_MAX, dbv))
+        return origin_y + margin_t_sub + (DB_MAX - clamped) / (DB_MAX - DB_MIN) * plot_h_sub
+
+    def subplot_grid(origin_x, origin_y, title):
+        parts = []
+        parts.append(
+            f'<rect x="{origin_x + margin_l_sub}" y="{origin_y + margin_t_sub}" '
+            f'width="{plot_w_sub}" height="{plot_h_sub}" fill="#0e0e14" '
+            f'stroke="#3a3a46" stroke-width="1"/>'
+        )
+        for f in [50, 100, 200, 500, 1000, 2000, 5000, 10000]:
+            x = x_for_sub(f, origin_x)
+            parts.append(
+                f'<line x1="{x:.1f}" y1="{origin_y + margin_t_sub}" '
+                f'x2="{x:.1f}" y2="{origin_y + margin_t_sub + plot_h_sub}" '
+                f'stroke="#2a2a35" stroke-width="0.4"/>'
+            )
+            label_f = f"{f}" if f < 1000 else f"{f // 1000}k"
+            parts.append(
+                f'<text x="{x:.1f}" y="{origin_y + margin_t_sub + plot_h_sub + 13}" '
+                f'fill="#888" font-size="9" text-anchor="middle">{label_f}</text>'
+            )
+        for dbv in range(int(DB_MIN), int(DB_MAX) + 1, 20):
+            y = y_for_sub(dbv, origin_y)
+            stroke = "#555" if dbv == 0 else "#2a2a35"
+            parts.append(
+                f'<line x1="{origin_x + margin_l_sub}" y1="{y:.1f}" '
+                f'x2="{origin_x + margin_l_sub + plot_w_sub}" y2="{y:.1f}" '
+                f'stroke="{stroke}" stroke-width="0.4"/>'
+            )
+            parts.append(
+                f'<text x="{origin_x + margin_l_sub - 6}" y="{y + 3:.1f}" '
+                f'fill="#888" font-size="9" text-anchor="end">{dbv:+d}</text>'
+            )
+        parts.append(
+            f'<text x="{origin_x + sub_w/2}" y="{origin_y + margin_t_sub - 10}" '
+            f'fill="#e0e0e8" font-size="13" font-weight="bold" text-anchor="middle">{title}</text>'
+        )
+        return "\n".join(parts)
+
+    def subplot_curve(origin_x, origin_y, freqs, mags, color):
+        pts = []
+        for f, m in zip(freqs, mags):
+            x = x_for_sub(f, origin_x)
+            y = y_for_sub(db(m), origin_y)
+            pts.append(f"{x:.1f},{y:.1f}")
+        return (
+            f'<polyline points="{" ".join(pts)}" fill="none" stroke="{color}" '
+            f'stroke-width="1.6"/>'
+        )
+
+    def subplot_peaks(origin_x, origin_y, peaks, color):
+        parts = []
+        for hz, dbv in peaks:
+            x = x_for_sub(hz, origin_x)
+            y = y_for_sub(dbv, origin_y)
+            parts.append(
+                f'<circle cx="{x:.1f}" cy="{y:.1f}" r="2.5" fill="{color}" '
+                f'stroke="#ffffff" stroke-width="0.6"/>'
+            )
+            parts.append(
+                f'<text x="{x:.1f}" y="{y - 6:.1f}" fill="#eeeeee" font-size="8" '
+                f'text-anchor="middle">{hz:.0f}</text>'
+            )
+        return "\n".join(parts)
+
+    parts = [
+        f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {canvas_w} {canvas_h}" '
+        f'font-family="monospace" font-size="11">',
+        f'<rect width="{canvas_w}" height="{canvas_h}" fill="#1a1a20"/>',
+        f'<text x="{canvas_w/2}" y="28" fill="#eeeef0" text-anchor="middle" '
+        f'font-size="16" font-weight="bold">P2K #013 — Talking Hedz, all 4 corners as subplots</text>',
+        f'<text x="{canvas_w/2}" y="46" fill="#999" text-anchor="middle" font-size="11">'
+        f'matches the E-mu UI one-curve-per-setting view; peaks marked at ≥3 dB prominence</text>',
+    ]
+
+    # 4 corners in a 2×2 grid — matching the UI screenshots' arrangement
+    corner_layout = [
+        ("M0_Q0",    20,           70),
+        ("M100_Q0",  sub_w + 40,   70),
+        ("M0_Q100",  20,           sub_h + 90),
+        ("M100_Q100",sub_w + 40,   sub_h + 90),
+    ]
+
+    kf_by_label = {kf["label"]: kf for kf in data["keyframes"]}
+
+    for label, ox, oy in corner_layout:
+        kf = kf_by_label[label]
+        stages = stages_from_keyframe(kf)
+        boost = kf.get("boost", 1.0)
+        mags = cascade_response(stages, boost, freqs)
+        peaks = find_local_maxima(freqs, mags, min_prominence_db=3.0)
+        color = P2K_COLORS[label]
+        title = f"{label}   ({len(peaks)} formants)"
+        parts.append(subplot_grid(ox, oy, title))
+        parts.append(subplot_curve(ox, oy, freqs, mags, color))
+        parts.append(subplot_peaks(ox, oy, peaks, color))
+
+    parts.append("</svg>")
+
+    out_path = PLOTS_DIR / "p2k_013_per_corner.svg"
+    out_path.write_text("\n".join(parts), encoding="utf-8")
+    print(f"wrote {out_path.relative_to(REPO)}")
+
+    # Also print the formant inventory to stdout for the report
+    print("\nP2K #013 formant inventory (shape-bank data):")
+    for label, _, _ in corner_layout:
+        kf = kf_by_label[label]
+        stages = stages_from_keyframe(kf)
+        boost = kf.get("boost", 1.0)
+        mags = cascade_response(stages, boost, freqs)
+        peaks = find_local_maxima(freqs, mags, min_prominence_db=3.0)
+        if peaks:
+            peak_strs = [f"{hz:.0f}Hz({dbv:+.0f}dB)" for hz, dbv in peaks]
+            print(f"  {label:<11} ({len(peaks)} peaks): {', '.join(peak_strs)}")
+        else:
+            print(f"  {label:<11} (no peaks — flat/rolloff)")
 
 
 # ---------------------------------------------------------------------------
@@ -399,6 +609,7 @@ def plot_comparison() -> None:
 def main() -> int:
     PLOTS_DIR.mkdir(exist_ok=True)
     plot_p2k()
+    plot_p2k_per_corner()
     plot_speaker_knockerz()
     plot_comparison()
     return 0
