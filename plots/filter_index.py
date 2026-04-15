@@ -182,21 +182,47 @@ def analyze_corner(stages, boost):
 # Main
 # ---------------------------------------------------------------------------
 
+def _load_filter_names(repo: Path) -> dict:
+    """Extract P2K filter names from token_inventory_unified_v2.json.
+
+    Returns dict like {"P2k_000": "No Filter", "P2k_001": "2 Pole Lowpass", ...}.
+    Filters absent from the inventory get None.
+    """
+    inv_path = (repo / "cartridges" / "engine" / "_source"
+                / "token_inventory_unified_v2.json")
+    inv = json.loads(inv_path.read_text())
+    names: dict = {}
+    for token in inv["tokens"].values():
+        for entry in token.get("p2k_phonemes", []):
+            for rep in entry.get("representatives", []):
+                pid = rep.get("id", "")
+                name = rep.get("filter_name", "")
+                if pid and name and pid not in names:
+                    names[pid] = name
+    return names
+
+
 def main():
     repo = Path(__file__).resolve().parents[1]
     corners = ["M0_Q0", "M100_Q0", "M0_Q100", "M100_Q100"]
+    filter_names = _load_filter_names(repo)
 
     all_filters = []
     for n in range(33):
         num = f"{n:03d}"
+        p2k_id = f"P2k_{num}"
         result = subprocess.run(
             ["git", "-C", str(repo), "show",
-             f"f146fb3^:cartridges/p2k/P2k_{num}.json"],
+             f"f146fb3^:cartridges/p2k/{p2k_id}.json"],
             capture_output=True, text=True, check=True,
         )
         p2k = json.loads(result.stdout)
 
-        entry = {"id": f"p2k_{num}", "corners": {}}
+        entry = {
+            "id": f"p2k_{num}",
+            "filter_name": filter_names.get(p2k_id, None),
+            "corners": {},
+        }
         for corner in corners:
             kf = next(k for k in p2k["keyframes"] if k["label"] == corner)
             stages = [[s["c0"], s["c1"], s["c2"], s["c3"], s["c4"]]
@@ -205,13 +231,16 @@ def main():
             entry["corners"][corner] = analyze_corner(stages, boost)
 
         all_filters.append(entry)
-        print(f"indexed p2k_{num}")
+        name_str = filter_names.get(p2k_id) or "?"
+        print(f"indexed p2k_{num}  ({name_str})")
 
     index = {
-        "schema_version": "1",
+        "schema_version": "2",
         "description": (
             "LLM-readable frequency-response index for all 33 E-mu Proteus 2000 "
-            "filters (P2k_000–P2k_032). Each filter has 4 corners: "
+            "filters (P2k_000–P2k_032). filter_name is the E-mu preset name from "
+            "token_inventory_unified_v2.json (null = not yet mapped). "
+            "Each filter has 4 corners: "
             "M=Morph (0=start, 100=end), Q=resonance (0=flat, 100=max). "
             "Frequencies in Hz, levels in dBFS. "
             "formants: local peaks with topographic prominence >= 3 dB. "

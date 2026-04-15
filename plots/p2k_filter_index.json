@@ -1,6 +1,6 @@
 {
-  "schema_version": "1",
-  "description": "LLM-readable frequency-response index for all 33 E-mu Proteus 2000 filters (P2k_000\u2013P2k_032). Each filter has 4 corners: M=Morph (0=start, 100=end), Q=resonance (0=flat, 100=max). Frequencies in Hz, levels in dBFS. formants: local peaks with topographic prominence >= 3 dB. notches: local troughs with depth >= 6 dB. shape: lowpass|highpass|bandpass|bandstop|peaking|notched|complex. centroid_hz: energy-weighted spectral center of mass. Source: design-time 6-stage biquad model at SR=39062.5 Hz (not the runtime 5-stage plugin model).",
+  "schema_version": "2",
+  "description": "LLM-readable frequency-response index for all 33 E-mu Proteus 2000 filters (P2k_000\u2013P2k_032). filter_name is the E-mu preset name from token_inventory_unified_v2.json (null = not yet mapped). Each filter has 4 corners: M=Morph (0=start, 100=end), Q=resonance (0=flat, 100=max). Frequencies in Hz, levels in dBFS. formants: local peaks with topographic prominence >= 3 dB. notches: local troughs with depth >= 6 dB. shape: lowpass|highpass|bandpass|bandstop|peaking|notched|complex. centroid_hz: energy-weighted spectral center of mass. Source: design-time 6-stage biquad model at SR=39062.5 Hz (not the runtime 5-stage plugin model).",
   "sample_rate_hz": 39062.5,
   "freq_range_hz": [
     50.0,
@@ -9,6 +9,7 @@
   "filters": [
     {
       "id": "p2k_000",
+      "filter_name": "No Filter",
       "corners": {
         "M0_Q0": {
           "shape": "lowpass",
@@ -173,6 +174,7 @@
     },
     {
       "id": "p2k_001",
+      "filter_name": "2 Pole Lowpass",
       "corners": {
         "M0_Q0": {
           "shape": "peaking",
@@ -343,6 +345,7 @@
     },
     {
       "id": "p2k_002",
+      "filter_name": "4 Pole Lowpass",
       "corners": {
         "M0_Q0": {
           "shape": "lowpass",
@@ -406,6 +409,7 @@
     },
     {
       "id": "p2k_003",
+      "filter_name": "6 Pole Lowpass",
       "corners": {
         "M0_Q0": {
           "shape": "lowpass",
@@ -566,6 +570,7 @@
     },
     {
       "id": "p2k_004",
+      "filter_name": "2 Pole Highpass",
       "corners": {
         "M0_Q0": {
           "shape": "lowpass",
@@ -741,6 +746,7 @@
     },
     {
       "id": "p2k_005",
+      "filter_name": "4 Pole Highpass",
       "corners": {
         "M0_Q0": {
           "shape": "lowpass",
@@ -921,6 +927,7 @@
     },
     {
       "id": "p2k_006",
+      "filter_name": "2 Pole Bandpass",
       "corners": {
         "M0_Q0": {
           "shape": "lowpass",
@@ -1065,6 +1072,7 @@
     },
     {
       "id": "p2k_007",
+      "filter_name": "4 Pole Bandpass",
       "corners": {
         "M0_Q0": {
           "shape": "lowpass",
@@ -1189,6 +1197,7 @@
     },
     {
       "id": "p2k_008",
+      "filter_name": "Contrary Bandpass",
       "corners": {
         "M0_Q0": {
           "shape": "lowpass",
@@ -1374,6 +1383,7 @@
     },
     {
       "id": "p2k_009",
+      "filter_name": "Swept EQ 1 Octave",
       "corners": {
         "M0_Q0": {
           "shape": "peaking",
@@ -1493,6 +1503,7 @@
     },
     {
       "id": "p2k_010",
+      "filter_name": "Swept EQ 2/1 Octave",
       "corners": {
         "M0_Q0": {
           "shape": "notched",
@@ -1753,6 +1764,7 @@
     },
     {
       "id": "p2k_011",
+      "filter_name": "Swept EQ 3/1 Octave",
       "corners": {
         "M0_Q0": {
           "shape": "lowpass",
@@ -1861,6 +1873,7 @@
     },
     {
       "id": "p2k_012",
+      "filter_name": "Phaser 1",
       "corners": {
         "M0_Q0": {
           "shape": "lowpass",
@@ -2086,6 +2099,7 @@
     },
     {
       "id": "p2k_013",
+      "filter_name": "Phaser 2",
       "corners": {
         "M0_Q0": {
           "shape": "lowpass",
@@ -2341,6 +2355,7 @@
     },
     {
       "id": "p2k_014",
+      "filter_name": "Bat Phaser",
       "corners": {
         "M0_Q0": {
           "shape": "lowpass",
@@ -2551,6 +2566,7 @@
     },
     {
       "id": "p2k_015",
+      "filter_name": "Flanger Lite",
       "corners": {
         "M0_Q0": {
           "shape": "notched",
@@ -2766,6 +2782,7 @@
     },
     {
       "id": "p2k_016",
+      "filter_name": "Vocal Ah-Ay-Ee",
       "corners": {
         "M0_Q0": {
           "shape": "lowpass",
@@ -2903,6 +2920,7 @@
     },
     {
       "id": "p2k_017",
+      "filter_name": "Vocal Oo-Ah",
       "corners": {
         "M0_Q0": {
           "shape": "notched",
@@ -3108,6 +3126,7 @@
     },
     {
       "id": "p2k_018",
+      "filter_name": null,
       "corners": {
         "M0_Q0": {
           "shape": "notched",
@@ -3288,6 +3307,7 @@
     },
     {
       "id": "p2k_019",
+      "filter_name": "Dual EQ + LP Morph",
       "corners": {
         "M0_Q0": {
           "shape": "notched",
@@ -3513,6 +3533,7 @@
     },
     {
       "id": "p2k_020",
+      "filter_name": "Dual EQ Morph/Expression",
       "corners": {
         "M0_Q0": {
           "shape": "bandstop",
@@ -3768,6 +3789,7 @@
     },
     {
       "id": "p2k_021",
+      "filter_name": "Peak/Shelf Morph",
       "corners": {
         "M0_Q0": {
           "shape": "notched",
@@ -4013,6 +4035,7 @@
     },
     {
       "id": "p2k_022",
+      "filter_name": "Morph Designer",
       "corners": {
         "M0_Q0": {
           "shape": "lowpass",
@@ -4263,6 +4286,7 @@
     },
     {
       "id": "p2k_023",
+      "filter_name": "Ace of Bass",
       "corners": {
         "M0_Q0": {
           "shape": "bandpass",
@@ -4473,6 +4497,7 @@
     },
     {
       "id": "p2k_024",
+      "filter_name": "MegaSweepz",
       "corners": {
         "M0_Q0": {
           "shape": "lowpass",
@@ -4628,6 +4653,7 @@
     },
     {
       "id": "p2k_025",
+      "filter_name": "Early Rizer",
       "corners": {
         "M0_Q0": {
           "shape": "notched",
@@ -4858,6 +4884,7 @@
     },
     {
       "id": "p2k_026",
+      "filter_name": "Millennium",
       "corners": {
         "M0_Q0": {
           "shape": "notched",
@@ -5083,6 +5110,7 @@
     },
     {
       "id": "p2k_027",
+      "filter_name": "Meaty Gizmo",
       "corners": {
         "M0_Q0": {
           "shape": "lowpass",
@@ -5278,6 +5306,7 @@
     },
     {
       "id": "p2k_028",
+      "filter_name": "Klub Klassik",
       "corners": {
         "M0_Q0": {
           "shape": "lowpass",
@@ -5433,6 +5462,7 @@
     },
     {
       "id": "p2k_029",
+      "filter_name": "BassBox 303",
       "corners": {
         "M0_Q0": {
           "shape": "lowpass",
@@ -5587,6 +5617,7 @@
     },
     {
       "id": "p2k_030",
+      "filter_name": "Fuzzi Face",
       "corners": {
         "M0_Q0": {
           "shape": "lowpass",
@@ -5787,6 +5818,7 @@
     },
     {
       "id": "p2k_031",
+      "filter_name": "Dead Ringer",
       "corners": {
         "M0_Q0": {
           "shape": "peaking",
@@ -5932,6 +5964,7 @@
     },
     {
       "id": "p2k_032",
+      "filter_name": "TB or Not TB",
       "corners": {
         "M0_Q0": {
           "shape": "notched",
