@@ -99,6 +99,14 @@ PILL_LABELS: dict[str, str] = {
     "nasals.nasal_n": "N",
     # singer
     "singer.singers_formant": "SF",
+    # speaker_knockerz (launch body 1, 7 station pills authored via v2 template)
+    "speaker_knockerz.sk_vault": "VLT",
+    "speaker_knockerz.sk_chest": "CST",
+    "speaker_knockerz.sk_choke": "CHK",
+    "speaker_knockerz.sk_rip": "RIP",
+    "speaker_knockerz.sk_rattle": "RAT",
+    "speaker_knockerz.sk_cry": "CRY",
+    "speaker_knockerz.sk_fracture": "FRC",
     # vowels — IPA-style 2-char codes
     "vowels.ae": "AE",
     "vowels.ah": "AH",
