@@ -16,6 +16,7 @@ class BiquadState {
     constructor() {
         this.coeffs = [1, 0, 0, 0, 0];
         this.deltas = [0, 0, 0, 0, 0];
+        this.rampRemaining = 0;
         this.w1 = 0.0;
         this.w2 = 0.0;
     }
@@ -25,16 +26,23 @@ class BiquadState {
         for (let i = 0; i < 5; i++) {
             this.deltas[i] = (target[i] - this.coeffs[i]) / n;
         }
+        this.rampRemaining = n;
     }
 
     /** Returns [output, unstable]. Ramps coefficients, then computes DF2T. */
     processSample(x) {
-        // Ramp
-        this.coeffs[0] += this.deltas[0];
-        this.coeffs[1] += this.deltas[1];
-        this.coeffs[2] += this.deltas[2];
-        this.coeffs[3] += this.deltas[3];
-        this.coeffs[4] += this.deltas[4];
+        // Ramp (stop when countdown expires so coefficients don't drift)
+        if (this.rampRemaining > 0) {
+            this.coeffs[0] += this.deltas[0];
+            this.coeffs[1] += this.deltas[1];
+            this.coeffs[2] += this.deltas[2];
+            this.coeffs[3] += this.deltas[3];
+            this.coeffs[4] += this.deltas[4];
+            if (--this.rampRemaining === 0) {
+                this.deltas[0] = this.deltas[1] = this.deltas[2] = 0;
+                this.deltas[3] = this.deltas[4] = 0;
+            }
+        }
 
         // DF2T
         let y = this.coeffs[0] * x + this.w1;
@@ -65,6 +73,7 @@ export class Cascade {
         }
         this._boost      = 1.0;
         this._boostDelta = 0.0;
+        this._boostRampRemaining = 0;
         this._instabilityFlag = false;
     }
 
@@ -88,6 +97,7 @@ export class Cascade {
     setBoost(target, rampSamples) {
         const n = Math.max(1, rampSamples);
         this._boostDelta = (target - this._boost) / n;
+        this._boostRampRemaining = n;
     }
 
     /** Process one sample through all 12 stages + boost. */
@@ -101,10 +111,14 @@ export class Cascade {
             }
             v = next;
         }
-        this._boost += this._boostDelta;
+        if (this._boostRampRemaining > 0) {
+            this._boost += this._boostDelta;
+            if (--this._boostRampRemaining === 0) this._boostDelta = 0.0;
+        }
         if (!isFinite(this._boost)) {
             this._boost = 1.0;
             this._boostDelta = 0.0;
+            this._boostRampRemaining = 0;
             this._instabilityFlag = true;
             return 0.0;
         }
@@ -136,8 +150,10 @@ export class Cascade {
             stage.w1 = 0.0;
             stage.w2 = 0.0;
             stage.deltas = [0, 0, 0, 0, 0];
+            stage.rampRemaining = 0;
         }
         this._boostDelta = 0.0;
+        this._boostRampRemaining = 0;
         this._instabilityFlag = false;
     }
 }
