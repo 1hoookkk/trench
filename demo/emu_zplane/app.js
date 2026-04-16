@@ -40,6 +40,7 @@ const stimSine        = document.getElementById('stim-sine');
 const stimNoise       = document.getElementById('stim-noise');
 const stimClick       = document.getElementById('stim-click');
 const canvasResponse  = document.getElementById('canvas-response');
+const canvasImpulse   = document.getElementById('canvas-impulse');
 const statusDiv       = document.getElementById('status');
 
 // ---------------------------------------------------------------------------
@@ -89,7 +90,22 @@ function renderAndPlot() {
     const sr       = audioCtx ? audioCtx.sampleRate : SR_OFFLINE;
     compileCascade(sr);
 
-    // Impulse for FFT
+    // ---------------------------------------------------------------------------
+    // Two separate Cascade instances are used here intentionally:
+    //
+    //   cascade   (module-level) — used for audio playback via renderOffline in
+    //             startPlayback(). Its internal delay-line state accumulates
+    //             across calls as the user scrubs sliders, which is correct for
+    //             smooth audio output but would corrupt a clean FFT measurement.
+    //
+    //   fftCasc   (local, throw-away) — freshly constructed each time with
+    //             rampSamples=1 so coefficients snap in one sample.  Rendering
+    //             a 1024-sample impulse through it gives a clean linear-phase
+    //             snapshot of the current filter response with no dirty state
+    //             contaminating the frequency plot.
+    // ---------------------------------------------------------------------------
+
+    // Impulse for FFT (uses throw-away cascade — see comment above)
     const impulse  = makeImpulse(1024, sr);
     const fftCasc  = new Cascade();
     {
@@ -102,6 +118,9 @@ function renderAndPlot() {
         fftCasc.setBoost(4.0, 1);
     }
     const rendered = renderOffline(fftCasc, impulse);
+
+    // Draw impulse waveform (first 256 samples)
+    drawImpulse(canvasImpulse, rendered.slice(0, 256));
 
     // Pad to 1024
     const padded = new Float32Array(1024);

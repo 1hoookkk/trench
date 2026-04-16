@@ -31,6 +31,10 @@ export async function runParity(interpolateMod, sr) {
         fetch('./data/hedz_golden.json'),
         fetch('./data/heritage_designer_sections.json'),
     ]);
+    if (!goldenResp.ok)
+        throw new Error(`HTTP ${goldenResp.status} fetching hedz_golden.json`);
+    if (!sectionsResp.ok)
+        throw new Error(`HTTP ${sectionsResp.status} fetching heritage_designer_sections.json`);
     const golden   = await goldenResp.json();
     const sections = await sectionsResp.json();
 
