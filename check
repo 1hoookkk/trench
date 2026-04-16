@@ -1,0 +1,114 @@
+#!/usr/bin/env bash
+# Strict errors + strict undefined variables, but deliberately NOT pipefail —
+# some Windows bash builds reject `set -o pipefail` as an unknown option,
+# which kills the whole script on line 2. Cargo exit codes are checked
+# explicitly via the `run` helper below instead of relying on pipe status
+# propagation, so pipefail isn't needed for correctness.
+set -eu
+
+cd "$(dirname "$0")"
+
+# Ensure MSVC link.exe wins over Git Bash /usr/bin/link when cargo links test
+# binaries. Without this, rustc picks the hardlink utility and fails with
+# "missing operand after ' ■'".
+for msvc_root in \
+  "/c/Program Files/Microsoft Visual Studio/2022/Community/VC/Tools/MSVC" \
+  "/c/Program Files (x86)/Microsoft Visual Studio/2022/BuildTools/VC/Tools/MSVC"; do
+  if [[ -d "$msvc_root" ]]; then
+    msvc_ver=$(ls "$msvc_root" 2>/dev/null | sort -V | tail -1)
+    if [[ -n "$msvc_ver" && -x "$msvc_root/$msvc_ver/bin/Hostx64/x64/link.exe" ]]; then
+      export PATH="$msvc_root/$msvc_ver/bin/Hostx64/x64:$PATH"
+      break
+    fi
+  fi
+done
+
+step() { printf '\n=== %s ===\n' "$1"; }
+
+# Run a cargo test subcommand with explicit exit-status handling — avoids
+# relying on `set -o pipefail` for pipe-safety. Captures stdout+stderr to a
+# temp file, checks the cargo exit code, prints only the summary lines on
+# success, dumps the tail of the log on failure, and exits non-zero so the
+# surrounding `set -e` halts the script.
+run_cargo_test() {
+  local tmp
+  tmp=$(mktemp 2>/dev/null || echo "/tmp/trench-check-$$-$RANDOM.log")
+  if "$@" >"$tmp" 2>&1; then
+    grep -E "(test result|rust parity:|null peak residual)" "$tmp" | sed 's/^/  /' || true
+    rm -f "$tmp"
+  else
+    local code=$?
+    echo "  FAILED (cargo exit $code)"
+    tail -40 "$tmp" | sed 's/^/  /'
+    rm -f "$tmp"
+    exit 1
+  fi
+}
+
+step "canonical doc set exists"
+for f in CLAUDE.md SPEC.md DOCTRINE.md MODES.md BODIES.md PHONEMES.md cartridge.schema.json; do
+  if [[ -f "$f" ]]; then
+    printf '  %-22s OK\n' "$f"
+  else
+    printf '  %-22s MISSING\n' "$f"
+    exit 1
+  fi
+done
+
+step "no orphan SHIPPING.md"
+if [[ -e SHIPPING.md ]]; then
+  echo "  SHIPPING.md still exists (should be BODIES.md)"
+  exit 1
+fi
+echo "  OK"
+
+step "rust workspace check (lib + tests, type-only)"
+cargo check --workspace --tests --quiet
+
+step "passthrough null targets (static < -120 dBFS, dynamic < -90 dBFS)"
+run_cargo_test cargo test -p trench-core --test null_targets --quiet
+
+step "P2K parity null (41 entries: 35 raw + 6 calibration_re, hard fail at > -140 dB)"
+if ! PYTHONPATH=. python tools/parity_null.py 2>&1 | sed 's/^/  /'; then
+  echo "  FAILED"
+  exit 1
+fi
+
+step "rust cascade parity (33 raw skins x 4 corners, hard fail at > -120 dB)"
+run_cargo_test cargo test -p trench-core --test canonical_parity --release --quiet
+
+step "rust hedz cascade cross-language parity (4 corners vs python bake)"
+run_cargo_test cargo test -p trench-core --test hedz_cascade --release --quiet
+
+step "rust engine pills smoke (every cartridges/engine/*.json loads)"
+run_cargo_test cargo test -p trench-core --test engine_pills --release --quiet
+
+step "rust compile_grid round-trip (2-token limit + loader parity)"
+run_cargo_test cargo test -p trench-core --test compile_grid_roundtrip --release --quiet
+
+step "rust vowel formant classification (8 ok + 2 known-drift: aw, oo)"
+run_cargo_test cargo test -p trench-core --test vowel_formants --release --quiet
+
+step "cartridges validate against schema"
+python - <<'PY'
+import json, sys
+from pathlib import Path
+import jsonschema
+schema = json.loads(Path("cartridge.schema.json").read_text())
+ok = bad = 0
+for p in Path("cartridges").rglob("*.json"):
+    try:
+        d = json.loads(p.read_text())
+    except Exception as e:
+        print(f"  PARSE FAIL {p}: {e}"); bad += 1; continue
+    if not isinstance(d, dict) or d.get("format") != "compiled-v1":
+        continue
+    try:
+        jsonschema.validate(d, schema); ok += 1
+    except jsonschema.ValidationError as e:
+        print(f"  FAIL {p}: {e.message[:200]}"); bad += 1
+print(f"  {ok} compiled-v1 cartridges OK, {bad} failed")
+sys.exit(1 if bad else 0)
+PY
+
+printf '\nall checks passed\n'

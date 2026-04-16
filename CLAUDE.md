@@ -1,14 +1,44 @@
-# CLAUDE.md — FIELD (Trench)
+# TRENCH
 
-1) Make the smallest possible diff; no drive‑by refactors.
-2) Keep builds green on Windows (VS2022 + CMake/Ninja).
-3) Audio thread: no allocations, no locks, no exceptions, no logging.
-4) DSP coeff/state math in **double**; audio buffers in **float**.
-5) Never interpolate biquad coefficients; interpolate **poles** then rebuild (see `docs/dsp-spec.md`).
-6) PARALLEL↔CASCADE changes must crossfade two real cores (no single “interpolated topology”).
-7) High‑Q must stay loud: apply bandwidth/loudness compensation in PARALLEL (see `docs/dsp-spec.md`).
-8) Saturation belongs in feedback/state path (Dattorro-style), not only on output.
-9) Rebuild coefficients at a fixed control rate; avoid per‑sample trig where possible.
-10) Every DSP change: add/extend a deterministic impulse/noise/sweep test or give exact repro steps.
-11) UI: no knobs/menus/preset browser; one‑hand gestures only.
-12) If something is underspecified, follow `docs/*`; otherwise ask for the latest core files.
+## Role
+- I own sound, taste, UX, product identity, final musical judgment.
+- You own code, math, implementation, debugging, verification, cleanup.
+- I write zero code. Every task runs agent end-to-end.
+- Do the work. No planning doc. No vague summary layer.
+
+## Product (v1.0, ship 2026-07-15)
+TRENCH is an authoring instrument: phoneme tokens on a time grid become the
+filter trajectory. Windows JUCE 8 standalone + VST3.
+
+## Core model
+- Cartridge-based morph filter instrument.
+- Cartridges are phoneme pills: morph-invariant, Q-varied spectral
+  states identified by short grid labels.
+- MORPH = travel between pills on the Looperator time grid, scheduled
+  by the compiler. Pills themselves do not morph internally.
+- Q = playback-surface tonal shaping of whichever pill the playhead
+  is currently on.
+- BODY = a named preset sequence of pills (Speaker Knockerz, Aluminum
+  Siding, Small Talk Ah-Ee, Cul-De-Sac per BODIES.md). Compiler TBD.
+
+## Ground truth
+- Active truth + architect prompts: `TRUTH_MAP.md`
+- Math + contracts: `SPEC.md`
+- Cartridge wire schema: `cartridge.schema.json`
+- Operating modes: `MODES.md`
+- Doctrine (rules, bans, verification, escalation): `DOCTRINE.md`
+- Shipping bodies + rubrics: `BODIES.md`
+- Phoneme authoring contract: `PHONEMES.md`
+- Shipping phoneme pills: `cartridges/engine/` baked from
+  `cartridges/engine/_source/token_inventory_unified_v2.json` +
+  `cartridges/engine/_source/shapes/` via `tools/bake_phoneme_pills.py`
+- Hardcoded Talking Hedz ROM: `trench-core/src/hedz_rom.rs` baked from
+  `cartridges/engine/_source/heritage_designer_sections.json` via
+  `tools/bake_hedz_const.py`
+- Verify workspace: `./check`
+- Active shipping plugin: `trench-juce/plugin/`
+- Subtree rules: `trench-core/CLAUDE.md`
+- Repo index: live filesystem. Doctrine wins; no precomputed snapshot.
+
+## HARD RULE
+any investigation that would read >3 files or >300 cumulative lines gets dispatched to an Explore subagent. The subagent reads the files, you only see its summary. The raw content never enters this parent context.

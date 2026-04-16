@@ -1,0 +1,16 @@
+[package]
+name = "trench-live"
+version = "0.1.0"
+edition = "2021"
+
+[lib]
+crate-type = ["cdylib", "lib"]
+
+# Audio-thread purity: only nih-plug (plugin framework) and trench-core
+# (pure DSP) are allowed. No serde, no baseview, no softbuffer, no
+# crossbeam, no raw-window-handle — there is no editor, no filesystem
+# poll, no JSON reloader, no mutex on the hot path. Adding a dep here
+# is a doctrine decision: it must not run inside `process()`.
+[dependencies]
+nih_plug = { git = "https://github.com/robbert-vdh/nih-plug.git", features = ["standalone"] }
+trench-core = { path = "../trench-core" }

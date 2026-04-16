@@ -1,0 +1,718 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  E-MU Z-Plane Filter Types — Machine-Readable Reference
+  Source: Emulator X3 Reference Manual, Chapter 6 (Voice Processing), pp. 145–153
+  Extracted: 2026-04-16
+
+  This file documents all 55 factory filter types available in the E-MU
+  Emulator X / Proteus 2000 / Audity 2000 Z-plane filter engine.
+
+  The Z-plane filter has the unique ability to change its function over time.
+  Filters A and B represent two different complex filters or "frames."
+  Most filters have two parameters: Frequency (or Morph) and Resonance (Q, Gain, Body Size).
+  These two parameters can be continuously varied during the note.
+
+  Categories:
+    BPF  — Band-pass filter
+    DST  — Distortion
+    EQ+  — EQ boost filter
+    EQ-  — EQ cut filter
+    FLG  — Flanger filter
+    HPF  — High-pass filter
+    LPF  — Low-pass filter
+    PHA  — Phaser filter
+    PROG — Programmable (user-defined morph)
+    REZ  — Highly resonant
+    SFX  — Special effect
+    VOW  — Vowel / formant
+    WAH  — Wah-Wah pedal
+-->
+<emu-zplane-filters
+  source="Emulator X3 Reference Manual"
+  chapter="6 — Voice Processing"
+  total-types="55"
+  includes-no-filter="true">
+
+  <!-- ================================================================== -->
+  <!-- LOW-ORDER FILTERS (2–6 pole)                                       -->
+  <!-- ================================================================== -->
+
+  <filter id="P2k_000" order="0" category="BYPASS">
+    <name>No Filter</name>
+    <description>Bypasses the filter section entirely.</description>
+    <parameters>
+      <morph-controls>none</morph-controls>
+      <q-controls>none</q-controls>
+    </parameters>
+  </filter>
+
+  <filter id="P2k_001" order="2" category="LPF">
+    <name>2-pole Lowpass</name>
+    <description>Typical OB type low-pass filter with a shallow 12 dB/octave slope.</description>
+    <parameters>
+      <morph-controls>cutoff frequency</morph-controls>
+      <q-controls>resonance</q-controls>
+    </parameters>
+  </filter>
+
+  <filter id="P2k_002" order="4" category="LPF">
+    <name>4-pole Lowpass</name>
+    <description>4-pole low-pass filter, the standard filter on classic analog synths. 24 dB/octave rolloff.</description>
+    <parameters>
+      <morph-controls>cutoff frequency</morph-controls>
+      <q-controls>resonance</q-controls>
+    </parameters>
+  </filter>
+
+  <filter id="P2k_003" order="6" category="LPF">
+    <name>6-pole Lowpass</name>
+    <description>6-pole low-pass filter which has a steeper slope than a 4-pole low-pass filter. 36 dB/octave rolloff.</description>
+    <parameters>
+      <morph-controls>cutoff frequency</morph-controls>
+      <q-controls>resonance</q-controls>
+    </parameters>
+  </filter>
+
+  <filter id="P2k_004" order="2" category="HPF">
+    <name>2-pole Highpass</name>
+    <description>2-pole high-pass filter. 12 dB/octave slope.</description>
+    <parameters>
+      <morph-controls>cutoff frequency</morph-controls>
+      <q-controls>resonance</q-controls>
+    </parameters>
+  </filter>
+
+  <filter id="P2k_005" order="4" category="HPF">
+    <name>4-pole Highpass</name>
+    <description>Classic 4-pole high-pass filter. Cutoff sweep progressively cuts 4th Order High-pass.</description>
+    <parameters>
+      <morph-controls>cutoff frequency</morph-controls>
+      <q-controls>resonance</q-controls>
+    </parameters>
+  </filter>
+
+  <filter id="P2k_006" order="2" category="BPF">
+    <name>2-pole Bandpass</name>
+    <description>Band-pass filter with 6 dB/octave rolloff on either side of the passband and Q control.</description>
+    <parameters>
+      <morph-controls>center frequency</morph-controls>
+      <q-controls>bandwidth</q-controls>
+    </parameters>
+  </filter>
+
+  <filter id="P2k_007" order="4" category="BPF">
+    <name>4-pole Bandpass</name>
+    <description>Band-pass filter with 12 dB/octave rolloff on either side of the passband and Q control.</description>
+    <parameters>
+      <morph-controls>center frequency</morph-controls>
+      <q-controls>bandwidth</q-controls>
+    </parameters>
+    <trench-status>
+      <cartridge>trench-juce/plugin/assets/cartridges/P2k_007.json</cartridge>
+    </trench-status>
+  </filter>
+
+  <filter id="P2k_008" order="6" category="BPF">
+    <name>Contrary Bandpass</name>
+    <description>A novel band-pass filter where the frequency peaks and dips midway in the frequency range.</description>
+    <parameters>
+      <morph-controls>frequency</morph-controls>
+      <q-controls>resonance</q-controls>
+    </parameters>
+  </filter>
+
+  <filter id="P2k_009" order="6" category="EQ+">
+    <name>Swept EQ 1 octave</name>
+    <description>Parametric filter with 24 dB of boost or cut and a one octave bandwidth.</description>
+    <parameters>
+      <morph-controls>center frequency</morph-controls>
+      <q-controls>boost/cut amount</q-controls>
+    </parameters>
+  </filter>
+
+  <filter id="P2k_010" order="6" category="EQ+">
+    <name>Swept EQ 2-to-1 octave</name>
+    <description>Parametric filter with 24 dB of boost or cut. The bandwidth of the filter is two octaves wide at the low end of the audio spectrum, gradually changing to one octave wide at the upper end.</description>
+    <parameters>
+      <morph-controls>center frequency</morph-controls>
+      <q-controls>boost/cut amount</q-controls>
+    </parameters>
+  </filter>
+
+  <filter id="P2k_011" order="6" category="EQ+">
+    <name>Swept EQ 3-to-1 octave</name>
+    <description>Parametric filter with 24 dB of boost or cut. The bandwidth of the filter is three octaves wide at the low end of the audio spectrum, gradually changing to one octave wide at the upper end.</description>
+    <parameters>
+      <morph-controls>center frequency</morph-controls>
+      <q-controls>boost/cut amount</q-controls>
+    </parameters>
+  </filter>
+
+  <filter id="P2k_012" order="6" category="PHA">
+    <name>Phaser 1</name>
+    <description>Recreates a comb filter effect typical of phase shifters. Frequency moves position of notches. Q varies the depth of the notches.</description>
+    <parameters>
+      <morph-controls>notch position</morph-controls>
+      <q-controls>notch depth</q-controls>
+    </parameters>
+  </filter>
+
+  <filter id="P2k_013" order="6" category="PHA">
+    <name>Phaser 2</name>
+    <description>Comb filter with slightly different notch frequency moving the frequency of notches. Q varies the depth of the notches.</description>
+    <parameters>
+      <morph-controls>notch frequency</morph-controls>
+      <q-controls>notch depth</q-controls>
+    </parameters>
+  </filter>
+
+  <filter id="P2k_014" order="6" category="FLG">
+    <name>FlangerLite</name>
+    <description>Contains three notches. Frequency moves frequency and spacing of notches. Q increases flanging depth.</description>
+    <parameters>
+      <morph-controls>notch frequency and spacing</morph-controls>
+      <q-controls>flanging depth</q-controls>
+    </parameters>
+  </filter>
+
+  <filter id="P2k_015" order="6" category="VOW">
+    <name>Vocal Aah-Ay-Eeh</name>
+    <description>Vowel formant filter which sweeps from "Ah" sound, through "Ay" sound to "Ee" sound at maximum frequency setting. Q varies the apparent size of the mouth cavity.</description>
+    <parameters>
+      <morph-controls>vowel position (Ah → Ay → Ee)</morph-controls>
+      <q-controls>mouth cavity size</q-controls>
+    </parameters>
+  </filter>
+
+  <filter id="P2k_016" order="6" category="VOW">
+    <name>Vocal Ooh-Aah</name>
+    <description>Vowel formant filter which sweeps from "Oo" sound, through "Oh" sound to "Ah" sound at maximum frequency setting. Q varies the apparent size of mouth cavity.</description>
+    <parameters>
+      <morph-controls>vowel position (Oo → Oh → Ah)</morph-controls>
+      <q-controls>mouth cavity size</q-controls>
+    </parameters>
+  </filter>
+
+  <!-- ================================================================== -->
+  <!-- PROGRAMMABLE MORPHING FILTERS (6 pole, user-definable)             -->
+  <!-- ================================================================== -->
+
+  <filter id="P2k_017" order="6" category="PROG">
+    <name>Dual EQ Morph</name>
+    <description>A 2-frame morphing filter with two EQ sections and controllable gain. Morph interpolates between frame A and frame B settings.</description>
+    <parameters>
+      <morph-controls>frame interpolation (A → B)</morph-controls>
+      <q-controls>gain offset</q-controls>
+    </parameters>
+    <programmable>
+      <sections>2</sections>
+      <section-types>EQ, EQ</section-types>
+    </programmable>
+  </filter>
+
+  <filter id="P2k_018" order="6" category="PROG">
+    <name>Dual EQ Morph + Expression</name>
+    <description>This filter contains two EQ sections and a separately controllable lowpass filter. Expression controls the lowpass independently of Morph.</description>
+    <parameters>
+      <morph-controls>EQ frame interpolation</morph-controls>
+      <q-controls>lowpass cutoff (independent)</q-controls>
+    </parameters>
+    <programmable>
+      <sections>3</sections>
+      <section-types>EQ, EQ, LP</section-types>
+    </programmable>
+  </filter>
+
+  <filter id="P2k_019" order="6" category="PROG">
+    <name>2EQ Morph + Lowpass Morph</name>
+    <description>This filter has two EQ sections and lowpass filter tied to the Morph parameter. All three sections morph together.</description>
+    <parameters>
+      <morph-controls>frame interpolation (all sections)</morph-controls>
+      <q-controls>gain offset</q-controls>
+    </parameters>
+    <programmable>
+      <sections>3</sections>
+      <section-types>EQ, EQ, LP</section-types>
+    </programmable>
+  </filter>
+
+  <filter id="P2k_020" order="6" category="PROG">
+    <name>Peak/Shelf Morph</name>
+    <description>This is a 2-frame morphing filter with independent control over frequency, shelving and peak for each filter frame.</description>
+    <parameters>
+      <morph-controls>frame interpolation</morph-controls>
+      <q-controls>shelf/peak balance</q-controls>
+    </parameters>
+    <programmable>
+      <sections>3</sections>
+      <section-types>shelf, peak, shelf</section-types>
+    </programmable>
+  </filter>
+
+  <filter id="P2k_021" order="2-12" category="PROG">
+    <name>Morph Designer</name>
+    <description>The ultimate in synthesizer filters. Up to six completely programmable filter sections (lowpass, highpass, or EQ) and the ability to morph between two completely different frame settings of the six sections. Twenty-four knobs reduced to just two: Morph and Gain (offset).</description>
+    <parameters>
+      <morph-controls>frame interpolation across all 6 sections</morph-controls>
+      <q-controls>gain offset (±50% frequency shift for HP/LP stages)</q-controls>
+    </parameters>
+    <programmable>
+      <sections>6</sections>
+      <section-types>any combination of LP, HP, EQ (per section)</section-types>
+      <stage-gain-controls>
+        <eq-stage>small knob: gain (-24 to +24 dB), big wheel: gain offset (-24 to +24 dB), sum clipped at 0 or 100</eq-stage>
+        <hplp-stage>small knob: Q (0 to 100%), big wheel: Q offset (-50% to +50%), sum clipped at 0 or 100</hplp-stage>
+      </stage-gain-controls>
+    </programmable>
+    <note>This is the filter type used by all 12th-order factory filters and all user MorphDesigner presets in resources/Filter/</note>
+  </filter>
+
+  <!-- ================================================================== -->
+  <!-- 12th ORDER FILTERS (MorphDesigner-based factory presets)           -->
+  <!-- These are pre-programmed MorphDesigner configurations using all    -->
+  <!-- 6 sections (12 poles). The firmware compiles them from internal    -->
+  <!-- section tables — they are not editable by the user.               -->
+  <!-- ================================================================== -->
+
+  <filter id="P2k_022" order="12" category="EQ+">
+    <name>Ace of Bass</name>
+    <description>Bass-boost to bass-cut morph.</description>
+    <parameters>
+      <morph-controls>bass boost → bass cut</morph-controls>
+      <q-controls>resonance emphasis</q-controls>
+    </parameters>
+    <trench-status>
+      <cartridge>trench-juce/plugin/assets/cartridges/P2k_023.json</cartridge>
+    </trench-status>
+  </filter>
+
+  <filter id="P2k_023" order="12" category="LPF">
+    <name>MegaSweepz</name>
+    <description>"Loud" LPF with a hard Q. Tweeters beware!</description>
+    <parameters>
+      <morph-controls>cutoff frequency</morph-controls>
+      <q-controls>resonance (extreme)</q-controls>
+    </parameters>
+  </filter>
+
+  <filter id="P2k_024" order="12" category="LPF">
+    <name>EarlyRizer</name>
+    <description>Classic analog sweeping with hot Q and Low-end.</description>
+    <parameters>
+      <morph-controls>cutoff frequency</morph-controls>
+      <q-controls>resonance + low-end emphasis</q-controls>
+    </parameters>
+    <trench-status>
+      <extraction>datasets/p2k_skins/P2k_025.json</extraction>
+      <calibration>docs/calibration/EarlyRizer.json</calibration>
+      <reference-wavs>ref/canonical/P2k_025_*.wav</reference-wavs>
+    </trench-status>
+  </filter>
+
+  <filter id="P2k_025" order="12" category="LPF">
+    <name>Millennium</name>
+    <description>Aggressive low-pass filter sweep with a wide spectrum of spiky tonal peaks.</description>
+    <parameters>
+      <morph-controls>cutoff frequency</morph-controls>
+      <q-controls>tonal peak complexity</q-controls>
+    </parameters>
+    <trench-status>
+      <extraction>datasets/p2k_skins/P2k_026.json</extraction>
+      <calibration>docs/calibration/Millennium.json</calibration>
+      <reference-wavs>ref/canonical/P2k_026_*.wav</reference-wavs>
+      <cartridge>trench-juce/plugin/assets/cartridges/P2k_026.json</cartridge>
+    </trench-status>
+  </filter>
+
+  <filter id="P2k_026" order="12" category="REZ">
+    <name>MeatyGizmo</name>
+    <description>Filter inverts at mid-Q.</description>
+    <parameters>
+      <morph-controls>frequency</morph-controls>
+      <q-controls>resonance (inverts at midpoint)</q-controls>
+    </parameters>
+    <trench-status>
+      <extraction>datasets/p2k_skins/P2k_027.json</extraction>
+      <calibration>docs/calibration/MeatyGizmo.json</calibration>
+      <reference-wavs>ref/canonical/P2k_027_*.wav</reference-wavs>
+    </trench-status>
+  </filter>
+
+  <filter id="P2k_027" order="12" category="LPF">
+    <name>KlubKlassik</name>
+    <description>Responsive low-pass filter sweep with a wide spectrum of Q sounds.</description>
+    <parameters>
+      <morph-controls>cutoff frequency</morph-controls>
+      <q-controls>resonance character variety</q-controls>
+    </parameters>
+  </filter>
+
+  <filter id="P2k_028" order="12" category="LPF">
+    <name>BassBox-303</name>
+    <description>Pumped up lows with TB-like squelchy Q factor.</description>
+    <parameters>
+      <morph-controls>cutoff frequency</morph-controls>
+      <q-controls>squelchy resonance (TB-303 style)</q-controls>
+    </parameters>
+    <trench-status>
+      <extraction>datasets/p2k_skins/P2k_029.json</extraction>
+      <calibration>docs/calibration/BassBox303.json</calibration>
+      <reference-wavs>ref/canonical/P2k_029_*.wav</reference-wavs>
+    </trench-status>
+  </filter>
+
+  <filter id="P2k_029" order="12" category="DST">
+    <name>FuzziFace</name>
+    <description>Nasty clipped distortion. Q functions as mid-frequency tone control.</description>
+    <parameters>
+      <morph-controls>distortion frequency</morph-controls>
+      <q-controls>mid-frequency tone</q-controls>
+    </parameters>
+    <trench-status>
+      <extraction>datasets/p2k_skins/P2k_030.json</extraction>
+      <calibration>docs/calibration/FuzziFace.json</calibration>
+      <reference-wavs>ref/canonical/P2k_030_*.wav</reference-wavs>
+    </trench-status>
+  </filter>
+
+  <filter id="P2k_030" order="12" category="REZ">
+    <name>DeadRinger</name>
+    <description>Permanent "Ringy" Q response. Many Q variations.</description>
+    <parameters>
+      <morph-controls>ring frequency</morph-controls>
+      <q-controls>ring character (many variations)</q-controls>
+    </parameters>
+  </filter>
+
+  <filter id="P2k_031" order="12" category="EQ+">
+    <name>TB-OrNot-TB</name>
+    <description>Great Bassline "Processor."</description>
+    <parameters>
+      <morph-controls>bassline sweep</morph-controls>
+      <q-controls>resonance emphasis</q-controls>
+    </parameters>
+  </filter>
+
+  <filter id="P2k_032" order="12" category="VOW">
+    <name>Ooh-To-Eee</name>
+    <description>Oooh to Eeee formant morph.</description>
+    <parameters>
+      <morph-controls>vowel position (Ooh → Eee)</morph-controls>
+      <q-controls>formant emphasis</q-controls>
+    </parameters>
+  </filter>
+
+  <filter id="P2k_033" order="12" category="EQ+">
+    <name>BolandBass</name>
+    <description>Constant bass boost with mid-tone Q control.</description>
+    <parameters>
+      <morph-controls>frequency sweep</morph-controls>
+      <q-controls>mid-tone emphasis</q-controls>
+    </parameters>
+  </filter>
+
+  <filter id="P2k_034" order="12" category="VOW">
+    <name>MultiQVox</name>
+    <description>Multi-Formant, Map Q To velocity.</description>
+    <parameters>
+      <morph-controls>formant position</morph-controls>
+      <q-controls>velocity-mapped formant intensity</q-controls>
+    </parameters>
+  </filter>
+
+  <filter id="P2k_035" order="12" category="VOW">
+    <name>TalkingHedz</name>
+    <description>"Oui" morphing filter. Q adds peaks.</description>
+    <parameters>
+      <morph-controls>vowel morph ("Oui" trajectory)</morph-controls>
+      <q-controls>peak addition</q-controls>
+    </parameters>
+    <trench-status>
+      <extraction>datasets/p2k_skins/P2k_013.json</extraction>
+      <calibration>docs/calibration/Talking_Hedz.json</calibration>
+      <reference-wavs>ref/canonical/P2k_013_*.wav</reference-wavs>
+      <cartridge>trench-juce/plugin/assets/cartridges/P2k_013.json</cartridge>
+      <hedz-rom>trench-core/src/hedz_rom.rs</hedz-rom>
+      <golden>trench-core/src/hedz_golden.rs</golden>
+      <heritage-template>hedz (in heritage_designer_sections.json)</heritage-template>
+    </trench-status>
+    <note>Primary cross-language parity reference. Hardcoded in Rust as hedz_rom. Q axis is degenerate (morph-only MorphDesigner template).</note>
+  </filter>
+
+  <filter id="P2k_036" order="12" category="REZ">
+    <name>ZoomPeaks</name>
+    <description>High resonance nasal filter.</description>
+    <parameters>
+      <morph-controls>resonant frequency</morph-controls>
+      <q-controls>nasal resonance intensity</q-controls>
+    </parameters>
+  </filter>
+
+  <filter id="P2k_037" order="12" category="EQ+">
+    <name>DJAlkaline</name>
+    <description>Band accentuating filter, Q shifts "ring" frequency.</description>
+    <parameters>
+      <morph-controls>band accent position</morph-controls>
+      <q-controls>ring frequency shift</q-controls>
+    </parameters>
+  </filter>
+
+  <filter id="P2k_038" order="12" category="EQ+">
+    <name>BassTracer</name>
+    <description>Low Q boosts bass. Try sawtooth or square waveform with Q set to 115.</description>
+    <parameters>
+      <morph-controls>bass sweep</morph-controls>
+      <q-controls>bass boost amount</q-controls>
+    </parameters>
+    <usage-tip>Try sawtooth or square waveform with Q set to 115.</usage-tip>
+  </filter>
+
+  <filter id="P2k_039" order="12" category="EQ+">
+    <name>RogueHertz</name>
+    <description>Bass with mid-range boost and smooth Q. Sweep cutoff with Q at 127.</description>
+    <parameters>
+      <morph-controls>cutoff sweep</morph-controls>
+      <q-controls>mid-range boost smoothness</q-controls>
+    </parameters>
+    <usage-tip>Sweep cutoff with Q at 127.</usage-tip>
+  </filter>
+
+  <filter id="P2k_040" order="12" category="EQ-">
+    <name>RazorBlades</name>
+    <description>Cuts a series of frequency bands. Q selects different bands.</description>
+    <parameters>
+      <morph-controls>cut band positions</morph-controls>
+      <q-controls>band selection</q-controls>
+    </parameters>
+    <trench-status>
+      <calibration>docs/calibration/Razor_Blades.json</calibration>
+      <reference-wavs>ref/canonical/cal_Razor_Blades_*.wav</reference-wavs>
+    </trench-status>
+  </filter>
+
+  <filter id="P2k_041" order="12" category="EQ-">
+    <name>RadioCraze</name>
+    <description>Band limited for a cheap radio-like EQ.</description>
+    <parameters>
+      <morph-controls>band limiting</morph-controls>
+      <q-controls>bandwidth narrowing</q-controls>
+    </parameters>
+    <trench-status>
+      <calibration>docs/calibration/Radio_Craze.json</calibration>
+      <reference-wavs>ref/canonical/cal_Radio_Craze_*.wav</reference-wavs>
+    </trench-status>
+  </filter>
+
+  <filter id="P2k_042" order="12" category="VOW">
+    <name>Eeh-To-Aah</name>
+    <description>"E" to "Ah" formant movement. Q accentuates "peakiness."</description>
+    <parameters>
+      <morph-controls>vowel position (Ee → Ah)</morph-controls>
+      <q-controls>formant peak sharpness</q-controls>
+    </parameters>
+  </filter>
+
+  <filter id="P2k_043" order="12" category="VOW">
+    <name>UbuOrator</name>
+    <description>Aah-Uuh vowel with no Q. Raise Q for throaty vocals.</description>
+    <parameters>
+      <morph-controls>vowel position (Aah → Uuh)</morph-controls>
+      <q-controls>throatiness</q-controls>
+    </parameters>
+  </filter>
+
+  <filter id="P2k_044" order="12" category="VOW">
+    <name>DeepBouche</name>
+    <description>French vowels! "Ou-Est" vowel at low Q.</description>
+    <parameters>
+      <morph-controls>French vowel position</morph-controls>
+      <q-controls>mouth depth</q-controls>
+    </parameters>
+  </filter>
+
+  <filter id="P2k_045" order="12" category="PHA">
+    <name>FreakShifta</name>
+    <description>Phasey movement. Try major 6 interval and maximum Q.</description>
+    <parameters>
+      <morph-controls>phase shift frequency</morph-controls>
+      <q-controls>phase depth</q-controls>
+    </parameters>
+    <usage-tip>Try major 6 interval and maximum Q.</usage-tip>
+    <trench-status>
+      <calibration>docs/calibration/Freak_Shifta.json</calibration>
+      <reference-wavs>ref/canonical/cal_Freak_Shifta_*.wav</reference-wavs>
+    </trench-status>
+  </filter>
+
+  <filter id="P2k_046" order="12" category="PHA">
+    <name>CruzPusher</name>
+    <description>Accentuates harmonics at high Q. Try it with a sawtooth LFO.</description>
+    <parameters>
+      <morph-controls>harmonic emphasis position</morph-controls>
+      <q-controls>harmonic accentuation</q-controls>
+    </parameters>
+    <usage-tip>Try it with a sawtooth LFO.</usage-tip>
+  </filter>
+
+  <filter id="P2k_047" order="12" category="FLG">
+    <name>AngelzHairz</name>
+    <description>Smooth sweep flanger. Good with vox waves. e.g. 1094, Q = 60.</description>
+    <parameters>
+      <morph-controls>flanger sweep</morph-controls>
+      <q-controls>flange depth</q-controls>
+    </parameters>
+    <usage-tip>Good with vox waves. Try frequency 1094, Q = 60.</usage-tip>
+  </filter>
+
+  <filter id="P2k_048" order="12" category="FLG">
+    <name>DreamWeava</name>
+    <description>Directional Flanger. Poles shift down at low Q and up at high Q.</description>
+    <parameters>
+      <morph-controls>flanger sweep</morph-controls>
+      <q-controls>pole direction (down at low Q, up at high Q)</q-controls>
+    </parameters>
+  </filter>
+
+  <filter id="P2k_049" order="12" category="REZ">
+    <name>AcidRavage</name>
+    <description>Great analog Q response. Wide tonal range. Try it with a sawtooth LFO.</description>
+    <parameters>
+      <morph-controls>frequency sweep</morph-controls>
+      <q-controls>analog-style resonance</q-controls>
+    </parameters>
+    <usage-tip>Try it with a sawtooth LFO.</usage-tip>
+  </filter>
+
+  <filter id="P2k_050" order="12" category="REZ">
+    <name>BassOMatic</name>
+    <description>Low boost for basslines. Q goes to distortion at the maximum level.</description>
+    <parameters>
+      <morph-controls>bass boost sweep</morph-controls>
+      <q-controls>distortion intensity</q-controls>
+    </parameters>
+  </filter>
+
+  <filter id="P2k_051" order="12" category="REZ">
+    <name>LucifersQ</name>
+    <description>Violent mid Q filter! Take care with Q values 40-90.</description>
+    <parameters>
+      <morph-controls>frequency</morph-controls>
+      <q-controls>violent mid-range resonance (dangerous 40-90)</q-controls>
+    </parameters>
+    <usage-tip>Take care with Q values 40-90.</usage-tip>
+    <note>CRITICAL extraction gap — not yet captured in TRENCH parity gate.</note>
+  </filter>
+
+  <filter id="P2k_052" order="12" category="REZ">
+    <name>ToothComb</name>
+    <description>Highly resonant harmonic peaks shift in unison. Try mid Q.</description>
+    <parameters>
+      <morph-controls>harmonic peak position</morph-controls>
+      <q-controls>resonance intensity</q-controls>
+    </parameters>
+    <usage-tip>Try mid Q.</usage-tip>
+  </filter>
+
+  <filter id="P2k_053" order="12" category="WAH">
+    <name>EarBender</name>
+    <description>Midway between wah and vowel. Strong mid-boost. Nasty at high Q settings.</description>
+    <parameters>
+      <morph-controls>wah/vowel sweep</morph-controls>
+      <q-controls>mid-boost intensity (nasty at high values)</q-controls>
+    </parameters>
+    <trench-status>
+      <calibration>docs/calibration/Ear_Bender.json</calibration>
+      <reference-wavs>ref/canonical/cal_Ear_Bender_*.wav</reference-wavs>
+    </trench-status>
+  </filter>
+
+  <filter id="P2k_054" order="12" category="SFX">
+    <name>KlangKling</name>
+    <description>Ringing Flange filter. Q "tunes" the ring frequency.</description>
+    <parameters>
+      <morph-controls>ring/flange position</morph-controls>
+      <q-controls>ring frequency tuning</q-controls>
+    </parameters>
+  </filter>
+
+  <!-- ================================================================== -->
+  <!-- MORPH DESIGNER ARCHITECTURE                                        -->
+  <!-- Documents the shared architecture used by all 12th-order filters   -->
+  <!-- and user-programmable Morph Designer presets.                       -->
+  <!-- ================================================================== -->
+
+  <morph-designer-architecture>
+    <description>
+      The Morph Designer is the core of the Z-plane filter engine.
+      It provides up to six completely programmable filter sections
+      (lowpass, highpass, or EQ) with the ability to morph between
+      two completely different frame settings of the six sections.
+    </description>
+
+    <section-count>6</section-count>
+    <total-poles>12 (2 poles per section × 6 sections)</total-poles>
+
+    <section-types>
+      <type id="0">Off (passthrough)</type>
+      <type id="1">2-pole Lowpass / Highpass</type>
+      <type id="2">2-pole EQ (parametric)</type>
+      <type id="3">2-pole Lowpass (alternate recipe)</type>
+    </section-types>
+
+    <per-section-parameters>
+      <frame name="Lo Morph (A)">
+        <freq range="0-127">Frequency at morph = 0%</freq>
+        <gain range="0-127">Gain/Q at morph = 0%</gain>
+      </frame>
+      <frame name="Hi Morph (B)">
+        <freq range="0-127">Frequency at morph = 100%</freq>
+        <gain range="0-127">Gain/Q at morph = 100%</gain>
+      </frame>
+    </per-section-parameters>
+
+    <global-parameters>
+      <morph range="0-127">Interpolates all 6 sections between Lo and Hi frames</morph>
+      <q-offset range="0-127">
+        For EQ stages: gain offset (-24 to +24 dB, two controls sum and clip).
+        For HP/LP stages: Q offset (-50% to +50% frequency shift).
+      </q-offset>
+    </global-parameters>
+
+    <firmware-compile>
+      <description>
+        Each section's (type, freq, gain) triplet at the current morph position
+        is compiled to a 5-coefficient DF2T biquad kernel [c0, c1, c2, c3, c4]
+        via the firmware's integer math pipeline. The 6 kernels are loaded into
+        a 12-stage serial cascade (6 active + 6 passthrough).
+      </description>
+      <sample-rates>
+        <rate hz="44100" index="0" scale="220" base="18"/>
+        <rate hz="48000" index="1" scale="220" base="18"/>
+        <rate hz="96000" index="2" scale="200" base="4"/>
+        <rate hz="192000" index="3" scale="177" base="1"/>
+      </sample-rates>
+    </firmware-compile>
+  </morph-designer-architecture>
+
+  <!-- ================================================================== -->
+  <!-- CATEGORY SUMMARY                                                   -->
+  <!-- ================================================================== -->
+
+  <category-summary>
+    <category code="BPF" count="3" description="Band-pass filter"/>
+    <category code="BYPASS" count="1" description="No filter (bypass)"/>
+    <category code="DST" count="1" description="Distortion"/>
+    <category code="EQ+" count="8" description="EQ boost filter"/>
+    <category code="EQ-" count="2" description="EQ cut filter"/>
+    <category code="FLG" count="3" description="Flanger filter"/>
+    <category code="HPF" count="2" description="High-pass filter"/>
+    <category code="LPF" count="8" description="Low-pass filter"/>
+    <category code="PHA" count="4" description="Phaser filter"/>
+    <category code="PROG" count="5" description="Programmable (user-defined morph)"/>
+    <category code="REZ" count="7" description="Highly resonant"/>
+    <category code="SFX" count="1" description="Special effect"/>
+    <category code="VOW" count="8" description="Vowel / formant"/>
+    <category code="WAH" count="1" description="Wah-Wah pedal"/>
+  </category-summary>
+
+</emu-zplane-filters>
