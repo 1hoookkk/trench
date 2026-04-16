@@ -83,6 +83,9 @@ run_cargo_test cargo test -p trench-core --test hedz_cascade --release --quiet
 step "rust engine pills smoke (every cartridges/engine/*.json loads)"
 run_cargo_test cargo test -p trench-core --test engine_pills --release --quiet
 
+step "rust compile_grid round-trip (2-token limit + loader parity)"
+run_cargo_test cargo test -p trench-core --test compile_grid_roundtrip --release --quiet
+
 step "rust vowel formant classification (8 ok + 2 known-drift: aw, oo)"
 run_cargo_test cargo test -p trench-core --test vowel_formants --release --quiet
 
