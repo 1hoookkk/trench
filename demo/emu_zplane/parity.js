@@ -1,6 +1,14 @@
 /**
  * parity.js — Cross-language parity check against hedz_golden.json.
  * Tolerance: maxAbsErr < 1e-4
+ *
+ * NOTE: The hedz baked ROM is a MorphDesigner-only template — Q is not
+ * differentiated in the compiled kernel. hedz_golden.json therefore has
+ * degenerate Q corners: M0_Q0 === M0_Q100 and M100_Q0 === M100_Q100.
+ * This is confirmed in trench-core/src/hedz_golden.rs (build_cartridge
+ * returns [m0, m1, m0, m1]).  Only the 2 morph endpoints at Q=0 are
+ * tested here; the live-Q path is exercised separately by the slider in
+ * the demo UI (applyLiveQ runs on top of the static kernel).
  */
 
 import { renderOffline, makeImpulse } from './render_audio.js';
@@ -30,12 +38,11 @@ export async function runParity(interpolateMod, sr) {
     const hedz = sections.templates.find(t => t.name === 'hedz');
     if (!hedz) throw new Error('hedz template not found in heritage_designer_sections.json');
 
-    // corners: { label, morph, q }
+    // Only 2 corners: M0 and M100 at Q=0.
+    // Q corners are degenerate in the hedz baked ROM — see file header.
     const corners = [
-        { label: 'M0_Q0',    morph: 0, q: 0 },
-        { label: 'M100_Q0',  morph: 1, q: 0 },
-        { label: 'M0_Q100',  morph: 0, q: 1 },
-        { label: 'M100_Q100',morph: 1, q: 1 },
+        { label: 'M0_Q0',   morph: 0, q: 0 },
+        { label: 'M100_Q0', morph: 1, q: 0 },
     ];
 
     const results = [];

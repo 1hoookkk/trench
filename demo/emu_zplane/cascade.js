@@ -79,7 +79,8 @@ export class Cascade {
             this._stages[i].setTarget(target[i], rampSamples);
         }
         for (let i = NUM_STAGES; i < TOTAL_STAGES; i++) {
-            this._stages[i].setTarget(PASSTHROUGH, rampSamples);
+            // Passthrough stages always snap immediately — never ramp.
+            this._stages[i].setTarget(PASSTHROUGH, 1);
         }
     }
 

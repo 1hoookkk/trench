@@ -19,16 +19,16 @@ export const FW_BASE  = [18, 18, 4, 1];
 
 export function mfDecode(u16) {
     const packed = u16 & 0xFFFF;
-    if (packed === 0xFFFF) return 1.0;
-    if (packed === 0x0000) return 0.0;
+    if (packed === 0xFFFF) return Math.fround(1.0);
+    if (packed === 0x0000) return Math.fround(0.0);
     const u = packed + 1;
     const exp = ((u >> 12) & 0xF) - 15;
     const mant = u & 0xFFF;
     if (exp < -14) {
-        return mant / 134217728.0; // 2^-27
+        return Math.fround(mant / 134217728.0); // 2^-27
     }
     const scaled = (mant | 0x1000) / 8192.0; // 2^-13
-    return scaled * Math.pow(2.0, exp);
+    return Math.fround(scaled * Math.pow(2.0, exp));
 }
 
 // ---------------------------------------------------------------------------

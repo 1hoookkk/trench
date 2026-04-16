@@ -230,7 +230,6 @@ async function init() {
 
     // Play / Stop
     btnPlay.addEventListener('click', () => {
-        getAudioCtx();
         startPlayback();
     });
     btnStop.addEventListener('click', () => {
