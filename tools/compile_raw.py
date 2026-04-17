@@ -6,7 +6,9 @@ Input format: raw-stage-v1 JSON with either:
   - `keyframes: [{label, stages, ...}, ...]`
 
 Each stage is authored in musical units:
-  - `allpole` / `resonator`: pole frequency + radius + stage gain
+  - `allpole` / `resonator`: pole frequency + radius + stage gain. A textbook
+    2-pole resonator with no numerator zeros: `b = (g, 0, 0)`. This is the
+    firmware-native pole-only shape (Morpheus cubes per E-mu RE).
   - `zero_forced`: pole frequency + radius + stage gain, zero on unit circle
     at the pole frequency
   - `zero_forced_offset`: pole frequency + radius + stage gain, unit-circle
@@ -113,11 +115,19 @@ def encode_stage(stage: dict, stage_path: str) -> dict:
 
     a1 = pole_a1(pole_freq_hz, radius)
     val1 = stage_gain - 1.0
-    b1_target = a1
-    b2_target = radius * radius
 
+    # Firmware-faithful pole-only encoding. Morpheus cubes in the E-mu
+    # firmware (per the RE decode) set val1 = val2 = val3 = 0, which
+    # produces b = (1, 0, 0): a textbook 2-pole resonator with no zeros
+    # in the numerator. With stage_gain g applied via val1 = g-1, this
+    # becomes b = (g, 0, 0). Prior to 2026-04-17 this kind wrote
+    # b1_target = a1 and b2_target = r² (numerator mirroring
+    # denominator), a form not documented anywhere in the firmware RE
+    # notes and one that produced massive DC gain instead of a
+    # resonance peak at the authored pole frequency.
     if kind in ("allpole", "resonator"):
-        pass
+        b1_target = 0.0
+        b2_target = 0.0
     elif kind == "zero_forced":
         b1_target = -2.0 * math.cos(2.0 * math.pi * pole_freq_hz / AUTHORING_SR)
         b2_target = 1.0

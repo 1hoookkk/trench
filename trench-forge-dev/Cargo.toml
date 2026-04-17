@@ -1,0 +1,31 @@
+[package]
+name = "trench-forge-dev"
+version = "0.1.0"
+edition = "2021"
+
+[lib]
+crate-type = ["cdylib", "lib"]
+
+# ============================================================================
+# Scoped doctrine exception — dev harness only, NEVER SHIPPING.
+#
+# The shipping plugin (`trench-live`) bans serde, filesystem polling, JSON
+# reloading, `Mutex`, and any `Arc<T>` handoff on the audio thread. Those
+# bans still hold in shipping. This crate is exempt only inasmuch as it
+# carves a narrow path for hot-reload authoring:
+#
+#   - `notify`      : cross-platform FS watcher, runs on its own
+#                     background thread. Never touched by `process()`.
+#   - `arc-swap`    : lock-free, wait-free `Arc` pointer swap. The audio
+#                     thread's interaction is a `load()` — atomic read,
+#                     no contention, no allocation.
+#
+# Everything else (JSON parsing via `Cartridge::from_json`, file reads,
+# error handling) happens on the watcher thread. The audio thread
+# doctrine from `trench-live` is preserved byte-for-byte in `process()`.
+# ============================================================================
+[dependencies]
+nih_plug = { git = "https://github.com/robbert-vdh/nih-plug.git", features = ["standalone"] }
+trench-core = { path = "../trench-core" }
+notify = "6"
+arc-swap = "1"

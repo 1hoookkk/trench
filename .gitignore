@@ -48,3 +48,6 @@ pdf_out.txt
 .aider.input.history
 .aider.tags.cache.v4/
 check.log
+
+# Hot-reload dev harness watch directory (trench-forge-dev)
+/forge-watch/

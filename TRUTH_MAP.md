@@ -16,6 +16,16 @@ it is either archive/non-canonical or queued for deletion.
   plugin can consume via FFI or a committed C header. If it doesn't
   serve the JUCE plugin, it doesn't belong here.
 
+## Authoring & Dev Harnesses
+
+- **trench-forge-dev** is the hot-reload authoring harness for internal
+  body authoring. It lives in the monorepo as a workspace crate, is
+  firewalled from shipping code (never imported or linked by
+  `trench-core` or `trench-juce/plugin/`), and is not distributed.
+  `DOCTRINE.md` bans on audio-thread filesystem IO remain in force for
+  shipping; `trench-forge-dev` uses a background watcher thread with
+  `ArcSwap` handoff — the audio thread still does nothing but math.
+
 ## Shipping cartridge format
 
 - **Schema**: `cartridge.schema.json` at repo root.
@@ -88,6 +98,8 @@ Claims with evidence. The purge order is safest-first.
 | `xtask/` | 21 lines in `xtask/src/main.rs`. Cargo convention for workspace tooling; check whether anything in `./check` or CI invokes it before deletion. | `grep -rln xtask` shows `BODIES.md` and an archive handoff — probably historical. |
 | `trench-core/src/cluster.rs`, `trench-core/src/motor.rs`, `trench-core/src/role.rs`, `trench-core/src/engine.rs` | 800+ lines of Rust that may or may not be consumed by the JUCE plugin. `engine.rs` is exported via `lib.rs:12` but only its own tests use it inside the workspace. `Cluster` / `Motor` / `Role` similarly — audit what the JUCE plugin actually FFI's into before keeping. | Workspace grep + the sibling-repo constraint. |
 | `trench-live/src/editor.rs` | **Already deleted** (Phase 3 of the current surgical slice, pending commit). | `ls trench-live/src/` shows only `lib.rs`. |
+| `trench-juce/forge/` | Legacy forge files predating the sibling-repo decision. Superseded by `trench-forge-dev` + `compile_raw.py`. Verify consumers before deletion. | — |
+| `tools/forge_write.py` | Legacy forge files predating the sibling-repo decision. Superseded by `trench-forge-dev` + `compile_raw.py`. Verify consumers before deletion. | — |
 
 ## Architect Prompts
 
