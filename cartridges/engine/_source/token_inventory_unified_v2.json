@@ -1,7 +1,7 @@
 {
   "generated_at": "2026-04-12T14:41:59",
   "source_unified": "C:\\Users\\hooki\\Trench\\vault\\_phonemes\\unified_sonic_inventory_v2.json",
-  "token_count": 50,
+  "token_count": 57,
   "tokens": {
     "consonants.p": {
       "tables_ref": "consonants.p",
@@ -1175,6 +1175,62 @@
           ]
         }
       ]
+    },
+    "speaker_knockerz.sk_vault": {
+      "tables_ref": "speaker_knockerz.sk_vault",
+      "category": "speaker_knockerz",
+      "key": "sk_vault",
+      "label": "Speaker Knockerz / The Vault (clean sub, heavy weight, clamped highs)",
+      "shape_path": "cartridges/engine/_source/shapes/speaker_knockerz/sk_vault.json",
+      "p2k_phonemes": []
+    },
+    "speaker_knockerz.sk_chest": {
+      "tables_ref": "speaker_knockerz.sk_chest",
+      "category": "speaker_knockerz",
+      "key": "sk_chest",
+      "label": "Speaker Knockerz / Chest Resonance (sub blooms into a warm 150 Hz boost)",
+      "shape_path": "cartridges/engine/_source/shapes/speaker_knockerz/sk_chest.json",
+      "p2k_phonemes": []
+    },
+    "speaker_knockerz.sk_choke": {
+      "tables_ref": "speaker_knockerz.sk_choke",
+      "category": "speaker_knockerz",
+      "key": "sk_choke",
+      "label": "Speaker Knockerz / The Choke (steep notch at 200 Hz; fundamental separates from overtones)",
+      "shape_path": "cartridges/engine/_source/shapes/speaker_knockerz/sk_choke.json",
+      "p2k_phonemes": []
+    },
+    "speaker_knockerz.sk_rip": {
+      "tables_ref": "speaker_knockerz.sk_rip",
+      "category": "speaker_knockerz",
+      "key": "sk_rip",
+      "label": "Speaker Knockerz / Cardboard Rip (peaky unstable resonance flares at 400 Hz)",
+      "shape_path": "cartridges/engine/_source/shapes/speaker_knockerz/sk_rip.json",
+      "p2k_phonemes": []
+    },
+    "speaker_knockerz.sk_rattle": {
+      "tables_ref": "speaker_knockerz.sk_rattle",
+      "category": "speaker_knockerz",
+      "key": "sk_rattle",
+      "label": "Speaker Knockerz / The Rattle (comb-like flutter in the 800 Hz range)",
+      "shape_path": "cartridges/engine/_source/shapes/speaker_knockerz/sk_rattle.json",
+      "p2k_phonemes": []
+    },
+    "speaker_knockerz.sk_cry": {
+      "tables_ref": "speaker_knockerz.sk_cry",
+      "category": "speaker_knockerz",
+      "key": "sk_cry",
+      "label": "Speaker Knockerz / Cone Cry (narrow screaming peak at 1.2 kHz)",
+      "shape_path": "cartridges/engine/_source/shapes/speaker_knockerz/sk_cry.json",
+      "p2k_phonemes": []
+    },
+    "speaker_knockerz.sk_fracture": {
+      "tables_ref": "speaker_knockerz.sk_fracture",
+      "category": "speaker_knockerz",
+      "key": "sk_fracture",
+      "label": "Speaker Knockerz / Total Fracture (mid-band phase-collapses; pure sub plus violent top)",
+      "shape_path": "cartridges/engine/_source/shapes/speaker_knockerz/sk_fracture.json",
+      "p2k_phonemes": []
     }
   }
 }
