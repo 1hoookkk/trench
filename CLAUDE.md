@@ -7,22 +7,25 @@
 - Do the work. No planning doc. No vague summary layer.
 
 ## Product (v1.0, ship 2026-07-15)
-TRENCH is an authoring instrument: phoneme tokens on a time grid become the
-filter trajectory. Windows JUCE 8 standalone + VST3.
+TRENCH is an E-mu Z-plane filter instrument. Phoneme pills are baked
+Morph Designer presets; MORPH is driven by standard DAW / synth mod
+sources at playback. Windows JUCE 8 standalone + VST3.
 
 ## Core model
-- Cartridge-based morph filter instrument.
-- Cartridges are phoneme pills: morph-invariant, Q-varied spectral
-  states identified by short grid labels.
-- MORPH = travel between pills on the Looperator time grid, scheduled
-  by the compiler. Pills themselves do not morph internally.
-- Q = playback-surface tonal shaping of whichever pill the playhead
-  is currently on.
-- BODY = a named preset sequence of pills (Speaker Knockerz, Aluminum
-  Siding, Small Talk Ah-Ee, Cul-De-Sac per BODIES.md). Compiler TBD.
+- Pill = one E-mu Morph Designer preset (Lo Morph / Hi Morph frames +
+  6 sections with per-section type, frequency, Q/Gain).
+- MORPH = interpolation between a pill's Lo and Hi frames. Driven by
+  mod sources (LFO, envelope, velocity, mod wheel, DAW automation).
+- Q = live resonance/gain parameter with a ±50% offset wheel, added to
+  interpolated section Q/Gain.
+- BODY = a named collection of pills sharing a design intent. Not a
+  scheduled sequence.
+- TYPE = selects the active body.
 
 ## Ground truth
 - Active truth + architect prompts: `TRUTH_MAP.md`
+- E-mu reference material: `docs/emu/`
+- Architecture direction: `docs/architecture/zplane_truth.md`
 - Math + contracts: `SPEC.md`
 - Cartridge wire schema: `cartridge.schema.json`
 - Operating modes: `MODES.md`
