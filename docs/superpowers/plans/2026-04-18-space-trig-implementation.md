@@ -93,7 +93,11 @@ git -C C:/Users/hooki/trench-juce/plugin commit -m "test: re-enable Catch2 and s
 - Modify: `C:/Users/hooki/trench-juce/plugin/source/PluginProcessor.h` (accessor getters if pattern exists)
 - Create: `C:/Users/hooki/trench-juce/plugin/tests/NullBaselineTests.cpp`
 
-- [ ] **Step 1: Write failing null-baseline test**
+- [ ] **Step 1: Confirm `apvts` access pattern**
+
+Open `PluginProcessor.h` around line 38-39. Verify whether `apvts` is public, or whether the class exposes a `getApvts()` accessor. Use whichever the header provides; the test below assumes a public or friend-accessible `apvts`. If it's private with no accessor, add a test-only accessor or use `juce::AudioProcessor::getParameters()` by ID lookup.
+
+- [ ] **Step 2: Write failing null-baseline test**
 
 In `NullBaselineTests.cpp`:
 ```cpp
@@ -102,21 +106,20 @@ In `NullBaselineTests.cpp`:
 
 TEST_CASE("space and trig parameters exist with default 0.0") {
     PluginProcessor p;
-    auto* spaceParam = p.getParameters()[/* index tbd */];
-    auto* trigParam  = p.getParameters()[/* index tbd */];
-    // Use apvts by ID instead:
-    REQUIRE(p.apvts.getRawParameterValue("space") != nullptr);
-    REQUIRE(p.apvts.getRawParameterValue("trig")  != nullptr);
-    REQUIRE(*p.apvts.getRawParameterValue("space") == 0.0f);
-    REQUIRE(*p.apvts.getRawParameterValue("trig")  == 0.0f);
+    // Use whichever access pattern Step 1 confirmed:
+    auto& state = p.apvts; // or p.getApvts()
+    REQUIRE(state.getRawParameterValue("space") != nullptr);
+    REQUIRE(state.getRawParameterValue("trig")  != nullptr);
+    REQUIRE(*state.getRawParameterValue("space") == 0.0f);
+    REQUIRE(*state.getRawParameterValue("trig")  == 0.0f);
 }
 ```
 
-- [ ] **Step 2: Run, confirm failure**
+- [ ] **Step 3: Run, confirm failure**
 
 Expected: test compiles but fails at REQUIRE (parameters don't exist yet).
 
-- [ ] **Step 3: Add parameters to `createParameterLayout`**
+- [ ] **Step 4: Add parameters to `createParameterLayout`**
 
 In `PluginProcessor.cpp`, append inside the parameter list:
 ```cpp
@@ -128,9 +131,9 @@ params.push_back (std::make_unique<juce::AudioParameterFloat>(
     juce::NormalisableRange<float>(0.0f, 1.0f), 0.0f));
 ```
 
-- [ ] **Step 4: Run test, confirm pass**
+- [ ] **Step 5: Run test, confirm pass**
 
-- [ ] **Step 5: Commit**
+- [ ] **Step 6: Commit**
 
 ```
 git commit -am "feat: add space and trig parameters, default 0.0"
@@ -279,6 +282,9 @@ git commit -am "feat(cartridge): add optional drive/spatial/mod_fn blocks with s
 
 > **PLAN-PHASE DECISION — MACKIE MODEL SOURCE:**
 > Pick one before writing the softclip: (a) Cytomic-documented circuit model of the 1202 non-VLZ preamp, or (b) a measured curve from a real 1202. If neither is accessible before implementation starts, escalate to the user — do not substitute a tanh placeholder. This is recorded in the spec as a non-negotiable.
+>
+> **PLAN-PHASE DECISION — CURVE-MATCH TOLERANCE:**
+> Once the model source is chosen, pick a curve-match tolerance (e.g. RMS error vs reference ≤ X) and a harmonic-threshold for Step 2's nonlinearity test (e.g. sum of 2f..5f bins > Y dB below fundamental at +12 dB). Record both values in a comment at the top of `MackieDrive.cpp`; tests consume them as constants.
 
 - [ ] **Step 1: Write failing test — unity at 0 dB**
 
@@ -583,18 +589,29 @@ In `processBlock(AudioBuffer&, MidiBuffer& midi)`, iterate MIDI messages; on not
 
 With SPACE=0, TRIG=0, all existing bodies: output should match the current release build bit-for-bit on the same input WAV. Automate this check as a test in step 9.
 
-- [ ] **Step 9: Write integration test — full-chain null at all-zero**
+- [ ] **Step 9: Generate the pre-change golden WAV** *(must happen before starting Task 1's CMake changes to guarantee the fixture predates any code change — if not done yet, check out the commit BEFORE this plan's first commit, build, render, commit the WAV, then return to this task)*
+
+From a clean checkout of the commit before Task 1 began:
+```
+git worktree add /tmp/pre-space-trig <pre-task-1 commit sha>
+cd /tmp/pre-space-trig/trench-juce/plugin && cmake -S . -B build && cmake --build build --target TRENCH_Standalone
+# Render a fixed input WAV (tests/fixtures/noise_burst_48k.wav) through the baseline body
+# Save output as tests/fixtures/pre-space-trig/<body>.wav
+```
+
+Commit the fixture to the current branch under `tests/fixtures/pre-space-trig/`.
+
+- [ ] **Step 10: Write integration test — full-chain null at all-zero**
 
 ```cpp
 TEST_CASE("Full chain: SPACE=0, TRIG=0, existing body produces identical output") {
-    // Render a fixed input WAV through the plugin with a baseline body.
-    // Compare against a committed golden WAV (produced pre-change).
+    // Render tests/fixtures/noise_burst_48k.wav through the plugin with baseline body.
+    // Compare sample-by-sample against tests/fixtures/pre-space-trig/<body>.wav.
+    // REQUIRE sample-accurate equality.
 }
 ```
 
-Produce the golden WAV from `git stash`-ed pre-change build, or from the prior committed binary; commit it under `tests/fixtures/`.
-
-- [ ] **Step 10: Run all tests, commit**
+- [ ] **Step 11: Run all tests, commit**
 
 ```
 git commit -am "feat: wire MackieDrive, FunctionGenerator, QSoundSpatial, SafetyLimiter into processBlock"
@@ -629,7 +646,7 @@ Hand-write 1–4 segments per body. Default `key-sync: 1`. For looping bodies, s
 
 - [ ] **Step 4: Add `spatial_profile` block**
 
-Copy representative coefficient values from `docs/archive/qsound_spatial.md` per body's intended spatial character.
+If `docs/archive/qsound_spatial.md` contains per-body or per-character example coefficient sets, copy the one that matches the body's intended spatial voice. If the doc only documents the laws and parametric model (not per-body presets), hand-author azimuth, distance, elevation, and per-band coefficients by ear: start from the doc's default/center values and audition in the standalone build. Commit the values as authored; refinement is cheap later. Do NOT substitute identity/placeholder — SPACE=1 should audibly differ from SPACE=0 on an authored body.
 
 - [ ] **Step 5: Build, load body, audition**
 
@@ -690,5 +707,14 @@ git commit --allow-empty -m "ship: SPACE + TRIG + Mackie drive complete per spec
 These are not code issues; they gate the plan but are not re-derivable from the spec:
 
 1. **Mackie model source** (Task 5 blocker): Cytomic reference vs measured 1202 curve. Escalate to user if neither is available.
-2. **Golden WAV provenance** (Task 9 Step 9): the pre-change reference for null tests. Generate from current `main` before starting Task 9, commit under `tests/fixtures/pre-space-trig/`.
-3. **Shipping body name→cartridge mapping** (Task 10): confirm the 4 names map to specific embedded cartridge files before authoring.
+2. **Mackie curve-match tolerance + harmonic threshold** (Task 5 decision): once model source is picked, record both values as constants in `MackieDrive.cpp`.
+3. **Golden WAV provenance** (Task 9 Step 9): the pre-change reference for null tests. Generate from the commit BEFORE Task 1 began, not from a dirty working tree. Commit under `tests/fixtures/pre-space-trig/`.
+4. **Shipping body name→cartridge mapping** (Task 10): confirm the 4 names (Aluminum Siding, Speaker Knockerz, Small Talk Ah-Ee, Cul-De-Sac) map to specific embedded cartridge files before authoring.
+5. **Per-body spatial coefficient availability** (Task 10 Step 4): verify whether `docs/archive/qsound_spatial.md` contains per-body presets or only parametric laws; if only laws, bodies are hand-authored by ear from center defaults.
+
+## Advisory items (not blocking; address opportunistically during execution)
+
+- **Task 3 roller placement**: consider invoking the `juce-lookandfeel-design` skill for disciplined pixel coords; at minimum commit chosen rectangles as named constants, not magic numbers.
+- **Task 6 shape coverage**: the plan tests `lin`, `jump`, and `REV`. Add a parametric test covering `hold`, `exp`, `log`, `sCurve` shapes before shipping.
+- **Task 9 generator tick rate**: spec tied to per-sample is simplest; a control-block (32-sample) tick rate is a cheap CPU optimization if profiling ever demands it. Not a v1 concern.
+- **Task 11 Rust-side schema**: if any Rust test fixture JSON gains the new optional blocks, update `trench-core/src/cartridge.rs` to parse them (or skip unknown fields gracefully) rather than letting Rust tests fail.
