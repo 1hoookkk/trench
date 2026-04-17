@@ -50,6 +50,7 @@ Everything else is a research script.
 | `tools/extract_emu_filter_params.py` | `cartridges/engine/_source/heritage_designer_sections.json` — heritage integer grids (upstream data for forge targeting and hedz bake) |
 | `tools/bake_hedz_const.py` | `trench-core/src/hedz_rom.rs`, `trench-core/src/hedz_golden.rs` — hardcoded Talking Hedz cartridge + golden impulse vector for the cross-language parity test |
 | `tools/bake_phoneme_pills.py` | `cartridges/engine/<category>/<key>.json` + `cartridges/engine/manifest.json` — shipping pill layout baked from `cartridges/engine/_source/` |
+| `tools/compile_raw.py` | `compiled-v1` cartridges from the internal `raw-stage-v1` authoring surface. Canonical contract: `docs/superpowers/specs/compiler_raw_to_cartridge.md`. Mechanical format bridge only — shipping acceptance comes from `BODIES.md`, not EX3 null parity. |
 | `tools/parity_null.py` | P2K parity gate consumed by `./check` |
 
 ## Archive / non-canonical paths

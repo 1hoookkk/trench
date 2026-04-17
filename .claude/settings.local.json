@@ -1,3 +1,8 @@
 {
-  "disableAllHooks": false
+  "disableAllHooks": false,
+  "permissions": {
+    "additionalDirectories": [
+      "C:\\Users\\hooki\\trench_re_vault"
+    ]
+  }
 }

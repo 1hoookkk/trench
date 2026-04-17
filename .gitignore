@@ -42,3 +42,9 @@ pdf_out.txt
 /docs/calibration/**/*.png
 /tools/*.wav
 /dev/*.bin
+
+# Tool byproducts
+.aider.chat.history.md
+.aider.input.history
+.aider.tags.cache.v4/
+check.log
