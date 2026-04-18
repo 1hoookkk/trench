@@ -1,0 +1,217 @@
+{
+  "data_dir": "C:\\Users\\hooki\\trench_re_vault\\datasets\\qsound_spatial_v1\\2026-03-05_pan_batch_fullgrid_a",
+  "sr": 48000,
+  "stimulus_hz": 220.0,
+  "window_sec": [
+    0.25,
+    1.25
+  ],
+  "itd": {
+    "per_pan": [
+      {
+        "pan": -60,
+        "lag_samples": 0,
+        "lag_us": 0.0,
+        "parametric_rad": -2665.9707556628396,
+        "parametric_deg": -447.6196975022863
+      },
+      {
+        "pan": -50,
+        "lag_samples": 0,
+        "lag_us": 0.0,
+        "parametric_rad": -2163.6284016682825,
+        "parametric_deg": 530.0736835716982
+      },
+      {
+        "pan": -40,
+        "lag_samples": 0,
+        "lag_us": 0.0,
+        "parametric_rad": -1665.1966117979346,
+        "parametric_deg": -2546.426704174476
+      },
+      {
+        "pan": -30,
+        "lag_samples": 0,
+        "lag_us": 0.0,
+        "parametric_rad": -1174.4404349008207,
+        "parametric_deg": 3833.9405361219337
+      },
+      {
+        "pan": -20,
+        "lag_samples": 5,
+        "lag_us": 104.16666666666667,
+        "parametric_rad": -723.4598560733887,
+        "parametric_deg": -2975.3745300443134
+      },
+      {
+        "pan": -10,
+        "lag_samples": 5,
+        "lag_us": 104.16666666666667,
+        "parametric_rad": -336.7912037349911,
+        "parametric_deg": 557.7143670168476
+      },
+      {
+        "pan": 0,
+        "lag_samples": 5,
+        "lag_us": 104.16666666666667,
+        "parametric_rad": 0.0,
+        "parametric_deg": 0.0
+      },
+      {
+        "pan": 10,
+        "lag_samples": 0,
+        "lag_us": 0.0,
+        "parametric_rad": 336.7912037349911,
+        "parametric_deg": -557.7143670168476
+      },
+      {
+        "pan": 20,
+        "lag_samples": 0,
+        "lag_us": 0.0,
+        "parametric_rad": 723.4598560733887,
+        "parametric_deg": 2975.3745300443134
+      },
+      {
+        "pan": 30,
+        "lag_samples": 0,
+        "lag_us": 0.0,
+        "parametric_rad": 1174.4404349008207,
+        "parametric_deg": -3833.9405361219337
+      },
+      {
+        "pan": 40,
+        "lag_samples": 5,
+        "lag_us": 104.16666666666667,
+        "parametric_rad": 1665.1966117979346,
+        "parametric_deg": 2546.426704174476
+      },
+      {
+        "pan": 50,
+        "lag_samples": 5,
+        "lag_us": 104.16666666666667,
+        "parametric_rad": 2163.6284016682825,
+        "parametric_deg": -530.0736835716982
+      },
+      {
+        "pan": 60,
+        "lag_samples": 5,
+        "lag_us": 104.16666666666667,
+        "parametric_rad": 2665.9707556628396,
+        "parametric_deg": 447.6196975022863
+      }
+    ],
+    "ratio_radians_mean": 217.3817883728271,
+    "ratio_radians_std": 272.6394677993688,
+    "ratio_degrees_mean": 1.8525022031039498,
+    "ratio_degrees_std": 359.2113628715222,
+    "lag_pos60": 5,
+    "lag_neg60": 0
+  },
+  "ild": {
+    "per_pan": [
+      {
+        "pan": -60,
+        "measured_dB": -6.332084120663106,
+        "parametric_rad_dB": -3.8933369250783563,
+        "parametric_deg_dB": 4.39719758987646
+      },
+      {
+        "pan": -50,
+        "measured_dB": 0.0,
+        "parametric_rad_dB": -3.2195580579561973,
+        "parametric_deg_dB": 0.9576799357062393
+      },
+      {
+        "pan": -40,
+        "measured_dB": 0.06221781834785973,
+        "parametric_rad_dB": -2.556761834373853,
+        "parametric_deg_dB": -7.981532379189103
+      },
+      {
+        "pan": -30,
+        "measured_dB": 6.97052388209193,
+        "parametric_rad_dB": -1.9042407420283693,
+        "parametric_deg_dB": 5.372177521274668
+      },
+      {
+        "pan": -20,
+        "measured_dB": -2.520667813198715,
+        "parametric_rad_dB": -1.2619829318241866,
+        "parametric_deg_dB": -4.298470593549573
+      },
+      {
+        "pan": -10,
+        "measured_dB": -2.354654747164985,
+        "parametric_rad_dB": -0.6284599943152073,
+        "parametric_deg_dB": 6.957614786903452
+      },
+      {
+        "pan": 0,
+        "measured_dB": -2.52115119492293,
+        "parametric_rad_dB": 0.0,
+        "parametric_deg_dB": 0.0
+      },
+      {
+        "pan": 10,
+        "measured_dB": 7.002908991086013,
+        "parametric_rad_dB": 0.6284599943152073,
+        "parametric_deg_dB": -6.957614786903452
+      },
+      {
+        "pan": 20,
+        "measured_dB": 7.006154162466354,
+        "parametric_rad_dB": 1.2619829318241866,
+        "parametric_deg_dB": 4.298470593549573
+      },
+      {
+        "pan": 30,
+        "measured_dB": 0.062394927516257095,
+        "parametric_rad_dB": 1.9042407420283693,
+        "parametric_deg_dB": -5.372177521274668
+      },
+      {
+        "pan": 40,
+        "measured_dB": -2.3549491716085456,
+        "parametric_rad_dB": 2.556761834373853,
+        "parametric_deg_dB": 7.981532379189103
+      },
+      {
+        "pan": 50,
+        "measured_dB": -2.518460881016878,
+        "parametric_rad_dB": 3.2195580579561973,
+        "parametric_deg_dB": -0.9576799357062393
+      },
+      {
+        "pan": 60,
+        "measured_dB": -2.354250888536662,
+        "parametric_rad_dB": 3.8933369250783563,
+        "parametric_deg_dB": -4.39719758987646
+      }
+    ],
+    "mae_radians_dB": 4.249559413758571
+  },
+  "bands": {
+    "best_crossovers_hz": [
+      200.0,
+      2000.0
+    ],
+    "best_mae_dB": 2.5987821456338813,
+    "all": {
+      "200_2000": {
+        "mae_dB": 2.5987821456338813
+      },
+      "500_5000": {
+        "mae_dB": 5.177770054691019
+      },
+      "300_3000": {
+        "mae_dB": 3.7150701589106143
+      },
+      "500_2000": {
+        "mae_dB": 3.164172433986635
+      },
+      "1000_4000": {
+        "mae_dB": 4.236647589212696
+      }
+    }
+  }
+}
