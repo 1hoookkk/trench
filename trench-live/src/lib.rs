@@ -4,9 +4,13 @@
 //!
 //! - No filesystem polling, no JSON reloading, no `Mutex`, no `RwLock`,
 //!   no `Arc<AtomicCell<...>>` handoffs into `process()`.
-//! - No editor — see `tools/bake_hedz_const.py` and
-//!   `trench-core/src/hedz_rom.rs` for the provenance chain that
-//!   produces the hardcoded Talking Hedz cartridge at build time.
+//! - The vizia editor (`editor.rs`) runs on the GUI thread only and
+//!   communicates with the audio thread exclusively through nih-plug's
+//!   atomic parameter storage. Nothing in `editor.rs` may ever be
+//!   invoked from `process()`.
+//! - The shipping cartridge is hardcoded — see `tools/bake_hedz_const
+//!   .py` and `trench-core/src/hedz_rom.rs` for the provenance chain
+//!   that produces it at build time.
 //! - The cartridge is fully const at the Rust level (`trench_core::
 //!   hedz_rom::HEDZ_CORNERS` + `HEDZ_BOOSTS`). `Cartridge::hedz_rom()`
 //!   makes one `String` allocation for the name at plugin init —
@@ -25,9 +29,12 @@
 //! workflow limitation, it is the point.
 
 use nih_plug::prelude::*;
+use nih_plug_vizia::ViziaState;
 use std::sync::Arc;
 
 use trench_core::{Cartridge, Cascade, BLOCK_SIZE};
+
+mod editor;
 
 pub struct TrenchLive {
     params: Arc<TrenchLiveParams>,
@@ -38,6 +45,11 @@ pub struct TrenchLive {
 
 #[derive(Params)]
 pub struct TrenchLiveParams {
+    /// Persisted editor window state (size + scale factor). The GUI
+    /// thread reads and writes this; the audio thread never touches it.
+    #[persist = "editor-state"]
+    pub editor_state: Arc<ViziaState>,
+
     #[id = "morph"]
     pub morph: FloatParam,
     #[id = "q"]
@@ -62,6 +74,8 @@ impl Default for TrenchLive {
 impl Default for TrenchLiveParams {
     fn default() -> Self {
         Self {
+            editor_state: editor::default_state(),
+
             morph: FloatParam::new("Morph", 0.0, FloatRange::Linear { min: 0.0, max: 1.0 })
                 .with_unit("%")
                 .with_value_to_string(formatters::v2s_f32_percentage(0))
@@ -94,8 +108,12 @@ impl Plugin for TrenchLive {
         self.params.clone()
     }
 
-    // No editor — the plugin ships a hardcoded cartridge and exposes
-    // two host-automation parameters. That's the whole UI surface.
+    // Editor runs on the GUI thread only. The audio-thread purity
+    // contract in `process()` below is unchanged — no GUI code ever
+    // reaches the hot path.
+    fn editor(&mut self, _async_executor: AsyncExecutor<Self>) -> Option<Box<dyn Editor>> {
+        editor::create(self.params.clone(), self.params.editor_state.clone())
+    }
 
     fn initialize(
         &mut self,
