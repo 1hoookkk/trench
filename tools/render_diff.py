@@ -1,21 +1,42 @@
 #!/usr/bin/env python3
-"""render_diff.py — bit-accurate WAV diff for the TRENCH render-diff harness.
+"""render_diff.py — audibility-tolerance WAV diff for TRENCH render-diff.
 
-Compares two mono IEEE-float32 WAV files sample-by-sample and reports the
-maximum absolute error. Exit code 0 if max error <= --tolerance (default
-0.0 = bit-identical); non-zero otherwise.
+Compares two mono IEEE-float32 WAV files. The gate is scoped to "do the
+two renders sound the same," not "are the bits identical." All
+thresholds are expressed **relative to the reference signal's peak**,
+which makes the gate invariant to overall output level — a 10x louder
+render with the same error pattern reports the same numbers.
 
-Intended pairing:
-    Rust reference WAV from `cargo test -p trench-core render_diff_harness`
-    C++ offline-render WAV from the JUCE plugin's TRENCH_OFFLINE_RENDER
-    mode (upcoming).
+Why relative thresholds:
+    The Rust reference runs an f64 cascade internally; the shipping C++
+    plugin runs an f32 cascade under `/fp:fast`. Precision and reorder
+    differences produce ~-40 to -60 dB error relative to ref-peak —
+    inaudible, and the product of the precision choice, not a bug. An
+    absolute-dBFS gate would either reject benign drift or miss real
+    bugs depending on how loud the test signal happens to be.
+
+Metrics reported every run:
+    samples=<N>  sr=<SR>
+    ref  peak=<linear> (<dBFS>) rms=<dBFS>
+    test peak=<linear> (<dBFS>) rms=<dBFS>
+    diff peak=<linear> (<dBFS abs>, <dB rel-ref-peak>)
+    diff rms =<linear> (<dBFS abs>, <dB rel-ref-peak>)
+    first_drift@<sample>            (only if any sample fails)
+
+Pass requires BOTH:
+    diff_peak / ref_peak <= `--max-peak-db`  (default -40 dB rel ref peak)
+    diff_rms  / ref_peak <= `--max-rms-db`   (default -60 dB rel ref peak)
+
+Exit codes:
+    0  both metrics within tolerance
+    1  peak or RMS tolerance exceeded
+    2  shape mismatch (channels / rate / length)
+    3  NaN in either input
 
 Usage:
-    python tools/render_diff.py <ref.wav> <test.wav> [--tolerance N]
-
-No external dependencies — parses the RIFF/WAVE container manually so
-IEEE-float32 samples (which the stdlib `wave` module does not handle) are
-read correctly.
+    python tools/render_diff.py <ref.wav> <test.wav>
+    python tools/render_diff.py <ref.wav> <test.wav> --max-peak-db -30
+    python tools/render_diff.py <ref.wav> <test.wav> --max-rms-db -50
 """
 
 import argparse
@@ -26,12 +47,7 @@ from pathlib import Path
 
 
 def read_f32_wav(path: Path):
-    """Return (samples: list[float], sample_rate: int, channels: int).
-
-    Accepts WAVE_FORMAT_IEEE_FLOAT (fmt=3) with 32 bits/sample, mono or
-    stereo. Rejects anything else — this tool is for the render-diff
-    contract, not a general WAV reader.
-    """
+    """Return (samples: list[float], sample_rate: int, channels: int)."""
     data = path.read_bytes()
     if data[0:4] != b"RIFF" or data[8:12] != b"WAVE":
         raise ValueError(f"{path}: not a RIFF/WAVE file")
@@ -57,10 +73,6 @@ def read_f32_wav(path: Path):
     (sample_rate,) = struct.unpack("<I", fmt[4:8])
     (bits_per_sample,) = struct.unpack("<H", fmt[14:16])
 
-    # WAVE_FORMAT_EXTENSIBLE (0xFFFE) stashes the real format code in the
-    # first 4 bytes of the SubFormat GUID at fmt[24:28]. `hound` writes
-    # float WAVs as EXTENSIBLE by default; plain IEEE-float (fmt=3) is
-    # also accepted.
     EXT = 0xFFFE
     IEEE_FLOAT = 3
     if audio_format == EXT:
@@ -86,15 +98,37 @@ def read_f32_wav(path: Path):
     return samples, sample_rate, channels
 
 
+def linear_to_db(value: float) -> float:
+    """Convert a non-negative linear amplitude to dB. -inf for 0."""
+    if value <= 0.0:
+        return float("-inf")
+    return 20.0 * math.log10(value)
+
+
+def format_db(db: float) -> str:
+    if db == float("-inf"):
+        return "-inf"
+    return f"{db:+.2f}"
+
+
 def main() -> int:
-    parser = argparse.ArgumentParser(description=__doc__.strip().splitlines()[0])
+    parser = argparse.ArgumentParser(
+        description=__doc__.strip().splitlines()[0],
+        formatter_class=argparse.RawDescriptionHelpFormatter,
+    )
     parser.add_argument("ref", type=Path, help="reference WAV (Rust)")
     parser.add_argument("test", type=Path, help="WAV to compare (C++)")
     parser.add_argument(
-        "--tolerance",
+        "--max-peak-db",
         type=float,
-        default=0.0,
-        help="max absolute error allowed; default 0.0 (bit-identical)",
+        default=-40.0,
+        help="peak |diff| limit in dB relative to ref peak (default -40)",
+    )
+    parser.add_argument(
+        "--max-rms-db",
+        type=float,
+        default=-60.0,
+        help="RMS(diff) limit in dB relative to ref peak (default -60)",
     )
     args = parser.parse_args()
 
@@ -114,33 +148,90 @@ def main() -> int:
         )
         return 2
 
+    n = len(ref)
+    ref_peak = 0.0
+    ref_sum_sq = 0.0
+    test_peak = 0.0
+    test_sum_sq = 0.0
     max_err = 0.0
-    first_drift = None
-    drift_count = 0
+    sum_sq_err = 0.0
+    first_drift_sample = -1
+
     for i, (a, b) in enumerate(zip(ref, test)):
-        # NaN in either side is an immediate fail; NaN != NaN so abs(a-b) is NaN.
         if math.isnan(a) or math.isnan(b):
-            print(
-                f"FAIL: NaN at sample {i} (ref={a}, test={b})",
-                file=sys.stderr,
-            )
+            print(f"FAIL: NaN at sample {i} (ref={a}, test={b})", file=sys.stderr)
             return 3
-        err = abs(a - b)
+        abs_a = abs(a)
+        abs_b = abs(b)
+        if abs_a > ref_peak:
+            ref_peak = abs_a
+        if abs_b > test_peak:
+            test_peak = abs_b
+        ref_sum_sq += a * a
+        test_sum_sq += b * b
+        d = a - b
+        sum_sq_err += d * d
+        err = abs(d)
         if err > max_err:
             max_err = err
-        if err > args.tolerance:
-            drift_count += 1
-            if first_drift is None:
-                first_drift = (i, a, b, err)
 
-    print(f"samples={len(ref)} max_abs_err={max_err:.9e} tolerance={args.tolerance:.9e}")
-    if drift_count:
-        i, a, b, err = first_drift
-        print(
-            f"FAIL: {drift_count} sample(s) exceed tolerance. First at {i}: "
-            f"ref={a} test={b} err={err:.9e}",
-            file=sys.stderr,
-        )
+    ref_rms = math.sqrt(ref_sum_sq / n) if n else 0.0
+    test_rms = math.sqrt(test_sum_sq / n) if n else 0.0
+    diff_rms = math.sqrt(sum_sq_err / n) if n else 0.0
+
+    # Relative-to-ref-peak thresholds.
+    peak_rel_db = linear_to_db(max_err / ref_peak) if ref_peak > 0 else float("-inf")
+    rms_rel_db = linear_to_db(diff_rms / ref_peak) if ref_peak > 0 else float("-inf")
+
+    # Locate first drift using the tightest of the two relative bounds
+    # (so the sample index matches a real criterion, not a stale one).
+    max_peak_linear = ref_peak * (10.0 ** (args.max_peak_db / 20.0)) if ref_peak > 0 else 0.0
+    if max_peak_linear > 0:
+        for i, (a, b) in enumerate(zip(ref, test)):
+            if abs(a - b) > max_peak_linear:
+                first_drift_sample = i
+                break
+
+    print(f"samples={n}  sr={ref_sr}")
+    print(
+        f"ref  peak={ref_peak:.9e} ({format_db(linear_to_db(ref_peak))} dBFS) "
+        f"rms={format_db(linear_to_db(ref_rms))} dBFS"
+    )
+    print(
+        f"test peak={test_peak:.9e} ({format_db(linear_to_db(test_peak))} dBFS) "
+        f"rms={format_db(linear_to_db(test_rms))} dBFS"
+    )
+    print(
+        f"diff peak={max_err:.9e} "
+        f"({format_db(linear_to_db(max_err))} dBFS abs, "
+        f"{format_db(peak_rel_db)} dB rel-ref-peak)"
+    )
+    print(
+        f"diff rms ={diff_rms:.9e} "
+        f"({format_db(linear_to_db(diff_rms))} dBFS abs, "
+        f"{format_db(rms_rel_db)} dB rel-ref-peak)"
+    )
+    print(
+        f"gate: peak<={args.max_peak_db:+.2f} dB rel  |  rms<={args.max_rms_db:+.2f} dB rel"
+    )
+
+    peak_fail = peak_rel_db > args.max_peak_db
+    rms_fail = rms_rel_db > args.max_rms_db
+
+    if peak_fail or rms_fail:
+        reasons = []
+        if peak_fail:
+            reasons.append(f"peak {format_db(peak_rel_db)} > {args.max_peak_db:+.2f}")
+        if rms_fail:
+            reasons.append(f"rms {format_db(rms_rel_db)} > {args.max_rms_db:+.2f}")
+        print(f"FAIL: {' ; '.join(reasons)}", file=sys.stderr)
+        if first_drift_sample >= 0:
+            print(
+                f"      first sample exceeding peak threshold: "
+                f"{first_drift_sample} (ref={ref[first_drift_sample]} "
+                f"test={test[first_drift_sample]})",
+                file=sys.stderr,
+            )
         return 1
     return 0
 

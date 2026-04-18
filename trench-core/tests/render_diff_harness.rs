@@ -13,9 +13,22 @@
 //! matches the committed fixture bit-for-bit (`f32::to_bits` equality).
 //! Drift in the Rust reference chain fails the test immediately.
 //!
+//! Precision contract (two tiers):
+//!   1. **Same-precision self-test (this harness):** Rust → Rust,
+//!      compared at `to_bits` equality. Any drift in the Rust cascade,
+//!      AGC, DCB, or output-gain path is an instant failure.
+//!   2. **Cross-language gate (`tools/render_diff.py`):** Rust-golden
+//!      vs. JUCE offline-render output, compared with an audibility
+//!      tolerance (default -80 dBFS). Accepts benign f32/f64 and
+//!      compiler-reorder drift between the canonical f64 reference and
+//!      the shipping f32 plugin; still catches any real wiring bug.
+//!
 //! Input signal is a deterministic linear chirp (20 Hz → 20 kHz, 1 s,
-//! amplitude 0.5, mono, 48 kHz) generated in-process; no binary input
-//! fixture is required.
+//! amplitude 0.5, mono, 48 kHz). The first run writes the buffer out to
+//! `tests/fixtures/chirp_input_48k.wav` and panics asking for a commit;
+//! subsequent runs load that WAV and feed its samples into the engine.
+//! Committing the input eliminates a cross-platform `f32::sin` parity
+//! failure mode between Rust's libm and MSVC's on the C++ side.
 //!
 //! Scope of this harness (step 2a of the render-diff doctrine):
 //!   cascade → AGC (with mix) → output_gain → DC blocker
@@ -37,6 +50,11 @@ const CHIRP_F1_HZ: f32 = 20_000.0;
 const MORPH: f64 = 0.5;
 const Q: f64 = 0.5;
 const FIXTURE_RELPATH: &str = "tests/fixtures/hedz_reference_48k.wav";
+const INPUT_FIXTURE_RELPATH: &str = "tests/fixtures/chirp_input_48k.wav";
+// Render through the same JSON cartridge the shipping plugin embeds.
+// The render-diff gate must exercise the data both sides run against,
+// otherwise it measures data-source drift instead of implementation drift.
+const CARTRIDGE_RELPATH: &str = "../trench-juce/plugin/assets/cartridges/P2k_013.json";
 
 /// Linear-frequency chirp, phase-accumulated sample-by-sample so the
 /// phase integral matches exactly across runs and platforms. Output is
@@ -58,11 +76,55 @@ fn generate_chirp() -> Vec<f32> {
     out
 }
 
+/// Returns the chirp samples loaded from the committed input WAV. On the
+/// very first run the fixture does not yet exist, so we generate it,
+/// write the WAV, and panic with instructions to commit — same pattern
+/// as the output fixture.
+fn load_or_generate_input() -> Vec<f32> {
+    let fixture = PathBuf::from(INPUT_FIXTURE_RELPATH);
+    if !fixture.exists() {
+        let samples = generate_chirp();
+        fs::create_dir_all(fixture.parent().unwrap()).expect("mkdir fixtures");
+        write_f32_wav(&fixture, &samples);
+        panic!(
+            "render_diff_harness: generated new input fixture at {}. Commit \
+             this WAV (git add {}) and re-run the test. This failure is \
+             expected exactly once — on the commit that introduces the \
+             committed chirp input.",
+            fixture.display(),
+            fixture.display()
+        );
+    }
+    let (samples, spec) = read_f32_wav(&fixture);
+    assert_eq!(spec.channels, 1, "input fixture must be mono");
+    assert_eq!(spec.sample_rate, SAMPLE_RATE, "input sample rate mismatch");
+    assert_eq!(spec.bits_per_sample, 32);
+    assert!(matches!(spec.sample_format, SampleFormat::Float));
+    assert_eq!(
+        samples.len(),
+        DURATION_SAMPLES,
+        "input fixture length mismatch: wav has {} samples, expected {}",
+        samples.len(),
+        DURATION_SAMPLES
+    );
+    samples
+}
+
 fn render_rust_reference() -> Vec<f32> {
+    let json = fs::read_to_string(CARTRIDGE_RELPATH).unwrap_or_else(|e| {
+        panic!(
+            "render_diff_harness: cannot read cartridge JSON at {}: {e}",
+            CARTRIDGE_RELPATH
+        )
+    });
+    let cart = Cartridge::from_json(&json).unwrap_or_else(|e| {
+        panic!("render_diff_harness: failed to parse cartridge JSON: {e}")
+    });
+
     let mut engine = FilterEngine::new();
     engine.prepare(SAMPLE_RATE as f64);
-    engine.load_cartridge(Cartridge::hedz_rom());
-    let mut buf = generate_chirp();
+    engine.load_cartridge(cart);
+    let mut buf = load_or_generate_input();
     engine.process_block(&mut buf, MORPH, Q);
     assert!(
         !engine.take_instability_flag(),
