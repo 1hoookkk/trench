@@ -1,29 +1,83 @@
 # Z-plane truth and TRENCH architecture direction
 
-This document pins TRENCH's architecture to E-mu Z-plane filter ground
-truth. It exists to prevent abstract inventions from drifting the
-runtime away from E-mu's actual design.
+This document pins TRENCH's architecture to E-mu Z-plane ground truth.
+It exists to stop three different things from collapsing into one lie:
+
+- heritage authoring truth
+- compiled engine representations
+- runtime playback state
+
+If these are not kept separate, the project drifts. Cache formats start
+pretending to be source material, implementation shortcuts start
+pretending to be authoring law, and future reverse-engineering work gets
+poisoned.
 
 ## Ground truth
 
 The canonical E-mu references live at:
 
-- [`docs/emu/zplane_explained.md`](../emu/zplane_explained.md) — the
-  Z-plane filter definition and morph interpolation behavior (Proteus
-  2000-era manual).
+- [`docs/emu/zplane_explained.md`](../emu/zplane_explained.md) — Z-plane
+  definition: two complex filter frames interpolated by a Morph axis.
 - [`docs/emu/emulator_x3_filter_reference.md`](../emu/emulator_x3_filter_reference.md)
-  — the 55-filter bank listing and Morph Designer specification
-  (*Emulator X3 Reference Manual*, Chapter 6).
+  — the 55-filter bank listing, Peak/Shelf Morph description, and Morph
+  Designer specification (*Emulator X3 Reference Manual*, Chapter 6).
+- [`docs/emu/dillusionman_peak_shelf_morph.md`](../emu/dillusionman_peak_shelf_morph.md)
+  — practical Peak/Shelf Morph vocabulary: `FREQ / SHELF / PEAK` per
+  frame plus the `FilFreq` / `FilRes` control usage.
+- [`docs/emu/peak_shelf_morph_reece_recipe.md`](../emu/peak_shelf_morph_reece_recipe.md)
+  — worked Peak/Shelf Morph example.
 
-Any TRENCH design decision that is not either (a) provably better than
-E-mu or (b) a faithful translation of E-mu truth needs justification or
-removal.
+Any TRENCH design decision that is not either:
+
+1. provably better than E-mu, or
+2. a faithful translation of E-mu truth
+
+needs justification or removal.
+
+## Provenance law
+
+Not all references are equal.
+
+### Canonical
+
+These are allowed to define architecture:
+
+- archived/manual E-mu documentation
+- direct clean-room extraction artifacts
+- byte-level parity references already validated in repo
+
+### Secondary
+
+These are useful, but cannot outrank canonical sources:
+
+- NotebookLM exports
+- NotebookLM summaries
+- community writeups
+- forum lore
+- workflow notes
+- interpretive DSP commentary
+
+NotebookLM material is allowed to:
+
+- corroborate a control law already present in canonical docs
+- preserve phrasing or practical usage patterns
+- point to likely extraction targets
+
+NotebookLM material is **not** allowed to:
+
+- redefine the native authoring object
+- override a manual/reference statement
+- silently introduce architecture law
+- replace raw provenance with paraphrase
+
+If a NotebookLM note conflicts with canonical docs, the NotebookLM note
+loses.
 
 ## Classification framing: preserve / translate / invent
 
-For every TRENCH concept, classify into one of three buckets:
+For every TRENCH concept, classify it into one of three buckets:
 
-- **(A) Better than E-mu** — modern engineering upgrade, with a stated
+- **(A) Better than E-mu** — modern engineering upgrade with a stated
   reason for why it beats the original. Keep.
 - **(B) E-mu truth, preserved or translated faithfully** — keep as-is,
   document provenance.
@@ -32,145 +86,438 @@ For every TRENCH concept, classify into one of three buckets:
 
 ### Current classification
 
-| Concept                                             | Bucket    | Notes |
-|------------------------------------------------------|-----------|-------|
-| Pill = Morph Designer preset                         | **B**     | Direct translation of E-mu's 6-section × 2-frame structure. |
-| Phoneme vocabulary / vowel naming                    | **B**     | E-mu's own vocal-tract metaphor; see `zplane_explained.md`. |
-| 30-integer heritage authoring grid                   | **B**     | The Morph Designer authoring format, preserved byte-for-byte at `cartridges/engine/_source/heritage_designer_sections.json`. |
-| Type 1/2/3 firmware compile recipes                  | **B**     | E-mu's real coefficient derivation, inlined in `tools/bake_hedz_const.py`. |
-| 12-stage DF2T serial cascade (6 active + 6 passthrough) | **B**  | Topology matches E-mu's 12th-order section chain. |
-| Per-filter calibration skins                         | **B**     | `docs/calibration/index.json` + per-filter JSONs reverse-engineer real E-mu filter strategies (FREQUENCY_SWAP, HF_WALL_FOLD, VOWEL_FORMANT, RADIUS_ONLY_MORPH, etc.). |
-| `f64` math + 32-sample control blocks + ramping      | **A**     | Modern precision and artifact control E-mu hardware couldn't afford. |
-| 4-corner (`M0_Q0`/`M0_Q100`/`M100_Q0`/`M100_Q100`) bilinear shape | **A** → transition to **B** | Precomputes Q variants per frame to avoid runtime biquad computation. Justified for current runtime; transitioning to 2-corner + live Q (see below). |
-| Audio-thread doctrine (no locks, no allocation)      | **A**     | Modern best practice E-mu firmware didn't need to encode. |
-| `compiled-v1` cartridge JSON format                  | **A**     | Wire-safe, schema-validated, host-portable. Transitional; subsumed by 30-integer grid under the 2-corner direction. |
-| Compiler (pill sequence → trajectory)                | **C dead**| E-mu has no compiler; MORPH is driven by mod sources. Concept removed from roadmap. |
-| Looperator time grid as authoring surface            | **C dead**| DAW automation and synth mod sources are the surface. |
-| BODIES as scheduled pill sequences                   | **C reframed** | A body is a named collection sharing a design intent (`BODIES.md`), not a scheduled trajectory. |
-| "Pills do not morph internally" rule                 | **C dead**| Contradicts the definition of Z-plane filter. A pill IS the A/B frame pair. |
-| `docs/hostile_authoring_workflow_spec.md`            | off-path  | Content/marketing concept (deadpan absurdist ritual framing), not engineering direction. |
+| Concept | Bucket | Notes |
+|---|---|---|
+| Pill = Morph Designer preset | **B** | Direct translation of E-mu's 6-section × 2-frame structure. |
+| Phoneme vocabulary / vowel naming | **B** | E-mu's own vocal-tract metaphor; see `zplane_explained.md`. |
+| 30-integer heritage authoring grid | **B** | Morph Designer authoring format, preserved byte-for-byte at `cartridges/engine/_source/heritage_designer_sections.json`. |
+| Peak/Shelf authoring as left/right frame triplets | **B** | Direct translation of E-mu's `FREQ / SHELF / PEAK` per-frame object. |
+| Type 1/2/3 firmware compile recipes | **B** | E-mu's real coefficient derivation, inlined in `tools/bake_hedz_const.py`. |
+| 12-stage DF2T serial cascade (6 active + 6 passthrough) | **B** | Topology matches E-mu's 12th-order section chain. |
+| Per-filter calibration skins | **B** | Reverse-engineered real E-mu filter strategies. |
+| `f64` math + 32-sample control blocks + ramping | **A** | Modern precision and artifact control E-mu hardware could not afford. |
+| 4-corner (`M0_Q0`/`M0_Q100`/`M100_Q0`/`M100_Q100`) bilinear shape | **A** constrained | Valid as a compiled/runtime representation only. Not native authoring truth. |
+| Audio-thread doctrine (no locks, no allocation) | **A** | Modern best practice E-mu firmware did not need to encode. |
+| `compiled-v1` cartridge JSON format | **A** transitional | Wire-safe and portable, but transitional. Must not replace heritage truth. |
+| Compiler (pill sequence → trajectory) | **C dead** | E-mu has no compiler; MORPH is driven by mod sources. Remove. |
+| Looperator time grid as authoring surface | **C dead** | DAW automation and synth mod sources are the surface. |
+| BODIES as scheduled pill sequences | **C reframed** | A body is a named collection sharing a design intent, not a scheduled trajectory. |
+| "Pills do not morph internally" rule | **C dead** | Contradicts the definition of a Z-plane filter. A pill **is** the A/B frame pair. |
 
-## The 4-corner → 2-corner transition
+## Non-negotiable architecture law
+
+There are exactly **three layers**.
+
+### 1. Heritage layer
+
+This is the only canonical source of truth.
+
+Use E-mu-native semantics only.
+
+Examples:
+
+- Peak/Shelf Morph as two semantic frames:
+  - left `{freq_hz, shelf, peak_db}`
+  - right `{freq_hz, shelf, peak_db}`
+- Morph Designer as six sections, each with:
+  - section shape/type
+  - Lo frame `{freq_hz, gain_or_q}`
+  - Hi frame `{freq_hz, gain_or_q}`
+
+### 2. Compiled layer
+
+This is a deterministic lowering from heritage into engine-ready data.
+
+Allowed contents:
+
+- 2-corner or 4-corner packs
+- pole/zero packs
+- biquad coefficient packs
+- normalized convenience values
+- stage enable flags
+- interpolation metadata
+
+This layer may optimize. It may not invent meaning.
+
+### 3. Runtime layer
+
+This is ephemeral playback state.
+
+Allowed contents:
+
+- current morph
+- current resonance / gain drive
+- smoothed control values
+- active coefficient sets
+- meter / telemetry state
+- temporary buffers
+
+Runtime state is never canonical and never hand-authored.
+
+## Hard invariants
+
+### Heritage layer must never contain
+
+- `M0_Q0`, `M0_Q100`, `M100_Q0`, `M100_Q100`
+- biquad coefficients
+- SIMD packs
+- interpolation caches
+- smoothed state
+- UI pixel positions
+- normalized convenience values that replace source units
+- anything that exists only because the engine is faster that way
+
+### Compiled layer may contain
+
+- corners
+- precomputed coeffs
+- stage packs
+- interpolation tables
+- normalized values
+- engine-specific convenience data
+
+But it must declare:
+
+- what heritage object it came from
+- what compiler produced it
+- whether the lowering is exact or approximate
+
+### Runtime layer may contain
+
+- live morph state
+- live resonance / peak / Q-offset state
+- smoothed values
+- active coeffs
+- telemetry
+
+But runtime state is disposable. It is not preset truth.
+
+## Why four corners are not the ontology
+
+TRENCH currently ships 4 bilinear corners:
+
+- `M0_Q0`
+- `M0_Q100`
+- `M100_Q0`
+- `M100_Q100`
+
+Each corner stores 12 biquad stages × 5 kernel-form coefficients. At
+runtime, `Cartridge::interpolate` does Q-first-then-Morph bilinear
+interpolation to produce the cascade's coefficient set.
+
+This shape is **not** E-mu's native authoring format.
+It is a compiled/runtime representation.
+
+### What E-mu actually authors
+
+#### Peak/Shelf Morph
+
+Peak/Shelf Morph is a 2-frame filter object. Each frame has:
+
+- `FREQ`
+- `SHELF`
+- `PEAK`
+
+The important law is that `FREQ` does **not** have a stable meaning by
+itself. Its effect depends on the `SHELF` value.
+
+So the canonical authoring atom is not frequency alone. It is the frame
+triplet:
+
+- `{freq_hz, shelf, peak_db}`
+
+left and right.
+
+#### Morph Designer
+
+Morph Designer stores 6 sections × 2 frames ×:
+
+- section type / shape
+- frequency
+- Q or Gain
+
+Again: two frames, not four corners.
+
+### Why four-corner thinking is dangerous
+
+If four corners become the primary mental model, the project silently
+starts assuming that:
+
+- Q is a second authored axis
+- Morph and Q form a native rectangular surface
+- bilinear interpolation is the meaning of the instrument
+
+That is implementation drift.
+
+The correct discipline is:
+
+- **author in frames**
+- **compile to corners if needed**
+- **run with whatever representation is fastest**
+
+Never confuse the cache with the instrument.
+
+## Peak/Shelf control law
+
+Peak/Shelf Morph should be understood as:
+
+- a left frame
+- a right frame
+- a live Morph sweep between them
+- a live resonance / peak drive control acting during playback
+
+Operationally:
+
+- `FilFreq` is the live control that sweeps the Morph position between
+  the two programmed frames.
+- `FilRes` is the live control used to drive / saturate / intensify the
+  filter behavior during the sweep.
+
+This is why a Peak/Shelf preset must not be stored as a frequency list
+or as four corners. The actual authored object is the two-frame posture.
+
+## Source-of-truth schemas
+
+### Peak/Shelf heritage schema
+
+```json
+{
+  "schema": "trench.heritage.peak_shelf.v1",
+  "id": "reece_stab_01",
+  "name": "Reece Stab",
+  "source": {
+    "origin": "emu_x3",
+    "family": "Peak/Shelf Morph",
+    "reference": "docs/emu/dillusionman_peak_shelf_morph.md"
+  },
+  "left": {
+    "freq_hz": 246.0,
+    "shelf": -50,
+    "peak_db": -24.0
+  },
+  "right": {
+    "freq_hz": 4488.0,
+    "shelf": 30,
+    "peak_db": 1.5
+  },
+  "controls": {
+    "morph_domain": [0, 255],
+    "morph_driver": "FilFreq",
+    "resonance_driver": "FilRes"
+  },
+  "notes": "Heritage object only. No derived corners."
+}
+```
+
+#### Rules
+
+- `freq_hz` is stored in Hz, not normalized.
+- `shelf` preserves source semantics as a signed scalar.
+- `peak_db` is stored in dB, not linear gain.
+- `left` and `right` are semantic frames, not corner aliases.
+- Do not add `q0`, `q100`, `corners`, or `coeffs` here.
+
+### Morph Designer heritage schema
+
+```json
+{
+  "schema": "trench.heritage.morph_designer.v1",
+  "id": "talkinghedz_md_01",
+  "name": "TalkingHedz",
+  "source": {
+    "origin": "emu_x3",
+    "family": "Morph Designer",
+    "reference": "docs/emu/emulator_x3_filter_reference.md"
+  },
+  "sections": [
+    {
+      "index": 0,
+      "shape": "lowpass",
+      "lo": { "freq_hz": 320.0, "gain_or_q": 38.0 },
+      "hi": { "freq_hz": 710.0, "gain_or_q": 44.0 }
+    },
+    {
+      "index": 1,
+      "shape": "eq",
+      "lo": { "freq_hz": 900.0, "gain_or_q": 12.0 },
+      "hi": { "freq_hz": 1250.0, "gain_or_q": 18.0 }
+    },
+    {
+      "index": 2,
+      "shape": "eq",
+      "lo": { "freq_hz": 1800.0, "gain_or_q": 10.0 },
+      "hi": { "freq_hz": 2300.0, "gain_or_q": 15.0 }
+    },
+    {
+      "index": 3,
+      "shape": "off",
+      "lo": { "freq_hz": 0.0, "gain_or_q": 0.0 },
+      "hi": { "freq_hz": 0.0, "gain_or_q": 0.0 }
+    },
+    {
+      "index": 4,
+      "shape": "off",
+      "lo": { "freq_hz": 0.0, "gain_or_q": 0.0 },
+      "hi": { "freq_hz": 0.0, "gain_or_q": 0.0 }
+    },
+    {
+      "index": 5,
+      "shape": "highpass",
+      "lo": { "freq_hz": 120.0, "gain_or_q": 20.0 },
+      "hi": { "freq_hz": 260.0, "gain_or_q": 24.0 }
+    }
+  ],
+  "global_control_model": {
+    "morph_axis": "lo_to_hi",
+    "big_wheel_role": "global_gain_or_q_offset"
+  }
+}
+```
+
+#### Rules
+
+- `shape` enum is heritage-facing:
+  - `off`
+  - `eq`
+  - `lowpass`
+  - `highpass`
+- `gain_or_q` preserves heritage ambiguity on purpose.
+- Do not split it into engine-specific subfields in heritage.
+- Store six sections even if some are `off`.
+
+## Compiled-layer examples
+
+The compiled layer is the only place where corners are allowed.
+
+### Peak/Shelf compiled example
+
+```json
+{
+  "schema": "trench.compiled.peak_shelf_surface.v1",
+  "id": "reece_stab_01.compiled",
+  "derived_from": "heritage/peak_shelf/reece_stab_01.heritage.json",
+  "compiler": {
+    "name": "peak_shelf_compiler",
+    "version": "1.0.0"
+  },
+  "semantic_family": "Peak/Shelf Morph",
+  "representation": "4corner_df2t",
+  "exactness": "approximate",
+  "derivation_notes": {
+    "morph_axis": "heritage_left_to_right",
+    "q_axis": "derived_runtime_axis_not_heritage_authored"
+  },
+  "nodes": {
+    "m0_q0": { "stages": [] },
+    "m1_q0": { "stages": [] },
+    "m0_q1": { "stages": [] },
+    "m1_q1": { "stages": [] }
+  }
+}
+```
+
+### Morph Designer compiled example
+
+```json
+{
+  "schema": "trench.compiled.morph_designer.v1",
+  "id": "talkinghedz_md_01.compiled",
+  "derived_from": "heritage/morph_designer/talkinghedz_md_01.heritage.json",
+  "compiler": {
+    "name": "designer_compile",
+    "version": "1.0.0"
+  },
+  "representation": "6stage_df2t_pack",
+  "exactness": "approximate"
+}
+```
+
+## Runtime layer contract
+
+Runtime state is transient and disposable.
+
+Use structs, not archival JSON, as the primary mental model.
+
+```cpp
+struct PeakShelfRuntimeState {
+    float morph_norm;
+    float res_norm;
+    float morph_smoothed;
+    float res_smoothed;
+    StageCoeffs active[6];
+};
+
+struct MorphDesignerRuntimeState {
+    float morph_norm;
+    float global_qgain_norm;
+    float morph_smoothed;
+    float qgain_smoothed;
+    StageCoeffs active[6];
+};
+```
+
+## Transformation law
+
+### Allowed
+
+- `heritage -> compiled`
+- `compiled -> runtime`
+- `heritage -> UI labels / browser metadata`
+
+### Forbidden
+
+- `runtime -> heritage`
+- `compiled -> heritage` as a normal authoring path
+- hand-editing compiled blobs as if they were presets
+- emitting heritage docs from runtime caches
+
+If reverse recovery is ever needed, that is a forensic tool, not the
+normal pipeline.
+
+## The 4-corner -> 2-corner transition
 
 ### Current state
 
-TRENCH cartridges ship with 4 bilinear corners: `M0_Q0`, `M0_Q100`,
-`M100_Q0`, `M100_Q100`. Each corner stores 12 biquad stages × 5
-kernel-form coefficients. At runtime, `Cartridge::interpolate` does
-Q-first-then-Morph bilinear interpolation (`SPEC.md` §1) to produce the
-cascade's coefficient set.
+TRENCH cartridges currently ship with 4 bilinear corners:
 
-This shape is NOT E-mu's native format. E-mu's Morph Designer stores 6
-sections × 2 frames × (section type, frequency, Q or Gain). At runtime,
-Morph Designer interpolates section parameters between the two frames
-and derives biquad coefficients live from the interpolated
-`(type, freq, Q)` tuple, with a live Q Offset wheel (±50%) added on top.
+- `M0_Q0`
+- `M0_Q100`
+- `M100_Q0`
+- `M100_Q100`
 
-TRENCH's 4-corner shape is an engineering optimization that precomputes
-two Q snapshots per morph frame to avoid runtime biquad coefficient
-computation. On the hardware E-mu shipped this on, runtime coefficient
-derivation was expensive; on modern CPUs it is free.
+Each corner stores 12 biquad stages × 5 kernel-form coefficients.
 
-### Why 2-corner is the better runtime
+This is valid as a shipping/runtime optimization.
+It is not E-mu's native source format.
 
-1. **E-mu-faithful.** Bucket (B) purity. The runtime matches the
-   reference bit for bit.
-2. **Shipping format equals authoring format.** The 30-integer heritage
-   grid is the cartridge. No intermediate `compiled-v1` translation
-   layer.
-3. **Q is a live parameter** with a real offset wheel (±50%), not two
-   precomputed snapshots. Full Q range, no interpolation artifacts
-   between snapshot endpoints.
-4. **CPU cost is negligible on modern hardware.** Six biquad coefficient
-   computations per 32-sample control block ≈ 0.03% of one modern core.
+### Why 2-corner + live control is the better runtime
+
+1. **E-mu-faithful.** The runtime matches the documented authoring
+   object more directly.
+2. **Shipping format can match authoring format.** The heritage object
+   stays legible instead of being hidden behind derived corners.
+3. **Q / Peak is live control, not a fake second authored axis.**
+4. **CPU cost is negligible on modern hardware.**
 5. **Authoring mental model shrinks.** Two frames per section, not four
-   corners; no Q-axis confusion for morph-only filters.
+   corners.
 
-### What it costs
+### What must not change without a new decision
 
-Transition plan, in dependency order. Items marked ⚠ are parity-critical
-— the `hedz_cascade` test must be green on every commit.
+- The DSP cascade topology stays frozen unless separately justified.
+- The parity gate stays green on every commit through any transition.
+- Existing shipped pills remain byte-preserved until re-derived from
+  their authoring sources.
 
-1. **⚠ Port E-mu type 1/2/3 firmware recipes from Python to Rust.**
-   Currently inlined in `tools/bake_hedz_const.py`. New module
-   proposed: `trench-core/src/emu_compile.rs`. Input:
-   `(section_type, freq, q_or_gain)`. Output: 5 kernel-form biquad
-   coefficients. Must be byte-for-byte against the Python reference.
-2. **Define the 2-corner cartridge schema.** 30-integer grid plus
-   metadata (section-type enum, Q-offset range, global boost, enable
-   flags). Replaces `compiled-v1`.
-3. **Rewrite `trench-core/src/cartridge.rs`** to load and interpolate
-   the new schema. `Cartridge::interpolate` returns `(type, freq, Q)`
-   per section; the cascade calls `emu_compile` from there.
-4. **Update `trench-core/src/cascade.rs`** control-block path to call
-   `emu_compile` once per section per control block. DF2T math
-   untouched.
-5. **⚠ Rewrite `trench-core/tests/hedz_cascade.rs`** for the new shape.
-   Must stay green on every commit through the transition. Lose this
-   gate = lose the byte-for-byte lock on E-mu truth.
-6. **Regenerate the committed pills** from their authoring sources.
-   Mechanical once steps 1–5 are green.
-7. **Update authoring tools** (`tools/author_speaker_knockerz.py`,
-   `tools/bake_phoneme_pills.py`, `tools/bake_hedz_const.py`) to
-   target the new format.
-8. **Update the JUCE plugin cartridge loader** (sibling repo). Same
-   parse, same interpolate, same cascade — different struct shape.
-9. **Retire the old `compiled-v1` format** once trench-core is stable
-   on the new shape.
+## One-sentence doctrine
 
-Steps 1–2 can happen on a scratch branch without disturbing anything
-shipping. Steps 3–5 form a single landing. Step 6 is mechanical. Steps
-7–9 fall out afterward.
-
-The hardest risk is subtle drift in the type 1/2/3 recipe port. The
-`hedz_cascade` parity gate is the enforcement mechanism.
-
-## HTML prototype (first step before committing)
-
-Before starting the Rust port, build a pure-JavaScript prototype of the
-2-corner + live-Q architecture and run it in a browser. The E-mu
-compile math is a pure function; porting to JS is a direct translation
-of `tools/bake_hedz_const.py`. The DF2T cascade is similarly tight
-(~20 lines of JS).
-
-**Deliverable:** `demo/emu_zplane/{index.html, zplane.js, plot.js, heritage.json, styles.css}`.
-Pure stdlib JS, no frameworks, no WASM, no libraries. Offline audio
-rendering via `AudioBuffer` + `AudioBufferSourceNode`; frequency
-response via Canvas 2D. Single-screen Bassbox-303 aesthetic, works on
-mobile browsers.
-
-**Why this is the right first step:**
-
-- **Proves the architecture cheaply.** If 2-corner + live-Q sounds
-  right in the browser, the Rust port has justification. If it
-  doesn't, the lesson is learned for the cost of one session instead
-  of a multi-week crate rewrite.
-- **Becomes the reference implementation** for the Rust port's parity
-  test. Same input → same output, byte-for-byte.
-- **Runs on a phone.** Every pill in the heritage inventory is
-  auditionable immediately.
-- **Zero risk to `trench-core`** until the architecture decision is
-  committed.
-
-## What must not change without a new decision
-
-- The DSP cascade topology (12-stage serial DF2T, 6 active + 6
-  passthrough sentinel) is frozen at `trench-core/src/cascade.rs` per
-  `SPEC.md` §3. The 4-corner → 2-corner transition changes the
-  cartridge format and interpolation path; it does NOT change the
-  cascade.
-- The `hedz_cascade` parity test must stay green on every commit
-  through the transition. This is the load-bearing guarantee that the
-  runtime still sounds like E-mu.
-- Pills authored under the current 4-corner shape are byte-preserved
-  until they are re-derived from their authoring sources into the
-  2-corner format. No truncation, no lossy conversion.
+**Heritage defines meaning. Compiled defines machinery. Runtime defines motion.**
 
 ## Related docs
 
 - [`docs/emu/zplane_explained.md`](../emu/zplane_explained.md)
 - [`docs/emu/emulator_x3_filter_reference.md`](../emu/emulator_x3_filter_reference.md)
-- [`SPEC.md`](../../SPEC.md) §1 (DSP engine), §2 (cartridge format), §3 (runtime invariants)
-- [`PHONEMES.md`](../../PHONEMES.md) (authoring model)
-- [`BODIES.md`](../../BODIES.md) (shipping bodies)
-- [`docs/calibration/index.json`](../calibration/index.json) (E-mu filter reconstruction strategies)
+- [`docs/emu/dillusionman_peak_shelf_morph.md`](../emu/dillusionman_peak_shelf_morph.md)
+- [`docs/emu/peak_shelf_morph_reece_recipe.md`](../emu/peak_shelf_morph_reece_recipe.md)
+- [`SPEC.md`](../../SPEC.md)
+- [`PHONEMES.md`](../../PHONEMES.md)
+- [`BODIES.md`](../../BODIES.md)
