@@ -146,10 +146,17 @@ jumps. Acts as LFO, envelope, or mini-sequencer depending on authoring.
 
 ### REV semantics
 
-- REV inverts the polarity of the function generator's contribution to
-  MORPH (multiplies cord output by -1).
+- REV reverses the time axis of the function generator: the authored
+  segments play back end-to-start instead of start-to-end on each
+  note-on (when `key-sync = 1`) or from the current reversed phase
+  (when `key-sync = 0`).
 - REV has no effect when TRIG = 0 or when the body has no `mod_fn`.
 - REV does not affect MORPH knob behavior outside TRIG.
+- Chosen over polarity invert because a body's authored arc played
+  backwards is musically stronger than the same arc mirrored around
+  zero: a rising trajectory becomes a falling one, a plucky one-shot
+  becomes a reverse swell. Polarity invert only moves the output
+  around its midpoint and produces generic results.
 
 ### Polyphony
 
@@ -269,7 +276,7 @@ this spec governs the machinery.
 input
   → pre-cascade: body.drive.input_gain_dB + Mackie-modeled softclip
   → 12-stage DF2T biquad cascade (frozen, with per-sample ramped coeffs)
-    ├─ MORPH = user knob + (TRIG * mod_fn(t) * (REV ? -1 : 1)), clamped
+    ├─ MORPH = user knob + (TRIG * mod_fn(REV ? (duration - t) : t)), clamped
     └─ Q     = user knob + envelope_follower if ENV=on
   → SPACE: bypass at 0, QSound spatial wet-scaled to SPACE at >0
   → safety limiter
@@ -288,7 +295,7 @@ input
 - TRIG > 0 with an authored `mod_fn` produces MORPH modulation visible in
   the LCD spectrum trace, with phase reset on each note-on when
   `key-sync = 1`, and time axis locked to host tempo when `tempo-sync = 1`.
-- REV inverts the TRIG contribution polarity.
+- REV reverses the TRIG trajectory in time (end-to-start playback).
 - A body with authored hot `input_gain_dB` audibly pushes the cascade
   harder than a body with `input_gain_dB = 0.0` (measurable in harmonic
   content, not just level).
