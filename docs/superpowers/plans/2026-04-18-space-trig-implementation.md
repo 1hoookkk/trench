@@ -24,13 +24,13 @@
 - `mackie_drive.rs` — pre-cascade softclip stage
 - `function_generator.rs` — 8-segment E-mu generator
 - `qsound_spatial.rs` — post-cascade spatial stage
-- `safety_limiter.rs` — final output peak limiter
+- `emu_kernels.rs` — Type 1/2/3 firmware kernels + `type3_freq_compression` + `compile_stage` dispatcher (Rust port of `tools/bake_hedz_const.py:119-186` and `trench-juce/plugin/source/EmuKernels.cpp`); required for render-diff on non-Hedz bodies
 
 **New Rust tests (`C:/Users/hooki/Trench/trench-core/tests/`):**
 - `mackie_drive_tests.rs`
 - `function_generator_tests.rs`
 - `qsound_spatial_tests.rs`
-- `safety_limiter_tests.rs`
+- `emu_kernels_tests.rs` — cross-validate Rust kernels against Python bake output on a fixture section
 - `render_diff_harness.rs` — full-chain render used by the parity tool
 
 **New render-diff tool (`C:/Users/hooki/Trench/tools/`):**
@@ -44,7 +44,7 @@
 - `MackieDrive.h` / `MackieDrive.cpp`
 - `FunctionGenerator.h` / `FunctionGenerator.cpp`
 - `QSoundSpatial.h` / `QSoundSpatial.cpp`
-- `SafetyLimiter.h` / `SafetyLimiter.cpp`
+- `PostCascadeAgc.h` / `PostCascadeAgc.cpp` — ports `trench-core/src/agc.rs` (16-value `AGC_TABLE` + `agc_step`, wrap-mask index, no gain floor)
 
 **Modified C++ files:**
 - `PluginProcessor.{h,cpp}` — add `space`, `trig` params; wire stages in `processBlock`; add offline-render mode flag
@@ -636,40 +636,138 @@ Mono test signal → through both Rust and C++ QSound stages at SPACE=1.0 with a
 
 ---
 
-## Task 10: Implement `safety_limiter` in Rust
+## Task 10: ~~Implement `safety_limiter` in Rust~~ — SUPERSEDED
 
-**Files:**
-- Create: `trench-core/src/safety_limiter.rs`
-- Create: `trench-core/tests/safety_limiter_tests.rs`
-- Modify: `trench-core/src/lib.rs`
+Retired by spec commit `de5cc9e` (replace `safety_limiter` with heritage
+E-mu AGC) and revert `9a84613` (remove the earlier `safety_limiter` Rust
+impl). The post-cascade tail is the reverse-engineered E-mu AGC at
+`trench-core/src/agc.rs` — 16-value table + `agc_step`, confirmed exact
+against `EmulatorX.dll` / `FUN_1802c04e0`, wrap-mask index `& 0xF`, no gain
+floor. Already merged; no Rust work under this task.
 
-- [ ] **Step 1: Write failing test — transparent below threshold**
-
-- [ ] **Step 2: Write failing test — catches peaks above ceiling**
-
-- [ ] **Step 3: Implement peak limiter**
-
-Simple lookahead-free. Ceiling: -0.3 dBFS. Stereo-linked gain reduction with short release (e.g. 50 ms).
-
-- [ ] **Step 4: Run tests, confirm pass**
-
-- [ ] **Step 5: Commit**
+Proceed to Task 11 for the C++ port of AGC.
 
 ---
 
-## Task 11: Port `SafetyLimiter` to C++
+## Task 11: Port `agc_step` + AGC table to C++
 
 **Files:**
-- Create: `plugin/source/SafetyLimiter.{h,cpp}`
+- Create: `plugin/source/PostCascadeAgc.{h,cpp}`
 - Modify: `plugin/CMakeLists.txt`
 
-- [ ] **Step 1: Port limiter state machine to C++**
+Ports `trench-core/src/agc.rs` to C++: the 16-value `AGC_TABLE` and the
+`agc_step` algorithm verbatim (index `& 0xF`, no gain floor,
+wrap-not-clamp).
+
+- [ ] **Step 1: Port `AGC_TABLE` and `agc_step` to C++**
+
+  ```cpp
+  class PostCascadeAgc {
+  public:
+      void reset() noexcept;              // agcGain_ = 1.0f
+      float step(float sample) noexcept;  // applies agc_step, updates gain
+  private:
+      static constexpr float kTable[16] = {
+          1.0001f, 1.0001f, 0.996f, 0.990f, 0.920f, 0.500f, 0.200f, 0.160f,
+          0.120f,  0.120f,  0.120f, 0.120f, 0.120f, 0.120f, 0.120f, 0.120f
+      };
+      float agcGain_ = 1.0f;
+  };
+  ```
+
+  Semantics (must match Rust bit-for-bit):
+  ```cpp
+  float PostCascadeAgc::step(float sample) noexcept {
+      const float absSample = std::fabs(sample);
+      const int idx = static_cast<int>(static_cast<uint32_t>(agcGain_ * absSample) & 0xFu);
+      const float newGain = agcGain_ * kTable[idx];
+      agcGain_ = newGain < 1.0f ? newGain : 1.0f;
+      return sample * agcGain_;
+  }
+  ```
 
 - [ ] **Step 2: Render-diff verification**
 
-Render a chirp-with-peaks through both. Diff ≤ 1e-5.
+  Render a chirp-with-peaks through `agc::agc_step` (Rust) and
+  `PostCascadeAgc::step` (C++). Diff: max absolute error = 0.0 expected
+  (integer-indexed table + float multiply; bit-identical).
 
 - [ ] **Step 3: Commit**
+
+  ```
+  git -C C:/Users/hooki/trench-juce commit -am "feat(dsp): port E-mu AGC to C++ (heritage table, render-diff parity with Rust agc.rs)"
+  ```
+
+---
+
+## Task 11b: Port E-mu Type 1/2/3 kernels to Rust (heritage kernels prereq)
+
+**Files:**
+- Create: `trench-core/src/emu_kernels.rs`
+- Create: `trench-core/tests/emu_kernels_tests.rs`
+- Modify: `trench-core/src/lib.rs`
+- Reference: `tools/bake_hedz_const.py:88-186` (Python ground truth),
+  `trench-juce/plugin/source/EmuKernels.cpp` (existing C++ port),
+  `PLAN_RECIPE_V1.md` (motivating failure case)
+
+**Why this task exists:** the spec's "Rust is source of truth" claim holds
+today only for bodies that bake cleanly to 4 corners. Live-kernel bodies
+(Hedz today bakes; `reece_stab` and future hot bodies do not) need Rust
+equivalents of the heritage Type 1/2/3 kernels. Without this task, the
+render-diff harness can only cover Hedz.
+
+- [ ] **Step 1: Port `fw_words_to_kernel`**
+
+  Shared primitive converting 5 × `u16` firmware words to direct-form
+  `(c0..c4)` kernel floats. Exact transcription from
+  `tools/bake_hedz_const.py:88-117` (also present in
+  `pyruntime/heritage_coeffs.py::_fw_words_to_kernel`).
+
+- [ ] **Step 2: Port `type1_kernel` and `type2_kernel`**
+
+  Transcribe `bake_hedz_const.py:119-147` exactly. Signatures:
+  ```rust
+  pub fn type1_kernel(freq_packed: i32, gain_packed: i32, shift: i32, sr: i32) -> [f32; 5];
+  pub fn type2_kernel(freq_packed: i32, gain_packed: i32, shift: i32, sr: i32) -> [f32; 5];
+  ```
+
+- [ ] **Step 3: Port `type3_freq_compression` and `type3_kernel`**
+
+  Type 3 has a frequency-compression step that Types 1 and 2 do not.
+  Transcribe `bake_hedz_const.py:150-172` and the C++ port at
+  `plugin/source/EmuKernels.cpp:91-156`.
+  ```rust
+  pub fn type3_freq_compression(freq_value: i32, shift: i32) -> i32;
+  pub fn type3_kernel(freq_packed: i32, gain_packed: i32, shift: i32, sr: i32) -> [f32; 5];
+  ```
+
+- [ ] **Step 4: Port `compile_stage` dispatcher**
+
+  ```rust
+  pub fn compile_stage(type_id: i32, freq_packed: i32, gain_packed: i32, shift: i32, sr: i32) -> [f32; 5];
+  ```
+  Match `bake_hedz_const.py:178-186` fallthrough semantics (unknown type →
+  type1).
+
+- [ ] **Step 5: Fixture + cross-check tests**
+
+  For a set of `(type_id, freq_packed, gain_packed, shift, sr)` tuples
+  covering all three types and several operating points (lowpass sweep,
+  peak, shelf), run the Python bake tool to produce reference `(c0..c4)`
+  vectors; commit as `tests/fixtures/emu_kernels_reference.json`. Rust
+  tests assert `max_abs_err <= 1e-7` vs each reference row.
+
+- [ ] **Step 6: Run tests, confirm pass**
+
+- [ ] **Step 7: Commit**
+
+  ```
+  git -C C:/Users/hooki/Trench commit -am "feat(dsp): port E-mu Type 1/2/3 heritage kernels to Rust (trench-core/emu_kernels.rs, cross-checked vs Python bake)"
+  ```
+
+No C++ task required here — `plugin/source/EmuKernels.cpp` already exists
+and is live in `TrenchEngine::compile_stage`. Render-diff against the new
+Rust kernels validates the existing C++ port retroactively.
 
 ---
 
@@ -679,7 +777,10 @@ Render a chirp-with-peaks through both. Diff ≤ 1e-5.
 - Modify: `plugin/source/TrenchEngine.{h,cpp}`
 - Modify: `plugin/source/PluginProcessor.cpp:364`
 
-- [ ] **Step 1: Add `Engine` members: `driveL`, `driveR`, `modFn`, `spatial`, `limiter`**
+- [ ] **Step 1: Add `Engine` members: `driveL`, `driveR`, `modFn`, `agcL`, `agcR`, `spatial`**
+
+  AGC is stereo-separate (independent gain state per channel, mirroring
+  the two `Cascade` instances). No `limiter` member — superseded by AGC.
 
 - [ ] **Step 2: Apply drive in the per-sample loop before stage 1 of the cascade**
 
@@ -694,15 +795,25 @@ float effectiveMorph = juce::jlimit(0.0f, 1.0f, userMorph + trigAmount * fnOut);
 
 Route REV parameter to `modFn.setReverse(...)`.
 
-- [ ] **Step 4: Apply SPACE post-cascade**
+- [ ] **Step 4: Apply AGC post-cascade (pre-SPACE)**
+
+Per-sample, per-channel, mirroring Rust `engine::SignalChain`:
+```cpp
+for (int ch = 0; ch < 2; ++ch) {
+    auto& agc = (ch == 0) ? agcL : agcR;
+    float* data = buffer.getWritePointer(ch);
+    for (int i = 0; i < numSamples; ++i)
+        data[i] = agc.step(data[i]);
+}
+```
+
+- [ ] **Step 5: Apply SPACE (post-AGC)**
 
 ```cpp
 float space = *apvts.getRawParameterValue("space");
 spatial.setSpace(space);
 spatial.processBlock(buffer);
 ```
-
-- [ ] **Step 5: Apply limiter at final output**
 
 - [ ] **Step 6: Wire MIDI note-on to `modFn.noteOn()`**
 
@@ -717,7 +828,7 @@ Require sample-accurate parity across the full chain for a known body with autho
 - [ ] **Step 8: Commit**
 
 ```
-git -C C:/Users/hooki/trench-juce commit -am "feat: wire MackieDrive, FunctionGenerator, QSoundSpatial, SafetyLimiter into processBlock"
+git -C C:/Users/hooki/trench-juce commit -am "feat: wire MackieDrive, FunctionGenerator, QSoundSpatial, PostCascadeAgc into processBlock"
 ```
 
 ---

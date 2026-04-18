@@ -1,19 +1,27 @@
 # SPACE + TRIG + pre-cascade Mackie drive — v1 UI and DSP Addition
 
-**Date:** 2026-04-18 (amended 2026-04-18 for Rust ship path)
-**Status:** Design, Rust-core implementation in progress; Rust nih-plug is the v1 ship path
-**Scope:** v1.0 shipping plugin (2026-07-15) — Rust `trench-live` (nih-plug)
+**Date:** 2026-04-18 (amended twice — Rust pivot added, then reverted same day)
+**Status:** Design; JUCE v1 ship path locked 2026-04-18, Rust source-of-truth via render-diff
+**Scope:** v1.0 shipping plugin (2026-07-15) — `trench-juce/plugin/` (JUCE C++)
 
-## Ship path (amended)
+## Ship path (locked 2026-04-18 after Rust-pivot revert)
 
-The JUCE plugin at `trench-juce/plugin/` is no longer the v1 ship path. See
-`MEMORY.md > Rust Pivot 2026-04-18`. Shipping plugin is the nih-plug Rust
-crate at `trench-live/`, editor built with `nih_plug_vizia`.
+v1 ships the JUCE plugin at `trench-juce/plugin/` (Windows VST3 +
+standalone, 2026-07-15).
 
-All DSP lives in `trench-core/` (canonical) and is consumed by
-`trench-live/`. No hand-port. One source of truth from DSP through
-packaging. References to "C++ port" earlier in this file apply historically
-but are obsolete for v1.
+**Rust `trench-core/` is the DSP source of truth.** The JUCE C++ runtime
+hand-ports each Rust stage. Parity is enforced by a render-diff harness
+(`tools/render_diff.py` + `trench-core/tests/render_diff_harness.rs`);
+bit-accurate WAV equivalence on a fixture body is a ship gate.
+
+The `trench-live/` nih-plug Rust crate is a committed scaffold (see commit
+97cca17) held for post-v1 consideration. It is not the v1 ship path and
+receives no editor or DSP-wiring work until after v1 ships.
+
+A prior amendment on 2026-04-18 flipped the ship path to Rust nih-plug;
+that amendment was reverted the same day after evaluating the cost of
+rebuilding a working JUCE UI from zero in three months. Git log preserves
+the round-trip.
 
 ## Intent
 
@@ -240,6 +248,34 @@ reference signal chain (`trench-core/src/engine.rs:174`) already invokes
 - No tone-shaping, no attack/release knob. The heritage table IS the
   behavior.
 
+## Heritage kernels (live stage compile)
+
+The shipping Hedz cartridge is pre-baked into `trench-core/src/hedz_rom.rs`
+(4 corners × 6 stages × 5 coefficients, flat `f32` constants). That bake
+ran the E-mu Type 1/2/3 firmware kernels at compile time in Python
+(`tools/bake_hedz_const.py`).
+
+**Non-Hedz shipping bodies require live per-stage kernel compile** because
+bilinear interpolation over 4 baked corners does not equal E-mu's Peak /
+Shelf Morph math at live-kernel resolution. `PLAN_RECIPE_V1.md` captures
+the `reece_stab_v1` failure case (+13.8 dB Hi peak vs Dillusion's +1.5 dB
+target) that motivated the live-kernel path.
+
+The heritage kernels exist today only in:
+
+- `tools/bake_hedz_const.py:119-186` — Python, compile-time
+- `trench-juce/plugin/source/EmuKernels.cpp` — C++, runtime
+
+`trench-core/` has no Rust port. This is the load-bearing prerequisite for
+the render-diff truth claim beyond Hedz: until `trench-core/src/emu_kernels.rs`
+exists with `type1_kernel` / `type2_kernel` / `type3_kernel` /
+`type3_freq_compression` / `compile_stage` and cross-validates against the
+Python bake tool, the ship gate can only be enforced on baked bodies.
+
+Port scope and test strategy are a plan-phase deliverable (see plan Task
+11b). The Python source and the C++ port are both documented and
+well-tested against firmware ground truth.
+
 ## Parameter additions
 
 Two new plugin parameters exposed to the host:
@@ -301,8 +337,8 @@ input
   → 12-stage DF2T biquad cascade (frozen, with per-sample ramped coeffs)
     ├─ MORPH = user knob + (TRIG * mod_fn(REV ? (duration - t) : t)), clamped
     └─ Q     = user knob + envelope_follower if ENV=on
+  → post-cascade heritage E-mu AGC (table-driven, `agc_step` from `trench-core/src/agc.rs`)
   → SPACE: bypass at 0, QSound spatial wet-scaled to SPACE at >0
-  → safety limiter
   → output
 ```
 
@@ -324,8 +360,12 @@ input
   content, not just level).
 - Mackie-model soft-clip output matches the reference curve within a
   plan-phase-specified tolerance.
-- Safety limiter engages only on peak excursions; transparent on normal
-  material.
+- Heritage AGC render-diff matches Rust `agc_step` output bit-accurately on
+  fixture WAVs; table-driven reduction engages only when the cascade runs
+  hot, transparent on quiet material.
+- Render-diff harness passes on at least one fixture body end-to-end; the
+  set of bodies enforced by the harness is bounded by Rust heritage-kernel
+  coverage (see `## Heritage kernels`).
 - Bodies without optional blocks remain functional; the respective control
   becomes inert.
 

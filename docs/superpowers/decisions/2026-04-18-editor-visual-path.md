@@ -1,5 +1,12 @@
 # Editor Visual Path — Decision Primer
 
+> **STATUS: SUPERSEDED 2026-04-18 (same day).** This primer assumed the
+> Rust nih-plug / vizia editor as ship path. That path was reverted within
+> 24 hours of being committed; v1 ships the existing JUCE plugin at
+> `trench-juce/plugin/` with its current `PluginEditor.cpp`. The A/B/C
+> pick below is archived for audit trail and has no bearing on v1 UI work.
+> See `docs/superpowers/specs/2026-04-18-space-trig-design.md > Ship path`.
+
 **Question to decide:** Which rendering approach for the TRENCH v1 plugin editor
 maximizes unit sales?
 
