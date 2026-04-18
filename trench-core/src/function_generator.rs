@@ -46,11 +46,54 @@
 //! - When no segments are loaded (or the generator has run off the end
 //!   of the segment list with no jump), `tick()` returns `0.0`.
 
-use crate::cartridge::{FnSegment, ModFnBlock};
+use crate::cartridge::ModFnBlock;
 
 /// Output clamp range.
 const OUT_MIN: f32 = -1.0;
 const OUT_MAX: f32 = 1.0;
+
+/// Segment curve shape (parsed from authored string at `load()` time).
+///
+/// The DTO type `cartridge::FnSegment` stores `shape` as a `String` (serde
+/// contract), but at runtime the generator works with this enum so the
+/// per-sample dispatch in `tick()` is a cheap integer branch instead of
+/// a string compare. Also gives the upcoming C++ port a 1:1 type to
+/// mirror rather than a bag of string literals.
+#[derive(Debug, Clone, Copy, PartialEq, Eq)]
+pub enum SegmentShape {
+    Hold,
+    Lin,
+    Exp,
+    Log,
+    SCurve,
+}
+
+impl SegmentShape {
+    /// Parse an authored shape string into the enum. Unknown strings fall
+    /// back silently to `Lin` — matches the prior `evaluate_shape` default
+    /// branch so cartridge behavior is unchanged.
+    pub fn from_str(s: &str) -> Self {
+        match s {
+            "hold" => SegmentShape::Hold,
+            "lin" => SegmentShape::Lin,
+            "exp" => SegmentShape::Exp,
+            "log" => SegmentShape::Log,
+            "sCurve" => SegmentShape::SCurve,
+            _ => SegmentShape::Lin, // silent fallback (matches prior behavior)
+        }
+    }
+}
+
+/// Internal (post-parse) representation of a function-generator segment.
+/// Distinct from `cartridge::FnSegment` so the runtime never re-parses a
+/// string per sample.
+#[derive(Debug, Clone, Copy)]
+struct InternalSegment {
+    level: f32,
+    time_ms: f32,
+    shape: SegmentShape,
+    jump: Option<i32>,
+}
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
 enum State {
@@ -62,7 +105,7 @@ enum State {
 
 pub struct FunctionGenerator {
     sample_rate: f32,
-    segments: Vec<FnSegment>,
+    segments: Vec<InternalSegment>,
     key_sync: bool,
     tempo_sync: bool,
     tempo_bpm: f32,
@@ -92,12 +135,18 @@ impl FunctionGenerator {
     }
 
     /// Load a function-generator program from a `ModFnBlock`. Allocates
-    /// exactly once to copy the segment list.
+    /// exactly once to copy (and parse) the segment list. Shape strings are
+    /// resolved to `SegmentShape` here so `tick()` never touches strings.
     pub fn load(&mut self, block: &ModFnBlock) {
         self.segments.clear();
         self.segments.reserve(block.segments.len());
         for s in &block.segments {
-            self.segments.push(s.clone());
+            self.segments.push(InternalSegment {
+                level: s.level,
+                time_ms: s.time_ms,
+                shape: SegmentShape::from_str(&s.shape),
+                jump: s.jump,
+            });
         }
         self.key_sync = block.key_sync();
         self.tempo_sync = block.tempo_sync();
@@ -170,7 +219,7 @@ impl FunctionGenerator {
     /// ramps can't divide by zero and zero-duration segments advance on
     /// the next tick.
     #[inline]
-    fn segment_length_samples(&self, seg: &FnSegment) -> u64 {
+    fn segment_length_samples(&self, seg: &InternalSegment) -> u64 {
         let ms = if self.tempo_sync {
             seg.time_ms * (120.0 / self.tempo_bpm)
         } else {
@@ -231,8 +280,7 @@ impl FunctionGenerator {
         // (1 - t) flips direction in-place.
         let start = self.prev_level;
         let end = seg.level;
-        let shape = seg.shape.as_str();
-        let y = evaluate_shape(shape, start, end, t_eff);
+        let y = evaluate_shape(seg.shape, start, end, t_eff);
 
         // Advance phase. After this tick, check for segment completion.
         let next_sample = sample_in_seg + 1;
@@ -319,37 +367,50 @@ impl FunctionGenerator {
 
 /// Evaluate a single shape at normalized progress `t ∈ [0, 1]`.
 #[inline]
-fn evaluate_shape(shape: &str, start: f32, end: f32, t: f32) -> f32 {
+fn evaluate_shape(shape: SegmentShape, start: f32, end: f32, t: f32) -> f32 {
     let span = end - start;
     match shape {
-        "hold" => start,
-        "lin" => start + span * t,
-        "exp" => start + span * (t * t),
-        "log" => {
+        SegmentShape::Hold => start,
+        SegmentShape::Lin => start + span * t,
+        SegmentShape::Exp => start + span * (t * t),
+        SegmentShape::Log => {
             let u = 1.0 - t;
             start + span * (1.0 - u * u)
         }
-        "sCurve" => start + span * (3.0 * t * t - 2.0 * t * t * t),
-        _ => start + span * t, // unknown → linear
+        SegmentShape::SCurve => start + span * (3.0 * t * t - 2.0 * t * t * t),
     }
 }
 
 #[cfg(test)]
 mod unit {
     use super::*;
+    use crate::cartridge::FnSegment;
 
     #[test]
     fn evaluate_shape_endpoints() {
-        for shape in ["hold", "lin", "exp", "log", "sCurve"] {
+        for (name, shape) in [
+            ("hold", SegmentShape::Hold),
+            ("lin", SegmentShape::Lin),
+            ("exp", SegmentShape::Exp),
+            ("log", SegmentShape::Log),
+            ("sCurve", SegmentShape::SCurve),
+        ] {
             let y0 = evaluate_shape(shape, 0.0, 1.0, 0.0);
             let y1 = evaluate_shape(shape, 0.0, 1.0, 1.0);
-            assert!((y0 - 0.0).abs() < 1e-6, "{shape} at t=0 should be 0, got {y0}");
-            if shape == "hold" {
+            assert!((y0 - 0.0).abs() < 1e-6, "{name} at t=0 should be 0, got {y0}");
+            if shape == SegmentShape::Hold {
                 assert!((y1 - 0.0).abs() < 1e-6, "hold at t=1 should still be 0");
             } else {
-                assert!((y1 - 1.0).abs() < 1e-6, "{shape} at t=1 should be 1, got {y1}");
+                assert!((y1 - 1.0).abs() < 1e-6, "{name} at t=1 should be 1, got {y1}");
             }
         }
+    }
+
+    #[test]
+    fn from_str_unknown_falls_back_to_lin() {
+        assert_eq!(SegmentShape::from_str("not-a-shape"), SegmentShape::Lin);
+        assert_eq!(SegmentShape::from_str(""), SegmentShape::Lin);
+        assert_eq!(SegmentShape::from_str("HOLD"), SegmentShape::Lin); // case-sensitive
     }
 
     #[test]
