@@ -319,3 +319,33 @@ fn tempo_sync_scales_time() {
         "120 BPM sample count {samples_120} not within 5% of {expected_120}"
     );
 }
+
+#[test]
+fn key_sync_false_does_not_reset_on_note_on() {
+    // key-sync = 0: free-run LFO. note_on() must not move the phase.
+    let mut fg = FunctionGenerator::new(48_000.0);
+    let block = ModFnBlock {
+        segments: vec![
+            FnSegment { level: 0.0, time_ms: 0.0,   shape: "hold".into(), jump: None },
+            FnSegment { level: 1.0, time_ms: 500.0, shape: "lin".into(),  jump: None },
+        ],
+        key_sync_int: 0,   // free-run
+        tempo_sync_int: 0,
+    };
+    fg.load(&block);
+
+    // Advance 12000 samples (≈250ms, mid-ramp at 48kHz). Expected output around 0.5.
+    for _ in 0..12_000 { fg.tick(); }
+    let before_note_on = fg.tick();
+
+    fg.note_on(); // should be a no-op when key_sync = false
+
+    let after_note_on = fg.tick();
+    // If key_sync=false was honored, the next sample is one step further down the
+    // same ramp, not reset to 0. Tolerance is one sample's worth of progress.
+    let ramp_step = 1.0 / 24_000.0; // lin 0->1 over 500ms @ 48kHz = 24000 samples
+    assert!(
+        (after_note_on - before_note_on).abs() < ramp_step * 4.0,
+        "key_sync=false should free-run; got {} -> {}", before_note_on, after_note_on
+    );
+}

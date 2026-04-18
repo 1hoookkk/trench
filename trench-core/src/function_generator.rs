@@ -22,10 +22,10 @@
 //!
 //! ## Sync flags
 //!
-//! - `key_sync = true` → `note_on()` resets segment index and phase.
-//!   (We always honor `note_on()` resets regardless of the flag in the
-//!   current implementation; the flag is kept with the load for future
-//!   per-voice semantics.)
+//! - `key_sync = true` → `note_on()` resets segment index and phase
+//!   (or end-of-last-segment in REV mode).
+//! - `key_sync = false` → `note_on()` is a no-op; the generator free-runs
+//!   (LFO semantics).
 //! - `tempo_sync = true` → `time_ms` is interpreted as "milliseconds at
 //!   120 BPM" and scaled by `120 / tempo_bpm` at runtime. (Authored
 //!   `time_ms = 500` with `tempo_sync = 1` → 500 ms at 120 BPM, 1000 ms
@@ -106,9 +106,13 @@ impl FunctionGenerator {
         self.rearm_from_start();
     }
 
-    /// Reset segment index + phase. Equivalent to key-sync behavior — we
-    /// always honor it so the driver can force a re-trigger.
+    /// Reset segment index + phase when `key_sync` is true. When
+    /// `key_sync = false`, `note_on()` is a no-op and the generator
+    /// free-runs (LFO semantics).
     pub fn note_on(&mut self) {
+        if !self.key_sync {
+            return;
+        }
         self.prev_level = 0.0;
         self.last_out = 0.0;
         self.rearm_from_start();
