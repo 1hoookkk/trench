@@ -7,6 +7,7 @@ pub mod function_generator;
 pub mod hedz_golden;
 pub mod hedz_rom;
 pub mod motor;
+pub mod qsound_spatial;
 pub mod role;
 
 pub use agc::agc_step;
