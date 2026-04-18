@@ -8,6 +8,7 @@ pub mod hedz_golden;
 pub mod hedz_rom;
 pub mod motor;
 pub mod role;
+pub mod safety_limiter;
 
 pub use agc::agc_step;
 pub use cartridge::{Cartridge, CornerData, NUM_COEFFS, NUM_STAGES};
