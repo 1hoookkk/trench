@@ -1,5 +1,67 @@
 use serde::Deserialize;
 
+/// Optional drive-stage config (preceding cascade).
+/// Defaults to inert: 0 dB input gain, `mackie_1202` model.
+#[derive(Debug, Clone, Deserialize)]
+pub struct DriveBlock {
+    #[serde(rename = "input_gain_dB", default)]
+    pub input_gain_db: f32,
+    #[serde(default = "default_mackie_model")]
+    pub model: String,
+}
+
+fn default_mackie_model() -> String {
+    "mackie_1202".to_string()
+}
+
+impl Default for DriveBlock {
+    fn default() -> Self {
+        Self {
+            input_gain_db: 0.0,
+            model: default_mackie_model(),
+        }
+    }
+}
+
+/// One segment of a TRENCH function-generator envelope.
+#[derive(Debug, Clone, Deserialize)]
+pub struct FnSegment {
+    pub level: f32,
+    pub time_ms: f32,
+    pub shape: String,
+    #[serde(default)]
+    pub jump: Option<i32>,
+}
+
+/// Optional `mod_fn` block: a function-generator envelope + sync flags.
+/// `key-sync` / `tempo-sync` are serialized as ints (0/1) in the E-mu style;
+/// use [`ModFnBlock::key_sync`] / [`ModFnBlock::tempo_sync`] for booleans.
+#[derive(Debug, Clone, Deserialize)]
+pub struct ModFnBlock {
+    pub segments: Vec<FnSegment>,
+    #[serde(rename = "key-sync", default)]
+    pub key_sync_int: i32,
+    #[serde(rename = "tempo-sync", default)]
+    pub tempo_sync_int: i32,
+}
+
+impl ModFnBlock {
+    pub fn key_sync(&self) -> bool {
+        self.key_sync_int != 0
+    }
+    pub fn tempo_sync(&self) -> bool {
+        self.tempo_sync_int != 0
+    }
+}
+
+/// Optional QSound-style spatial profile. Fields are flexible — held as a
+/// raw JSON map so Task 8 can tighten the shape without a schema migration.
+#[derive(Debug, Clone, Deserialize)]
+pub struct SpatialProfile {
+    #[serde(flatten)]
+    pub raw: serde_json::Map<String, serde_json::Value>,
+}
+
 /// Number of active stages in the cascade.
 pub const NUM_STAGES: usize = 6;
 /// Number of coefficients per stage (c0..c4).
@@ -70,6 +132,24 @@ pub struct Cartridge {
     pub corners: [CornerData; NUM_CORNERS],
     /// Per-corner post-cascade gain (linear). Same corner order.
     pub boosts: [f64; NUM_CORNERS],
+    /// Optional drive stage preceding the cascade. Absent block → inert default.
+    pub drive: DriveBlock,
+    /// Optional spatial profile (QSound-style). Absent → no spatial stage.
+    pub spatial_profile: Option<SpatialProfile>,
+    /// Optional function-generator envelope driving MORPH. Absent → no fn mod.
+    pub mod_fn: Option<ModFnBlock>,
+}
+
+/// Lightweight probe for the three optional top-level blocks. Tolerant of
+/// unknown fields and missing keys — any block absent stays `None`.
+#[derive(Deserialize, Default)]
+struct OptionalBlocksProbe {
+    #[serde(default)]
+    drive: Option<DriveBlock>,
+    #[serde(default)]
+    spatial_profile: Option<SpatialProfile>,
+    #[serde(default)]
+    mod_fn: Option<ModFnBlock>,
 }
 
 impl Cartridge {
@@ -80,13 +160,25 @@ impl Cartridge {
         let probe: serde_json::Value =
             serde_json::from_str(json).map_err(|e| format!("JSON parse error: {e}"))?;
 
-        if probe.get("keyframes").is_some() {
-            Self::from_keyframe_json(json)
+        let mut cart = if probe.get("keyframes").is_some() {
+            Self::from_keyframe_json(json)?
         } else if probe.get("corners").is_some() {
-            Self::from_array_json(json)
+            Self::from_array_json(json)?
         } else {
-            Err("JSON must have 'corners' or 'keyframes' key".to_string())
+            return Err("JSON must have 'corners' or 'keyframes' key".to_string());
+        };
+
+        // Extract the three optional top-level blocks. Tolerant: absent blocks
+        // leave the default (`drive` = inert, `spatial_profile` / `mod_fn` = None).
+        let blocks: OptionalBlocksProbe =
+            serde_json::from_str(json).map_err(|e| format!("optional blocks parse error: {e}"))?;
+        if let Some(d) = blocks.drive {
+            cart.drive = d;
         }
+        cart.spatial_profile = blocks.spatial_profile;
+        cart.mod_fn = blocks.mod_fn;
+
+        Ok(cart)
     }
 
     fn from_array_json(json: &str) -> Result<Self, String> {
@@ -109,6 +201,9 @@ impl Cartridge {
                 raw.corners.M100_Q100,
             ],
             boosts: [1.0; NUM_CORNERS],
+            drive: DriveBlock::default(),
+            spatial_profile: None,
+            mod_fn: None,
         })
     }
 
@@ -179,6 +274,9 @@ impl Cartridge {
             name: raw.name,
             corners: [c0, c1, c2, c3],
             boosts: [b0, b1, b2, b3],
+            drive: DriveBlock::default(),
+            spatial_profile: None,
+            mod_fn: None,
         })
     }
 
@@ -192,6 +290,9 @@ impl Cartridge {
             name: crate::hedz_rom::HEDZ_NAME.to_string(),
             corners: crate::hedz_rom::HEDZ_CORNERS,
             boosts: crate::hedz_rom::HEDZ_BOOSTS,
+            drive: DriveBlock::default(),
+            spatial_profile: None,
+            mod_fn: None,
         }
     }
 
