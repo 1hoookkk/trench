@@ -1,8 +1,19 @@
 # SPACE + TRIG + pre-cascade Mackie drive — v1 UI and DSP Addition
 
-**Date:** 2026-04-18
-**Status:** Design, not yet implemented
-**Scope:** v1.0 shipping plugin (2026-07-15)
+**Date:** 2026-04-18 (amended 2026-04-18 for Rust ship path)
+**Status:** Design, Rust-core implementation in progress; Rust nih-plug is the v1 ship path
+**Scope:** v1.0 shipping plugin (2026-07-15) — Rust `trench-live` (nih-plug)
+
+## Ship path (amended)
+
+The JUCE plugin at `trench-juce/plugin/` is no longer the v1 ship path. See
+`MEMORY.md > Rust Pivot 2026-04-18`. Shipping plugin is the nih-plug Rust
+crate at `trench-live/`, editor built with `nih_plug_vizia`.
+
+All DSP lives in `trench-core/` (canonical) and is consumed by
+`trench-live/`. No hand-port. One source of truth from DSP through
+packaging. References to "C++ port" earlier in this file apply historically
+but are obsolete for v1.
 
 ## Intent
 
