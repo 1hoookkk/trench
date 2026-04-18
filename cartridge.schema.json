@@ -20,7 +20,8 @@
         { "contains": { "properties": { "label": { "const": "M100_Q0"   } }, "required": ["label"] } },
         { "contains": { "properties": { "label": { "const": "M100_Q100" } }, "required": ["label"] } }
       ]
-    }
+    },
+    "spatial_profile": { "$ref": "#/$defs/spatial_profile" }
   },
   "$defs": {
     "keyframe": {
@@ -48,6 +49,39 @@
         "c2": { "type": "number" },
         "c3": { "type": "number" },
         "c4": { "type": "number" }
+      }
+    },
+    "spatial_profile": {
+      "type": "object",
+      "description": "Typed QSound-style spatial profile. Feature orders for the coefficient arrays are documented in docs/archive/qsound_spatial.md §\"Canonical Recon Model\". Mirrored bit-for-bit by trench-core Rust and the JUCE C++ loader.",
+      "required": ["azimuth", "distance", "elevation", "itd_coeffs", "ild_coeffs", "band_coeffs"],
+      "additionalProperties": false,
+      "properties": {
+        "azimuth":   { "type": "number" },
+        "distance":  { "type": "number" },
+        "elevation": { "type": "number" },
+        "itd_coeffs": { "type": "array", "items": { "type": "number" }, "minItems": 6, "maxItems": 6 },
+        "ild_coeffs": { "type": "array", "items": { "type": "number" }, "minItems": 6, "maxItems": 6 },
+        "band_coeffs": { "$ref": "#/$defs/band_coeffs" }
+      }
+    },
+    "band_coeffs": {
+      "type": "object",
+      "required": ["l", "r"],
+      "additionalProperties": false,
+      "properties": {
+        "l": { "$ref": "#/$defs/band_channel_coeffs" },
+        "r": { "$ref": "#/$defs/band_channel_coeffs" }
+      }
+    },
+    "band_channel_coeffs": {
+      "type": "object",
+      "required": ["low", "mid", "high"],
+      "additionalProperties": false,
+      "properties": {
+        "low":  { "type": "array", "items": { "type": "number" }, "minItems": 12, "maxItems": 12 },
+        "mid":  { "type": "array", "items": { "type": "number" }, "minItems": 12, "maxItems": 12 },
+        "high": { "type": "array", "items": { "type": "number" }, "minItems": 12, "maxItems": 12 }
       }
     }
   }

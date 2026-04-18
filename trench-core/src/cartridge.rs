@@ -54,12 +54,44 @@ impl ModFnBlock {
     }
 }
 
-/// Optional QSound-style spatial profile. Fields are flexible — held as a
-/// raw JSON map so Task 8 can tighten the shape without a schema migration.
+/// Six-coefficient regression law (ITD or ILD). Feature order is the canonical
+/// `[sin(az), sin(2*az), sin(3*az), sin(4*az), sin(5*az), sin(az)*abs(el)/30]`
+/// from `docs/archive/qsound_spatial.md` §"Canonical Recon Model".
+pub type LawCoeffs6 = [f32; 6];
+
+/// Twelve-coefficient per-band regression law. Feature order is the canonical
+/// `[1, log2(dist/0.25), log2(dist/0.25)^2, sin(az), cos(az), sin(2*az),
+///   cos(2*az), sin(3*az), cos(3*az), el/30, sin(az)*el/30, cos(az)*el/30]`
+/// from `docs/archive/qsound_spatial.md` §"Canonical Recon Model".
+pub type BandLawCoeffs12 = [f32; 12];
+
+/// Per-channel low/mid/high band coefficients.
+#[derive(Debug, Clone, Deserialize)]
+pub struct BandChannelCoeffs {
+    pub low: BandLawCoeffs12,
+    pub mid: BandLawCoeffs12,
+    pub high: BandLawCoeffs12,
+}
+
+/// Left + right band coefficient matrices.
+#[derive(Debug, Clone, Deserialize)]
+pub struct BandCoeffs {
+    pub l: BandChannelCoeffs,
+    pub r: BandChannelCoeffs,
+}
+
+/// Typed QSound-style spatial profile. Units match the regression laws in
+/// `docs/archive/qsound_spatial.md`: `azimuth` / `elevation` in radians,
+/// `distance` in metres. All fields required when the block is present;
+/// the block itself remains optional at the cartridge level.
 #[derive(Debug, Clone, Deserialize)]
 pub struct SpatialProfile {
-    #[serde(flatten)]
-    pub raw: serde_json::Map<String, serde_json::Value>,
+    pub azimuth: f32,
+    pub distance: f32,
+    pub elevation: f32,
+    pub itd_coeffs: LawCoeffs6,
+    pub ild_coeffs: LawCoeffs6,
+    pub band_coeffs: BandCoeffs,
 }
 
 /// Number of active stages in the cascade.
