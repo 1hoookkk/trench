@@ -209,13 +209,25 @@ bodies override to their authored hot value.
 - Producers who want to drive harder drive into the plugin from their DAW,
   same workflow they already use with real Mackies.
 
-## Output safety limiter
+## Post-cascade AGC (heritage, not invented)
 
-- Post-cascade, post-SPACE, hard safety limiter at the final output.
-- Inaudible under normal playing. Catches peak runaways from pole-brink
-  bodies pushed into regions the author did not anticipate.
-- Not a tone-shaping block. Speaker protection only. Matches E-mu hardware
-  headroom management on the DAC.
+Level management post-cascade uses the **existing reverse-engineered E-mu
+AGC table** at `trench-core/src/agc.rs` (16 exact table values verified
+against `EmulatorX.dll`, algorithm from `FUN_1802c04e0`). The Rust
+reference signal chain (`trench-core/src/engine.rs:174`) already invokes
+`agc_step(sample, &mut agc_gain)` post-cascade.
+
+- This is E-mu ground truth, not a textbook limiter. No new "safety
+  limiter" is introduced. Generic post-cascade limiting was explicitly
+  rejected as a fudge factor during the spec review cycle.
+- The C++ plugin runtime must port this AGC: the 16-value table and the
+  `agc_step` algorithm go into `plugin/source/` and run post-cascade,
+  pre-SPACE. Render-diff bit-accurate parity against Rust is required.
+- Pole-brink character is preserved because the AGC is table-driven and
+  non-limiting for quiet signals — it only reduces gain when the cascade
+  actually runs hot, matching the hardware's behavior.
+- No tone-shaping, no attack/release knob. The heritage table IS the
+  behavior.
 
 ## Parameter additions
 
