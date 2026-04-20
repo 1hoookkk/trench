@@ -91,6 +91,25 @@ def stage_coefficients_raw(stage: dict) -> tuple[float, float, float, float, flo
     return b0, b1, b2, a1, a2
 
 
+def stage_coefficients_compiled_v1(
+    stage: dict,
+) -> tuple[float, float, float, float, float]:
+    """Compiled-v1 stage → (b0, b1, b2, a1, a2). Direct mapping, no
+    recomputation: the compiled-v1 kernel already holds DF2T coefficients
+    with `c0=b0, c1=b1, c2=b2, c3=a1, c4=a2` (see
+    `trench-juce/forge/pyruntime/render.py:47`). Use this when the parity
+    test wants bit-close coefficient identity with the Rust runtime,
+    instead of the calibration_re path that re-derives `a1` from
+    `pole_freq_hz` and accumulates compile-path drift."""
+    return (
+        float(stage["c0"]),
+        float(stage["c1"]),
+        float(stage["c2"]),
+        float(stage["c3"]),
+        float(stage["c4"]),
+    )
+
+
 def stage_coefficients_calibration(
     stage: dict, sample_rate_authored: float
 ) -> tuple[float, float, float, float, float]:
@@ -117,10 +136,41 @@ def build_sos(stages: list[dict], source_type: str, sample_rate_authored: float)
     for st in stages:
         if source_type == "calibration_re":
             b0, b1, b2, a1, a2 = stage_coefficients_calibration(st, sample_rate_authored)
+        elif source_type == "compiled_v1":
+            b0, b1, b2, a1, a2 = stage_coefficients_compiled_v1(st)
         else:
             b0, b1, b2, a1, a2 = stage_coefficients_raw(st)
         rows.append([b0, b1, b2, 1.0, a1, a2])
     return np.asarray(rows, dtype=np.float64)
+
+
+def get_corner_stages(body: dict, source_type: str, label: str) -> list[dict] | None:
+    """Resolve a corner's stage list across source formats.
+
+    - raw_p2k_skin / calibration_re: `body['corners'][label]['stages']`
+    - compiled_v1: `body['keyframes'][i]['stages']` where keyframes[i].label == label
+    """
+    if source_type == "compiled_v1":
+        for kf in body.get("keyframes", []):
+            if kf.get("label") == label:
+                return kf.get("stages")
+        return None
+    corner = body.get("corners", {}).get(label)
+    return corner.get("stages") if corner else None
+
+
+def get_body_boost(body: dict, source_type: str) -> float:
+    """Top-level boost across source formats. Compiled-v1 carries per-keyframe
+    boost but heritage cartridges use one scalar for all corners — take the
+    first keyframe's boost as the canonical scalar. Parity tests only run
+    cartridges where every corner shares one boost (verified at bake time
+    in tools/bake_hedz_from_p2k.py)."""
+    if source_type == "compiled_v1":
+        kfs = body.get("keyframes", [])
+        if kfs:
+            return float(kfs[0].get("boost", 1.0))
+        return 1.0
+    return float(body.get("boost", 1.0))
 
 
 def apply_agc(samples: np.ndarray) -> np.ndarray:
@@ -267,7 +317,7 @@ def rebake(name: str, apply_agc_enabled: bool = True) -> int:
 
     entry = manifest[name]
     body, src_type, sr_auth = load_source(entry)
-    boost = float(entry.get("boost", body.get("boost", 1.0)))
+    boost = float(entry.get("boost", get_body_boost(body, src_type)))
     dry_data, dry_sr = sf.read(str(DRY))
     dry = mono(dry_data)
     dry_sr = float(dry_sr)
@@ -277,13 +327,13 @@ def rebake(name: str, apply_agc_enabled: bool = True) -> int:
     print(f"  dry: {DRY.name} {len(dry)} samples @ {dry_sr:.1f} Hz")
 
     for label in CORNERS:
-        corner = body["corners"].get(label)
-        if corner is None:
+        stages = get_corner_stages(body, src_type, label)
+        if stages is None:
             print(f"  {label}: missing in source body; skipped")
             continue
         out = render_canonical(
             dry,
-            corner["stages"],
+            stages,
             src_type,
             sr_auth,
             boost,
@@ -347,13 +397,13 @@ def main() -> int:
             if not wav.exists():
                 continue
             ref = mono(sf.read(str(wav))[0])
-            corner = body["corners"].get(label)
-            if corner is None:
+            stages = get_corner_stages(body, src_type, label)
+            if stages is None:
                 continue
-            boost = float(entry.get("boost", body.get("boost", 1.0)))
+            boost = float(entry.get("boost", get_body_boost(body, src_type)))
             pred = render_canonical(
                 dry,
-                corner["stages"],
+                stages,
                 src_type,
                 sr_auth,
                 boost,
@@ -371,7 +421,7 @@ def main() -> int:
             continue
         boost = float(entry.get("boost", 1.0))
         marker = " " if worst[1] <= FAIL_THRESHOLD_DB else "!"
-        tag = "raw" if src_type == "raw_p2k_skin" else "cal"
+        tag = {"raw_p2k_skin": "raw", "calibration_re": "cal", "compiled_v1": "c-v1"}.get(src_type, src_type[:4])
         print(
             f"{marker}{name:27} {tag:>4} {boost:6.2f} {worst[0]:>12} "
             f"{worst[2]:8.4f} {worst[1]:+8.1f} dB"

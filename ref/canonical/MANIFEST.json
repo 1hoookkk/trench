@@ -531,5 +531,31 @@
       "M100_Q0",
       "M100_Q100"
     ]
+  },
+  "compiled_talking_hedz": {
+    "source": "trench-juce/cartridges/heritage/Talking_Hedz.json",
+    "source_type": "compiled_v1",
+    "boost": 4.0,
+    "stage_count": 6,
+    "sample_rate_authored": 39062.5,
+    "corners": [
+      "M0_Q0",
+      "M0_Q100",
+      "M100_Q0",
+      "M100_Q100"
+    ]
+  },
+  "compiled_p2k_013": {
+    "source": "trench-juce/cartridges/p2k/P2k_013.json",
+    "source_type": "compiled_v1",
+    "boost": 4.0,
+    "stage_count": 6,
+    "sample_rate_authored": 39062.5,
+    "corners": [
+      "M0_Q0",
+      "M0_Q100",
+      "M100_Q0",
+      "M100_Q100"
+    ]
   }
 }

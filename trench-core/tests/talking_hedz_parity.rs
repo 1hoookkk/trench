@@ -63,13 +63,6 @@ fn hedz_json_path() -> PathBuf {
         .join("Talking_Hedz.json")
 }
 
-fn canonical_wav_path(corner: &str) -> PathBuf {
-    repo_root()
-        .join("ref")
-        .join("canonical")
-        .join(format!("cal_Talking_Hedz_{corner}.wav"))
-}
-
 // ─── input signal ────────────────────────────────────────────────────────────
 
 const SR: f64 = 44100.0;
@@ -219,68 +212,61 @@ fn load_hedz() -> Option<Cartridge> {
     Some(Cartridge::from_json(&json).expect("parse Talking_Hedz.json"))
 }
 
-/// Talking_Hedz.json through FilterEngine at 44100 Hz vs canonical reference WAVs.
-/// Uses the external pinknoise dry at trenchwork_clean if present (same source
-/// used for the canonical WAVs), falling back to the chirp. Threshold: −30 dB.
-///
-/// Canonical refs are AGC-OFF native-SR rebakes — this gate validates
-/// cascade math, coefficient interpolation, resampler, and boost. AGC is
-/// disabled on the FilterEngine side (see `render()`); AGC correctness
-/// lives in `trench-core/src/agc.rs` unit tests (byte-identical
-/// EmulatorX.dll port). The ±256-sample lag search in `null_db_lag` is
-/// load-bearing: two different polyphase FIRs (scipy's Kaiser
-/// `resample_poly` vs our 32-tap) have different constant group delays.
-#[test]
-fn talking_hedz_44100_nulls_against_canonical_wav() {
-    let hedz = match load_hedz() {
-        Some(c) => c,
-        None => return,
-    };
+fn canonical_wav_path_named(prefix: &str, corner: &str) -> PathBuf {
+    repo_root()
+        .join("ref")
+        .join("canonical")
+        .join(format!("{prefix}_{corner}.wav"))
+}
 
-    // Try external dry first (same source used for canonical WAVs), else chirp.
+fn load_dry() -> Vec<f32> {
     let dry_path = PathBuf::from(r"C:/Users/hooki/trenchwork_clean/ref/bypassed-pinknoise.wav");
-    let input: Vec<f32> = if dry_path.exists() {
-        match read_wav_f32(&dry_path) {
-            Some(v) => v,
-            None => make_chirp(),
-        }
+    if dry_path.exists() {
+        read_wav_f32(&dry_path).unwrap_or_else(make_chirp)
     } else {
         make_chirp()
-    };
-    eprintln!(
-        "talking_hedz_44100_nulls: dry = {} samples",
-        input.len()
-    );
+    }
+}
+
+/// Core null loop shared by the compile-path and runtime-identity gates.
+fn run_parity_gate(
+    gate_name: &str,
+    cart: &Cartridge,
+    canonical_prefix: &str,
+    threshold_db: f64,
+) {
+    let input = load_dry();
+    eprintln!("{gate_name}: dry = {} samples, threshold = {threshold_db} dB", input.len());
 
     let skip_transient = input.len() / 20;
     let mut any_fail = false;
-    const THRESHOLD: f64 = -30.0;
 
     for &(label, morph, q) in CORNERS {
-        let wav_path = canonical_wav_path(label);
+        let wav_path = canonical_wav_path_named(canonical_prefix, label);
         if !wav_path.exists() {
-            eprintln!("  {label:<12} — canonical WAV missing, skip");
+            eprintln!("  {label:<12} — canonical WAV missing at {}", wav_path.display());
+            any_fail = true;
             continue;
         }
         let reference = match read_wav_f32(&wav_path) {
             Some(v) => v,
             None => {
-                eprintln!("  {label:<12} — could not read WAV, skip");
+                eprintln!("  {label:<12} — could not read WAV");
+                any_fail = true;
                 continue;
             }
         };
 
-        let pred = render(hedz.clone(), morph, q, &input);
-
+        let pred = render(cart.clone(), morph, q, &input);
         let n = pred.len().min(reference.len());
         let (lag, gain, rel) = null_db_lag(
             &pred[skip_transient..n],
             &reference[skip_transient..n],
             256,
         );
-        let ok = rel <= THRESHOLD;
+        let ok = rel <= threshold_db;
         eprintln!(
-            "  Talking_Hedz 44100→native {label:<12}  lag={lag:+4}  gain={gain:.4}  null={rel:+7.1} dB  {}",
+            "  {canonical_prefix:<25} {label:<12}  lag={lag:+4}  gain={gain:.4}  null={rel:+8.2} dB  {}",
             if ok { "OK" } else { "FAIL" }
         );
         if !ok {
@@ -288,7 +274,69 @@ fn talking_hedz_44100_nulls_against_canonical_wav() {
         }
     }
 
-    if any_fail {
-        panic!("one or more corners exceeded {THRESHOLD} dB threshold vs canonical WAVs");
-    }
+    assert!(!any_fail, "{gate_name}: one or more corners exceeded {threshold_db} dB threshold");
+}
+
+/// Compile-path parity: compiled_talking_hedz (Rust DF2T kernel coeffs) nulled
+/// against the Python canonical render of cal_talking_hedz (pole_freq_hz,
+/// radius → on-the-fly a1 = -2r·cos(...) derivation). Measures how much the
+/// compile step `calibration_re → compiled_v1` degrades the filter. Residual
+/// lives in f32 quantisation of ~1e-4 coefficient differences through the
+/// resonant cascade — amplified at M100_Q0 (narrowest bandwidth). Threshold
+/// -30 dB: audibility gate, not math gate.
+///
+/// AGC + DC blocker disabled on the FilterEngine side (see `render()`); the
+/// Python canonical also runs AGC-off. AGC correctness is covered by
+/// `trench-core/src/agc.rs` unit tests (byte-identical EmulatorX.dll port).
+/// The lag search in `null_db_lag` is kept as defense-in-depth against
+/// future resampler changes; in practice observed lag is 0 because
+/// `tools/rust_resampler.py` ports `trench-core/src/resampler.rs` verbatim.
+#[test]
+fn compile_path_parity_compiled_v1_vs_calibration() {
+    let hedz = match load_hedz() {
+        Some(c) => c,
+        None => return,
+    };
+    run_parity_gate(
+        "compile_path_parity",
+        &hedz,
+        "cal_Talking_Hedz",
+        -30.0,
+    );
+}
+
+/// Runtime identity: compiled_talking_hedz nulled against a Python canonical
+/// rendered from the SAME compiled-v1 cartridge. Both sides use bit-identical
+/// coefficients, the same ported polyphase FIR, AGC off, boost × 4.0.
+///
+/// Non-resonant corners (M0_Q0, M0_Q100) null at the f32 WAV noise floor
+/// (≈ -180 dB) — proving the runtime path is bit-close to the reference
+/// implementation when the filter state is well-behaved.
+///
+/// Resonant corners (M100_Q0, M100_Q100) have pole radii ≈ 0.999 (nearly
+/// on the unit circle), where tiny numerical differences amplify through
+/// the feedback loop. The residual there is ≈ -48 dB — driven by Rust's
+/// per-sample coefficient ramping (`cascade.rs:43-47` — `coeffs += delta`
+/// every sample even on static corners) and the f64→f32 cast at cascade
+/// output (`cascade.rs:150`). Python's `scipy.signal.sosfilt` holds fixed
+/// f64 coefficients throughout with no per-sample rounding pressure.
+///
+/// Threshold -45 dB: 3 dB margin above the observed worst-case M100_Q0
+/// residual. Tighter than the compile-path gate (-30 dB), catches any
+/// runtime regression without demanding the cascade be made drift-free.
+/// If this drift becomes a product concern, the fix is to snap cascade
+/// coefficients at block boundaries in `snap_to_target` (currently only
+/// snaps output_gain) — not to loosen this threshold.
+#[test]
+fn runtime_identity_compiled_v1_both_sides() {
+    let hedz = match load_hedz() {
+        Some(c) => c,
+        None => return,
+    };
+    run_parity_gate(
+        "runtime_identity",
+        &hedz,
+        "compiled_talking_hedz",
+        -45.0,
+    );
 }
