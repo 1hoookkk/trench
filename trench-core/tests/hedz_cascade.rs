@@ -114,11 +114,13 @@ fn hedz_rom_has_six_active_stages_per_corner() {
 }
 
 #[test]
-fn hedz_rom_q_axis_is_collapsed() {
-    // Talking Hedz is a morph-only heritage body — Q0 and Q100 at each
-    // morph endpoint must be byte-identical by construction.
-    assert_eq!(HEDZ_CORNERS[0], HEDZ_CORNERS[2], "M0_Q0 != M0_Q100");
-    assert_eq!(HEDZ_CORNERS[1], HEDZ_CORNERS[3], "M100_Q0 != M100_Q100");
+fn hedz_rom_has_live_q_axis() {
+    // Source is now the compiled P2K truth (P2k_013), which has genuine
+    // Q-axis variation — not the morph-only MorphDesigner XML the rom
+    // was previously baked from. Guard that the Q endpoints are distinct
+    // so a future source regression back to a morph-only body is loud.
+    assert_ne!(HEDZ_CORNERS[0], HEDZ_CORNERS[2], "M0_Q0 == M0_Q100 — rom source lost Q variation");
+    assert_ne!(HEDZ_CORNERS[1], HEDZ_CORNERS[3], "M100_Q0 == M100_Q100 — rom source lost Q variation");
 }
 
 #[test]
@@ -126,8 +128,8 @@ fn hedz_cartridge_builder_wires_const_through() {
     // Cartridge::hedz_rom() must carry the const arrays verbatim.
     let cart = Cartridge::hedz_rom();
     assert_eq!(cart.name, "Talking Hedz");
-    assert_eq!(cart.corners, HEDZ_CORNERS);
-    assert_eq!(cart.boosts, HEDZ_BOOSTS);
+    assert_eq!(cart.corners(), HEDZ_CORNERS.as_slice());
+    assert_eq!(cart.boosts(), HEDZ_BOOSTS.as_slice());
 }
 
 #[test]
