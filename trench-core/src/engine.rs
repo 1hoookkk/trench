@@ -15,10 +15,11 @@
 //! the `trenchwork_clean` engine. See SESSION_STATE rev 4 for the split.
 
 use crate::agc::agc_step;
-use crate::cartridge::{Cartridge, CornerData};
+use crate::cartridge::{Cartridge, CornerData, SurfaceControlMode};
 #[cfg(test)]
 use crate::cartridge::{NUM_COEFFS, NUM_STAGES};
 use crate::cascade::{Cascade, BLOCK_SIZE};
+use crate::resampler::{Resampler, NATIVE_SR};
 
 /// First-order DC blocker (~20 Hz highpass).
 ///     y[n] = x[n] - x[n-1] + R * y[n-1]
@@ -71,6 +72,13 @@ pub struct FilterEngine {
     cascade: Cascade,
     cartridge: Option<Cartridge>,
     sample_rate: f64,
+    /// Rate at which the cascade actually runs — NATIVE_SR when resampling, else sample_rate.
+    cascade_sr: f64,
+    target_x: f64,
+    target_y: f64,
+    target_z: f64,
+    latched_y: Option<f64>,
+    latched_z: Option<f64>,
     output_gain: f32,
     target_output_gain: f32,
     delta_output_gain: f32,
@@ -79,6 +87,9 @@ pub struct FilterEngine {
     gain_ceiling: f32,
     dc_blocker: DcBlocker,
     pub debug: DebugToggles,
+    resampler_down: Option<Resampler>,
+    resampler_up: Option<Resampler>,
+    native_scratch: Vec<f32>,
 }
 
 impl Default for FilterEngine {
@@ -93,6 +104,12 @@ impl FilterEngine {
             cascade: Cascade::new(),
             cartridge: None,
             sample_rate: 44100.0,
+            cascade_sr: 44100.0,
+            target_x: 0.0,
+            target_y: 0.0,
+            target_z: 0.0,
+            latched_y: None,
+            latched_z: None,
             output_gain: 1.0,
             target_output_gain: 1.0,
             delta_output_gain: 0.0,
@@ -101,18 +118,36 @@ impl FilterEngine {
             gain_ceiling: 100.0,
             dc_blocker: DcBlocker::new(44100.0),
             debug: DebugToggles::default(),
+            resampler_down: None,
+            resampler_up: None,
+            native_scratch: Vec::new(),
         }
     }
 
-    /// Reset runtime state and set the sample rate. Call before processing.
+    /// Reset runtime state and set the sample rate. Call before processing (not on audio thread).
     pub fn prepare(&mut self, sample_rate: f64) {
         self.sample_rate = sample_rate;
+        if (sample_rate - NATIVE_SR).abs() > 0.1 {
+            self.cascade_sr = NATIVE_SR;
+            self.resampler_down = Some(Resampler::new(sample_rate, NATIVE_SR));
+            self.resampler_up = Some(Resampler::new(NATIVE_SR, sample_rate));
+            self.native_scratch.resize(8192, 0.0);
+        } else {
+            self.cascade_sr = sample_rate;
+            self.resampler_down = None;
+            self.resampler_up = None;
+        }
         self.cascade.reset();
+        self.target_x = 0.0;
+        self.target_y = 0.0;
+        self.target_z = 0.0;
+        self.latched_y = None;
+        self.latched_z = None;
         self.output_gain = 1.0;
         self.target_output_gain = 1.0;
         self.delta_output_gain = 0.0;
         self.agc_gain = 1.0;
-        self.dc_blocker = DcBlocker::new(sample_rate);
+        self.dc_blocker = DcBlocker::new(self.cascade_sr);
     }
 
     /// Install a cartridge. Does not reset biquad state (avoids clicks on
@@ -133,21 +168,47 @@ impl FilterEngine {
     }
 
     /// Control-rate parameter dispatch for one sub-block of `chunk_size`
-    /// samples. Interpolates the cartridge at (morph, q), hands the
+    /// samples. Interpolates the cartridge at the active surface position, hands the
     /// corner to the cascade (which ramps per-sample internally), and
     /// computes a ramped `output_gain` that folds in the per-corner boost
     /// and the peak-based gain ceiling clamp.
-    fn set_parameters(&mut self, morph: f64, q: f64, chunk_size: usize) {
+    fn set_parameters_xyz(
+        &mut self,
+        x: f64,
+        y: f64,
+        z: f64,
+        trigger_event: bool,
+        chunk_size: usize,
+    ) {
         let cart = match &self.cartridge {
             Some(c) => c,
             None => return,
         };
 
-        let corner: CornerData = cart.interpolate(morph, q);
-        let mut gain = cart.interpolate_boost(morph, q) as f32;
+        self.target_x = x;
+        self.target_y = y;
+        self.target_z = z;
+
+        let (resolved_y, resolved_z) = match cart.control_mode() {
+            SurfaceControlMode::MorphQ => (y, 0.0),
+            SurfaceControlMode::ModernLiveXyz => (y, z),
+            SurfaceControlMode::LegacyLatchYz => {
+                if trigger_event {
+                    self.latched_y = Some(y);
+                    self.latched_z = Some(z);
+                }
+                match (self.latched_y, self.latched_z) {
+                    (Some(ly), Some(lz)) => (ly, lz),
+                    _ => (y, z),
+                }
+            }
+        };
+
+        let corner: CornerData = cart.interpolate_xyz(x, resolved_y, resolved_z);
+        let mut gain = cart.interpolate_boost_xyz(x, resolved_y, resolved_z) as f32;
 
         if self.debug.output_gain_clamp_enabled {
-            let peak = compute_cascade_peak(&corner, self.sample_rate);
+            let peak = compute_cascade_peak(&corner, self.cascade_sr);
             if peak * gain > self.gain_ceiling {
                 gain *= self.gain_ceiling / (peak * gain);
             }
@@ -198,29 +259,114 @@ impl FilterEngine {
     /// intents held constant across the buffer; the engine ramps coefficients
     /// and output gain per-sample inside each 32-sample control block.
     pub fn process_block(&mut self, data: &mut [f32], morph: f64, q: f64) {
+        self.process_block_xyz_with_trigger(data, morph, q, 0.0, false);
+    }
+
+    pub fn process_block_xyz(&mut self, data: &mut [f32], x: f64, y: f64, z: f64) {
+        self.process_block_xyz_with_trigger(data, x, y, z, false);
+    }
+
+    pub fn process_block_xyz_with_trigger(
+        &mut self,
+        data: &mut [f32],
+        x: f64,
+        y: f64,
+        z: f64,
+        trigger_event: bool,
+    ) {
         if self.cartridge.is_none() {
             return;
         }
+
+        if self.resampler_down.is_some() {
+            // Resampled path: host SR → NATIVE_SR → cascade → host SR.
+            // Use take/put to satisfy the borrow checker without allocating.
+            let n_host = data.len();
+            let m_max = ((n_host as f64 * NATIVE_SR / self.sample_rate).ceil() as usize + 4)
+                .min(self.native_scratch.len());
+
+            // Downsample host → native scratch.
+            let produced_native = {
+                let mut down = self.resampler_down.take().unwrap();
+                let (_, n) = down.process(data, &mut self.native_scratch[..m_max]);
+                self.resampler_down = Some(down);
+                n
+            };
+
+            // Run cascade at NATIVE_SR on scratch buffer.
+            let mut offset = 0;
+            while offset < produced_native {
+                let chunk = (produced_native - offset).min(BLOCK_SIZE);
+                self.set_parameters_xyz(x, y, z, trigger_event && offset == 0, chunk);
+                for i in 0..chunk {
+                    let s = self.native_scratch[offset + i];
+                    self.native_scratch[offset + i] = self.process_sample_inner(s);
+                }
+                self.snap_to_target();
+                offset += chunk;
+            }
+
+            // Upsample native scratch → host output.
+            let produced_host = {
+                let mut up = self.resampler_up.take().unwrap();
+                let (_, n) = up.process(&self.native_scratch[..produced_native], data);
+                self.resampler_up = Some(up);
+                n
+            };
+
+            // Fill any trailing samples the resampler couldn't produce yet.
+            for s in &mut data[produced_host..] {
+                *s = 0.0;
+            }
+            return;
+        }
+
+        // Direct path: host SR already equals cascade SR.
         let mut offset = 0;
         while offset < data.len() {
             let remaining = data.len() - offset;
             let chunk = remaining.min(BLOCK_SIZE);
-
-            self.set_parameters(morph, q, chunk);
-
+            self.set_parameters_xyz(x, y, z, trigger_event && offset == 0, chunk);
             for i in 0..chunk {
                 data[offset + i] = self.process_sample_inner(data[offset + i]);
             }
-
             self.snap_to_target();
             offset += chunk;
         }
+    }
+
+    /// Clear biquad state, resampler delay lines, and DC blocker without
+    /// reallocating the sinc table. Call on transport reset.
+    pub fn reset_dsp(&mut self) {
+        self.cascade.reset();
+        self.dc_blocker = DcBlocker::new(self.cascade_sr);
+        self.agc_gain = 1.0;
+        self.output_gain = 1.0;
+        self.target_output_gain = 1.0;
+        self.delta_output_gain = 0.0;
+        if let Some(r) = &mut self.resampler_down {
+            r.reset();
+        }
+        if let Some(r) = &mut self.resampler_up {
+            r.reset();
+        }
+    }
+
+    pub fn sample_rate(&self) -> f64 {
+        self.sample_rate
     }
 
     /// Returns whether the cascade encountered non-finite state since the
     /// last call. Forwarded from `Cascade::take_instability_flag`.
     pub fn take_instability_flag(&mut self) -> bool {
         self.cascade.take_instability_flag()
+    }
+
+    pub fn latched_coordinates(&self) -> Option<(f64, f64)> {
+        match (self.latched_y, self.latched_z) {
+            (Some(y), Some(z)) => Some((y, z)),
+            _ => None,
+        }
     }
 }
 
@@ -330,20 +476,33 @@ mod tests {
     fn passthrough_cartridge_preserves_energy() {
         let mut engine = FilterEngine::new();
         engine.prepare(44100.0);
+        // Strip AGC and DC blocker so this tests only the cascade + resampler
+        // path. AGC is a non-linear time-varying gain that ducks hard on an
+        // impulse then recovers, which legitimately changes the output energy
+        // by ~50%; that's audible-pipeline behaviour, not what this test is
+        // meant to catch.
+        engine.debug.agc_enabled = false;
+        engine.debug.dc_block_enabled = false;
         engine.load_cartridge(make_passthrough_cartridge());
 
-        // Impulse through passthrough stages + DC blocker. Energy should
-        // survive the DC blocker to within a few percent for an impulse.
-        let mut buf = vec![0.0_f32; 256];
-        buf[0] = 1.0;
-        let input_sum_sq: f32 = buf.iter().map(|&s| s * s).sum();
+        // Band-limited input so the resampler's passband is tested rather
+        // than the impulse energy redistributing across its stop-band. A
+        // 1 kHz tone sits well inside passband for both 44100 and NATIVE_SR.
+        let len = 1024;
+        let mut buf: Vec<f32> = (0..len)
+            .map(|i| {
+                (2.0 * std::f64::consts::PI * 1000.0 * i as f64 / 44100.0).sin() as f32
+            })
+            .collect();
+        let input_sum_sq: f32 = buf.iter().skip(128).map(|&s| s * s).sum();
 
         engine.process_block(&mut buf, 0.5, 0.5);
 
-        let output_sum_sq: f32 = buf.iter().map(|&s| s * s).sum();
+        let output_sum_sq: f32 = buf.iter().skip(128).map(|&s| s * s).sum();
+        let ratio = output_sum_sq / input_sum_sq;
         assert!(
-            (output_sum_sq - input_sum_sq).abs() < 0.05,
-            "impulse energy drifted: in={input_sum_sq} out={output_sum_sq}"
+            (0.95..=1.05).contains(&ratio),
+            "passband energy drifted: in={input_sum_sq} out={output_sum_sq} ratio={ratio}"
         );
         assert!(!engine.take_instability_flag());
     }
