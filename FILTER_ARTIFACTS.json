@@ -1,0 +1,152 @@
+{
+  "_schema": {
+    "purpose": "Single source of truth for filter-artifact identity. Every physical file that claims to represent a filter body belongs here. Human names collide across artifact classes ('Talking Hedz' names four non-equivalent files); this registry makes 'what object is this?' impossible to get wrong.",
+    "fields": {
+      "internal_id": "Unique, code-safe snake_case ID. Never reuse across artifacts.",
+      "display_name": "Human-authoring name. NOT unique — may collide.",
+      "source_class": "heritage_designer_xml | calibration_re | raw_p2k_skin | compiled_v1 | rust_const_rom | canonical_render",
+      "truth_status": "authoring_source | runtime_truth | runtime_compile | theoretical_reference | reference_render | deprecated",
+      "path": "Repo-relative path. WAV sets list the glob.",
+      "render_chain": "Ordered pipeline from this artifact's stored data to a final audio sample.",
+      "sample_rate": "Authored sample rate in Hz, or null if format-agnostic.",
+      "boost": "Post-cascade scalar boost, or null if the format does not store one.",
+      "q_behavior": "morph_only | live_q | unknown",
+      "derived_from": "internal_id this artifact was produced from, or null for root sources.",
+      "notes": "Brief caveat — what this artifact is NOT, if the name is misleading."
+    },
+    "naming_policy": "Never refer to a filter by display_name alone in code comments, test docs, or commit messages. Use internal_id."
+  },
+
+  "artifacts": [
+    {
+      "internal_id": "md_hedz",
+      "display_name": "Talking Hedz",
+      "source_class": "heritage_designer_xml",
+      "truth_status": "authoring_source",
+      "path": "cartridges/engine/_source/heritage_designer_sections.json#L4111",
+      "render_chain": "30-int authoring grid → type 1/2/3 firmware compile (pyruntime/heritage_coeffs.py) → 6-stage kernel coeffs → DF2T cascade",
+      "sample_rate": 44100,
+      "boost": 4.0,
+      "q_behavior": "morph_only",
+      "derived_from": null,
+      "notes": "MorphDesigner XML preset. Q axis is collapsed by construction — NOT what the real E-mu runtime does for the Talking Hedz patch."
+    },
+    {
+      "internal_id": "cal_talking_hedz",
+      "display_name": "Talking Hedz",
+      "source_class": "calibration_re",
+      "truth_status": "runtime_truth",
+      "path": "docs/calibration/Talking_Hedz.json",
+      "render_chain": "per-stage {pole_freq_hz, radius, val*} → SOS cascade → AGC → × boost → float32 WAV",
+      "sample_rate": 39062.5,
+      "boost": 4.0,
+      "q_behavior": "live_q",
+      "derived_from": null,
+      "notes": "Authoritative RE'd runtime model. 5-stage captured form (real engine throws out one stage). Use this when asking 'what does the real Talking Hedz filter sound like'."
+    },
+    {
+      "internal_id": "compiled_talking_hedz",
+      "display_name": "Talking Hedz",
+      "source_class": "compiled_v1",
+      "truth_status": "runtime_compile",
+      "path": "trench-juce/cartridges/heritage/Talking_Hedz.json",
+      "render_chain": "compiled-v1 DF2T kernel coeffs → FilterEngine (cascade → AGC → × boost → DC blocker)",
+      "sample_rate": 39062.5,
+      "boost": 4.0,
+      "q_behavior": "live_q",
+      "derived_from": "cal_talking_hedz",
+      "notes": "Plugin-loadable compile of cal_talking_hedz. Nulls against the cal_Talking_Hedz_*.wav set."
+    },
+    {
+      "internal_id": "raw_p2k_013",
+      "display_name": "Talking Hedz (P2K index 13)",
+      "source_class": "raw_p2k_skin",
+      "truth_status": "theoretical_reference",
+      "path": "datasets/p2k_skins/P2k_013.json",
+      "render_chain": "per-stage {a1, r, val*, flag} → SOS cascade → AGC → × boost → float32 WAV",
+      "sample_rate": 39062.5,
+      "boost": 4.0,
+      "q_behavior": "live_q",
+      "derived_from": null,
+      "notes": "Raw theoretical 6-stage P2K skin, byte-identical to upstream trenchwork_clean. NOT what the real engine runs — the real runtime discards one stage and hard-converts the last captured stage (see cal_talking_hedz). Plugin convention still maps 'P2K index 013' → 'Talking Hedz' (hotswap tool doc)."
+    },
+    {
+      "internal_id": "compiled_p2k_013",
+      "display_name": "Talking Hedz (P2K index 13)",
+      "source_class": "compiled_v1",
+      "truth_status": "runtime_compile",
+      "path": "trench-juce/cartridges/p2k/P2k_013.json",
+      "render_chain": "compiled-v1 DF2T kernel coeffs → FilterEngine (cascade → AGC → × boost → DC blocker)",
+      "sample_rate": 39062.5,
+      "boost": 4.0,
+      "q_behavior": "live_q",
+      "derived_from": "raw_p2k_013",
+      "notes": "Plugin-loadable compile of raw_p2k_013. The committed hedz_rom.rs is baked from THIS file, not from cal_talking_hedz — choose deliberately when comparing against canonical WAVs."
+    },
+    {
+      "internal_id": "rom_hedz",
+      "display_name": "Talking Hedz",
+      "source_class": "rust_const_rom",
+      "truth_status": "runtime_compile",
+      "path": "trench-core/src/hedz_rom.rs",
+      "render_chain": "HEDZ_CORNERS const → Cartridge::hedz_rom() → FilterEngine pipeline",
+      "sample_rate": 39062.5,
+      "boost": 4.0,
+      "q_behavior": "live_q",
+      "derived_from": "compiled_p2k_013",
+      "notes": "Hardcoded plugin default. Regenerate with `python tools/bake_hedz_from_p2k.py`. Previously baked from md_hedz (morph-only, stale)."
+    },
+    {
+      "internal_id": "canonical_wav_cal_talking_hedz",
+      "display_name": "Talking Hedz (calibration render)",
+      "source_class": "canonical_render",
+      "truth_status": "reference_render",
+      "path": "ref/canonical/cal_Talking_Hedz_{M0_Q0,M0_Q100,M100_Q0,M100_Q100}.wav",
+      "render_chain": "cal_talking_hedz → Python raw-stage SOS cascade → AGC → × 4.0 → float32 WAV @ 44100 Hz",
+      "sample_rate": 44100,
+      "boost": 4.0,
+      "q_behavior": "live_q",
+      "derived_from": "cal_talking_hedz",
+      "notes": "Null-test reference for compiled_talking_hedz. Dry source: C:/Users/hooki/trenchwork_clean/ref/bypassed-pinknoise.wav (per ref/canonical/PROVENANCE.json)."
+    },
+    {
+      "internal_id": "canonical_wav_p2k_013",
+      "display_name": "Talking Hedz (raw P2K render)",
+      "source_class": "canonical_render",
+      "truth_status": "reference_render",
+      "path": "ref/canonical/P2k_013_{M0_Q0,M0_Q100,M100_Q0,M100_Q100}.wav",
+      "render_chain": "raw_p2k_013 → Python raw-stage SOS cascade → AGC → × 4.0 → float32 WAV @ 44100 Hz",
+      "sample_rate": 44100,
+      "boost": 4.0,
+      "q_behavior": "live_q",
+      "derived_from": "raw_p2k_013",
+      "notes": "Null-test reference for compiled_p2k_013 / rom_hedz. Same dry source as cal set. Distinct from canonical_wav_cal_talking_hedz — the two sets measure different filters despite the shared 'Talking Hedz' name."
+    }
+  ],
+
+  "null_test_pairs": [
+    {
+      "predicted": "compiled_talking_hedz",
+      "reference": "canonical_wav_cal_talking_hedz",
+      "rationale": "compile-path null: does the compiled-v1 of the calibration_re model reproduce the Python raw-stage render?"
+    },
+    {
+      "predicted": "rom_hedz",
+      "reference": "canonical_wav_p2k_013",
+      "rationale": "plugin-default null: does the baked Rust rom reproduce the P2K raw-stage canonical render?"
+    }
+  ],
+
+  "forbidden_comparisons": [
+    {
+      "predicted": "rom_hedz",
+      "reference": "canonical_wav_cal_talking_hedz",
+      "reason": "different source filter (raw_p2k_013 vs cal_talking_hedz). The display name matches but the underlying DSP is different — raw_p2k_013 is the theoretical 6-stage, cal_talking_hedz is the captured 5-stage runtime."
+    },
+    {
+      "predicted": "compiled_talking_hedz",
+      "reference": "canonical_wav_p2k_013",
+      "reason": "same as above, inverse direction."
+    }
+  ]
+}
