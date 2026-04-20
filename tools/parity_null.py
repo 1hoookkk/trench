@@ -26,7 +26,7 @@ from pathlib import Path
 
 import numpy as np
 import soundfile as sf
-from scipy.signal import sosfilt
+from scipy.signal import resample_poly, sosfilt
 
 ROOT = Path(__file__).resolve().parent.parent
 DRY = Path(r"C:/Users/hooki/trenchwork_clean/ref/bypassed-pinknoise.wav")
@@ -35,6 +35,15 @@ REF_DIR = ROOT / "ref" / "canonical"
 CORNERS = ("M0_Q0", "M0_Q100", "M100_Q0", "M100_Q100")
 # Null worse than this triggers a failure exit code.
 FAIL_THRESHOLD_DB = -140.0
+
+# Cascade coefficients are authored at the E-mu native sample rate. The
+# runtime FilterEngine resamples host -> native -> cascade -> host; parity
+# has to mirror that or every pole shifts in analog frequency.
+NATIVE_SR = 39062.5
+# 44100 <-> 39062.5 reduces exactly to 3528/3125 (gcd = 12.5). Verify:
+# 44100 * 3125 / 3528 == 39062.5.
+HOST_TO_NATIVE_UP = 3125
+HOST_TO_NATIVE_DOWN = 3528
 
 # AGC_TABLE ported from trenchwork_clean/trench-core/src/agc.rs
 AGC_TABLE = np.array(
@@ -153,7 +162,109 @@ def load_source(entry: dict) -> tuple[dict, str, float]:
     return body, src_type, sr_auth
 
 
+def render_canonical(
+    dry: np.ndarray,
+    stages: list[dict],
+    src_type: str,
+    sr_auth: float,
+    boost: float,
+    dry_sr: float,
+    cascade_sr: float = NATIVE_SR,
+) -> np.ndarray:
+    """Canonical render chain that mirrors trench-core's FilterEngine:
+
+        host SR -> resample down to native SR -> DF2T cascade (SOS)
+                -> per-sample AGC -> * boost -> resample up to host SR
+
+    Cascade coefficients are authored at `sr_auth` (normally `cascade_sr`),
+    so running sosfilt at `dry_sr` instead shifts every pole in analog
+    frequency. Pulling the cascade back down to `cascade_sr` realigns it
+    with what the runtime engine sees.
+
+    Returns a float64 ndarray the same length as `dry` (truncated or
+    zero-padded as needed, since `resample_poly` length is approximate).
+    """
+    if dry_sr == cascade_sr:
+        dry_native = dry.astype(np.float64, copy=False)
+    else:
+        dry_native = resample_poly(
+            dry.astype(np.float64, copy=False),
+            up=HOST_TO_NATIVE_UP,
+            down=HOST_TO_NATIVE_DOWN,
+        )
+    sos = build_sos(stages, src_type, sr_auth)
+    cascaded = sosfilt(sos, dry_native)
+    limited = apply_agc(cascaded)
+    scaled = limited * boost
+    if dry_sr == cascade_sr:
+        out = scaled
+    else:
+        out = resample_poly(
+            scaled,
+            up=HOST_TO_NATIVE_DOWN,
+            down=HOST_TO_NATIVE_UP,
+        )
+    n = len(dry)
+    if len(out) == n:
+        return out
+    if len(out) > n:
+        return out[:n]
+    padded = np.zeros(n, dtype=out.dtype)
+    padded[: len(out)] = out
+    return padded
+
+
+def rebake(name: str) -> int:
+    """Regenerate a manifest entry's 4 corner WAVs through render_canonical.
+
+    Writes to ref/canonical/{name}_{corner}.wav as 32-bit float mono @ 44100 Hz.
+    """
+    manifest_path = REF_DIR / "MANIFEST.json"
+    if not manifest_path.exists():
+        print(f"rebake: manifest missing at {manifest_path}")
+        return 2
+    manifest = json.loads(manifest_path.read_text())
+    if name not in manifest:
+        print(f"rebake: manifest has no entry named {name!r}")
+        return 2
+    if not DRY.exists():
+        print(f"rebake: dry input missing at {DRY}")
+        return 2
+
+    entry = manifest[name]
+    body, src_type, sr_auth = load_source(entry)
+    boost = float(entry.get("boost", body.get("boost", 1.0)))
+    dry_data, dry_sr = sf.read(str(DRY))
+    dry = mono(dry_data)
+    dry_sr = float(dry_sr)
+
+    print(f"rebake {name}: src_type={src_type} sr_auth={sr_auth} boost={boost}")
+    print(f"  dry: {DRY.name} {len(dry)} samples @ {dry_sr:.1f} Hz")
+
+    for label in CORNERS:
+        corner = body["corners"].get(label)
+        if corner is None:
+            print(f"  {label}: missing in source body; skipped")
+            continue
+        out = render_canonical(
+            dry, corner["stages"], src_type, sr_auth, boost, dry_sr
+        )
+        out_path = REF_DIR / f"{name}_{label}.wav"
+        sf.write(str(out_path), out.astype(np.float32), 44100, subtype="FLOAT")
+        peak = float(np.max(np.abs(out))) if len(out) else 0.0
+        print(f"  {label}: wrote {out_path.name}  len={len(out)}  peak={peak:.4f}")
+    return 0
+
+
 def main() -> int:
+    # --rebake NAME: regenerate a manifest entry's 4 corner WAVs.
+    argv = sys.argv[1:]
+    if argv and argv[0] == "--rebake":
+        if len(argv) != 2:
+            print("usage: parity_null.py --rebake NAME")
+            return 2
+        return rebake(argv[1])
+
     manifest_path = REF_DIR / "MANIFEST.json"
     if not REF_DIR.exists() or not manifest_path.exists() or not DRY.exists():
         print(
@@ -163,11 +274,16 @@ def main() -> int:
         return 0
 
     manifest = json.loads(manifest_path.read_text())
-    dry = mono(sf.read(str(DRY))[0])
+    dry_data, dry_sr = sf.read(str(DRY))
+    dry = mono(dry_data)
+    dry_sr = float(dry_sr)
 
-    print(f"dry input:  {DRY.name}  {len(dry)} samples")
+    print(f"dry input:  {DRY.name}  {len(dry)} samples  @ {dry_sr:.1f} Hz")
     print(f"refs:       {REF_DIR}  ({len(manifest)} entries)")
-    print(f"pipeline:   source stage -> SOS cascade -> AGC -> *boost -> gain null")
+    print(
+        f"pipeline:   host->native ({dry_sr:.1f}->{NATIVE_SR:.1f}) -> SOS cascade"
+        f" -> AGC -> *boost -> native->host -> gain null"
+    )
     print(f"fail at:    rel_null > {FAIL_THRESHOLD_DB:.0f} dB")
     print()
     print(f"{'name':28} {'src':4} {'boost':>6} {'worst_corner':>12} {'gain':>8} {'rel_null':>11}")
@@ -186,15 +302,20 @@ def main() -> int:
             corner = body["corners"].get(label)
             if corner is None:
                 continue
-            sos = build_sos(corner["stages"], src_type, sr_auth)
             boost = float(entry.get("boost", body.get("boost", 1.0)))
-            cascaded = sosfilt(sos, dry)
-            pred = apply_agc(cascaded) * boost
+            pred = render_canonical(
+                dry,
+                corner["stages"],
+                src_type,
+                sr_auth,
+                boost,
+                dry_sr,
+            )
             _lag, gain, rms, _peak, ref_rms = best_fit_null(pred, ref)
             rel = db(rms) - db(ref_rms)
             if worst[0] is None or rel > worst[1]:
                 worst = (label, rel, gain)
-            del ref, sos, cascaded, pred
+            del ref, pred
         gc.collect()
         if worst[0] is None:
             print(f"{name:28} no refs")
