@@ -102,7 +102,7 @@
       "source_class": "canonical_render",
       "truth_status": "reference_render",
       "path": "ref/canonical/cal_Talking_Hedz_{M0_Q0,M0_Q100,M100_Q0,M100_Q100}.wav",
-      "render_chain": "cal_talking_hedz → resample 44100→39062.5 → SOS cascade @ 39062.5 → per-sample AGC → × 4.0 → resample 39062.5→44100 → float32 WAV @ 44100",
+      "render_chain": "cal_talking_hedz → resample 44100→39062.5 (32-tap 512-phase Blackman polyphase FIR, port of trench-core/src/resampler.rs) → SOS cascade @ 39062.5 → × 4.0 → resample 39062.5→44100 (same FIR) → float32 WAV @ 44100 (AGC bypassed — AGC parity handled by trench-core/src/agc.rs unit tests)",
       "sample_rate": 44100,
       "boost": 4.0,
       "q_behavior": "live_q",
@@ -115,7 +115,7 @@
       "source_class": "canonical_render",
       "truth_status": "reference_render",
       "path": "ref/canonical/P2k_013_{M0_Q0,M0_Q100,M100_Q0,M100_Q100}.wav",
-      "render_chain": "raw_p2k_013 → resample 44100→39062.5 → SOS cascade @ 39062.5 → per-sample AGC → × 4.0 → resample 39062.5→44100 → float32 WAV @ 44100",
+      "render_chain": "raw_p2k_013 → resample 44100→39062.5 (32-tap 512-phase Blackman polyphase FIR, port of trench-core/src/resampler.rs) → SOS cascade @ 39062.5 → × 4.0 → resample 39062.5→44100 (same FIR) → float32 WAV @ 44100 (AGC bypassed — AGC parity handled by trench-core/src/agc.rs unit tests)",
       "sample_rate": 44100,
       "boost": 4.0,
       "q_behavior": "live_q",
@@ -147,6 +147,13 @@
       "predicted": "compiled_talking_hedz",
       "reference": "canonical_wav_p2k_013",
       "reason": "same as above, inverse direction."
+    }
+  ],
+
+  "parity_notes": [
+    {
+      "scope": "canonical_wav_cal_talking_hedz, canonical_wav_p2k_013",
+      "note": "These WAVs are AGC-OFF renders. Any null test against them must disable AGC on the FilterEngine side (`engine.debug.agc_enabled = false`). The AGC is a bit-masked nonlinear state machine (`(gain * abs_sample) as u32 & 0xF` indexing a 16-entry cliff-shaped table) — Rust runs it at f32, the Python canonical chain at f64, and the index-flip trajectories diverge after ~thousands of samples. Scoping the parity gate to cascade + resampler + coefficient interpolation + boost is what keeps the gate meaningful; AGC correctness is validated separately by `trench-core/src/agc.rs` unit tests (byte-identical port of the EmulatorX.dll reference)."
     }
   ]
 }

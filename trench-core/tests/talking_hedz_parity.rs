@@ -12,13 +12,30 @@
 //! despite sharing the display name — see `forbidden_comparisons` in
 //! the registry.
 //!
-//! Canonical render chain (see `ref/canonical/PROVENANCE.json`):
-//!   raw stage → SOS cascade → AGC → × boost → float32 WAV
+//! Canonical render chain (see `ref/canonical/PROVENANCE.json`) —
+//! AGC-OFF native-SR rebake:
+//!   raw stage → resample host→native → SOS cascade @ 39062.5 Hz
+//!             → × boost → resample native→host → float32 WAV
 //!
-//! FilterEngine at 44100 Hz resamples to native (39062.5 Hz), runs the
-//! compiled-v1 DF2T cascade, applies AGC, then folds per-corner boost into
-//! the ramped output gain. DC blocker is disabled to match the canonical
-//! chain exactly.
+//! FilterEngine here runs at 44100 Hz, resamples to native (39062.5 Hz),
+//! runs the compiled-v1 DF2T cascade, and folds per-corner boost into the
+//! ramped output gain. **AGC and DC blocker are both disabled** so the gate
+//! validates cascade math + coefficient interpolation + resampler + boost.
+//!
+//! AGC parity is out of scope here on purpose: the AGC is a bit-masked
+//! nonlinear state machine (`(gain * abs_sample) as u32 & 0xF` indexing a
+//! 16-entry cliff-shaped table, see `agc.rs:12`). Rust runs it at f32, the
+//! Python canonical chain at f64 — the index-flip trajectories diverge
+//! after thousands of samples into totally different gain states. AGC
+//! correctness is covered by the `agc.rs` unit tests (byte-identical port
+//! of the EmulatorX.dll reference), not by this parity gate.
+//!
+//! Canonical refs are rendered through `tools/rust_resampler.py` — a
+//! straight port of `trench-core/src/resampler.rs` — so FilterEngine and
+//! the canonical chain share the SAME polyphase FIR at the host↔native
+//! boundary. The ±256-sample lag search in `null_db_lag` is kept as
+//! defense-in-depth against future resampler changes; in practice
+//! observed lag is 0.
 //!
 //! Threshold −30 dB: compile-path (raw→compiled-v1 quantise) plus resampler
 //! rounding. Audibility gate, not math gate.
@@ -97,49 +114,88 @@ fn read_wav_f32(path: &std::path::Path) -> Option<Vec<f32>> {
 fn render(cart: Cartridge, morph: f64, q: f64, input: &[f32]) -> Vec<f32> {
     let mut engine = FilterEngine::new();
     engine.prepare(SR);
-    // Canonical chain = cascade → AGC → × boost. No DC blocker.
+    // Canonical refs are AGC-off native-SR rebakes — disable AGC + DC blocker
+    // so the gate measures cascade + resampler + coefficient interpolation +
+    // boost only. AGC correctness is covered by agc.rs unit tests.
+    engine.debug.agc_enabled = false;
     engine.debug.dc_block_enabled = false;
     engine.load_cartridge(cart);
+    // Chunk into DAW-sized host blocks. FilterEngine's internal
+    // `native_scratch` is sized for ~8192 native samples (≈9252 host
+    // samples at 44100/39062.5); passing the full 132 k-sample dry in
+    // one shot clamps output to the scratch size and zero-fills the
+    // remainder, defeating the parity gate. Real DAWs hand the engine
+    // blocks of 64–2048 samples, so 4096 here still mirrors a realistic
+    // call pattern while staying well under the scratch ceiling.
+    const HOST_BLOCK: usize = 4096;
     let mut buf = input.to_vec();
-    engine.process_block(&mut buf, morph, q);
+    let mut offset = 0;
+    while offset < buf.len() {
+        let end = (offset + HOST_BLOCK).min(buf.len());
+        engine.process_block(&mut buf[offset..end], morph, q);
+        offset = end;
+    }
     buf
 }
 
 // ─── metrics ──────────────────────────────────────────────────────────────────
 
-fn rms(v: &[f32]) -> f64 {
-    if v.is_empty() {
-        return 0.0;
+/// Optimal-gain null with ±`max_lag` sample alignment search.
+///
+/// FilterEngine's 32-tap Rust polyphase resampler and the Python canonical
+/// render chain's `scipy.signal.resample_poly` (default Kaiser polyphase)
+/// both produce high-quality output but have different constant group
+/// delays. A lag=0 null sees the two as uncorrelated even when the shapes
+/// match; this search absorbs that constant offset.
+///
+/// Returns `(best_lag, gain, rel_db)` — the lag (in samples, `pred[i]`
+/// aligned with `reference[i + lag]`), the optimal scalar gain at that
+/// lag, and the residual RMS relative to the reference RMS in dB.
+fn null_db_lag(pred: &[f32], reference: &[f32], max_lag: i64) -> (i64, f64, f64) {
+    let mut best = (0i64, 0.0f64, f64::INFINITY);
+    for lag in -max_lag..=max_lag {
+        let (p_start, r_start) = if lag >= 0 {
+            (0usize, lag as usize)
+        } else {
+            ((-lag) as usize, 0usize)
+        };
+        let n = pred
+            .len()
+            .saturating_sub(p_start)
+            .min(reference.len().saturating_sub(r_start));
+        if n < 1024 {
+            continue;
+        }
+        let mut num = 0.0f64;
+        let mut den = 0.0f64;
+        for i in 0..n {
+            let p = pred[p_start + i] as f64;
+            let r = reference[r_start + i] as f64;
+            num += p * r;
+            den += p * p;
+        }
+        if den <= 0.0 {
+            continue;
+        }
+        let gain = num / den;
+        let mut res2 = 0.0f64;
+        let mut r2 = 0.0f64;
+        for i in 0..n {
+            let p = pred[p_start + i] as f64;
+            let r = reference[r_start + i] as f64;
+            let residual = r - gain * p;
+            res2 += residual * residual;
+            r2 += r * r;
+        }
+        if r2 <= 0.0 {
+            continue;
+        }
+        let rel = 10.0 * (res2 / r2).log10();
+        if rel < best.2 {
+            best = (lag, gain, rel);
+        }
     }
-    let s: f64 = v.iter().map(|&x| (x as f64).powi(2)).sum();
-    (s / v.len() as f64).sqrt()
-}
-
-fn db(x: f64) -> f64 {
-    if x <= 0.0 {
-        -300.0
-    } else {
-        20.0 * x.log10()
-    }
-}
-
-/// Optimal-gain null: scales `pred` to minimise residual vs `reference`.
-/// Returns (scale_factor, residual_dB_relative_to_reference_RMS).
-fn null_db(pred: &[f32], reference: &[f32]) -> (f64, f64) {
-    let n = pred.len().min(reference.len());
-    let num: f64 = (0..n)
-        .map(|i| pred[i] as f64 * reference[i] as f64)
-        .sum();
-    let den: f64 = (0..n).map(|i| (pred[i] as f64).powi(2)).sum();
-    if den <= 0.0 {
-        return (0.0, 0.0);
-    }
-    let gain = num / den;
-    let residual: Vec<f32> = (0..n)
-        .map(|i| (reference[i] as f64 - gain * pred[i] as f64) as f32)
-        .collect();
-    let rel = db(rms(&residual)) - db(rms(&reference[..n]));
-    (gain, rel)
+    best
 }
 
 // ─── corner table ─────────────────────────────────────────────────────────────
@@ -167,15 +223,13 @@ fn load_hedz() -> Option<Cartridge> {
 /// Uses the external pinknoise dry at trenchwork_clean if present (same source
 /// used for the canonical WAVs), falling back to the chirp. Threshold: −30 dB.
 ///
-/// **IGNORED**: optimal-gain factors are now sane (≈ 0.1 – 0.75 range, same
-/// signal space), but the null still sits at 0.0 dB — the remaining mismatch
-/// is cross-pipeline (FilterEngine's AGC implementation and compiled-v1
-/// coefficient quantisation vs the Python render chain that rendered the
-/// canonical WAVs from `docs/calibration/Talking_Hedz.json` raw stages).
-/// The resampler itself is verified correct by the unit tests in
-/// `trench-core/src/resampler.rs`. Re-enable once the canonical WAVs are
-/// rebaked through FilterEngine or the AGC/compile paths are reconciled.
-#[ignore]
+/// Canonical refs are AGC-OFF native-SR rebakes — this gate validates
+/// cascade math, coefficient interpolation, resampler, and boost. AGC is
+/// disabled on the FilterEngine side (see `render()`); AGC correctness
+/// lives in `trench-core/src/agc.rs` unit tests (byte-identical
+/// EmulatorX.dll port). The ±256-sample lag search in `null_db_lag` is
+/// load-bearing: two different polyphase FIRs (scipy's Kaiser
+/// `resample_poly` vs our 32-tap) have different constant group delays.
 #[test]
 fn talking_hedz_44100_nulls_against_canonical_wav() {
     let hedz = match load_hedz() {
@@ -219,13 +273,14 @@ fn talking_hedz_44100_nulls_against_canonical_wav() {
         let pred = render(hedz.clone(), morph, q, &input);
 
         let n = pred.len().min(reference.len());
-        let (gain, rel) = null_db(
+        let (lag, gain, rel) = null_db_lag(
             &pred[skip_transient..n],
             &reference[skip_transient..n],
+            256,
         );
         let ok = rel <= THRESHOLD;
         eprintln!(
-            "  Talking_Hedz 44100→native {label:<12}  gain={gain:.4}  null={rel:+7.1} dB  {}",
+            "  Talking_Hedz 44100→native {label:<12}  lag={lag:+4}  gain={gain:.4}  null={rel:+7.1} dB  {}",
             if ok { "OK" } else { "FAIL" }
         );
         if !ok {

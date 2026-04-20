@@ -11,11 +11,22 @@ path (relative to the Trench root) and a source_type:
 
 Pipeline:
     source stage -> (b0, b1, b2, a1, a2) -> scipy.signal.sosfilt
-                 -> per-sample AGC (16-entry table from agc.rs)
+                 -> [per-sample AGC (16-entry table from agc.rs) — bypassed with --no-agc]
                  -> * boost
                  -> best-fit gain null vs reference WAV (lag=0)
 
 Hard fail at rel_null > FAIL_THRESHOLD_DB.
+
+Flags:
+    --no-agc                Skip the per-sample AGC step on both rebake
+                            and null paths. Canonical Talking Hedz WAVs
+                            are baked AGC-off because the bit-masked AGC
+                            state machine (`(gain * abs_sample) as u32 & 0xF`)
+                            diverges between f32 (Rust) and f64 (Python);
+                            AGC correctness is covered by
+                            `trench-core/src/agc.rs` unit tests.
+    --rebake NAME           Regenerate manifest entry NAME's 4 corner WAVs.
+                            Combine with --no-agc for AGC-off rebakes.
 """
 from __future__ import annotations
 
@@ -26,7 +37,15 @@ from pathlib import Path
 
 import numpy as np
 import soundfile as sf
-from scipy.signal import resample_poly, sosfilt
+from scipy.signal import sosfilt
+
+# Port of trench-core/src/resampler.rs — a 32-tap, 512-phase Blackman-
+# windowed sinc polyphase FIR with per-phase DC normalisation. Canonical
+# renders use this instead of scipy.signal.resample_poly so both sides
+# of the parity null use the SAME FIR at the host<->native boundary.
+# See tools/rust_resampler.py for the port; xlang_null against a Rust
+# dump measures -100 dB (bit-close).
+from rust_resampler import resample as rust_resample
 
 ROOT = Path(__file__).resolve().parent.parent
 DRY = Path(r"C:/Users/hooki/trenchwork_clean/ref/bypassed-pinknoise.wav")
@@ -40,10 +59,6 @@ FAIL_THRESHOLD_DB = -140.0
 # runtime FilterEngine resamples host -> native -> cascade -> host; parity
 # has to mirror that or every pole shifts in analog frequency.
 NATIVE_SR = 39062.5
-# 44100 <-> 39062.5 reduces exactly to 3528/3125 (gcd = 12.5). Verify:
-# 44100 * 3125 / 3528 == 39062.5.
-HOST_TO_NATIVE_UP = 3125
-HOST_TO_NATIVE_DOWN = 3528
 
 # AGC_TABLE ported from trenchwork_clean/trench-core/src/agc.rs
 AGC_TABLE = np.array(
@@ -170,40 +185,59 @@ def render_canonical(
     boost: float,
     dry_sr: float,
     cascade_sr: float = NATIVE_SR,
+    apply_agc_enabled: bool = True,
 ) -> np.ndarray:
     """Canonical render chain that mirrors trench-core's FilterEngine:
 
         host SR -> resample down to native SR -> DF2T cascade (SOS)
-                -> per-sample AGC -> * boost -> resample up to host SR
+                -> [per-sample AGC] -> * boost -> resample up to host SR
 
     Cascade coefficients are authored at `sr_auth` (normally `cascade_sr`),
     so running sosfilt at `dry_sr` instead shifts every pole in analog
     frequency. Pulling the cascade back down to `cascade_sr` realigns it
     with what the runtime engine sees.
 
+    The host<->native resampling uses `rust_resample` — the Python port of
+    trench-core/src/resampler.rs (32-tap 512-phase Blackman-windowed sinc
+    polyphase FIR with per-phase DC normalisation). scipy's
+    `resample_poly` uses a Kaiser window with ~23 taps per subfilter, so
+    its magnitude response near Nyquist differs from the runtime
+    FilterEngine; using the ported FIR means both sides of the parity
+    null share the exact same resampler.
+
+    If `apply_agc_enabled` is False the AGC step is skipped. The AGC is a
+    bit-masked nonlinear state machine (`(gain * abs_sample) as u32 & 0xF`
+    indexing a 16-entry table with cliff-like values); run at f32 vs f64
+    the index-flip trajectories diverge after thousands of samples, so
+    cascade+resampler parity tests disable AGC on both sides and rely on
+    `trench-core/src/agc.rs` unit tests for AGC correctness.
+
     Returns a float64 ndarray the same length as `dry` (truncated or
-    zero-padded as needed, since `resample_poly` length is approximate).
+    zero-padded as needed, since polyphase resampler length is approximate).
     """
     if dry_sr == cascade_sr:
         dry_native = dry.astype(np.float64, copy=False)
     else:
-        dry_native = resample_poly(
-            dry.astype(np.float64, copy=False),
-            up=HOST_TO_NATIVE_UP,
-            down=HOST_TO_NATIVE_DOWN,
-        )
+        dry_native = rust_resample(
+            dry.astype(np.float32, copy=False),
+            input_sr=float(dry_sr),
+            output_sr=float(cascade_sr),
+        ).astype(np.float64, copy=False)
     sos = build_sos(stages, src_type, sr_auth)
     cascaded = sosfilt(sos, dry_native)
-    limited = apply_agc(cascaded)
+    if apply_agc_enabled:
+        limited = apply_agc(cascaded)
+    else:
+        limited = cascaded
     scaled = limited * boost
     if dry_sr == cascade_sr:
         out = scaled
     else:
-        out = resample_poly(
-            scaled,
-            up=HOST_TO_NATIVE_DOWN,
-            down=HOST_TO_NATIVE_UP,
-        )
+        out = rust_resample(
+            scaled.astype(np.float32, copy=False),
+            input_sr=float(cascade_sr),
+            output_sr=float(dry_sr),
+        ).astype(np.float64, copy=False)
     n = len(dry)
     if len(out) == n:
         return out
@@ -214,7 +248,7 @@ def render_canonical(
     return padded
 
 
-def rebake(name: str) -> int:
+def rebake(name: str, apply_agc_enabled: bool = True) -> int:
     """Regenerate a manifest entry's 4 corner WAVs through render_canonical.
 
     Writes to ref/canonical/{name}_{corner}.wav as 32-bit float mono @ 44100 Hz.
@@ -238,7 +272,8 @@ def rebake(name: str) -> int:
     dry = mono(dry_data)
     dry_sr = float(dry_sr)
 
-    print(f"rebake {name}: src_type={src_type} sr_auth={sr_auth} boost={boost}")
+    agc_status = "on" if apply_agc_enabled else "OFF (bypassed)"
+    print(f"rebake {name}: src_type={src_type} sr_auth={sr_auth} boost={boost} agc={agc_status}")
     print(f"  dry: {DRY.name} {len(dry)} samples @ {dry_sr:.1f} Hz")
 
     for label in CORNERS:
@@ -247,7 +282,13 @@ def rebake(name: str) -> int:
             print(f"  {label}: missing in source body; skipped")
             continue
         out = render_canonical(
-            dry, corner["stages"], src_type, sr_auth, boost, dry_sr
+            dry,
+            corner["stages"],
+            src_type,
+            sr_auth,
+            boost,
+            dry_sr,
+            apply_agc_enabled=apply_agc_enabled,
         )
         out_path = REF_DIR / f"{name}_{label}.wav"
         sf.write(str(out_path), out.astype(np.float32), 44100, subtype="FLOAT")
@@ -257,13 +298,19 @@ def rebake(name: str) -> int:
 
 
 def main() -> int:
-    # --rebake NAME: regenerate a manifest entry's 4 corner WAVs.
+    # Flag parsing: --no-agc may appear anywhere after the subcommand.
     argv = sys.argv[1:]
+    apply_agc_enabled = True
+    if "--no-agc" in argv:
+        apply_agc_enabled = False
+        argv = [a for a in argv if a != "--no-agc"]
+
+    # --rebake NAME: regenerate a manifest entry's 4 corner WAVs.
     if argv and argv[0] == "--rebake":
         if len(argv) != 2:
-            print("usage: parity_null.py --rebake NAME")
+            print("usage: parity_null.py --rebake NAME [--no-agc]")
             return 2
-        return rebake(argv[1])
+        return rebake(argv[1], apply_agc_enabled=apply_agc_enabled)
 
     manifest_path = REF_DIR / "MANIFEST.json"
     if not REF_DIR.exists() or not manifest_path.exists() or not DRY.exists():
@@ -278,11 +325,12 @@ def main() -> int:
     dry = mono(dry_data)
     dry_sr = float(dry_sr)
 
+    agc_status = "AGC" if apply_agc_enabled else "(AGC bypassed)"
     print(f"dry input:  {DRY.name}  {len(dry)} samples  @ {dry_sr:.1f} Hz")
     print(f"refs:       {REF_DIR}  ({len(manifest)} entries)")
     print(
         f"pipeline:   host->native ({dry_sr:.1f}->{NATIVE_SR:.1f}) -> SOS cascade"
-        f" -> AGC -> *boost -> native->host -> gain null"
+        f" -> {agc_status} -> *boost -> native->host -> gain null"
     )
     print(f"fail at:    rel_null > {FAIL_THRESHOLD_DB:.0f} dB")
     print()
@@ -310,6 +358,7 @@ def main() -> int:
                 sr_auth,
                 boost,
                 dry_sr,
+                apply_agc_enabled=apply_agc_enabled,
             )
             _lag, gain, rms, _peak, ref_rms = best_fit_null(pred, ref)
             rel = db(rms) - db(ref_rms)

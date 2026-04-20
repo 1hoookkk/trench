@@ -22,7 +22,7 @@
     ]
   },
   "dry_input": "C:/Users/hooki/trenchwork_clean/ref/bypassed-pinknoise.wav",
-  "render_pipeline": "raw stage -> resample host->native (scipy resample_poly 3125/3528) -> SOS cascade @ 39062.5 Hz -> per-sample AGC -> * boost -> resample native->host -> float32 WAV @ 44100",
+  "render_pipeline": "raw stage -> resample host->native (32-tap 512-phase Blackman polyphase FIR, port of trench-core/src/resampler.rs; see tools/rust_resampler.py) -> SOS cascade @ 39062.5 Hz -> * boost -> resample native->host (same FIR) -> float32 WAV @ 44100 (AGC bypassed — AGC parity handled by trench-core/src/agc.rs unit tests)",
   "playback_sample_rate": 44100,
   "container_subtype": "FLOAT (float32, 24-bit mantissa, ~-150 dB null floor)",
   "supersedes": "trenchwork_clean/ref/_BROKEN_CE_CAPTURE_QUARANTINE/hedz*.wav (broken Cheat Engine capture, quarantined)"
