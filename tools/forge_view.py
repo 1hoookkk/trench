@@ -176,9 +176,16 @@ def main() -> int:
                     cart = json.loads(path.read_text())
                     name = cart.get("name", "?")
                     fmt = cart.get("format", "?")
-                    sr = float(cart.get("sampleRate", 48000.0))
+                    # The compiled-v1 `sampleRate` field is stale authoring
+                    # metadata. Coefficients are designed for evaluation at
+                    # host SR (44100). Using the declared value misplaces
+                    # all peaks/notches by ~13%. See memory entry
+                    # reference_compiled_v1_sample_rate.
+                    declared_sr = float(cart.get("sampleRate", 44100.0))
+                    sr = 44100.0
                     fig.suptitle(
-                        f"{name}   ·   {fmt}   ·   {sr:.1f} Hz",
+                        f"{name}   ·   {fmt}   ·   eval@{sr:.0f} Hz   "
+                        f"(JSON declares {declared_sr:.1f})",
                         fontsize=12,
                     )
                     for ax, label in zip(flat, CORNERS):
