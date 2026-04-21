@@ -1,4 +1,5 @@
 pub mod agc;
+pub mod auto_sequencer;
 pub mod cartridge;
 pub mod cascade;
 pub mod cluster;
