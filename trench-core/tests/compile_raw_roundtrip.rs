@@ -83,13 +83,12 @@ fn raw_surface_round_trips_through_rust_loader() {
     );
 
     let stdout = String::from_utf8(output.stdout).expect("utf8 stdout");
-    let cart = Cartridge::from_json(&stdout).unwrap_or_else(|e| {
-        panic!("loader rejected compiled cartridge: {e}\n\njson:\n{stdout}")
-    });
+    let cart = Cartridge::from_json(&stdout)
+        .unwrap_or_else(|e| panic!("loader rejected compiled cartridge: {e}\n\njson:\n{stdout}"));
 
     assert_eq!(cart.name, "raw_roundtrip");
-    assert_eq!(cart.corners.len(), 4);
-    assert_eq!(cart.boosts, [4.0, 4.0, 4.0, 4.0]);
+    assert_eq!(cart.corners().len(), 4);
+    assert_eq!(cart.boosts(), &[4.0, 4.0, 4.0, 4.0]);
 }
 
 #[test]
@@ -128,12 +127,11 @@ fn corner_stage_list_shorthand_round_trips_through_rust_loader() {
     );
 
     let stdout = String::from_utf8(output.stdout).expect("utf8 stdout");
-    let cart = Cartridge::from_json(&stdout).unwrap_or_else(|e| {
-        panic!("loader rejected compiled cartridge: {e}\n\njson:\n{stdout}")
-    });
+    let cart = Cartridge::from_json(&stdout)
+        .unwrap_or_else(|e| panic!("loader rejected compiled cartridge: {e}\n\njson:\n{stdout}"));
 
     assert_eq!(cart.name, "raw_corner_list");
-    assert_eq!(cart.corners.len(), 4);
+    assert_eq!(cart.corners().len(), 4);
 }
 
 #[test]

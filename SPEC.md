@@ -10,8 +10,10 @@ files.
   bypassed/passthrough SOS). Never parallel.
 - **Coefficient format:** kernel-form `[c0, c1, c2, c3, c4]` interpolation
   only. Never interpolate raw biquad coefficients or frequencies.
-- **Interpolation order:** 4-corner bilinear interpolation. Interpolate Q
-  first, then morph.
+- **Interpolation (compiled-v1 path):** 4-corner bilinear. Interpolate Q
+  first, then morph. This is a property of the compiled-v1 cartridge format,
+  not a permanent engine law. See §2 (Cartridge format) and
+  `docs/architecture/zplane_truth.md` §"The 4-corner → 2-corner transition".
 - **Control blocks:** 32-sample control blocks with per-sample coefficient
   ramping.
 - **Sample rates:** 39062.5 Hz (authoring/forge), 44100.0 Hz (plugin runtime).
@@ -36,7 +38,7 @@ DF2T execution:
 Sentinels: `0x0000` = 0.0; `0xDFFF` = passthrough gain; `0xFFFF` = max
 constant 1.0.
 
-### Bilinear interpolation (Q first, then morph)
+### Bilinear interpolation — compiled-v1 path (Q first, then morph)
 
     q_m0 = C_M0_Q0   + (C_M0_Q100   - C_M0_Q0)   * Q_frac
     q_m1 = C_M100_Q0 + (C_M100_Q100 - C_M100_Q0) * Q_frac
@@ -92,12 +94,67 @@ frozen.
 
 ## 3. Runtime invariants
 
-The runtime stays:
-- 6 active serial stages
-- 4 corners
-- kernel interpolation only
+The following are frozen regardless of cartridge format:
 
-Friendlier authoring models do not grant permission to change runtime
-topology, interpolation order, or cartridge format. The DSP cascade is
-frozen at `trench-core/src/cascade.rs` and
+- 6 active serial stages (12 total, 6 passthrough)
+- kernel-form coefficient interpolation only — never raw biquad or frequency
+  interpolation
+
+The compiled-v1 path additionally uses 4-corner bilinear interpolation (§2).
+This is a format-layer property, not a topology law; a future format can change
+the interpolation shape without violating these invariants.
+
+No authoring model or cartridge format change grants permission to alter cascade
+topology or DF2T math. The cascade is frozen at `trench-core/src/cascade.rs` and
 `trench-juce/plugin/source/TrenchEngine.cpp`.
+
+## 4. Cube Authoring Path (`trench.authoring_path.cube.v1`)
+
+Cube is a macro authoring surface above heritage truth. It does not create a new
+canonical truth layer.
+
+Required fields:
+
+- `schema`
+- `id`
+- `name`
+- `provenance`
+- `exactness`
+- `control_mode_default`
+- `axes`
+- `legacy_behavior`
+- `corners`
+
+Corner labels are fixed:
+
+- `c000`
+- `c100`
+- `c010`
+- `c110`
+- `c001`
+- `c101`
+- `c011`
+- `c111`
+
+Authoring files must not store runtime coefficients, compiled corner packs,
+corner caches, or opaque blobs.
+
+## 5. Cube Compiled Surface (`trench.compiled.cube_surface.v1`)
+
+Cube lowers into a separate compiled runtime surface while preserving backward compatibility with `compiled-v1`.
+
+Required fields:
+
+- `schema`
+- `derived_from`
+- `compiler`
+- `representation`
+- `exactness`
+- `control_mode`
+- `corner_resolution`
+- `corners`
+
+`representation` is `engine_ready_coeff_packs`.
+
+Cube runtime interpolation is trilinear in `(x, y, z)`. `compiled-v1` bilinear
+interpolation remains intact and unchanged.

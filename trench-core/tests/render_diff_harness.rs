@@ -117,9 +117,8 @@ fn render_rust_reference() -> Vec<f32> {
             CARTRIDGE_RELPATH
         )
     });
-    let cart = Cartridge::from_json(&json).unwrap_or_else(|e| {
-        panic!("render_diff_harness: failed to parse cartridge JSON: {e}")
-    });
+    let cart = Cartridge::from_json(&json)
+        .unwrap_or_else(|e| panic!("render_diff_harness: failed to parse cartridge JSON: {e}"));
 
     let mut engine = FilterEngine::new();
     engine.prepare(SAMPLE_RATE as f64);
@@ -176,7 +175,10 @@ fn hedz_cascade_agc_render_matches_committed_fixture() {
 
     let (committed, spec) = read_f32_wav(&fixture);
     assert_eq!(spec.channels, 1, "fixture must be mono");
-    assert_eq!(spec.sample_rate, SAMPLE_RATE, "fixture sample rate mismatch");
+    assert_eq!(
+        spec.sample_rate, SAMPLE_RATE,
+        "fixture sample rate mismatch"
+    );
     assert_eq!(spec.bits_per_sample, 32);
     assert!(matches!(spec.sample_format, SampleFormat::Float));
     assert_eq!(

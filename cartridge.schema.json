@@ -2,14 +2,15 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://trench/cartridge.schema.json",
   "title": "TRENCH compiled-v1 cartridge",
-  "description": "Wire format for cartridges consumed by the JUCE plugin. Authoritative loader: trench-core/src/cartridge.rs::Cartridge::from_json. Validated by ./check.",
+  "description": "Validates the compiled-v1 cartridge format consumed by the JUCE plugin. This schema is scoped to compiled-v1 only; future cartridge formats will be validated by separate schemas or additional oneOf branches. Authoritative loader: trench-core/src/cartridge.rs::Cartridge::from_json. Validated by ./check.",
   "type": "object",
   "required": ["format", "keyframes"],
   "additionalProperties": true,
   "properties": {
-    "format": { "type": "string", "const": "compiled-v1" },
+    "format": { "type": "string", "const": "compiled-v1", "description": "Cartridge format identifier. Currently the only shipping format is compiled-v1 (4-corner bilinear Q-precomputed shape). Future formats are not defined here." },
     "name":   { "type": "string", "minLength": 1 },
     "sampleRate": { "type": "number", "exclusiveMinimum": 0 },
+    "drive": { "$ref": "#/$defs/drive" },
     "keyframes": {
       "type": "array",
       "minItems": 4,
@@ -49,6 +50,15 @@
         "c2": { "type": "number" },
         "c3": { "type": "number" },
         "c4": { "type": "number" }
+      }
+    },
+    "drive": {
+      "type": "object",
+      "required": ["input_gain_dB", "model"],
+      "additionalProperties": false,
+      "properties": {
+        "input_gain_dB": { "type": "number" },
+        "model": { "type": "string", "const": "desk_slam_v1" }
       }
     },
     "spatial_profile": {

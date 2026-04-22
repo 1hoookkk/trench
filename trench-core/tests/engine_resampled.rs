@@ -161,7 +161,10 @@ fn reset_dsp_clears_resamplers() {
     let mut zeros = vec![0.0f32; 256];
     engine.process_block(&mut zeros, 0.0, 0.0);
     for (i, &s) in zeros.iter().enumerate() {
-        assert!(s.abs() < 1e-4, "sample {i} after reset: expected silence, got {s}");
+        assert!(
+            s.abs() < 1e-4,
+            "sample {i} after reset: expected silence, got {s}"
+        );
     }
 }
 

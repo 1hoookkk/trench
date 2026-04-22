@@ -1,47 +1,95 @@
-# TRENCH
+# CLAUDE.md — Plugin / Filter Engine
+
+Canonical guide for the plugin-and-filter-engine half of TRENCH. The forge
+half lives at `authoring/CLAUDE.md`; do not touch runtime invariants from
+there, and do not import forge tooling into anything that ships.
+
+## Scope
+
+This side owns the deterministic path:
+
+    heritage spec  →  compiled-v1 cartridge  →  runtime cascade  →  user audio
+
+Surface:
+
+- `trench-core/` — pure DSP crate (frozen cascade, cartridge loader,
+  resampler, engine). See `trench-core/CLAUDE.md` for crate invariants.
+- `trench-live/` — live/editor Rust.
+- `trench-juce/plugin/` — JUCE host (runtime only; the `CLAUDE.md` there
+  is a stub that points back here).
+- `tools/compile_pill.py`, `tools/compile_cube.py`,
+  `tools/bake_hedz_const.py`, `tools/pole_math.py` — offline compile
+  pipeline. These live here because they are deterministic math, not
+  generation.
+- `cartridge.schema.json`, `schemas/` — the wire contract with forge.
+- `cartridges/engine/` — shipping compiled-v1 content.
+
+Out of scope (forge's job, under `authoring/`): body generation, taste
+scoring, vault scanning, MCP measurement, notebook exploration, RE
+artifacts, Morpheus decode. Consume schema-valid JSON from them; never
+depend on their internals.
 
 ## Role
-- I own sound, taste, UX, product identity, final musical judgment.
-- You own code, math, implementation, debugging, verification, cleanup.
-- I write zero code. Every task runs agent end-to-end.
-- Do the work. No planning doc. No vague summary layer.
 
-## Product (v1.0, ship 2026-07-15)
-TRENCH is an E-mu Z-plane filter instrument. Phoneme pills are baked
-Morph Designer presets; MORPH is driven by standard DAW / synth mod
-sources at playback. Windows JUCE 8 standalone + VST3.
+You own implementation, debugging, verification, code quality.
+I own product, sound, UX, final judgment.
 
-## Core model
-- Pill = one E-mu Morph Designer preset (Lo Morph / Hi Morph frames +
-  6 sections with per-section type, frequency, Q/Gain).
-- MORPH = interpolation between a pill's Lo and Hi frames. Driven by
-  mod sources (LFO, envelope, velocity, mod wheel, DAW automation).
-- Q = live resonance/gain parameter with a ±50% offset wheel, added to
-  interpolated section Q/Gain.
-- BODY = a named collection of pills sharing a design intent. Not a
-  scheduled sequence.
-- TYPE = selects the active body.
+## Execution
 
-## Ground truth
-- Active truth + architect prompts: `TRUTH_MAP.md`
-- E-mu reference material: `docs/emu/`
-- Architecture direction: `docs/architecture/zplane_truth.md`
-- Math + contracts: `SPEC.md`
-- Cartridge wire schema: `cartridge.schema.json`
-- Operating modes: `MODES.md`
-- Doctrine (rules, bans, verification, escalation): `DOCTRINE.md`
-- Shipping bodies + rubrics: `BODIES.md`
-- Phoneme authoring contract: `PHONEMES.md`
-- Shipping phoneme pills: `cartridges/engine/` baked from
-  `cartridges/engine/_source/token_inventory_unified_v2.json` +
-  `cartridges/engine/_source/shapes/` via `tools/bake_phoneme_pills.py`
-- Hardcoded Talking Hedz ROM: `trench-core/src/hedz_rom.rs` baked from
-  `cartridges/engine/_source/heritage_designer_sections.json` via
-  `tools/bake_hedz_const.py`
-- Verify workspace: `./check`
-- Active shipping plugin: `trench-juce/plugin/`
-- Subtree rules: `trench-core/CLAUDE.md`
-- Repo index: live filesystem. Doctrine wins; no precomputed snapshot.
+- No preamble. No plan unless asked. Make the change.
+- Use exact file paths.
+- If you change code, give complete, copy-pasteable blocks.
+- If a function changes, output the whole function.
+- If context is missing or conflicting, say exactly what is missing.
 
-## HARD RULE
-any investigation that would read >3 files or >300 cumulative lines gets dispatched to an Explore subagent. The subagent reads the files, you only see its summary. The raw content never enters this parent context.
+## Audio Rules (hard)
+
+- No allocations, locks, file I/O, or parsing on the audio thread.
+- DSP topology is frozen: 12-stage DF2T cascade, 6 active + 6 passthrough,
+  per-sample coefficient ramping, 32-sample control block.
+- Interpolation order is frozen: Q-first, then morph. Do not reorder
+  silently.
+- If sound changes, say exactly what changed and why.
+
+## Project Rules
+
+- Follow the existing architecture. Do not invent new patterns without
+  reason.
+- Prefer the smallest change that preserves clarity.
+- Reuse existing code before adding new code.
+- Do not add dependencies without asking.
+- Keep docs and code aligned. If a decision becomes durable, propose the
+  doc update.
+
+## Schema = boundary with forge
+
+`cartridge.schema.json` is the only contract. Forge emits `compiled-v1`
+or `trench.authoring_path.*.v1` JSON. Engine validates with `./check`,
+then consumes. Never accept coefficient data that has not been
+schema-validated. Never let forge internals (taste weights, vault
+rankings, MCP outputs, notebook state) enter shipping code.
+
+## Verification
+
+- Run the relevant tests, not guesswork. `cargo test --lib` in
+  `trench-core/`; the parity gates (`tests/hedz_cascade.rs`,
+  `tests/talking_hedz_parity.rs`); schema checks
+  (`tests/cartridge_schema_tests.rs`).
+- Never claim something works unless you ran it.
+- If bash's `/usr/bin/link` shadows MSVC `link.exe`, point rustc at MSVC
+  directly via `CARGO_TARGET_X86_64_PC_WINDOWS_MSVC_LINKER`.
+- If you could not run verification, say so plainly.
+
+## Escalate Only If
+
+- sound will materially change
+- UX will materially change
+- the change is hard to reverse
+- the change adds architectural debt
+
+## Filter-path reference
+
+Which compile path turns a body's geometry into `compiled-v1` — Morph
+Designer recipes, Peak/Shelf Morph two-frame sweeps, or native Morpheus
+poles — is decision support, not always-on law. See the
+`filter-path-selection` skill.

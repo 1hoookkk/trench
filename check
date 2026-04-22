@@ -1,9 +1,5 @@
 #!/usr/bin/env bash
-# Strict errors + strict undefined variables, but deliberately NOT pipefail —
-# some Windows bash builds reject `set -o pipefail` as an unknown option,
-# which kills the whole script on line 2. Cargo exit codes are checked
-# explicitly via the `run` helper below instead of relying on pipe status
-# propagation, so pipefail isn't needed for correctness.
+# Strict errors + strict undefined variables
 set -eu
 
 cd "$(dirname "$0")"
@@ -22,6 +18,25 @@ for msvc_root in \
     fi
   fi
 done
+
+# Some Windows bash launches do not inherit the user's cargo bin even though
+# PowerShell does. Seed the common locations so the repo-local check can run
+# from Git Bash / MSYS without shell-specific handholding.
+for cargo_glob in "/c/Users"/*/.cargo/bin "/mnt/c/Users"/*/.cargo/bin; do
+  if [[ -d "$cargo_glob" ]]; then
+    export PATH="$cargo_glob:$PATH"
+  fi
+done
+
+CARGO_BIN="$(command -v cargo 2>/dev/null || command -v cargo.exe 2>/dev/null || true)"
+if [[ -z "$CARGO_BIN" ]]; then
+  CARGO_BIN="cargo"
+fi
+
+PYTHON_BIN="$(command -v python 2>/dev/null || command -v python.exe 2>/dev/null || command -v python3 2>/dev/null || true)"
+if [[ -z "$PYTHON_BIN" ]]; then
+  PYTHON_BIN="python"
+fi
 
 step() { printf '\n=== %s ===\n' "$1"; }
 
@@ -63,37 +78,56 @@ fi
 echo "  OK"
 
 step "rust workspace check (lib + tests, type-only)"
-cargo check --workspace --tests --quiet
+"$CARGO_BIN" check --workspace --tests --quiet
 
 step "passthrough null targets (static < -120 dBFS, dynamic < -90 dBFS)"
-run_cargo_test cargo test -p trench-core --test null_targets --quiet
+run_cargo_test "$CARGO_BIN" test -p trench-core --test null_targets --quiet
 
 step "P2K parity null (41 entries: 35 raw + 6 calibration_re, hard fail at > -140 dB)"
-if ! PYTHONPATH=. python tools/parity_null.py 2>&1 | sed 's/^/  /'; then
+if ! PYTHONPATH=. "$PYTHON_BIN" tools/parity_null.py 2>&1 | sed 's/^/  /'; then
   echo "  FAILED"
   exit 1
 fi
 
 step "rust cascade parity (33 raw skins x 4 corners, hard fail at > -120 dB)"
-run_cargo_test cargo test -p trench-core --test canonical_parity --release --quiet
+run_cargo_test "$CARGO_BIN" test -p trench-core --test canonical_parity --release --quiet
+
+step "MorphLP RE dump verifier (sanitized table matches committed dump)"
+if ! PYTHONPATH=tools "$PYTHON_BIN" tools/verify_morphlp_re.py 2>&1 | sed 's/^/  /'; then
+  echo "  FAILED"
+  exit 1
+fi
 
 step "rust hedz cascade cross-language parity (4 corners vs python bake)"
-run_cargo_test cargo test -p trench-core --test hedz_cascade --release --quiet
+run_cargo_test "$CARGO_BIN" test -p trench-core --test hedz_cascade --release --quiet
 
 step "rust engine pills smoke (every cartridges/engine/*.json loads)"
-run_cargo_test cargo test -p trench-core --test engine_pills --release --quiet
+run_cargo_test "$CARGO_BIN" test -p trench-core --test engine_pills --release --quiet
 
 step "rust compile_grid round-trip (2-token limit + loader parity)"
-run_cargo_test cargo test -p trench-core --test compile_grid_roundtrip --release --quiet
+run_cargo_test "$CARGO_BIN" test -p trench-core --test compile_grid_roundtrip --release --quiet
 
 step "rust compile_raw round-trip (raw-stage-v1 -> compiled-v1 loader parity)"
-run_cargo_test cargo test -p trench-core --test compile_raw_roundtrip --release --quiet
+run_cargo_test "$CARGO_BIN" test -p trench-core --test compile_raw_roundtrip --release --quiet
 
 step "rust vowel formant classification (8 ok + 2 known-drift: aw, oo)"
-run_cargo_test cargo test -p trench-core --test vowel_formants --release --quiet
+run_cargo_test "$CARGO_BIN" test -p trench-core --test vowel_formants --release --quiet
+
+step "hardware parity (engine vs E-mu P2K captures)"
+# First gate in the pyramid that compares against real hardware — every
+# other gate verifies internal consistency (Rust-vs-Rust, Python-vs-Python).
+# Silently skips when capture WAVs aren't on this machine (they're a
+# user-side artifact, not committed to the repo). Fails hard on drift.
+if [[ -f "C:/Users/hooki/trenchwork_clean/P2k_013_m0_q0.wav" ]]; then
+  if ! "$PYTHON_BIN" tools/hardware_parity_batch.py 2>&1 | sed 's/^/  /'; then
+    printf '  hardware parity batch failed\n'; exit 1
+  fi
+else
+  printf '  skipped (capture WAVs not present on this machine)\n'
+fi
 
 step "cartridges validate against schema"
-python - <<'PY'
+"$PYTHON_BIN" - <<'PY'
 import json, sys
 from pathlib import Path
 import jsonschema

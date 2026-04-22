@@ -1,8 +1,15 @@
 {
-  "disableAllHooks": false,
   "permissions": {
     "additionalDirectories": [
       "C:\\Users\\hooki\\trench_re_vault"
+    ],
+    "allow": [
+      "Bash(cp \"/c/Users/hooki/.claude/image-cache/1a340d89-7710-46b9-aede-33e5aaaf7fed/12.png\" \"C:/Users/hooki/Trench/trench-juce/plugin/assets/_genimg_mockup.png\")",
+      "Bash(python)"
     ]
+  },
+  "disableAllHooks": false,
+  "enabledPlugins": {
+    "everything-claude-code@everything-claude-code": true
   }
 }

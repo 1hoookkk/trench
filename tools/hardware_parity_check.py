@@ -68,19 +68,46 @@ COMPARE_HI_HZ = 16000.0
 
 
 def load_wav_mono(path: Path) -> tuple[np.ndarray, int]:
-    with wave.open(str(path), "rb") as w:
-        n = w.getnframes()
-        sr = w.getframerate()
-        ch = w.getnchannels()
-        sw = w.getsampwidth()
-        raw = w.readframes(n)
-    if sw != 2:
-        raise SystemExit(f"unsupported sample width {sw} bytes in {path}")
-    fmt = "<" + "h" * (n * ch)
-    flat = np.array(struct.unpack(fmt, raw), dtype=np.float32) / 32768.0
-    if ch > 1:
-        flat = flat.reshape(n, ch).mean(axis=1)
-    return flat, sr
+    # Stdlib wave handles PCM16 but chokes on IEEE float (fmt tag 3), which
+    # Trench's hardware captures ship as. Fall back to soundfile/scipy for
+    # anything it rejects — keeps the fast path allocation-free on normal
+    # PCM captures.
+    try:
+        with wave.open(str(path), "rb") as w:
+            n = w.getnframes()
+            sr = w.getframerate()
+            ch = w.getnchannels()
+            sw = w.getsampwidth()
+            raw = w.readframes(n)
+        if sw != 2:
+            raise SystemExit(f"unsupported sample width {sw} bytes in {path}")
+        fmt = "<" + "h" * (n * ch)
+        flat = np.array(struct.unpack(fmt, raw), dtype=np.float32) / 32768.0
+        if ch > 1:
+            flat = flat.reshape(n, ch).mean(axis=1)
+        return flat, sr
+    except wave.Error:
+        try:
+            import soundfile as sf
+        except ImportError:
+            try:
+                from scipy.io import wavfile as _wavfile
+            except ImportError as exc:
+                raise SystemExit(
+                    f"non-PCM WAV at {path}; install soundfile or scipy"
+                ) from exc
+            sr, data = _wavfile.read(str(path))
+            flat = np.asarray(data, dtype=np.float32)
+            if flat.dtype.kind in "iu":
+                flat = flat / float(np.iinfo(flat.dtype).max)
+            if flat.ndim > 1:
+                flat = flat.mean(axis=1)
+            return flat.astype(np.float32), int(sr)
+        data, sr = sf.read(str(path), always_2d=False)
+        flat = np.asarray(data, dtype=np.float32)
+        if flat.ndim > 1:
+            flat = flat.mean(axis=1)
+        return flat, int(sr)
 
 
 def welch_psd(xs: np.ndarray, sr: int, nfft: int = 4096, hop: int = 2048) -> tuple[np.ndarray, np.ndarray]:

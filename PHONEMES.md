@@ -79,10 +79,11 @@ and the `trench-core/tests/vowel_formants.rs` classification gate.
 
 ## Constraints on authoring tools
 
-All authoring tools MUST:
+All authoring tools targeting the compiled-v1 format MUST:
 
 - Produce cartridges that validate against `cartridge.schema.json`
-  (see `SPEC.md` §2).
+  (see `SPEC.md` §2). This schema is scoped to compiled-v1; future
+  format targets will validate against their own schemas.
 - Preserve per-body invariants from [`BODIES.md`](BODIES.md) for
   shipping candidates.
 
@@ -93,3 +94,11 @@ All authoring tools MUST NOT:
 - Accept raw coefficient edits.
 - Derive stages from RBJ cookbook shapes. Direct pole-zero only (see
   [`DOCTRINE.md`](DOCTRINE.md)).
+
+## Cube
+
+Cube is a macro authoring path over heritage objects.
+
+- Peak/Shelf and Morph Designer remain the native heritage authoring surfaces.
+- Cube corners resolve to those heritage objects.
+- Cube does not replace heritage truth or compiled truth.

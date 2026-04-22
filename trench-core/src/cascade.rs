@@ -10,6 +10,8 @@ pub const BLOCK_SIZE: usize = 32;
 struct BiquadState {
     /// Current coefficients [c0, c1, c2, c3, c4].
     coeffs: [f64; NUM_COEFFS],
+    /// Latched target coefficients for exact block-boundary snaps.
+    target_coeffs: [f64; NUM_COEFFS],
     /// Ramp deltas per sample.
     deltas: [f64; NUM_COEFFS],
     /// DF2T delay elements.
@@ -21,6 +23,7 @@ impl BiquadState {
     fn new() -> Self {
         Self {
             coeffs: PASSTHROUGH_COEFFS,
+            target_coeffs: PASSTHROUGH_COEFFS,
             deltas: [0.0; NUM_COEFFS],
             w1: 0.0,
             w2: 0.0,
@@ -31,8 +34,14 @@ impl BiquadState {
     fn set_target(&mut self, target: &[f64; NUM_COEFFS], ramp_samples: usize) {
         let ramp_samples = ramp_samples.max(1) as f64;
         for (i, &t) in target.iter().enumerate() {
+            self.target_coeffs[i] = t;
             self.deltas[i] = (t - self.coeffs[i]) / ramp_samples;
         }
+    }
+
+    fn snap_to_target(&mut self) {
+        self.coeffs = self.target_coeffs;
+        self.deltas = [0.0; NUM_COEFFS];
     }
 
     /// Process one sample through this DF2T stage.
@@ -54,6 +63,7 @@ impl BiquadState {
             self.w1 = 0.0;
             self.w2 = 0.0;
             self.deltas = [0.0; NUM_COEFFS];
+            self.target_coeffs = self.coeffs;
             return (y, true);
         }
         self.w1 = self.coeffs[1] * x - self.coeffs[3] * y + self.w2;
@@ -63,6 +73,7 @@ impl BiquadState {
             self.w1 = 0.0;
             self.w2 = 0.0;
             self.deltas = [0.0; NUM_COEFFS];
+            self.target_coeffs = self.coeffs;
         }
         (y, unstable)
     }
@@ -74,6 +85,8 @@ pub struct Cascade {
     stages: [BiquadState; TOTAL_STAGES],
     /// Current post-cascade boost (linear gain), ramped per sample.
     boost: f64,
+    /// Latched post-cascade boost target for exact block-boundary snaps.
+    target_boost: f64,
     /// Per-sample ramp delta for boost.
     boost_delta: f64,
     /// Latched when stage math or boost becomes non-finite.
@@ -85,6 +98,7 @@ impl Cascade {
         Self {
             stages: std::array::from_fn(|_| BiquadState::new()),
             boost: 1.0,
+            target_boost: 1.0,
             boost_delta: 0.0,
             instability_detected: false,
         }
@@ -96,7 +110,9 @@ impl Cascade {
             stage.w1 = 0.0;
             stage.w2 = 0.0;
             stage.deltas = [0.0; NUM_COEFFS];
+            stage.target_coeffs = stage.coeffs;
         }
+        self.target_boost = self.boost;
         self.boost_delta = 0.0;
         self.instability_detected = false;
     }
@@ -104,6 +120,7 @@ impl Cascade {
     /// Set target post-cascade boost (linear gain) and compute per-sample ramp delta.
     pub fn set_boost(&mut self, target: f64, ramp_samples: usize) {
         let ramp_samples = ramp_samples.max(1) as f64;
+        self.target_boost = target;
         self.boost_delta = (target - self.boost) / ramp_samples;
     }
 
@@ -138,6 +155,7 @@ impl Cascade {
         self.boost += self.boost_delta;
         if !self.boost.is_finite() {
             self.boost = 1.0;
+            self.target_boost = self.boost;
             self.boost_delta = 0.0;
             self.instability_detected = true;
             return 0.0;
@@ -156,6 +174,15 @@ impl Cascade {
         for sample in samples.iter_mut() {
             *sample = self.tick(*sample);
         }
+    }
+
+    /// Pin stage coefficients and boost exactly to the last requested targets.
+    pub fn snap_to_target(&mut self) {
+        for stage in &mut self.stages {
+            stage.snap_to_target();
+        }
+        self.boost = self.target_boost;
+        self.boost_delta = 0.0;
     }
 
     /// Returns whether this cascade encountered a non-finite runtime condition since the last call.
@@ -220,6 +247,22 @@ mod tests {
     }
 
     #[test]
+    fn snap_to_target_pins_coefficients_exactly() {
+        let mut stage = BiquadState::new();
+        let target = [1.0, -0.25, 0.5, -1.5, 0.75];
+
+        stage.set_target(&target, BLOCK_SIZE);
+        for _ in 0..(BLOCK_SIZE - 1) {
+            let _ = stage.process_sample(0.0);
+        }
+
+        assert_ne!(stage.coeffs, target);
+        stage.snap_to_target();
+        assert_eq!(stage.coeffs, target);
+        assert_eq!(stage.deltas, [0.0; NUM_COEFFS]);
+    }
+
+    #[test]
     fn reset_clears_ramp_state() {
         let mut cascade = Cascade::new();
         let target = [[2.0, 0.0, 0.0, 0.0, 0.0]; NUM_STAGES];
@@ -231,6 +274,28 @@ mod tests {
         for stage in &cascade.stages {
             assert_eq!(stage.deltas, [0.0; NUM_COEFFS]);
         }
+        assert_eq!(cascade.boost_delta, 0.0);
+    }
+
+    #[test]
+    fn cascade_snap_to_target_pins_boost_and_stages() {
+        let mut cascade = Cascade::new();
+        let target = [[1.0, -0.5, 0.25, -1.0, 0.5]; NUM_STAGES];
+
+        cascade.set_targets(&target, BLOCK_SIZE);
+        cascade.set_boost(2.0, BLOCK_SIZE);
+        for _ in 0..(BLOCK_SIZE - 1) {
+            let _ = cascade.tick(0.0);
+        }
+
+        assert_ne!(cascade.stages[0].coeffs, target[0]);
+        assert_ne!(cascade.boost, 2.0);
+
+        cascade.snap_to_target();
+
+        assert_eq!(cascade.stages[0].coeffs, target[0]);
+        assert_eq!(cascade.stages[0].deltas, [0.0; NUM_COEFFS]);
+        assert_eq!(cascade.boost, 2.0);
         assert_eq!(cascade.boost_delta, 0.0);
     }
 

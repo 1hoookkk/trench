@@ -74,6 +74,8 @@ def main(argv: list[str]) -> int:
                         help="CSV verdict log (default: verdicts.csv).")
     parser.add_argument("--resume", action="store_true",
                         help="Skip pills already recorded in the log.")
+    parser.add_argument("--revisit-maybes", action="store_true",
+                        help="Re-audition pills previously logged as 'maybe' even with --resume.")
     args = parser.parse_args(argv)
 
     live_path = resolve_live_path()
@@ -86,6 +88,8 @@ def main(argv: list[str]) -> int:
     if args.resume and args.log.exists():
         with open(args.log, newline="", encoding="utf-8") as f:
             for row in csv.DictReader(f):
+                if args.revisit_maybes and row.get("verdict") == "maybe":
+                    continue
                 already_logged.add(row.get("file", ""))
 
     log_exists = args.log.exists()

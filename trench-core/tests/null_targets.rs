@@ -26,10 +26,7 @@ fn make_noise(n: usize) -> Vec<f32> {
 }
 
 fn peak_dbfs(residual: &[f32]) -> f64 {
-    let peak = residual
-        .iter()
-        .map(|&x| x.abs())
-        .fold(0.0f32, f32::max) as f64;
+    let peak = residual.iter().map(|&x| x.abs()).fold(0.0f32, f32::max) as f64;
     if peak <= 0.0 {
         -300.0
     } else {

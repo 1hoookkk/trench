@@ -342,7 +342,7 @@ impl QSoundSpatial {
         // any positive gain — a prerequisite for the full-scale-peak
         // stability target.
         let mut l_broadband_db = if ild_law_db >= 0.0 { -ild_law_db } else { 0.0 };
-        let mut r_broadband_db = if ild_law_db <  0.0 {  ild_law_db } else { 0.0 };
+        let mut r_broadband_db = if ild_law_db < 0.0 { ild_law_db } else { 0.0 };
 
         // Guard against shelves pushing the per-channel response above
         // 0 dB at any frequency. Worst-case is a broadband stimulus with
@@ -389,4 +389,3 @@ impl QSoundSpatial {
         }
     }
 }
-

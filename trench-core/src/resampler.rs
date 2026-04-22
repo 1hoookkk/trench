@@ -138,9 +138,9 @@ impl Resampler {
 
         // Select the two polyphase phases bracketing `frac`.
         let phase_f = frac * PHASES as f32;
-        let phase_lo = phase_f as usize;           // 0 .. PHASES-1
+        let phase_lo = phase_f as usize; // 0 .. PHASES-1
         let phase_hi = (phase_lo + 1).min(PHASES); // 1 .. PHASES
-        let t = phase_f - phase_lo as f32;         // blend weight for phase_hi
+        let t = phase_f - phase_lo as f32; // blend weight for phase_hi
 
         let base_lo = phase_lo * TAPS;
         let base_hi = phase_hi * TAPS;
@@ -150,7 +150,8 @@ impl Resampler {
             // Symmetric window: tap k spans position center-half+1+k.
             let pos = (center - half + 1 + k as i64) as usize & RING_MASK;
             let x = self.ring[pos];
-            let c = self.table[base_lo + k] + (self.table[base_hi + k] - self.table[base_lo + k]) * t;
+            let c =
+                self.table[base_lo + k] + (self.table[base_hi + k] - self.table[base_lo + k]) * t;
             acc += x * c;
         }
         acc
@@ -187,8 +188,7 @@ fn build_sinc_table(cutoff: f64) -> Box<[f32]> {
             (PI * cutoff * t).sin() / (PI * t)
         };
         // Blackman window — better stopband than Hann for ≥80 dB rejection.
-        let w = 0.42
-            - 0.5 * (2.0 * PI * i as f64 / n as f64).cos()
+        let w = 0.42 - 0.5 * (2.0 * PI * i as f64 / n as f64).cos()
             + 0.08 * (4.0 * PI * i as f64 / n as f64).cos();
         proto[i] = sinc * w;
     }
@@ -209,7 +209,11 @@ fn build_sinc_table(cutoff: f64) -> Box<[f32]> {
         let phase_sum: f64 = (0..TAPS)
             .map(|k| {
                 let idx = k * PHASES + p;
-                if idx <= n { proto[idx] } else { 0.0 }
+                if idx <= n {
+                    proto[idx]
+                } else {
+                    0.0
+                }
             })
             .sum();
         let phase_scale = if phase_sum.abs() > 1e-12 {

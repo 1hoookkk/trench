@@ -44,6 +44,7 @@ For every TRENCH concept, classify into one of three buckets:
 | 4-corner (`M0_Q0`/`M0_Q100`/`M100_Q0`/`M100_Q100`) bilinear shape | **A** → transition to **B** | Precomputes Q variants per frame to avoid runtime biquad computation. Justified for current runtime; transitioning to 2-corner + live Q (see below). |
 | Audio-thread doctrine (no locks, no allocation)      | **A**     | Modern best practice E-mu firmware didn't need to encode. |
 | `compiled-v1` cartridge JSON format                  | **A**     | Wire-safe, schema-validated, host-portable. Transitional; subsumed by 30-integer grid under the 2-corner direction. |
+| Cube authoring path over heritage objects            | **A**     | Deliberate product-modernized layer above heritage truth; lowers deterministically into compiled runtime packs. |
 | Compiler (pill sequence → trajectory)                | **C dead**| E-mu has no compiler; MORPH is driven by mod sources. Concept removed from roadmap. |
 | Looperator time grid as authoring surface            | **C dead**| DAW automation and synth mod sources are the surface. |
 | BODIES as scheduled pill sequences                   | **C reframed** | A body is a named collection sharing a design intent (`BODIES.md`), not a scheduled trajectory. |
@@ -70,6 +71,12 @@ TRENCH's 4-corner shape is an engineering optimization that precomputes
 two Q snapshots per morph frame to avoid runtime biquad coefficient
 computation. On the hardware E-mu shipped this on, runtime coefficient
 derivation was expensive; on modern CPUs it is free.
+
+Cube sits above this level. It is a product surface that resolves eight macro
+corners into heritage truth, then into compiled runtime packs. Native Morpheus
+Transform 2 semantics were historically note-on scoped. TRENCH's modern cube
+mode intentionally breaks that limit by default and runs live XYZ at control
+block rate.
 
 ### Why 2-corner is the better runtime
 

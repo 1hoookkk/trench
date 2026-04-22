@@ -124,44 +124,70 @@ def type3_freq_compression(freq_value: int, shift: int) -> int:
     return freq_value
 
 
-def type3_vocal_kernel(
-    freq_packed: int,
-    gain_packed: int,
-    shift: int,
-    sr: int,
-    morphlp_idx: int | None,
-    corner: str,
-) -> tuple[float, float, float, float, float]:
-    """Type 3 vocal kernel with optional MorphLP numerator override.
+def type1_kernel(freq_packed: int, gain_packed: int, shift: int, sr: int):
+    """Type 1: LP/HP with peak. Mirror of bake_hedz_const.py."""
+    fv = fw_freq_value(freq_packed, sr)
+    rad = fw_radius(fv)
+    go = fw_gain_offset(gain_packed, shift)
+    w0 = fv << 8
+    w1 = max(0, min(255, rad + go)) << 8
+    w2 = fv << 8
+    w3 = max(0, min(255, rad - go)) << 8
+    w4 = 0xE000
+    return fw_words_to_kernel(w0, w1, w2, w3, w4)
 
-    When `morphlp_idx` is None the numerator words match the stock Type 3
-    pattern (passthrough-shaped numerator from `bake_hedz_const.py`). When
-    set, the (w0, w1, w4) numerator words are replaced with the MorphLP
-    table values for the given corner — driving the per-corner zero
-    dissolution that produces the "talking" character.
-    """
+
+def type2_kernel(freq_packed: int, gain_packed: int, shift: int, sr: int):
+    """Type 2: parametric EQ. Mirror of bake_hedz_const.py."""
+    idx = SR_FAMILY.get(sr, 0)
+    fv = fw_freq_value(freq_packed, sr)
+    rad = fw_radius(fv)
+    go = fw_gain_offset(gain_packed, shift)
+    if idx < 2:
+        w0 = 0xEC << 8
+        w1 = 0xFF << 8
+        w4_val = fv + 0xF5
+    else:
+        w0 = 0xE1 << 8
+        w1 = 0xF0 << 8
+        w4_val = fv
+    w2 = fv << 8
+    w3 = max(0, min(255, rad - go)) << 8
+    w4 = w4_val << 8
+    return fw_words_to_kernel(w0, w1, w2, w3, w4)
+
+
+def type3_kernel(freq_packed: int, gain_packed: int, shift: int, sr: int):
+    """Type 3 vocal/shaped with split-code freq compression at shift<0,
+    fv>0xDB. Mirror of bake_hedz_const.py."""
     idx = SR_FAMILY.get(sr, 0)
     fv = fw_freq_value(freq_packed, sr)
     go = fw_gain_offset(gain_packed, shift)
     fv_compressed = type3_freq_compression(fv, shift)
     rad = fw_radius(fv_compressed)
-    if morphlp_idx is not None:
-        v1, v2, v3 = morphlp_corner_words(morphlp_idx, corner)
-        w0 = v1
-        w1 = v2
-        w4 = v3
-    else:
-        base = FW_BASE[idx]
-        w0 = base << 8
-        w1 = ((base * 124) // 256 + 150) << 8
-        if idx < 2:
-            w4 = (fv_compressed - 18) * (-12) + (-8192)
-            w4 &= 0xFFFF
-        else:
-            w4 = 0xE000
+    base = FW_BASE[idx]
+    w0 = base << 8
+    w1 = ((base * 124) // 256 + 150) << 8
     w2 = fv_compressed << 8
     w3 = max(0, min(255, rad - go)) << 8
+    if idx < 2:
+        w4 = (fv_compressed - 18) * (-12) + (-8192)
+        w4 &= 0xFFFF
+    else:
+        w4 = 0xE000
     return fw_words_to_kernel(w0, w1, w2, w3, w4)
+
+
+def compile_section(type_id: int, freq_packed: int, gain_packed: int, shift: int, sr: int):
+    if type_id <= 0:
+        return PASSTHROUGH
+    if type_id == 1:
+        return type1_kernel(freq_packed, gain_packed, shift, sr)
+    if type_id == 2:
+        return type2_kernel(freq_packed, gain_packed, shift, sr)
+    if type_id == 3:
+        return type3_kernel(freq_packed, gain_packed, shift, sr)
+    return type1_kernel(freq_packed, gain_packed, shift, sr)
 
 
 PASSTHROUGH = (1.0, 0.0, 0.0, 0.0, 0.0)
@@ -190,39 +216,30 @@ PASSTHROUGH = (1.0, 0.0, 0.0, 0.0, 0.0)
 #   - anchors (4-5): idx=8 — saturated zone where M0/M100 zeros are
 #     converging. Anchors sit still both spectrally and zero-wise.
 SECTIONS = [
-    # (type, lo_f, lo_g, hi_f, hi_g, shift, morphlp_idx)
-    # MorphLP override DISABLED: Type 3 (FUN_1802c3600) and CPhantomMorphLP
-    # (FUN_1802c59b0) are different firmware compile paths with their own
-    # numerator/denominator polynomial coupling. Forcing MorphLP zeros onto
-    # Type 3 poles broke gain balance by 90+ dB across all 16 indices.
-    # `tools/morphlp_zeros.py` stays in place for future MorphLP-native bodies.
-    (3,  64,  80,  32,  80,   0, None),  # Stage 1 — F1
-    (3,  80,  90, 160,  90,   0, None),  # Stage 2 — F2 (talking crossover)
-    (3, 140,  80, 170,  80,   0, None),  # Stage 3 — F3
-    (3, 224,  96, 224,  96, -32, None),  # Stage 4 — anchor F4 (split-code clamp)
-    (3, 240,  96, 240,  96, -32, None),  # Stage 5 — anchor F5 (split-code clamp)
-    (0,   0,   0,   0,   0,   0, None),  # Stage 6 — forced passthrough
+    # (type, lo_f, lo_g, hi_f, hi_g, shift)
+    # PLUMBING-CHECK: literal hedz bytes. If this produces vocal formants
+    # in the cartridge output, the bake math matches bake_hedz_const.py
+    # and the issue is byte selection. If not, the bake script diverges.
+    (3,   0, 127, 116,  87,   0),
+    (1,  15,   0,  33,   0,   0),
+    (1,  33, 127,  51, 127,   0),
+    (1,  51,   0,  70,   0,   0),
+    (1,  70, 127,  89, 127,   0),
+    (2,   0, 127, 127, 127,   0),
 ]
 
 
-def compile_corner(morph: float, corner_label: str, sr: int) -> list[tuple[float, ...]]:
-    """Compile the 6 active stages for one corner. Q-axis is degenerate so
-    `corner_label` selects M0 vs M100 zeros from the MorphLP table; the
-    Q distinction (Q0 vs Q100) does not affect the numerator."""
-    if morph == 0.0:
-        zero_corner = "M0"
-    elif morph == 1.0:
-        zero_corner = "M100"
-    else:
-        raise ValueError("compile_corner expects morph endpoint (0.0 or 1.0)")
+def compile_corner(morph: float, sr: int) -> list[tuple[float, ...]]:
+    """Compile the 6 active stages for one corner. Q-axis is degenerate
+    in this body — Q0 and Q100 share the same morph-interpolated stages."""
     stages: list[tuple[float, ...]] = []
-    for type_id, lo_f, lo_g, hi_f, hi_g, shift, mlp_idx in SECTIONS:
+    for type_id, lo_f, lo_g, hi_f, hi_g, shift in SECTIONS:
         if type_id == 0:
             stages.append(PASSTHROUGH)
             continue
         freq = round(lo_f + morph * (hi_f - lo_f))
         gain = round(lo_g + morph * (hi_g - lo_g))
-        coeffs = type3_vocal_kernel(freq, gain, shift, sr, mlp_idx, zero_corner)
+        coeffs = compile_section(type_id, freq, gain, shift, sr)
         stages.append(tuple(f32(c) for c in coeffs))
     while len(stages) < NUM_PHYSICAL_STAGES:
         stages.append(PASSTHROUGH)
@@ -230,8 +247,8 @@ def compile_corner(morph: float, corner_label: str, sr: int) -> list[tuple[float
 
 
 def build_cartridge() -> dict:
-    m0_stages = compile_corner(0.0, "M0", SR_COMPILE)
-    m100_stages = compile_corner(1.0, "M100", SR_COMPILE)
+    m0_stages = compile_corner(0.0, SR_COMPILE)
+    m100_stages = compile_corner(1.0, SR_COMPILE)
     keyframes = [
         {"label": "M0_Q0",     "morph": 0.0, "q": 0.0, "boost": BOOST,
          "stages": [stage_dict(s) for s in m0_stages]},

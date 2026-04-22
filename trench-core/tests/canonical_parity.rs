@@ -44,8 +44,8 @@ use serde::Deserialize;
 use trench_core::{Cascade, CornerData, BLOCK_SIZE, NUM_STAGES};
 
 const AGC_TABLE: [f64; 16] = [
-    1.0001, 1.0001, 0.996, 0.990, 0.920, 0.500, 0.200, 0.160, 0.120, 0.120, 0.120, 0.120,
-    0.120, 0.120, 0.120, 0.120,
+    1.0001, 1.0001, 0.996, 0.990, 0.920, 0.500, 0.200, 0.160, 0.120, 0.120, 0.120, 0.120, 0.120,
+    0.120, 0.120, 0.120,
 ];
 
 #[inline(always)]
@@ -214,8 +214,8 @@ fn dry_path() -> PathBuf {
 }
 
 fn read_wav_mono(path: &Path) -> Vec<f32> {
-    let mut reader = hound::WavReader::open(path)
-        .unwrap_or_else(|e| panic!("opening {}: {e}", path.display()));
+    let mut reader =
+        hound::WavReader::open(path).unwrap_or_else(|e| panic!("opening {}: {e}", path.display()));
     let spec = reader.spec();
     let channels = spec.channels as usize;
     assert_eq!(
@@ -224,7 +224,12 @@ fn read_wav_mono(path: &Path) -> Vec<f32> {
         "expected float WAV at {}",
         path.display()
     );
-    assert_eq!(spec.bits_per_sample, 32, "expected f32 WAV at {}", path.display());
+    assert_eq!(
+        spec.bits_per_sample,
+        32,
+        "expected f32 WAV at {}",
+        path.display()
+    );
     let samples: Vec<f32> = reader
         .samples::<f32>()
         .map(|s| s.expect("wav sample read"))
@@ -287,8 +292,7 @@ fn build_corner_from_source(
             let skin: RawSkin = serde_json::from_str(&json)
                 .map_err(|e| format!("raw parse {}: {e}", source_path.display()))?;
             for (label, corner) in skin.corners {
-                let rows: Vec<[f64; 5]> =
-                    corner.stages.iter().map(raw_stage_to_row).collect();
+                let rows: Vec<[f64; 5]> = corner.stages.iter().map(raw_stage_to_row).collect();
                 if let Some(cd) = pad_corner(rows) {
                     out.insert(label, cd);
                 }

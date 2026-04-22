@@ -30,13 +30,19 @@ python tools/workbench/sampler.py --scope hf_resonance --n 20
 Candidates land in `tools/workbench/_queue/`. Only gate-passing pills are written.
 Rejected candidates print their fail reason and are discarded.
 
+When `verdicts.csv` exists, the sampler automatically applies a weighted centroid
+shift toward keeps and away from rejects. 25% of the batch is drawn from the
+unshifted envelope (exploration). See `tools/workbench/bias.py` for the v1 contract.
+
 Options:
 
 ```
---scope     Scope name (default: hf_resonance)
---n         Target admitted count (default: 20)
---seed      RNG seed for reproducibility
---out-dir   Output directory (default: _queue/)
+--scope           Scope name (default: hf_resonance)
+--n               Target admitted count (default: 20)
+--seed            RNG seed for reproducibility
+--out-dir         Output directory (default: _queue/)
+--no-bias         Disable centroid shift even if verdicts.csv exists
+--fresh           Wipe existing scope pills from _queue/ before generating
 ```
 
 ---
@@ -61,6 +67,12 @@ To resume a previous session (skip already-logged pills):
 python tools/workbench/verdict.py --resume
 ```
 
+To re-audition pills previously logged as 'maybe':
+
+```
+python tools/workbench/verdict.py --resume --revisit-maybes
+```
+
 ---
 
 ## Step 3 — Promote keepers
@@ -70,10 +82,21 @@ To promote one, copy it from `_queue/` to `cartridges/pills/` and run `./check`.
 
 ---
 
-## Step 4 — Re-sample (coming)
+## Step 4 — Re-sample with bias
 
-A bias re-sampler will read `verdicts.csv` and re-weight the scope envelope toward
-high-rated candidates. Design checkpoint with user before implementing.
+Run the sampler again. It reads `verdicts.csv` automatically and shifts the scope
+envelope toward your keeps, away from your rejects, then refills the queue:
+
+```
+python tools/workbench/sampler.py --n 20
+```
+
+The bias report prints per-corner center shifts and exploration fraction.
+To start completely fresh (wipe queue, ignore previous verdicts in envelope):
+
+```
+python tools/workbench/sampler.py --fresh --no-bias --n 20
+```
 
 ---
 
@@ -90,7 +113,8 @@ user direction.
 
 | Path | Purpose |
 |------|---------|
-| `sampler.py` | Generate admitted pills into `_queue/` |
+| `sampler.py` | Generate admitted pills into `_queue/` (with bias) |
 | `verdict.py` | Audition loop + CSV logger |
-| `_queue/` | Ephemeral candidates (gitignored) |
+| `bias.py` | Weighted centroid shift — v1 contract |
+| `_queue/` | Persistent candidates (gitignored) |
 | `verdicts.csv` | Persistent verdict log (gitignored) |

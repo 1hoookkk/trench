@@ -27,8 +27,8 @@ use std::f64::consts::PI;
 use std::fs;
 use std::path::PathBuf;
 
-use trench_core::Cartridge;
 use trench_core::cartridge::{CornerData, NUM_STAGES};
+use trench_core::Cartridge;
 
 /// Shape bank authoring sample rate. Every `cartridges/engine/vowels/*.json`
 /// carries `"sampleRate": 39062.5`.
@@ -167,17 +167,18 @@ fn log_distance(peaks: &[f64], formants: &[f64; 3]) -> f64 {
 }
 
 fn load_cartridge(path: &PathBuf) -> Cartridge {
-    let json = fs::read_to_string(path)
-        .unwrap_or_else(|e| panic!("read {}: {e}", path.display()));
-    Cartridge::from_json(&json)
-        .unwrap_or_else(|e| panic!("parse {}: {e}", path.display()))
+    let json = fs::read_to_string(path).unwrap_or_else(|e| panic!("read {}: {e}", path.display()));
+    Cartridge::from_json(&json).unwrap_or_else(|e| panic!("parse {}: {e}", path.display()))
 }
 
 #[test]
 fn every_vowel_pill_classifies_as_itself() {
     let dir = engine_vowels_dir();
     if !dir.exists() {
-        eprintln!("skip: {} does not exist — run `python tools/bake_phoneme_pills.py`", dir.display());
+        eprintln!(
+            "skip: {} does not exist — run `python tools/bake_phoneme_pills.py`",
+            dir.display()
+        );
         return;
     }
 
@@ -190,11 +191,11 @@ fn every_vowel_pill_classifies_as_itself() {
         }
         let cart = load_cartridge(&path);
         assert_eq!(
-            cart.corners[0].len(),
+            cart.corners()[0].len(),
             NUM_STAGES,
             "{key}: corner 0 should have {NUM_STAGES} stages",
         );
-        let response = cascade_response(&cart.corners[0], N_BINS);
+        let response = cascade_response(&cart.corners()[0], N_BINS);
         let peaks = local_peaks_hz(&response);
         assert!(
             !peaks.is_empty(),
@@ -227,15 +228,11 @@ fn every_vowel_pill_classifies_as_itself() {
                 best_label = ref_key;
             }
         }
-        let top3: Vec<String> = peaks
-            .iter()
-            .take(3)
-            .map(|p| format!("{:.0}", p))
-            .collect();
+        let top3: Vec<String> = peaks.iter().take(3).map(|p| format!("{:.0}", p)).collect();
         let in_drift = KNOWN_DRIFT.contains(key);
         let status = match (best_label == *key, in_drift) {
             (true, false) => "ok",
-            (true, true) => "DRIFT_FIXED",   // promote out of KNOWN_DRIFT
+            (true, true) => "DRIFT_FIXED", // promote out of KNOWN_DRIFT
             (false, true) => "drift (known)",
             (false, false) => "MISS",
         };

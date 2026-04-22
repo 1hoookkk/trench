@@ -119,8 +119,14 @@ fn hedz_rom_has_live_q_axis() {
     // Q-axis variation — not the morph-only MorphDesigner XML the rom
     // was previously baked from. Guard that the Q endpoints are distinct
     // so a future source regression back to a morph-only body is loud.
-    assert_ne!(HEDZ_CORNERS[0], HEDZ_CORNERS[2], "M0_Q0 == M0_Q100 — rom source lost Q variation");
-    assert_ne!(HEDZ_CORNERS[1], HEDZ_CORNERS[3], "M100_Q0 == M100_Q100 — rom source lost Q variation");
+    assert_ne!(
+        HEDZ_CORNERS[0], HEDZ_CORNERS[2],
+        "M0_Q0 == M0_Q100 — rom source lost Q variation"
+    );
+    assert_ne!(
+        HEDZ_CORNERS[1], HEDZ_CORNERS[3],
+        "M100_Q0 == M100_Q100 — rom source lost Q variation"
+    );
 }
 
 #[test]

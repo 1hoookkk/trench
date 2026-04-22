@@ -194,9 +194,9 @@ fn null_db_lag(pred: &[f32], reference: &[f32], max_lag: i64) -> (i64, f64, f64)
 // ─── corner table ─────────────────────────────────────────────────────────────
 
 const CORNERS: &[(&str, f64, f64)] = &[
-    ("M0_Q0",     0.0, 0.0),
-    ("M0_Q100",   0.0, 1.0),
-    ("M100_Q0",   1.0, 0.0),
+    ("M0_Q0", 0.0, 0.0),
+    ("M0_Q100", 0.0, 1.0),
+    ("M100_Q0", 1.0, 0.0),
     ("M100_Q100", 1.0, 1.0),
 ];
 
@@ -205,7 +205,10 @@ const CORNERS: &[(&str, f64, f64)] = &[
 fn load_hedz() -> Option<Cartridge> {
     let path = hedz_json_path();
     if !path.exists() {
-        eprintln!("hedz_parity: skipping — Talking_Hedz.json not found at {}", path.display());
+        eprintln!(
+            "hedz_parity: skipping — Talking_Hedz.json not found at {}",
+            path.display()
+        );
         return None;
     }
     let json = fs::read_to_string(&path).expect("read Talking_Hedz.json");
@@ -229,14 +232,12 @@ fn load_dry() -> Vec<f32> {
 }
 
 /// Core null loop shared by the compile-path and runtime-identity gates.
-fn run_parity_gate(
-    gate_name: &str,
-    cart: &Cartridge,
-    canonical_prefix: &str,
-    threshold_db: f64,
-) {
+fn run_parity_gate(gate_name: &str, cart: &Cartridge, canonical_prefix: &str, threshold_db: f64) {
     let input = load_dry();
-    eprintln!("{gate_name}: dry = {} samples, threshold = {threshold_db} dB", input.len());
+    eprintln!(
+        "{gate_name}: dry = {} samples, threshold = {threshold_db} dB",
+        input.len()
+    );
 
     let skip_transient = input.len() / 20;
     let mut any_fail = false;
@@ -244,7 +245,10 @@ fn run_parity_gate(
     for &(label, morph, q) in CORNERS {
         let wav_path = canonical_wav_path_named(canonical_prefix, label);
         if !wav_path.exists() {
-            eprintln!("  {label:<12} — canonical WAV missing at {}", wav_path.display());
+            eprintln!(
+                "  {label:<12} — canonical WAV missing at {}",
+                wav_path.display()
+            );
             any_fail = true;
             continue;
         }
@@ -259,11 +263,8 @@ fn run_parity_gate(
 
         let pred = render(cart.clone(), morph, q, &input);
         let n = pred.len().min(reference.len());
-        let (lag, gain, rel) = null_db_lag(
-            &pred[skip_transient..n],
-            &reference[skip_transient..n],
-            256,
-        );
+        let (lag, gain, rel) =
+            null_db_lag(&pred[skip_transient..n], &reference[skip_transient..n], 256);
         let ok = rel <= threshold_db;
         eprintln!(
             "  {canonical_prefix:<25} {label:<12}  lag={lag:+4}  gain={gain:.4}  null={rel:+8.2} dB  {}",
@@ -274,7 +275,10 @@ fn run_parity_gate(
         }
     }
 
-    assert!(!any_fail, "{gate_name}: one or more corners exceeded {threshold_db} dB threshold");
+    assert!(
+        !any_fail,
+        "{gate_name}: one or more corners exceeded {threshold_db} dB threshold"
+    );
 }
 
 /// Compile-path parity: compiled_talking_hedz (Rust DF2T kernel coeffs) nulled
@@ -297,12 +301,7 @@ fn compile_path_parity_compiled_v1_vs_calibration() {
         Some(c) => c,
         None => return,
     };
-    run_parity_gate(
-        "compile_path_parity",
-        &hedz,
-        "cal_Talking_Hedz",
-        -30.0,
-    );
+    run_parity_gate("compile_path_parity", &hedz, "cal_Talking_Hedz", -30.0);
 }
 
 /// Runtime identity: compiled_talking_hedz nulled against a Python canonical
@@ -315,28 +314,19 @@ fn compile_path_parity_compiled_v1_vs_calibration() {
 ///
 /// Resonant corners (M100_Q0, M100_Q100) have pole radii ≈ 0.999 (nearly
 /// on the unit circle), where tiny numerical differences amplify through
-/// the feedback loop. The residual there is ≈ -48 dB — driven by Rust's
-/// per-sample coefficient ramping (`cascade.rs:43-47` — `coeffs += delta`
-/// every sample even on static corners) and the f64→f32 cast at cascade
-/// output (`cascade.rs:150`). Python's `scipy.signal.sosfilt` holds fixed
-/// f64 coefficients throughout with no per-sample rounding pressure.
+/// the feedback loop. Rust now snaps the cascade coefficients and boost to
+/// their exact targets at each 32-sample block boundary, so the static-corner
+/// runtime converges to the Python reference's fixed-f64 behavior instead of
+/// recirculating ulp-scale ramp residue forever.
 ///
-/// Threshold -45 dB: 3 dB margin above the observed worst-case M100_Q0
-/// residual. Tighter than the compile-path gate (-30 dB), catches any
-/// runtime regression without demanding the cascade be made drift-free.
-/// If this drift becomes a product concern, the fix is to snap cascade
-/// coefficients at block boundaries in `snap_to_target` (currently only
-/// snaps output_gain) — not to loosen this threshold.
+/// Threshold -100 dB: significantly below audibility and comfortably above
+/// the f32 WAV floor, so any future block-boundary drift shows up loudly
+/// without touching the compile-path gate.
 #[test]
 fn runtime_identity_compiled_v1_both_sides() {
     let hedz = match load_hedz() {
         Some(c) => c,
         None => return,
     };
-    run_parity_gate(
-        "runtime_identity",
-        &hedz,
-        "compiled_talking_hedz",
-        -45.0,
-    );
+    run_parity_gate("runtime_identity", &hedz, "compiled_talking_hedz", -100.0);
 }

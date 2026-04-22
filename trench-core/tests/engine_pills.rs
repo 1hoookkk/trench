@@ -85,5 +85,9 @@ fn every_engine_pill_loads() {
         failures.join("\n  ")
     );
 
-    println!("loaded {} phoneme pills from {}", pills.len(), root.display());
+    println!(
+        "loaded {} phoneme pills from {}",
+        pills.len(),
+        root.display()
+    );
 }

@@ -397,11 +397,17 @@ mod unit {
         ] {
             let y0 = evaluate_shape(shape, 0.0, 1.0, 0.0);
             let y1 = evaluate_shape(shape, 0.0, 1.0, 1.0);
-            assert!((y0 - 0.0).abs() < 1e-6, "{name} at t=0 should be 0, got {y0}");
+            assert!(
+                (y0 - 0.0).abs() < 1e-6,
+                "{name} at t=0 should be 0, got {y0}"
+            );
             if shape == SegmentShape::Hold {
                 assert!((y1 - 0.0).abs() < 1e-6, "hold at t=1 should still be 0");
             } else {
-                assert!((y1 - 1.0).abs() < 1e-6, "{name} at t=1 should be 1, got {y1}");
+                assert!(
+                    (y1 - 1.0).abs() < 1e-6,
+                    "{name} at t=1 should be 1, got {y1}"
+                );
             }
         }
     }

@@ -58,13 +58,12 @@ fn two_token_grid_round_trips_through_rust_loader() {
     );
 
     let stdout = String::from_utf8(output.stdout).expect("utf8 stdout");
-    let cart = Cartridge::from_json(&stdout).unwrap_or_else(|e| {
-        panic!("loader rejected compiled cartridge: {e}\n\njson:\n{stdout}")
-    });
+    let cart = Cartridge::from_json(&stdout)
+        .unwrap_or_else(|e| panic!("loader rejected compiled cartridge: {e}\n\njson:\n{stdout}"));
 
     assert_eq!(cart.name, "ah_to_ee_roundtrip");
-    assert_eq!(cart.corners.len(), 4);
-    assert_eq!(cart.boosts.len(), 4);
+    assert_eq!(cart.corners().len(), 4);
+    assert_eq!(cart.boosts().len(), 4);
 }
 
 #[test]

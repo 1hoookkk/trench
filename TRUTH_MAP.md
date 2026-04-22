@@ -9,7 +9,7 @@ it is either archive/non-canonical or queued for deletion.
   C++/JUCE 8. Windows standalone + VST3.
 - **DSP source of truth**: `trench-juce/plugin/source/TrenchEngine.cpp`
   (referenced by `DOCTRINE.md`, `SPEC.md`). The 12-stage serial DF2T
-  cascade and the bilinear cartridge interpolation live there.
+  cascade and the current legacy compiled-v1 bilinear interpolation path live there.
 - **Rust crates that serve the shipping runtime**: `trench-core` only.
   It exists to codify DSP math (`cascade.rs`), the cartridge schema
   (`cartridge.rs`), and heritage bakes (`hedz_rom.rs`) that the JUCE
@@ -26,17 +26,33 @@ it is either archive/non-canonical or queued for deletion.
   shipping; `trench-forge-dev` uses a background watcher thread with
   `ArcSwap` handoff — the audio thread still does nothing but math.
 
-## Shipping cartridge format
+## Shipping cartridge formats
 
 - **Schema**: `cartridge.schema.json` at repo root.
-- **Canonical format tag**: `"format": "compiled-v1"`.
-- **Keyframe shape**: 4 keyframes (`M0_Q0`, `M100_Q0`, `M0_Q100`,
-  `M100_Q100`) × 6 or 12 stages (12 = 6 active + 6 passthrough tail) ×
-  `{c0, c1, c2, c3, c4}` direct-form DF2T coefficients + per-keyframe
-  `boost`.
+- **compiled-v1** (current/legacy shipping path):
+  - Format tag: `"format": "compiled-v1"`.
+  - Keyframe shape: 4 keyframes (`M0_Q0`, `M100_Q0`, `M0_Q100`,
+    `M100_Q100`) × 6 or 12 stages (12 = 6 active + 6 passthrough tail) ×
+    `{c0, c1, c2, c3, c4}` direct-form DF2T coefficients + per-keyframe
+    `boost`.
+  - 4-corner bilinear interpolation (Q first, then morph) is the current
+    shipping surface.
+  - Backward-compatible; not universal.
+- **cube compiled surface** (`trench.compiled.cube_surface.v1`):
+  - Now part of the repo architecture. Implemented in
+    `trench-core/src/cartridge.rs` (`SurfaceFormat::CubeSurfaceV1`).
+  - 8-corner compiled surface with trilinear `(x, y, z)` interpolation.
+  - Lowers into a separate compiled runtime surface while preserving backward compatibility with `compiled-v1`.
+  - Does not replace heritage truth; cube is a macro authoring surface
+    above heritage truth (SPEC.md §4–§5).
+  - **Admission gate**: `CUBE_GATE.md` (`cube-v1` validation schema).
+    Gates 12 edges first, then faces, then redundancy, then source
+    robustness. A cube that fails the gate is not admitted to the
+    shipping runtime.
 - **Rust loader**: `trench-core/src/cartridge.rs::Cartridge::from_json`
-  — accepts both the keyframe format above and the array format
-  (`corners.M0_Q0 = [[c0..c4], ...]`). This is the authoritative
+  — accepts compiled-v1 keyframe format, compiled-v1 array format
+  (`corners.M0_Q0 = [[c0..c4], ...]`), and cube compiled surface
+  (`schema: "trench.compiled.cube_surface.v1"`). This is the authoritative
   loader; the shipping chain has no Python loader.
 
 ## Verification command

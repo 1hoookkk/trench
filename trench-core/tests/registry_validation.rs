@@ -28,10 +28,9 @@ fn repo_root() -> PathBuf {
 
 fn load_registry() -> Value {
     let path = repo_root().join("FILTER_ARTIFACTS.json");
-    let s = std::fs::read_to_string(&path)
-        .unwrap_or_else(|e| panic!("read {}: {e}", path.display()));
-    serde_json::from_str(&s)
-        .unwrap_or_else(|e| panic!("parse FILTER_ARTIFACTS.json: {e}"))
+    let s =
+        std::fs::read_to_string(&path).unwrap_or_else(|e| panic!("read {}: {e}", path.display()));
+    serde_json::from_str(&s).unwrap_or_else(|e| panic!("parse FILTER_ARTIFACTS.json: {e}"))
 }
 
 /// Strip a `#Lnnn` suffix when resolving a registry path to disk.
@@ -79,8 +78,14 @@ fn registry_parses_and_has_schema() {
     let reg = load_registry();
     assert!(reg.get("_schema").is_some(), "missing _schema block");
     assert!(reg["artifacts"].is_array(), "artifacts must be array");
-    assert!(reg["null_test_pairs"].is_array(), "null_test_pairs must be array");
-    assert!(reg["forbidden_comparisons"].is_array(), "forbidden_comparisons must be array");
+    assert!(
+        reg["null_test_pairs"].is_array(),
+        "null_test_pairs must be array"
+    );
+    assert!(
+        reg["forbidden_comparisons"].is_array(),
+        "forbidden_comparisons must be array"
+    );
 }
 
 #[test]
@@ -126,11 +131,7 @@ fn registry_paths_exist_on_disk() {
         let cleaned = strip_line_anchor(path_field);
         for concrete in expand_brace(cleaned) {
             let abs = root.join(&concrete);
-            assert!(
-                abs.exists(),
-                "{id}: path does not exist: {}",
-                abs.display()
-            );
+            assert!(abs.exists(), "{id}: path does not exist: {}", abs.display());
         }
     }
 }

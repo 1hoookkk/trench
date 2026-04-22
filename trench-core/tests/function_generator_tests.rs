@@ -198,10 +198,7 @@ fn key_sync_restarts() {
 #[test]
 fn rev_time_reverses_trajectory() {
     // 0 → 1 over 100 ms, then 1 → 0 over 100 ms. Symmetric tent.
-    let segs = vec![
-        seg(1.0, 100.0, "lin", None),
-        seg(0.0, 100.0, "lin", None),
-    ];
+    let segs = vec![seg(1.0, 100.0, "lin", None), seg(0.0, 100.0, "lin", None)];
     let b = block(segs, false, false);
     const N: usize = 9_600; // 200 ms @ 48 kHz
 
@@ -326,16 +323,28 @@ fn key_sync_false_does_not_reset_on_note_on() {
     let mut fg = FunctionGenerator::new(48_000.0);
     let block = ModFnBlock {
         segments: vec![
-            FnSegment { level: 0.0, time_ms: 0.0,   shape: "hold".into(), jump: None },
-            FnSegment { level: 1.0, time_ms: 500.0, shape: "lin".into(),  jump: None },
+            FnSegment {
+                level: 0.0,
+                time_ms: 0.0,
+                shape: "hold".into(),
+                jump: None,
+            },
+            FnSegment {
+                level: 1.0,
+                time_ms: 500.0,
+                shape: "lin".into(),
+                jump: None,
+            },
         ],
-        key_sync_int: 0,   // free-run
+        key_sync_int: 0, // free-run
         tempo_sync_int: 0,
     };
     fg.load(&block);
 
     // Advance 12000 samples (≈250ms, mid-ramp at 48kHz). Expected output around 0.5.
-    for _ in 0..12_000 { fg.tick(); }
+    for _ in 0..12_000 {
+        fg.tick();
+    }
     let before_note_on = fg.tick();
 
     fg.note_on(); // should be a no-op when key_sync = false
@@ -346,7 +355,9 @@ fn key_sync_false_does_not_reset_on_note_on() {
     let ramp_step = 1.0 / 24_000.0; // lin 0->1 over 500ms @ 48kHz = 24000 samples
     assert!(
         (after_note_on - before_note_on).abs() < ramp_step * 4.0,
-        "key_sync=false should free-run; got {} -> {}", before_note_on, after_note_on
+        "key_sync=false should free-run; got {} -> {}",
+        before_note_on,
+        after_note_on
     );
 }
 
@@ -357,10 +368,30 @@ fn forward_skip_jump_advances_past_later_segments() {
     let mut fg = FunctionGenerator::new(48_000.0);
     let block = ModFnBlock {
         segments: vec![
-            FnSegment { level: 0.0, time_ms: 0.0,   shape: "hold".into(), jump: None },
-            FnSegment { level: 0.5, time_ms: 100.0, shape: "lin".into(),  jump: Some(3) }, // skip seg 2
-            FnSegment { level: 0.2, time_ms: 100.0, shape: "lin".into(),  jump: None },    // should NEVER be reached
-            FnSegment { level: 1.0, time_ms: 100.0, shape: "lin".into(),  jump: None },
+            FnSegment {
+                level: 0.0,
+                time_ms: 0.0,
+                shape: "hold".into(),
+                jump: None,
+            },
+            FnSegment {
+                level: 0.5,
+                time_ms: 100.0,
+                shape: "lin".into(),
+                jump: Some(3),
+            }, // skip seg 2
+            FnSegment {
+                level: 0.2,
+                time_ms: 100.0,
+                shape: "lin".into(),
+                jump: None,
+            }, // should NEVER be reached
+            FnSegment {
+                level: 1.0,
+                time_ms: 100.0,
+                shape: "lin".into(),
+                jump: None,
+            },
         ],
         key_sync_int: 1,
         tempo_sync_int: 0,
@@ -371,9 +402,14 @@ fn forward_skip_jump_advances_past_later_segments() {
     // then run through what would be segment 2 (another 100ms). If the skip worked,
     // we should now be ramping from 0.5 (segment 1 end) to 1.0 (segment 3 target),
     // NOT from 0.5 back down to 0.2.
-    for _ in 0..7200 { fg.tick(); } // 150ms total: past seg 1, midway through what would be seg 3
+    for _ in 0..7200 {
+        fg.tick();
+    } // 150ms total: past seg 1, midway through what would be seg 3
     let out = fg.tick();
-    assert!(out > 0.6, "Expected rising toward 1.0 (segment 3); got {out} (probably fell into segment 2)");
+    assert!(
+        out > 0.6,
+        "Expected rising toward 1.0 (segment 3); got {out} (probably fell into segment 2)"
+    );
 }
 
 #[test]
@@ -382,16 +418,31 @@ fn negative_levels_work_and_midpoint_matches_linear() {
     let mut fg = FunctionGenerator::new(48_000.0);
     let block = ModFnBlock {
         segments: vec![
-            FnSegment { level: 0.0,  time_ms: 0.0,   shape: "hold".into(), jump: None },
-            FnSegment { level: -0.7, time_ms: 100.0, shape: "lin".into(),  jump: None },
+            FnSegment {
+                level: 0.0,
+                time_ms: 0.0,
+                shape: "hold".into(),
+                jump: None,
+            },
+            FnSegment {
+                level: -0.7,
+                time_ms: 100.0,
+                shape: "lin".into(),
+                jump: None,
+            },
         ],
         key_sync_int: 1,
         tempo_sync_int: 0,
     };
     fg.load(&block);
-    for _ in 0..2400 { fg.tick(); } // 50ms = midpoint of a 100ms segment at 48kHz
+    for _ in 0..2400 {
+        fg.tick();
+    } // 50ms = midpoint of a 100ms segment at 48kHz
     let out = fg.tick();
-    assert!((out - (-0.35)).abs() < 1e-2, "Expected ~-0.35 at midpoint; got {out}");
+    assert!(
+        (out - (-0.35)).abs() < 1e-2,
+        "Expected ~-0.35 at midpoint; got {out}"
+    );
 }
 
 #[test]
@@ -403,8 +454,18 @@ fn out_of_range_level_is_clamped_to_unit_interval() {
     let mut fg = FunctionGenerator::new(48_000.0);
     let block = ModFnBlock {
         segments: vec![
-            FnSegment { level: 0.0, time_ms: 0.0,   shape: "hold".into(), jump: None },
-            FnSegment { level: 2.5, time_ms: 10.0,  shape: "lin".into(),  jump: None },
+            FnSegment {
+                level: 0.0,
+                time_ms: 0.0,
+                shape: "hold".into(),
+                jump: None,
+            },
+            FnSegment {
+                level: 2.5,
+                time_ms: 10.0,
+                shape: "lin".into(),
+                jump: None,
+            },
         ],
         key_sync_int: 1,
         tempo_sync_int: 0,
@@ -412,10 +473,18 @@ fn out_of_range_level_is_clamped_to_unit_interval() {
     fg.load(&block);
     // 10 ms at 48 kHz = 480 samples. Advance to late-segment so the
     // unclamped ramp value is ~0.83 * 2.5 ≈ 2.08 and must clamp to 1.0.
-    for _ in 0..400 { fg.tick(); }
+    for _ in 0..400 {
+        fg.tick();
+    }
     let out = fg.tick();
-    assert!(out <= 1.0 + 1e-6, "Expected output clamped to <=1.0; got {out}");
-    assert!(out >= 0.99, "Expected output at/near clamp ceiling 1.0; got {out}");
+    assert!(
+        out <= 1.0 + 1e-6,
+        "Expected output clamped to <=1.0; got {out}"
+    );
+    assert!(
+        out >= 0.99,
+        "Expected output at/near clamp ceiling 1.0; got {out}"
+    );
 }
 
 #[test]
@@ -424,9 +493,24 @@ fn one_sample_segment_advances_correctly_forward_and_rev() {
     let mut fg = FunctionGenerator::new(48_000.0);
     let block = ModFnBlock {
         segments: vec![
-            FnSegment { level: 0.0, time_ms: 0.0,   shape: "hold".into(), jump: None },
-            FnSegment { level: 1.0, time_ms: 0.01,  shape: "lin".into(),  jump: None }, // < 1 sample at 48kHz
-            FnSegment { level: 0.0, time_ms: 100.0, shape: "lin".into(),  jump: None },
+            FnSegment {
+                level: 0.0,
+                time_ms: 0.0,
+                shape: "hold".into(),
+                jump: None,
+            },
+            FnSegment {
+                level: 1.0,
+                time_ms: 0.01,
+                shape: "lin".into(),
+                jump: None,
+            }, // < 1 sample at 48kHz
+            FnSegment {
+                level: 0.0,
+                time_ms: 100.0,
+                shape: "lin".into(),
+                jump: None,
+            },
         ],
         key_sync_int: 1,
         tempo_sync_int: 0,
@@ -437,12 +521,19 @@ fn one_sample_segment_advances_correctly_forward_and_rev() {
     let mut hit_high = false;
     for _ in 0..100 {
         let o = fg.tick();
-        if o > 0.5 { hit_high = true; }
+        if o > 0.5 {
+            hit_high = true;
+        }
     }
-    assert!(hit_high, "Forward: 1-sample segment should allow output to briefly reach near 1.0");
+    assert!(
+        hit_high,
+        "Forward: 1-sample segment should allow output to briefly reach near 1.0"
+    );
 
     // REV: same thing, time-reversed. Must not hang or panic.
     fg.set_reverse(true);
     fg.note_on();
-    for _ in 0..100 { fg.tick(); } // don't crash
+    for _ in 0..100 {
+        fg.tick();
+    } // don't crash
 }
