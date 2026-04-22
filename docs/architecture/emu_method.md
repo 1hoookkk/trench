@@ -35,18 +35,19 @@ Three concrete things a designer touches. Nothing else.
 
 - **M0 shape** — spectral geometry at the start of the morph sweep
 - **M100 shape** — spectral geometry at the end of the sweep
-- **family** — names the Q law that will be applied at play-time
+- **family** — names the Q law/compiler family used to bake the runtime surface
 
-The Q law is **code**, not data. It lives in a registry in
-`trench-core`. Each family is one named, versioned, deterministic
-function:
+The Q law is **code**, not data. On the current repo path it lives in
+offline compiler tooling, not in `trench-core`. Each family is one
+named, versioned, deterministic compiler rule:
 
     (m0, m100, morph ∈ [0,1], q ∈ [0,1]) → coeff_corner
 
-At runtime the end-user turns Morph and Q. Morph picks where along the
-sweep we are; Q asks the family's law to sharpen/broaden accordingly.
+For the shipping `compiled-v1` path, that family logic is baked
+offline into four corners and the runtime only interpolates those
+corners. Morph and Q are runtime controls; family-aware algebra is not.
 Q is never peer to Morph in authoring — it is a secondary modifier the
-family's code responds to.
+offline family compiler responds to.
 
 ## UI consequence
 
@@ -75,26 +76,35 @@ stages are ordered so nothing is broken in the middle.
 - `cartridges/p2k/*` P2K heritage presets: **untouched**.
 - `compiled-v1` format: **untouched**. Still the runtime surface.
 
-### Stage 2 — Name the Q laws
+### Stage 2 — Consolidate the offline family compilers
 
 **Goal:** make the heritage algebra explicit and addressable.
 
-Create a registry in `trench-core` (module `q_laws` or similar) with
-one named, versioned function per family. Seed the registry with the
-families already implemented as code or recipes today:
+Keep family logic out of `trench-core`. The runtime stays a pure
+`compiled-v1` loader/interpolator. Family compilers live on the offline
+side (`tools/` today; a future authoring subtree is acceptable only if
+it preserves the same boundary).
 
-- `morph_lp` — MorphLP zero bank (landed at `90f82e3`)
+Seed this layer from the family compilers and recipes already present
+or implied by the repo:
+
+- `morph_lp` — implemented offline at `tools/compile_morphlp.py`,
+  backed by `tools/morphlp_zeros.py` and verified against
+  `trench_re_vault/analysis/emulatorx_re_dumps_2026-04-21.json`
 - `peak_shelf` — Peak/Shelf Morph recipe (prototype is
   `PLAN_RECIPE_V1.md`, JUCE C++ `EmuKernels` port of the Python
   reference in `tools/build_filter_reference.py`)
 - `phantom_lpx` — P2K phantom family per RE findings
-- `native_poles` — Morpheus pole block (landed at `98d2699`)
+- `native_poles` — pole-oriented path using
+  `trench-core/src/pole_block.rs` as a math helper, not as a family
+  registry
 - `md_generic` — heritage Morph Designer fallback
 
 Runtime and cartridge formats are unchanged in this stage. Existing
-`compiled-v1` cartridges continue to load. The registry is new code;
-it doesn't replace anything yet. `PLAN_RECIPE_V1.md`'s C++ recipe-v1
-loader becomes the `peak_shelf` family entry in the registry.
+`compiled-v1` cartridges continue to load. This stage does not add
+runtime family awareness. It makes the offline compiler surface honest
+and testable. `PLAN_RECIPE_V1.md`'s C++ recipe-v1 loader becomes the
+`peak_shelf` family entry in the offline compiler layer.
 
 ### Stage 3 — Authoring format: 2 states + family
 
@@ -105,8 +115,14 @@ New authoring format `*.filter.json` carrying only
 family's Q law → emits existing `compiled-v1` for the runtime. No
 runtime change required.
 
+This is a target authoring surface, not the current MorphLP input
+contract. The current cleanroom MorphLP compiler already in-tree still
+takes narrower compiler inputs (`filter_type`, `skin_idx`, `q0_byte`,
+`q100_byte`) and emits `compiled-v1`. Do not describe the new source
+schema as already landed until a real schema and dispatcher exist.
+
 - Migrate `cartridges/p2k/*` to the new source format; regenerate
-  `compiled-v1` outputs via the registered Q laws; verify byte-equal
+  `compiled-v1` outputs via the offline family compilers; verify byte-equal
   or sound-equal against current shipping.
 - Rewrite `heritage_designer_sections.json` as MD-family source pairs
   under the same schema.
@@ -144,8 +160,8 @@ stage of this plan:
 - `trench-core/src/cascade.rs` — frozen DSP topology
 - `trench-core/src/resampler.rs`, `agc.rs`, `desk_drive.rs` — pure DSP
 - `trench-core/src/hedz_rom.rs`, `hedz_golden.rs` — baked heritage
-- `trench-core/src/pole_block.rs` — Stage-2 Q-law primitive for
-  `native_poles`
+- `trench-core/src/pole_block.rs` — clean math helper for pole-bank
+  compilation; not evidence that family registries belong in runtime
 - `trench-core/src/qsound_spatial.rs`, `function_generator.rs` —
   orthogonal subsystems
 - `cartridges/p2k/*` — heritage data
@@ -155,6 +171,10 @@ stage of this plan:
 - `docs/architecture/zplane_truth.md` — runtime side of this transition
 - `PLAN_RECIPE_V1.md` — live prototype of Stage 2 for the `peak_shelf`
   family in the JUCE C++ plugin
+- `tools/compile_morphlp.py` — existing cleanroom MorphLP/MorphLPX
+  offline compiler
+- `tools/verify_morphlp_re.py` — verification bridge from sanitized
+  tables to the RE vault artifact
 - `trench_re_vault/` — P2K decomp source material (filter family
   classes, Q-law algebra)
 - `authoring/CLAUDE.md` — forge scope and boundary with engine
