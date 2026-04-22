@@ -3,9 +3,11 @@
 //! This is a scaffold for the R1 spike. The layout is a structural
 //! placeholder for the v1 faceplate: 4-body selector row, LCD
 //! placeholder, MORPH / Q / SPACE / TRIG rollers, REV / ENV buttons.
-//! MORPH and Q are wired to the live plugin params. SPACE / TRIG /
-//! REV / ENV are inert placeholders until Task R2 adds the
-//! corresponding DSP stages and params.
+//! MORPH and Q are wired to the live plugin params — MORPH is the
+//! primary knob, Q sits beneath it as a secondary modifier (see
+//! `docs/architecture/emu_method.md`). SPACE / TRIG / REV / ENV are
+//! inert placeholders until Task R2 adds the corresponding DSP stages
+//! and params.
 //!
 //! AUDIO-THREAD NOTE: this module runs on the GUI thread. Nothing in
 //! here may be called from `process()`. The DSP doctrine in
@@ -68,8 +70,8 @@ pub(crate) fn create(
                 .border_color(Color::black())
                 .border_width(Pixels(2.0));
 
-            // --- Roller row 1: MORPH + Q (wired) ---------------------
-            HStack::new(cx, |cx| {
+            // --- Main controls: MORPH primary on top, Q beneath -------
+            VStack::new(cx, |cx| {
                 VStack::new(cx, |cx| {
                     Label::new(cx, "MORPH").height(Pixels(20.0));
                     ParamSlider::new(cx, Data::params, |p| &p.morph);
@@ -82,7 +84,8 @@ pub(crate) fn create(
                 })
                 .row_between(Pixels(4.0));
             })
-            .col_between(Pixels(12.0));
+            .row_between(Pixels(12.0))
+            .width(Stretch(1.0));
 
             // --- Roller row 2: SPACE + TRIG (stubs) ------------------
             HStack::new(cx, |cx| {

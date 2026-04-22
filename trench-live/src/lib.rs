@@ -11,37 +11,37 @@
 //! - The shipping cartridge is hardcoded — see `tools/bake_hedz_const
 //!   .py` and `trench-core/src/hedz_rom.rs` for the provenance chain
 //!   that produces it at build time.
-//! - The cartridge is fully const at the Rust level (`trench_core::
-//!   hedz_rom::HEDZ_CORNERS` + `HEDZ_BOOSTS`). `Cartridge::hedz_rom()`
-//!   makes one `String` allocation for the name at plugin init —
-//!   once — and nothing else ever allocates.
-//! - `process()` walks 32-sample control blocks through
-//!   `Cascade::set_targets` + `Cascade::set_boost` +
-//!   `Cascade::process_block_mono`. Anything else added to this
-//!   function is a doctrine violation.
-//!
-//! Parameter shape is intentionally small: two knobs (morph, Q) on
-//! `[0, 1]`. Parameter reads on the hot path are `FloatParam::value()`,
-//! which is lock-free per nih-plug's atomic parameter storage.
-//!
-//! If you find yourself wanting to live-reload a different cartridge:
-//! rebuild the plugin with a different `hedz_rom.rs`. That is not a
-//! workflow limitation, it is the point.
+//! - `initialize()` calls `FilterEngine::prepare()` and loads the baked
+//!   cartridge (one allocation for the name String, then nothing).
+//! - `process()` calls `FilterEngine::process_block` on each channel
+//!   slice. The engine handles down-resampling to NATIVE_SR (39062.5 Hz),
+//!   the DF2T cascade, AGC, DC blocker, and up-resampling back to host SR.
+//!   All scratch buffers are pre-allocated in `prepare()`; `process()` is
+//!   allocation-free.
+//! - The engine accepts any host sample rate. `initialize()` always returns
+//!   `true`; resampling handles the conversion transparently.
 
 use nih_plug::prelude::*;
 use nih_plug_vizia::ViziaState;
 use std::sync::Arc;
 
-use trench_core::{Cartridge, Cascade, BLOCK_SIZE};
+use trench_core::qsound_spatial::QSoundSpatial;
+use trench_core::{Cartridge, FilterEngine};
 
 mod editor;
 
 pub struct TrenchLive {
     params: Arc<TrenchLiveParams>,
-    cascade_l: Cascade,
-    cascade_r: Cascade,
-    cartridge: Cartridge,
+    engine_l: FilterEngine,
+    engine_r: FilterEngine,
+    spatial: QSoundSpatial,
+    /// Host sample rate set in `initialize()`. Stored so `reset()` can
+    /// re-call `reset_dsp()` without re-running the full `prepare()`.
+    sample_rate: f64,
 }
+
+const HEDZ_SOURCE_JSON: &str =
+    include_str!("../../trench-juce/plugin/assets/cartridges/P2k_013.json");
 
 #[derive(Params)]
 pub struct TrenchLiveParams {
@@ -60,13 +60,10 @@ impl Default for TrenchLive {
     fn default() -> Self {
         Self {
             params: Arc::new(TrenchLiveParams::default()),
-            cascade_l: Cascade::new(),
-            cascade_r: Cascade::new(),
-            // One allocation for the name String. Never touches the
-            // audio thread. The 4×6×5 float cartridge body is copied
-            // from `trench_core::hedz_rom::HEDZ_CORNERS` which lives
-            // in .rodata.
-            cartridge: Cartridge::hedz_rom(),
+            engine_l: FilterEngine::new(),
+            engine_r: FilterEngine::new(),
+            spatial: QSoundSpatial::new(44_100.0),
+            sample_rate: 44100.0,
         }
     }
 }
@@ -108,9 +105,6 @@ impl Plugin for TrenchLive {
         self.params.clone()
     }
 
-    // Editor runs on the GUI thread only. The audio-thread purity
-    // contract in `process()` below is unchanged — no GUI code ever
-    // reaches the hot path.
     fn editor(&mut self, _async_executor: AsyncExecutor<Self>) -> Option<Box<dyn Editor>> {
         editor::create(self.params.clone(), self.params.editor_state.clone())
     }
@@ -121,16 +115,29 @@ impl Plugin for TrenchLive {
         buf: &BufferConfig,
         _: &mut impl InitContext<Self>,
     ) -> bool {
-        // Hedz is a 44.1 kHz / 48 kHz body (see the heritage compile
-        // path in `tools/bake_hedz_const.py`). Reject unusual rates
-        // rather than silently alias the formants.
-        let sr = buf.sample_rate;
-        (sr - 44100.0).abs() <= 0.5 || (sr - 48000.0).abs() <= 0.5
+        let sr = buf.sample_rate as f64;
+        self.sample_rate = sr;
+        // prepare() allocates scratch buffers and sinc tables — not on audio thread.
+        self.engine_l.prepare(sr);
+        self.engine_r.prepare(sr);
+        self.spatial = QSoundSpatial::new(sr as f32);
+
+        let cart = Cartridge::from_json(HEDZ_SOURCE_JSON).expect("embedded P2k_013 parses");
+        if let Some(profile) = cart.spatial_profile.as_ref() {
+            self.spatial.set_profile(profile);
+            self.spatial.set_space(1.0);
+        } else {
+            self.spatial.set_space(0.0);
+        }
+        self.engine_l.load_cartridge(cart.clone());
+        self.engine_r.load_cartridge(cart);
+        true
     }
 
     fn reset(&mut self) {
-        self.cascade_l.reset();
-        self.cascade_r.reset();
+        self.engine_l.reset_dsp();
+        self.engine_r.reset_dsp();
+        self.spatial.reset();
     }
 
     fn process(
@@ -144,42 +151,36 @@ impl Plugin for TrenchLive {
         // ----------------------------------------------------------------
         //  This function must only:
         //    - read atomic parameter values (lock-free)
-        //    - call into trench_core::Cascade (pure DSP)
+        //    - call into FilterEngine (pure DSP, allocation-free post-prepare)
         //    - return ProcessStatus
-        //  It must NOT:
-        //    - take any lock of any kind
-        //    - touch the filesystem
-        //    - allocate (except via Cascade's stack-owned state)
-        //    - parse JSON or any serialized format
-        //    - block on channels, signals, or atomics that can spin
-        //
-        //  If you need to edit this function, re-read
-        //  `trench-core/CLAUDE.md` first.
+        //  FilterEngine::process_block uses pre-allocated scratch buffers
+        //  and Option::take/put for borrow-checker safety — no heap calls.
         // ================================================================
 
         let morph = self.params.morph.value() as f64;
         let q = self.params.q.value() as f64;
-        let coeffs = self.cartridge.interpolate(morph, q);
-        let boost = self.cartridge.interpolate_boost(morph, q);
 
-        for (_, block) in buffer.iter_blocks(BLOCK_SIZE) {
-            let n = block.samples();
-            self.cascade_l.set_targets(&coeffs, n);
-            self.cascade_r.set_targets(&coeffs, n);
-            self.cascade_l.set_boost(boost, n);
-            self.cascade_r.set_boost(boost, n);
-
+        for (_, block) in buffer.iter_blocks(32) {
             let mut channels = block.into_iter();
-            if let Some(l) = channels.next() {
-                self.cascade_l.process_block_mono(l);
-            }
-            if let Some(r) = channels.next() {
-                self.cascade_r.process_block_mono(r);
+            match (channels.next(), channels.next()) {
+                (Some(l), Some(r)) => {
+                    self.engine_l.process_block(l, morph, q);
+                    self.engine_r.process_block(r, morph, q);
+                    self.spatial.process_stereo(l, r);
+                }
+                (Some(l), None) => {
+                    self.engine_l.process_block(l, morph, q);
+                }
+                (None, Some(r)) => {
+                    self.engine_r.process_block(r, morph, q);
+                }
+                (None, None) => {}
             }
 
-            if self.cascade_l.take_instability_flag() || self.cascade_r.take_instability_flag() {
-                self.cascade_l.reset();
-                self.cascade_r.reset();
+            if self.engine_l.take_instability_flag() || self.engine_r.take_instability_flag() {
+                self.engine_l.reset_dsp();
+                self.engine_r.reset_dsp();
+                self.spatial.reset();
             }
         }
 

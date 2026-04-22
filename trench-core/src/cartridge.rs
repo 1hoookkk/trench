@@ -1,25 +1,41 @@
 use serde::Deserialize;
 
 /// Optional drive-stage config (preceding cascade).
-/// Defaults to inert: 0 dB input gain, `mackie_1202` model.
+/// Public control is `slam` in [0, 1]. `input_gain_dB` remains as a
+/// compatibility/authored field for older cartridges.
 #[derive(Debug, Clone, Deserialize)]
 pub struct DriveBlock {
+    #[serde(default)]
+    pub slam: Option<f32>,
     #[serde(rename = "input_gain_dB", default)]
     pub input_gain_db: f32,
-    #[serde(default = "default_mackie_model")]
+    #[serde(default = "default_drive_model")]
     pub model: String,
 }
 
-fn default_mackie_model() -> String {
-    "mackie_1202".to_string()
+fn default_drive_model() -> String {
+    "desk_slam_v1".to_string()
 }
 
 impl Default for DriveBlock {
     fn default() -> Self {
         Self {
+            slam: None,
             input_gain_db: 0.0,
-            model: default_mackie_model(),
+            model: default_drive_model(),
         }
+    }
+}
+
+impl DriveBlock {
+    pub fn effective_slam(&self) -> f32 {
+        self.slam
+            .unwrap_or(self.input_gain_db / 60.0)
+            .clamp(0.0, 1.0)
+    }
+
+    pub fn effective_input_gain_db(&self) -> f32 {
+        self.effective_slam() * 60.0
     }
 }
 
@@ -98,13 +114,13 @@ pub struct SpatialProfile {
 pub const NUM_STAGES: usize = 6;
 /// Number of coefficients per stage (c0..c4).
 pub const NUM_COEFFS: usize = 5;
-/// Number of interpolation corners.
+/// Number of corners in the compiled-v1 bilinear surface.
 pub const NUM_CORNERS: usize = 4;
 
 /// Passthrough stage coefficients: y = x (identity).
 pub const PASSTHROUGH_COEFFS: [f64; NUM_COEFFS] = [1.0, 0.0, 0.0, 0.0, 0.0];
 
-/// One corner of the interpolation surface: 6 stages × 5 coefficients.
+/// One surface corner: 6 stages × 5 kernel-form coefficients.
 pub type CornerData = [[f64; NUM_COEFFS]; NUM_STAGES];
 
 // ── Array format (trench-core native): corners.M0_Q0 = [[c0,c1,c2,c3,c4], ...] ──
@@ -156,14 +172,14 @@ struct StageCoeffsJson {
 }
 
 /// A loaded cartridge ready for runtime interpolation.
+///
+/// One 4-corner bilinear filter surface: `M0_Q0`, `M100_Q0`, `M0_Q100`,
+/// `M100_Q100`. Interpolation order is Q first, then morph.
 #[derive(Clone, Debug)]
 pub struct Cartridge {
     pub name: String,
-    /// Indexed as [corner_index][stage][coeff].
-    /// Corner order: M0_Q0, M100_Q0, M0_Q100, M100_Q100.
-    pub corners: [CornerData; NUM_CORNERS],
-    /// Per-corner post-cascade gain (linear). Same corner order.
-    pub boosts: [f64; NUM_CORNERS],
+    corners: [CornerData; NUM_CORNERS],
+    boosts: [f64; NUM_CORNERS],
     /// Optional drive stage preceding the cascade. Absent block → inert default.
     pub drive: DriveBlock,
     /// Optional spatial profile (QSound-style). Absent → no spatial stage.
@@ -185,7 +201,7 @@ struct OptionalBlocksProbe {
 }
 
 impl Cartridge {
-    /// Load a cartridge from JSON. Accepts both formats:
+    /// Load a cartridge from JSON. Accepts:
     /// - Array format: `{"version":"compiled-v1", "corners":{"M0_Q0":[[...],...],...}}`
     /// - Keyframe format: `{"format":"compiled-v1", "keyframes":[{"label":"M0_Q0","stages":[{"c0":...},...]},...]}`
     pub fn from_json(json: &str) -> Result<Self, String> {
@@ -200,8 +216,6 @@ impl Cartridge {
             return Err("JSON must have 'corners' or 'keyframes' key".to_string());
         };
 
-        // Extract the three optional top-level blocks. Tolerant: absent blocks
-        // leave the default (`drive` = inert, `spatial_profile` / `mod_fn` = None).
         let blocks: OptionalBlocksProbe =
             serde_json::from_str(json).map_err(|e| format!("optional blocks parse error: {e}"))?;
         if let Some(d) = blocks.drive {
@@ -256,45 +270,7 @@ impl Cartridge {
                 .iter()
                 .find(|kf| kf.label == label)
                 .ok_or_else(|| format!("missing keyframe '{label}'"))?;
-
-            let stage_count = kf.stages.len();
-            let padded_stage_count = NUM_STAGES * 2;
-            if stage_count != NUM_STAGES && stage_count != padded_stage_count {
-                return Err(format!(
-                    "keyframe '{}' has {} stages, expected {} or {} (6 active + 6 passthrough)",
-                    label,
-                    stage_count,
-                    NUM_STAGES,
-                    padded_stage_count,
-                ));
-            }
-
-            let mut corner = [[0.0; NUM_COEFFS]; NUM_STAGES];
-            for (i, s) in kf.stages.iter().take(NUM_STAGES).enumerate() {
-                corner[i] = [s.c0, s.c1, s.c2, s.c3, s.c4];
-            }
-
-            // Accept padded forge output (12 stages) as long as the tail is passthrough.
-            if stage_count == padded_stage_count {
-                for (i, s) in kf.stages.iter().skip(NUM_STAGES).enumerate() {
-                    let coeffs = [s.c0, s.c1, s.c2, s.c3, s.c4];
-                    let mut ok = true;
-                    for j in 0..NUM_COEFFS {
-                        if (coeffs[j] - PASSTHROUGH_COEFFS[j]).abs() > 1.0e-10 {
-                            ok = false;
-                            break;
-                        }
-                    }
-                    if !ok {
-                        return Err(format!(
-                            "keyframe '{}' stage {} is not passthrough (expected c0=1,c1-4=0)",
-                            label,
-                            NUM_STAGES + i + 1
-                        ));
-                    }
-                }
-            }
-            Ok((corner, kf.boost))
+            parse_compiled_corner(label, &kf.stages, kf.boost)
         };
 
         let (c0, b0) = find_corner("M0_Q0")?;
@@ -328,20 +304,26 @@ impl Cartridge {
         }
     }
 
-    /// Interpolate post-cascade boost (linear gain) at the given morph/q position.
-    /// Q-axis first, then morph-axis (same order as coefficient interpolation).
+    pub fn corners(&self) -> &[CornerData; NUM_CORNERS] {
+        &self.corners
+    }
+
+    pub fn boosts(&self) -> &[f64; NUM_CORNERS] {
+        &self.boosts
+    }
+
+    /// Bilinear boost interpolation at the given morph/q position.
     pub fn interpolate_boost(&self, morph: f64, q: f64) -> f64 {
         let q_m0 = self.boosts[0] + (self.boosts[2] - self.boosts[0]) * q;
         let q_m1 = self.boosts[1] + (self.boosts[3] - self.boosts[1]) * q;
         q_m0 + (q_m1 - q_m0) * morph
     }
 
-    /// Interpolate coefficients for all 6 stages at the given morph/q position.
-    /// Both morph and q are in [0.0, 1.0].
-    /// Order: Q-axis first, then morph-axis (per spec).
+    /// Bilinear interpolation: produces coefficients for all 6 stages at the
+    /// given morph/q position. Both morph and q are in [0.0, 1.0]. Order: Q
+    /// first, then morph (SPEC.md §1, compiled-v1 path).
     pub fn interpolate(&self, morph: f64, q: f64) -> CornerData {
         let mut result = [[0.0; NUM_COEFFS]; NUM_STAGES];
-
         let m0_q0 = &self.corners[0];
         let m100_q0 = &self.corners[1];
         let m0_q100 = &self.corners[2];
@@ -349,16 +331,56 @@ impl Cartridge {
 
         for stage in 0..NUM_STAGES {
             for c in 0..NUM_COEFFS {
-                // Q-axis first
                 let q_m0 = m0_q0[stage][c] + (m0_q100[stage][c] - m0_q0[stage][c]) * q;
                 let q_m1 = m100_q0[stage][c] + (m100_q100[stage][c] - m100_q0[stage][c]) * q;
-                // Then morph-axis
                 result[stage][c] = q_m0 + (q_m1 - q_m0) * morph;
             }
         }
 
         result
     }
+}
+
+fn parse_compiled_corner(
+    label: &str,
+    stages: &[StageCoeffsJson],
+    boost: f64,
+) -> Result<(CornerData, f64), String> {
+    let stage_count = stages.len();
+    let padded_stage_count = NUM_STAGES * 2;
+    if stage_count != NUM_STAGES && stage_count != padded_stage_count {
+        return Err(format!(
+            "corner '{}' has {} stages, expected {} or {} (6 active + 6 passthrough)",
+            label, stage_count, NUM_STAGES, padded_stage_count,
+        ));
+    }
+
+    let mut corner = [[0.0; NUM_COEFFS]; NUM_STAGES];
+    for (i, s) in stages.iter().take(NUM_STAGES).enumerate() {
+        corner[i] = [s.c0, s.c1, s.c2, s.c3, s.c4];
+    }
+
+    if stage_count == padded_stage_count {
+        for (i, s) in stages.iter().skip(NUM_STAGES).enumerate() {
+            let coeffs = [s.c0, s.c1, s.c2, s.c3, s.c4];
+            let mut ok = true;
+            for j in 0..NUM_COEFFS {
+                if (coeffs[j] - PASSTHROUGH_COEFFS[j]).abs() > 1.0e-10 {
+                    ok = false;
+                    break;
+                }
+            }
+            if !ok {
+                return Err(format!(
+                    "corner '{}' stage {} is not passthrough (expected c0=1,c1-4=0)",
+                    label,
+                    NUM_STAGES + i + 1
+                ));
+            }
+        }
+    }
+
+    Ok((corner, boost))
 }
 
 #[cfg(test)]
@@ -368,7 +390,7 @@ mod tests {
     fn test_array_json() -> &'static str {
         r#"{
             "version": "compiled-v1",
-            "name": "Test Body",
+            "name": "Test Filter",
             "corners": {
                 "M0_Q0":    [[1,0,0,0,0],[1,0,0,0,0],[1,0,0,0,0],[1,0,0,0,0],[1,0,0,0,0],[1,0,0,0,0]],
                 "M100_Q0":  [[2,0,0,0,0],[2,0,0,0,0],[2,0,0,0,0],[2,0,0,0,0],[2,0,0,0,0],[2,0,0,0,0]],
@@ -381,7 +403,7 @@ mod tests {
     fn test_keyframe_json() -> &'static str {
         r#"{
             "format": "compiled-v1",
-            "name": "Forge Body",
+            "name": "Forge Filter",
             "keyframes": [
                 {"label": "M0_Q0", "boost": 4.0, "stages": [
                     {"c0":1,"c1":0,"c2":0,"c3":0,"c4":0},{"c0":1,"c1":0,"c2":0,"c3":0,"c4":0},
@@ -410,25 +432,22 @@ mod tests {
     #[test]
     fn loads_array_format() {
         let cart = Cartridge::from_json(test_array_json()).unwrap();
-        assert_eq!(cart.name, "Test Body");
-        assert_eq!(cart.corners[0][0][0], 1.0);
+        assert_eq!(cart.name, "Test Filter");
+        assert_eq!(cart.corners()[0][0][0], 1.0);
     }
 
     #[test]
     fn loads_keyframe_format() {
         let cart = Cartridge::from_json(test_keyframe_json()).unwrap();
-        assert_eq!(cart.name, "Forge Body");
-        assert_eq!(cart.corners[0][0][0], 1.0);
-        assert_eq!(cart.corners[1][0][0], 5.0);
-        assert_eq!(cart.corners[0][5][0], 1.0);
+        assert_eq!(cart.name, "Forge Filter");
+        assert_eq!(cart.corners()[0][0][0], 1.0);
+        assert_eq!(cart.corners()[1][0][0], 5.0);
+        assert_eq!(cart.corners()[0][5][0], 1.0);
     }
 
     #[test]
     fn keyframe_interpolation() {
         let cart = Cartridge::from_json(test_keyframe_json()).unwrap();
-        // M0_Q0 c0=1, M100_Q0 c0=5, M0_Q100 c0=3, M100_Q100 c0=7
-        // At midpoint: Q first → q_m0 = 1+(3-1)*0.5=2, q_m1 = 5+(7-5)*0.5=6
-        // Then morph: 2+(6-2)*0.5=4
         let c = cart.interpolate(0.5, 0.5);
         assert!((c[0][0] - 4.0).abs() < 1e-10);
     }

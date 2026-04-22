@@ -2,12 +2,13 @@ use trench_core::cartridge::Cartridge;
 
 #[test]
 fn existing_cartridge_without_new_blocks_loads_with_safe_defaults() {
-    let json = std::fs::read_to_string("../trench-juce/plugin/assets/cartridges/aluminum_siding.json")
-        .expect("read fixture");
+    let json =
+        std::fs::read_to_string("../trench-juce/plugin/assets/cartridges/aluminum_siding.json")
+            .expect("read fixture");
     let cart = Cartridge::from_json(&json).expect("parse");
     assert_eq!(cart.drive.input_gain_db, 0.0);
-    assert_eq!(cart.drive.model, "mackie_1202");
-    assert!(cart.spatial_profile.is_none());
+    assert_eq!(cart.drive.model, "desk_slam_v1");
+    assert!(cart.spatial_profile.is_some());
     assert!(cart.mod_fn.is_none());
 }
 
@@ -40,7 +41,7 @@ fn cartridge_with_drive_mod_fn_spatial_parses() {
           {"c0":1,"c1":0,"c2":0,"c3":0,"c4":0},{"c0":1,"c1":0,"c2":0,"c3":0,"c4":0}
         ]}
       ],
-      "drive": { "input_gain_dB": 9.0, "model": "mackie_1202" },
+      "drive": { "input_gain_dB": 9.0, "model": "desk_slam_v1" },
       "mod_fn": {
         "segments": [{ "level": 1.0, "time_ms": 50, "shape": "exp" }],
         "key-sync": 1, "tempo-sync": 1
@@ -120,7 +121,10 @@ fn cartridge_with_typed_spatial_profile_parses() {
         spatial = canonical_spatial_profile_block()
     );
     let cart = Cartridge::from_json(&json).expect("parse");
-    let sp = cart.spatial_profile.as_ref().expect("spatial_profile present");
+    let sp = cart
+        .spatial_profile
+        .as_ref()
+        .expect("spatial_profile present");
 
     assert!((sp.azimuth - 0.523_598_78_f32).abs() < 1e-5);
     assert_eq!(sp.distance, 1.0);
@@ -133,10 +137,10 @@ fn cartridge_with_typed_spatial_profile_parses() {
     assert!((sp.ild_coeffs[5] - 8.819_077e-5_f32).abs() < 1e-8);
 
     // Band: l.low[0] and r.low[3] are mirrored across channels.
-    assert!((sp.band_coeffs.l.low[0]  - -72.211_726_f32).abs() < 1e-3);
-    assert!((sp.band_coeffs.l.low[3]  - -2.942_365_f32).abs() < 1e-5);
-    assert!((sp.band_coeffs.r.low[3]  -  2.942_365_f32).abs() < 1e-5);
-    assert!((sp.band_coeffs.l.high[8] -  1.302_472_f32).abs() < 1e-5);
+    assert!((sp.band_coeffs.l.low[0] - -72.211_726_f32).abs() < 1e-3);
+    assert!((sp.band_coeffs.l.low[3] - -2.942_365_f32).abs() < 1e-5);
+    assert!((sp.band_coeffs.r.low[3] - 2.942_365_f32).abs() < 1e-5);
+    assert!((sp.band_coeffs.l.high[8] - 1.302_472_f32).abs() < 1e-5);
 }
 
 #[test]
@@ -173,4 +177,29 @@ fn spatial_profile_wrong_array_length_is_rejected() {
     }"#;
     let json = format!("{{ {stub}, {bad} }}", stub = KEYFRAMES_STUB, bad = bad);
     assert!(Cartridge::from_json(&json).is_err());
+}
+
+#[test]
+fn cube_authoring_schema_is_not_accepted_as_compiled_v1() {
+    let json = r#"{
+      "schema": "trench.authoring_path.cube.v1",
+      "id": "cube.authoring",
+      "name": "Cube Authoring",
+      "provenance": {},
+      "exactness": "modern_cleanroom_not_native_verified",
+      "control_mode_default": "modern_live_xyz",
+      "axes": {},
+      "legacy_behavior": {},
+      "corners": {
+        "c000": {"kind": "peak_shelf_ref", "path": "x"},
+        "c100": {"kind": "peak_shelf_ref", "path": "x"},
+        "c010": {"kind": "peak_shelf_ref", "path": "x"},
+        "c110": {"kind": "peak_shelf_ref", "path": "x"},
+        "c001": {"kind": "peak_shelf_ref", "path": "x"},
+        "c101": {"kind": "peak_shelf_ref", "path": "x"},
+        "c011": {"kind": "peak_shelf_ref", "path": "x"},
+        "c111": {"kind": "peak_shelf_ref", "path": "x"}
+      }
+    }"#;
+    assert!(Cartridge::from_json(json).is_err());
 }
