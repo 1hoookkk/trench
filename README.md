@@ -1,13 +1,19 @@
-# TRENCH
+# DF-II
 
-TRENCH is a cartridge-based morph filter instrument. The repo has 5 canonical
-docs; everything else is implementation detail.
+**DF-II — Musical Filter.**
+
+The plugin is called **DF-II**. The faceplate reads "Musical Filter".
+
+A Direct Form II transposed serial biquad cascade, authored body-first and
+shipped as a cartridge-based morph instrument. Not an E-mu clone. Not a
+Rossum-kernel emulator. DF-II is the name. Musical Filter is what it does.
 
 ## Canonical
-- Math + contracts (law): `SPEC.md`
+- Filter-work doctrine + shipping rules: `authoring/FILTER_WORK.md`
 - Operating modes: `MODES.md`
-- Doctrine (rules, bans, verification, escalation): `DOCTRINE.md`
 - Shipping bodies + rubrics: `BODIES.md`
+- Phoneme model: `PHONEMES.md`
+- Cartridge wire format: `cartridge.schema.json`
 - Per-session brief: `CLAUDE.md`
 
 ## Verify the workspace

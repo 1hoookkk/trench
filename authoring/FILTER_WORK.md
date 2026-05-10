@@ -1,10 +1,24 @@
-# Canonical Filter Work
+# DF-II — Canonical Filter Work
 
-This repo is the canonical repo for TRENCH filter work:
+```text
+DF-II — Musical Filter.
+```
+
+The plugin is called **DF-II**. The faceplate reads "Musical Filter".
+DF-II is the name. Musical Filter is what it does. Direct Form II transposed
+serial biquad cascade, authored body-first, shipped as DF-II-native
+cartridges. Not an E-mu clone. Not a Rossum-kernel emulator. Not an
+encoded-c-domain hardware faithful. Say it loudly and write it down.
+
+This repo is the canonical repo for DF-II filter work:
 
 ```text
 C:\Users\hooki\Trench
 ```
+
+(Codebase paths still use the legacy `trench-` prefix — `trench-core`,
+`trench-juce`, the `Trench/` directory. The product is **DF-II**; the path
+names are infrastructure that will follow when it makes sense to rename them.)
 
 The canonical doorway is:
 
@@ -13,14 +27,21 @@ C:\Users\hooki\Trench\authoring
 ```
 
 Do not create a fourth filter repo. Do not argue about provenance taxonomy as
-the main policy. The only shipping rule that matters is this:
+the main policy. The two rules that matter are:
 
 ```text
-TRENCH does not ship E-mu filters.
+DF-II is a Musical Filter.
+DF-II does not ship E-mu filters.
 ```
 
+The first is a positive identity claim — it tells you what DF-II is, what
+math it runs, and what category the product belongs to. The second is a
+shipping veto — it tells you what cannot leave the building. They are not in
+tension; they are the doctrine.
+
 References can inform taste, vocabulary, measurements, and regression checks.
-The shipped cartridge must be original TRENCH work.
+The shipped cartridge must be original DF-II work, authored against the
+DF-II cascade as a musical instrument — not as a clone target.
 
 ## Shipping Veto
 
@@ -130,35 +151,25 @@ Material from anywhere else becomes part of active filter work only when it has:
 
 ## Current Active Filter Path
 
-The first verified internal slice is the EOS encoded-surface harness:
+The active runtime is the DF-II cascade — `runtime/trench-core/src/cascade.rs`,
+12 slots × 6 active stages + 6 passthrough, direct biquad form
+`(c0, c1, c2, c3, c4) = (b0, b1, b2, a1, a2)`, per-sample DF2T recurrence.
+That is the engine. That is what TRENCH is.
 
-```text
-trench_eos_pipeline_compiler.py                       # root launcher (delegates)
-authoring/compilers/trench_eos_pipeline_compiler.py   # real harness
-schema: trench.eos.encoded_surface.v1
-default out: cartridges/factory/generated/live_eos_surface.json
-```
+The active authoring slice — meaning the path that takes a body goal from
+`BODIES.md` and produces a TRENCH-native compiled-v1 cartridge that runs on
+the DF-II cascade — is not yet written. The first slice will live in
+`authoring/compilers/` and consume body-goal IRs, not heritage filter
+classes. Authoring is body-first; the DF-II cascade is the realization.
 
-The harness models the four-stage runtime shape — 6-byte stage descriptors
-→ encoded uint16 quintuplets → bilinear c-domain interpolation → decoder
-→ 6-stage serial biquad render kernel — and exposes explicit replacement
-seams for the real lowering, decoder, and kernel code. It is **not** a
-playable compiled-v1 cartridge writer. It does **not** invent E-MU
-descriptor lowering, coefficient encoding, decoder behavior, or the render
-equation; those must come from verified reverse engineering, not from the
-harness itself. Per the doc Authority Order, this is an active
-authoring/compiler output (#2), not a shipped asset (#1) or a reference
-comparison (#5).
-
-Verification commands (passing as of 2026-05-10):
-
-```powershell
-python -m py_compile trench_eos_pipeline_compiler.py authoring\compilers\trench_eos_pipeline_compiler.py
-python trench_eos_pipeline_compiler.py example-fixture ...
-python trench_eos_pipeline_compiler.py interp ...
-python trench_eos_pipeline_compiler.py fixture ...
-cargo test -p trench-core --test compile_raw_roundtrip --release -- --nocapture   # 4/4 passing
-```
+`trench_eos_pipeline_compiler.py` (root launcher) and
+`authoring/compilers/trench_eos_pipeline_compiler.py` (harness) remain in the
+tree as **offline analysis tooling** — they emit encoded-surface JSON for
+research and reject-clones distance checks. They are **not** the shipping
+authoring path. The encoded uint16 / c-domain interpolation / Rossum kernel
+direction was explicitly retired on 2026-05-10 in favor of the DF-II Musical
+Filter identity declared at the top of this doc. Do not propose a
+"heritage-faithful" parallel runtime.
 
 The previous "Peak/Shelf" slice was deleted on 2026-05-10 because that name
 identifies an E-mu Morpheus filter class (DillusionMan tutorial: SHELF
@@ -169,9 +180,9 @@ deletion. Pre-veto research IRs are archived under
 `authoring/_research/peak_shelf/` for vocabulary and reject-clones use
 only — see that directory's README.
 
-The shipping rule is unchanged: until a candidate cartridge is produced
-from this slice and passes the no-clone gate, nothing here is a shipping
-artifact. The harness is internal scaffolding, not a release path.
+The shipping rule is unchanged: until a body-first authoring slice produces
+a candidate cartridge that passes the no-clone gate against the DF-II
+cascade, nothing in this tree is a shipping artifact.
 
 ## Immediate Consolidation Moves
 

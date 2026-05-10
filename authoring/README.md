@@ -1,11 +1,18 @@
-# TRENCH Authoring Hub
+# DF-II — Authoring Hub
 
-This is the canonical entrypoint for TRENCH authoring and design work.
+```text
+DF-II — Musical Filter.
+```
+
+The plugin is called **DF-II**. The faceplate reads "Musical Filter".
+This folder is the canonical entrypoint for DF-II authoring and design work.
 
 For filter work specifically, the repo-level contract is `FILTER_WORK.md`.
-The canonical repo is `C:\Users\hooki\Trench`; external trees are upstream
-sources, not parallel authorities. The shipping rule is simple: TRENCH does
-not ship E-mu filters.
+The canonical repo lives at `C:\Users\hooki\Trench` (codebase paths still
+use the legacy `trench-` prefix); external trees are upstream sources, not
+parallel authorities. The two rules: **DF-II is a Musical Filter** (DF-II
+serial biquad cascade, body-first authoring), and **DF-II does not ship
+E-mu filters**. Both at once.
 
 Use this folder when the task is:
 
