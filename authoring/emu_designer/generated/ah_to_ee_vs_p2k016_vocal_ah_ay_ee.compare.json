@@ -1,0 +1,132 @@
+{
+  "source": "authoring/emu_designer/generated/ah_to_ee_talking_formant.compiled.json",
+  "reference": "cartridges/p2k/P2k_016.json",
+  "reference_name": "Vocal Ah-Ay-Ee",
+  "manual_evidence": {
+    "pdf": "e-mu_emulator_x3_manual.pdf",
+    "page": 146,
+    "line": "Vocal Aah-Ay-Eeh"
+  },
+  "comparison": "curves plotted peak-normalized per corner; peak_db includes cartridge boost",
+  "corners": {
+    "M0_Q0": {
+      "foundry_active_stages": 6,
+      "p2k016_active_stages": 6,
+      "foundry_peak_db": 38.76,
+      "p2k016_peak_db": 62.97,
+      "mean_abs_shape_delta_db": 33.1,
+      "foundry_top_peaks": [
+        {
+          "hz": 1094.3,
+          "bark": 9.075,
+          "db_from_peak": 0.0
+        }
+      ],
+      "p2k016_top_peaks": [
+        {
+          "hz": 9534.7,
+          "bark": 21.709,
+          "db_from_peak": 0.0
+        },
+        {
+          "hz": 10530.8,
+          "bark": 22.073,
+          "db_from_peak": -1.4
+        },
+        {
+          "hz": 12241.7,
+          "bark": 22.58,
+          "db_from_peak": -9.35
+        }
+      ]
+    },
+    "M0_Q100": {
+      "foundry_active_stages": 6,
+      "p2k016_active_stages": 6,
+      "foundry_peak_db": 38.76,
+      "p2k016_peak_db": 27.93,
+      "mean_abs_shape_delta_db": 32.97,
+      "foundry_top_peaks": [
+        {
+          "hz": 1094.3,
+          "bark": 9.075,
+          "db_from_peak": 0.0
+        }
+      ],
+      "p2k016_top_peaks": [
+        {
+          "hz": 8816.8,
+          "bark": 21.404,
+          "db_from_peak": 0.0
+        },
+        {
+          "hz": 14102.6,
+          "bark": 23.009,
+          "db_from_peak": -8.89
+        },
+        {
+          "hz": 11771.8,
+          "bark": 22.453,
+          "db_from_peak": -18.38
+        },
+        {
+          "hz": 10722.8,
+          "bark": 22.137,
+          "db_from_peak": -23.88
+        }
+      ]
+    },
+    "M100_Q0": {
+      "foundry_active_stages": 6,
+      "p2k016_active_stages": 6,
+      "foundry_peak_db": 29.38,
+      "p2k016_peak_db": -8.33,
+      "mean_abs_shape_delta_db": 28.96,
+      "foundry_top_peaks": [
+        {
+          "hz": 2504.5,
+          "bark": 14.51,
+          "db_from_peak": 0.0
+        }
+      ],
+      "p2k016_top_peaks": [
+        {
+          "hz": 7911.1,
+          "bark": 20.957,
+          "db_from_peak": 0.0
+        },
+        {
+          "hz": 10755.1,
+          "bark": 22.147,
+          "db_from_peak": -24.96
+        }
+      ]
+    },
+    "M100_Q100": {
+      "foundry_active_stages": 6,
+      "p2k016_active_stages": 6,
+      "foundry_peak_db": 29.38,
+      "p2k016_peak_db": 97.98,
+      "mean_abs_shape_delta_db": 35.99,
+      "foundry_top_peaks": [
+        {
+          "hz": 2504.5,
+          "bark": 14.51,
+          "db_from_peak": 0.0
+        }
+      ],
+      "p2k016_top_peaks": [
+        {
+          "hz": 9679.4,
+          "bark": 21.765,
+          "db_from_peak": 0.0
+        },
+        {
+          "hz": 11561.0,
+          "bark": 22.394,
+          "db_from_peak": -24.36
+        }
+      ]
+    }
+  }
+}

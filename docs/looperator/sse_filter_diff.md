@@ -8,7 +8,7 @@ This file documents the binary difference between `CPhantomRTFilter` and `CPhant
 # Why it's here
 In the TRENCH architecture, resolving DSP variations cleanly prevents phantom bugs. Identifying that the SSE variant has zero algorithmic divergence ensures that the core `biquad` DSP logic in the CLEAN repo doesn't need maintaining multiple parallel floating-point schemas. Furthermore, establishing the remaining target slate directs future triage efforts correctly.
 
-# Sanitized content
+# Reference content
 
 ## Filter Algorithmic Delta
 There is **no algorithmic or behavioral difference** between the base filter and the SSE filter models. 

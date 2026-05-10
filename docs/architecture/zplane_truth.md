@@ -43,7 +43,7 @@ Not all references are equal.
 These are allowed to define architecture:
 
 - archived/manual E-mu documentation
-- direct clean-room extraction artifacts
+- direct reference extraction artifacts
 - byte-level parity references already validated in repo
 
 ### Secondary

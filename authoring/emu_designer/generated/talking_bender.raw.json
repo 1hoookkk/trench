@@ -1,0 +1,112 @@
+{
+    "format": "raw-stage-v1",
+    "name": "talking_bender_v2",
+    "authoring_sample_rate_hz": 39062.5,
+    "boost": 4.0,
+    "frames": {
+        "M0": {
+            "stages": [
+                {
+                    "kind": "explicit_zero",
+                    "pole_freq_hz": 9313.1,
+                    "radius": 0.975292,
+                    "stage_gain": 0.56189,
+                    "zero_freq_hz": 4508.4,
+                    "zero_radius": 0.701201
+                },
+                {
+                    "kind": "explicit_zero",
+                    "pole_freq_hz": 890.7,
+                    "radius": 0.979289,
+                    "stage_gain": 0.56189,
+                    "zero_freq_hz": 4608.5,
+                    "zero_radius": 0.70898
+                },
+                {
+                    "kind": "explicit_zero",
+                    "pole_freq_hz": 1569.6,
+                    "radius": 0.977293,
+                    "stage_gain": 0.56189,
+                    "zero_freq_hz": 4852.2,
+                    "zero_radius": 0.719735
+                },
+                {
+                    "kind": "explicit_zero",
+                    "pole_freq_hz": 2348.0,
+                    "radius": 0.996945,
+                    "stage_gain": 0.56189,
+                    "zero_freq_hz": 5237.8,
+                    "zero_radius": 0.728817
+                },
+                {
+                    "kind": "explicit_zero",
+                    "pole_freq_hz": 4606.9,
+                    "radius": 0.947884,
+                    "stage_gain": 0.56189,
+                    "zero_freq_hz": 8392.6,
+                    "zero_radius": 0.562287
+                },
+                {
+                    "kind": "explicit_zero",
+                    "pole_freq_hz": 199.4,
+                    "radius": 0.991178,
+                    "stage_gain": 0.56189,
+                    "zero_freq_hz": 7297.5,
+                    "zero_radius": 0.749592
+                }
+            ]
+        },
+        "M100": {
+            "stages": [
+                {
+                    "kind": "explicit_zero",
+                    "pole_freq_hz": 45.3,
+                    "radius": 0.997312,
+                    "stage_gain": 1.1519,
+                    "zero_freq_hz": 10228.3,
+                    "zero_radius": 0.334053
+                },
+                {
+                    "kind": "explicit_zero",
+                    "pole_freq_hz": 10190.4,
+                    "radius": 0.994126,
+                    "stage_gain": 1.1519,
+                    "zero_freq_hz": 11113.9,
+                    "zero_radius": 0.3844
+                },
+                {
+                    "kind": "explicit_zero",
+                    "pole_freq_hz": 12653.4,
+                    "radius": 0.879505,
+                    "stage_gain": 1.1519,
+                    "zero_freq_hz": 11426.3,
+                    "zero_radius": 0.377392
+                },
+                {
+                    "kind": "explicit_zero",
+                    "pole_freq_hz": 13545.5,
+                    "radius": 0.994126,
+                    "stage_gain": 1.1519,
+                    "zero_freq_hz": 11908.4,
+                    "zero_radius": 0.35804
+                },
+                {
+                    "kind": "explicit_zero",
+                    "pole_freq_hz": 14559.9,
+                    "radius": 0.994126,
+                    "stage_gain": 1.1519,
+                    "zero_freq_hz": 12259.2,
+                    "zero_radius": 0.3646
+                },
+                {
+                    "kind": "explicit_zero",
+                    "pole_freq_hz": 16131.1,
+                    "radius": 0.994126,
+                    "stage_gain": 1.1519,
+                    "zero_freq_hz": 12171.5,
+                    "zero_radius": 0.389763
+                }
+            ]
+        }
+    }
+}

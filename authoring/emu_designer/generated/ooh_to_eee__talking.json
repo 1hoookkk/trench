@@ -1,0 +1,92 @@
+{
+  "schema": "trench.heritage.morph_designer.v1",
+  "filter_class": "MorphDesigner",
+  "name": "ooh_to_eee__talking_formant",
+  "category": "VOW",
+  "source_affinity": [
+    "vocal chops",
+    "lead synth stabs",
+    "one-shots"
+  ],
+  "planner": {
+    "input_schema": "trench.ui.frame_map.v1",
+    "recipe": "talking_formant",
+    "recipe_note": "Heritage VOW skeleton: LP + 4xEQ + HP, formant-axis EQs.",
+    "landmark_source": "authoring/ui/bark_landmarks.json"
+  },
+  "boost": 0.004,
+  "stages": [
+    {
+      "shape": "LP",
+      "lo": {
+        "freq_hz": 5065.1,
+        "gain_db": 0.0
+      },
+      "hi": {
+        "freq_hz": 7457.1,
+        "gain_db": 0.0
+      },
+      "planner_landmark": "air"
+    },
+    {
+      "shape": "EQ",
+      "lo": {
+        "freq_hz": 318.7,
+        "gain_db": 0.0
+      },
+      "hi": {
+        "freq_hz": 313.8,
+        "gain_db": 0.0
+      },
+      "planner_landmark": "throat_f1"
+    },
+    {
+      "shape": "EQ",
+      "lo": {
+        "freq_hz": 1267.7,
+        "gain_db": 0.0
+      },
+      "hi": {
+        "freq_hz": 2210.4,
+        "gain_db": 0.0
+      },
+      "planner_landmark": "mouth_f2"
+    },
+    {
+      "shape": "EQ",
+      "lo": {
+        "freq_hz": 2426.3,
+        "gain_db": 0.0
+      },
+      "hi": {
+        "freq_hz": 2951.0,
+        "gain_db": 0.0
+      },
+      "planner_landmark": "bite"
+    },
+    {
+      "shape": "EQ",
+      "lo": {
+        "freq_hz": 3201.8,
+        "gain_db": 0.0
+      },
+      "hi": {
+        "freq_hz": 3305.3,
+        "gain_db": 0.0
+      },
+      "planner_landmark": "presence"
+    },
+    {
+      "shape": "HP",
+      "lo": {
+        "freq_hz": 60.3,
+        "gain_db": 0.0
+      },
+      "hi": {
+        "freq_hz": 74.4,
+        "gain_db": 0.0
+      },
+      "planner_landmark": "floor"
+    }
+  ]
+}

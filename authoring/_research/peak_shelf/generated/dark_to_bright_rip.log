@@ -1,0 +1,15 @@
+STDOUT:
+Compiled dark_to_bright_rip -> c:\Users\hooki\Trench\authoring\peak_shelf\dark_to_bright_rip.raw.json
+Lowered -> c:\Users\hooki\Trench\authoring\peak_shelf\dark_to_bright_rip.raw.compiled.json
+=== dark_to_bright_rip ===
+  M0_Q0: cascade=12.0 dB, max_stage=10.6 dB, cancel=-1.4 dB, r_max=0.896
+  M0_Q100: cascade=12.0 dB, max_stage=10.6 dB, cancel=-1.4 dB, r_max=0.896
+  M100_Q0: cascade=12.0 dB, max_stage=13.1 dB, cancel=1.1 dB, r_max=0.878
+  M100_Q100: cascade=12.0 dB, max_stage=13.1 dB, cancel=1.1 dB, r_max=0.878
+DECISION: PASS
+NOTES: Stable controlled cancellation.
+
+Plot -> c:\Users\hooki\Trench\authoring\peak_shelf\dark_to_bright_rip.raw.response.png
+Preview -> c:\Users\hooki\Trench\authoring\peak_shelf\dark_to_bright_rip.raw.preview.png
+
+STDERR:

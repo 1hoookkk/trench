@@ -1,0 +1,6 @@
+Talking Hedz with internal resampling (FFT) — host 44100 Hz, native 39062.5 Hz
+corner           rms_dB   max_err_dB  native_peak  resamp_peak
+M0_Q0             1.054        1.055        18.40        19.45
+M100_Q0           1.054        1.059        36.11        37.16
+M0_Q100           1.054        1.054        18.40        19.45
+M100_Q100         1.054        1.057        39.11        40.17

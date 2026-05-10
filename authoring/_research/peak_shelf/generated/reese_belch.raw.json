@@ -1,0 +1,67 @@
+{
+  "format": "raw-stage-v1",
+  "name": "reese_belch",
+  "boost": 0.004,
+  "frames": {
+    "M0": [
+      {
+        "kind": "explicit_zero",
+        "pole_freq_hz": 110.0,
+        "radius": 0.6171875,
+        "zero_freq_hz": 79.0625,
+        "zero_radius": 0.5703125,
+        "stage_gain": 1.0
+      },
+      {
+        "kind": "explicit_zero",
+        "pole_freq_hz": 110.0,
+        "radius": 0.4936103545130302,
+        "zero_freq_hz": 110.0,
+        "zero_radius": 0.2,
+        "stage_gain": 1.0
+      },
+      {
+        "kind": "passthrough"
+      },
+      {
+        "kind": "passthrough"
+      },
+      {
+        "kind": "passthrough"
+      },
+      {
+        "kind": "passthrough"
+      }
+    ],
+    "M100": [
+      {
+        "kind": "explicit_zero",
+        "pole_freq_hz": 780.0,
+        "radius": 0.6328125,
+        "zero_freq_hz": 1144.954128440367,
+        "zero_radius": 0.5796875,
+        "stage_gain": 1.0
+      },
+      {
+        "kind": "explicit_zero",
+        "pole_freq_hz": 780.0,
+        "radius": 0.4352773500685569,
+        "zero_freq_hz": 780.0,
+        "zero_radius": 0.2,
+        "stage_gain": 1.0
+      },
+      {
+        "kind": "passthrough"
+      },
+      {
+        "kind": "passthrough"
+      },
+      {
+        "kind": "passthrough"
+      },
+      {
+        "kind": "passthrough"
+      }
+    ]
+  }
+}

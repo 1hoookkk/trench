@@ -1,0 +1,25 @@
+{
+  "schema": "trench.ui.frame_map.v1",
+  "name": "ah_to_eee",
+  "category": "VOW",
+  "source_affinity": ["vocal chops", "lead synth stabs", "one-shots"],
+  "note": "AH->EE test for talking_formant recipe. Expected movement: throat_f1 700->342Hz, mouth_f2 1220->2322Hz, bite/f3 2600->3000Hz",
+  "frames": {
+    "A": {
+      "floor":     {"hz": 87},
+      "throat_f1": {"hz": 700},
+      "mouth_f2":  {"hz": 1220},
+      "bite":      {"hz": 2600},
+      "nasal_cut": {"hz": 1100},
+      "air":       {"hz": 4000}
+    },
+    "B": {
+      "floor":     {"hz": 120},
+      "throat_f1": {"hz": 342},
+      "mouth_f2":  {"hz": 2322},
+      "bite":      {"hz": 3000},
+      "nasal_cut": {"hz": 1100},
+      "air":       {"hz": 4500}
+    }
+  }
+}

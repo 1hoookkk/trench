@@ -1,0 +1,61 @@
+{
+    "schema": "trench.ui.frame_map.v1",
+    "name": "nasal_scar",
+    "category": "VOW",
+    "boost": 0.004,
+    "frames": {
+        "A": {
+            "throat_f1": {
+                "hz": 1200,
+                "gain_db": 15.0
+            },
+            "mouth_f2": {
+                "hz": 490,
+                "gain_db": 14.0
+            },
+            "nasal_cut": {
+                "hz": 1900,
+                "gain_db": -24.0
+            },
+            "bite": {
+                "hz": 700,
+                "gain_db": 16.0
+            },
+            "air": {
+                "hz": 3000,
+                "gain_db": 0
+            },
+            "floor": {
+                "hz": 80,
+                "gain_db": 0
+            }
+        },
+        "B": {
+            "throat_f1": {
+                "hz": 600,
+                "gain_db": 12.0
+            },
+            "mouth_f2": {
+                "hz": 1020,
+                "gain_db": 14.0
+            },
+            "nasal_cut": {
+                "hz": 1500,
+                "gain_db": -24.0
+            },
+            "bite": {
+                "hz": 1800,
+                "gain_db": 18.0
+            },
+            "air": {
+                "hz": 7000,
+                "gain_db": 0
+            },
+            "floor": {
+                "hz": 80,
+                "gain_db": 0
+            }
+        }
+    },
+    "mental_mode": "CLEAN"
+}

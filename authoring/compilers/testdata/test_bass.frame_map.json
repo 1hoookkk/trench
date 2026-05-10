@@ -1,0 +1,23 @@
+{
+  "schema": "trench.ui.frame_map.v1",
+  "name": "test_bass",
+  "category": "BASS",
+  "source_affinity": ["bass", "sub"],
+  "note": "Bass pressure test",
+  "frames": {
+    "A": {
+      "floor":     {"hz": 55},
+      "chest":    {"hz": 120},
+      "choke":    {"hz": 280},
+      "rip":      {"hz": 450},
+      "cry":      {"hz": 800}
+    },
+    "B": {
+      "floor":     {"hz": 80},
+      "chest":    {"hz": 90},
+      "choke":    {"hz": 350},
+      "rip":      {"hz": 600},
+      "cry":      {"hz": 1200}
+    }
+  }
+}

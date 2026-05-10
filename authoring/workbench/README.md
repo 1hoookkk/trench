@@ -1,6 +1,6 @@
 # Workbench
 
-This zone is the clean authoring factory.
+This zone is the authoring factory.
 
 It is where forge, foundry, session logic, MCP-assisted analysis, vault work, and authoring tools should be indexed from one place.
 
@@ -17,10 +17,10 @@ It is where forge, foundry, session logic, MCP-assisted analysis, vault work, an
 - MCP entrypoints
 - vault entrypoints
 - session prompts
-- authoring tools that produce clean artifacts
+- authoring tools that produce original TRENCH artifacts
 
 ## Not Scope
 
 - shipping runtime code
-- raw DIRTY capture/extraction
-
+- raw research dumps
+- E-mu clone release candidates

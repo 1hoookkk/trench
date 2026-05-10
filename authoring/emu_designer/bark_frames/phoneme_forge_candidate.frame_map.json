@@ -1,0 +1,52 @@
+{
+    "schema": "trench.ui.frame_map.v1",
+    "name": "god_filter_candidate",
+    "category": "VOW",
+    "boost": 0.004,
+    "frames": {
+        "A": {
+            "throat_f1": {
+                "hz": 700,
+                "gain_db": 10
+            },
+            "mouth_f2": {
+                "hz": 1220,
+                "gain_db": 8
+            },
+            "nasal_cut": {
+                "hz": 1100,
+                "gain_db": -24
+            },
+            "bite": {
+                "hz": 2600,
+                "gain_db": 4
+            },
+            "air": {
+                "hz": 5000,
+                "gain_db": 0
+            }
+        },
+        "B": {
+            "throat_f1": {
+                "hz": 342,
+                "gain_db": 8
+            },
+            "mouth_f2": {
+                "hz": 2322,
+                "gain_db": 12
+            },
+            "nasal_cut": {
+                "hz": 1500,
+                "gain_db": -24
+            },
+            "bite": {
+                "hz": 3000,
+                "gain_db": 7
+            },
+            "air": {
+                "hz": 6500,
+                "gain_db": 0
+            }
+        }
+    }
+}

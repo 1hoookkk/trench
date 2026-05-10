@@ -7,7 +7,7 @@ This inventory includes `CPhantom*` classes that are filters, filter compilers, 
 Knowledge-depth labels used below:
 
 - `parameter semantics known`: the surveyed docs expose enough math, table structure, or compile contract to describe how the class behaves
-- `decompiled only`: the class/function is identified and some behavior is known, but the surveyed docs do not give a full clean-room parameter contract
+- `decompiled only`: the class/function is identified and some behavior is known, but the surveyed docs do not give a full reference parameter contract
 - `name only`: only the class name and coarse role are present
 
 Direct shipping-body scaffold set found in the surveyed docs:

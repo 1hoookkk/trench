@@ -1,0 +1,15 @@
+STDOUT:
+Compiled lowpass_to_highshelf_flip -> c:\Users\hooki\Trench\authoring\peak_shelf\lowpass_to_highshelf_flip.raw.json
+Lowered -> c:\Users\hooki\Trench\authoring\peak_shelf\lowpass_to_highshelf_flip.raw.compiled.json
+=== lowpass_to_highshelf_flip ===
+  M0_Q0: cascade=12.0 dB, max_stage=8.4 dB, cancel=-3.6 dB, r_max=0.898
+  M0_Q100: cascade=12.0 dB, max_stage=8.4 dB, cancel=-3.6 dB, r_max=0.898
+  M100_Q0: cascade=12.0 dB, max_stage=17.6 dB, cancel=5.6 dB, r_max=0.876
+  M100_Q100: cascade=12.0 dB, max_stage=17.6 dB, cancel=5.6 dB, r_max=0.876
+DECISION: PASS
+NOTES: Stable controlled cancellation.
+
+Plot -> c:\Users\hooki\Trench\authoring\peak_shelf\lowpass_to_highshelf_flip.raw.response.png
+Preview -> c:\Users\hooki\Trench\authoring\peak_shelf\lowpass_to_highshelf_flip.raw.preview.png
+
+STDERR:

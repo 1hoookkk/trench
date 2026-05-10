@@ -1,8 +1,30 @@
 {
-  "disableAllHooks": false,
+  "$schema": "https://json.schemastore.org/claude-code-settings.json",
+  "env": {
+    "CLAUDE_CODE_DISABLE_ADAPTIVE_THINKING": "1",
+    "MAX_THINKING_TOKENS": "31999"
+  },
   "permissions": {
-    "additionalDirectories": [
-      "C:\\Users\\hooki\\trench_re_vault"
-    ]
-  }
+    "allow": [
+      "Bash",
+      "Read",
+      "Edit",
+      "Write",
+      "Glob",
+      "Grep",
+      "LS",
+      "WebFetch",
+      "WebSearch"
+    ],
+    "deny": [],
+    "defaultMode": "bypassPermissions",
+    "skipDangerousModePermissionPrompt": true
+  },
+  "enabledMcpjsonServers": [
+    "claude-flow"
+  ],
+  "alwaysThinkingEnabled": true,
+  "effortLevel": "xhigh",
+  "showThinkingSummaries": true,
+  "enableAllProjectMcpServers": true
 }

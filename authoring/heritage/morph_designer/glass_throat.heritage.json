@@ -1,0 +1,93 @@
+{
+  "schema": "trench.heritage.morph_designer.v1",
+  "filter_class": "MorphDesigner",
+  "name": "glass_throat",
+  "category": "VOW",
+  "source_affinity": [
+    "vocal chop",
+    "saw",
+    "reese"
+  ],
+  "planner": {
+    "input_schema": "trench.ui.frame_map.v1",
+    "recipe": "talking_formant",
+    "recipe_note": "Heritage VOW skeleton: LP + 4xEQ + HP, formant-axis EQs.",
+    "landmark_source": "authoring/ui/bark_landmarks.json",
+    "authoring_sample_rate_hz": 39062.5
+  },
+  "boost": 0.003,
+  "stages": [
+    {
+      "shape": "LP",
+      "lo": {
+        "freq_hz": 7200.0,
+        "gain_db": 0.0
+      },
+      "hi": {
+        "freq_hz": 7600.0,
+        "gain_db": 0.0
+      },
+      "planner_landmark": "air"
+    },
+    {
+      "shape": "EQ",
+      "lo": {
+        "freq_hz": 720.0,
+        "gain_db": 3.0
+      },
+      "hi": {
+        "freq_hz": 340.0,
+        "gain_db": 2.0
+      },
+      "planner_landmark": "throat_f1"
+    },
+    {
+      "shape": "EQ",
+      "lo": {
+        "freq_hz": 1180.0,
+        "gain_db": 4.0
+      },
+      "hi": {
+        "freq_hz": 2250.0,
+        "gain_db": 3.0
+      },
+      "planner_landmark": "mouth_f2"
+    },
+    {
+      "shape": "EQ",
+      "lo": {
+        "freq_hz": 2450.0,
+        "gain_db": -3.0
+      },
+      "hi": {
+        "freq_hz": 3050.0,
+        "gain_db": 9.0
+      },
+      "planner_landmark": "bite"
+    },
+    {
+      "shape": "EQ",
+      "lo": {
+        "freq_hz": 3350.0,
+        "gain_db": -6.0
+      },
+      "hi": {
+        "freq_hz": 3275.0,
+        "gain_db": -3.0
+      },
+      "planner_landmark": "presence"
+    },
+    {
+      "shape": "HP",
+      "lo": {
+        "freq_hz": 90.0,
+        "gain_db": 0.0
+      },
+      "hi": {
+        "freq_hz": 110.0,
+        "gain_db": 0.0
+      },
+      "planner_landmark": "floor"
+    }
+  ]
+}

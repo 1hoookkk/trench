@@ -1,6 +1,9 @@
 # TRENCH Looperator Extraction Specifications
 
-This directory contains sanitized hardware mapping contracts, acoustic characteristics, and display rules extracted from the Emulator X `DIRTY` vault infrastructure, rewritten for explicit integration into the TRENCH `CLEAN` repository. 
+This directory contains reference hardware mapping contracts, acoustic
+characteristics, and display rules extracted from Emulator X research material.
+Use it to reject clones and understand behavior; do not turn it into shipping
+filter content.
 
 All files omit reverse-engineering process minutiae and focus solely on structural software integration requirements for building the "Looperator" module.
 

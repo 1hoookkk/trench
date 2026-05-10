@@ -1,0 +1,30 @@
+{
+  "format": "raw-stage-v1",
+  "name": "oo_to_ee",
+  "intent": "Rounded dark /u/ opening to bright forward /i/. Driver is F2 swing 870->2290 Hz; F1 slight close; F3 rises and detail brightens.",
+  "authoring_sample_rate_hz": 39062.5,
+  "boost": 4.0,
+  "skeleton": ["anchor", "mass", "carve", "pressure", "detail", "boundary"],
+  "frames": {
+    "M0": {
+      "stages": [
+        {"role": "anchor",   "type": "allpole",       "kind": "allpole",       "pole_hz": 100.0,  "pole_freq_hz": 100.0,  "radius": 0.988, "zero_hz": 0.0,    "zero_freq_hz": 0.0,    "zero_radius": 0.0,  "stage_gain": 1.0},
+        {"role": "mass",     "type": "explicit_zero", "kind": "explicit_zero", "pole_hz": 300.0,  "pole_freq_hz": 300.0,  "radius": 0.996, "zero_hz": 180.0,  "zero_freq_hz": 180.0,  "zero_radius": 0.2,  "stage_gain": 1.0},
+        {"role": "carve",    "type": "explicit_zero", "kind": "explicit_zero", "pole_hz": 870.0,  "pole_freq_hz": 870.0,  "radius": 0.994, "zero_hz": 500.0,  "zero_freq_hz": 500.0,  "zero_radius": 0.3,  "stage_gain": 1.0},
+        {"role": "pressure", "type": "explicit_zero", "kind": "explicit_zero", "pole_hz": 1800.0, "pole_freq_hz": 1800.0, "radius": 0.970, "zero_hz": 2400.0, "zero_freq_hz": 2400.0, "zero_radius": 0.9,  "stage_gain": 1.0},
+        {"role": "detail",   "type": "explicit_zero", "kind": "explicit_zero", "pole_hz": 2240.0, "pole_freq_hz": 2240.0, "radius": 0.988, "zero_hz": 4500.0, "zero_freq_hz": 4500.0, "zero_radius": 0.4,  "stage_gain": 1.0},
+        {"role": "boundary", "type": "explicit_zero", "kind": "explicit_zero", "pole_hz": 8000.0, "pole_freq_hz": 8000.0, "radius": 0.900, "zero_hz": 9500.0, "zero_freq_hz": 9500.0, "zero_radius": 0.95, "stage_gain": 1.0}
+      ]
+    },
+    "M100": {
+      "stages": [
+        {"role": "anchor",   "type": "allpole",       "kind": "allpole",       "pole_hz": 100.0,  "pole_freq_hz": 100.0,  "radius": 0.985, "zero_hz": 0.0,    "zero_freq_hz": 0.0,    "zero_radius": 0.0,  "stage_gain": 1.0},
+        {"role": "mass",     "type": "explicit_zero", "kind": "explicit_zero", "pole_hz": 270.0,  "pole_freq_hz": 270.0,  "radius": 0.996, "zero_hz": 180.0,  "zero_freq_hz": 180.0,  "zero_radius": 0.2,  "stage_gain": 1.0},
+        {"role": "carve",    "type": "explicit_zero", "kind": "explicit_zero", "pole_hz": 2290.0, "pole_freq_hz": 2290.0, "radius": 0.994, "zero_hz": 1200.0, "zero_freq_hz": 1200.0, "zero_radius": 0.5,  "stage_gain": 1.0},
+        {"role": "pressure", "type": "explicit_zero", "kind": "explicit_zero", "pole_hz": 3010.0, "pole_freq_hz": 3010.0, "radius": 0.990, "zero_hz": 4800.0, "zero_freq_hz": 4800.0, "zero_radius": 0.3,  "stage_gain": 1.0},
+        {"role": "detail",   "type": "explicit_zero", "kind": "explicit_zero", "pole_hz": 4200.0, "pole_freq_hz": 4200.0, "radius": 0.985, "zero_hz": 6000.0, "zero_freq_hz": 6000.0, "zero_radius": 0.3,  "stage_gain": 1.0},
+        {"role": "boundary", "type": "explicit_zero", "kind": "explicit_zero", "pole_hz": 8000.0, "pole_freq_hz": 8000.0, "radius": 0.900, "zero_hz": 9500.0, "zero_freq_hz": 9500.0, "zero_radius": 0.90, "stage_gain": 1.0}
+      ]
+    }
+  }
+}

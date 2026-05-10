@@ -1,0 +1,67 @@
+{
+  "format": "raw-stage-v1",
+  "name": "dark_to_bright_rip",
+  "boost": 0.004,
+  "frames": {
+    "M0": [
+      {
+        "kind": "explicit_zero",
+        "pole_freq_hz": 260.0,
+        "radius": 0.671875,
+        "zero_freq_hz": 152.75,
+        "zero_radius": 0.603125,
+        "stage_gain": 1.0
+      },
+      {
+        "kind": "explicit_zero",
+        "pole_freq_hz": 260.0,
+        "radius": 0.5238900470453784,
+        "zero_freq_hz": 260.0,
+        "zero_radius": 0.2,
+        "stage_gain": 1.0
+      },
+      {
+        "kind": "passthrough"
+      },
+      {
+        "kind": "passthrough"
+      },
+      {
+        "kind": "passthrough"
+      },
+      {
+        "kind": "passthrough"
+      }
+    ],
+    "M100": [
+      {
+        "kind": "explicit_zero",
+        "pole_freq_hz": 3200.0,
+        "radius": 0.609375,
+        "zero_freq_hz": 4338.983050847457,
+        "zero_radius": 0.565625,
+        "stage_gain": 1.0
+      },
+      {
+        "kind": "explicit_zero",
+        "pole_freq_hz": 3200.0,
+        "radius": 0.46955833979581607,
+        "zero_freq_hz": 3200.0,
+        "zero_radius": 0.2,
+        "stage_gain": 1.0
+      },
+      {
+        "kind": "passthrough"
+      },
+      {
+        "kind": "passthrough"
+      },
+      {
+        "kind": "passthrough"
+      },
+      {
+        "kind": "passthrough"
+      }
+    ]
+  }
+}

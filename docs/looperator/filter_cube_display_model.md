@@ -9,7 +9,7 @@ This dataset represents the structural identity of the morph filter templates ex
 # Why it's here
 The Looperator time-grid will visualize each placed token as a filter cube preview. To correctly draw these preview cubes and group equivalent templates, the CLEAN repo needs this mapping to distinguish unique structural topologies from mere preset aliases. 
 
-# Sanitized content
+# Reference content
 
 ## Shape Dictionary Schema
 The core extraction distills 79 templates down to 72 unique shapes. Below is the parsed schema that Looperator should expect:

@@ -1,0 +1,67 @@
+{
+  "format": "raw-stage-v1",
+  "name": "air_choke",
+  "boost": 0.004,
+  "frames": {
+    "M0": [
+      {
+        "kind": "explicit_zero",
+        "pole_freq_hz": 4200.0,
+        "radius": 0.546875,
+        "zero_freq_hz": 4732.394366197183,
+        "zero_radius": 0.528125,
+        "stage_gain": 1.0
+      },
+      {
+        "kind": "explicit_zero",
+        "pole_freq_hz": 4200.0,
+        "radius": 0.46955833979581607,
+        "zero_freq_hz": 4200.0,
+        "zero_radius": 0.2,
+        "stage_gain": 1.0
+      },
+      {
+        "kind": "passthrough"
+      },
+      {
+        "kind": "passthrough"
+      },
+      {
+        "kind": "passthrough"
+      },
+      {
+        "kind": "passthrough"
+      }
+    ],
+    "M100": [
+      {
+        "kind": "explicit_zero",
+        "pole_freq_hz": 1600.0,
+        "radius": 0.625,
+        "zero_freq_hz": 1120.0,
+        "zero_radius": 0.575,
+        "stage_gain": 1.0
+      },
+      {
+        "kind": "explicit_zero",
+        "pole_freq_hz": 1600.0,
+        "radius": 0.5238900470453784,
+        "zero_freq_hz": 1600.0,
+        "zero_radius": 0.2,
+        "stage_gain": 1.0
+      },
+      {
+        "kind": "passthrough"
+      },
+      {
+        "kind": "passthrough"
+      },
+      {
+        "kind": "passthrough"
+      },
+      {
+        "kind": "passthrough"
+      }
+    ]
+  }
+}

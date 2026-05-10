@@ -1,0 +1,21 @@
+{
+  "schema": "trench.heritage.peak_shelf.v1",
+  "name": "reese_belch",
+  "category": "BASS",
+  "boost": 0.004,
+  "frames": {
+    "A": {
+      "freq_hz": 110,
+      "shelf": -30,
+      "peak_db": 14
+    },
+    "B": {
+      "freq_hz": 780,
+      "shelf": 34,
+      "peak_db": 8
+    }
+  },
+  "render_metadata": {
+    "preview_type": "PEAK_SHELF_INTENT_NOT_RESPONSE"
+  }
+}

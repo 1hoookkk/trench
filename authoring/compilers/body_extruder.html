@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>TRENCH // BODY EXTRUDER v0.1</title>
+    <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <style>
+        :root {
+            color-scheme: dark;
+        }
+
+        body {
+            margin: 0;
+            background: #070a0f;
+            color: #cbd5e1;
+            font-family: ui-monospace, monospace;
+            font-size: 13px;
+        }
+
+        .tx-root {
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .tx-card {
+            border: 1px solid #334155;
+            background: rgba(15, 23, 42, 0.82);
+            padding: 15px;
+            margin-bottom: 20px;
+        }
+
+        .tx-btn {
+            background: #1e293b;
+            border: 1px solid #475569;
+            color: #fff;
+            padding: 5px 10px;
+            cursor: pointer;
+        }
+
+        .tx-btn:hover {
+            border-color: #22d3ee;
+        }
+
+        .tx-btn-primary {
+            background: #0e7490;
+            border-color: #22d3ee;
+        }
+
+        input,
+        textarea,
+        select {
+            background: #05070b;
+            border: 1px solid #334155;
+            color: #fff;
+            padding: 5px;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        .tx-plot-wrap {
+            height: 200px;
+            background: #000;
+            margin-top: 10px;
+            border: 1px solid #333;
+            position: relative;
+        }
+
+        .tx-plot-badge {
+            position: absolute;
+            top: 5px;
+            right: 5px;
+            background: rgba(0, 0, 0, 0.5);
+            font-size: 10px;
+            padding: 2px 5px;
+            color: #64748b;
+        }
+
+        .tx-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #334155;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+        }
+
+        .tx-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr 300px;
+            gap: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="root"></div>
+    <script type="text/babel">
+        const { useState, useMemo } = React;
+
+        const SAMPLE_RATE = 39062.5;
+
+        // Ported from jsx
+        function structuralCurve(seed = 0, pressure = 0.5) {
+            const points = [];
+            for (let i = 0; i <= 100; i += 2) {
+                const t = i / 100;
+                const waveA = Math.sin((t * Math.PI * 2) + seed) * 20;
+                const waveB = Math.sin((t * Math.PI * 5.2) + seed * 0.6) * 8;
+                const notch = -28 * Math.exp(-Math.pow((t - (0.38 + seed * 0.02)) / 0.055, 2));
+                const lift = pressure * 32 * Math.exp(-Math.pow((t - 0.72) / 0.17, 2));
+                const db = Math.max(-60, Math.min(80, -12 + waveA + waveB + notch + lift));
+                const y = 100 - ((db + 60) / 140) * 100;
+                points.push(`${i},${y}`);
+            }
+            return points.join(" L ");
+        }
+
+        function ProofPlot({ mode, qLaw }) {
+            const width = 300; const height = 150;
+            const seeds = mode === "corners" ? [
+                { label: "M0_Q0", seed: 0.2, p: 0.2, color: "#7dd3fc" },
+                { label: "M100_Q100", seed: 1.2, p: 0.9, color: "#ffffff" }
+            ] : [
+                { label: "M0", seed: 0.2, p: 0.2, color: "#7dd3fc" },
+                { label: "M50", seed: 0.7, p: 0.4, color: "#ffffff" },
+                { label: "M100", seed: 1.2, p: 0.6, color: "#e879f9" }
+            ];
+
+            return (
+                <div className="tx-plot-wrap">
+                    <svg viewBox="0 0 100 100" preserveAspectRatio="none" style={{ width: '100%', height: '100%' }}>
+                        {seeds.map(s => (
+                            <path key={s.label} d={`M ${structuralCurve(s.seed, s.p)}`} fill="none" stroke={s.color} strokeWidth="1" opacity="0.8" />
+                        ))}
+                    </svg>
+                    <div className="tx-plot-badge">{mode.toUpperCase()} PREVIEW</div>
+                </div>
+            );
+        }
+
+        function TrenchBodyExtruder() {
+            const [stateA, setStateA] = useState({ name: "M0 Core", donor: "Talking Hedz" });
+            const [stateB, setStateB] = useState({ name: "M100 Sweep", donor: "Ear Bender" });
+
+            return (
+                <div className="tx-root">
+                    <header className="tx-header">
+                        <div>
+                            <div style={{ color: '#22d3ee', fontSize: '10px', letterSpacing: '2px' }}>TRENCH // BODY EXTRUDER</div>
+                            <h1 style={{ margin: 0 }}>Boundary State DNA Extruder</h1>
+                        </div>
+                        <div style={{ display: 'flex', gap: '10px' }}>
+                            <button className="tx-btn" onClick={() => alert('Saved!')}>SAVE RECIPE</button>
+                            <button className="tx-btn tx-btn-primary">EXPORT CART JSON</button>
+                        </div>
+                    </header>
+
+                    <div className="tx-grid">
+                        <div className="tx-card">
+                            <div style={{ color: '#f59e0b', fontSize: '10px' }}>STATE A / M0</div>
+                            <input value={stateA.name} onChange={e => setStateA({ ...stateA, name: e.target.value })} style={{ marginTop: '10px' }} />
+                            <textarea placeholder="Intent notes..." style={{ marginTop: '10px', height: '60px' }}></textarea>
+                            <ProofPlot mode="corners" />
+                        </div>
+
+                        <div className="tx-card">
+                            <div style={{ color: '#f59e0b', fontSize: '10px' }}>STATE B / M100</div>
+                            <input value={stateB.name} onChange={e => setStateB({ ...stateB, name: e.target.value })} style={{ marginTop: '10px' }} />
+                            <textarea placeholder="Intent notes..." style={{ marginTop: '10px', height: '60px' }}></textarea>
+                            <ProofPlot mode="morph" />
+                        </div>
+
+                        <div className="tx-card">
+                            <div style={{ color: '#f59e0b', fontSize: '10px' }}>AUDITION & Q-LAW</div>
+                            <select style={{ marginTop: '10px' }}>
+                                <option>FORMANT PINCH</option>
+                                <option>HERITAGE RADIUS</option>
+                                <option>NOTCH TENSION</option>
+                            </select>
+                            <p style={{ fontSize: '10px', color: '#64748b', marginTop: '10px' }}>Audition with: SAW / REESE / 808 / VOCAL</p>
+                            <button className="tx-btn" style={{ width: '100%', marginTop: '5px' }}>PLAY M-SWEEP</button>
+                        </div>
+                    </div>
+                </div>
+            );
+        }
+
+        const root = ReactDOM.createRoot(document.getElementById('root'));
+        root.render(<TrenchBodyExtruder />);
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,113 @@
+{
+  "format": "raw-stage-v1",
+  "name": "glass_throat_injury",
+  "authoring_sample_rate_hz": 39062.5,
+  "boost": 0.0015,
+  "identity": "Talking AH-to-EE throat with one upper-mid glass wound.",
+  "protected_invariant": "Two readable vocal peaks before the injury stage.",
+  "danger_zone": "Single nasal glass shard around 2.8-3.2 kHz on the B frame.",
+  "frames": {
+    "M0": {
+      "stages": [
+        {
+          "role": "throat_body",
+          "kind": "explicit_zero",
+          "pole_freq_hz": 720.0,
+          "radius": 0.954,
+          "stage_gain": 1.0,
+          "zero_freq_hz": 0.0,
+          "zero_radius": 1.0
+        },
+        {
+          "role": "mouth_formant",
+          "kind": "explicit_zero",
+          "pole_freq_hz": 1180.0,
+          "radius": 0.962,
+          "stage_gain": 1.0,
+          "zero_freq_hz": 0.0,
+          "zero_radius": 1.0
+        },
+        {
+          "role": "injury_dormant",
+          "kind": "explicit_zero",
+          "pole_freq_hz": 2380.0,
+          "radius": 0.944,
+          "stage_gain": 0.48,
+          "zero_freq_hz": 3050.0,
+          "zero_radius": 0.82
+        },
+        {
+          "role": "nasal_shadow",
+          "kind": "explicit_zero",
+          "pole_freq_hz": 1680.0,
+          "radius": 0.93,
+          "stage_gain": 0.54,
+          "zero_freq_hz": 1450.0,
+          "zero_radius": 0.92
+        },
+        {
+          "role": "air_cap",
+          "kind": "lowpass2",
+          "pole_freq_hz": 6800.0,
+          "radius": 0.86,
+          "stage_gain": 0.74
+        },
+        {
+          "role": "floor_guard",
+          "kind": "passthrough"
+        }
+      ]
+    },
+    "M100": {
+      "stages": [
+        {
+          "role": "throat_body",
+          "kind": "explicit_zero",
+          "pole_freq_hz": 340.0,
+          "radius": 0.946,
+          "stage_gain": 1.0,
+          "zero_freq_hz": 0.0,
+          "zero_radius": 1.0
+        },
+        {
+          "role": "mouth_formant",
+          "kind": "explicit_zero",
+          "pole_freq_hz": 2240.0,
+          "radius": 0.972,
+          "stage_gain": 1.0,
+          "zero_freq_hz": 0.0,
+          "zero_radius": 1.0
+        },
+        {
+          "role": "glass_injury",
+          "kind": "explicit_zero",
+          "pole_freq_hz": 3050.0,
+          "radius": 0.986,
+          "stage_gain": 1.62,
+          "zero_freq_hz": 2620.0,
+          "zero_radius": 0.78
+        },
+        {
+          "role": "nasal_shadow",
+          "kind": "explicit_zero",
+          "pole_freq_hz": 1720.0,
+          "radius": 0.93,
+          "stage_gain": 0.46,
+          "zero_freq_hz": 1320.0,
+          "zero_radius": 0.92
+        },
+        {
+          "role": "air_cap",
+          "kind": "lowpass2",
+          "pole_freq_hz": 7600.0,
+          "radius": 0.86,
+          "stage_gain": 0.72
+        },
+        {
+          "role": "floor_guard",
+          "kind": "passthrough"
+        }
+      ]
+    }
+  }
+}

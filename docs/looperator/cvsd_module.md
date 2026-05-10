@@ -5,9 +5,11 @@
 This captures the operational behavioral specifications for the Continuously Variable Slope Delta (CVSD) modulation block. Instead of ripping raw instruction lines, this isolates the actual deterministic acoustic response metrics (e.g. tracking slew-rates via syllabic charge) when the codec operates under test signals such as steps, impulses, and white noise. 
 
 # Why it's here
-In the CLEAN DSP codebase, the CVSD block must provide an authentic degradation path echoing early E-mu lo-fi grit. Hard-coding arbitrary saturation isn't historically accurate. Relying on these exact decay constants and idle tones ensures the runtime implementation breathes correctly behind the main filter logic inside the Looperator UI.
+In the product DSP codebase, the CVSD block must provide an original degradation
+path informed by reference behavior. Hard-coding arbitrary saturation is not
+acceptable, but reference findings must not become shipped filter identity.
 
-# Sanitized content
+# Reference content
 
 ## Oracle Characteristics
 - **Reference Oracle Tool:** SoX (Sound eXchange) `v14.4.2`

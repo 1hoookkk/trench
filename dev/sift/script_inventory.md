@@ -46,12 +46,12 @@ _Generated 2026-04-17_
 | Path | Purpose | Last Modified | Referenced By | Writes Files |
 |------|---------|---------------|---------------|--------------|
 | `C:/Users/hooki/trench_re_vault/ghidra_scripts/e4ultra_headless_init.py` | @category E4Ultra | 2026-03-04 | no | no |
-| `C:/Users/hooki/trench_re_vault/tools/codec_lab/run_dual_target_dirty.py` | Run G.726 then CVSD DIRTY sessions with fixed ordering. | 2026-03-05 | no | no |
-| `C:/Users/hooki/trench_re_vault/tools/cvsd_lab/run_cvsd_end_to_end.py` | DIRTY end-to-end behavioral extraction for CVSD. | 2026-03-05 | yes — trench_re_vault\tools\codec_lab\run_dual_target_dirty.py | yes — CAPTURE_MANIFEST.json, cvsd_behavioral_spec.v1.yaml |
+| `C:/Users/hooki/trench_re_vault/tools/codec_lab/run_dual_target_dirty.py` | Run G.726 then CVSD reference sessions with fixed ordering. | 2026-03-05 | no | no |
+| `C:/Users/hooki/trench_re_vault/tools/cvsd_lab/run_cvsd_end_to_end.py` | Reference end-to-end behavioral extraction for CVSD. | 2026-03-05 | yes — trench_re_vault\tools\codec_lab\run_dual_target_dirty.py | yes — CAPTURE_MANIFEST.json, cvsd_behavioral_spec.v1.yaml |
 | `C:/Users/hooki/trench_re_vault/tools/e4ultra/extract_morph_designer_tables.py` | extract_morph_designer_tables.py — Extract CPhantomMorphDesigner lookup tables from EmulatorX.dll | 2026-03-08 | no | yes — analysis/morph_designer_tables.json |
 | `C:/Users/hooki/trench_re_vault/tools/e4ultra/hash_roms.py` | Hash EOS/E4 Ultra ROM images and emit manifest.json. | 2026-03-04 | no | yes — analysis/e4ultra/roms/manifest.json |
-| `C:/Users/hooki/trench_re_vault/tools/g726_lab/run_g726_end_to_end.py` | DIRTY end-to-end behavioral extraction for G.726 ADPCM. | 2026-03-05 | yes — trench_re_vault\tools\codec_lab\run_dual_target_dirty.py | yes — probe_{name}_cs{code_size}.bin, transfer_curve_{mode_tag}.csv |
-| `C:/Users/hooki/trench_re_vault/tools/g729_lab/run_g729_decoder_first_extract.py` | DIRTY decoder-first behavioral extraction for a G.729-class LSP grid target. | 2026-03-06 | no | no |
+| `C:/Users/hooki/trench_re_vault/tools/g726_lab/run_g726_end_to_end.py` | Reference end-to-end behavioral extraction for G.726 ADPCM. | 2026-03-05 | yes — trench_re_vault\tools\codec_lab\run_dual_target_dirty.py | yes — probe_{name}_cs{code_size}.bin, transfer_curve_{mode_tag}.csv |
+| `C:/Users/hooki/trench_re_vault/tools/g729_lab/run_g729_decoder_first_extract.py` | Reference decoder-first behavioral extraction for a G.729-class LSP grid target. | 2026-03-06 | no | no |
 | `C:/Users/hooki/trench_re_vault/tools/inflator_lab/analyze_dc_curve.py` | (no docstring) | 2026-03-09 | yes — trench_re_vault\tools\inflator_lab\run_inflator_blackbox_capture.py | no |
 | `C:/Users/hooki/trench_re_vault/tools/inflator_lab/analyze_harmonics.py` | (no docstring) | 2026-03-09 | yes — trench_re_vault\tools\inflator_lab\run_inflator_blackbox_capture.py | no |
 | `C:/Users/hooki/trench_re_vault/tools/inflator_lab/analyze_memory.py` | (no docstring) | 2026-03-03 | yes — trench_re_vault\tools\inflator_lab\run_inflator_blackbox_capture.py | yes — memory_report.json, memory_report.txt |
@@ -73,11 +73,11 @@ _Generated 2026-04-17_
 | `C:/Users/hooki/trench_re_vault/tools/qsound_lab/build_measure_harness.py` | QSound phase-5 measurement harness scaffolding. | 2026-03-04 | yes — trenchwork_clean\tools\offline-render\src\main.rs | yes — measurement_manifest.json |
 | `C:/Users/hooki/trench_re_vault/tools/qsound_lab/build_phase1_queue.py` | Build a Phase-1 rename/decompile queue from qsound_table_banks JSON output. | 2026-03-03 | no | yes — C:/Users/hooki/Downloads/qsound_table_banks_*.json, tools/qsound_lab/QSOUND_PHASE1_RENAME_QUEUE.md |
 | `C:/Users/hooki/trench_re_vault/tools/qsound_lab/build_qsound_phase3_bundle.py` | Build QSound phase-3 extraction bundle docs from phase1/phase2/decompile artifacts. | 2026-03-03 | no | yes — QSOUND_RENDERER_A_SPEC.md, QSOUND_RENDERER_C_SPEC.md |
-| `C:/Users/hooki/trench_re_vault/tools/qsound_lab/build_qsound_sanitized_bundle.py` | Build a sanitized QSound handoff bundle inside DIRTY and enforce fail-closed leak gates. | 2026-03-07 | yes — trench_re_vault\tools\qsound_lab\run_qsound_spatial_batch_capture.py | yes — HANDOFF.json, CONTRACT.json |
+| `C:/Users/hooki/trench_re_vault/tools/qsound_lab/build_qsound_sanitized_bundle.py` | Build a QSound reference handoff bundle and enforce fail-closed leak gates. | 2026-03-07 | yes - trench_re_vault\tools\qsound_lab\run_qsound_spatial_batch_capture.py | yes - HANDOFF.json, CONTRACT.json |
 | `C:/Users/hooki/trench_re_vault/tools/qsound_lab/extract_qcreator.py` | Extract QCreator payload files from legacy InstallShield artifacts. | 2026-03-03 | no | yes — extract_manifest.json |
-| `C:/Users/hooki/trench_re_vault/tools/qsound_lab/reconstruct_qsound_spatial_v1.py` | QSound spatial v1 clean-room reconstruction pipeline. | 2026-03-07 | yes — trench_re_vault\tools\qsound_lab\run_qsound_spatial_batch_capture.py | yes — train_metrics.csv, val_metrics.csv |
-| `C:/Users/hooki/trench_re_vault/tools/qsound_lab/run_qsound_pan_batch_capture.py` | Manifest-driven QSound pan-grid batch capture for DIRTY workspace. | 2026-03-05 | no | yes — Batch-capture QSound pan grid and emit CAPTURE_MANIFEST.json, CAPTURE_PLAN.json |
-| `C:/Users/hooki/trench_re_vault/tools/qsound_lab/run_qsound_spatial_batch_capture.py` | QSound live-ingress v2 batch capture driver for the DIRTY airlock. | 2026-03-07 | no | yes — artifacts/qsound_phase5_harness/measurement_manifest.json, stimulus_variants.json |
+| `C:/Users/hooki/trench_re_vault/tools/qsound_lab/reconstruct_qsound_spatial_v1.py` | QSound spatial v1 reference reconstruction pipeline. | 2026-03-07 | yes - trench_re_vault\tools\qsound_lab\run_qsound_spatial_batch_capture.py | yes - train_metrics.csv, val_metrics.csv |
+| `C:/Users/hooki/trench_re_vault/tools/qsound_lab/run_qsound_pan_batch_capture.py` | Manifest-driven QSound pan-grid batch capture for reference workspace. | 2026-03-05 | no | yes - Batch-capture QSound pan grid and emit CAPTURE_MANIFEST.json, CAPTURE_PLAN.json |
+| `C:/Users/hooki/trench_re_vault/tools/qsound_lab/run_qsound_spatial_batch_capture.py` | QSound live-ingress v2 batch capture driver for reference work. | 2026-03-07 | no | yes - artifacts/qsound_phase5_harness/measurement_manifest.json, stimulus_variants.json |
 
 ## C:/Users/hooki/trenchwork_clean
 
@@ -126,7 +126,7 @@ _Generated 2026-04-17_
 | `C:/Users/hooki/trenchwork_clean/foo/src/main.rs` | (no docstring) | 2026-03-27 | yes — Trench\dev\sift\gen_inventory.py | — |
 | `C:/Users/hooki/trenchwork_clean/quarantine/trench-ui/src/main.rs` | Resolve workspace root — works whether CWD is workspace root or trench-ui/. | 2026-03-23 | yes — Trench\dev\sift\gen_inventory.py | — |
 | `C:/Users/hooki/trenchwork_clean/tools/bake/src/main.rs` | ! One-time bake tool: legacy cartridge JSON → compiled JSON + const Rust source. | 2026-03-23 | yes — Trench\dev\sift\gen_inventory.py | — |
-| `C:/Users/hooki/trenchwork_clean/tools/offline-render/src/main.rs` | Render QSound stimuli through a simplified clean-room path using extracted tables. | 2026-03-23 | yes — Trench\dev\sift\gen_inventory.py | — |
+| `C:/Users/hooki/trenchwork_clean/tools/offline-render/src/main.rs` | Render QSound stimuli through a simplified reference path using extracted tables. | 2026-03-23 | yes — Trench\dev\sift\gen_inventory.py | — |
 | `C:/Users/hooki/trenchwork_clean/tools/render-morph/src/main.rs` | QSound contract ITD/ILD coefficients (from CONTRACT.json behavioral_laws_v1) | 2026-03-23 | yes — Trench\dev\sift\gen_inventory.py | — |
 | `C:/Users/hooki/trenchwork_clean/tools/render-parity/src/main.rs` | ! Render P2K_013 (Talking Hedz) at all 4 corners through the TRENCH cascade. | 2026-03-23 | yes — Trench\dev\sift\gen_inventory.py | — |
 | `C:/Users/hooki/trenchwork_clean/trench-mcp/src/main.rs` | ! trench-mcp — MCP server exposing TRENCH analysis to Claude. | 2026-03-25 | yes — Trench\dev\sift\gen_inventory.py | — |

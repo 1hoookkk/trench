@@ -1,0 +1,7 @@
+Talking Hedz fidelity — calibration @ 39062.5 Hz vs pill @ 44100 Hz
+Both cascades peak-normalized to calibration cascade_peak_db per corner.
+corner           rms_dB   max_err_dB   peak_cal  peak_pill
+M0_Q0              5.10        13.78      18.40      18.40
+M100_Q0            5.12        13.59      36.10      36.10
+M0_Q100            4.01        14.20      18.40      18.40
+M100_Q100          4.02        14.12      39.10      39.10

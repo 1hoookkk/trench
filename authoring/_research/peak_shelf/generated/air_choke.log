@@ -1,0 +1,15 @@
+STDOUT:
+Compiled air_choke -> c:\Users\hooki\Trench\authoring\peak_shelf\air_choke.raw.json
+Lowered -> c:\Users\hooki\Trench\authoring\peak_shelf\air_choke.raw.compiled.json
+=== air_choke ===
+  M0_Q0: cascade=12.0 dB, max_stage=10.1 dB, cancel=-1.9 dB, r_max=0.879
+  M0_Q100: cascade=12.0 dB, max_stage=10.1 dB, cancel=-1.9 dB, r_max=0.879
+  M100_Q0: cascade=12.0 dB, max_stage=18.4 dB, cancel=6.4 dB, r_max=0.893
+  M100_Q100: cascade=12.0 dB, max_stage=18.4 dB, cancel=6.4 dB, r_max=0.893
+DECISION: PASS
+NOTES: Stable controlled cancellation.
+
+Plot -> c:\Users\hooki\Trench\authoring\peak_shelf\air_choke.raw.response.png
+Preview -> c:\Users\hooki\Trench\authoring\peak_shelf\air_choke.raw.preview.png
+
+STDERR:

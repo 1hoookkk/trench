@@ -1,0 +1,37 @@
+{
+  "name": "glass_throat",
+  "verdict": "KILL",
+  "reason": "The planner output does not produce readable individual stage jobs. Stages 2-5 stack into one broad hill, so the cascade has a morph gesture but not a memorable injury.",
+  "stage_failures": [
+    {
+      "stage": 1,
+      "planned_role": "air cap",
+      "actual_read": "broad low-pass boundary, not identity-bearing"
+    },
+    {
+      "stage": 2,
+      "planned_role": "throat F1",
+      "actual_read": "adds broad low/mid energy; not isolated enough to read as a formant"
+    },
+    {
+      "stage": 3,
+      "planned_role": "mouth F2",
+      "actual_read": "dominates into the same hill as stage 2"
+    },
+    {
+      "stage": 4,
+      "planned_role": "glass bite",
+      "actual_read": "does not become the obvious injury; it is absorbed into the cascade"
+    },
+    {
+      "stage": 5,
+      "planned_role": "presence control",
+      "actual_read": "too broad to carve the glass shard"
+    },
+    {
+      "stage": 6,
+      "planned_role": "floor cleanup",
+      "actual_read": "not the problem, but also not part of the identity"
+    }
+  ]
+}

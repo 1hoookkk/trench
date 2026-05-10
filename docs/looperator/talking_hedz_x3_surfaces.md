@@ -12,7 +12,7 @@ This is tracking and analysis data describing the `Talking Hedz` P2K morph skin,
 # Why it's here
 `Talking Hedz` represents the worst-case complexity for a morphing filter body—it exhibits the foreign-pole-alignment traits (now preserved as `project_zeros_architecture` in the CLEAN repo). The Looperator compiler must understand exactly how the original runtime simplified/swapped these stages at the corners to guarantee that the user's placement of a Talking Hedz token yields the actual expected vocal character, rather than the theoretically pure but sonically incorrect 6-stage raw format.
 
-# Sanitized content
+# Reference content
 
 ## X3 Surface Definitions
 The `talking_hedz_x3_surfaces` capture identifies three principal measurement layers built around the `[M0_Q100, M100_Q100, M100_Q0]` coordinate grid:

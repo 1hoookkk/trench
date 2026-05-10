@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TRENCH // ACOUSTIC THEATER COCKPIT</title>
+    <style>
+        :root {
+            --bg: #050505;
+            --panel: #0a0a0a;
+            --border: #222;
+            --text: #888;
+            --accent: #00ffcc;
+            --font: "Consolas", "Monaco", monospace;
+        }
+
+        body {
+            background: var(--bg);
+            color: var(--text);
+            font-family: var(--font);
+            margin: 0;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+        }
+
+        header {
+            height: 45px;
+            background: var(--panel);
+            border-bottom: 2px solid var(--border);
+            display: flex;
+            align-items: center;
+            padding: 0 20px;
+            z-index: 100;
+        }
+
+        footer {
+            height: 55px;
+            background: var(--panel);
+            border-top: 2px solid var(--border);
+            display: flex;
+            align-items: center;
+            padding: 0 20px;
+            gap: 20px;
+            z-index: 100;
+        }
+
+        .actions {
+            display: flex;
+            gap: 6px;
+            margin-left: auto;
+        }
+
+        button {
+            background: #111;
+            border: 1px solid #333;
+            color: #aaa;
+            font-family: var(--font);
+            font-size: 11px;
+            padding: 6px 12px;
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.2s ease;
+        }
+
+        button:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+            background: #001a14;
+        }
+
+        button.active {
+            background: #003322;
+            color: var(--accent);
+            border-color: var(--accent);
+            box-shadow: 0 0 10px rgba(0, 255, 204, 0.2);
+        }
+
+        input[type=text] {
+            background: #000;
+            border: 1px solid #444;
+            color: var(--accent);
+            font-family: var(--font);
+            font-size: 14px;
+            padding: 6px 10px;
+            width: 280px;
+            letter-spacing: 1px;
+        }
+
+        #viewport {
+            flex: 1;
+            background: radial-gradient(circle at center, #111 0%, #000 100%);
+            cursor: crosshair;
+            position: relative;
+        }
+
+        .ctrl {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 11px;
+            font-weight: bold;
+            letter-spacing: 1px;
+        }
+
+        input[type=range] {
+            width: 140px;
+            accent-color: var(--accent);
+        }
+
+        #overlay-readout {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            padding: 15px;
+            background: rgba(0, 0, 0, 0.85);
+            border: 1px solid var(--accent);
+            border-left: 4px solid var(--accent);
+            pointer-events: none;
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+        }
+
+        .read-val {
+            color: #fff;
+            font-size: 16px;
+            margin-top: 4px;
+            margin-bottom: 12px;
+            font-weight: bold;
+        }
+
+        .zone-hl {
+            color: var(--accent);
+        }
+
+        .doctrine {
+            color: #e85090;
+            font-size: 10px;
+            margin-left: auto;
+            font-weight: bold;
+            letter-spacing: 2px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <input type="text" id="candidate-name" value="stage_forge_candidate">
+        <div class="actions">
+            <select id="preset-select"
+                style="background:#000;color:#fff;font-family:var(--font);font-size:11px;border:1px solid #444;padding:4px;"
+                onchange="window.loadPreset(this.value)">
+                <option value="">-- PHYSICAL PRESETS --</option>
+                <option value="PEAK/SHELF REESE" selected>PEAK/SHELF REESE</option>
+                <option value="AHH -> EEE">AHH -> EEE</option>
+            </select>
+            <button onclick="document.getElementById('file-input').click()">LOAD MAP</button>
+            <button onclick="saveJSON()">BAKE</button>
+            <button onclick="resetAll()">RESET</button>
+        </div>
+    </header>
+
+    <div id="viewport">
+        <div class="hud">
+            <b>ANATOMICAL TARGET</b>
+            <span id="read-stage">-</span>
+            <div style="height:10px"></div>
+            <b>HZ / MAGNITUDE</b>
+            <span id="read-coords">0 / 0</span>
+            <div style="height:10px"></div>
+            <b>FORMANT ZONE</b>
+            <span id="read-zone" style="color:var(--accent);font-size:14px">-</span>
+        </div>
+    </div>
+
+    <footer>
+        <button id="play-btn" onclick="toggleAudio()">TEST SWEEP</button>
+
+        <div class="ctrl">
+            <span style="color:var(--accent)">MORPH</span>
+            <input type="range" id="morph-slider" min="0" max="1" step="0.01" value="0" oninput="updateAudioParams()">
+        </div>
+
+        <div class="ctrl">
+            <span>DRIVE (Q)</span>
+            <input type="range" id="bake-boost" min="0.001" max="0.02" step="0.001" value="0.004">
+        </div>
+
+        <div class="ctrl">
+            <span>OUT</span>
+            <input type="range" id="vol-slider" min="0" max="1" step="0.01" value="0.5" oninput="updateAudioParams()">
+        </div>
+
+        <button onclick="copyCommands()">COPY BUILD SCRIPT</button>
+        <div class="doctrine">ACOUSTIC THEATER PARADIGM</div>
+    </footer>
+
+    <input type="file" id="file-input" style="display:none" onchange="loadJSON(event)">
+
+    <script type="importmap">
+    { "imports": { "three": "https://unpkg.com/three@0.160.0/build/three.module.js" } }
+    </script>
+
+    <script type="module">
+        import * as THREE from 'three';
+
+        // Physical Band Definitions (Resonant Bark Scale)
+        function getPhysicalZone(hz) {
+            if (hz < 150) return "SUB";
+            if (hz < 400) return "CHEST";
+            if (hz < 920) return "THROAT";
+            if (hz < 2320) return "MOUTH";
+            if (hz < 4400) return "PRESENCE";
+            if (hz < 7700) return "BITE";
+            return "AIR";
+        }
+
+        // Stage Matrix Mapping (1-Indexed)
+        const STAGES = {
+            S1: { color: 0x666666, type: 'highpass', anatomy: "CHEST" },
+            S2: { color: 0x00ffff, type: 'peaking',  anatomy: "THROAT" },
+            S3: { color: 0x00ff00, type: 'peaking',  anatomy: "MOUTH" },
+            S4: { color: ff00ff, type: 'notch',    anatomy: "NASAL" },
+            S5: { color: 0xffaa00, type: 'peaking',  anatomy: "FACE" },
+            S6: { color: 0x88ccff, type: 'lowpass',  anatomy: "AIR" }
+        };
+        const SNAMES = Object.keys(STAGES);
+        const FMAP = { S1:"floor", S2:"throat_f1", S3:"mouth_f2", S4:"nasal_cut", S5:"bite", S6:"air" };
+
+        const BIO_ZONES = [
+            { name: "CHEST",  hz: 400,   color: 0x110000 },
+            { name: "THROAT (F1)", hz: 1000,  color: 0x001100 },
+            { name: "MOUTH (F2)",  hz: 2500,  color: 0x000011 },
+            { name: "FACE (F3+)",  hz: 5000,  color: 0x111100 },
+            { name: "BITE/AIR",    hz: 18000, color: 0x001111 }
+        ];
+
+        function getBioZone(hz) {
+            for (let z of BIO_ZONES) { if (hz <= z.hz) return z.name; }
+            return "ULTRASONIC";
+        }
+
+        // Accurately matched to your Peak/Shelf Reese instructions
+        const PRESETS = {
+            "PEAK/SHELF REESE": {
+                A: { floor: { hz: 246, gain_db: -50 }, throat_f1: { hz: 246, gain_db: -24 }, mouth_f2: { hz: 300, gain_db: -20 }, nasal_cut: { hz: 2500, gain_db: -12 }, bite: { hz: 3500, gain_db: 0 }, air: { hz: 500, gain_db: -50 } },
+                B: { floor: { hz: 4488, gain_db: 30 }, throat_f1: { hz: 4488, gain_db: 1.5 }, mouth_f2: { hz: 2200, gain_db: 12 }, nasal_cut: { hz: 2500, gain_db: -12 }, bite: { hz: 5500, gain_db: 8 }, air: { hz: 18000, gain_db: 30 } }
+            },
+            "AHH -> EEE": {
+                A: { floor: { hz: 100, gain_db: 0 }, throat_f1: { hz: 800, gain_db: 15 }, mouth_f2: { hz: 1200, gain_db: 15 }, nasal_cut: { hz: 2500, gain_db: -12 }, bite: { hz: 3500, gain_db: 5 }, air: { hz: 8000, gain_db: 0 } },
+                B: { floor: { hz: 100, gain_db: 0 }, throat_f1: { hz: 400, gain_db: 15 }, mouth_f2: { hz: 2200, gain_db: 15 }, nasal_cut: { hz: 2500, gain_db: -12 }, bite: { hz: 3500, gain_db: 5 }, air: { hz: 8000, gain_db: 0 } }
+            }
+        };
+
+        const DEFAULTS = PRESETS["PEAK/SHELF REESE"];
+        let state = JSON.parse(JSON.stringify(DEFAULTS));
+
+        // --- COORDINATE CORE (Bark Scale Math) ---
+        const hz_to_bark = f => 26.81 * f / (1960.0 + f) - 0.53;
+        const bark_to_hz = b => 1960.0 * (b + 0.53) / (26.28 - b);
+        const BARK_MIN = hz_to_bark(20), BARK_MAX = hz_to_bark(20000);
+
+        function hzToX(hz, aspect) {
+            const b = hz_to_bark(hz);
+            return (((b - BARK_MIN) / (BARK_MAX - BARK_MIN)) * 2 - 1) * aspect;
+        }
+        function xToHz(x, aspect) {
+            const b = BARK_MIN + (((x / aspect) + 1) / 2) * (BARK_MAX - BARK_MIN);
+            return bark_to_hz(b);
+        }
+        function dbToY(db) { return ((db + 48) / 72) * 2 - 1; }
+        function yToDb(y) { return ((y + 1) / 2) * 72 - 48; }
+
+        // --- THREE.JS ---
+        const viewport = document.getElementById('viewport');
+        const scene = new THREE.Scene();
+        const camera = new THREE.OrthographicCamera(-1, 1, 1, -1, 0.1, 100);
+        camera.position.z = 10;
+
+        const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+        renderer.setPixelRatio(window.devicePixelRatio);
+        renderer.setSize(viewport.clientWidth, viewport.clientHeight);
+        viewport.appendChild(renderer.domElement);
+
+        function syncCam() {
+            const a = viewport.clientWidth / viewport.clientHeight;
+            camera.left = -a; camera.right = a; camera.updateProjectionMatrix();
+        }
+        syncCam();
+
+        window.loadPreset = (k) => {
+            if (!PRESETS[k]) return;
+            state = JSON.parse(JSON.stringify(PRESETS[k]));
+            document.getElementById('candidate-name').value = k.toLowerCase().replace(/\s+/g, '_');
+            buildHandles(); syncHUD(); updateAudio();
+        };
+
+        const gridGrp = new THREE.Group(), handleGrp = new THREE.Group(), linkGrp = new THREE.Group();
+        scene.add(gridGrp, handleGrp, linkGrp);
+
+        function buildGrid() {
+            gridGrp.clear();
+            const aspect = viewport.clientWidth / viewport.clientHeight;
+
+            // Physical Band Background Colors
+            const zones = [
+                { hz: 150, col: 0x110000 }, { hz: 400, col: 0x1a0a00 },
+                { hz: 920, col: 0x111100 }, { hz: 2320, col: 0x001100 },
+                { hz: 4400, col: 0x001111 }, { hz: 7700, col: 0x000011 }
+            ];
+
+            let lastX = -aspect;
+            zones.forEach(z => {
+                const x = hzToX(z.hz, aspect);
+                const geo = new THREE.PlaneGeometry(x - lastX, 2);
+                const mat = new THREE.MeshBasicMaterial({ color: z.col, transparent: true, opacity: 0.4 });
+                const mesh = new THREE.Mesh(geo, mat);
+                mesh.position.set(lastX + (x - lastX) / 2, 0, -2);
+                gridGrp.add(mesh);
+
+                // Cutoff lines
+                const lg = new THREE.BufferGeometry().setFromPoints([new THREE.Vector3(x, -1, 0), new THREE.Vector3(x, 1, 0)]);
+                gridGrp.add(new THREE.Line(lg, new THREE.LineBasicMaterial({ color: 0x333333 })));
+                lastX = x;
+            });
+
+            [-24, -12, 0, 12, 24].forEach(db => {
+                const y = dbToY(db);
+                const g = new THREE.BufferGeometry().setFromPoints([new THREE.Vector3(-aspect, y, 0), new THREE.Vector3(aspect, y, 0)]);
+                gridGrp.add(new THREE.Line(g, new THREE.LineBasicMaterial({ color: db === 0 ? 0x444444 : 0x222222 })));
+            });
+        }
+
+        const handles = [];
+        function createSpr(text, color) {
+            const canvas = document.createElement('canvas');
+            canvas.width = 150; canvas.height = 32;
+            const ctx = canvas.getContext('2d');
+            ctx.fillStyle = '#' + color.toString(16).padStart(6, '0');
+            ctx.font = 'bold 16px Consolas';
+            ctx.fillText(text, 5, 20);
+            const tex = new THREE.CanvasTexture(canvas);
+            const sprite = new THREE.Sprite(new THREE.SpriteMaterial({ map: tex }));
+            sprite.scale.set(0.5, 0.11, 1);
+            return sprite;
+        }
+
+        function buildHandles() {
+            handleGrp.clear(); linkGrp.clear(); handles.length = 0;
+            const aspect = viewport.clientWidth / viewport.clientHeight;
+
+            SNAMES.forEach(sn => {
+                const fname = FIELD_NAMES[sn], conf = STAGES[sn];
+                const posA = new THREE.Vector3(hzToX(state.A[fname].hz, aspect), dbToY(state.A[fname].gain_db), 0);
+                const posB = new THREE.Vector3(hzToX(state.B[fname].hz, aspect), dbToY(state.B[fname].gain_db), 0);
+
+                const linkGeom = new THREE.BufferGeometry().setFromPoints([posA, posB]);
+                const link = new THREE.Line(linkGeom, new THREE.LineBasicMaterial({ color: conf.color, transparent: true, opacity: 0.3, linewidth: 2 }));
+                linkGrp.add(link);
+
+                ['A', 'B'].forEach(fid => {
+                    const s = state[fid][fname];
+                    const g = new THREE.Group();
+                    g.position.set(hzToX(s.hz, aspect), dbToY(s.gain_db), 0);
+
+                    const size = 0.04;
+                    let mesh;
+
+                    // Semantic Visual Weighting
+                    if (conf.shape === "bar") {
+                        const geo = new THREE.PlaneGeometry(size * 4, size * 1.5);
+                        mesh = new THREE.Mesh(geo, new THREE.MeshBasicMaterial({ color: conf.color, wireframe: fid === 'A' }));
+                    } else if (conf.shape === "hollow") {
+                        const pts = [new THREE.Vector3(-size, -size, 0), new THREE.Vector3(size, -size, 0), new THREE.Vector3(size, size, 0), new THREE.Vector3(-size, size, 0), new THREE.Vector3(-size, -size, 0)];
+                        g.add(new THREE.Line(new THREE.BufferGeometry().setFromPoints(pts), new THREE.LineBasicMaterial({ color: 0x00ffd5, linewidth: 2 })));
+                    } else {
+                        const geo = new THREE.PlaneGeometry(size * 2, size * 2);
+                        mesh = new THREE.Mesh(geo, new THREE.MeshBasicMaterial({ color: conf.color, wireframe: fid === 'A' }));
+                    }
+
+                    const hitbox = new THREE.Mesh(new THREE.PlaneGeometry(0.2, 0.2), new THREE.MeshBasicMaterial({ visible: false }));
+                    const lbl = createSpr(`${sn}${fid}`, conf.color);
+                    lbl.position.set(fid === 'A' ? -0.18 : 0.18, fid === 'A' ? 0.08 : -0.08, 0);
+
+                    g.add(mesh, hitbox, lbl);
+                    handleGrp.add(g);
+                    handles.push({ fid, stage: sn, fname, group: g, lbl, link });
+                });
+            });
+        }
+
+        function syncHUD() {
+            const aspect = viewport.clientWidth / viewport.clientHeight;
+            handles.forEach(h => {
+                const s = state[h.fid][h.fname];
+                const ctx = h.lbl.material.map.image.getContext('2d');
+                ctx.clearRect(0, 0, 150, 32);
+                ctx.fillStyle = '#' + STAGES[h.stage].color.toString(16).padStart(6, '0');
+
+                // SEMANTIC LABEL IN VIEWPORT
+                const zone = getPhysicalZone(s.hz);
+                ctx.fillText(`[${zone}] ${s.gain_db}dB`, 5, 20);
+
+                h.lbl.material.map.needsUpdate = true;
+                if (h.fid === 'A') {
+                    h.link.geometry.setFromPoints([
+                        new THREE.Vector3(hzToX(state.A[h.fname].hz, aspect), dbToY(state.A[h.fname].gain_db), 0),
+                        new THREE.Vector3(hzToX(state.B[h.fname].hz, aspect), dbToY(state.B[h.fname].gain_db), 0)
+                    ]);
+                }
+            });
+        }
+
+        // --- INTERACTION ---
+        let sel = null, isDrag = false;
+        const ray = new THREE.Raycaster(), mouse = new THREE.Vector2();
+
+        viewport.addEventListener('pointerdown', e => {
+            const r = viewport.getBoundingClientRect();
+            mouse.x = ((e.clientX - r.left) / r.width) * 2 - 1;
+            mouse.y = -((e.clientY - r.top) / r.height) * 2 + 1;
+            ray.setFromCamera(mouse, camera);
+            const hits = ray.intersectObjects(handleGrp.children, true);
+            if (hits.length > 0) {
+                let t = hits[0].object; while (t && !handles.find(h => h.group === t)) t = t.parent;
+                sel = handles.find(h => h.group === t);
+                if (sel) { isDrag = true; sel.group.scale.set(1.5, 1.5, 1); updateReadout(); }
+            }
+        });
+
+        window.addEventListener('pointermove', e => {
+            const r = viewport.getBoundingClientRect(), aspect = r.width / r.height;
+            mouse.x = ((e.clientX - r.left) / r.width) * 2 - 1;
+            mouse.y = -((e.clientY - r.top) / r.height) * 2 + 1;
+            if (isDrag && sel) {
+                const x = Math.max(-aspect, Math.min(aspect, mouse.x * aspect));
+                const y = Math.max(-1, Math.min(1, mouse.y));
+                state[sel.fid][sel.fname].hz = Math.round(xToHz(x, aspect));
+                state[sel.fid][sel.fname].gain_db = Math.round(yToDb(y) * 10) / 10;
+                sel.group.position.set(x, y, 0);
+                syncHUD(); updateReadout(); updateAudio();
+            }
+        });
+
+        window.addEventListener('pointerup', () => { if (sel) sel.group.scale.set(1, 1, 1); isDrag = false; sel = null; });
+
+        function updateReadout() {
+            if (sel) {
+                const s = state[sel.fid][sel.fname];
+                const zone = getPhysicalZone(s.hz);
+                document.getElementById('read-stage').textContent = `${sel.stage} (${STAGES[sel.stage].name})`;
+                document.getElementById('read-coords').innerHTML = `<span class="zone-hl">[${zone}]</span> ${s.hz}Hz / ${s.gain_db}dB`;
+            }
+        }
+
+        // --- AUDIO ---
+        let ac = null, src = null, gain = null;
+        const filters = {};
+
+        window.toggleAudio = () => {
+            if (!ac) ac = new AudioContext();
+            const btn = document.getElementById('play-btn');
+            if (src) { src.stop(); src = null; btn.classList.remove('active'); }
+            else {
+                src = ac.createOscillator(); src.type = 'sawtooth';
+                gain = ac.createGain(); gain.gain.value = document.getElementById('vol-slider').value * 0.15;
+                let prev = src;
+                SNAMES.forEach(sn => {
+                    const f = ac.createBiquadFilter();
+                    f.type = (sn === 'S3') ? 'notch' : (sn === 'S0') ? 'highpass' : (sn === 'S5') ? 'lowpass' : 'peaking';
+                    f.Q.value = 2; filters[sn] = f; prev.connect(f); prev = f;
+                });
+                prev.connect(gain); gain.connect(ac.destination);
+                src.start(); updateAudio(); btn.classList.add('active');
+            }
+        };
+
+        function updateAudio() {
+            if (!src) return;
+            const morph = parseFloat(document.getElementById('morph-slider').value);
+            gain.gain.setTargetAtTime(document.getElementById('vol-slider').value * 0.15, ac.currentTime, 0.05);
+            SNAMES.forEach(sn => {
+                const fn = FIELD_NAMES[sn];
+                const hz = state.A[fn].hz + (state.B[fn].hz - state.A[fn].hz) * morph;
+                const db = state.A[fn].gain_db + (state.B[fn].gain_db - state.A[fn].gain_db) * morph;
+                filters[sn].frequency.setTargetAtTime(hz, ac.currentTime, 0.05);
+                filters[sn].gain.setTargetAtTime(db, ac.currentTime, 0.05);
+            });
+        }
+
+        // --- FILE ---
+        window.saveJSON = () => {
+            const name = document.getElementById('candidate-name').value;
+            const boost = parseFloat(document.getElementById('bake-boost').value);
+            const data = { schema: "trench.ui.frame_map.v1", name, category: "VOW", boost, frames: state, render_metadata: { preview_type: "AUDIO_SKETCH_NOT_RESPONSE" } };
+            const blob = new Blob([JSON.stringify(data, null, 2)], { type: "application/json" });
+            const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = `${name}.frame_map.json`; a.click();
+        };
+
+        window.loadJSON = e => {
+            const f = e.target.files[0]; if (!f) return;
+            const r = new FileReader(); r.onload = ev => {
+                const d = JSON.parse(ev.target.result);
+                if (d.schema === "trench.ui.frame_map.v1") {
+                    state = d.frames; document.getElementById('candidate-name').value = d.name;
+                    buildHandles(); syncHUD(); updateAudio();
+                }
+            }; r.readAsText(f);
+        };
+
+        window.copyCommands = () => {
+            const n = document.getElementById('candidate-name').value;
+            const c = `python tools/plan_stages_from_bark_map.py --input authoring/emu_designer/bark_frames/${n}.frame_map.json --recipe talking_formant --out authoring/emu_designer/generated/${n}.morph_designer.json --plot authoring/emu_designer/generated/${n}.intent_hz.png\n\npython tools/compile_emu_designer.py authoring/emu_designer/generated/${n}.morph_designer.json --out authoring/emu_designer/generated/${n}.raw.json\n\npython tools/compile_raw.py authoring/emu_designer/generated/${n}.raw.json --out authoring/emu_designer/generated/${n}.compiled.json\n\npython tools/plot_magnitude.py authoring/emu_designer/generated/${n}.compiled.json --out authoring/emu_designer/generated/${n}.response.png\n\npython tools/check_forge_candidate.py --frame-map authoring/emu_designer/bark_frames/${n}.frame_map.json --compiled authoring/emu_designer/generated/${n}.compiled.json --plot authoring/emu_designer/generated/${n}.response.png --recipe talking_formant`;
+            navigator.clipboard.writeText(c);
+        };
+
+        window.resetAll = () => { state = JSON.parse(JSON.stringify(DEFAULTS)); buildHandles(); syncHUD(); };
+        function animate() { requestAnimationFrame(animate); renderer.render(scene, camera); }
+        window.addEventListener('resize', () => { renderer.setSize(viewport.clientWidth, viewport.clientHeight); syncCam(); buildGrid(); buildHandles(); syncHUD(); });
+
+        buildGrid(); buildHandles(); animate();
+    </script>
+</body>
+
+</html>

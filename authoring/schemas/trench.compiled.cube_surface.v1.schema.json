@@ -1,0 +1,71 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "trench.compiled.cube_surface.v1.schema.json",
+  "title": "TRENCH Compiled Cube Surface v1",
+  "type": "object",
+  "required": [
+    "schema",
+    "derived_from",
+    "compiler",
+    "representation",
+    "exactness",
+    "control_mode",
+    "corner_resolution",
+    "corners"
+  ],
+  "properties": {
+    "schema": { "const": "trench.compiled.cube_surface.v1" },
+    "name": { "type": "string" },
+    "derived_from": { "type": "object" },
+    "compiler": { "type": "object" },
+    "representation": { "const": "engine_ready_coeff_packs" },
+    "exactness": { "type": "string", "minLength": 1 },
+    "control_mode": {
+      "type": "string",
+      "enum": ["modern_live_xyz", "legacy_latch_yz"]
+    },
+    "corner_resolution": { "type": "object" },
+    "corners": {
+      "type": "object",
+      "required": ["c000", "c100", "c010", "c110", "c001", "c101", "c011", "c111"],
+      "additionalProperties": false,
+      "properties": {
+        "c000": { "$ref": "#/$defs/compiledCorner" },
+        "c100": { "$ref": "#/$defs/compiledCorner" },
+        "c010": { "$ref": "#/$defs/compiledCorner" },
+        "c110": { "$ref": "#/$defs/compiledCorner" },
+        "c001": { "$ref": "#/$defs/compiledCorner" },
+        "c101": { "$ref": "#/$defs/compiledCorner" },
+        "c011": { "$ref": "#/$defs/compiledCorner" },
+        "c111": { "$ref": "#/$defs/compiledCorner" }
+      }
+    }
+  },
+  "$defs": {
+    "stage": {
+      "type": "object",
+      "required": ["c0", "c1", "c2", "c3", "c4"],
+      "properties": {
+        "c0": { "type": "number" },
+        "c1": { "type": "number" },
+        "c2": { "type": "number" },
+        "c3": { "type": "number" },
+        "c4": { "type": "number" }
+      },
+      "additionalProperties": false
+    },
+    "compiledCorner": {
+      "type": "object",
+      "required": ["boost", "stages"],
+      "properties": {
+        "boost": { "type": "number" },
+        "stages": {
+          "type": "array",
+          "minItems": 6,
+          "items": { "$ref": "#/$defs/stage" }
+        }
+      },
+      "additionalProperties": false
+    }
+  }
+}

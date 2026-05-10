@@ -1,0 +1,69 @@
+{
+  "schema": "trench.ui.bark_landmarks.v1",
+  "note": "Fixed authoring locations on the Bark (psychoacoustic critical-band) axis. Hz is the canonical storage value; Bark is provided for quick reference and is close to the Traunmueller (1990) value but not strictly derived (some entries are rounded for grid readability). GUI, plot labels, AI language, candidate scoring, and Frame A/B handles all anchor to this file.",
+  "rows": [
+    {
+      "id": "floor",
+      "label": "Floor",
+      "bark": 1.5,
+      "hz": 60,
+      "role": "sub anchor / low-end survival"
+    },
+    {
+      "id": "chest",
+      "label": "Chest",
+      "bark": 3.0,
+      "hz": 125,
+      "role": "weight / body resonance"
+    },
+    {
+      "id": "throat_f1",
+      "label": "Throat / F1",
+      "bark": 5.5,
+      "hz": 500,
+      "role": "vowel opening / throat size"
+    },
+    {
+      "id": "mouth_f2",
+      "label": "Mouth / F2",
+      "bark": 10.5,
+      "hz": 1300,
+      "role": "vowel identity / talking read"
+    },
+    {
+      "id": "nasal_cut",
+      "label": "Nasal Cut",
+      "bark": 12.0,
+      "hz": 1700,
+      "role": "anti-resonance / hollow tube"
+    },
+    {
+      "id": "bite",
+      "label": "Bite",
+      "bark": 15.0,
+      "hz": 2700,
+      "role": "ear canal / nasal bite"
+    },
+    {
+      "id": "presence",
+      "label": "Presence",
+      "bark": 16.5,
+      "hz": 3500,
+      "role": "projection / intelligibility"
+    },
+    {
+      "id": "sibilance",
+      "label": "Sibilance",
+      "bark": 20.5,
+      "hz": 7000,
+      "role": "fold / metallic stress"
+    },
+    {
+      "id": "air",
+      "label": "Air",
+      "bark": 23.0,
+      "hz": 12000,
+      "role": "sheen / top openness"
+    }
+  ]
+}

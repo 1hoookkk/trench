@@ -1,0 +1,863 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TRENCH // STAGE FORGE v0.2 (Atlas Edition)</title>
+    <style>
+        :root {
+            --bg: #050607;
+            --panel: #0d0f11;
+            --border: #22292d;
+            --text: #c0c7cf;
+            --accent: #00ffcc;
+            --warning: #ff4400;
+            --muted: #556677;
+            --font: "Consolas", "Monaco", monospace;
+            --glass: rgba(13, 15, 17, 0.85);
+        }
+
+        * {
+            box-sizing: border-box;
+            user-select: none;
+        }
+
+        body {
+            background: var(--bg);
+            color: var(--text);
+            font-family: var(--font);
+            margin: 0;
+            display: grid;
+            grid-template-columns: 320px 1fr 340px;
+            grid-template-rows: 60px 1fr 100px;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        header {
+            grid-column: 1 / 4;
+            background: var(--panel);
+            border-bottom: 2px solid var(--border);
+            display: flex;
+            align-items: center;
+            padding: 0 20px;
+            justify-content: space-between;
+            z-index: 100;
+        }
+
+        .title {
+            font-size: 18px;
+            font-weight: bold;
+            letter-spacing: 2px;
+            color: var(--accent);
+        }
+
+        nav {
+            grid-row: 2 / 3;
+            background: var(--panel);
+            border-right: 1px solid var(--border);
+            padding: 20px;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        #viewport-container {
+            grid-row: 2 / 3;
+            grid-column: 2 / 3;
+            position: relative;
+            background: radial-gradient(circle at center, #111518 0%, #050607 100%);
+            overflow: hidden;
+        }
+
+        aside {
+            grid-row: 2 / 3;
+            background: var(--panel);
+            border-left: 1px solid var(--border);
+            padding: 20px;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        footer {
+            grid-column: 1 / 4;
+            background: var(--panel);
+            border-top: 2px solid var(--border);
+            display: flex;
+            align-items: center;
+            padding: 0 20px;
+            gap: 30px;
+        }
+
+        .section-title {
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--muted);
+            margin-bottom: 12px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .stage-row {
+            padding: 10px;
+            background: #151a1d;
+            border: 1px solid #2d3539;
+            margin-bottom: 8px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .stage-row:hover {
+            border-color: var(--accent);
+        }
+
+        .stage-row.active {
+            border-color: var(--accent);
+            background: #001a14;
+            box-shadow: 0 0 15px rgba(0, 255, 204, 0.1);
+        }
+
+        .stage-head {
+            display: flex;
+            justify-content: space-between;
+            font-size: 12px;
+            margin-bottom: 4px;
+        }
+
+        .stage-hz {
+            color: var(--accent);
+            font-weight: bold;
+        }
+
+        .stage-role-tag {
+            font-size: 9px;
+            color: var(--muted);
+            text-transform: uppercase;
+        }
+
+        .vowel-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 4px;
+        }
+
+        .vowel-btn {
+            background: #1a1f24;
+            border: 1px solid #333;
+            color: #aaa;
+            padding: 6px;
+            font-size: 10px;
+            cursor: pointer;
+            text-align: center;
+        }
+
+        .vowel-btn.active {
+            background: var(--accent);
+            color: #000;
+            border-color: var(--accent);
+            font-weight: bold;
+        }
+
+        .atlas-panel {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            min-height: 0;
+        }
+
+        .atlas-filters {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            margin-bottom: 12px;
+        }
+
+        .atlas-filters input,
+        .atlas-filters select {
+            background: #000;
+            border: 1px solid #333;
+            color: #fff;
+            padding: 6px;
+            font-size: 11px;
+            font-family: var(--font);
+        }
+
+        .atlas-list {
+            flex: 1;
+            overflow-y: auto;
+            border: 1px inset #222;
+            background: #080a0c;
+        }
+
+        .atlas-entry {
+            padding: 8px;
+            border-bottom: 1px solid #1a1f24;
+            font-size: 10px;
+            cursor: pointer;
+        }
+
+        .atlas-entry:hover {
+            background: #111;
+        }
+
+        .atlas-entry.selected {
+            background: #1a1f24;
+            border-left: 3px solid var(--accent);
+        }
+
+        .ae-name {
+            color: #eee;
+            font-weight: bold;
+            display: block;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        .ae-meta {
+            color: var(--muted);
+            display: flex;
+            justify-content: space-between;
+            margin-top: 2px;
+        }
+
+        .atlas-actions {
+            display: flex;
+            gap: 4px;
+            margin-top: 10px;
+        }
+
+        .atlas-actions button {
+            flex: 1;
+            font-size: 9px;
+            padding: 6px 2px;
+        }
+
+        .metric-item {
+            display: flex;
+            justify-content: space-between;
+            font-size: 11px;
+            padding: 4px 0;
+            border-bottom: 1px solid #1a1f24;
+        }
+
+        .metric-val {
+            font-family: monospace;
+            color: #fff;
+        }
+
+        .warning-box {
+            background: rgba(255, 68, 0, 0.05);
+            border: 1px solid var(--warning);
+            padding: 10px;
+            display: none;
+        }
+
+        .warning-item {
+            color: var(--warning);
+            font-size: 10px;
+            margin-bottom: 4px;
+            display: flex;
+            gap: 6px;
+        }
+
+        .hud-overlay {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            background: var(--glass);
+            border: 1px solid var(--accent);
+            padding: 15px;
+            pointer-events: none;
+            backdrop-filter: blur(5px);
+        }
+
+        button {
+            background: #1a1f24;
+            border: 1px solid #444;
+            color: #ccc;
+            padding: 8px 12px;
+            font-family: var(--font);
+            font-size: 11px;
+            cursor: pointer;
+            text-transform: uppercase;
+        }
+
+        button:hover {
+            background: #22292d;
+            color: #fff;
+            border-color: #666;
+        }
+
+        button.primary {
+            background: var(--accent);
+            color: #000;
+            border: none;
+            font-weight: bold;
+        }
+
+        .zplane-container {
+            position: absolute;
+            bottom: 20px;
+            left: 20px;
+            width: 140px;
+            height: 140px;
+            background: var(--glass);
+            border: 1px solid var(--border);
+            backdrop-filter: blur(5px);
+        }
+
+        #viewport-canvas {
+            width: 100%;
+            height: 100%;
+        }
+
+        input[type=range] {
+            flex: 1;
+            accent-color: var(--accent);
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <div class="title">TRENCH // STAGE FORGE v0.2</div>
+        <div style="display:flex; gap:12px;">
+            <button onclick="document.getElementById('file-input').click()">LOAD BODY</button>
+            <button class="primary" onclick="exportJSON()">EXPORT RAW-STAGE-V1</button>
+        </div>
+    </header>
+
+    <nav>
+        <div class="section-title">FRAME TARGETS</div>
+        <div style="display:flex; gap:4px; margin-bottom:12px;">
+            <button id="btn-m0" class="primary" style="flex:1" onclick="setFrame('M0')">M0</button>
+            <button id="btn-m100" style="flex:1" onclick="setFrame('M100')">M100</button>
+        </div>
+        <div class="vowel-grid" id="vowel-anchors">
+            <!-- Vowel buttons -->
+        </div>
+
+        <div class="section-title" style="margin-top:10px;">STAGE ROLES</div>
+        <div id="stage-list">
+            <!-- Stages -->
+        </div>
+
+        <div class="atlas-panel">
+            <div class="section-title">POLE ATLAS</div>
+            <div class="atlas-filters">
+                <input type="text" id="atlas-search" placeholder="Search body/source/tag..." oninput="filterAtlas()">
+                <div style="display:flex; gap:4px;">
+                    <select id="atlas-filter-stage" style="flex:1" onchange="filterAtlas()">
+                        <option value="">ALL STAGES</option>
+                        <option value="S1">S1</option>
+                        <option value="S2">S2</option>
+                        <option value="S3">S3</option>
+                        <option value="S4">S4</option>
+                        <option value="S5">S5</option>
+                        <option value="S6">S6</option>
+                    </select>
+                    <select id="atlas-filter-source" style="flex:1" onchange="filterAtlas()">
+                        <option value="">ALL SOURCES</option>
+                        <option value="raw-v1">RAW</option>
+                        <option value="compiled">COMPILED</option>
+                        <option value="x3_filter">X3</option>
+                    </select>
+                </div>
+            </div>
+            <div class="atlas-list" id="atlas-list">
+                <!-- Atlas entries -->
+                <div style="padding:20px; color:var(--muted); text-align:center;">LOADING ATLAS...</div>
+            </div>
+            <div class="atlas-actions">
+                <button onclick="applyAtlas('pole')">POLE</button>
+                <button onclick="applyAtlas('zero')">ZERO</button>
+                <button onclick="applyAtlas('full')">FULL</button>
+                <button id="btn-ghost" onclick="toggleGhost()">GHOST</button>
+            </div>
+        </div>
+    </nav>
+
+    <div id="viewport-container">
+        <canvas id="viewport-canvas"></canvas>
+        <div class="hud-overlay" id="hud">
+            <div id="hud-stage-name" style="color:var(--muted); font-size:10px; margin-bottom:4px;">STAGE 2 // ALLPOLE
+            </div>
+            <div id="hud-readout" style="font-size:24px; font-weight:bold;">1200.0 HZ / 0.920 R</div>
+            <div id="hud-role" style="font-size:11px; color:var(--accent); margin-top:4px;">ROLE: F2/MOUTH</div>
+        </div>
+
+        <div class="zplane-container">
+            <canvas id="zplane-canvas" width="140" height="140"></canvas>
+        </div>
+    </div>
+
+    <aside>
+        <div class="section-title">DSP METRICS</div>
+        <div id="metrics-panel">
+            <div class="metric-item"><span>MAX SINGLE PEAK</span><span class="metric-val" id="m-peak">-</span></div>
+            <div class="metric-item"><span>CASCADE PEAK</span><span class="metric-val" id="m-cascade">-</span></div>
+            <div class="metric-item"><span>CANCELLATION</span><span class="metric-val" id="m-cancel">-</span></div>
+            <div class="metric-item"><span>MAX POLE RADIUS</span><span class="metric-val" id="m-radius">-</span></div>
+            <div class="metric-item"><span>MORPH DELTA</span><span class="metric-val" id="m-delta">-</span></div>
+            <div class="metric-item"><span>DIST TO VOWEL</span><span class="metric-val" id="m-dist">-</span></div>
+        </div>
+
+        <div class="section-title">RELATIONSHIP WARNINGS</div>
+        <div id="warning-box" class="warning-box">
+        </div>
+
+        <div class="section-title" style="margin-top:auto;">VOWEL ANCHORS</div>
+        <div id="vowel-map-edit" style="font-size:10px; background:#000; padding:10px; border:1px solid #222;">
+            <!-- F1/F2 edit rows -->
+        </div>
+    </aside>
+
+    <footer>
+        <div style="color:var(--muted); font-size:11px; width:100px;">MORPH PREVIEW</div>
+        <input type="range" id="morph-slider" min="0" max="1" step="0.01" value="0">
+        <div style="font-size:10px; color:var(--muted); text-align:right;">
+            SR: 39062.5 HZ // SCHEMA: RAW-STAGE-V1 // RE-BRIDGE READY
+        </div>
+    </footer>
+
+    <input type="file" id="file-input" style="display:none" onchange="loadJSON(event)">
+
+    <script type="importmap">
+    { "imports": { "three": "https://unpkg.com/three@0.160.0/build/three.module.js" } }
+    </script>
+
+    <script type="module">
+        import * as THREE from 'three';
+
+        // --- CONSTANTS ---
+        const FS = 39062.5;
+        const ROLES = ["floor", "F1/throat", "F2/mouth", "nasal cut", "bite", "air"];
+        const VOWEL_DEFAULTS = {
+            "AH": [730, 1090], "EE": [270, 2290], "OO": [300, 870], "EH": [530, 1840],
+            "OH": [570, 840], "UH": [520, 1190], "neutral": [500, 1500]
+        };
+        const VOWEL_COLORS = { AH: 0xffaa00, EE: 0x00ffcc, OO: 0xff00ff, EH: 0xccff00, OH: 0xff5500, UH: 0x00ccff, neutral: 0x888888 };
+
+        // --- STATE ---
+        let state = {
+            name: "forged_candidate",
+            boost: 0.015,
+            vowels: JSON.parse(JSON.stringify(VOWEL_DEFAULTS)),
+            frames: {
+                M0: { stages: defaultStages(), target: "AH" },
+                M100: { stages: defaultStages(), target: "EE" }
+            }
+        };
+
+        let currentFrame = "M0";
+        let selectedStageIdx = 1;
+        let atlas = [];
+        let filteredAtlas = [];
+        let selectedAtlasEntry = null;
+        let showGhost = true;
+
+        function defaultStages() {
+            return [
+                { kind: "explicit_zero", pole_freq_hz: 100, radius: 0.85, zero_freq_hz: 0, zero_radius: 0 },
+                { kind: "allpole", pole_freq_hz: 700, radius: 0.9 },
+                { kind: "allpole", pole_freq_hz: 1200, radius: 0.9 },
+                { kind: "explicit_zero", pole_freq_hz: 2500, radius: 0.95, zero_freq_hz: 2500, zero_radius: 1.0 },
+                { kind: "allpole", pole_freq_hz: 3500, radius: 0.9 },
+                { kind: "lowpass2", pole_freq_hz: 8000, radius: 0.85 }
+            ];
+        }
+
+        // --- BARK MATH ---
+        const hz2b = (f) => 26.81 * f / (1960.0 + f) - 0.53;
+        const b2hz = (b) => 1960.0 * (b + 0.53) / (26.28 - b);
+        const B_MIN = hz2b(20), B_MAX = hz2b(19000);
+
+        // --- THREE.JS SETUP ---
+        const container = document.getElementById('viewport-container');
+        const canvas = document.getElementById('viewport-canvas');
+        const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true });
+        const scene = new THREE.Scene();
+        const camera = new THREE.OrthographicCamera(-1, 1, 1, -1, 0, 10);
+
+        const gridGrp = new THREE.Group(), vowelGrp = new THREE.Group(), handleGrp = new THREE.Group(), plotGrp = new THREE.Group(), ghostGrp = new THREE.Group();
+        scene.add(gridGrp, vowelGrp, handleGrp, plotGrp, ghostGrp);
+
+        function resize() {
+            const w = container.clientWidth, h = container.clientHeight;
+            renderer.setSize(w, h);
+            const a = w / h;
+            camera.left = -a; camera.right = a; camera.updateProjectionMatrix();
+            drawGrid(); updateVowels(); updateHandles();
+        }
+        window.addEventListener('resize', resize);
+
+        function hz2x(hz) {
+            const aspect = container.clientWidth / container.clientHeight;
+            return (((hz2b(hz) - B_MIN) / (B_MAX - B_MIN)) * 2 - 1) * aspect;
+        }
+        function x2hz(x) {
+            const aspect = container.clientWidth / container.clientHeight;
+            return b2hz(B_MIN + ((x / aspect + 1) / 2) * (B_MAX - B_MIN));
+        }
+
+        function drawGrid() {
+            gridGrp.clear();
+            const a = container.clientWidth / container.clientHeight;
+            [100, 500, 1000, 2000, 5000, 10000].forEach(hz => {
+                const x = hz2x(hz);
+                const g = new THREE.BufferGeometry().setFromPoints([new THREE.Vector3(x, -1, 0), new Vector3(x, 1, 0)]);
+                gridGrp.add(new THREE.Line(g, new THREE.LineBasicMaterial({ color: 0x22292d })));
+            });
+            [-24, -12, 0, 12, 24].forEach(db => {
+                const y = db / 60;
+                const g = new THREE.BufferGeometry().setFromPoints([new THREE.Vector3(-a, y, 0), new THREE.Vector3(a, y, 0)]);
+                gridGrp.add(new THREE.Line(g, new THREE.LineBasicMaterial({ color: db === 0 ? 0x2d3539 : 0x151a1d })));
+            });
+        }
+
+        function updateVowels() {
+            vowelGrp.clear();
+            Object.entries(state.vowels).forEach(([name, [f1, f2]]) => {
+                const x1 = hz2x(f1), x2 = hz2x(f2);
+                const mat = new THREE.LineBasicMaterial({ color: VOWEL_COLORS[name], transparent: true, opacity: 0.2 });
+                vowelGrp.add(new THREE.Line(new THREE.BufferGeometry().setFromPoints([new THREE.Vector3(x1, -1, 0), new THREE.Vector3(x1, 1, 0)]), mat));
+                vowelGrp.add(new THREE.Line(new THREE.BufferGeometry().setFromPoints([new THREE.Vector3(x2, -1, 0), new THREE.Vector3(x2, 1, 0)]), mat));
+                const s = createTextSprite(name, VOWEL_COLORS[name]);
+                s.position.set((x1 + x2) / 2, 0.85, 1);
+                vowelGrp.add(s);
+            });
+        }
+
+        function createTextSprite(text, color) {
+            const c = document.createElement('canvas'); c.width = 120; c.height = 40;
+            const ctx = c.getContext('2d');
+            ctx.fillStyle = '#' + color.toString(16).padStart(6, '0');
+            ctx.font = 'bold 24px Consolas'; ctx.textAlign = 'center';
+            ctx.fillText(text, 60, 30);
+            const tex = new THREE.CanvasTexture(c);
+            const sprite = new THREE.Sprite(new THREE.SpriteMaterial({ map: tex }));
+            sprite.scale.set(0.2, 0.06, 1);
+            return sprite;
+        }
+
+        // --- HANDLE INTERACTION ---
+        let isDragging = false;
+        const ray = new THREE.Raycaster(), mouse = new THREE.Vector2();
+
+        container.addEventListener('mousedown', e => {
+            const r = canvas.getBoundingClientRect();
+            mouse.x = ((e.clientX - r.left) / r.width) * 2 - 1;
+            mouse.y = -((e.clientY - r.top) / r.height) * 2 + 1;
+            const aspect = r.width / r.height;
+            ray.setFromCamera({ x: mouse.x * aspect, y: mouse.y }, camera);
+            const hits = ray.intersectObjects(handleGrp.children);
+            if (hits.length > 0) {
+                selectedStageIdx = hits[0].object.userData.idx;
+                isDragging = true; refresh();
+            }
+        });
+
+        window.addEventListener('mousemove', e => {
+            if (!isDragging) return;
+            const r = canvas.getBoundingClientRect();
+            const aspect = r.width / r.height;
+            const x = ((e.clientX - r.left) / r.width) * 2 - 1;
+            const y = -((e.clientY - r.top) / r.height) * 2 + 1;
+            const hz = x2hz(x * aspect);
+            const db = Math.max(0, y * 60);
+            const radius = 1 - Math.pow(10, -db / 20);
+            const s = state.frames[currentFrame].stages[selectedStageIdx];
+            s.pole_freq_hz = Math.round(hz);
+            s.radius = Math.min(0.998, Math.max(0, radius));
+            if (e.shiftKey && s.kind === 'explicit_zero') { s.zero_freq_hz = s.pole_freq_hz; s.zero_radius = 1.0; }
+            refresh();
+        });
+
+        window.addEventListener('mouseup', () => { isDragging = false; });
+
+        function updateHandles() {
+            handleGrp.clear();
+            state.frames[currentFrame].stages.forEach((s, i) => {
+                const x = hz2x(s.pole_freq_hz), y = (20 * Math.log10(1 / (1 - s.radius + 1e-10))) / 60;
+                const mesh = new THREE.Mesh(new THREE.CircleGeometry(0.025, 16), new THREE.MeshBasicMaterial({ color: i === selectedStageIdx ? 0x00ffcc : 0x556677 }));
+                mesh.position.set(x, y, 2); mesh.userData = { idx: i };
+                handleGrp.add(mesh);
+                if (s.zero_radius > 0) {
+                    const zx = hz2x(s.zero_freq_hz);
+                    const zmesh = new THREE.Mesh(new THREE.RingGeometry(0.02, 0.03, 16), new THREE.MeshBasicMaterial({ color: 0xff00ff }));
+                    zmesh.position.set(zx, -0.6, 2); handleGrp.add(zmesh);
+                }
+            });
+        }
+
+        // --- MATH ---
+        function getMag(hz, stages) {
+            let mag = 1.0;
+            const w = 2 * Math.PI * hz / FS;
+            const cosW = Math.cos(w);
+            stages.forEach(s => {
+                const r = s.radius, theta = 2 * Math.PI * s.pole_freq_hz / FS, cosT = Math.cos(theta);
+                const den = 1 + r ** 4 + 4 * r ** 2 * cosT ** 2 - 4 * r * (1 + r ** 2) * cosT * cosW + 2 * r ** 2 * (2 * cosW ** 2 - 1);
+                mag *= 1.0 / Math.sqrt(Math.max(1e-12, den));
+                if (s.kind === 'explicit_zero' && s.zero_radius > 0) {
+                    const rZ = s.zero_radius, thetaZ = 2 * Math.PI * s.zero_freq_hz / FS, cosTZ = Math.cos(thetaZ);
+                    const num = 1 + rZ ** 4 + 4 * rZ ** 2 * cosTZ ** 2 - 4 * rZ * (1 + rZ ** 2) * cosTZ * cosW + 2 * rZ ** 2 * (2 * cosW ** 2 - 1);
+                    mag *= Math.sqrt(num);
+                }
+            });
+            return mag;
+        }
+
+        function getMagCoeffs(hz, c) {
+            const w = 2 * Math.PI * hz / FS;
+            const n_re = c.c0 + c.c1 * Math.cos(w) + c.c2 * Math.cos(2 * w), n_im = -c.c1 * Math.sin(w) - c.c2 * Math.sin(2 * w);
+            const d_re = 1 - c.c3 * Math.cos(w) - c.c4 * Math.cos(2 * w), d_im = c.c3 * Math.sin(w) + c.c4 * Math.sin(2 * w);
+            return Math.sqrt((n_re ** 2 + n_im ** 2) / Math.max(1e-12, d_re ** 2 + d_im ** 2));
+        }
+
+        // --- UI REFRESH ---
+        function refresh() {
+            updateHandles();
+            const frame = state.frames[currentFrame];
+            const stages = frame.stages;
+
+            // Stages list
+            const list = document.getElementById('stage-list');
+            list.innerHTML = '';
+            stages.forEach((s, i) => {
+                const div = document.createElement('div');
+                div.className = `stage-row ${i === selectedStageIdx ? 'active' : ''}`;
+                div.onclick = () => { selectedStageIdx = i; refresh(); };
+                div.innerHTML = `<div class="stage-head"><span>STAGE ${i + 1}</span><span class="stage-hz">${s.pole_freq_hz || '-'} HZ</span></div>
+                                 <div class="stage-role-tag">S${i + 1} ${ROLES[i]}</div>`;
+                list.appendChild(div);
+            });
+
+            // Vowels
+            const vDiv = document.getElementById('vowel-anchors');
+            vDiv.innerHTML = '';
+            Object.keys(state.vowels).forEach(v => {
+                const b = document.createElement('div'); b.className = `vowel-btn ${frame.target === v ? 'active' : ''}`;
+                b.textContent = v; b.onclick = () => { applyVowel(v); };
+                vDiv.appendChild(b);
+            });
+
+            // Vowel table
+            const vt = document.getElementById('vowel-map-edit');
+            if (vt && vt.innerHTML === "") {
+                Object.entries(state.vowels).forEach(([v, [f1, f2]]) => {
+                    const row = document.createElement('div'); row.style.display = 'flex'; row.style.gap = '5px'; row.style.marginBottom = '2px';
+                    row.innerHTML = `<span style="width:50px">${v}</span>
+                        <input style="width:45px; background:#000; border:1px solid #333; color:#fff; font-size:9px;" type="number" value="${f1}" onchange="updateVTable('${v}',0,this.value)">
+                        <input style="width:45px; background:#000; border:1px solid #333; color:#fff; font-size:9px;" type="number" value="${f2}" onchange="updateVTable('${v}',1,this.value)">`;
+                    vt.appendChild(row);
+                });
+            }
+
+            // HUD
+            const sel = stages[selectedStageIdx];
+            document.getElementById('hud-stage-name').textContent = `STAGE ${selectedStageIdx + 1} // ${sel.kind.toUpperCase()}`;
+            document.getElementById('hud-readout').textContent = `${sel.pole_freq_hz || 0} HZ / ${(sel.radius || 0).toFixed(3)} R`;
+            document.getElementById('hud-role').textContent = `ROLE: ${ROLES[selectedStageIdx].toUpperCase()}`;
+
+            document.getElementById('btn-m0').className = currentFrame === 'M0' ? 'primary' : '';
+            document.getElementById('btn-m100').className = currentFrame === 'M100' ? 'primary' : '';
+
+            updatePlot();
+            updateMetrics();
+            drawZPlane();
+        }
+
+        window.updateVTable = (v, i, val) => { state.vowels[v][i] = parseInt(val); updateVowels(); refresh(); };
+        window.setFrame = f => { currentFrame = f; refresh(); };
+        function applyVowel(v) {
+            state.frames[currentFrame].target = v;
+            state.frames[currentFrame].stages[1].pole_freq_hz = state.vowels[v][0];
+            state.frames[currentFrame].stages[2].pole_freq_hz = state.vowels[v][1];
+            refresh();
+        }
+
+        function updatePlot() {
+            plotGrp.clear(); ghostGrp.clear();
+            const morph = parseFloat(document.getElementById('morph-slider').value);
+            const curStages = [];
+            for (let i = 0; i < 6; i++) {
+                const s0 = state.frames.M0.stages[i], s1 = state.frames.M100.stages[i];
+                curStages.push({
+                    kind: s0.kind, pole_freq_hz: s0.pole_freq_hz + (s1.pole_freq_hz - s0.pole_freq_hz) * morph,
+                    radius: s0.radius + (s1.radius - s0.radius) * morph,
+                    zero_freq_hz: (s0.zero_freq_hz || 0) + ((s1.zero_freq_hz || 0) - (s0.zero_freq_hz || 0)) * morph,
+                    zero_radius: (s0.zero_radius || 0) + ((s1.zero_radius || 0) - (s0.zero_radius || 0)) * morph
+                });
+            }
+
+            const points = [], steps = 120;
+            for (let i = 0; i <= steps; i++) {
+                const hz = b2hz(B_MIN + (i / steps) * (B_MAX - B_MIN));
+                const db = 20 * Math.log10(getMag(hz, curStages) + 1e-10) + state.boost * 2000;
+                points.push(new THREE.Vector3(hz2x(hz), Math.max(-1, Math.min(1, db / 60)), 0));
+            }
+            plotGrp.add(new THREE.Line(new THREE.BufferGeometry().setFromPoints(points), new THREE.LineBasicMaterial({ color: 0x00ffcc, linewidth: 2 })));
+
+            if (selectedAtlasEntry && showGhost) {
+                const gp = [];
+                for (let i = 0; i <= steps; i++) {
+                    const hz = b2hz(B_MIN + (i / steps) * (B_MAX - B_MIN));
+                    let mag = 1.0;
+                    if (selectedAtlasEntry.c0 !== undefined) mag = getMagCoeffs(hz, selectedAtlasEntry);
+                    else mag = getMag(hz, [selectedAtlasEntry]);
+                    gp.push(new THREE.Vector3(hz2x(hz), Math.max(-1, Math.min(1, (20 * Math.log10(mag + 1e-10) + state.boost * 1500) / 60)), 0));
+                }
+                ghostGrp.add(new THREE.Line(new THREE.BufferGeometry().setFromPoints(gp), new THREE.LineBasicMaterial({ color: 0xff4400, transparent: true, opacity: 0.5 })));
+                if (selectedAtlasEntry.pole_freq_hz) {
+                    const gx = hz2x(selectedAtlasEntry.pole_freq_hz), gy = (20 * Math.log10(1 / (1 - selectedAtlasEntry.pole_radius + 1e-10))) / 60;
+                    const dot = new THREE.Mesh(new THREE.CircleGeometry(0.015, 8), new THREE.MeshBasicMaterial({ color: 0xff4400 }));
+                    dot.position.set(gx, gy, 1); ghostGrp.add(dot);
+                }
+            }
+        }
+
+        function updateMetrics() {
+            const frame = state.frames[currentFrame];
+            const maxR = Math.max(...frame.stages.map(s => s.radius));
+            const peak = Math.max(...frame.stages.map(s => 20 * Math.log10(1 / (1 - s.radius + 1e-10))));
+            const target = state.vowels[frame.target];
+            const dist = target ? Math.sqrt((hz2b(frame.stages[1].pole_freq_hz) - hz2b(target[0])) ** 2 + (hz2b(frame.stages[2].pole_freq_hz) - hz2b(target[1])) ** 2) : 0;
+
+            document.getElementById('m-radius').textContent = maxR.toFixed(3);
+            document.getElementById('m-peak').textContent = peak.toFixed(1) + " dB";
+            document.getElementById('m-dist').textContent = dist.toFixed(2) + " BARK";
+
+            const warnings = [];
+            if (maxR > 0.985) warnings.push("DANGER: Radius > 0.985");
+            if (Math.abs(hz2b(frame.stages[1].pole_freq_hz) - hz2b(frame.stages[2].pole_freq_hz)) < 0.7) warnings.push("WARN: Formant collision");
+            if (frame.stages[3].pole_freq_hz < frame.stages[1].pole_freq_hz || frame.stages[3].pole_freq_hz > frame.stages[2].pole_freq_hz) warnings.push("WARN: S4 Cut out of bounds");
+
+            const wb = document.getElementById('warning-box');
+            wb.style.display = warnings.length ? 'block' : 'none';
+            wb.innerHTML = warnings.map(w => `<div class="warning-item">${w}</div>`).join('');
+        }
+
+        function drawZPlane() {
+            const cvs = document.getElementById('zplane-canvas'), ctx = cvs.getContext('2d'), W = 140, H = 140;
+            ctx.clearRect(0, 0, W, H); ctx.strokeStyle = '#222'; ctx.beginPath(); ctx.arc(70, 70, 60, 0, Math.PI * 2); ctx.stroke();
+            ctx.beginPath(); ctx.moveTo(0, 70); ctx.lineTo(140, 70); ctx.moveTo(70, 0); ctx.lineTo(70, 140); ctx.stroke();
+            state.frames[currentFrame].stages.forEach((s, i) => {
+                const theta = (2 * Math.PI * s.pole_freq_hz / FS);
+                const x = 70 + 60 * s.radius * Math.cos(theta), y = 70 - 60 * s.radius * Math.sin(theta);
+                ctx.fillStyle = i === selectedStageIdx ? '#0f0' : '#555';
+                ctx.beginPath(); ctx.arc(x, y, 2, 0, Math.PI * 2); ctx.fill();
+            });
+        }
+
+        // --- ATLAS ---
+        async function loadAtlas() {
+            try {
+                const r = await fetch('../authoring/atlas/pole_atlas.json');
+                atlas = await r.json();
+                filterAtlas();
+            } catch (e) {
+                document.getElementById('atlas-list').innerHTML = '<div style="padding:20px; color:red">ATLAS NOT FOUND</div>';
+            }
+        }
+
+        window.filterAtlas = () => {
+            const query = document.getElementById('atlas-search').value.toLowerCase();
+            const stage = document.getElementById('atlas-filter-stage').value;
+            const src = document.getElementById('atlas-filter-source').value;
+            filteredAtlas = atlas.filter(a => {
+                const matchQuery = !query || a.body_name.toLowerCase().includes(query) || a.source_file.toLowerCase().includes(query);
+                const matchStage = !stage || a.user_stage === stage;
+                const matchSrc = !src || a.source.includes(src);
+                return matchQuery && matchStage && matchSrc;
+            }).slice(0, 100);
+            renderAtlas();
+        };
+
+        function renderAtlas() {
+            const list = document.getElementById('atlas-list'); list.innerHTML = '';
+            filteredAtlas.forEach((a, i) => {
+                const d = document.createElement('div'); d.className = `atlas-entry ${selectedAtlasEntry === a ? 'selected' : ''}`;
+                d.onclick = () => { selectedAtlasEntry = a; renderAtlas(); refresh(); };
+                d.innerHTML = `<span class="ae-name">${a.body_name} [${a.corner_label}]</span>
+                               <div class="ae-meta"><span>${a.user_stage}</span><span>${a.pole_freq_hz || (a.c3 ? 'COEFFS' : '')} ${a.pole_radius ? 'R:' + a.pole_radius : ''}</span></div>`;
+                list.appendChild(d);
+            });
+        }
+
+        window.applyAtlas = type => {
+            if (!selectedAtlasEntry) return;
+            const s = state.frames[currentFrame].stages[selectedStageIdx];
+            if (type === 'pole' || type === 'full') {
+                if (selectedAtlasEntry.pole_freq_hz) {
+                    s.pole_freq_hz = selectedAtlasEntry.pole_freq_hz;
+                    s.radius = selectedAtlasEntry.pole_radius;
+                }
+            }
+            if (type === 'zero' || type === 'full') {
+                if (selectedAtlasEntry.zero_radius !== undefined && selectedAtlasEntry.zero_radius !== null) {
+                    s.zero_radius = selectedAtlasEntry.zero_radius;
+                    s.zero_freq_hz = selectedAtlasEntry.zero_freq_hz;
+                }
+            }
+            refresh();
+        };
+
+        window.toggleGhost = () => {
+            showGhost = !showGhost;
+            document.getElementById('btn-ghost').classList.toggle('primary', showGhost);
+            refresh();
+        };
+
+        // --- FILE ---
+        window.exportJSON = () => {
+            const out = {
+                format: "raw-stage-v1", name: state.name, authoring_sample_rate_hz: FS, boost: state.boost,
+                frames: { M0: { stages: state.frames.M0.stages }, M100: { stages: state.frames.M100.stages } },
+                _metadata: { source: "STAGE FORGE v0.2", anchors: state.vowels }
+            };
+            const blob = new Blob([JSON.stringify(out, null, 2)], { type: "application/json" });
+            const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = `${state.name}.raw.json`;
+            a.click();
+        };
+
+        window.loadJSON = e => {
+            const f = e.target.files[0]; if (!f) return;
+            const reader = new FileReader();
+            reader.onload = ev => {
+                const d = JSON.parse(ev.target.result);
+                if (d.format === 'raw-stage-v1') {
+                    state.frames = d.frames || state.frames;
+                    state.name = d.name || state.name;
+                    refresh();
+                }
+            };
+            reader.readAsText(f);
+        };
+
+        // --- ANIMATE ---
+        function animate() {
+            requestAnimationFrame(animate);
+            updatePlot();
+            renderer.render(scene, camera);
+        }
+
+        document.getElementById('morph-slider').oninput = refresh;
+
+        // --- INIT ---
+        resize();
+        loadAtlas();
+        refresh();
+        animate();
+    </script>
+</body>
+
+</html>

@@ -94,7 +94,7 @@ Scope note: the surveyed files use the phrase `P2K Lattice Compiler` specificall
 
 - Assessment: these passages contradict any broad reading that all P2K-facing filters are built by one lattice law at compile time. Sources: `C:\Users\hooki\trenchwork_clean\docs\context\re-proven-facts.md:36`, `C:\Users\hooki\trenchwork_clean\docs\context\re-proven-facts.md:52`, `C:\Users\hooki\trenchwork_clean\docs\context\re-proven-facts.md:168`
 
-### 3. Other surveyed compiler implementations shown in clean-room code compile stages independently
+### 3. Other surveyed compiler implementations shown in reference code compile stages independently
 
 - Quote:
   > `freq_packed = int(round(sec.low_freq + morph * (sec.high_freq - sec.low_freq)))`
@@ -114,7 +114,7 @@ Scope note: the surveyed files use the phrase `P2K Lattice Compiler` specificall
   > `return _encoded_to_stage_params(enc), enc`
 - Source: `C:\Users\hooki\trenchwork_clean\pyruntime\heritage_coeffs.py:245-246`
 
-- Assessment: these clean-room implementations do not show a previous-stage zero/pole coupling law. This does not disprove the `FUN_1802c59b0` claim, but it does mean the law is not surfaced across all current compiler code paths. Sources: `C:\Users\hooki\trenchwork_clean\pyruntime\designer_compile.py:154-156`, `C:\Users\hooki\trenchwork_clean\pyruntime\designer_compile.py:186-189`, `C:\Users\hooki\trenchwork_clean\pyruntime\heritage_coeffs.py:245-246`
+- Assessment: these reference implementations do not show a previous-stage zero/pole coupling law. This does not disprove the `FUN_1802c59b0` claim, but it does mean the law is not surfaced across all current compiler code paths. Sources: `C:\Users\hooki\trenchwork_clean\pyruntime\designer_compile.py:154-156`, `C:\Users\hooki\trenchwork_clean\pyruntime\designer_compile.py:186-189`, `C:\Users\hooki\trenchwork_clean\pyruntime\heritage_coeffs.py:245-246`
 
 ### 4. Runtime dispatch and stage-count reports also argue against a universal one-law reading
 
@@ -136,7 +136,7 @@ The documented evidence supports the claim weakly.
 Why weakly instead of strongly:
 
 - The exact sentence `stage N zeros = stage N-1 poles` appears in two surveyed files, but they are duplicate notebook-ground-truth packs rather than independent primary derivations. Sources: `C:\Users\hooki\Trench\docs\notebooklm\packs\ground-truth\morpheus_cube_architecture_proven.md:26-33`, `C:\Users\hooki\trenchwork_clean\docs\notebooklm\packs\ground-truth\morpheus_cube_architecture_proven.md:26-33`
-- The adjacent clean-room contracts strongly support a shared 3-stage inner compiler with explicit numerator laws for `Morph1` / `MorphLP` / `MorphLPX`, but those contracts stop short of restating the exact cross-coupling identity in their own words. Sources: `C:\Users\hooki\trenchwork_clean\contracts\cleanroom\handoffs\lpx_zero_law\v1\CONTRACT.json:5-8`, `C:\Users\hooki\Trench\docs\looperator\phantom_morph_lpx_contracts.md:17-20`, `C:\Users\hooki\trench_re_vault\contracts\CPhantomMorphLPX\2026-03-16_comparison_MorphLP_vs_LPX.md:7-20`
+- The adjacent reference contracts strongly support a shared 3-stage inner compiler with explicit numerator laws for `Morph1` / `MorphLP` / `MorphLPX`, but those contracts stop short of restating the exact cross-coupling identity in their own words. Sources: `C:\Users\hooki\trenchwork_clean\contracts\cleanroom\handoffs\lpx_zero_law\v1\CONTRACT.json:5-8`, `C:\Users\hooki\Trench\docs\looperator\phantom_morph_lpx_contracts.md:17-20`, `C:\Users\hooki\trench_re_vault\contracts\CPhantomMorphLPX\2026-03-16_comparison_MorphLP_vs_LPX.md:7-20`
 - Several surveyed files explicitly show that the law is not a universal statement about all P2K-related filters, because ROM-only classes, `Morph2`, and `CPhantomFilterP2k` memcpy paths are handled separately. Sources: `C:\Users\hooki\trenchwork_clean\docs\context\re-proven-facts.md:36`, `C:\Users\hooki\trenchwork_clean\docs\context\re-proven-facts.md:52`, `C:\Users\hooki\trenchwork_clean\docs\notebooklm\packs\ground-truth\morpheus_cube_architecture_proven.md:11-12`, `C:\Users\hooki\trenchwork_clean\docs\notebooklm\packs\ground-truth\morpheus_cube_architecture_proven.md:33`
 
 Narrow reading: `FUN_1802c59b0` for `Morph1` / `MorphLP` / `MorphLPX` probably does enforce the documented lattice cross-coupling law.

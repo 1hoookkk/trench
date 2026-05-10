@@ -1,0 +1,67 @@
+{
+  "format": "raw-stage-v1",
+  "name": "tearing_shelf",
+  "boost": 0.004,
+  "frames": {
+    "M0": [
+      {
+        "kind": "explicit_zero",
+        "pole_freq_hz": 320.0,
+        "radius": 0.71875,
+        "zero_freq_hz": 152.0,
+        "zero_radius": 0.63125,
+        "stage_gain": 1.0
+      },
+      {
+        "kind": "explicit_zero",
+        "pole_freq_hz": 320.0,
+        "radius": 0.2,
+        "zero_freq_hz": 320.0,
+        "zero_radius": 0.4174722649931443,
+        "stage_gain": 1.0
+      },
+      {
+        "kind": "passthrough"
+      },
+      {
+        "kind": "passthrough"
+      },
+      {
+        "kind": "passthrough"
+      },
+      {
+        "kind": "passthrough"
+      }
+    ],
+    "M100": [
+      {
+        "kind": "explicit_zero",
+        "pole_freq_hz": 2600.0,
+        "radius": 0.6875,
+        "zero_freq_hz": 4727.272727272727,
+        "zero_radius": 0.6125,
+        "stage_gain": 1.0
+      },
+      {
+        "kind": "explicit_zero",
+        "pole_freq_hz": 2600.0,
+        "radius": 0.4504531454039289,
+        "zero_freq_hz": 2600.0,
+        "zero_radius": 0.2,
+        "stage_gain": 1.0
+      },
+      {
+        "kind": "passthrough"
+      },
+      {
+        "kind": "passthrough"
+      },
+      {
+        "kind": "passthrough"
+      },
+      {
+        "kind": "passthrough"
+      }
+    ]
+  }
+}

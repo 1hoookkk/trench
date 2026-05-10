@@ -1,0 +1,21 @@
+{
+  "schema": "trench.heritage.peak_shelf.v1",
+  "name": "throat_shelf_pressure",
+  "category": "BASS",
+  "boost": 0.004,
+  "frames": {
+    "A": {
+      "freq_hz": 290,
+      "shelf": -34,
+      "peak_db": 12
+    },
+    "B": {
+      "freq_hz": 1900,
+      "shelf": 20,
+      "peak_db": 14
+    }
+  },
+  "render_metadata": {
+    "preview_type": "PEAK_SHELF_INTENT_NOT_RESPONSE"
+  }
+}

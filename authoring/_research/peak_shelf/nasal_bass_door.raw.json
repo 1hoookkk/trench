@@ -1,0 +1,113 @@
+{
+  "format": "raw-stage-v1",
+  "name": "nasal_bass_door",
+  "boost": 0.004,
+  "frames": {
+    "M0": {
+      "stages": [
+        {
+          "kind": "explicit_zero",
+          "pole_freq_hz": 63.0,
+          "radius": 0.88,
+          "zero_freq_hz": 161.4375,
+          "zero_radius": 0.2881561679790026,
+          "stage_gain": 0.5561056430446194
+        },
+        {
+          "kind": "explicit_zero",
+          "pole_freq_hz": 93.0,
+          "radius": 0.882,
+          "zero_freq_hz": 245.46187500000002,
+          "zero_radius": 0.2881561679790026,
+          "stage_gain": 0.5561056430446194
+        },
+        {
+          "kind": "explicit_zero",
+          "pole_freq_hz": 127.5,
+          "radius": 0.884,
+          "zero_freq_hz": 346.32187500000003,
+          "zero_radius": 0.2881561679790026,
+          "stage_gain": 0.5561056430446194
+        },
+        {
+          "kind": "explicit_zero",
+          "pole_freq_hz": 150.0,
+          "radius": 0.886,
+          "zero_freq_hz": 418.96875000000006,
+          "zero_radius": 0.2881561679790026,
+          "stage_gain": 0.5561056430446194
+        },
+        {
+          "kind": "explicit_zero",
+          "pole_freq_hz": 206.99999999999997,
+          "radius": 0.888,
+          "zero_freq_hz": 594.0899999999999,
+          "zero_radius": 0.2881561679790026,
+          "stage_gain": 0.5561056430446194
+        },
+        {
+          "kind": "explicit_zero",
+          "pole_freq_hz": 307.5,
+          "radius": 0.89,
+          "zero_freq_hz": 906.1640624999999,
+          "zero_radius": 0.2881561679790026,
+          "stage_gain": 0.5561056430446194
+        }
+      ],
+      "boost": 0.00040322227088699877
+    },
+    "M100": {
+      "stages": [
+        {
+          "kind": "explicit_zero",
+          "pole_freq_hz": 544.0,
+          "radius": 0.8671259842519685,
+          "zero_freq_hz": 501.16,
+          "zero_radius": 0.3010367454068241,
+          "stage_gain": 0.7146719160104987
+        },
+        {
+          "kind": "explicit_zero",
+          "pole_freq_hz": 800.0,
+          "radius": 0.8691259842519685,
+          "zero_freq_hz": 759.11,
+          "zero_radius": 0.3010367454068241,
+          "stage_gain": 0.7146719160104987
+        },
+        {
+          "kind": "explicit_zero",
+          "pole_freq_hz": 1088.0,
+          "radius": 0.8711259842519685,
+          "zero_freq_hz": 1062.4592,
+          "zero_radius": 0.3010367454068241,
+          "stage_gain": 0.7146719160104987
+        },
+        {
+          "kind": "explicit_zero",
+          "pole_freq_hz": 1408.0,
+          "radius": 0.8731259842519685,
+          "zero_freq_hz": 1413.8608000000002,
+          "zero_radius": 0.3010367454068241,
+          "stage_gain": 0.7146719160104987
+        },
+        {
+          "kind": "explicit_zero",
+          "pole_freq_hz": 1696.0,
+          "radius": 0.8751259842519685,
+          "zero_freq_hz": 1749.9328000000003,
+          "zero_radius": 0.3010367454068241,
+          "stage_gain": 0.7146719160104987
+        },
+        {
+          "kind": "explicit_zero",
+          "pole_freq_hz": 2048.0,
+          "radius": 0.8771259842519685,
+          "zero_freq_hz": 2169.728,
+          "zero_radius": 0.3010367454068241,
+          "stage_gain": 0.7146719160104987
+        }
+      ],
+      "boost": 0.000586961020871334
+    }
+  }
+}

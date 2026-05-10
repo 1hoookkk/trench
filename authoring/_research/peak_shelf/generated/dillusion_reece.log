@@ -1,0 +1,15 @@
+STDOUT:
+Compiled dillusion_reece -> c:\Users\hooki\Trench\authoring\peak_shelf\dillusion_reece.raw.json
+Lowered -> c:\Users\hooki\Trench\authoring\peak_shelf\dillusion_reece.raw.compiled.json
+=== dillusion_reece ===
+  M0_Q0: cascade=12.0 dB, max_stage=11.4 dB, cancel=-0.6 dB, r_max=0.897
+  M0_Q100: cascade=12.0 dB, max_stage=11.4 dB, cancel=-0.6 dB, r_max=0.897
+  M100_Q0: cascade=12.0 dB, max_stage=11.4 dB, cancel=-0.6 dB, r_max=0.878
+  M100_Q100: cascade=12.0 dB, max_stage=11.4 dB, cancel=-0.6 dB, r_max=0.878
+DECISION: PASS
+NOTES: Stable controlled cancellation.
+
+Plot -> c:\Users\hooki\Trench\authoring\peak_shelf\dillusion_reece.raw.response.png
+Preview -> c:\Users\hooki\Trench\authoring\peak_shelf\dillusion_reece.raw.preview.png
+
+STDERR:

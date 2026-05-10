@@ -1,0 +1,15 @@
+STDOUT:
+Compiled nasal_bass_door -> c:\Users\hooki\Trench\authoring\peak_shelf\nasal_bass_door.raw.json
+Lowered -> c:\Users\hooki\Trench\authoring\peak_shelf\nasal_bass_door.raw.compiled.json
+=== nasal_bass_door ===
+  M0_Q0: cascade=12.1 dB, max_stage=13.7 dB, cancel=1.6 dB, r_max=0.890
+  M0_Q100: cascade=12.1 dB, max_stage=13.7 dB, cancel=1.6 dB, r_max=0.890
+  M100_Q0: cascade=12.0 dB, max_stage=18.5 dB, cancel=6.5 dB, r_max=0.877
+  M100_Q100: cascade=12.0 dB, max_stage=18.5 dB, cancel=6.5 dB, r_max=0.877
+DECISION: PASS
+NOTES: Stable controlled cancellation.
+
+Plot -> c:\Users\hooki\Trench\authoring\peak_shelf\nasal_bass_door.raw.response.png
+Preview -> c:\Users\hooki\Trench\authoring\peak_shelf\nasal_bass_door.raw.preview.png
+
+STDERR:

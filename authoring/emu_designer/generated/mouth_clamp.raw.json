@@ -1,0 +1,92 @@
+{
+  "format": "raw-stage-v1",
+  "name": "mouth_clamp",
+  "authoring_sample_rate_hz": 39062.5,
+  "boost": 0.004,
+  "frames": {
+    "M0": {
+      "stages": [
+        {
+          "kind": "lowpass2",
+          "pole_freq_hz": 6000.0,
+          "radius": 0.88,
+          "stage_gain": 1.0
+        },
+        {
+          "kind": "allpole",
+          "pole_freq_hz": 1700.0,
+          "radius": 0.75,
+          "stage_gain": 5.011872336272722
+        },
+        {
+          "kind": "allpole",
+          "pole_freq_hz": 900.0,
+          "radius": 0.75,
+          "stage_gain": 3.9810717055349722
+        },
+        {
+          "kind": "zero_forced",
+          "pole_freq_hz": 1900.0,
+          "radius": 0.7,
+          "stage_gain": 0.06309573444801933
+        },
+        {
+          "kind": "allpole",
+          "pole_freq_hz": 400.0,
+          "radius": 0.75,
+          "stage_gain": 6.309573444801933
+        },
+        {
+          "kind": "explicit_zero",
+          "pole_freq_hz": 80.0,
+          "radius": 0.85,
+          "stage_gain": 1.0,
+          "zero_freq_hz": 0.0,
+          "zero_radius": 1.0
+        }
+      ]
+    },
+    "M100": {
+      "stages": [
+        {
+          "kind": "lowpass2",
+          "pole_freq_hz": 4000.0,
+          "radius": 0.88,
+          "stage_gain": 1.0
+        },
+        {
+          "kind": "allpole",
+          "pole_freq_hz": 570.0,
+          "radius": 0.75,
+          "stage_gain": 3.9810717055349722
+        },
+        {
+          "kind": "allpole",
+          "pole_freq_hz": 1200.0,
+          "radius": 0.75,
+          "stage_gain": 3.9810717055349722
+        },
+        {
+          "kind": "zero_forced",
+          "pole_freq_hz": 1500.0,
+          "radius": 0.7,
+          "stage_gain": 0.06309573444801933
+        },
+        {
+          "kind": "allpole",
+          "pole_freq_hz": 1200.0,
+          "radius": 0.75,
+          "stage_gain": 5.011872336272722
+        },
+        {
+          "kind": "explicit_zero",
+          "pole_freq_hz": 80.0,
+          "radius": 0.85,
+          "stage_gain": 1.0,
+          "zero_freq_hz": 0.0,
+          "zero_radius": 1.0
+        }
+      ]
+    }
+  }
+}

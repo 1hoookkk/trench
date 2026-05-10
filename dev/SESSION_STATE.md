@@ -1,3 +1,57 @@
+# Latest handoff — 2026-05-10 filter-work canonical doctrine
+
+Doctrine page is `authoring/FILTER_WORK.md`: TRENCH does not ship E-mu filters.
+References can inform taste, vocabulary, and regression checks; shipped
+cartridges must be original TRENCH work.
+
+The previous session's "Peak/Shelf authoring pipeline" (compile_peak_shelf.py
+slice + scratch artifacts + audition WAVs + handoff doc) was deleted on
+2026-05-10 because the Peak/Shelf framing names an E-mu filter class and
+violates the FILTER_WORK.md shipping rule. Cascade plot of the disk law also
+inverted the authored intent. Memory `project_peak_shelf_canonical_spec.md`
+retains the heritage spec for reference-only reject-clones use.
+
+Files removed: `scratch/peak_shelf/`, four `Vocal Air Shelf_*.wav` audition
+files under `cartridges/factory/generated/qlaw/audition/`, and
+`docs/handoff_2026-05-10-peak-shelf-authoring.md`.
+
+Workstation consolidation complete (2026-05-10):
+- All E-mu clones deleted from former `forge/compilers/` (Peak/Shelf, EMU
+  Designer, Morph2, MorphLP/MorphLPX, Z-plane Qlaw, X3 importers, EMU style
+  banks, DillusionMan law verifier, summarizers, EmulatorX_utf8.rc).
+- `forge/compilers/` → `authoring/compilers/`. `forge/audition.py` →
+  `authoring/audition.py`. `forge/{tools}` → `authoring/tools/`.
+  `forge/{q_laws,diagnostics,scratch}` → `authoring/{q_laws,diagnostics,scratch}`.
+  `forge/` removed.
+- `schemas/{trench.*.json}` → `authoring/schemas/`. `schemas/peak_shelf_v1.json`
+  deleted. `schemas/` removed.
+- `runtime/trench-core/tests/peak_shelf_authoring.rs` deleted.
+- `authoring/peak_shelf/*.peak_shelf.json` archived under
+  `authoring/_research/peak_shelf/` with research-only README.
+- `authoring/FILTER_WORK.md` "Current Active Filter Path" rewritten to
+  point at the EOS pipeline harness (the first verified internal slice).
+- `./check` updated: `tools/parity_null.py` → `authoring/compilers/parity_null.py`.
+- `runtime/trench-core/tests/compile_raw_roundtrip.rs` repointed at
+  `authoring/compilers/compile_raw.py` (test now passes 4/4).
+
+EOS pipeline:
+- Root launcher: `trench_eos_pipeline_compiler.py` (delegates via runpy)
+- Real harness: `authoring/compilers/trench_eos_pipeline_compiler.py`
+- Schema: `trench.eos.encoded_surface.v1`
+- Status: internal authoring scaffold, not a shipping path. Replacement
+  seams expose where verified RE coefficient lowering plugs in.
+
+Pending operator decisions:
+- Root scrap (find_814_*, k.py, optimize_*, _ai_context_*, build_error.txt,
+  CANDIDATES.txt, handoff*.json, session-ses_*.md, NotebookLM_Trench_Bundle.md,
+  PLAN_RECIPE_V1.md, SESSION_NOTES_*.md) — harness denied mass repo-root
+  delete in this session.
+- Root duplicates of `audition.py`, `phoneme_author_studio.py`,
+  `forge_phoneme_author_studio.py`, `audit_pack.py`, `extract_candidates.py`
+  (canonical copies live under `authoring/`).
+- `authoring/{heritage,imported_x3,emu_designer,dirty_airlock}` may contain
+  E-mu material per FILTER_WORK.md veto — pending review.
+
 # TRENCH SESSION STATE — 2026-04-13 (rev 4)
 
 Context reset dump. Full content, no compaction. Read this before resuming.

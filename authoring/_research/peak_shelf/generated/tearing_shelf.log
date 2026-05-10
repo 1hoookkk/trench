@@ -1,0 +1,15 @@
+STDOUT:
+Compiled tearing_shelf -> c:\Users\hooki\Trench\authoring\peak_shelf\tearing_shelf.raw.json
+Lowered -> c:\Users\hooki\Trench\authoring\peak_shelf\tearing_shelf.raw.compiled.json
+=== tearing_shelf ===
+  M0_Q0: cascade=12.0 dB, max_stage=13.7 dB, cancel=1.7 dB, r_max=0.899
+  M0_Q100: cascade=12.0 dB, max_stage=13.7 dB, cancel=1.7 dB, r_max=0.899
+  M100_Q0: cascade=12.0 dB, max_stage=16.3 dB, cancel=4.3 dB, r_max=0.876
+  M100_Q100: cascade=12.0 dB, max_stage=16.3 dB, cancel=4.3 dB, r_max=0.876
+DECISION: PASS
+NOTES: Stable controlled cancellation.
+
+Plot -> c:\Users\hooki\Trench\authoring\peak_shelf\tearing_shelf.raw.response.png
+Preview -> c:\Users\hooki\Trench\authoring\peak_shelf\tearing_shelf.raw.preview.png
+
+STDERR:

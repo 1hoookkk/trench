@@ -1,0 +1,60 @@
+name,rate,sync,smooth,direction,length,active_triggers,min_value,max_value,nonzero_values,json_path
+16StepShaker,1.0,2,1,0,15,4,-1.0,0.921875,40,authoring\imported_x3\function_generators\16_step_shaker.function.json
+5th + Oct - Extended Alt,4.0,0,0,2,11,10,0.0,0.96875,11,authoring\imported_x3\function_generators\5th_+_oct_-_extended_alt.function.json
+5th + Oct - Extended,4.0,0,0,0,7,8,0.0,0.75,7,authoring\imported_x3\function_generators\5th_+_oct_-_extended.function.json
+5th + Oct,4.0,0,0,0,3,4,0.0,0.375,3,authoring\imported_x3\function_generators\5th_+_oct.function.json
+Cuban,4.0,0,0,0,11,7,-1.0,0.0625,13,authoring\imported_x3\function_generators\afro_cuban.function.json
+All Off,2.0,2,0,0,23,1,0.0,0.0,0,authoring\imported_x3\function_generators\all_off.function.json
+Another Riff,5.0,2,0,0,15,12,-0.28125,0.0,12,authoring\imported_x3\function_generators\another_riff.function.json
+Another Time,4.0,2,0,0,7,12,-0.375,0.375,4,authoring\imported_x3\function_generators\another_time.function.json
+Blue View,5.0,2,0,2,15,14,-0.375,0.375,9,authoring\imported_x3\function_generators\blue_view.function.json
+Cascading,3.0,2,0,0,23,24,-0.09375,0.15625,20,authoring\imported_x3\function_generators\cascading.function.json
+Chromatic,6.0,1,0,2,11,13,0.0,0.34375,11,authoring\imported_x3\function_generators\chromatic.function.json
+Clave Accent,4.0,0,1,0,15,5,-0.015625,0.0,1,authoring\imported_x3\function_generators\clave_accent.function.json
+Diddy 1,4.0,0,0,0,23,11,-0.375,0.53125,23,authoring\imported_x3\function_generators\diddy_1.function.json
+Diddy 2,4.0,0,0,1,15,11,-0.21875,0.15625,12,authoring\imported_x3\function_generators\diddy_2.function.json
+Diminishing Return,4.69231,2,0,2,11,3,0.0,0.59375,11,authoring\imported_x3\function_generators\diminishing_return.function.json
+EightEightRhythm,7.0,0,0,0,15,8,-0.015625,0.84375,41,authoring\imported_x3\function_generators\eighteightrhythm.function.json
+Flat 7 + Oct - Extended,4.0,0,0,0,7,4,-0.0625,0.75,7,authoring\imported_x3\function_generators\flat_7_+_oct_-_extended.function.json
+Flat 7 + Oct,4.0,0,0,0,3,4,-0.0625,0.375,3,authoring\imported_x3\function_generators\flat_7_+_oct.function.json
+Funky Machine 1,4.0,0,0,0,15,8,-0.15625,0.09375,12,authoring\imported_x3\function_generators\funky_machine_1.function.json
+Funky Machine 2,4.0,0,0,0,15,10,-0.0625,0.75,13,authoring\imported_x3\function_generators\funky_machine_2.function.json
+Half the size each step,1.0,0,0,1,7,0,-1.0,1.0,8,authoring\imported_x3\function_generators\half_sizer.function.json
+HorseLaugh,1.0,2,1,0,63,0,-1.0,1.0,63,authoring\imported_x3\function_generators\horselaugh.function.json
+Jittery,18.01,1,1,2,63,0,-0.140625,0.109375,62,authoring\imported_x3\function_generators\jittery.function.json
+Little Riff,6.0,2,0,2,7,8,-0.375,0.0,5,authoring\imported_x3\function_generators\little_riff.function.json
+Mach Groove 1,4.0,0,0,0,15,4,-0.0625,0.375,7,authoring\imported_x3\function_generators\mach_groove_1.function.json
+Mach Groove 2,4.0,0,0,0,15,8,-0.375,0.375,18,authoring\imported_x3\function_generators\mach_groove_2.function.json
+Mach Groove 3,4.0,0,0,0,15,7,-0.375,0.375,10,authoring\imported_x3\function_generators\mach_groove_3.function.json
+Major Arp,4.69231,2,0,0,23,24,-0.75,0.75,22,authoring\imported_x3\function_generators\major_arp.function.json
+Major Scale,5.56575,2,0,2,7,8,0.0,0.375,7,authoring\imported_x3\function_generators\major_scale.function.json
+Melodic Frenzy,6.0,2,0,2,15,9,-0.15625,0.09375,9,authoring\imported_x3\function_generators\melodic_frenzy.function.json
+Melodic Madness,4.79013,0,0,0,15,8,-0.15625,0.15625,6,authoring\imported_x3\function_generators\melodic_madness.function.json
+Minor Arp,3.94184,2,0,0,23,24,-0.75,0.75,22,authoring\imported_x3\function_generators\minor_arp.function.json
+Minor Scale,5.56575,2,0,2,7,8,0.0,0.375,7,authoring\imported_x3\function_generators\minor_scale.function.json
+Skirmish - Minor,4.0,0,0,1,7,11,-0.15625,0.15625,8,authoring\imported_x3\function_generators\minor_skirmish.function.json
+MorseCode24FUN,7.0,2,0,0,23,0,-0.015625,0.96875,23,authoring\imported_x3\function_generators\morse_code.function.json
+1 Oct Random - Chromatic,2.0,0,0,3,23,6,-0.34375,0.3125,23,authoring\imported_x3\function_generators\oct_random_-_chromatic.function.json
+OctaveBrownFUN,1.0,2,0,4,63,64,-0.75,0.75,45,authoring\imported_x3\function_generators\octave_brown.function.json
+Octave Jumper,2.0,2,0,0,15,9,-0.375,0.375,10,authoring\imported_x3\function_generators\octave_jumper.function.json
+Octavious,4.0,0,0,0,15,6,-0.75,0.375,8,authoring\imported_x3\function_generators\octavious.function.json
+Oddigy Arpeggio,4.0,0,0,0,31,12,0.0,0.46875,22,authoring\imported_x3\function_generators\oddigy_arpeggio.function.json
+Pentatonic Play 1,4.0,0,0,0,15,9,-0.96875,0.6875,14,authoring\imported_x3\function_generators\pentatonic_1.function.json
+Pentatonic Play 2,4.0,0,0,0,15,7,-0.75,0.59375,12,authoring\imported_x3\function_generators\pentatonic_2.function.json
+Phrase 0,2.0,0,0,5,7,0,-0.0625,0.0,1,authoring\imported_x3\function_generators\phrase_0.function.json
+Phrase 1 Shot 1,2.0,0,0,5,7,0,-0.0625,0.03125,2,authoring\imported_x3\function_generators\phrase_1.function.json
+Phrase 2,2.0,0,0,1,7,0,-0.0625,0.03125,2,authoring\imported_x3\function_generators\phrase_2.function.json
+Phrase 3,2.0,0,0,2,5,0,-0.0625,0.03125,2,authoring\imported_x3\function_generators\phrase_3.function.json
+ProgRocker,4.0,2,0,2,15,5,-0.15625,0.09375,8,authoring\imported_x3\function_generators\progrocker.function.json
+QuartalArpeggios,1.0,2,0,2,7,0,0.0,0.96875,8,authoring\imported_x3\function_generators\quartal_arpeggios.function.json
+Funky Random Minor,4.0,0,0,3,32,11,-0.375,0.375,29,authoring\imported_x3\function_generators\random_natural_minor.function.json
+Reverse Clave Accent,4.0,0,1,0,15,5,-0.015625,0.0,1,authoring\imported_x3\function_generators\reverse_clave_accent.function.json
+Shark Tooth,2.0,2,0,2,23,25,-0.375,0.375,24,authoring\imported_x3\function_generators\shark_tooth.function.json
+Simple Boogaloo ,4.0,0,0,0,15,3,-0.375,0.0,4,authoring\imported_x3\function_generators\simple_boogaloo_.function.json
+StepSweeper64FUN,1.0,2,0,0,63,0,-1.0,1.0,64,authoring\imported_x3\function_generators\step_sweeper.function.json
+Syncopatico32FUN,4.0,2,1,0,31,0,-1.0,1.0,29,authoring\imported_x3\function_generators\syncopatico.function.json
+The Editor,4.0,0,0,0,15,0,-1.0,0.0,8,authoring\imported_x3\function_generators\the_editor_1.function.json
+The Editor 2,4.0,0,0,0,15,0,-1.0,0.0,16,authoring\imported_x3\function_generators\the_editor_2.function.json
+The Editor 3,7.0,0,0,0,15,0,-0.75,0.75,16,authoring\imported_x3\function_generators\the_editor_3.function.json
+UpToPitchFUN,18.01,2,1,5,63,0,0.0,0.75,59,authoring\imported_x3\function_generators\up_to_pitch.function.json
+WayProgger,4.0,2,0,0,31,10,-0.15625,0.21875,19,authoring\imported_x3\function_generators\wayprogger.function.json

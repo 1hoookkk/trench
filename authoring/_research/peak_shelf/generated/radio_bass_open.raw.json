@@ -1,0 +1,67 @@
+{
+  "format": "raw-stage-v1",
+  "name": "radio_bass_open",
+  "boost": 0.004,
+  "frames": {
+    "M0": [
+      {
+        "kind": "explicit_zero",
+        "pole_freq_hz": 140.0,
+        "radius": 0.6875,
+        "zero_freq_hz": 77.0,
+        "zero_radius": 0.6125,
+        "stage_gain": 1.0
+      },
+      {
+        "kind": "explicit_zero",
+        "pole_freq_hz": 140.0,
+        "radius": 0.5238900470453784,
+        "zero_freq_hz": 140.0,
+        "zero_radius": 0.2,
+        "stage_gain": 1.0
+      },
+      {
+        "kind": "passthrough"
+      },
+      {
+        "kind": "passthrough"
+      },
+      {
+        "kind": "passthrough"
+      },
+      {
+        "kind": "passthrough"
+      }
+    ],
+    "M100": [
+      {
+        "kind": "explicit_zero",
+        "pole_freq_hz": 1700.0,
+        "radius": 0.65625,
+        "zero_freq_hz": 2720.0,
+        "zero_radius": 0.59375,
+        "stage_gain": 1.0
+      },
+      {
+        "kind": "explicit_zero",
+        "pole_freq_hz": 1700.0,
+        "radius": 0.2,
+        "zero_freq_hz": 1700.0,
+        "zero_radius": 0.4159546854596071,
+        "stage_gain": 1.0
+      },
+      {
+        "kind": "passthrough"
+      },
+      {
+        "kind": "passthrough"
+      },
+      {
+        "kind": "passthrough"
+      },
+      {
+        "kind": "passthrough"
+      }
+    ]
+  }
+}

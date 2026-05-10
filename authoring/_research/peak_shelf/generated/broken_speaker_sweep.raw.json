@@ -1,0 +1,67 @@
+{
+  "format": "raw-stage-v1",
+  "name": "broken_speaker_sweep",
+  "boost": 0.004,
+  "frames": {
+    "M0": [
+      {
+        "kind": "explicit_zero",
+        "pole_freq_hz": 200.0,
+        "radius": 0.6484375,
+        "zero_freq_hz": 128.75,
+        "zero_radius": 0.5890625,
+        "stage_gain": 1.0
+      },
+      {
+        "kind": "explicit_zero",
+        "pole_freq_hz": 200.0,
+        "radius": 0.4936103545130302,
+        "zero_freq_hz": 200.0,
+        "zero_radius": 0.2,
+        "stage_gain": 1.0
+      },
+      {
+        "kind": "passthrough"
+      },
+      {
+        "kind": "passthrough"
+      },
+      {
+        "kind": "passthrough"
+      },
+      {
+        "kind": "passthrough"
+      }
+    ],
+    "M100": [
+      {
+        "kind": "explicit_zero",
+        "pole_freq_hz": 2600.0,
+        "radius": 0.5703125,
+        "zero_freq_hz": 3127.8195488721803,
+        "zero_radius": 0.5421875,
+        "stage_gain": 1.0
+      },
+      {
+        "kind": "explicit_zero",
+        "pole_freq_hz": 2600.0,
+        "radius": 0.4504531454039289,
+        "zero_freq_hz": 2600.0,
+        "zero_radius": 0.2,
+        "stage_gain": 1.0
+      },
+      {
+        "kind": "passthrough"
+      },
+      {
+        "kind": "passthrough"
+      },
+      {
+        "kind": "passthrough"
+      },
+      {
+        "kind": "passthrough"
+      }
+    ]
+  }
+}

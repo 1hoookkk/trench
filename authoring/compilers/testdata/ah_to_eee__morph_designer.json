@@ -1,0 +1,60 @@
+{
+  "schema": "trench.heritage.morph_designer.v1",
+  "filter_class": "MorphDesigner",
+  "name": "ah_to_eee",
+  "category": "VOW",
+  "source_affinity": [
+    "vocal chops",
+    "lead synth stabs",
+    "one-shots"
+  ],
+  "planner": {
+    "input_schema": "trench.ui.frame_map.v1",
+    "recipe": "talking_formant",
+    "recipe_note": "Heritage Morph Designer 6-section formant chain."
+  },
+  "sections": [
+    {
+      "section": 1,
+      "name": "boundary_darkness",
+      "type": "lowpass",
+      "freq_a_hz": 87.0,
+      "freq_b_hz": 120.0
+    },
+    {
+      "section": 2,
+      "name": "throat_f1",
+      "type": "eq",
+      "freq_a_hz": 700.0,
+      "freq_b_hz": 342.0
+    },
+    {
+      "section": 3,
+      "name": "mouth_f2",
+      "type": "eq",
+      "freq_a_hz": 1220.0,
+      "freq_b_hz": 2322.0
+    },
+    {
+      "section": 4,
+      "name": "bite_or_f3",
+      "type": "eq",
+      "freq_a_hz": 2600.0,
+      "freq_b_hz": 3000.0
+    },
+    {
+      "section": 5,
+      "name": "nasal_cut_antis",
+      "type": "eq",
+      "freq_a_hz": 1100.0,
+      "freq_b_hz": 1100.0
+    },
+    {
+      "section": 6,
+      "name": "cleanup",
+      "type": "highpass",
+      "freq_a_hz": 4000.0,
+      "freq_b_hz": 4500.0
+    }
+  ]
+}

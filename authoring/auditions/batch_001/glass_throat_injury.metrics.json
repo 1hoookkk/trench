@@ -1,0 +1,161 @@
+{
+  "name": "glass_throat_injury",
+  "auditions": {
+    "noise": "authoring/auditions/batch_001/glass_throat_injury_noise_morph.wav",
+    "saw": "authoring/auditions/batch_001/glass_throat_injury_saw_morph.wav"
+  },
+  "stage_roles": [
+    "throat_body",
+    "mouth_formant",
+    "injury_dormant",
+    "nasal_shadow",
+    "air_cap",
+    "floor_guard"
+  ],
+  "corners": {
+    "M0_Q0": {
+      "peak_db": 38.55,
+      "strongest_spectral_feature": {
+        "hz": 1127.2,
+        "db": 38.55
+      }
+    },
+    "M0_Q100": {
+      "peak_db": 38.55,
+      "strongest_spectral_feature": {
+        "hz": 1127.2,
+        "db": 38.55
+      }
+    },
+    "M100_Q0": {
+      "peak_db": 30.56,
+      "strongest_spectral_feature": {
+        "hz": 2212.4,
+        "db": 30.56
+      }
+    },
+    "M100_Q100": {
+      "peak_db": 30.56,
+      "strongest_spectral_feature": {
+        "hz": 2212.4,
+        "db": 30.56
+      }
+    }
+  },
+  "stage_tops": {
+    "M0_Q0": [
+      {
+        "after_stage": 1,
+        "role": "throat_body",
+        "peak_db": -10.59,
+        "top": {
+          "hz": 664.4,
+          "db": -10.59
+        }
+      },
+      {
+        "after_stage": 2,
+        "role": "mouth_formant",
+        "peak_db": 14.41,
+        "top": {
+          "hz": 808.8,
+          "db": 14.41
+        }
+      },
+      {
+        "after_stage": 3,
+        "role": "injury_dormant",
+        "peak_db": 22.39,
+        "top": {
+          "hz": 989.1,
+          "db": 22.39
+        }
+      },
+      {
+        "after_stage": 4,
+        "role": "nasal_shadow",
+        "peak_db": 40.98,
+        "top": {
+          "hz": 1123.8,
+          "db": 40.98
+        }
+      },
+      {
+        "after_stage": 5,
+        "role": "air_cap",
+        "peak_db": 38.55,
+        "top": {
+          "hz": 1127.2,
+          "db": 38.55
+        }
+      },
+      {
+        "after_stage": 6,
+        "role": "floor_guard",
+        "peak_db": 38.55,
+        "top": {
+          "hz": 1127.2,
+          "db": 38.55
+        }
+      }
+    ],
+    "M100_Q0": [
+      {
+        "after_stage": 1,
+        "role": "throat_body",
+        "peak_db": -4.97,
+        "top": {
+          "hz": 40.0,
+          "db": -4.97
+        }
+      },
+      {
+        "after_stage": 2,
+        "role": "mouth_formant",
+        "peak_db": 2.01,
+        "top": {
+          "hz": 123.9,
+          "db": 2.01
+        }
+      },
+      {
+        "after_stage": 3,
+        "role": "injury_dormant",
+        "peak_db": 14.49,
+        "top": {
+          "hz": 3037.3,
+          "db": 14.49
+        }
+      },
+      {
+        "after_stage": 4,
+        "role": "nasal_shadow",
+        "peak_db": 32.86,
+        "top": {
+          "hz": 2209.0,
+          "db": 32.86
+        }
+      },
+      {
+        "after_stage": 5,
+        "role": "air_cap",
+        "peak_db": 30.56,
+        "top": {
+          "hz": 2212.4,
+          "db": 30.56
+        }
+      },
+      {
+        "after_stage": 6,
+        "role": "floor_guard",
+        "peak_db": 30.56,
+        "top": {
+          "hz": 2212.4,
+          "db": 30.56
+        }
+      }
+    ]
+  },
+  "peak_db_max": 38.55,
+  "reject_condition_status": "PASS"
+}

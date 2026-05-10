@@ -1,0 +1,14 @@
+{
+  "filter_class": "MorphDesigner",
+  "name": "filter_001_demo",
+  "note": "Demo / pipeline-proof artifact, NOT a shipping preset. Layout does not match the heritage MD skeleton (LP + 4xEQ + HP).",
+  "boost": 0.015,
+  "stages": [
+    {"shape": "HP", "lo": {"freq_hz": 80,    "gain_db": 0.0}, "hi": {"freq_hz": 80,    "gain_db": 0.0}},
+    {"shape": "EQ", "lo": {"freq_hz": 800,   "gain_db": 0.0}, "hi": {"freq_hz": 520,   "gain_db": 0.0}},
+    {"shape": "EQ", "lo": {"freq_hz": 1200,  "gain_db": 0.0}, "hi": {"freq_hz": 2000,  "gain_db": 0.0}},
+    {"shape": "EQ", "lo": {"freq_hz": 2600,  "gain_db": 0.0}, "hi": {"freq_hz": 3000,  "gain_db": 0.0}},
+    {"shape": "LP", "lo": {"freq_hz": 3500,  "gain_db": 0.0}, "hi": {"freq_hz": 9000,  "gain_db": 0.0}},
+    {"shape": "EQ", "lo": {"freq_hz": 5000,  "gain_db": 0.0}, "hi": {"freq_hz": 10000, "gain_db": 0.0}}
+  ]
+}

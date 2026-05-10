@@ -1,0 +1,84 @@
+[
+  {
+    "morph": 0.0,
+    "cascade_peak_db": 18.48,
+    "deepest_null_db": -102.52,
+    "peaks": [
+      194.4,
+      867.0,
+      1546.7,
+      2354.9,
+      4563.2,
+      9343.6
+    ]
+  },
+  {
+    "morph": 0.1,
+    "cascade_peak_db": 32.56,
+    "deepest_null_db": -21.27,
+    "peaks": [
+      3081.0,
+      3867.7,
+      4201.1,
+      5768.0,
+      8721.4
+    ]
+  },
+  {
+    "morph": 0.25,
+    "cascade_peak_db": 61.55,
+    "deepest_null_db": -18.67,
+    "peaks": [
+      4788.7,
+      6094.9,
+      7757.3
+    ]
+  },
+  {
+    "morph": 0.5,
+    "cascade_peak_db": 64.49,
+    "deepest_null_db": -14.58,
+    "peaks": [
+      6222.2,
+      6805.3,
+      8661.5,
+      9343.6
+    ]
+  },
+  {
+    "morph": 0.75,
+    "cascade_peak_db": 68.2,
+    "deepest_null_db": -7.5,
+    "peaks": [
+      4288.8,
+      8542.9,
+      11023.9,
+      12224.4
+    ]
+  },
+  {
+    "morph": 0.9,
+    "cascade_peak_db": 68.44,
+    "deepest_null_db": -3.7,
+    "peaks": [
+      2665.9,
+      9538.7,
+      12479.7,
+      13462.5
+    ]
+  },
+  {
+    "morph": 1.0,
+    "cascade_peak_db": 74.5,
+    "deepest_null_db": -6.11,
+    "peaks": [
+      42.1,
+      10219.2,
+      13555.6,
+      14522.6,
+      16104.0
+    ]
+  }
+]
+Rendering audio sweeps...
+Done.

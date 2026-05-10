@@ -12,7 +12,7 @@ This data catalogs the usage, classification, and metadata of hardware filter mo
 # Why it's here
 The Looperator token picker must allow users to select from the catalog of available filters. To do this intelligently, it needs to understand the landscape of filter types, their families, and how they relate to one another (e.g., suggesting similar filters based on proximity/adjacency). This spec provides the index of available filters and sets up the structural framework for token suggestions.
 
-# Sanitized content
+# Reference content
 
 ## Filter Catalog Index
 Total active distinct filters catalogued in usage: **49**

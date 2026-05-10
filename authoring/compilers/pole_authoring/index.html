@@ -1,0 +1,648 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>TRENCH — pole authoring</title>
+<style>
+  :root {
+    --bg: #0e0e10;
+    --panel: #16171b;
+    --line: #25272d;
+    --text: #d6d8de;
+    --dim: #8a8d96;
+    --accent: #6cf3a6;
+    --warn: #f3b86c;
+    --err: #f36c6c;
+    --row-alt: #18191e;
+  }
+  * { box-sizing: border-box; }
+  body {
+    background: var(--bg); color: var(--text);
+    font: 13px/1.4 ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+    margin: 0; padding: 16px;
+  }
+  h1 { font-size: 14px; margin: 0 0 4px; color: var(--accent); letter-spacing: 0.04em; }
+  h2 { font-size: 12px; color: var(--dim); margin: 12px 0 6px; text-transform: uppercase; letter-spacing: 0.08em; }
+  .row { display: flex; gap: 12px; align-items: center; }
+  .controls { margin-bottom: 8px; }
+  button, input[type=number] {
+    background: var(--panel); color: var(--text);
+    border: 1px solid var(--line); border-radius: 3px;
+    padding: 4px 8px; font: inherit;
+  }
+  button { cursor: pointer; }
+  button:hover { border-color: var(--accent); color: var(--accent); }
+  button.primary { background: var(--accent); color: #07120c; border-color: var(--accent); font-weight: bold; }
+  button.primary:hover { color: #07120c; opacity: 0.85; }
+  label { color: var(--dim); margin-right: 4px; }
+  input[type=number] { width: 70px; text-align: right; }
+  .corners { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .corner { background: var(--panel); border: 1px solid var(--line); border-radius: 4px; padding: 8px; }
+  .corner h3 { font-size: 12px; margin: 0 0 6px; color: var(--accent); }
+  table { width: 100%; border-collapse: collapse; }
+  th { font-size: 10px; color: var(--dim); text-align: left; padding: 2px 4px; font-weight: normal; text-transform: uppercase; }
+  td { padding: 2px 4px; }
+  tr:nth-child(even) { background: var(--row-alt); }
+  td input[type=number] { width: 56px; }
+  td.passthrough input { color: var(--dim); }
+  td input[type=range] {
+    width: 70px; vertical-align: middle; accent-color: var(--accent);
+    background: transparent; margin: 0 4px;
+  }
+  .toggle { width: auto; }
+  svg.response {
+    display: block; width: 100%; height: 140px;
+    background: #0a0a0c; border: 1px solid var(--line); border-radius: 3px;
+    margin-bottom: 6px;
+  }
+  svg.response .grid line { stroke: #1a1c22; stroke-width: 1; }
+  svg.response .axis-label { fill: var(--dim); font-size: 9px; }
+  svg.response path.curve { fill: none; stroke: var(--accent); stroke-width: 1.4; }
+  svg.response line.pole-tick { stroke: var(--warn); stroke-width: 1; opacity: 0.55; }
+  svg.response line.zero-tick { stroke: #6c8ef3; stroke-width: 1; opacity: 0.45; stroke-dasharray: 2 2; }
+  #status { color: var(--dim); margin-top: 8px; min-height: 16px; }
+  #status.ok { color: var(--accent); }
+  #status.err { color: var(--err); }
+  #status.warn { color: var(--warn); }
+  #target { color: var(--dim); font-size: 11px; }
+  textarea {
+    width: 100%; min-height: 200px;
+    background: #0a0a0c; color: var(--text);
+    border: 1px solid var(--line); border-radius: 3px;
+    padding: 8px; font: inherit;
+  }
+  .modal-bg {
+    position: fixed; inset: 0; background: rgba(0,0,0,0.7);
+    display: none; align-items: center; justify-content: center; z-index: 100;
+  }
+  .modal-bg.open { display: flex; }
+  .modal {
+    background: var(--panel); border: 1px solid var(--line); border-radius: 4px;
+    padding: 16px; width: 600px; max-width: 90vw;
+  }
+  .modal h2 { margin-top: 0; }
+</style>
+</head>
+<body>
+  <h1>TRENCH POLE AUTHORING</h1>
+  <div id="target"></div>
+
+  <div class="controls row" style="margin-top:12px;">
+    <button class="primary" id="apply">Apply (write trench_live.json)</button>
+    <label><input type="checkbox" id="auto-write" class="toggle" checked /> auto-write on edit</label>
+    <button id="load">Load Body…</button>
+    <label style="margin-left:8px;">CORPUS
+      <select id="corpus-picker" style="background:var(--panel);color:var(--text);border:1px solid var(--line);border-radius:3px;padding:4px 6px;font:inherit;max-width:240px;">
+        <option value="">(loading…)</option>
+      </select>
+    </label>
+    <button id="corpus-load" title="Load M0_Q0 + M100_Q0 from vault/_shapes; mirrors into Q100 corners.">Load CORPUS</button>
+    <button id="copy-json">Copy JSON</button>
+    <button id="reset">Reset</button>
+    <label>name <input type="text" id="body-name" value="pole-live" style="width:140px;background:var(--panel);color:var(--text);border:1px solid var(--line);border-radius:3px;padding:4px 8px;font:inherit;" /></label>
+    <button id="mirror-q" style="margin-left:16px;" title="Copy M0_Q0 → M0_Q100 and M100_Q0 → M100_Q100. Q axis becomes structurally degenerate; you then edit Q100 corners to apply behavioral stress only.">Mirror Q from M</button>
+  </div>
+  <div id="status">ready</div>
+
+  <h2>4-corner authoring — author M-row first (bottom), Mirror Q, then sculpt Q-row (top) as behavioral stress</h2>
+  <div class="corners" id="corners"></div>
+
+  <div class="modal-bg" id="modal-bg">
+    <div class="modal">
+      <h2>Paste compiled-v1 JSON</h2>
+      <p style="color:var(--dim);font-size:11px;">Accepts either kernel-coef form (c0..c4 per stage — uses inverse math)
+        or pole/zero Hz form (pole_freq_hz / pole_radius / zero_freq_hz / zero_radius). Loads into all 4 corners.</p>
+      <textarea id="paste-area" spellcheck="false" placeholder='{"format":"compiled-v1","keyframes":[...]}'></textarea>
+      <div class="row" style="margin-top:8px; justify-content:flex-end;">
+        <button id="modal-cancel">Cancel</button>
+        <button class="primary" id="modal-load">Parse → fill fields</button>
+      </div>
+    </div>
+  </div>
+
+<script>
+const NUM_STAGES = 6;
+// Author 4 distinct corners. Q is a behavioral lens applied to the M-axis
+// identity, NOT an unrelated second sweep. Workflow:
+//   1. Author M0_Q0 + M100_Q0 (the bottom edge — pure timbral journey).
+//   2. Click "Mirror Q from M" to clone bottom into top (Q becomes inert).
+//   3. Edit M0_Q100 + M100_Q100 to apply behavioral stress only — pinch
+//      notches, merge formants, push to fracture. Don't author unrelated
+//      shapes here; that muddies the axes.
+const CORNERS = [
+  { label: "M0_Q0",     morph: 0, q: 0 },   // index 0 — State A, no stress
+  { label: "M100_Q0",   morph: 1, q: 0 },   // index 1 — State B, no stress
+  { label: "M0_Q100",   morph: 0, q: 1 },   // index 2 — State A under Q stress
+  { label: "M100_Q100", morph: 1, q: 1 },   // index 3 — State B under Q stress
+];
+const SR = 44100;
+
+function defaultStages() {
+  return Array.from({length: NUM_STAGES}, () => ({
+    enabled: true,
+    pole_freq_hz: 1000,
+    pole_radius: 0.95,
+    zero_freq_hz: 1000,
+    zero_radius: 1.0,
+    gain: 1.0,
+  }));
+}
+
+const state = {
+  name: "pole-live",
+  boost: 1.0,
+  corners: CORNERS.map(c => ({...c, stages: defaultStages()})),
+};
+
+function el(tag, attrs = {}, ...children) {
+  const e = document.createElement(tag);
+  for (const [k, v] of Object.entries(attrs)) {
+    if (k === "class") e.className = v;
+    else if (k.startsWith("on")) e.addEventListener(k.slice(2), v);
+    else if (typeof v === "boolean") { if (v) e.setAttribute(k, ""); }
+    else e.setAttribute(k, v);
+  }
+  for (const c of children) {
+    if (c == null) continue;
+    e.appendChild(typeof c === "string" ? document.createTextNode(c) : c);
+  }
+  return e;
+}
+
+function renderCorners() {
+  const root = document.getElementById("corners");
+  root.innerHTML = "";
+  state.corners.forEach((corner, ci) => {
+    const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+    svg.setAttribute("class", "response");
+    svg.setAttribute("viewBox", "0 0 240 140");
+    svg.setAttribute("preserveAspectRatio", "none");
+    corner._svg = svg;
+
+    const table = el("table");
+    const thead = el("thead");
+    thead.appendChild(el("tr", {},
+      el("th", {}, "#"),
+      el("th", {}, "on"),
+      el("th", {}, "pole Hz"),
+      el("th", {}, "pole r"),
+      el("th", {}, "zero Hz"),
+      el("th", {}, "zero r"),
+      el("th", {}, "gain"),
+    ));
+    table.appendChild(thead);
+    const tbody = el("tbody");
+    corner.stages.forEach((stage, si) => {
+      const tr = el("tr", { class: stage.enabled ? "" : "passthrough" });
+      tr.appendChild(el("td", {}, String(si + 1)));
+      tr.appendChild(el("td", {}, mkCheckbox(stage, "enabled", () => { tr.className = stage.enabled ? "" : "passthrough"; onEdit(); })));
+      tr.appendChild(el("td", {}, ...mkPair(stage, "pole_freq_hz", 0, SR/2, 1, true)));
+      tr.appendChild(el("td", {}, ...mkPair(stage, "pole_radius",  0, 0.999, 0.001, false)));
+      tr.appendChild(el("td", {}, ...mkPair(stage, "zero_freq_hz", 0, SR/2, 1, true)));
+      tr.appendChild(el("td", {}, ...mkPair(stage, "zero_radius",  0, 1.5, 0.001, false)));
+      tr.appendChild(el("td", {}, mkNum(stage, "gain", -10, 10, 0.01)));
+      tbody.appendChild(tr);
+    });
+    table.appendChild(tbody);
+    const wrap = el("div", { class: "corner" }, el("h3", {}, corner.label), svg, table);
+    root.appendChild(wrap);
+    drawResponse(svg, corner.stages);
+  });
+}
+
+// Pair of [number-input, range-slider] kept in sync. `logScale` makes the
+// slider's mapping logarithmic so 20 Hz–22 kHz feels balanced under the thumb.
+function mkPair(obj, key, min, max, step, logScale) {
+  const num = el("input", {
+    type: "number", min, max, step,
+  });
+  num.value = obj[key];
+  const slider = el("input", {
+    type: "range",
+    min: 0, max: 1000, step: 1,
+  });
+  const toSliderPos = v => {
+    if (logScale) {
+      const lo = Math.log(Math.max(20, min || 20));
+      const hi = Math.log(max);
+      const lv = Math.log(Math.max(20, v || 20));
+      return ((lv - lo) / (hi - lo)) * 1000;
+    }
+    return ((v - min) / (max - min)) * 1000;
+  };
+  const fromSliderPos = p => {
+    if (logScale) {
+      const lo = Math.log(Math.max(20, min || 20));
+      const hi = Math.log(max);
+      return Math.exp(lo + (p / 1000) * (hi - lo));
+    }
+    return min + (p / 1000) * (max - min);
+  };
+  slider.value = toSliderPos(obj[key]);
+  num.oninput = e => {
+    const v = parseFloat(e.target.value);
+    obj[key] = isFinite(v) ? v : 0;
+    slider.value = toSliderPos(obj[key]);
+    onEdit();
+  };
+  slider.oninput = e => {
+    const v = fromSliderPos(parseFloat(e.target.value));
+    obj[key] = logScale ? Math.round(v) : Math.round(v * 1000) / 1000;
+    num.value = obj[key];
+    onEdit();
+  };
+  return [num, slider];
+}
+
+// --- Magnitude response (cascaded biquads) -------------------------------
+
+const NFFT = 256;
+const F_MIN = 20, F_MAX = SR / 2;
+const DB_MIN = -40, DB_MAX = 30;
+
+function stageCoeffs(s) {
+  if (!s.enabled) return null;
+  const theta_p = 2 * Math.PI * s.pole_freq_hz / SR;
+  const theta_z = 2 * Math.PI * s.zero_freq_hz / SR;
+  const a1 = -2 * s.pole_radius * Math.cos(theta_p);
+  const a2 = s.pole_radius * s.pole_radius;
+  const b1 = -2 * s.zero_radius * Math.cos(theta_z);
+  const b2 = s.zero_radius * s.zero_radius;
+  const g = s.gain;
+  // Standard direct-form: H(z) = (g + g·b1·z⁻¹ + g·b2·z⁻²) / (1 + a1·z⁻¹ + a2·z⁻²)
+  return { b: [g, g * b1, g * b2], a: [1, a1, a2] };
+}
+
+function cascadeMagDb(stages) {
+  const freqs = new Float32Array(NFFT);
+  const mags = new Float32Array(NFFT);
+  for (let i = 0; i < NFFT; i++) {
+    const t = i / (NFFT - 1);
+    const f = F_MIN * Math.pow(F_MAX / F_MIN, t);
+    freqs[i] = f;
+    const w = 2 * Math.PI * f / SR;
+    const cw = Math.cos(w), sw = Math.sin(w), c2w = Math.cos(2 * w), s2w = Math.sin(2 * w);
+    let hRe = 1, hIm = 0;
+    for (const s of stages) {
+      const co = stageCoeffs(s);
+      if (!co) continue;
+      const nRe = co.b[0] + co.b[1] * cw + co.b[2] * c2w;
+      const nIm = -(co.b[1] * sw + co.b[2] * s2w);
+      const dRe = co.a[0] + co.a[1] * cw + co.a[2] * c2w;
+      const dIm = -(co.a[1] * sw + co.a[2] * s2w);
+      const dMag2 = dRe * dRe + dIm * dIm;
+      const stageRe = (nRe * dRe + nIm * dIm) / dMag2;
+      const stageIm = (nIm * dRe - nRe * dIm) / dMag2;
+      const newRe = hRe * stageRe - hIm * stageIm;
+      const newIm = hRe * stageIm + hIm * stageRe;
+      hRe = newRe; hIm = newIm;
+    }
+    const mag = Math.sqrt(hRe * hRe + hIm * hIm);
+    mags[i] = 20 * Math.log10(Math.max(mag, 1e-6));
+  }
+  return { freqs, mags };
+}
+
+function drawResponse(svg, stages) {
+  while (svg.firstChild) svg.removeChild(svg.firstChild);
+  const W = 240, H = 140;
+  const NS = "http://www.w3.org/2000/svg";
+
+  // Grid
+  const grid = document.createElementNS(NS, "g");
+  grid.setAttribute("class", "grid");
+  for (const f of [100, 1000, 10000]) {
+    const x = freqToX(f, W);
+    const ln = document.createElementNS(NS, "line");
+    ln.setAttribute("x1", x); ln.setAttribute("y1", 0);
+    ln.setAttribute("x2", x); ln.setAttribute("y2", H);
+    grid.appendChild(ln);
+    const tx = document.createElementNS(NS, "text");
+    tx.setAttribute("x", x + 2); tx.setAttribute("y", H - 2);
+    tx.setAttribute("class", "axis-label");
+    tx.textContent = f >= 1000 ? (f / 1000) + "k" : String(f);
+    grid.appendChild(tx);
+  }
+  for (const db of [0, -20, 20]) {
+    const y = dbToY(db, H);
+    const ln = document.createElementNS(NS, "line");
+    ln.setAttribute("x1", 0); ln.setAttribute("y1", y);
+    ln.setAttribute("x2", W); ln.setAttribute("y2", y);
+    grid.appendChild(ln);
+    const tx = document.createElementNS(NS, "text");
+    tx.setAttribute("x", 2); tx.setAttribute("y", y - 1);
+    tx.setAttribute("class", "axis-label");
+    tx.textContent = (db >= 0 ? "+" : "") + db + "dB";
+    grid.appendChild(tx);
+  }
+  svg.appendChild(grid);
+
+  // Pole / zero ticks at the bottom
+  for (const s of stages) {
+    if (!s.enabled) continue;
+    if (s.pole_freq_hz >= F_MIN && s.pole_freq_hz <= F_MAX) {
+      const x = freqToX(s.pole_freq_hz, W);
+      const ln = document.createElementNS(NS, "line");
+      ln.setAttribute("x1", x); ln.setAttribute("y1", H - 12);
+      ln.setAttribute("x2", x); ln.setAttribute("y2", H);
+      ln.setAttribute("class", "pole-tick");
+      svg.appendChild(ln);
+    }
+    if (s.zero_freq_hz >= F_MIN && s.zero_freq_hz <= F_MAX) {
+      const x = freqToX(s.zero_freq_hz, W);
+      const ln = document.createElementNS(NS, "line");
+      ln.setAttribute("x1", x); ln.setAttribute("y1", 0);
+      ln.setAttribute("x2", x); ln.setAttribute("y2", 12);
+      ln.setAttribute("class", "zero-tick");
+      svg.appendChild(ln);
+    }
+  }
+
+  // Curve
+  const { freqs, mags } = cascadeMagDb(stages);
+  let d = "";
+  for (let i = 0; i < freqs.length; i++) {
+    const x = freqToX(freqs[i], W);
+    const y = dbToY(mags[i], H);
+    d += (i === 0 ? "M" : "L") + x.toFixed(1) + " " + y.toFixed(1) + " ";
+  }
+  const path = document.createElementNS(NS, "path");
+  path.setAttribute("d", d);
+  path.setAttribute("class", "curve");
+  svg.appendChild(path);
+}
+
+function freqToX(f, W) {
+  const t = (Math.log(Math.max(F_MIN, f)) - Math.log(F_MIN)) / (Math.log(F_MAX) - Math.log(F_MIN));
+  return Math.max(0, Math.min(W, t * W));
+}
+function dbToY(db, H) {
+  const t = (db - DB_MIN) / (DB_MAX - DB_MIN);
+  return H - t * H;
+}
+
+function redrawAllResponses() {
+  for (const c of state.corners) {
+    if (c._svg) drawResponse(c._svg, c.stages);
+  }
+}
+
+function mkCheckbox(obj, key, onchange) {
+  return el("input", {
+    type: "checkbox",
+    onchange: e => { obj[key] = e.target.checked; (onchange || onEdit)(); },
+  }).also(e => { e.checked = obj[key]; });
+}
+
+function mkNum(obj, key, min, max, step) {
+  return el("input", {
+    type: "number", min, max, step,
+    oninput: e => {
+      const v = parseFloat(e.target.value);
+      obj[key] = isNaN(v) ? 0 : v;
+      onEdit();
+    },
+  }).also(e => { e.value = obj[key]; });
+}
+
+// tiny extension so .also() chains for setting properties after construction
+HTMLElement.prototype.also = function(fn) { fn(this); return this; };
+
+function buildCartridge() {
+  return {
+    format: "compiled-v1",
+    name: state.name,
+    provenance: "pole-authoring",
+    sampleRate: 39062.5,
+    stages: 12,
+    keyframes: state.corners.map(c => ({
+      label: c.label, morph: c.morph, q: c.q, boost: state.boost,
+      stages: c.stages.map(s => {
+        if (!s.enabled) return { c0: 1, c1: 0, c2: 0, c3: 0, c4: 0 };
+        return {
+          pole_freq_hz: s.pole_freq_hz, pole_radius: s.pole_radius,
+          zero_freq_hz: s.zero_freq_hz, zero_radius: s.zero_radius,
+          gain: s.gain,
+        };
+      }).concat(Array.from({length: 12 - NUM_STAGES}, () => ({c0:1,c1:0,c2:0,c3:0,c4:0}))),
+    })),
+  };
+}
+
+let writeTimer = null;
+function onEdit() {
+  redrawAllResponses();
+  if (document.getElementById("auto-write").checked) {
+    if (writeTimer) clearTimeout(writeTimer);
+    writeTimer = setTimeout(writeNow, 200);
+  }
+}
+
+async function writeNow() {
+  setStatus("writing…");
+  try {
+    const r = await fetch("/write", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(buildCartridge()),
+    });
+    const txt = await r.text();
+    if (r.ok) setStatus("ok · " + txt, "ok");
+    else setStatus("err · " + txt, "err");
+  } catch (e) {
+    setStatus("err · " + e.message, "err");
+  }
+}
+
+function setStatus(msg, cls = "") {
+  const s = document.getElementById("status");
+  s.textContent = msg;
+  s.className = cls;
+}
+
+function copyJson() {
+  navigator.clipboard.writeText(JSON.stringify(buildCartridge(), null, 2));
+  setStatus("copied JSON to clipboard", "ok");
+}
+
+// --- Load Body modal -----------------------------------------------------
+
+function openLoadModal() {
+  document.getElementById("modal-bg").classList.add("open");
+  document.getElementById("paste-area").focus();
+}
+function closeLoadModal() {
+  document.getElementById("modal-bg").classList.remove("open");
+}
+
+function parseAndLoad() {
+  const raw = document.getElementById("paste-area").value;
+  let parsed;
+  try { parsed = JSON.parse(raw); }
+  catch (e) { setStatus("paste err · " + e.message, "err"); return; }
+
+  if (!Array.isArray(parsed.keyframes)) {
+    setStatus("paste err · missing keyframes[]", "err"); return;
+  }
+  const loaded = applyCartridge(parsed);
+  closeLoadModal();
+  setStatus(`loaded ${loaded}/4 corners (${parsed.name || "unnamed"})`, "ok");
+}
+
+function applyCartridge(parsed) {
+  const byLabel = Object.fromEntries(parsed.keyframes.map(k => [k.label, k]));
+  let loaded = 0;
+  for (const corner of state.corners) {
+    const src = byLabel[corner.label];
+    if (!src || !Array.isArray(src.stages)) continue;
+    for (let i = 0; i < NUM_STAGES; i++) {
+      const ss = src.stages[i];
+      if (!ss) {
+        corner.stages[i] = { enabled: false, pole_freq_hz: 0, pole_radius: 0, zero_freq_hz: 0, zero_radius: 1, gain: 1 };
+        continue;
+      }
+      corner.stages[i] = stageFromSource(ss);
+    }
+    loaded++;
+  }
+  if (parsed.name) {
+    state.name = parsed.name;
+    document.getElementById("body-name").value = parsed.name;
+  }
+  renderCorners();
+  onEdit();
+  return loaded;
+}
+
+async function loadCorpusPair() {
+  const sel = document.getElementById("corpus-picker");
+  const name = sel.value;
+  if (!name) { setStatus("pick a CORPUS template first", "warn"); return; }
+  setStatus("fetching CORPUS pair…");
+  try {
+    const r = await fetch("/corpus/pair?name=" + encodeURIComponent(name));
+    if (!r.ok) { setStatus("corpus err · " + (await r.text()), "err"); return; }
+    const synth = await r.json();
+    const loaded = applyCartridge(synth);
+    setStatus(`CORPUS loaded: ${name} (${loaded}/4 corners; Q mirrored from M)`, "ok");
+  } catch (e) { setStatus("corpus err · " + e.message, "err"); }
+}
+
+async function populateCorpusPicker() {
+  try {
+    const r = await fetch("/corpus/list");
+    if (!r.ok) return;
+    const j = await r.json();
+    const sel = document.getElementById("corpus-picker");
+    sel.innerHTML = "";
+    const placeholder = document.createElement("option");
+    placeholder.value = "";
+    placeholder.textContent = `(${j.pairs.length} templates)`;
+    sel.appendChild(placeholder);
+    for (const entry of j.pairs) {
+      const opt = document.createElement("option");
+      opt.value = entry.name;
+      const mark = entry.has_full_q ? "◆" : "·";  // ◆ = native Q100, · = mirror-only
+      opt.textContent = `${mark} ${entry.name.replace(/_/g, " ")}`;
+      sel.appendChild(opt);
+    }
+  } catch (e) { /* keep placeholder */ }
+}
+
+function stageFromSource(s) {
+  // Pole/zero Hz form already? Use directly.
+  if ("pole_freq_hz" in s || "pole_radius" in s) {
+    return {
+      enabled: true,
+      pole_freq_hz: numOr(s.pole_freq_hz, 1000),
+      pole_radius: numOr(s.pole_radius, 0.95),
+      zero_freq_hz: numOr(s.zero_freq_hz, s.pole_freq_hz || 1000),
+      zero_radius: numOr(s.zero_radius, s.pole_radius || 0.95),
+      gain: numOr(s.gain, 1.0),
+    };
+  }
+  // Kernel-coef form: invert.
+  const c0 = numOr(s.c0, 1), c1 = numOr(s.c1, 0), c2 = numOr(s.c2, 0),
+        c3 = numOr(s.c3, 0), c4 = numOr(s.c4, 0);
+  // Detect passthrough.
+  if (c0 === 1 && c1 === 0 && c2 === 0 && c3 === 0 && c4 === 0) {
+    return { enabled: false, pole_freq_hz: 0, pole_radius: 0, zero_freq_hz: 0, zero_radius: 1, gain: 1 };
+  }
+  // Pole: a1 = c3, a2 = c4 → r = sqrt(a2), θ = acos(-a1 / 2r)
+  const pole_r = Math.sqrt(Math.max(0, c4));
+  const pole_theta = pole_r > 1e-6 ? Math.acos(Math.max(-1, Math.min(1, -c3 / (2 * pole_r)))) : 0;
+  const pole_hz = pole_theta * SR / (2 * Math.PI);
+  // Zero: numerator b0=c0, b1=c1, b2=c2 → roots of b0 + b1 z^-1 + b2 z^-2.
+  // Convert to standard form: b2*z^2 + b1*z + b0 = 0 in z. Same r/θ logic with (b1,b2) ratios.
+  // For unit-circle special case (c1 ≈ 0): zeros at ±sqrt(-c0/c2).
+  let zero_r, zero_hz;
+  if (Math.abs(c0) < 1e-9 || Math.abs(c2) < 1e-9) {
+    zero_r = 1;
+    zero_hz = pole_hz;
+  } else {
+    zero_r = Math.sqrt(Math.abs(c2 / c0));
+    const arg = Math.max(-1, Math.min(1, c1 / (2 * Math.sqrt(Math.abs(c0 * c2)))));
+    const zero_theta = Math.acos(-arg);
+    zero_hz = zero_theta * SR / (2 * Math.PI);
+    if (!isFinite(zero_hz)) { zero_hz = pole_hz; zero_r = 1; }
+  }
+  return {
+    enabled: true,
+    pole_freq_hz: round(pole_hz, 1),
+    pole_radius: round(pole_r, 4),
+    zero_freq_hz: round(zero_hz, 1),
+    zero_radius: round(zero_r, 4),
+    gain: 1.0,
+  };
+}
+
+function numOr(v, fallback) {
+  const n = Number(v);
+  return isFinite(n) ? n : fallback;
+}
+function round(v, n) {
+  const p = Math.pow(10, n);
+  return Math.round(v * p) / p;
+}
+
+function reset() {
+  state.corners = CORNERS.map(c => ({...c, stages: defaultStages()}));
+  renderCorners();
+  setStatus("reset to defaults");
+  onEdit();
+}
+
+function mirrorQ() {
+  // Copy M-row stages into Q-row stages (deep clone). Q axis becomes
+  // structurally degenerate; user then sculpts top corners as stress.
+  const m0 = state.corners[0].stages;
+  const m1 = state.corners[1].stages;
+  state.corners[2].stages = m0.map(s => ({...s}));
+  state.corners[3].stages = m1.map(s => ({...s}));
+  renderCorners();
+  setStatus("Q corners mirrored from M corners — Q axis is now inert; sculpt Q-row to add behavioral stress", "ok");
+  onEdit();
+}
+
+// --- Init ----------------------------------------------------------------
+
+document.getElementById("apply").onclick = writeNow;
+document.getElementById("load").onclick = openLoadModal;
+document.getElementById("copy-json").onclick = copyJson;
+document.getElementById("reset").onclick = reset;
+document.getElementById("modal-cancel").onclick = closeLoadModal;
+document.getElementById("modal-load").onclick = parseAndLoad;
+document.getElementById("body-name").oninput = e => { state.name = e.target.value; onEdit(); };
+document.getElementById("mirror-q").onclick = mirrorQ;
+document.getElementById("corpus-load").onclick = loadCorpusPair;
+document.getElementById("modal-bg").onclick = e => { if (e.target.id === "modal-bg") closeLoadModal(); };
+
+renderCorners();
+populateCorpusPicker();
+
+fetch("/target").then(r => r.json()).then(j => {
+  document.getElementById("target").textContent = "writes → " + j.target;
+}).catch(() => {});
+</script>
+</body>
+</html>

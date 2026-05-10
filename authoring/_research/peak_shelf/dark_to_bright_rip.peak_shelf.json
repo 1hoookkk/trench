@@ -1,0 +1,21 @@
+{
+  "schema": "trench.heritage.peak_shelf.v1",
+  "name": "dark_to_bright_rip",
+  "category": "BASS",
+  "boost": 0.004,
+  "frames": {
+    "A": {
+      "freq_hz": 260,
+      "shelf": -44,
+      "peak_db": 16
+    },
+    "B": {
+      "freq_hz": 3200,
+      "shelf": 28,
+      "peak_db": 12
+    }
+  },
+  "render_metadata": {
+    "preview_type": "PEAK_SHELF_INTENT_NOT_RESPONSE"
+  }
+}

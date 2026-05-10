@@ -1,0 +1,21 @@
+{
+  "schema": "trench.heritage.peak_shelf.v1",
+  "name": "lowpass_to_highshelf_flip",
+  "category": "BASS",
+  "boost": 0.004,
+  "frames": {
+    "A": {
+      "freq_hz": 190,
+      "shelf": -52,
+      "peak_db": -18
+    },
+    "B": {
+      "freq_hz": 2300,
+      "shelf": 52,
+      "peak_db": 6
+    }
+  },
+  "render_metadata": {
+    "preview_type": "PEAK_SHELF_INTENT_NOT_RESPONSE"
+  }
+}

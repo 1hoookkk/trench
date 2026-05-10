@@ -1,0 +1,67 @@
+{
+  "format": "raw-stage-v1",
+  "name": "plastic_mid_bark",
+  "boost": 0.004,
+  "frames": {
+    "M0": [
+      {
+        "kind": "explicit_zero",
+        "pole_freq_hz": 800.0,
+        "radius": 0.5546875,
+        "zero_freq_hz": 695.0,
+        "zero_radius": 0.5328125,
+        "stage_gain": 1.0
+      },
+      {
+        "kind": "explicit_zero",
+        "pole_freq_hz": 800.0,
+        "radius": 0.4936103545130302,
+        "zero_freq_hz": 800.0,
+        "zero_radius": 0.2,
+        "stage_gain": 1.0
+      },
+      {
+        "kind": "passthrough"
+      },
+      {
+        "kind": "passthrough"
+      },
+      {
+        "kind": "passthrough"
+      },
+      {
+        "kind": "passthrough"
+      }
+    ],
+    "M100": [
+      {
+        "kind": "explicit_zero",
+        "pole_freq_hz": 1300.0,
+        "radius": 0.5859375,
+        "zero_freq_hz": 1637.7952755905512,
+        "zero_radius": 0.5515625,
+        "stage_gain": 1.0
+      },
+      {
+        "kind": "explicit_zero",
+        "pole_freq_hz": 1300.0,
+        "radius": 0.4504531454039289,
+        "zero_freq_hz": 1300.0,
+        "zero_radius": 0.2,
+        "stage_gain": 1.0
+      },
+      {
+        "kind": "passthrough"
+      },
+      {
+        "kind": "passthrough"
+      },
+      {
+        "kind": "passthrough"
+      },
+      {
+        "kind": "passthrough"
+      }
+    ]
+  }
+}

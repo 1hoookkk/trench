@@ -51,3 +51,4 @@ check.log
 
 # Hot-reload dev harness watch directory (trench-forge-dev)
 /forge-watch/
+.aider*

@@ -1,0 +1,61 @@
+{
+    "schema": "trench.ui.frame_map.v1",
+    "name": "mouth_clamp",
+    "category": "VOW",
+    "boost": 0.004,
+    "frames": {
+        "A": {
+            "throat_f1": {
+                "hz": 1700,
+                "gain_db": 14.0
+            },
+            "mouth_f2": {
+                "hz": 900,
+                "gain_db": 12.0
+            },
+            "nasal_cut": {
+                "hz": 1900,
+                "gain_db": -24.0
+            },
+            "bite": {
+                "hz": 400,
+                "gain_db": 16.0
+            },
+            "air": {
+                "hz": 6000,
+                "gain_db": 0
+            },
+            "floor": {
+                "hz": 80,
+                "gain_db": 0
+            }
+        },
+        "B": {
+            "throat_f1": {
+                "hz": 570,
+                "gain_db": 12.0
+            },
+            "mouth_f2": {
+                "hz": 1200,
+                "gain_db": 12.0
+            },
+            "nasal_cut": {
+                "hz": 1500,
+                "gain_db": -24.0
+            },
+            "bite": {
+                "hz": 1200,
+                "gain_db": 14.0
+            },
+            "air": {
+                "hz": 4000,
+                "gain_db": 0
+            },
+            "floor": {
+                "hz": 80,
+                "gain_db": 0
+            }
+        }
+    },
+    "mental_mode": "CLEAN"
+}

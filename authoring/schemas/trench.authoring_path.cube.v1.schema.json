@@ -1,0 +1,83 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "trench.authoring_path.cube.v1.schema.json",
+  "title": "TRENCH Cube Authoring Path v1",
+  "type": "object",
+  "required": [
+    "schema",
+    "id",
+    "name",
+    "provenance",
+    "exactness",
+    "control_mode_default",
+    "axes",
+    "legacy_behavior",
+    "corners"
+  ],
+  "properties": {
+    "schema": { "const": "trench.authoring_path.cube.v1" },
+    "id": { "type": "string", "minLength": 1 },
+    "name": { "type": "string", "minLength": 1 },
+    "provenance": { "type": "object" },
+    "exactness": { "type": "string", "minLength": 1 },
+    "control_mode_default": {
+      "type": "string",
+      "enum": ["modern_live_xyz", "legacy_latch_yz"]
+    },
+    "axes": { "type": "object" },
+    "legacy_behavior": { "type": "object" },
+    "corners": {
+      "type": "object",
+      "required": ["c000", "c100", "c010", "c110", "c001", "c101", "c011", "c111"],
+      "additionalProperties": false,
+      "properties": {
+        "c000": { "$ref": "#/$defs/heritageObject" },
+        "c100": { "$ref": "#/$defs/heritageObject" },
+        "c010": { "$ref": "#/$defs/heritageObject" },
+        "c110": { "$ref": "#/$defs/heritageObject" },
+        "c001": { "$ref": "#/$defs/heritageObject" },
+        "c101": { "$ref": "#/$defs/heritageObject" },
+        "c011": { "$ref": "#/$defs/heritageObject" },
+        "c111": { "$ref": "#/$defs/heritageObject" }
+      }
+    }
+  },
+  "$defs": {
+    "sample": {
+      "type": "object",
+      "properties": {
+        "morph": { "type": "number" },
+        "q": { "type": "number" }
+      },
+      "additionalProperties": false
+    },
+    "heritageObject": {
+      "type": "object",
+      "required": ["kind"],
+      "properties": {
+        "kind": {
+          "type": "string",
+          "enum": [
+            "morph_designer_ref",
+            "morph_designer_inline",
+            "peak_shelf_ref",
+            "peak_shelf_inline"
+          ]
+        },
+        "template_name": { "type": "string" },
+        "template": { "type": "object" },
+        "path": { "type": "string" },
+        "document": { "type": "object" },
+        "sample": { "$ref": "#/$defs/sample" }
+      },
+      "additionalProperties": true,
+      "not": {
+        "anyOf": [
+          { "required": ["keyframes"] },
+          { "required": ["representation"] },
+          { "required": ["corners"] }
+        ]
+      }
+    }
+  }
+}

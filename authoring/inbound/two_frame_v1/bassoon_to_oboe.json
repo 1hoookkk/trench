@@ -1,0 +1,30 @@
+{
+  "format": "raw-stage-v1",
+  "name": "bassoon_to_oboe",
+  "intent": "Double-reed register transform. Bassoon = low hollow woody body (F1~350, F2~700, F3~1200). Oboe = pinched bright buzz (F1~1100, F2~2700, F3~3200). Driver is body+carve lift an octave+, plus HF boundary opens.",
+  "authoring_sample_rate_hz": 39062.5,
+  "boost": 4.0,
+  "skeleton": ["anchor", "mass", "carve", "pressure", "detail", "boundary"],
+  "frames": {
+    "M0": {
+      "stages": [
+        {"role": "anchor",   "type": "allpole",       "kind": "allpole",       "pole_hz": 90.0,   "pole_freq_hz": 90.0,   "radius": 0.988, "zero_hz": 0.0,    "zero_freq_hz": 0.0,    "zero_radius": 0.0,  "stage_gain": 1.0},
+        {"role": "mass",     "type": "explicit_zero", "kind": "explicit_zero", "pole_hz": 350.0,  "pole_freq_hz": 350.0,  "radius": 0.996, "zero_hz": 200.0,  "zero_freq_hz": 200.0,  "zero_radius": 0.3,  "stage_gain": 1.0},
+        {"role": "carve",    "type": "explicit_zero", "kind": "explicit_zero", "pole_hz": 700.0,  "pole_freq_hz": 700.0,  "radius": 0.994, "zero_hz": 480.0,  "zero_freq_hz": 480.0,  "zero_radius": 0.4,  "stage_gain": 1.0},
+        {"role": "pressure", "type": "explicit_zero", "kind": "explicit_zero", "pole_hz": 1200.0, "pole_freq_hz": 1200.0, "radius": 0.990, "zero_hz": 900.0,  "zero_freq_hz": 900.0,  "zero_radius": 0.4,  "stage_gain": 1.0},
+        {"role": "detail",   "type": "explicit_zero", "kind": "explicit_zero", "pole_hz": 2400.0, "pole_freq_hz": 2400.0, "radius": 0.975, "zero_hz": 3500.0, "zero_freq_hz": 3500.0, "zero_radius": 0.5,  "stage_gain": 1.0},
+        {"role": "boundary", "type": "explicit_zero", "kind": "explicit_zero", "pole_hz": 6000.0, "pole_freq_hz": 6000.0, "radius": 0.850, "zero_hz": 8000.0, "zero_freq_hz": 8000.0, "zero_radius": 0.95, "stage_gain": 1.0}
+      ]
+    },
+    "M100": {
+      "stages": [
+        {"role": "anchor",   "type": "allpole",       "kind": "allpole",       "pole_hz": 90.0,   "pole_freq_hz": 90.0,   "radius": 0.985, "zero_hz": 0.0,    "zero_freq_hz": 0.0,    "zero_radius": 0.0,  "stage_gain": 1.0},
+        {"role": "mass",     "type": "explicit_zero", "kind": "explicit_zero", "pole_hz": 1100.0, "pole_freq_hz": 1100.0, "radius": 0.992, "zero_hz": 600.0,  "zero_freq_hz": 600.0,  "zero_radius": 0.3,  "stage_gain": 1.0},
+        {"role": "carve",    "type": "explicit_zero", "kind": "explicit_zero", "pole_hz": 2700.0, "pole_freq_hz": 2700.0, "radius": 0.994, "zero_hz": 1800.0, "zero_freq_hz": 1800.0, "zero_radius": 0.4,  "stage_gain": 1.0},
+        {"role": "pressure", "type": "explicit_zero", "kind": "explicit_zero", "pole_hz": 3200.0, "pole_freq_hz": 3200.0, "radius": 0.995, "zero_hz": 4200.0, "zero_freq_hz": 4200.0, "zero_radius": 0.3,  "stage_gain": 1.0},
+        {"role": "detail",   "type": "explicit_zero", "kind": "explicit_zero", "pole_hz": 5000.0, "pole_freq_hz": 5000.0, "radius": 0.980, "zero_hz": 6500.0, "zero_freq_hz": 6500.0, "zero_radius": 0.3,  "stage_gain": 1.0},
+        {"role": "boundary", "type": "explicit_zero", "kind": "explicit_zero", "pole_hz": 8000.0, "pole_freq_hz": 8000.0, "radius": 0.900, "zero_hz": 9400.0, "zero_freq_hz": 9400.0, "zero_radius": 0.90, "stage_gain": 1.0}
+      ]
+    }
+  }
+}

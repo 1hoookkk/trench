@@ -1,0 +1,69 @@
+====================================================================================================
+  RCA: Cul-De-Sac  |  analysis point: morph=0.00, q=1.00
+====================================================================================================
+  Cascade peak:  7.533634e+10  at  112.1 Hz
+  Cascade dB:    217.5 dB
+
+── Interpolated coefficients at analysis point ──
+  stage            c0            c1            c2            c3            c4
+      0      0.561890     -1.399945      0.490000     -1.989689      0.990025
+      1      0.561890     -1.399668      0.490000     -1.982758      0.984064
+      2      0.561890     -1.398672      0.490000     -1.975043      0.980100
+      3      0.561890     -1.396671      0.490000     -1.965210      0.976144
+      4      0.561890     -1.390472      0.490000     -1.949088      0.980100
+      5      0.561890     -1.373911      0.490000     -1.910287      0.984064
+
+── Pole / zero analysis ──
+  stage 0: |p|=0.995000 pole_f=110.0 Hz  |z|=2.374001 zero_f=0.0 Hz  nearest_z_dist=0.5121  
+           corner |p|: M0_Q0=0.970000  M100_Q0=0.970000  M0_Q100=0.995000  M100_Q100=0.995000  max_corner=0.995000
+  stage 1: |p|=0.992000 pole_f=220.0 Hz  |z|=2.373290 zero_f=0.0 Hz  nearest_z_dist=0.5094  
+           corner |p|: M0_Q0=0.850000  M100_Q0=0.850000  M0_Q100=0.992000  M100_Q100=0.992000  max_corner=0.992000
+  stage 2: |p|=0.990000 pole_f=440.0 Hz  |z|=2.370736 zero_f=0.0 Hz  nearest_z_dist=0.5087  
+           corner |p|: M0_Q0=0.830000  M100_Q0=0.830000  M0_Q100=0.990000  M100_Q100=0.990000  max_corner=0.990000
+  stage 3: |p|=0.988000 pole_f=650.0 Hz  |z|=2.365603 zero_f=0.0 Hz  nearest_z_dist=0.5084  
+           corner |p|: M0_Q0=0.820000  M100_Q0=0.820000  M0_Q100=0.988000  M100_Q100=0.988000  max_corner=0.988000
+  stage 4: |p|=0.990000 pole_f=1100.0 Hz  |z|=2.349665 zero_f=0.0 Hz  nearest_z_dist=0.5168  
+           corner |p|: M0_Q0=0.840000  M100_Q0=0.840000  M0_Q100=0.990000  M100_Q100=0.990000  max_corner=0.990000
+  stage 5: |p|=0.992000 pole_f=1700.0 Hz  |z|=2.306799 zero_f=0.0 Hz  nearest_z_dist=0.5306  
+           corner |p|: M0_Q0=0.830000  M100_Q0=0.830000  M0_Q100=0.992000  M100_Q100=0.992000  max_corner=0.992000
+
+── Q-axis radius runaway: |p| at q=0 vs q=1 (morph fixed) ──
+  stage     |p|@q=0     |p|@q=1       delta  flag
+      0    0.970000    0.995000   +0.025000  
+      1    0.850000    0.992000   +0.142000  
+      2    0.830000    0.990000   +0.160000  
+      3    0.820000    0.988000   +0.168000  
+      4    0.840000    0.990000   +0.150000  
+      5    0.830000    0.992000   +0.162000  
+
+── Band stacking groups (pole freq within 1 octave) ──
+  stages [0, 1]  pole_freqs=['110.0', '220.0'] Hz
+  stages [2, 3]  pole_freqs=['440.0', '650.0'] Hz
+  stages [2, 3, 4]  pole_freqs=['440.0', '650.0', '1100.0'] Hz
+  stages [3, 4, 5]  pole_freqs=['650.0', '1100.0', '1700.0'] Hz
+  stages [4, 5]  pole_freqs=['1100.0', '1700.0'] Hz
+
+── Per-stage peak |H| and leave-one-out cascade peak ──
+  stage       peak|H|   peak|H|dB   peak_f Hz        loo_peak    loo_dB  culprit?
+      0    1.9730e+03        65.9       105.5      9.9521e+07     160.0  
+      1    6.1796e+02        55.8       214.3      2.2422e+08     167.0  
+      2    2.4829e+02        47.9       436.0      1.0317e+09     180.3  
+      3    1.4079e+02        43.0       645.9      2.3199e+09     187.3  
+      4    1.0140e+02        40.1      1098.9      6.8257e+09     196.7  
+      5    8.3992e+01        38.5      1701.0      1.7175e+10     204.7  
+
+── c0 values (all stages, uniform check vs heritage c0=0.5619 Talking_Hedz) ──
+  c0 values: ['0.5619', '0.5619', '0.5619', '0.5619', '0.5619', '0.5619']
+  mean=0.5619  min=0.5619  max=0.5619
+  heritage Talking_Hedz c0=0.5619  (val1=-0.43811 => 1+val1=0.56189)
+  these cartridges: 1+val1 = 0.56189 for all stages (val1 uniform)
+
+── Repair proposals (per culprit stage, smallest-viable) ──
+  stage 0: lower r at M0_Q100 (and M100_Q100) from 0.9950 -> 0.9850  (delta_r=-0.0100)
+    field change: c4 corner M0_Q100 = 0.990025 -> 0.970225
+    Equivalent RawStage: set r=0.985 in M0_Q100 (and M100_Q100) corner for this stage
+    Estimated cascade peak after: ~2.524e+10  (208.0 dB) — analytical approximation only
+  stage 1: lower r at M0_Q100 (and M100_Q100) from 0.9920 -> 0.9850  (delta_r=-0.0070)
+    field change: c4 corner M0_Q100 = 0.984064 -> 0.970225
+    Equivalent RawStage: set r=0.985 in M0_Q100 (and M100_Q100) corner for this stage
+    Estimated cascade peak after: ~4.032e+10  (212.1 dB) — analytical approximation only

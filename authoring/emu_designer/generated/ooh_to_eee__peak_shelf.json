@@ -1,0 +1,30 @@
+{
+  "schema": "trench.heritage.peak_shelf.v1",
+  "filter_class": "PeakShelfMorph",
+  "name": "ooh_to_eee__peak_shelf",
+  "category": "PROG",
+  "source_affinity": [
+    "vocal chops",
+    "lead synth stabs",
+    "one-shots"
+  ],
+  "planner": {
+    "input_schema": "trench.ui.frame_map.v1",
+    "recipe": "peak_shelf",
+    "recipe_note": "Heritage Peak/Shelf Morph. FREQ from landmark; SHELF/PEAK defaults from DillusionMan reece recipe.",
+    "landmark_source": "authoring/ui/bark_landmarks.json",
+    "freq_landmark": "mouth_f2"
+  },
+  "frames": {
+    "A": {
+      "freq_hz": 1267.7,
+      "shelf": -50,
+      "peak_db": -24.0
+    },
+    "B": {
+      "freq_hz": 2210.4,
+      "shelf": 30,
+      "peak_db": 1.5
+    }
+  }
+}

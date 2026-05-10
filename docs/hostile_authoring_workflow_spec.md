@@ -578,7 +578,7 @@ It may use heritage bodies or cubes as seeds, but the main interface is perceptu
 
 ## 20. RE Translation Layer
 
-The workflow should translate clean-room RE truth into authoring constraints, seeds, and solver priors.
+The workflow should translate reference findings into authoring constraints, seeds, and solver priors.
 It must not translate heritage UI or historical product metaphors into the front-end ritual surface.
 
 ### 20.1 What To Translate From RE
@@ -596,7 +596,7 @@ Concrete structural truths to translate:
 - stage-count and bypass behavior where historically relevant
 - historical sample-rate families where parity work matters
 - corpus-learned stage activity patterns
-- known pole/zero vocab families from sanitized corpus data
+- known pole/zero vocab families from reference corpus data
 - known failure modes such as midpoint blowup and open-state drift
 
 RE truth belongs in:
@@ -627,7 +627,7 @@ They should feel like they are coercing a hostile machine.
 
 The correct one-way flow is:
 
-`clean-room RE truth -> normalized body priors -> body-world target grammar -> solver -> runtime gates -> keep/reject`
+`reference findings -> normalized body priors -> body-world target grammar -> solver -> runtime gates -> keep/reject`
 
 This implies:
 - RE is structural input
@@ -686,12 +686,12 @@ Do not build one generic world for all bodies.
 Do not build separate engines per body.
 Do not build one isolated world per flagship body if the bodies share the same gate grammar.
 
-### 20.7 Provenance Rules
+### 20.7 Source Rules
 
 Every world should declare:
 - which invariants came from product doctrine
-- which constraints came from clean-room RE truth
-- which seed families came from sanitized corpus analysis
+- which constraints came from reference findings
+- which seed families came from reference corpus analysis
 - which room mappings are original TRENCH design inventions
 
 This keeps the boundary clear:

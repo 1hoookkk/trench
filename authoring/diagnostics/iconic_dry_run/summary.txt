@@ -1,0 +1,460 @@
+================================================================================
+ICONIC DRY-RUN DIAGNOSTIC  |  forge/iconic_author_dry_run.py
+Stage source: iconic_author.body_* functions (NO write side-effects)
+Boost source: PEAK_AMPLITUDE_TARGET / corner_peak (re-derived analytically)
+PEAK_AMPLITUDE_TARGET = 2.5  CLIFF = 5.0  SR = 39062.5
+=
+ICONIC DRY-RUN DIAGNOSTIC  |  forge/iconic_author_dry_run.py
+Stage source: iconic_author.body_* functions (NO write side-effects)
+Boost source: PEAK_AMPLITUDE_TARGET / corner_peak (re-derived analytically)
+PEAK_AMPLITUDE_TARGET = 2.5  CLIFF = 5.0  SR = 39062.5
+=
+ICONIC DRY-RUN DIAGNOSTIC  |  forge/iconic_author_dry_run.py
+Stage source: iconic_author.body_* functions (NO write side-effects)
+Boost source: PEAK_AMPLITUDE_TARGET / corner_peak (re-derived analytically)
+PEAK_AMPLITUDE_TARGET = 2.5  CLIFF = 5.0  SR = 39062.5
+=
+ICONIC DRY-RUN DIAGNOSTIC  |  forge/iconic_author_dry_run.py
+Stage source: iconic_author.body_* functions (NO write side-effects)
+Boost source: PEAK_AMPLITUDE_TARGET / corner_peak (re-derived analytically)
+PEAK_AMPLITUDE_TARGET = 2.5  CLIFF = 5.0  SR = 39062.5
+=
+ICONIC DRY-RUN DIAGNOSTIC  |  forge/iconic_author_dry_run.py
+Stage source: iconic_author.body_* functions (NO write side-effects)
+Boost source: PEAK_AMPLITUDE_TARGET / corner_peak (re-derived analytically)
+PEAK_AMPLITUDE_TARGET = 2.5  CLIFF = 5.0  SR = 39062.5
+=
+ICONIC DRY-RUN DIAGNOSTIC  |  forge/iconic_author_dry_run.py
+Stage source: iconic_author.body_* functions (NO write side-effects)
+Boost source: PEAK_AMPLITUDE_TARGET / corner_peak (re-derived analytically)
+PEAK_AMPLITUDE_TARGET = 2.5  CLIFF = 5.0  SR = 39062.5
+=
+ICONIC DRY-RUN DIAGNOSTIC  |  forge/iconic_author_dry_run.py
+Stage source: iconic_author.body_* functions (NO write side-effects)
+Boost source: PEAK_AMPLITUDE_TARGET / corner_peak (re-derived analytically)
+PEAK_AMPLITUDE_TARGET = 2.5  CLIFF = 5.0  SR = 39062.5
+=
+ICONIC DRY-RUN DIAGNOSTIC  |  forge/iconic_author_dry_run.py
+Stage source: iconic_author.body_* functions (NO write side-effects)
+Boost source: PEAK_AMPLITUDE_TARGET / corner_peak (re-derived analytically)
+PEAK_AMPLITUDE_TARGET = 2.5  CLIFF = 5.0  SR = 39062.5
+=
+ICONIC DRY-RUN DIAGNOSTIC  |  forge/iconic_author_dry_run.py
+Stage source: iconic_author.body_* functions (NO write side-effects)
+Boost source: PEAK_AMPLITUDE_TARGET / corner_peak (re-derived analytically)
+PEAK_AMPLITUDE_TARGET = 2.5  CLIFF = 5.0  SR = 39062.5
+=
+ICONIC DRY-RUN DIAGNOSTIC  |  forge/iconic_author_dry_run.py
+Stage source: iconic_author.body_* functions (NO write side-effects)
+Boost source: PEAK_AMPLITUDE_TARGET / corner_peak (re-derived analytically)
+PEAK_AMPLITUDE_TARGET = 2.5  CLIFF = 5.0  SR = 39062.5
+=
+ICONIC DRY-RUN DIAGNOSTIC  |  forge/iconic_author_dry_run.py
+Stage source: iconic_author.body_* functions (NO write side-effects)
+Boost source: PEAK_AMPLITUDE_TARGET / corner_peak (re-derived analytically)
+PEAK_AMPLITUDE_TARGET = 2.5  CLIFF = 5.0  SR = 39062.5
+=
+ICONIC DRY-RUN DIAGNOSTIC  |  forge/iconic_author_dry_run.py
+Stage source: iconic_author.body_* functions (NO write side-effects)
+Boost source: PEAK_AMPLITUDE_TARGET / corner_peak (re-derived analytically)
+PEAK_AMPLITUDE_TARGET = 2.5  CLIFF = 5.0  SR = 39062.5
+=
+ICONIC DRY-RUN DIAGNOSTIC  |  forge/iconic_author_dry_run.py
+Stage source: iconic_author.body_* functions (NO write side-effects)
+Boost source: PEAK_AMPLITUDE_TARGET / corner_peak (re-derived analytically)
+PEAK_AMPLITUDE_TARGET = 2.5  CLIFF = 5.0  SR = 39062.5
+=
+ICONIC DRY-RUN DIAGNOSTIC  |  forge/iconic_author_dry_run.py
+Stage source: iconic_author.body_* functions (NO write side-effects)
+Boost source: PEAK_AMPLITUDE_TARGET / corner_peak (re-derived analytically)
+PEAK_AMPLITUDE_TARGET = 2.5  CLIFF = 5.0  SR = 39062.5
+=
+ICONIC DRY-RUN DIAGNOSTIC  |  forge/iconic_author_dry_run.py
+Stage source: iconic_author.body_* functions (NO write side-effects)
+Boost source: PEAK_AMPLITUDE_TARGET / corner_peak (re-derived analytically)
+PEAK_AMPLITUDE_TARGET = 2.5  CLIFF = 5.0  SR = 39062.5
+=
+ICONIC DRY-RUN DIAGNOSTIC  |  forge/iconic_author_dry_run.py
+Stage source: iconic_author.body_* functions (NO write side-effects)
+Boost source: PEAK_AMPLITUDE_TARGET / corner_peak (re-derived analytically)
+PEAK_AMPLITUDE_TARGET = 2.5  CLIFF = 5.0  SR = 39062.5
+=
+ICONIC DRY-RUN DIAGNOSTIC  |  forge/iconic_author_dry_run.py
+Stage source: iconic_author.body_* functions (NO write side-effects)
+Boost source: PEAK_AMPLITUDE_TARGET / corner_peak (re-derived analytically)
+PEAK_AMPLITUDE_TARGET = 2.5  CLIFF = 5.0  SR = 39062.5
+=
+ICONIC DRY-RUN DIAGNOSTIC  |  forge/iconic_author_dry_run.py
+Stage source: iconic_author.body_* functions (NO write side-effects)
+Boost source: PEAK_AMPLITUDE_TARGET / corner_peak (re-derived analytically)
+PEAK_AMPLITUDE_TARGET = 2.5  CLIFF = 5.0  SR = 39062.5
+=
+ICONIC DRY-RUN DIAGNOSTIC  |  forge/iconic_author_dry_run.py
+Stage source: iconic_author.body_* functions (NO write side-effects)
+Boost source: PEAK_AMPLITUDE_TARGET / corner_peak (re-derived analytically)
+PEAK_AMPLITUDE_TARGET = 2.5  CLIFF = 5.0  SR = 39062.5
+=
+ICONIC DRY-RUN DIAGNOSTIC  |  forge/iconic_author_dry_run.py
+Stage source: iconic_author.body_* functions (NO write side-effects)
+Boost source: PEAK_AMPLITUDE_TARGET / corner_peak (re-derived analytically)
+PEAK_AMPLITUDE_TARGET = 2.5  CLIFF = 5.0  SR = 39062.5
+=
+ICONIC DRY-RUN DIAGNOSTIC  |  forge/iconic_author_dry_run.py
+Stage source: iconic_author.body_* functions (NO write side-effects)
+Boost source: PEAK_AMPLITUDE_TARGET / corner_peak (re-derived analytically)
+PEAK_AMPLITUDE_TARGET = 2.5  CLIFF = 5.0  SR = 39062.5
+=
+ICONIC DRY-RUN DIAGNOSTIC  |  forge/iconic_author_dry_run.py
+Stage source: iconic_author.body_* functions (NO write side-effects)
+Boost source: PEAK_AMPLITUDE_TARGET / corner_peak (re-derived analytically)
+PEAK_AMPLITUDE_TARGET = 2.5  CLIFF = 5.0  SR = 39062.5
+=
+ICONIC DRY-RUN DIAGNOSTIC  |  forge/iconic_author_dry_run.py
+Stage source: iconic_author.body_* functions (NO write side-effects)
+Boost source: PEAK_AMPLITUDE_TARGET / corner_peak (re-derived analytically)
+PEAK_AMPLITUDE_TARGET = 2.5  CLIFF = 5.0  SR = 39062.5
+=
+ICONIC DRY-RUN DIAGNOSTIC  |  forge/iconic_author_dry_run.py
+Stage source: iconic_author.body_* functions (NO write side-effects)
+Boost source: PEAK_AMPLITUDE_TARGET / corner_peak (re-derived analytically)
+PEAK_AMPLITUDE_TARGET = 2.5  CLIFF = 5.0  SR = 39062.5
+=
+ICONIC DRY-RUN DIAGNOSTIC  |  forge/iconic_author_dry_run.py
+Stage source: iconic_author.body_* functions (NO write side-effects)
+Boost source: PEAK_AMPLITUDE_TARGET / corner_peak (re-derived analytically)
+PEAK_AMPLITUDE_TARGET = 2.5  CLIFF = 5.0  SR = 39062.5
+=
+ICONIC DRY-RUN DIAGNOSTIC  |  forge/iconic_author_dry_run.py
+Stage source: iconic_author.body_* functions (NO write side-effects)
+Boost source: PEAK_AMPLITUDE_TARGET / corner_peak (re-derived analytically)
+PEAK_AMPLITUDE_TARGET = 2.5  CLIFF = 5.0  SR = 39062.5
+=
+ICONIC DRY-RUN DIAGNOSTIC  |  forge/iconic_author_dry_run.py
+Stage source: iconic_author.body_* functions (NO write side-effects)
+Boost source: PEAK_AMPLITUDE_TARGET / corner_peak (re-derived analytically)
+PEAK_AMPLITUDE_TARGET = 2.5  CLIFF = 5.0  SR = 39062.5
+=
+ICONIC DRY-RUN DIAGNOSTIC  |  forge/iconic_author_dry_run.py
+Stage source: iconic_author.body_* functions (NO write side-effects)
+Boost source: PEAK_AMPLITUDE_TARGET / corner_peak (re-derived analytically)
+PEAK_AMPLITUDE_TARGET = 2.5  CLIFF = 5.0  SR = 39062.5
+=
+ICONIC DRY-RUN DIAGNOSTIC  |  forge/iconic_author_dry_run.py
+Stage source: iconic_author.body_* functions (NO write side-effects)
+Boost source: PEAK_AMPLITUDE_TARGET / corner_peak (re-derived analytically)
+PEAK_AMPLITUDE_TARGET = 2.5  CLIFF = 5.0  SR = 39062.5
+=
+ICONIC DRY-RUN DIAGNOSTIC  |  forge/iconic_author_dry_run.py
+Stage source: iconic_author.body_* functions (NO write side-effects)
+Boost source: PEAK_AMPLITUDE_TARGET / corner_peak (re-derived analytically)
+PEAK_AMPLITUDE_TARGET = 2.5  CLIFF = 5.0  SR = 39062.5
+=
+ICONIC DRY-RUN DIAGNOSTIC  |  forge/iconic_author_dry_run.py
+Stage source: iconic_author.body_* functions (NO write side-effects)
+Boost source: PEAK_AMPLITUDE_TARGET / corner_peak (re-derived analytically)
+PEAK_AMPLITUDE_TARGET = 2.5  CLIFF = 5.0  SR = 39062.5
+=
+ICONIC DRY-RUN DIAGNOSTIC  |  forge/iconic_author_dry_run.py
+Stage source: iconic_author.body_* functions (NO write side-effects)
+Boost source: PEAK_AMPLITUDE_TARGET / corner_peak (re-derived analytically)
+PEAK_AMPLITUDE_TARGET = 2.5  CLIFF = 5.0  SR = 39062.5
+=
+ICONIC DRY-RUN DIAGNOSTIC  |  forge/iconic_author_dry_run.py
+Stage source: iconic_author.body_* functions (NO write side-effects)
+Boost source: PEAK_AMPLITUDE_TARGET / corner_peak (re-derived analytically)
+PEAK_AMPLITUDE_TARGET = 2.5  CLIFF = 5.0  SR = 39062.5
+=
+ICONIC DRY-RUN DIAGNOSTIC  |  forge/iconic_author_dry_run.py
+Stage source: iconic_author.body_* functions (NO write side-effects)
+Boost source: PEAK_AMPLITUDE_TARGET / corner_peak (re-derived analytically)
+PEAK_AMPLITUDE_TARGET = 2.5  CLIFF = 5.0  SR = 39062.5
+=
+ICONIC DRY-RUN DIAGNOSTIC  |  forge/iconic_author_dry_run.py
+Stage source: iconic_author.body_* functions (NO write side-effects)
+Boost source: PEAK_AMPLITUDE_TARGET / corner_peak (re-derived analytically)
+PEAK_AMPLITUDE_TARGET = 2.5  CLIFF = 5.0  SR = 39062.5
+=
+ICONIC DRY-RUN DIAGNOSTIC  |  forge/iconic_author_dry_run.py
+Stage source: iconic_author.body_* functions (NO write side-effects)
+Boost source: PEAK_AMPLITUDE_TARGET / corner_peak (re-derived analytically)
+PEAK_AMPLITUDE_TARGET = 2.5  CLIFF = 5.0  SR = 39062.5
+=
+ICONIC DRY-RUN DIAGNOSTIC  |  forge/iconic_author_dry_run.py
+Stage source: iconic_author.body_* functions (NO write side-effects)
+Boost source: PEAK_AMPLITUDE_TARGET / corner_peak (re-derived analytically)
+PEAK_AMPLITUDE_TARGET = 2.5  CLIFF = 5.0  SR = 39062.5
+=
+ICONIC DRY-RUN DIAGNOSTIC  |  forge/iconic_author_dry_run.py
+Stage source: iconic_author.body_* functions (NO write side-effects)
+Boost source: PEAK_AMPLITUDE_TARGET / corner_peak (re-derived analytically)
+PEAK_AMPLITUDE_TARGET = 2.5  CLIFF = 5.0  SR = 39062.5
+=
+ICONIC DRY-RUN DIAGNOSTIC  |  forge/iconic_author_dry_run.py
+Stage source: iconic_author.body_* functions (NO write side-effects)
+Boost source: PEAK_AMPLITUDE_TARGET / corner_peak (re-derived analytically)
+PEAK_AMPLITUDE_TARGET = 2.5  CLIFF = 5.0  SR = 39062.5
+=
+ICONIC DRY-RUN DIAGNOSTIC  |  forge/iconic_author_dry_run.py
+Stage source: iconic_author.body_* functions (NO write side-effects)
+Boost source: PEAK_AMPLITUDE_TARGET / corner_peak (re-derived analytically)
+PEAK_AMPLITUDE_TARGET = 2.5  CLIFF = 5.0  SR = 39062.5
+=
+ICONIC DRY-RUN DIAGNOSTIC  |  forge/iconic_author_dry_run.py
+Stage source: iconic_author.body_* functions (NO write side-effects)
+Boost source: PEAK_AMPLITUDE_TARGET / corner_peak (re-derived analytically)
+PEAK_AMPLITUDE_TARGET = 2.5  CLIFF = 5.0  SR = 39062.5
+=
+ICONIC DRY-RUN DIAGNOSTIC  |  forge/iconic_author_dry_run.py
+Stage source: iconic_author.body_* functions (NO write side-effects)
+Boost source: PEAK_AMPLITUDE_TARGET / corner_peak (re-derived analytically)
+PEAK_AMPLITUDE_TARGET = 2.5  CLIFF = 5.0  SR = 39062.5
+=
+ICONIC DRY-RUN DIAGNOSTIC  |  forge/iconic_author_dry_run.py
+Stage source: iconic_author.body_* functions (NO write side-effects)
+Boost source: PEAK_AMPLITUDE_TARGET / corner_peak (re-derived analytically)
+PEAK_AMPLITUDE_TARGET = 2.5  CLIFF = 5.0  SR = 39062.5
+=
+ICONIC DRY-RUN DIAGNOSTIC  |  forge/iconic_author_dry_run.py
+Stage source: iconic_author.body_* functions (NO write side-effects)
+Boost source: PEAK_AMPLITUDE_TARGET / corner_peak (re-derived analytically)
+PEAK_AMPLITUDE_TARGET = 2.5  CLIFF = 5.0  SR = 39062.5
+=
+ICONIC DRY-RUN DIAGNOSTIC  |  forge/iconic_author_dry_run.py
+Stage source: iconic_author.body_* functions (NO write side-effects)
+Boost source: PEAK_AMPLITUDE_TARGET / corner_peak (re-derived analytically)
+PEAK_AMPLITUDE_TARGET = 2.5  CLIFF = 5.0  SR = 39062.5
+=
+ICONIC DRY-RUN DIAGNOSTIC  |  forge/iconic_author_dry_run.py
+Stage source: iconic_author.body_* functions (NO write side-effects)
+Boost source: PEAK_AMPLITUDE_TARGET / corner_peak (re-derived analytically)
+PEAK_AMPLITUDE_TARGET = 2.5  CLIFF = 5.0  SR = 39062.5
+=
+ICONIC DRY-RUN DIAGNOSTIC  |  forge/iconic_author_dry_run.py
+Stage source: iconic_author.body_* functions (NO write side-effects)
+Boost source: PEAK_AMPLITUDE_TARGET / corner_peak (re-derived analytically)
+PEAK_AMPLITUDE_TARGET = 2.5  CLIFF = 5.0  SR = 39062.5
+=
+ICONIC DRY-RUN DIAGNOSTIC  |  forge/iconic_author_dry_run.py
+Stage source: iconic_author.body_* functions (NO write side-effects)
+Boost source: PEAK_AMPLITUDE_TARGET / corner_peak (re-derived analytically)
+PEAK_AMPLITUDE_TARGET = 2.5  CLIFF = 5.0  SR = 39062.5
+=
+ICONIC DRY-RUN DIAGNOSTIC  |  forge/iconic_author_dry_run.py
+Stage source: iconic_author.body_* functions (NO write side-effects)
+Boost source: PEAK_AMPLITUDE_TARGET / corner_peak (re-derived analytically)
+PEAK_AMPLITUDE_TARGET = 2.5  CLIFF = 5.0  SR = 39062.5
+=
+ICONIC DRY-RUN DIAGNOSTIC  |  forge/iconic_author_dry_run.py
+Stage source: iconic_author.body_* functions (NO write side-effects)
+Boost source: PEAK_AMPLITUDE_TARGET / corner_peak (re-derived analytically)
+PEAK_AMPLITUDE_TARGET = 2.5  CLIFF = 5.0  SR = 39062.5
+=
+ICONIC DRY-RUN DIAGNOSTIC  |  forge/iconic_author_dry_run.py
+Stage source: iconic_author.body_* functions (NO write side-effects)
+Boost source: PEAK_AMPLITUDE_TARGET / corner_peak (re-derived analytically)
+PEAK_AMPLITUDE_TARGET = 2.5  CLIFF = 5.0  SR = 39062.5
+=
+ICONIC DRY-RUN DIAGNOSTIC  |  forge/iconic_author_dry_run.py
+Stage source: iconic_author.body_* functions (NO write side-effects)
+Boost source: PEAK_AMPLITUDE_TARGET / corner_peak (re-derived analytically)
+PEAK_AMPLITUDE_TARGET = 2.5  CLIFF = 5.0  SR = 39062.5
+=
+ICONIC DRY-RUN DIAGNOSTIC  |  forge/iconic_author_dry_run.py
+Stage source: iconic_author.body_* functions (NO write side-effects)
+Boost source: PEAK_AMPLITUDE_TARGET / corner_peak (re-derived analytically)
+PEAK_AMPLITUDE_TARGET = 2.5  CLIFF = 5.0  SR = 39062.5
+=
+ICONIC DRY-RUN DIAGNOSTIC  |  forge/iconic_author_dry_run.py
+Stage source: iconic_author.body_* functions (NO write side-effects)
+Boost source: PEAK_AMPLITUDE_TARGET / corner_peak (re-derived analytically)
+PEAK_AMPLITUDE_TARGET = 2.5  CLIFF = 5.0  SR = 39062.5
+=
+ICONIC DRY-RUN DIAGNOSTIC  |  forge/iconic_author_dry_run.py
+Stage source: iconic_author.body_* functions (NO write side-effects)
+Boost source: PEAK_AMPLITUDE_TARGET / corner_peak (re-derived analytically)
+PEAK_AMPLITUDE_TARGET = 2.5  CLIFF = 5.0  SR = 39062.5
+=
+ICONIC DRY-RUN DIAGNOSTIC  |  forge/iconic_author_dry_run.py
+Stage source: iconic_author.body_* functions (NO write side-effects)
+Boost source: PEAK_AMPLITUDE_TARGET / corner_peak (re-derived analytically)
+PEAK_AMPLITUDE_TARGET = 2.5  CLIFF = 5.0  SR = 39062.5
+=
+ICONIC DRY-RUN DIAGNOSTIC  |  forge/iconic_author_dry_run.py
+Stage source: iconic_author.body_* functions (NO write side-effects)
+Boost source: PEAK_AMPLITUDE_TARGET / corner_peak (re-derived analytically)
+PEAK_AMPLITUDE_TARGET = 2.5  CLIFF = 5.0  SR = 39062.5
+=
+ICONIC DRY-RUN DIAGNOSTIC  |  forge/iconic_author_dry_run.py
+Stage source: iconic_author.body_* functions (NO write side-effects)
+Boost source: PEAK_AMPLITUDE_TARGET / corner_peak (re-derived analytically)
+PEAK_AMPLITUDE_TARGET = 2.5  CLIFF = 5.0  SR = 39062.5
+=
+ICONIC DRY-RUN DIAGNOSTIC  |  forge/iconic_author_dry_run.py
+Stage source: iconic_author.body_* functions (NO write side-effects)
+Boost source: PEAK_AMPLITUDE_TARGET / corner_peak (re-derived analytically)
+PEAK_AMPLITUDE_TARGET = 2.5  CLIFF = 5.0  SR = 39062.5
+=
+ICONIC DRY-RUN DIAGNOSTIC  |  forge/iconic_author_dry_run.py
+Stage source: iconic_author.body_* functions (NO write side-effects)
+Boost source: PEAK_AMPLITUDE_TARGET / corner_peak (re-derived analytically)
+PEAK_AMPLITUDE_TARGET = 2.5  CLIFF = 5.0  SR = 39062.5
+=
+ICONIC DRY-RUN DIAGNOSTIC  |  forge/iconic_author_dry_run.py
+Stage source: iconic_author.body_* functions (NO write side-effects)
+Boost source: PEAK_AMPLITUDE_TARGET / corner_peak (re-derived analytically)
+PEAK_AMPLITUDE_TARGET = 2.5  CLIFF = 5.0  SR = 39062.5
+=
+ICONIC DRY-RUN DIAGNOSTIC  |  forge/iconic_author_dry_run.py
+Stage source: iconic_author.body_* functions (NO write side-effects)
+Boost source: PEAK_AMPLITUDE_TARGET / corner_peak (re-derived analytically)
+PEAK_AMPLITUDE_TARGET = 2.5  CLIFF = 5.0  SR = 39062.5
+=
+ICONIC DRY-RUN DIAGNOSTIC  |  forge/iconic_author_dry_run.py
+Stage source: iconic_author.body_* functions (NO write side-effects)
+Boost source: PEAK_AMPLITUDE_TARGET / corner_peak (re-derived analytically)
+PEAK_AMPLITUDE_TARGET = 2.5  CLIFF = 5.0  SR = 39062.5
+=
+ICONIC DRY-RUN DIAGNOSTIC  |  forge/iconic_author_dry_run.py
+Stage source: iconic_author.body_* functions (NO write side-effects)
+Boost source: PEAK_AMPLITUDE_TARGET / corner_peak (re-derived analytically)
+PEAK_AMPLITUDE_TARGET = 2.5  CLIFF = 5.0  SR = 39062.5
+=
+ICONIC DRY-RUN DIAGNOSTIC  |  forge/iconic_author_dry_run.py
+Stage source: iconic_author.body_* functions (NO write side-effects)
+Boost source: PEAK_AMPLITUDE_TARGET / corner_peak (re-derived analytically)
+PEAK_AMPLITUDE_TARGET = 2.5  CLIFF = 5.0  SR = 39062.5
+=
+ICONIC DRY-RUN DIAGNOSTIC  |  forge/iconic_author_dry_run.py
+Stage source: iconic_author.body_* functions (NO write side-effects)
+Boost source: PEAK_AMPLITUDE_TARGET / corner_peak (re-derived analytically)
+PEAK_AMPLITUDE_TARGET = 2.5  CLIFF = 5.0  SR = 39062.5
+=
+ICONIC DRY-RUN DIAGNOSTIC  |  forge/iconic_author_dry_run.py
+Stage source: iconic_author.body_* functions (NO write side-effects)
+Boost source: PEAK_AMPLITUDE_TARGET / corner_peak (re-derived analytically)
+PEAK_AMPLITUDE_TARGET = 2.5  CLIFF = 5.0  SR = 39062.5
+=
+ICONIC DRY-RUN DIAGNOSTIC  |  forge/iconic_author_dry_run.py
+Stage source: iconic_author.body_* functions (NO write side-effects)
+Boost source: PEAK_AMPLITUDE_TARGET / corner_peak (re-derived analytically)
+PEAK_AMPLITUDE_TARGET = 2.5  CLIFF = 5.0  SR = 39062.5
+=
+ICONIC DRY-RUN DIAGNOSTIC  |  forge/iconic_author_dry_run.py
+Stage source: iconic_author.body_* functions (NO write side-effects)
+Boost source: PEAK_AMPLITUDE_TARGET / corner_peak (re-derived analytically)
+PEAK_AMPLITUDE_TARGET = 2.5  CLIFF = 5.0  SR = 39062.5
+=
+ICONIC DRY-RUN DIAGNOSTIC  |  forge/iconic_author_dry_run.py
+Stage source: iconic_author.body_* functions (NO write side-effects)
+Boost source: PEAK_AMPLITUDE_TARGET / corner_peak (re-derived analytically)
+PEAK_AMPLITUDE_TARGET = 2.5  CLIFF = 5.0  SR = 39062.5
+=
+ICONIC DRY-RUN DIAGNOSTIC  |  forge/iconic_author_dry_run.py
+Stage source: iconic_author.body_* functions (NO write side-effects)
+Boost source: PEAK_AMPLITUDE_TARGET / corner_peak (re-derived analytically)
+PEAK_AMPLITUDE_TARGET = 2.5  CLIFF = 5.0  SR = 39062.5
+=
+ICONIC DRY-RUN DIAGNOSTIC  |  forge/iconic_author_dry_run.py
+Stage source: iconic_author.body_* functions (NO write side-effects)
+Boost source: PEAK_AMPLITUDE_TARGET / corner_peak (re-derived analytically)
+PEAK_AMPLITUDE_TARGET = 2.5  CLIFF = 5.0  SR = 39062.5
+=
+ICONIC DRY-RUN DIAGNOSTIC  |  forge/iconic_author_dry_run.py
+Stage source: iconic_author.body_* functions (NO write side-effects)
+Boost source: PEAK_AMPLITUDE_TARGET / corner_peak (re-derived analytically)
+PEAK_AMPLITUDE_TARGET = 2.5  CLIFF = 5.0  SR = 39062.5
+=
+ICONIC DRY-RUN DIAGNOSTIC  |  forge/iconic_author_dry_run.py
+Stage source: iconic_author.body_* functions (NO write side-effects)
+Boost source: PEAK_AMPLITUDE_TARGET / corner_peak (re-derived analytically)
+PEAK_AMPLITUDE_TARGET = 2.5  CLIFF = 5.0  SR = 39062.5
+=
+ICONIC DRY-RUN DIAGNOSTIC  |  forge/iconic_author_dry_run.py
+Stage source: iconic_author.body_* functions (NO write side-effects)
+Boost source: PEAK_AMPLITUDE_TARGET / corner_peak (re-derived analytically)
+PEAK_AMPLITUDE_TARGET = 2.5  CLIFF = 5.0  SR = 39062.5
+=
+ICONIC DRY-RUN DIAGNOSTIC  |  forge/iconic_author_dry_run.py
+Stage source: iconic_author.body_* functions (NO write side-effects)
+Boost source: PEAK_AMPLITUDE_TARGET / corner_peak (re-derived analytically)
+PEAK_AMPLITUDE_TARGET = 2.5  CLIFF = 5.0  SR = 39062.5
+=
+ICONIC DRY-RUN DIAGNOSTIC  |  forge/iconic_author_dry_run.py
+Stage source: iconic_author.body_* functions (NO write side-effects)
+Boost source: PEAK_AMPLITUDE_TARGET / corner_peak (re-derived analytically)
+PEAK_AMPLITUDE_TARGET = 2.5  CLIFF = 5.0  SR = 39062.5
+=
+ICONIC DRY-RUN DIAGNOSTIC  |  forge/iconic_author_dry_run.py
+Stage source: iconic_author.body_* functions (NO write side-effects)
+Boost source: PEAK_AMPLITUDE_TARGET / corner_peak (re-derived analytically)
+PEAK_AMPLITUDE_TARGET = 2.5  CLIFF = 5.0  SR = 39062.5
+=
+ICONIC DRY-RUN DIAGNOSTIC  |  forge/iconic_author_dry_run.py
+Stage source: iconic_author.body_* functions (NO write side-effects)
+Boost source: PEAK_AMPLITUDE_TARGET / corner_peak (re-derived analytically)
+PEAK_AMPLITUDE_TARGET = 2.5  CLIFF = 5.0  SR = 39062.5
+=
+ICONIC DRY-RUN DIAGNOSTIC  |  forge/iconic_author_dry_run.py
+Stage source: iconic_author.body_* functions (NO write side-effects)
+Boost source: PEAK_AMPLITUDE_TARGET / corner_peak (re-derived analytically)
+PEAK_AMPLITUDE_TARGET = 2.5  CLIFF = 5.0  SR = 39062.5
+=
+
+================================================================================
+B. PER-BODY MORPH-GRID SUMMARY (21x5 grid)
+================================================================================
+body                      peak_max lin   peak_max dB   morph*     q*   req_body_boost
+-------------------------------------------------------------------------------------
+speaker_knockerz             27.891416      +28.9094 dB     0.80   0.00       0.08963331
+aluminum_siding            1015.597102      +60.1344 dB     1.00   0.00       0.00246161
+small_talk_ah_ee            382.650352      +51.6560 dB     0.00   0.00       0.00653338
+cul_de_sac                    5.345088      +14.5591 dB     1.00   0.00       0.46771912
+
+================================================================================
+C. PER-CORNER ADEQUACY  (computed boost via PEAK_AMPLITUDE_TARGET/corner_peak)
+================================================================================
+
+  speaker_knockerz
+    corner peaks:  M0_Q0=5.86259  M100_Q0=19.44956  M0_Q100=5.86259  M100_Q100=19.44956
+    corner boosts: M0_Q0=0.426433  M100_Q0=0.128538  M0_Q100=0.426433  M100_Q100=0.128538
+    max(peak*interp_boost) over grid = 6.757962  [UNSAFE]  dB_over_cliff = +2.6169 dB
+
+  aluminum_siding
+    corner peaks:  M0_Q0=19.27548  M100_Q0=1015.59710  M0_Q100=19.27548  M100_Q100=1015.59710
+    corner boosts: M0_Q0=0.129698  M100_Q0=0.002462  M0_Q100=0.129698  M100_Q100=0.002462
+    max(peak*interp_boost) over grid = 3.449758  [SAFE]
+
+  small_talk_ah_ee
+    corner peaks:  M0_Q0=382.65035  M100_Q0=2.74444  M0_Q100=382.65035  M100_Q100=2.74444
+    corner boosts: M0_Q0=0.006533  M100_Q0=0.910932  M0_Q100=0.006533  M100_Q100=0.910932
+    max(peak*interp_boost) over grid = 11.186501  [UNSAFE]  dB_over_cliff = +6.9945 dB
+
+  cul_de_sac
+    corner peaks:  M0_Q0=0.77058  M100_Q0=5.34509  M0_Q100=0.77058  M100_Q100=5.34509
+    corner boosts: M0_Q0=3.244305  M100_Q0=0.467719  M0_Q100=3.244305  M100_Q100=0.467719
+    max(peak*interp_boost) over grid = 2.500000  [SAFE]
+
+================================================================================
+D. COMPARISON TO SHIPPED ASSETS  (juce-shell/assets/cartridges/)
+================================================================================
+  speaker_knockerz        DRY=27.891416 (+28.91dB)  SHIPPED=62423582417.842758 (+215.91dB)  ratio=0.0000 (-187.00dB)  -> patched-iconic much tamer
+  aluminum_siding         DRY=1015.597102 (+60.13dB)  SHIPPED=659.299125 (+56.38dB)  ratio=1.5404 (+3.75dB)  -> patched-iconic higher
+  small_talk_ah_ee        DRY=382.650352 (+51.66dB)  SHIPPED=7574401.068900 (+137.59dB)  ratio=0.0001 (-85.93dB)  -> patched-iconic much tamer
+  cul_de_sac              DRY=5.345088 (+14.56dB)  SHIPPED=75332874046.542648 (+217.54dB)  ratio=0.0000 (-202.98dB)  -> patched-iconic much tamer
+
+================================================================================
+E. COMPARISON TO ON-DISK generated/iconic/
+================================================================================
+  speaker_knockerz        DRY=27.891416 (+28.91dB)  ON-DISK=27.891416 (+28.91dB)  -> IDENTICAL (patched source == on-disk)
+  aluminum_siding         DRY=1015.597102 (+60.13dB)  ON-DISK=1015.597102 (+60.13dB)  -> IDENTICAL (patched source == on-disk)
+  small_talk_ah_ee        DRY=382.650352 (+51.66dB)  ON-DISK=382.650352 (+51.66dB)  -> IDENTICAL (patched source == on-disk)
+  cul_de_sac              DRY=5.345088 (+14.56dB)  ON-DISK=5.345088 (+14.56dB)  -> IDENTICAL (patched source == on-disk)
+
+================================================================================
+F. FILES WRITTEN
+================================================================================
+  C:\Users\hooki\Trench\forge\diagnostics\iconic_dry_run\speaker_knockerz.png
+  C:\Users\hooki\Trench\forge\diagnostics\iconic_dry_run\aluminum_siding.png
+  C:\Users\hooki\Trench\forge\diagnostics\iconic_dry_run\small_talk_ah_ee.png
+  C:\Users\hooki\Trench\forge\diagnostics\iconic_dry_run\cul_de_sac.png
+  C:\Users\hooki\Trench\forge\diagnostics\iconic_dry_run\summary.txt

@@ -1,0 +1,15 @@
+STDOUT:
+Compiled sub_throat -> c:\Users\hooki\Trench\authoring\peak_shelf\sub_throat.raw.json
+Lowered -> c:\Users\hooki\Trench\authoring\peak_shelf\sub_throat.raw.compiled.json
+=== sub_throat ===
+  M0_Q0: cascade=12.0 dB, max_stage=6.7 dB, cancel=-5.3 dB, r_max=0.895
+  M0_Q100: cascade=12.0 dB, max_stage=6.7 dB, cancel=-5.3 dB, r_max=0.895
+  M100_Q0: cascade=12.0 dB, max_stage=17.5 dB, cancel=5.5 dB, r_max=0.879
+  M100_Q100: cascade=12.0 dB, max_stage=17.5 dB, cancel=5.5 dB, r_max=0.879
+DECISION: PASS
+NOTES: Stable controlled cancellation.
+
+Plot -> c:\Users\hooki\Trench\authoring\peak_shelf\sub_throat.raw.response.png
+Preview -> c:\Users\hooki\Trench\authoring\peak_shelf\sub_throat.raw.preview.png
+
+STDERR:

@@ -1,0 +1,6 @@
+Talking Hedz cascade peak match (host sr 44100 Hz):
+corner        target_dB   monic_dB      boost   final_dB   delta_dB
+M0_Q0             18.40     127.72     0.0000      18.40     +0.000
+M100_Q0           36.10     149.54     0.0000      36.10     -0.000
+M0_Q100           18.40     117.08     0.0000      18.40     +0.000
+M100_Q100         39.10     144.76     0.0000      39.10     -0.000

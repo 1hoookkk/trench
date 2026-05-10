@@ -1,0 +1,14 @@
+candidate,compile_returncode,raw_exists,compiled_exists,preview_exists,response_exists,decision,notes
+air_choke,0,1,1,1,1,PASS,Stable controlled cancellation.
+broken_speaker_sweep,0,1,1,1,1,PASS,Stable controlled cancellation.
+dark_to_bright_rip,0,1,1,1,1,PASS,Stable controlled cancellation.
+dillusion_reece,0,1,1,1,1,PASS,Stable controlled cancellation.
+lowpass_to_highshelf_flip,0,1,1,1,1,PASS,Stable controlled cancellation.
+nasal_bass_door,0,1,1,1,1,PASS,Stable controlled cancellation.
+plastic_mid_bark,0,1,1,1,1,PASS,Stable controlled cancellation.
+radio_bass_open,0,1,1,1,1,PASS,Stable controlled cancellation.
+reese_belch,0,1,1,1,1,PASS,Stable controlled cancellation.
+sub_throat,0,1,1,1,1,PASS,Stable controlled cancellation.
+tearing_shelf,0,1,1,1,1,PASS,Stable controlled cancellation.
+throat_shelf_pressure,0,1,1,1,1,PASS,Stable controlled cancellation.
+vowel_shelf_fold,0,1,1,1,1,PASS,Stable controlled cancellation.

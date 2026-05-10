@@ -1,0 +1,44 @@
+{
+  "name": "glass_throat",
+  "sample_rate_hz": 39062.5,
+  "auditions": {
+    "noise": "authoring/auditions/batch_001/glass_throat_noise_morph.wav",
+    "saw": "authoring/auditions/batch_001/glass_throat_saw_morph.wav"
+  },
+  "corners": {
+    "M0_Q0": {
+      "peak_db": 36.02,
+      "strongest_spectral_feature": {
+        "hz": 1080.0,
+        "db": 36.02
+      },
+      "active_stages": 6
+    },
+    "M0_Q100": {
+      "peak_db": 36.02,
+      "strongest_spectral_feature": {
+        "hz": 1080.0,
+        "db": 36.02
+      },
+      "active_stages": 6
+    },
+    "M100_Q0": {
+      "peak_db": 40.08,
+      "strongest_spectral_feature": {
+        "hz": 2489.8,
+        "db": 40.08
+      },
+      "active_stages": 6
+    },
+    "M100_Q100": {
+      "peak_db": 40.08,
+      "strongest_spectral_feature": {
+        "hz": 2489.8,
+        "db": 40.08
+      },
+      "active_stages": 6
+    }
+  },
+  "peak_db_max": 40.08,
+  "reject_condition_status": "PASS"
+}

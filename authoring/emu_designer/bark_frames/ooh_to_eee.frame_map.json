@@ -1,0 +1,31 @@
+{
+  "schema": "trench.ui.frame_map.v1",
+  "name": "ooh_to_eee",
+  "category": "VOW",
+  "source_affinity": ["vocal chops", "lead synth stabs", "one-shots"],
+  "note": "Ooh -> Eee. Frame A positions from vowels.oo formants; Frame B from vowels.ee. F2 does the work. Floor/chest/sibilance/air anchored near defaults.",
+  "frames": {
+    "A": {
+      "floor":     {"bark": 0.27},
+      "chest":     {"bark": 1.08},
+      "throat_f1": {"bark": 3.22},
+      "mouth_f2":  {"bark": 10.00},
+      "nasal_cut": {"bark": 11.20},
+      "bite":      {"bark": 14.30},
+      "presence":  {"bark": 16.10},
+      "sibilance": {"bark": 20.00},
+      "air":       {"bark": 18.80}
+    },
+    "B": {
+      "floor":     {"bark": 0.45},
+      "chest":     {"bark": 1.08},
+      "throat_f1": {"bark": 3.17},
+      "mouth_f2":  {"bark": 13.68},
+      "nasal_cut": {"bark": 11.20},
+      "bite":      {"bark": 15.58},
+      "presence":  {"bark": 16.30},
+      "sibilance": {"bark": 20.10},
+      "air":       {"bark": 20.70}
+    }
+  }
+}

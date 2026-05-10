@@ -1,0 +1,66 @@
+====================================================================================================
+  RCA: Speaker Knockerz  |  analysis point: morph=0.00, q=1.00
+====================================================================================================
+  Cascade peak:  6.242358e+10  at  20.0 Hz
+  Cascade dB:    215.9 dB
+
+── Interpolated coefficients at analysis point ──
+  stage            c0            c1            c2            c3            c4
+      0      0.561890     -1.399986      0.490000     -1.939924      0.940900
+      1      0.561890     -1.999493      1.000000     -1.939508      0.940900
+      2      0.561890     -1.399546      0.490000     -1.954543      0.956484
+      3      0.561890     -1.396521      0.490000     -1.940311      0.950625
+      4      0.561890     -1.391583      0.490000     -1.959289      0.980100
+      5      0.561890     -1.379675      0.490000     -1.899343      0.956484
+
+── Pole / zero analysis ──
+  stage 0: |p|=0.970000 pole_f=55.0 Hz  |z|=2.374106 zero_f=0.0 Hz  nearest_z_dist=0.4870  
+           corner |p|: M0_Q0=0.920000  M100_Q0=0.920000  M0_Q100=0.970000  M100_Q100=0.970000  max_corner=0.970000
+  stage 1: |p|=0.970000 pole_f=140.0 Hz  |z|=1.661262 zero_f=0.0 Hz  nearest_z_dist=0.6319  
+           corner |p|: M0_Q0=0.920000  M100_Q0=0.920000  M0_Q100=0.970000  M100_Q100=0.970000  max_corner=0.970000
+  stage 2: |p|=0.978000 pole_f=240.0 Hz  |z|=2.372978 zero_f=0.0 Hz  nearest_z_dist=0.4955  
+           corner |p|: M0_Q0=0.940000  M100_Q0=0.940000  M0_Q100=0.978000  M100_Q100=0.978000  max_corner=0.978000
+  stage 3: |p|=0.975000 pole_f=620.0 Hz  |z|=2.365218 zero_f=0.0 Hz  nearest_z_dist=0.4949  
+           corner |p|: M0_Q0=0.930000  M100_Q0=0.930000  M0_Q100=0.975000  M100_Q100=0.975000  max_corner=0.975000
+  stage 4: |p|=0.990000 pole_f=900.0 Hz  |z|=2.352525 zero_f=0.0 Hz  nearest_z_dist=0.5125  
+           corner |p|: M0_Q0=0.960000  M100_Q0=0.960000  M0_Q100=0.990000  M100_Q100=0.990000  max_corner=0.990000
+  stage 5: |p|=0.978000 pole_f=1500.0 Hz  |z|=2.321765 zero_f=0.0 Hz  nearest_z_dist=0.5122  
+           corner |p|: M0_Q0=0.920000  M100_Q0=0.920000  M0_Q100=0.978000  M100_Q100=0.978000  max_corner=0.978000
+
+── Q-axis radius runaway: |p| at q=0 vs q=1 (morph fixed) ──
+  stage     |p|@q=0     |p|@q=1       delta  flag
+      0    0.920000    0.970000   +0.050000  
+      1    0.920000    0.970000   +0.050000  
+      2    0.940000    0.978000   +0.038000  
+      3    0.930000    0.975000   +0.045000  
+      4    0.960000    0.990000   +0.030000  
+      5    0.920000    0.978000   +0.058000  
+
+── Band stacking groups (pole freq within 1 octave) ──
+  stages [1, 2]  pole_freqs=['140.0', '240.0'] Hz
+  stages [3, 4]  pole_freqs=['620.0', '900.0'] Hz
+  stages [3, 4, 5]  pole_freqs=['620.0', '900.0', '1500.0'] Hz
+  stages [4, 5]  pole_freqs=['900.0', '1500.0'] Hz
+
+── Per-stage peak |H| and leave-one-out cascade peak ──
+  stage       peak|H|   peak|H|dB   peak_f Hz        loo_peak    loo_dB  culprit?
+      0    3.5362e+02        51.0        20.0      1.8396e+08     165.3  
+      1    3.1374e+02        49.9        20.0      1.9897e+08     166.0  
+      2    2.0732e+02        46.3       196.7      3.4766e+08     170.8  
+      4    1.2219e+02        41.7       897.5      3.8224e+09     191.6  
+      3    7.1117e+01        37.0       600.7      1.8665e+09     185.4  
+      5    3.4474e+01        30.7      1496.3      1.0880e+10     200.7  
+
+── c0 values (all stages, uniform check vs heritage c0=0.5619 Talking_Hedz) ──
+  c0 values: ['0.5619', '0.5619', '0.5619', '0.5619', '0.5619', '0.5619']
+  mean=0.5619  min=0.5619  max=0.5619
+  heritage Talking_Hedz c0=0.5619  (val1=-0.43811 => 1+val1=0.56189)
+  these cartridges: 1+val1 = 0.56189 for all stages (val1 uniform)
+
+── Repair proposals (per culprit stage, smallest-viable) ──
+  stage 0: reduce c0 from 0.5619 -> 0.2000  (change val1 from -0.43811 -> -0.80000)
+    Estimated cascade peak after: ~2.222e+10 — analytical approximation only
+  stage 1: reduce c0 from 0.5619 -> 0.2000  (change val1 from -0.43811 -> -0.80000)
+    Estimated cascade peak after: ~2.222e+10 — analytical approximation only
+  stage 2: reduce c0 from 0.5619 -> 0.2000  (change val1 from -0.43811 -> -0.80000)
+    Estimated cascade peak after: ~2.222e+10 — analytical approximation only

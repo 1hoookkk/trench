@@ -1,0 +1,62 @@
+{
+  "schema": "trench.ui.frame_map.v1",
+  "name": "ah_to_ee_talking_formant",
+  "category": "VOW",
+  "source_affinity": [
+    "vocal chops",
+    "lead synth stabs",
+    "one-shots"
+  ],
+  "boost": 0.004,
+  "note": "AH to EE talking_formant fixture. Bark values are Traunmueller positions for docs/sonic_tables vowels.ah and vowels.ee formants.",
+  "frames": {
+    "A": {
+      "floor": {
+        "bark": 0.6095
+      },
+      "throat_f1": {
+        "bark": 6.5253,
+        "gain_db": 10
+      },
+      "mouth_f2": {
+        "bark": 9.7556,
+        "gain_db": 8
+      },
+      "bite": {
+        "bark": 14.7564,
+        "gain_db": 4
+      },
+      "presence": {
+        "bark": 16.4763,
+        "gain_db": 2
+      },
+      "air": {
+        "bark": 20.4153
+      }
+    },
+    "B": {
+      "floor": {
+        "bark": 1.0167
+      },
+      "throat_f1": {
+        "bark": 3.4531,
+        "gain_db": 8
+      },
+      "mouth_f2": {
+        "bark": 14.0083,
+        "gain_db": 12
+      },
+      "bite": {
+        "bark": 15.6857,
+        "gain_db": 7
+      },
+      "presence": {
+        "bark": 16.9249,
+        "gain_db": 3
+      },
+      "air": {
+        "bark": 20.4153
+      }
+    }
+  }
+}

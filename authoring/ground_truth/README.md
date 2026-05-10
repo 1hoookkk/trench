@@ -2,15 +2,15 @@
 
 This zone exists to answer one question cleanly:
 
-What is true about TRENCH without mixing runtime, authoring, and DIRTY provenance into one pile?
+What is true about TRENCH without confusing references with shippable filters?
 
 ## Use This Zone For
 
 - shipping runtime references
 - cartridge law
 - authoring law
-- cleanroom boundary statements
-- provenance maps
+- no-E-mu-shipping release criteria
+- source maps
 
 ## Do Not Use This Zone For
 
@@ -18,6 +18,7 @@ What is true about TRENCH without mixing runtime, authoring, and DIRTY provenanc
 - UI moodboards
 - forge experiments
 - old runtime nostalgia
+- E-mu clone release candidates
 
 ## Current Canonical Inputs
 
@@ -26,4 +27,3 @@ What is true about TRENCH without mixing runtime, authoring, and DIRTY provenanc
 - `C:\Users\hooki\Trench\DOCTRINE.md`
 - `C:\Users\hooki\Trench\PHONEMES.md`
 - `C:\Users\hooki\Trench\docs\architecture\zplane_truth.md`
-

@@ -3706,6 +3706,7 @@ name = "trench-core"
 version = "0.1.0"
 dependencies = [
  "hound",
+ "libc",
  "serde",
  "serde_json",
 ]

@@ -6,13 +6,13 @@ This is the one-file domain brief for authoring and design work.
 
 TRENCH is a cartridge-based Z-plane filter instrument with a frozen shipping runtime and a separate authoring/design world around it.
 
-The mistake to avoid is flattening everything into one truth layer.
+The mistake to avoid is treating reference material as shippable product.
 
-There are three:
+There are three working layers:
 
 1. **Shipping runtime truth**
 2. **Authoring/design truth**
-3. **DIRTY provenance truth**
+3. **Reference material**
 
 ## 1. Shipping Runtime Truth
 
@@ -28,7 +28,7 @@ When a statement about runtime conflicts with repo prose, build wiring wins.
 
 ## 2. Authoring / Design Truth
 
-This is the clean factory around the shipping runtime.
+This is the factory around the shipping runtime.
 
 It includes:
 
@@ -40,44 +40,69 @@ It includes:
 
 Primary sources:
 
+- `C:\Users\hooki\Trench\authoring\FILTER_WORK.md`
+- `C:\Users\hooki\Trench\authoring\`
+- `C:\Users\hooki\Trench\authoring\compilers\`
+- `C:\Users\hooki\Trench\authoring\tools\`
 - `C:\Users\hooki\Trench\PHONEMES.md`
 - `C:\Users\hooki\Trench\docs\body_authoring_seed.md`
 - `C:\Users\hooki\Trench\docs\sonic_tables\`
+
+Reference sources:
+
 - `C:\Users\hooki\trenchwork_clean`
 - `C:\Users\hooki\trenchwork`
 
 This layer informs what should be built and shipped. It does not override live runtime wiring.
 
-## 3. DIRTY Provenance Truth
+## 3. Reference Material
 
-This is reverse-engineering and capture truth.
+This is material that can inform taste, measurements, debugging, or rejection
+of clones.
 
-Primary source:
+Examples:
 
 - `C:\Users\hooki\trench_re_vault`
+- `C:\Users\hooki\trenchwork_clean`
+- `C:\Users\hooki\trenchwork`
+- `C:\Users\hooki\do-it`
 
-DIRTY truth is used to learn target behavior and produce sanitized contracts.
-It is not a runtime dependency and not a clean authoring surface.
+Reference material is not a runtime dependency and does not become a shipping
+filter by being useful.
+
+The hard shipping rule:
+
+```text
+TRENCH does not ship E-mu filters.
+```
+
+E-mu/P2K references can be used to reject accidental clones. They are not the
+target for product cartridges.
 
 ## Current External Tree Roles
 
 - `C:\Users\hooki\trenchwork_clean`
-  - strongest clean authoring/factory tree
+  - older authoring/factory reference tree
   - sonic tables, MCP, runtime and plugin experiments, vault, tools
+  - not canonical unless an artifact is imported, indexed, or cited here
 
 - `C:\Users\hooki\trenchwork`
   - broader workbench architecture
   - forge, foundry, MCP, plugin/runtime shell
+  - reference/import source only
 
 - `C:\Users\hooki\do-it`
   - historical runtime implementation and solved-state precedent
   - useful for old validation logic and prior runtime decisions
 
 - `C:\Users\hooki\trench_re_vault`
-  - DIRTY airlock
-  - capture, extraction, analysis, sanitization source
+  - research evidence and reference behavior
+  - not a shipping cartridge source
 
 ## Canonical Authoring Rule
+
+For filter work, `C:\Users\hooki\Trench` is the canonical repo and
+`authoring/` is the canonical doorway.
 
 Use this hub for:
 
@@ -85,7 +110,7 @@ Use this hub for:
 - "where are the sonic tables?"
 - "what is the workbench?"
 - "where do design references live?"
-- "where does DIRTY end and clean begin?"
+- "how do I prevent E-mu/P2K clone cartridges from shipping?"
 
 Use live runtime files for:
 
@@ -101,5 +126,4 @@ Use live runtime files for:
 - `sonic_tables/README.md`
 - `workbench/README.md`
 - `design/README.md`
-- `dirty_airlock/README.md`
-
+- `history/README.md`

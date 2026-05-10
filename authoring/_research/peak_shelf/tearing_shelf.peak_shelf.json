@@ -1,0 +1,21 @@
+{
+  "schema": "trench.heritage.peak_shelf.v1",
+  "name": "tearing_shelf",
+  "category": "BASS",
+  "boost": 0.004,
+  "frames": {
+    "A": {
+      "freq_hz": 320,
+      "shelf": -56,
+      "peak_db": -12
+    },
+    "B": {
+      "freq_hz": 2600,
+      "shelf": 48,
+      "peak_db": 10
+    }
+  },
+  "render_metadata": {
+    "preview_type": "PEAK_SHELF_INTENT_NOT_RESPONSE"
+  }
+}

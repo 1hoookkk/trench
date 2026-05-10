@@ -1,0 +1,18 @@
+{
+  "filter_class": "MorphDesigner",
+  "name": "talking_001",
+  "category": "VOW",
+  "source_affinity": ["vocal chops", "lead synth stabs", "one-shots"],
+  "arc": "Ooh -> Eee (heritage formant morph)",
+  "formant_source": "docs/sonic_tables/tables.json vowels.oo and vowels.ee",
+  "note": "Heritage MD skeleton: LP + 4xEQ + HP. First shipping-track talking filter.",
+  "boost": 0.004,
+  "stages": [
+    {"shape": "LP", "lo": {"freq_hz": 3500, "gain_db": 0.0}, "hi": {"freq_hz": 6000, "gain_db": 0.0}},
+    {"shape": "EQ", "lo": {"freq_hz": 350,  "gain_db": 0.0}, "hi": {"freq_hz": 342,  "gain_db": 0.0}},
+    {"shape": "EQ", "lo": {"freq_hz": 1250, "gain_db": 0.0}, "hi": {"freq_hz": 2322, "gain_db": 0.0}},
+    {"shape": "EQ", "lo": {"freq_hz": 2200, "gain_db": 0.0}, "hi": {"freq_hz": 3000, "gain_db": 0.0}},
+    {"shape": "EQ", "lo": {"freq_hz": 3400, "gain_db": 0.0}, "hi": {"freq_hz": 3657, "gain_db": 0.0}},
+    {"shape": "HP", "lo": {"freq_hz": 80,   "gain_db": 0.0}, "hi": {"freq_hz": 100,  "gain_db": 0.0}}
+  ]
+}

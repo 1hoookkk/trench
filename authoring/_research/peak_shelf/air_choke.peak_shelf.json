@@ -1,0 +1,21 @@
+{
+  "schema": "trench.heritage.peak_shelf.v1",
+  "name": "air_choke",
+  "category": "BASS",
+  "boost": 0.004,
+  "frames": {
+    "A": {
+      "freq_hz": 4200,
+      "shelf": 12,
+      "peak_db": 12
+    },
+    "B": {
+      "freq_hz": 1600,
+      "shelf": -32,
+      "peak_db": 16
+    }
+  },
+  "render_metadata": {
+    "preview_type": "PEAK_SHELF_INTENT_NOT_RESPONSE"
+  }
+}

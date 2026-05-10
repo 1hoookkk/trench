@@ -1,0 +1,138 @@
+{
+  "schema": "trench.function_pack.v1",
+  "name": "TRENCH Motion Pack v0",
+  "version": "0.1",
+  "description": "Curated E-mu X3 function generator patterns repurposed as TRENCH modulation sources. Sourced from factory Function Generator XML resources.",
+  "entries": [
+    {
+      "name": "StepSweeper",
+      "source_json_path": "authoring/imported_x3/function_generators/step_sweeper.function.json",
+      "suggested_target": "Morph",
+      "suggested_depth": 1.0,
+      "suggested_rate_multiplier": 1.0,
+      "smooth": 0,
+      "length": 63,
+      "short_note": "64-step full-range zigzag sweep. Bipolar oscillation from -1.0 to +1.0. Raw stepped motion, no smoothing. Use for aggressive filter sweeps."
+    },
+    {
+      "name": "SharkTooth",
+      "source_json_path": "authoring/imported_x3/function_generators/shark_tooth.function.json",
+      "suggested_target": "Morph",
+      "suggested_depth": 0.75,
+      "suggested_rate_multiplier": 2.0,
+      "smooth": 0,
+      "length": 23,
+      "short_note": "Diminishing sawtooth pattern. 24 steps, alternating sign, amplitude decays to zero. Triggers active on first 24 steps. Good for decaying sweep bursts."
+    },
+    {
+      "name": "Cascading",
+      "source_json_path": "authoring/imported_x3/function_generators/cascading.function.json",
+      "suggested_target": "Morph",
+      "suggested_depth": 0.5,
+      "suggested_rate_multiplier": 3.0,
+      "smooth": 0,
+      "length": 23,
+      "short_note": "Stepped upward cascade with micro-dips. 24 active steps, values climb from 0.0 to 0.15625. All triggers active. Subtle rhythmic ascent."
+    },
+    {
+      "name": "UpToPitch",
+      "source_json_path": "authoring/imported_x3/function_generators/up_to_pitch.function.json",
+      "suggested_target": "Morph",
+      "suggested_depth": 0.75,
+      "suggested_rate_multiplier": 0.5,
+      "smooth": 1,
+      "length": 63,
+      "short_note": "Smooth attack ramp to sustained plateau. 5-step rise to 0.75, then hold. Smooth=1 for interpolation. Use for note-on filter open gestures."
+    },
+    {
+      "name": "HorseLaugh",
+      "source_json_path": "authoring/imported_x3/function_generators/horselaugh.function.json",
+      "suggested_target": "Morph",
+      "suggested_depth": 1.0,
+      "suggested_rate_multiplier": 1.0,
+      "smooth": 1,
+      "length": 63,
+      "short_note": "Rise to +1.0 then rapid bipolar oscillation with decaying positive peaks. Smooth=1. Chaotic vocal-like motion. Best at moderate depth."
+    },
+    {
+      "name": "EightEightRhythm",
+      "source_json_path": "authoring/imported_x3/function_generators/eighteightrhythm.function.json",
+      "suggested_target": "Q",
+      "suggested_depth": 0.8,
+      "suggested_rate_multiplier": 7.0,
+      "smooth": 0,
+      "length": 15,
+      "short_note": "16-step rhythmic Q pattern. Values 0.22-0.84 in first half, near-zero in second. 8 triggers scattered. Sync=0 (free rate). Punchy Q modulation."
+    },
+    {
+      "name": "16StepShaker",
+      "source_json_path": "authoring/imported_x3/function_generators/16_step_shaker.function.json",
+      "suggested_target": "Q",
+      "suggested_depth": 0.9,
+      "suggested_rate_multiplier": 1.0,
+      "smooth": 1,
+      "length": 15,
+      "short_note": "16-step bipolar shuffle. Alternating positive/negative with smooth=1. 3 triggers at steps 0, 10, 12. Sync=2 (note sync). Groove Q movement."
+    },
+    {
+      "name": "Syncopatico",
+      "source_json_path": "authoring/imported_x3/function_generators/syncopatico.function.json",
+      "suggested_target": "Q",
+      "suggested_depth": 1.0,
+      "suggested_rate_multiplier": 4.0,
+      "smooth": 1,
+      "length": 31,
+      "short_note": "32-step syncopated pattern. First 16 steps are hard +1/-1 alternation, second 16 are shaped decay. Smooth=1. Aggressive Q rhythm."
+    },
+    {
+      "name": "ClaveAccent",
+      "source_json_path": "authoring/imported_x3/function_generators/clave_accent.function.json",
+      "suggested_target": "Q",
+      "suggested_depth": 0.5,
+      "suggested_rate_multiplier": 4.0,
+      "smooth": 1,
+      "length": 15,
+      "short_note": "Clave rhythm via triggers only. 5 triggers in 16-step cycle (3-2 son pattern). Values are flat. Use triggers for Q accent hits, not continuous modulation."
+    },
+    {
+      "name": "ReverseClaveAccent",
+      "source_json_path": "authoring/imported_x3/function_generators/reverse_clave_accent.function.json",
+      "suggested_target": "Q",
+      "suggested_depth": 0.5,
+      "suggested_rate_multiplier": 4.0,
+      "smooth": 1,
+      "length": 15,
+      "short_note": "Reverse clave (2-3 son). 5 triggers, offset from ClaveAccent. Values flat. Same use: trigger-based Q accents with inverted phrasing."
+    },
+    {
+      "name": "Jittery",
+      "source_json_path": "authoring/imported_x3/function_generators/jittery.function.json",
+      "suggested_target": "Experimental",
+      "suggested_depth": 0.15,
+      "suggested_rate_multiplier": 18.0,
+      "smooth": 1,
+      "length": 63,
+      "short_note": "High-rate micro-jitter. 64 steps, values in -0.14 to +0.11 range. Smooth=1, direction=2 (ping-pong). Rate=18.01. Use at low depth for vibrato/wobble."
+    },
+    {
+      "name": "MorseCode",
+      "source_json_path": "authoring/imported_x3/function_generators/morse_code.function.json",
+      "suggested_target": "Experimental",
+      "suggested_depth": 0.8,
+      "suggested_rate_multiplier": 7.0,
+      "smooth": 0,
+      "length": 23,
+      "short_note": "24-step dot-dash pattern. Alternating high values and near-zero gaps. No smoothing. Rate=7.0. Use for rhythmic filter gating or stutter effects."
+    },
+    {
+      "name": "OctaveBrown",
+      "source_json_path": "authoring/imported_x3/function_generators/octave_brown.function.json",
+      "suggested_target": "Experimental",
+      "suggested_depth": 0.75,
+      "suggested_rate_multiplier": 1.0,
+      "smooth": 0,
+      "length": 63,
+      "short_note": "64-step octave-jumping pattern. Values alternate between -0.75, 0.0, +0.375, +0.75. All 64 triggers active. Direction=4 (random). Chaotic pitch-like modulation."
+    }
+  ]
+}

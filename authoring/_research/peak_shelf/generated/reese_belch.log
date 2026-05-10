@@ -1,0 +1,15 @@
+STDOUT:
+Compiled reese_belch -> c:\Users\hooki\Trench\authoring\peak_shelf\reese_belch.raw.json
+Lowered -> c:\Users\hooki\Trench\authoring\peak_shelf\reese_belch.raw.compiled.json
+=== reese_belch ===
+  M0_Q0: cascade=12.0 dB, max_stage=10.9 dB, cancel=-1.1 dB, r_max=0.892
+  M0_Q100: cascade=12.0 dB, max_stage=10.9 dB, cancel=-1.1 dB, r_max=0.892
+  M100_Q0: cascade=12.0 dB, max_stage=20.0 dB, cancel=8.0 dB, r_max=0.877
+  M100_Q100: cascade=12.0 dB, max_stage=20.0 dB, cancel=8.0 dB, r_max=0.877
+DECISION: PASS
+NOTES: Stable controlled cancellation.
+
+Plot -> c:\Users\hooki\Trench\authoring\peak_shelf\reese_belch.raw.response.png
+Preview -> c:\Users\hooki\Trench\authoring\peak_shelf\reese_belch.raw.preview.png
+
+STDERR:

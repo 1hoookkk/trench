@@ -10,7 +10,7 @@ These are behavioral captures tracking how the original E-mu MorphDesigner tool 
 # Why it's here
 The Looperator is a modern evolution of the MorphDesigner UI constraint system. Understanding the boundaries between parsed templates, named wrapper "presets", and actual compiled DSP logic allows the CLEAN repo to design a predictable selector grid that won't produce invalid object mappings or lose invariant template structures.
 
-# Sanitized content
+# Reference content
 
 ## `2026-03-12_host_selection_trace_a`
 **Files**: `EXTRACT_MANIFEST.json`, `notes_behavioral.md`

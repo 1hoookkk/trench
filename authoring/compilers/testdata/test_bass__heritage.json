@@ -1,0 +1,57 @@
+{
+  "schema": "trench.heritage.morph_designer.v1",
+  "filter_class": "MorphDesigner",
+  "name": "test_bass",
+  "category": "BASS",
+  "source_affinity": [
+    "bass",
+    "sub"
+  ],
+  "planner": {
+    "input_schema": "trench.ui.frame_map.v1",
+    "recipe": "bass_pressure",
+    "recipe_note": "Heritage Morph Designer 6-section bass pressure chain."
+  },
+  "sections": [
+    {
+      "section": 1,
+      "name": "boundary_dark_open",
+      "type": "lowpass",
+      "freq_a_hz": 55.0,
+      "freq_b_hz": 80.0
+    },
+    {
+      "section": 2,
+      "name": "floor_chest",
+      "type": "eq",
+      "freq_a_hz": 120.0,
+      "freq_b_hz": 90.0
+    },
+    {
+      "section": 3,
+      "name": "choke",
+      "type": "eq",
+      "freq_a_hz": 280.0,
+      "freq_b_hz": 350.0
+    },
+    {
+      "section": 4,
+      "name": "rip",
+      "type": "eq",
+      "freq_a_hz": 450.0,
+      "freq_b_hz": 600.0
+    },
+    {
+      "section": 5,
+      "name": "cry",
+      "type": "eq",
+      "freq_a_hz": 800.0,
+      "freq_b_hz": 1200.0
+    },
+    {
+      "section": 6,
+      "name": "cleanup",
+      "type": "highpass"
+    }
+  ]
+}

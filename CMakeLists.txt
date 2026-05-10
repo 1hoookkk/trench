@@ -37,6 +37,20 @@ FetchContent_Declare(
 FetchContent_MakeAvailable(JUCE)
 
 # ==============================================================================
+# Unit Test Runner
+# ==============================================================================
+
+add_executable(trench_test_runner 
+    src/dsp/TrenchMorphFilter.cpp
+    src/dsp/trench_test_runner.cpp
+)
+
+target_include_directories(trench_test_runner PRIVATE
+    ${CMAKE_CURRENT_SOURCE_DIR}/src
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/dsp
+)
+
+# ==============================================================================
 # Plugin Target
 # ==============================================================================
 
@@ -64,6 +78,7 @@ target_sources(${PLUGIN_NAME}
     PRIVATE
         src/PluginProcessor.cpp
         src/PluginEditor.cpp
+        src/dsp/TrenchMorphFilter.cpp
 )
 
 # ==============================================================================

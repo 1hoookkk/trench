@@ -1,0 +1,15 @@
+STDOUT:
+Compiled throat_shelf_pressure -> c:\Users\hooki\Trench\authoring\peak_shelf\throat_shelf_pressure.raw.json
+Lowered -> c:\Users\hooki\Trench\authoring\peak_shelf\throat_shelf_pressure.raw.compiled.json
+=== throat_shelf_pressure ===
+  M0_Q0: cascade=12.0 dB, max_stage=11.8 dB, cancel=-0.2 dB, r_max=0.893
+  M0_Q100: cascade=12.0 dB, max_stage=11.8 dB, cancel=-0.2 dB, r_max=0.893
+  M100_Q0: cascade=12.0 dB, max_stage=15.6 dB, cancel=3.6 dB, r_max=0.878
+  M100_Q100: cascade=12.0 dB, max_stage=15.6 dB, cancel=3.6 dB, r_max=0.878
+DECISION: PASS
+NOTES: Stable controlled cancellation.
+
+Plot -> c:\Users\hooki\Trench\authoring\peak_shelf\throat_shelf_pressure.raw.response.png
+Preview -> c:\Users\hooki\Trench\authoring\peak_shelf\throat_shelf_pressure.raw.preview.png
+
+STDERR:

@@ -20,4 +20,4 @@ path = "src/bin/trench-live.rs"
 [dependencies]
 nih_plug = { git = "https://github.com/robbert-vdh/nih-plug.git", features = ["standalone"] }
 nih_plug_vizia = { git = "https://github.com/robbert-vdh/nih-plug.git" }
-trench-core = { path = "../trench-core" }
+trench-core = { path = "../runtime/trench-core" }

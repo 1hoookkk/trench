@@ -41,7 +41,7 @@ Do not use Rossum kernel math in Domain 1.
 
 ### 2.2 Domain 2: Firmware RE
 
-This is clean-room reverse-engineering truth from hardware, corpus study, and Ghidra work.
+This is reference research from hardware, corpus study, and Ghidra work.
 
 RE kernel form may be expressed as:
 - `[2 + b1 / b0, 1 - b2 / b0, 2 + a1, 1 - r^2, b0]`
@@ -302,10 +302,9 @@ TRENCH — HOW WE WORK
 ═══════════════════════════════════════════════════════════════
 
 I don't code. I vibe-code. My judgment lives in my ears, not in
-diffs. TRENCH is a clean-room resurrection of the E-MU Z-plane
-filter — Morpheus, Audity 2000, Proteus 2000 lineage. The DSP
-math is recovered, the cartridge format is locked, the cascade
-is frozen. That work is done. Don't re-litigate it.
+diffs. TRENCH is an original musical filter built from a verified
+cascade and authoring pipeline. The renderer is locked; the product
+must not ship E-mu filters. Don't re-litigate it.
 
 Four shipping bodies are sacred: Speaker Knockerz, Aluminum
 Siding, Small Talk Ah-Ee, Cul-De-Sac. Every move has to make

@@ -1,0 +1,15 @@
+STDOUT:
+Compiled vowel_shelf_fold -> c:\Users\hooki\Trench\authoring\peak_shelf\vowel_shelf_fold.raw.json
+Lowered -> c:\Users\hooki\Trench\authoring\peak_shelf\vowel_shelf_fold.raw.compiled.json
+=== vowel_shelf_fold ===
+  M0_Q0: cascade=12.0 dB, max_stage=15.1 dB, cancel=3.1 dB, r_max=0.887
+  M0_Q100: cascade=12.0 dB, max_stage=15.1 dB, cancel=3.1 dB, r_max=0.887
+  M100_Q0: cascade=12.0 dB, max_stage=16.2 dB, cancel=4.2 dB, r_max=0.878
+  M100_Q100: cascade=12.0 dB, max_stage=16.2 dB, cancel=4.2 dB, r_max=0.878
+DECISION: PASS
+NOTES: Stable controlled cancellation.
+
+Plot -> c:\Users\hooki\Trench\authoring\peak_shelf\vowel_shelf_fold.raw.response.png
+Preview -> c:\Users\hooki\Trench\authoring\peak_shelf\vowel_shelf_fold.raw.preview.png
+
+STDERR:

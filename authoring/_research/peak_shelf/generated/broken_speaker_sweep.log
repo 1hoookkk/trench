@@ -1,0 +1,15 @@
+STDOUT:
+Compiled broken_speaker_sweep -> c:\Users\hooki\Trench\authoring\peak_shelf\broken_speaker_sweep.raw.json
+Lowered -> c:\Users\hooki\Trench\authoring\peak_shelf\broken_speaker_sweep.raw.compiled.json
+=== broken_speaker_sweep ===
+  M0_Q0: cascade=12.0 dB, max_stage=9.8 dB, cancel=-2.2 dB, r_max=0.895
+  M0_Q100: cascade=12.0 dB, max_stage=9.8 dB, cancel=-2.2 dB, r_max=0.895
+  M100_Q0: cascade=12.0 dB, max_stage=13.4 dB, cancel=1.4 dB, r_max=0.879
+  M100_Q100: cascade=12.0 dB, max_stage=13.4 dB, cancel=1.4 dB, r_max=0.879
+DECISION: PASS
+NOTES: Stable controlled cancellation.
+
+Plot -> c:\Users\hooki\Trench\authoring\peak_shelf\broken_speaker_sweep.raw.response.png
+Preview -> c:\Users\hooki\Trench\authoring\peak_shelf\broken_speaker_sweep.raw.preview.png
+
+STDERR:

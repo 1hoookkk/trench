@@ -1,0 +1,73 @@
+{
+  "schema": "trench.ui.frame_map.v1",
+  "name": "glass_throat",
+  "identity": "Talking vowel throat that opens from AH body into tight EE nasal glass.",
+  "category": "VOW",
+  "source_affinity": [
+    "vocal chop",
+    "saw",
+    "reese"
+  ],
+  "protected_invariant": "Two dominant vocal/formant peaks must remain readable across the morph.",
+  "danger_zone": "Single memorable injury: 2.4-3.3 kHz nasal glass shard on the B frame.",
+  "audition_source": [
+    "noise",
+    "saw"
+  ],
+  "reject_condition": "Reject if the 3 kHz shard disappears, if the morph reads static, or if boosted peak exceeds +80 dB.",
+  "boost": 0.003,
+  "frames": {
+    "A": {
+      "floor": {
+        "hz": 90,
+        "gain_db": 0
+      },
+      "throat_f1": {
+        "hz": 720,
+        "gain_db": 3
+      },
+      "mouth_f2": {
+        "hz": 1180,
+        "gain_db": 4
+      },
+      "bite": {
+        "hz": 2450,
+        "gain_db": -3
+      },
+      "presence": {
+        "hz": 3350,
+        "gain_db": -6
+      },
+      "air": {
+        "hz": 7200,
+        "gain_db": 0
+      }
+    },
+    "B": {
+      "floor": {
+        "hz": 110,
+        "gain_db": 0
+      },
+      "throat_f1": {
+        "hz": 340,
+        "gain_db": 2
+      },
+      "mouth_f2": {
+        "hz": 2250,
+        "gain_db": 3
+      },
+      "bite": {
+        "hz": 3050,
+        "gain_db": 9
+      },
+      "presence": {
+        "hz": 3275,
+        "gain_db": -3
+      },
+      "air": {
+        "hz": 7600,
+        "gain_db": 0
+      }
+    }
+  }
+}

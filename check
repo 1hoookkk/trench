@@ -46,11 +46,14 @@ run_cargo_test() {
 }
 
 step "canonical doc set exists"
-for f in CLAUDE.md SPEC.md DOCTRINE.md MODES.md BODIES.md PHONEMES.md cartridge.schema.json; do
+# SPEC.md and DOCTRINE.md were folded into authoring/FILTER_WORK.md and CLAUDE.md
+# during the 2026-05-10 consolidation. The active filter-work contract lives at
+# authoring/FILTER_WORK.md.
+for f in CLAUDE.md MODES.md BODIES.md PHONEMES.md cartridge.schema.json authoring/FILTER_WORK.md; do
   if [[ -f "$f" ]]; then
-    printf '  %-22s OK\n' "$f"
+    printf '  %-30s OK\n' "$f"
   else
-    printf '  %-22s MISSING\n' "$f"
+    printf '  %-30s MISSING\n' "$f"
     exit 1
   fi
 done
@@ -69,7 +72,7 @@ step "passthrough null targets (static < -120 dBFS, dynamic < -90 dBFS)"
 run_cargo_test cargo test -p trench-core --test null_targets --quiet
 
 step "P2K parity null (41 entries: 35 raw + 6 calibration_re, hard fail at > -140 dB)"
-if ! PYTHONPATH=. python tools/parity_null.py 2>&1 | sed 's/^/  /'; then
+if ! PYTHONPATH=. python authoring/compilers/parity_null.py 2>&1 | sed 's/^/  /'; then
   echo "  FAILED"
   exit 1
 fi

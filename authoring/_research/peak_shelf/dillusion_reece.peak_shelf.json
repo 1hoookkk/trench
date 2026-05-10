@@ -1,0 +1,32 @@
+{
+  "schema": "trench.heritage.peak_shelf.v1",
+  "filter_class": "PeakShelfMorph",
+  "name": "dillusion_reece",
+  "category": "PROG",
+  "source_affinity": [
+    "bass",
+    "reece",
+    "sweep"
+  ],
+  "provenance": {
+    "tutorial_pdf": "EMU Dillusion_PeakShelfMorph_Tutorial_WEB.pdf",
+    "recipe_doc": "docs/emu/peak_shelf_morph_reece_recipe.md"
+  },
+  "planner": {
+    "input_schema": "trench.ui.frame_map.v1",
+    "recipe": "peak_shelf",
+    "recipe_note": "DillusionMan Reece Stab. Frame A: dark/scooped at 246Hz. Frame B: bright high-mid Reece at 4488Hz. Shelf polarity flips negative->positive. Peak compensates -24dB -> +1.5dB (+25.5dB swing)."
+  },
+  "frames": {
+    "A": {
+      "freq_hz": 246.0,
+      "shelf": -50,
+      "peak_db": -24.0
+    },
+    "B": {
+      "freq_hz": 4488.0,
+      "shelf": 30,
+      "peak_db": 1.5
+    }
+  }
+}

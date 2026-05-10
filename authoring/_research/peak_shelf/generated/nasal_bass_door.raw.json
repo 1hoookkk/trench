@@ -1,0 +1,67 @@
+{
+  "format": "raw-stage-v1",
+  "name": "nasal_bass_door",
+  "boost": 0.004,
+  "frames": {
+    "M0": [
+      {
+        "kind": "explicit_zero",
+        "pole_freq_hz": 150.0,
+        "radius": 0.578125,
+        "zero_freq_hz": 121.875,
+        "zero_radius": 0.546875,
+        "stage_gain": 1.0
+      },
+      {
+        "kind": "explicit_zero",
+        "pole_freq_hz": 150.0,
+        "radius": 0.4936103545130302,
+        "zero_freq_hz": 150.0,
+        "zero_radius": 0.2,
+        "stage_gain": 1.0
+      },
+      {
+        "kind": "passthrough"
+      },
+      {
+        "kind": "passthrough"
+      },
+      {
+        "kind": "passthrough"
+      },
+      {
+        "kind": "passthrough"
+      }
+    ],
+    "M100": [
+      {
+        "kind": "explicit_zero",
+        "pole_freq_hz": 1600.0,
+        "radius": 0.640625,
+        "zero_freq_hz": 2415.094339622641,
+        "zero_radius": 0.584375,
+        "stage_gain": 1.0
+      },
+      {
+        "kind": "explicit_zero",
+        "pole_freq_hz": 1600.0,
+        "radius": 0.2,
+        "zero_freq_hz": 1600.0,
+        "zero_radius": 0.41404416602041844,
+        "stage_gain": 1.0
+      },
+      {
+        "kind": "passthrough"
+      },
+      {
+        "kind": "passthrough"
+      },
+      {
+        "kind": "passthrough"
+      },
+      {
+        "kind": "passthrough"
+      }
+    ]
+  }
+}

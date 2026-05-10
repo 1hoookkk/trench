@@ -1,0 +1,15 @@
+STDOUT:
+Compiled plastic_mid_bark -> c:\Users\hooki\Trench\authoring\peak_shelf\plastic_mid_bark.raw.json
+Lowered -> c:\Users\hooki\Trench\authoring\peak_shelf\plastic_mid_bark.raw.compiled.json
+=== plastic_mid_bark ===
+  M0_Q0: cascade=12.0 dB, max_stage=13.4 dB, cancel=1.4 dB, r_max=0.888
+  M0_Q100: cascade=12.0 dB, max_stage=13.4 dB, cancel=1.4 dB, r_max=0.888
+  M100_Q0: cascade=12.0 dB, max_stage=17.6 dB, cancel=5.6 dB, r_max=0.878
+  M100_Q100: cascade=12.0 dB, max_stage=17.6 dB, cancel=5.6 dB, r_max=0.878
+DECISION: PASS
+NOTES: Stable controlled cancellation.
+
+Plot -> c:\Users\hooki\Trench\authoring\peak_shelf\plastic_mid_bark.raw.response.png
+Preview -> c:\Users\hooki\Trench\authoring\peak_shelf\plastic_mid_bark.raw.preview.png
+
+STDERR:
