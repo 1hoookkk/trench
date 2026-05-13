@@ -1,6 +1,6 @@
 //! Vowel label classification gate.
 //!
-//! For each vowel pill under `cartridges/engine/vowels/`, compute the
+//! For each vowel pill under `cartridges/factory/vowels/`, compute the
 //! magnitude response of the M0_Q0 cascade and find the lowest three
 //! formant peaks. Then score the peak pattern against a published
 //! formant table for each vowel, and assert the pill classifies as
@@ -19,7 +19,7 @@
 //!
 //! Sample rate is hardcoded to 39062.5 Hz — the shape bank's
 //! authoring rate, visible in the `sampleRate` field of every
-//! `cartridges/engine/vowels/*.json`. If the shape bank is ever
+//! `cartridges/factory/vowels/*.json`. If the shape bank is ever
 //! re-authored at a different rate, update this constant or derive
 //! it from the cartridge JSON.
 
@@ -32,7 +32,7 @@ use std::path::PathBuf;
 // those re-exports to keep the import line stable across module reshuffles.
 use trench_core::{Cartridge, CornerData, NUM_STAGES};
 
-/// Shape bank authoring sample rate. Every `cartridges/engine/vowels/*.json`
+/// Shape bank authoring sample rate. Every `cartridges/factory/vowels/*.json`
 /// carries `"sampleRate": 39062.5`.
 const SR: f64 = 39062.5;
 
@@ -81,12 +81,13 @@ const VOWEL_TARGETS: &[(&str, [f64; 3])] = &[
 ///     Needs F2 re-authoring down to ~870 Hz.
 const KNOWN_DRIFT: &[&str] = &["aw", "oo"];
 
-fn engine_vowels_dir() -> PathBuf {
+fn factory_vowels_dir() -> PathBuf {
     PathBuf::from(env!("CARGO_MANIFEST_DIR"))
         .parent()
-        .expect("workspace parent")
+        .and_then(|p| p.parent())
+        .expect("repo root above runtime/")
         .join("cartridges")
-        .join("engine")
+        .join("factory")
         .join("vowels")
 }
 
@@ -175,14 +176,12 @@ fn load_cartridge(path: &PathBuf) -> Cartridge {
 
 #[test]
 fn every_vowel_pill_classifies_as_itself() {
-    let dir = engine_vowels_dir();
-    if !dir.exists() {
-        eprintln!(
-            "skip: {} does not exist — run `python tools/bake_phoneme_pills.py`",
-            dir.display()
-        );
-        return;
-    }
+    let dir = factory_vowels_dir();
+    assert!(
+        dir.exists(),
+        "missing {}; run `python authoring/compilers/bake_phoneme_pills.py`",
+        dir.display()
+    );
 
     // Load every vowel pill, compute peaks.
     let mut loaded: Vec<(&'static str, Vec<f64>)> = Vec::new();

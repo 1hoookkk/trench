@@ -1,79 +1,78 @@
-//! Smoke gate: every cartridge under `cartridges/engine/` must load
+//! Smoke gate: every cartridge listed in `cartridges/factory/manifest.json` must load
 //! through `Cartridge::from_json` without error.
 //!
 //! This is intentionally the dumbest useful test — it does not try to
 //! measure audio, enforce invariants, or judge taste. It only proves
-//! that the shipping phoneme pills baked by `tools/bake_phoneme_pills.py`
+//! that the shipping phoneme pills baked by `authoring/compilers/bake_phoneme_pills.py`
 //! are all structurally valid `compiled-v1` cartridges the runtime can
 //! consume. If this gate fails, either the bake is emitting bad files
 //! or the upstream shape bank has drifted.
 
 use std::fs;
-use std::path::{Path, PathBuf};
+use std::path::PathBuf;
 
+use serde_json::Value;
 use trench_core::Cartridge;
 
-fn engine_root() -> PathBuf {
-    // Tests run with CWD = trench-core/, so cartridges/engine/ is up one level.
+fn repo_root() -> PathBuf {
     PathBuf::from(env!("CARGO_MANIFEST_DIR"))
         .parent()
-        .expect("workspace parent")
-        .join("cartridges")
-        .join("engine")
+        .and_then(|p| p.parent())
+        .expect("repo root above runtime/")
+        .to_path_buf()
 }
 
-fn collect_cartridges(dir: &Path, out: &mut Vec<PathBuf>) {
-    let entries = match fs::read_dir(dir) {
-        Ok(e) => e,
-        Err(_) => return,
-    };
-    for entry in entries.flatten() {
-        let path = entry.path();
-        if path.is_dir() {
-            // `_source/` holds the upstream inventory + shape bank the
-            // bake reads from — not shipping cartridges. Skip it.
-            if path.file_name().and_then(|s| s.to_str()) == Some("_source") {
-                continue;
-            }
-            collect_cartridges(&path, out);
-        } else if path.extension().and_then(|s| s.to_str()) == Some("json")
-            && path.file_name().and_then(|s| s.to_str()) != Some("manifest.json")
-        {
-            out.push(path);
-        }
-    }
+fn manifest_path() -> PathBuf {
+    repo_root()
+        .join("cartridges")
+        .join("factory")
+        .join("manifest.json")
 }
 
 #[test]
 fn every_engine_pill_loads() {
-    let root = engine_root();
-    if !root.exists() {
-        // Engine dir hasn't been baked yet — treat as skip rather than fail.
-        // Run `python tools/bake_phoneme_pills.py` from the repo root to
-        // populate it, then re-run this test.
-        eprintln!("skip: {} does not exist", root.display());
-        return;
-    }
-
-    let mut pills = Vec::new();
-    collect_cartridges(&root, &mut pills);
+    let manifest_path = manifest_path();
     assert!(
-        !pills.is_empty(),
-        "engine dir {} exists but has no cartridges",
-        root.display()
+        manifest_path.exists(),
+        "missing {}; run `python authoring/compilers/bake_phoneme_pills.py`",
+        manifest_path.display()
+    );
+
+    let manifest_json = fs::read_to_string(&manifest_path)
+        .unwrap_or_else(|e| panic!("read {}: {e}", manifest_path.display()));
+    let manifest: Value = serde_json::from_str(&manifest_json)
+        .unwrap_or_else(|e| panic!("parse {}: {e}", manifest_path.display()));
+
+    let tokens = manifest
+        .get("tokens")
+        .and_then(|v| v.as_array())
+        .expect("factory manifest must contain a tokens array");
+    assert!(
+        !tokens.is_empty(),
+        "factory manifest {} contains no tokens",
+        manifest_path.display()
     );
 
     let mut failures: Vec<String> = Vec::new();
-    for pill in &pills {
-        let json = match fs::read_to_string(pill) {
+    let root = repo_root();
+    for token in tokens {
+        let id = token.get("id").and_then(|v| v.as_str()).unwrap_or("<missing id>");
+        let path = match token.get("path").and_then(|v| v.as_str()) {
+            Some(path) => root.join(path),
+            None => {
+                failures.push(format!("{id}: missing path"));
+                continue;
+            }
+        };
+        let json = match fs::read_to_string(&path) {
             Ok(j) => j,
             Err(e) => {
-                failures.push(format!("{}: read error: {e}", pill.display()));
+                failures.push(format!("{id}: {}: read error: {e}", path.display()));
                 continue;
             }
         };
         if let Err(e) = Cartridge::from_json(&json) {
-            failures.push(format!("{}: {e}", pill.display()));
+            failures.push(format!("{id}: {}: {e}", path.display()));
         }
     }
 
@@ -81,13 +80,13 @@ fn every_engine_pill_loads() {
         failures.is_empty(),
         "{} / {} pills failed to load:\n  {}",
         failures.len(),
-        pills.len(),
+        tokens.len(),
         failures.join("\n  ")
     );
 
     println!(
         "loaded {} phoneme pills from {}",
-        pills.len(),
-        root.display()
+        tokens.len(),
+        manifest_path.display()
     );
 }
